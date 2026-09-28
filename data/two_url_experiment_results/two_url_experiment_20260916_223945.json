@@ -1,0 +1,101 @@
+{
+  "protocol": "three real POST calls to /debate/analyze",
+  "cases": [
+    {
+      "case_id": "U01",
+      "run_at_utc": "2026-09-16T15:38:38.141714+00:00",
+      "url1": "https://pubmed.ncbi.nlm.nih.gov/36357950/",
+      "url2": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7730482/",
+      "source_1_label": "Gibbons (2022), stress, personality, coping, motivation",
+      "source_2_label": "Teacher influence, motivation, stress, learning strategies",
+      "topic": "Compare how stress, motivation, and learning are related among university students.",
+      "scrape_http_status": 200,
+      "scrape_preview": {
+        "sources": [
+          {
+            "url": "https://pubmed.ncbi.nlm.nih.gov/36357950/",
+            "title": "Understanding the role of stress, personality and coping on learning motivation and mental health in university students during a pandemic.",
+            "content": "Title: Understanding the role of stress, personality and coping on learning motivation and mental health in university students during a pandemic.\nAuthors: Gibbons Chris\nJournal: BMC psychology\nYear: 2022\nDOI: 10.1186/s40359-022-00971-w\nPMID: 36357950\nURL: https://pubmed.ncbi.nlm.nih.gov/36357950/\n\nAbstract:\nThe aims explored the associations between stress, personality and coping on student mental health and compared defensive-pessimism and optimism as influences on learning motivation. Most re",
+            "char_count": 1735,
+            "source_method": "pubmed_api"
+          },
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7730482/",
+            "title": "The Influence of Teachers on Motivation and Academic Stress and Their Effect on the Learning Strategies of University Students - PMC",
+            "content": "The Influence of Teachers on Motivation and Academic Stress and Their Effect on the Learning Strategies of University Students - PMC Skip to main content Official websites use .gov A .gov website belongs to an official government organization in the United States. Secure .gov websites use HTTPS A lock ( ) or https:// means you've safely connected to the .gov website. Share sensitive information only on official, secure websites. Journal List User Guide PERMALINK As a library, NLM provides access",
+            "char_count": 45639,
+            "source_method": "direct"
+          }
+        ]
+      },
+      "analysis_http_status": 200,
+      "analysis_text": "1. Summary of ARTICLE 1 (Understanding the role of stress, personality and coping on learning motivation and mental health in university students during a pandemic.):\n   - Main topic: The study examines how stress, personality traits, and coping mechanisms influence the mental health and learning motivation of undergraduate psychology students during the COVID-19 pandemic.\n   - 3 core arguments: \n     1. Stress is not exclusively negative; the study distinguishes between distress and eustress, noting that some stress can enhance motivation.\n     2. Personality traits such as conscientiousness act as a buffer against the negative impacts of stress on motivation, while openness is linked to the stress of the learning process itself.\n     3. External factors, specifically the quality of teaching and the level of context control, are primary drivers of student motivation and mental health outcomes.\n   - Key evidence/citations: The study surveyed 162 undergraduate psychology students. It found that defensive-pessimism is as effective as optimism for anxious-prone students in stimulating learning motivation.\n\n2. Summary of ARTICLE 2 (Checking your browser - reCAPTCHA):\n   - Main topic: This URL could not be accessed.\n   - 3 core arguments: Not applicable.\n   - Key evidence/citations: Not applicable.\n\n3. Points of agreement between the two articles:\n   - There are no points of agreement because Article 2 did not provide accessible content.\n\n4. Points of contradiction / differences:\n   - There are no points of contradiction because Article 2 did not provide accessible content.\n\n5. Objective evaluation:\n   - Article 1 provides a clear, evidence-based analysis of psychological factors affecting university students, utilizing a specific sample size and defined variables. It is highly credible as it is a peer-reviewed study published in BMC Psychology. Article 2 failed to provide any academic content, rendering it useless for comparative analysis.\n\n6. Conclusion:\n   - Article 1 offers a comprehensive look at how personality and environmental factors like teaching quality influence student motivation during crises. Due to the failure of the second source, a comparative synthesis is impossible, leaving Article 1 as the sole provider of evidence regarding the relationship between stress and learning.",
+      "success": true,
+      "elapsed_seconds": 13.229
+    },
+    {
+      "case_id": "U02",
+      "run_at_utc": "2026-09-16T15:39:03.371569+00:00",
+      "url1": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7730482/",
+      "url2": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3372561/",
+      "source_1_label": "Teacher influence, motivation, stress, learning strategies",
+      "source_2_label": "Stress, motivation, academic performance in medical students",
+      "topic": "Compare the evidence about academic stress, motivation, and learning outcomes in higher education.",
+      "scrape_http_status": 200,
+      "scrape_preview": {
+        "sources": [
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7730482/",
+            "title": "Checking your browser - reCAPTCHA",
+            "content": "Checking your browser - reCAPTCHA Checking your browser before accessing pmc.ncbi.nlm.nih.gov ... Click here if you are not automatically redirected after 5 seconds.",
+            "char_count": 165,
+            "source_method": "direct"
+          },
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3372561/",
+            "title": "Checking your browser - reCAPTCHA",
+            "content": "Checking your browser - reCAPTCHA Checking your browser before accessing pmc.ncbi.nlm.nih.gov ... Click here if you are not automatically redirected after 5 seconds.",
+            "char_count": 165,
+            "source_method": "direct"
+          }
+        ]
+      },
+      "analysis_http_status": 200,
+      "analysis_text": "1. Summary of ARTICLE 1 (The Influence of Teachers on Motivation and Academic Stress and Their Effect on the Learning Strategies of University Students - PMC):\n- Main topic: The study investigates how teacher behavior, viewed through the lens of Self-Determination Theory, impacts university students' academic stress, motivation, and learning outcomes.\n- 3 core arguments: \n    1. Teachers act as a critical buffer for students experiencing the high-stress environment of university.\n    2. Psychological control by teachers is a positive predictor of academic stress, whereas autonomy support from teachers acts as a negative predictor.\n    3. Academic stress has a negative impact on the learning strategies and performance of students.\n- Key evidence/citations: The study utilized a structural equation model based on data from 2456 university students with an average age of 22.51 years.\n\n2. Summary of ARTICLE 2 (Checking your browser - reCAPTCHA):\n- Main topic: This URL represents a security gateway page used by the PMC website to verify that the user is not a bot.\n- 3 core arguments: \n    1. Access to the requested content is temporarily restricted by a reCAPTCHA security check.\n    2. The user must wait for an automatic redirection or click a link to proceed.\n    3. The page serves as a technical barrier to prevent automated access to the database.\n- Key evidence/citations: The content consists entirely of a browser-check notification and does not contain academic research or data.\n\n3. Points of agreement between the two articles:\n- There are no points of agreement regarding the topic of academic stress or motivation, as Article 2 contains no substantive academic content.\n\n4. Points of contradiction / differences:\n- The primary difference is that Article 1 provides a detailed psychological analysis of university student experiences, while Article 2 provides no information on the subject matter. Article 1 is a research paper, whereas Article 2 is a technical security interface.\n\n5. Objective evaluation:\n- Article 1 is the only source that provides evidence regarding the debate topic. It is highly credible as it is a peer-reviewed study published in a scientific journal (International Journal of Environmental Research and Public Health) with a large sample size of 2456 participants. Article 2 has no academic value or evidence to evaluate, as it failed to provide the intended research content due to a security redirection.\n\n6. Conclusion:\n- Article 1 offers a robust framework for understanding how teacher-student dynamics influence academic stress and learning outcomes in higher education. Because Article 2 failed to load the intended content, it is impossible to compare perspectives, leaving Article 1 as the sole source of evidence for this analysis.",
+      "success": true,
+      "elapsed_seconds": 12.717
+    },
+    {
+      "case_id": "U03",
+      "run_at_utc": "2026-09-16T15:39:28.088710+00:00",
+      "url1": "https://pubmed.ncbi.nlm.nih.gov/36357950/",
+      "url2": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3372561/",
+      "source_1_label": "Gibbons (2022), stress, personality, coping, motivation",
+      "source_2_label": "Stress, motivation, academic performance in medical students",
+      "topic": "Compare the roles of stress and motivation in student mental health and academic performance.",
+      "scrape_http_status": 200,
+      "scrape_preview": {
+        "sources": [
+          {
+            "url": "https://pubmed.ncbi.nlm.nih.gov/36357950/",
+            "title": "Understanding the role of stress, personality and coping on learning motivation and mental health in university students during a pandemic.",
+            "content": "Title: Understanding the role of stress, personality and coping on learning motivation and mental health in university students during a pandemic.\nAuthors: Gibbons Chris\nJournal: BMC psychology\nYear: 2022\nDOI: 10.1186/s40359-022-00971-w\nPMID: 36357950\nURL: https://pubmed.ncbi.nlm.nih.gov/36357950/\n\nAbstract:\nThe aims explored the associations between stress, personality and coping on student mental health and compared defensive-pessimism and optimism as influences on learning motivation. Most re",
+            "char_count": 1735,
+            "source_method": "pubmed_api"
+          },
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3372561/",
+            "title": "A Structural Model of Stress, Motivation, and Academic Performance in Medical Students - PMC",
+            "content": "A Structural Model of Stress, Motivation, and Academic Performance in Medical Students - PMC Skip to main content Official websites use .gov A .gov website belongs to an official government organization in the United States. Secure .gov websites use HTTPS A lock ( ) or https:// means you've safely connected to the .gov website. Share sensitive information only on official, secure websites. Journal List User Guide PERMALINK As a library, NLM provides access to scientific literature. Inclusion in ",
+            "char_count": 34783,
+            "source_method": "direct"
+          }
+        ]
+      },
+      "analysis_http_status": 200,
+      "analysis_text": "1. Summary of ARTICLE 1 (Understanding the role of stress, personality and coping on learning motivation and mental health in university students during a pandemic.):\n\nMain topic: The study investigates how stress, personality traits, and coping mechanisms influence the mental health and learning motivation of university students in the context of the COVID-19 pandemic.\n\n3 core arguments:\nFirst, the research distinguishes between distress and eustress, suggesting that stress is not inherently negative and can potentially enhance motivation and wellbeing.\nSecond, personality traits such as conscientiousness and openness play a significant role in how students manage stress and maintain motivation, with conscientiousness acting as a buffer against the negative impacts of stress.\nThird, environmental factors, specifically the quality of teaching and the level of context control perceived by the student, are critical determinants of both mental health and learning motivation.\n\nKey evidence/citations: The study surveyed 162 undergraduate psychology students. It found that while adverse mental health and low motivation were prevalent, support systems and context control were key variables in fostering resilience. It also noted that for anxious-prone students, defensive-pessimism was as effective as optimism in stimulating motivation.\n\n2. Summary of ARTICLE 2 (Checking your browser - reCAPTCHA):\n\nMain topic: This URL could not be accessed. The content provided is a security verification page (reCAPTCHA) and contains no academic information or research findings.\n\n3 core arguments: Not applicable.\n\nKey evidence/citations: Not applicable.\n\n3. Points of agreement between the two articles:\nThere are no points of agreement because Article 2 failed to provide any substantive content to compare against Article 1.\n\n4. Points of contradiction / differences:\nThere are no points of contradiction because Article 2 failed to provide any substantive content to compare against Article 1.\n\n5. Objective evaluation:\nArticle 1 provides a clear, evidence-based analysis of student mental health and motivation, utilizing a specific sample size and identifying clear variables such as personality traits and teaching quality. Article 2 is a technical error page and provides no academic value or evidence. Therefore, Article 1 is the only credible source for this analysis.\n\n6. Conclusion:\nBased on the available data, Article 1 offers a comprehensive look at the multifaceted nature of student motivation and mental health during a crisis. Because Article 2 could not be accessed, a comparative synthesis is impossible, leaving Article 1 as the sole source of evidence for this debate.",
+      "success": true,
+      "elapsed_seconds": 17.25
+    }
+  ]
+}

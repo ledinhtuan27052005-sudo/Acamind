@@ -1,0 +1,6 @@
+Configuration,Mean_Retrieve_ms,Mean_Rerank_ms,Mean_Total_ms,Mean_Recall,Skip_Activation_Rate_pct
+Dense_Only,2465.75,0.0,2465.75,0.767,0.0%
+Sparse_Only,21.85,0.0,21.85,0.8,0.0%
+Hybrid_RRF_NoRerank,66.74,0.0,66.87,0.767,0.0%
+Hybrid_CrossEncoder,66.91,467.45,534.48,0.767,0.0%
+Acamind_Proposed,73.24,0.08,73.47,0.767,0.0%

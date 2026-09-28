@@ -1,0 +1,101 @@
+{
+  "protocol": "three real POST calls to /debate/analyze",
+  "cases": [
+    {
+      "case_id": "U01",
+      "run_at_utc": "2026-09-16T15:39:21.706660+00:00",
+      "url1": "https://pubmed.ncbi.nlm.nih.gov/36357950/",
+      "url2": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7730482/",
+      "source_1_label": "Gibbons (2022), stress, personality, coping, motivation",
+      "source_2_label": "Teacher influence, motivation, stress, learning strategies",
+      "topic": "Compare how stress, motivation, and learning are related among university students.",
+      "scrape_http_status": 200,
+      "scrape_preview": {
+        "sources": [
+          {
+            "url": "https://pubmed.ncbi.nlm.nih.gov/36357950/",
+            "title": "Understanding the role of stress, personality and coping on learning motivation and mental health in university students during a pandemic.",
+            "content": "Title: Understanding the role of stress, personality and coping on learning motivation and mental health in university students during a pandemic.\nAuthors: Gibbons Chris\nJournal: BMC psychology\nYear: 2022\nDOI: 10.1186/s40359-022-00971-w\nPMID: 36357950\nURL: https://pubmed.ncbi.nlm.nih.gov/36357950/\n\nAbstract:\nThe aims explored the associations between stress, personality and coping on student mental health and compared defensive-pessimism and optimism as influences on learning motivation. Most re",
+            "char_count": 1735,
+            "source_method": "pubmed_api"
+          },
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7730482/",
+            "title": "Checking your browser - reCAPTCHA",
+            "content": "Checking your browser - reCAPTCHA Checking your browser before accessing pmc.ncbi.nlm.nih.gov ... Click here if you are not automatically redirected after 5 seconds.",
+            "char_count": 165,
+            "source_method": "direct"
+          }
+        ]
+      },
+      "analysis_http_status": 200,
+      "analysis_text": "\n\nWarning: AI error encountered: Server error '503 Service Unavailable' for url 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+      "success": false,
+      "elapsed_seconds": 10.426
+    },
+    {
+      "case_id": "U02",
+      "run_at_utc": "2026-09-16T15:39:44.139789+00:00",
+      "url1": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7730482/",
+      "url2": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3372561/",
+      "source_1_label": "Teacher influence, motivation, stress, learning strategies",
+      "source_2_label": "Stress, motivation, academic performance in medical students",
+      "topic": "Compare the evidence about academic stress, motivation, and learning outcomes in higher education.",
+      "scrape_http_status": 200,
+      "scrape_preview": {
+        "sources": [
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7730482/",
+            "title": "Checking your browser - reCAPTCHA",
+            "content": "Checking your browser - reCAPTCHA Checking your browser before accessing pmc.ncbi.nlm.nih.gov ... Click here if you are not automatically redirected after 5 seconds.",
+            "char_count": 165,
+            "source_method": "direct"
+          },
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3372561/",
+            "title": "Checking your browser - reCAPTCHA",
+            "content": "Checking your browser - reCAPTCHA Checking your browser before accessing pmc.ncbi.nlm.nih.gov ... Click here if you are not automatically redirected after 5 seconds.",
+            "char_count": 165,
+            "source_method": "direct"
+          }
+        ]
+      },
+      "analysis_http_status": 200,
+      "analysis_text": "1. Summary of ARTICLE 1 (The Influence of Teachers on Motivation and Academic Stress and Their Effect on the Learning Strategies of University Students - PMC):\n- Main topic: The study investigates how teacher behavior, framed by Self-Determination Theory, impacts university students' academic stress, motivation, and learning outcomes.\n- 3 core arguments: \n    1. Teachers act as a critical buffer for students experiencing the high-stress environment of university.\n    2. Psychological control by teachers is a positive predictor of academic stress, whereas autonomy support from teachers acts as a negative predictor.\n    3. Academic stress has a negative impact on the learning strategies and performance of students.\n- Key evidence/citations: The study utilized a structural equation model based on data from 2456 university students with an average age of 22.51 years.\n\n2. Summary of ARTICLE 2 (Checking your browser - reCAPTCHA):\n- Main topic: This URL represents a security verification page used by the PMC website to prevent automated bot access.\n- 3 core arguments: \n    1. The website requires a browser check to ensure the user is human.\n    2. The page provides a 5-second window for automatic redirection.\n    3. The page offers a manual link for users who are not automatically redirected.\n- Key evidence/citations: The content is limited to the reCAPTCHA interface and does not contain academic research or data.\n\n3. Points of agreement between the two articles:\n- There are no points of agreement regarding the topic of academic stress, motivation, or learning outcomes, as Article 2 contains no substantive academic content.\n\n4. Points of contradiction / differences:\n- The primary difference is that Article 1 provides a peer-reviewed psychological study on university student experiences, while Article 2 is a technical security barrier. Article 1 offers empirical data and theoretical frameworks, whereas Article 2 offers no information relevant to the debate topic.\n\n5. Objective evaluation:\n- Article 1 is the only source that provides evidence relevant to the debate topic. It is highly credible as it is a published, peer-reviewed study from the International Journal of Environmental Research and Public Health (PMC7730482). Article 2 has no academic value for this analysis as it failed to provide the intended research content due to a security redirect.\n\n6. Conclusion:\n- Article 1 provides a robust framework for understanding how teacher-student dynamics influence academic stress and performance, while Article 2 provides no usable data. Consequently, the debate must rely exclusively on the findings from Article 1, which highlights the importance of autonomy-supportive teaching in mitigating student stress.",
+      "success": true,
+      "elapsed_seconds": 16.673
+    },
+    {
+      "case_id": "U03",
+      "run_at_utc": "2026-09-16T15:40:12.814831+00:00",
+      "url1": "https://pubmed.ncbi.nlm.nih.gov/36357950/",
+      "url2": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3372561/",
+      "source_1_label": "Gibbons (2022), stress, personality, coping, motivation",
+      "source_2_label": "Stress, motivation, academic performance in medical students",
+      "topic": "Compare the roles of stress and motivation in student mental health and academic performance.",
+      "scrape_http_status": 200,
+      "scrape_preview": {
+        "sources": [
+          {
+            "url": "https://pubmed.ncbi.nlm.nih.gov/36357950/",
+            "title": "Understanding the role of stress, personality and coping on learning motivation and mental health in university students during a pandemic.",
+            "content": "Title: Understanding the role of stress, personality and coping on learning motivation and mental health in university students during a pandemic.\nAuthors: Gibbons Chris\nJournal: BMC psychology\nYear: 2022\nDOI: 10.1186/s40359-022-00971-w\nPMID: 36357950\nURL: https://pubmed.ncbi.nlm.nih.gov/36357950/\n\nAbstract:\nThe aims explored the associations between stress, personality and coping on student mental health and compared defensive-pessimism and optimism as influences on learning motivation. Most re",
+            "char_count": 1735,
+            "source_method": "pubmed_api"
+          },
+          {
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3372561/",
+            "title": "Checking your browser - reCAPTCHA",
+            "content": "Checking your browser - reCAPTCHA Checking your browser before accessing pmc.ncbi.nlm.nih.gov ... Click here if you are not automatically redirected after 5 seconds.",
+            "char_count": 165,
+            "source_method": "direct"
+          }
+        ]
+      },
+      "analysis_http_status": 200,
+      "analysis_text": "\n\nWarning: AI error encountered: Server error '503 Service Unavailable' for url 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503",
+      "success": false,
+      "elapsed_seconds": 11.014
+    }
+  ]
+}

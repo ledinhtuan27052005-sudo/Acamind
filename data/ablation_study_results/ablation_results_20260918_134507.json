@@ -1,0 +1,623 @@
+{
+  "timestamp_utc": "2026-09-18T06:44:36.196939+00:00",
+  "configurations": [
+    "Dense_Only",
+    "Sparse_Only",
+    "Hybrid_RRF_NoRerank",
+    "Hybrid_CrossEncoder",
+    "Acamind_Proposed"
+  ],
+  "num_test_cases": 10,
+  "results_by_config": {
+    "Dense_Only": {
+      "summary": {
+        "config": "Dense_Only",
+        "mean_total_ms": 2465.75,
+        "mean_retrieve_ms": 2465.75,
+        "mean_rerank_ms": 0.0,
+        "mean_recall": 0.767,
+        "skip_activation_rate_pct": 0.0
+      },
+      "cases": [
+        {
+          "case_id": "Q01",
+          "query": "Những yếu tố nào ảnh hưởng đến hứng thú học tập môn Tâm lý học đại cương của sinh viên?",
+          "retrieve_ms": 23657.09,
+          "rerank_ms": 0.0,
+          "total_ms": 23657.09,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q02",
+          "query": "Mối liên hệ giữa sự thỏa mãn nhu cầu tâm lý cơ bản, động lực học tập và trì hoãn học tập?",
+          "retrieve_ms": 118.1,
+          "rerank_ms": 0.0,
+          "total_ms": 118.1,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q03",
+          "query": "Những nhu cầu tư vấn tâm lý học đường nào của học sinh THPT được đề cập?",
+          "retrieve_ms": 107.88,
+          "rerank_ms": 0.0,
+          "total_ms": 107.88,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q04",
+          "query": "Mục tiêu và đóng góp chính của hướng dẫn linear mixed-effects models (LMMgui) là gì?",
+          "retrieve_ms": 106.91,
+          "rerank_ms": 0.0,
+          "total_ms": 106.91,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q05",
+          "query": "Biến độc lập và biến trung gian có vai trò và cần thiết như thế nào trong thí nghiệm tâm lý xã hội?",
+          "retrieve_ms": 114.63,
+          "rerank_ms": 0.0,
+          "total_ms": 114.63,
+          "num_chunks": 1,
+          "keyword_recall": 0.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q06",
+          "query": "Giả thuyết của nhà thí nghiệm ảnh hưởng đến đối tượng tham gia nghiên cứu tâm lý như thế nào theo Orne?",
+          "retrieve_ms": 114.86,
+          "rerank_ms": 0.0,
+          "total_ms": 114.86,
+          "num_chunks": 8,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q07",
+          "query": "Nghiên cứu tâm lý học xã hội thực nghiệm tập trung vào các phương pháp và vấn đề cốt lõi nào?",
+          "retrieve_ms": 117.41,
+          "rerank_ms": 0.0,
+          "total_ms": 117.41,
+          "num_chunks": 8,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q08",
+          "query": "Các vị trí việc làm và cơ hội nghề nghiệp của sinh viên chuyên ngành tâm lý học tham vấn?",
+          "retrieve_ms": 103.86,
+          "rerank_ms": 0.0,
+          "total_ms": 103.86,
+          "num_chunks": 8,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q09",
+          "query": "Nội dung giáo dục tâm lý học cho lứa tuổi học sinh trung học cơ sở gồm những gì?",
+          "retrieve_ms": 105.44,
+          "rerank_ms": 0.0,
+          "total_ms": 105.44,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q10",
+          "query": "Mục tiêu nghiên cứu và kết quả chính được trình bày trong ấn phẩm tâm lý học thực nghiệm này?",
+          "retrieve_ms": 111.27,
+          "rerank_ms": 0.0,
+          "total_ms": 111.27,
+          "num_chunks": 8,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": null
+        }
+      ]
+    },
+    "Sparse_Only": {
+      "summary": {
+        "config": "Sparse_Only",
+        "mean_total_ms": 21.85,
+        "mean_retrieve_ms": 21.85,
+        "mean_rerank_ms": 0.0,
+        "mean_recall": 0.8,
+        "skip_activation_rate_pct": 0.0
+      },
+      "cases": [
+        {
+          "case_id": "Q01",
+          "query": "Những yếu tố nào ảnh hưởng đến hứng thú học tập môn Tâm lý học đại cương của sinh viên?",
+          "retrieve_ms": 61.73,
+          "rerank_ms": 0.0,
+          "total_ms": 61.73,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q02",
+          "query": "Mối liên hệ giữa sự thỏa mãn nhu cầu tâm lý cơ bản, động lực học tập và trì hoãn học tập?",
+          "retrieve_ms": 18.34,
+          "rerank_ms": 0.0,
+          "total_ms": 18.34,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q03",
+          "query": "Những nhu cầu tư vấn tâm lý học đường nào của học sinh THPT được đề cập?",
+          "retrieve_ms": 5.45,
+          "rerank_ms": 0.0,
+          "total_ms": 5.45,
+          "num_chunks": 5,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q04",
+          "query": "Mục tiêu và đóng góp chính của hướng dẫn linear mixed-effects models (LMMgui) là gì?",
+          "retrieve_ms": 9.51,
+          "rerank_ms": 0.0,
+          "total_ms": 9.51,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q05",
+          "query": "Biến độc lập và biến trung gian có vai trò và cần thiết như thế nào trong thí nghiệm tâm lý xã hội?",
+          "retrieve_ms": 5.18,
+          "rerank_ms": 0.0,
+          "total_ms": 5.18,
+          "num_chunks": 1,
+          "keyword_recall": 0.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q06",
+          "query": "Giả thuyết của nhà thí nghiệm ảnh hưởng đến đối tượng tham gia nghiên cứu tâm lý như thế nào theo Orne?",
+          "retrieve_ms": 11.98,
+          "rerank_ms": 0.0,
+          "total_ms": 11.98,
+          "num_chunks": 8,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q07",
+          "query": "Nghiên cứu tâm lý học xã hội thực nghiệm tập trung vào các phương pháp và vấn đề cốt lõi nào?",
+          "retrieve_ms": 16.91,
+          "rerank_ms": 0.0,
+          "total_ms": 16.91,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q08",
+          "query": "Các vị trí việc làm và cơ hội nghề nghiệp của sinh viên chuyên ngành tâm lý học tham vấn?",
+          "retrieve_ms": 6.41,
+          "rerank_ms": 0.0,
+          "total_ms": 6.41,
+          "num_chunks": 4,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q09",
+          "query": "Nội dung giáo dục tâm lý học cho lứa tuổi học sinh trung học cơ sở gồm những gì?",
+          "retrieve_ms": 22.92,
+          "rerank_ms": 0.0,
+          "total_ms": 22.92,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q10",
+          "query": "Mục tiêu nghiên cứu và kết quả chính được trình bày trong ấn phẩm tâm lý học thực nghiệm này?",
+          "retrieve_ms": 60.12,
+          "rerank_ms": 0.0,
+          "total_ms": 60.12,
+          "num_chunks": 8,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": null
+        }
+      ]
+    },
+    "Hybrid_RRF_NoRerank": {
+      "summary": {
+        "config": "Hybrid_RRF_NoRerank",
+        "mean_total_ms": 66.87,
+        "mean_retrieve_ms": 66.74,
+        "mean_rerank_ms": 0.0,
+        "mean_recall": 0.767,
+        "skip_activation_rate_pct": 0.0
+      },
+      "cases": [
+        {
+          "case_id": "Q01",
+          "query": "Những yếu tố nào ảnh hưởng đến hứng thú học tập môn Tâm lý học đại cương của sinh viên?",
+          "retrieve_ms": 13.7,
+          "rerank_ms": 0.0,
+          "total_ms": 13.82,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q02",
+          "query": "Mối liên hệ giữa sự thỏa mãn nhu cầu tâm lý cơ bản, động lực học tập và trì hoãn học tập?",
+          "retrieve_ms": 61.34,
+          "rerank_ms": 0.0,
+          "total_ms": 61.45,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q03",
+          "query": "Những nhu cầu tư vấn tâm lý học đường nào của học sinh THPT được đề cập?",
+          "retrieve_ms": 58.13,
+          "rerank_ms": 0.0,
+          "total_ms": 58.23,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q04",
+          "query": "Mục tiêu và đóng góp chính của hướng dẫn linear mixed-effects models (LMMgui) là gì?",
+          "retrieve_ms": 59.17,
+          "rerank_ms": 0.0,
+          "total_ms": 59.3,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q05",
+          "query": "Biến độc lập và biến trung gian có vai trò và cần thiết như thế nào trong thí nghiệm tâm lý xã hội?",
+          "retrieve_ms": 53.89,
+          "rerank_ms": 0.0,
+          "total_ms": 53.92,
+          "num_chunks": 1,
+          "keyword_recall": 0.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q06",
+          "query": "Giả thuyết của nhà thí nghiệm ảnh hưởng đến đối tượng tham gia nghiên cứu tâm lý như thế nào theo Orne?",
+          "retrieve_ms": 78.73,
+          "rerank_ms": 0.0,
+          "total_ms": 78.87,
+          "num_chunks": 8,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q07",
+          "query": "Nghiên cứu tâm lý học xã hội thực nghiệm tập trung vào các phương pháp và vấn đề cốt lõi nào?",
+          "retrieve_ms": 72.32,
+          "rerank_ms": 0.0,
+          "total_ms": 72.49,
+          "num_chunks": 8,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q08",
+          "query": "Các vị trí việc làm và cơ hội nghề nghiệp của sinh viên chuyên ngành tâm lý học tham vấn?",
+          "retrieve_ms": 60.93,
+          "rerank_ms": 0.0,
+          "total_ms": 61.04,
+          "num_chunks": 8,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q09",
+          "query": "Nội dung giáo dục tâm lý học cho lứa tuổi học sinh trung học cơ sở gồm những gì?",
+          "retrieve_ms": 84.43,
+          "rerank_ms": 0.0,
+          "total_ms": 84.57,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q10",
+          "query": "Mục tiêu nghiên cứu và kết quả chính được trình bày trong ấn phẩm tâm lý học thực nghiệm này?",
+          "retrieve_ms": 124.76,
+          "rerank_ms": 0.0,
+          "total_ms": 124.96,
+          "num_chunks": 8,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": null
+        }
+      ]
+    },
+    "Hybrid_CrossEncoder": {
+      "summary": {
+        "config": "Hybrid_CrossEncoder",
+        "mean_total_ms": 534.48,
+        "mean_retrieve_ms": 66.91,
+        "mean_rerank_ms": 467.45,
+        "mean_recall": 0.767,
+        "skip_activation_rate_pct": 0.0
+      },
+      "cases": [
+        {
+          "case_id": "Q01",
+          "query": "Những yếu tố nào ảnh hưởng đến hứng thú học tập môn Tâm lý học đại cương của sinh viên?",
+          "retrieve_ms": 58.39,
+          "rerank_ms": 4587.83,
+          "total_ms": 4646.39,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q02",
+          "query": "Mối liên hệ giữa sự thỏa mãn nhu cầu tâm lý cơ bản, động lực học tập và trì hoãn học tập?",
+          "retrieve_ms": 63.21,
+          "rerank_ms": 10.91,
+          "total_ms": 74.28,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q03",
+          "query": "Những nhu cầu tư vấn tâm lý học đường nào của học sinh THPT được đề cập?",
+          "retrieve_ms": 54.56,
+          "rerank_ms": 9.83,
+          "total_ms": 64.49,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q04",
+          "query": "Mục tiêu và đóng góp chính của hướng dẫn linear mixed-effects models (LMMgui) là gì?",
+          "retrieve_ms": 62.06,
+          "rerank_ms": 10.88,
+          "total_ms": 73.07,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q05",
+          "query": "Biến độc lập và biến trung gian có vai trò và cần thiết như thế nào trong thí nghiệm tâm lý xã hội?",
+          "retrieve_ms": 56.45,
+          "rerank_ms": 0.0,
+          "total_ms": 56.48,
+          "num_chunks": 1,
+          "keyword_recall": 0.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q06",
+          "query": "Giả thuyết của nhà thí nghiệm ảnh hưởng đến đối tượng tham gia nghiên cứu tâm lý như thế nào theo Orne?",
+          "retrieve_ms": 62.95,
+          "rerank_ms": 14.15,
+          "total_ms": 77.28,
+          "num_chunks": 8,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q07",
+          "query": "Nghiên cứu tâm lý học xã hội thực nghiệm tập trung vào các phương pháp và vấn đề cốt lõi nào?",
+          "retrieve_ms": 67.09,
+          "rerank_ms": 11.44,
+          "total_ms": 78.73,
+          "num_chunks": 8,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q08",
+          "query": "Các vị trí việc làm và cơ hội nghề nghiệp của sinh viên chuyên ngành tâm lý học tham vấn?",
+          "retrieve_ms": 58.01,
+          "rerank_ms": 12.49,
+          "total_ms": 70.63,
+          "num_chunks": 8,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q09",
+          "query": "Nội dung giáo dục tâm lý học cho lứa tuổi học sinh trung học cơ sở gồm những gì?",
+          "retrieve_ms": 75.02,
+          "rerank_ms": 8.79,
+          "total_ms": 83.92,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": null
+        },
+        {
+          "case_id": "Q10",
+          "query": "Mục tiêu nghiên cứu và kết quả chính được trình bày trong ấn phẩm tâm lý học thực nghiệm này?",
+          "retrieve_ms": 111.32,
+          "rerank_ms": 8.14,
+          "total_ms": 119.57,
+          "num_chunks": 8,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": null
+        }
+      ]
+    },
+    "Acamind_Proposed": {
+      "summary": {
+        "config": "Acamind_Proposed",
+        "mean_total_ms": 73.47,
+        "mean_retrieve_ms": 73.24,
+        "mean_rerank_ms": 0.08,
+        "mean_recall": 0.767,
+        "skip_activation_rate_pct": 0.0
+      },
+      "cases": [
+        {
+          "case_id": "Q01",
+          "query": "Những yếu tố nào ảnh hưởng đến hứng thú học tập môn Tâm lý học đại cương của sinh viên?",
+          "retrieve_ms": 57.52,
+          "rerank_ms": 0.04,
+          "total_ms": 57.74,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": 1.0
+        },
+        {
+          "case_id": "Q02",
+          "query": "Mối liên hệ giữa sự thỏa mãn nhu cầu tâm lý cơ bản, động lực học tập và trì hoãn học tập?",
+          "retrieve_ms": 62.47,
+          "rerank_ms": 0.04,
+          "total_ms": 62.66,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": 1.013
+        },
+        {
+          "case_id": "Q03",
+          "query": "Những nhu cầu tư vấn tâm lý học đường nào của học sinh THPT được đề cập?",
+          "retrieve_ms": 58.11,
+          "rerank_ms": 0.05,
+          "total_ms": 58.27,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": 1.03
+        },
+        {
+          "case_id": "Q04",
+          "query": "Mục tiêu và đóng góp chính của hướng dẫn linear mixed-effects models (LMMgui) là gì?",
+          "retrieve_ms": 59.05,
+          "rerank_ms": 0.04,
+          "total_ms": 59.24,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": 1.0
+        },
+        {
+          "case_id": "Q05",
+          "query": "Biến độc lập và biến trung gian có vai trò và cần thiết như thế nào trong thí nghiệm tâm lý xã hội?",
+          "retrieve_ms": 58.01,
+          "rerank_ms": 0.0,
+          "total_ms": 58.04,
+          "num_chunks": 1,
+          "keyword_recall": 0.0,
+          "confident_skip": false,
+          "delta_rrf": 1.0
+        },
+        {
+          "case_id": "Q06",
+          "query": "Giả thuyết của nhà thí nghiệm ảnh hưởng đến đối tượng tham gia nghiên cứu tâm lý như thế nào theo Orne?",
+          "retrieve_ms": 66.86,
+          "rerank_ms": 0.05,
+          "total_ms": 67.1,
+          "num_chunks": 8,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": 1.162
+        },
+        {
+          "case_id": "Q07",
+          "query": "Nghiên cứu tâm lý học xã hội thực nghiệm tập trung vào các phương pháp và vấn đề cốt lõi nào?",
+          "retrieve_ms": 78.22,
+          "rerank_ms": 0.03,
+          "total_ms": 78.37,
+          "num_chunks": 8,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": 1.077
+        },
+        {
+          "case_id": "Q08",
+          "query": "Các vị trí việc làm và cơ hội nghề nghiệp của sinh viên chuyên ngành tâm lý học tham vấn?",
+          "retrieve_ms": 57.83,
+          "rerank_ms": 0.05,
+          "total_ms": 57.99,
+          "num_chunks": 8,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": 1.06
+        },
+        {
+          "case_id": "Q09",
+          "query": "Nội dung giáo dục tâm lý học cho lứa tuổi học sinh trung học cơ sở gồm những gì?",
+          "retrieve_ms": 83.02,
+          "rerank_ms": 0.42,
+          "total_ms": 83.75,
+          "num_chunks": 8,
+          "keyword_recall": 1.0,
+          "confident_skip": false,
+          "delta_rrf": 1.016
+        },
+        {
+          "case_id": "Q10",
+          "query": "Mục tiêu nghiên cứu và kết quả chính được trình bày trong ấn phẩm tâm lý học thực nghiệm này?",
+          "retrieve_ms": 151.28,
+          "rerank_ms": 0.04,
+          "total_ms": 151.52,
+          "num_chunks": 8,
+          "keyword_recall": 0.667,
+          "confident_skip": false,
+          "delta_rrf": 1.016
+        }
+      ]
+    }
+  }
+}

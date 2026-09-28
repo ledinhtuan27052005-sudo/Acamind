@@ -1,0 +1,338 @@
+export interface BodyPartInfo {
+  id: string;
+  name: string;
+  system: string;
+  description: string;
+  functions: string[];
+  commonConditions: string[];
+  searchKeywords: string[];
+  color: string;
+}
+
+export const BODY_DATA: Record<string, BodyPartInfo> = {
+  head: {
+    id: 'head',
+    name: 'Head',
+    system: 'Nervous System',
+    description: 'Contains the brain — the control center of all body activities, including cognition, emotion, movement, and autonomic functions.',
+    functions: ['Sensory processing', 'Motor control', 'Memory and learning', 'Emotional regulation'],
+    commonConditions: ['Headache / Migraine', 'Traumatic brain injury', 'Stroke', 'Alzheimer\'s disease', 'Epilepsy'],
+    searchKeywords: ['brain', 'skull'],
+    color: '#f4a261',
+  },
+  neck: {
+    id: 'neck',
+    name: 'Neck',
+    system: 'Musculoskeletal System',
+    description: 'Connects the head to the torso, containing the cervical spine (C1–C7), trachea, esophagus, and major blood vessels supplying the brain.',
+    functions: ['Support and rotate head', 'Transport blood to brain', 'Nerve conduction', 'Breathing and swallowing'],
+    commonConditions: ['Cervical spondylosis', 'Neck stiffness', 'Herniated cervical disc', 'Goiter'],
+    searchKeywords: ['cervical', 'neck'],
+    color: '#e9c46a',
+  },
+  chest: {
+    id: 'chest',
+    name: 'Chest',
+    system: 'Cardiovascular / Respiratory System',
+    description: 'The rib cage protects the heart and lungs — the two most critical vital organs. The heart pumps about 5 liters of blood per minute, and the lungs exchange O2 and CO2.',
+    functions: ['Pump blood circulation', 'Respiratory gas exchange', 'Protect heart and lungs', 'Speech and vocalization'],
+    commonConditions: ['Myocardial infarction (Heart attack)', 'Pneumonia', 'Asthma', 'Lung cancer', 'Heart failure'],
+    searchKeywords: ['tim', 'heart', 'lung'],
+    color: '#e76f51',
+  },
+  abdomen: {
+    id: 'abdomen',
+    name: 'Abdomen',
+    system: 'Digestive System',
+    description: 'Contains digestive organs: stomach, small intestine (6–7m), large intestine, liver (largest internal organ), pancreas, and spleen.',
+    functions: ['Digestion and absorption of food', 'Nutrient metabolism', 'Toxin excretion', 'Enzyme and hormone production'],
+    commonConditions: ['Gastritis', 'Peptic ulcer', 'Hepatitis B/C', 'Colorectal cancer', 'Diabetes'],
+    searchKeywords: ['gan', 'stomach', 'liver', 'intestine'],
+    color: '#2a9d8f',
+  },
+  left_shoulder: {
+    id: 'left_shoulder',
+    name: 'Left Shoulder',
+    system: 'Musculoskeletal Joint System',
+    description: 'The shoulder joint (glenohumeral) is the most flexible joint in the body, allowing 360° motion. Consists of the scapula, clavicle, and upper humerus.',
+    functions: ['Multi-directional arm movement', 'Lifting and carrying', 'Upper limb stabilization', 'Movement coordination'],
+    commonConditions: ['Shoulder dislocation', 'Rotator cuff tendonitis', 'Frozen shoulder', 'Labral tear'],
+    searchKeywords: ['vai', 'shoulder', 'rotator cuff'],
+    color: '#457b9d',
+  },
+  right_shoulder: {
+    id: 'right_shoulder',
+    name: 'Right Shoulder',
+    system: 'Musculoskeletal Joint System',
+    description: 'The shoulder joint (glenohumeral) is the most flexible joint in the body, allowing 360° motion. Consists of the scapula, clavicle, and upper humerus.',
+    functions: ['Multi-directional arm movement', 'Lifting and carrying', 'Upper limb stabilization', 'Movement coordination'],
+    commonConditions: ['Shoulder dislocation', 'Rotator cuff tendonitis', 'Frozen shoulder', 'Labral tear'],
+    searchKeywords: ['vai', 'shoulder', 'rotator cuff'],
+    color: '#457b9d',
+  },
+  left_arm: {
+    id: 'left_arm',
+    name: 'Left Arm',
+    system: 'Musculoskeletal System',
+    description: 'Consists of the humerus, forearm bones (radius & ulna), flexor/extensor muscles, and peripheral nervous system supplying the hand.',
+    functions: ['Perform fine motor tasks', 'Grasping and carrying', 'Transfer force from shoulder', 'Body protection'],
+    commonConditions: ['Humerus fracture', 'Tennis elbow', 'Carpal tunnel syndrome', 'Hand numbness'],
+    searchKeywords: ['arm', 'elbow', 'humerus', 'radius', 'ulna'],
+    color: '#6d9eeb',
+  },
+  right_arm: {
+    id: 'right_arm',
+    name: 'Right Arm',
+    system: 'Musculoskeletal System',
+    description: 'Consists of the humerus, forearm bones (radius & ulna), flexor/extensor muscles, and peripheral nervous system supplying the hand.',
+    functions: ['Perform fine motor tasks', 'Grasping and carrying', 'Transfer force from shoulder', 'Body protection'],
+    commonConditions: ['Humerus fracture', 'Tennis elbow', 'Carpal tunnel syndrome', 'Hand numbness'],
+    searchKeywords: ['arm', 'elbow', 'humerus'],
+    color: '#6d9eeb',
+  },
+  pelvis: {
+    id: 'pelvis',
+    name: 'Pelvis / Hip',
+    system: 'Musculoskeletal / Reproductive System',
+    description: 'The pelvis connects the spine to the lower limbs, housing and protecting the bladder, colon, and reproductive organs.',
+    functions: ['Support body weight', 'Protect pelvic organs', 'Lower limb muscle attachment', 'Pregnancy (female)'],
+    commonConditions: ['Pelvic fracture', 'Chronic pelvic pain', 'Hip osteoarthritis', 'Uterine fibroids'],
+    searchKeywords: ['pelvis', 'hip'],
+    color: '#8ecae6',
+  },
+  left_leg: {
+    id: 'left_leg',
+    name: 'Left Thigh',
+    system: 'Musculoskeletal System',
+    description: 'The femur is the longest and strongest bone in the body, connecting hip to knee. Includes the quadriceps and hamstring muscles.',
+    functions: ['Support body weight', 'Extend and flex knee', 'Running and climbing stairs', 'Absorb ground impact'],
+    commonConditions: ['Femoral fracture', 'Knee osteoarthritis', 'ACL tear', 'Quadriceps tendonitis', 'Knee pain'],
+    searchKeywords: ['femur', 'thigh', 'knee'],
+    color: '#a8dadc',
+  },
+  right_leg: {
+    id: 'right_leg',
+    name: 'Right Thigh',
+    system: 'Musculoskeletal System',
+    description: 'The femur is the longest and strongest bone in the body, connecting hip to knee. Includes the quadriceps and hamstring muscles.',
+    functions: ['Support body weight', 'Extend and flex knee', 'Running and climbing stairs', 'Absorb ground impact'],
+    commonConditions: ['Femoral fracture', 'Knee osteoarthritis', 'ACL tear', 'Quadriceps tendonitis', 'Knee pain'],
+    searchKeywords: ['femur', 'thigh', 'knee'],
+    color: '#a8dadc',
+  },
+  left_lower_leg: {
+    id: 'left_lower_leg',
+    name: 'Left Lower Leg',
+    system: 'Musculoskeletal System',
+    description: 'Consists of the tibia and fibula, connecting knee to foot. The calf (gastrocnemius) and soleus are main muscles for standing and walking.',
+    functions: ['Stand and maintain balance', 'Propel forward when walking/running', 'Pump venous blood back to heart', 'Absorb impact force'],
+    commonConditions: ['Tibia fracture', 'Achilles tendonitis', 'Calf muscle cramps', 'Compartment syndrome', 'Calf strain'],
+    searchKeywords: ['tibia', 'fibula', 'calf', 'shin', 'Achilles'],
+    color: '#76c8d0',
+  },
+  right_lower_leg: {
+    id: 'right_lower_leg',
+    name: 'Right Lower Leg',
+    system: 'Musculoskeletal System',
+    description: 'Consists of the tibia and fibula, connecting knee to foot. The calf (gastrocnemius) and soleus are main muscles for standing and walking.',
+    functions: ['Stand and maintain balance', 'Propel forward when walking/running', 'Pump venous blood back to heart', 'Absorb impact force'],
+    commonConditions: ['Tibia fracture', 'Achilles tendonitis', 'Calf muscle cramps', 'Compartment syndrome', 'Calf strain'],
+    searchKeywords: ['tibia', 'fibula', 'calf', 'shin', 'Achilles'],
+    color: '#76c8d0',
+  },
+  left_foot: {
+    id: 'left_foot',
+    name: 'Left Foot',
+    system: 'Musculoskeletal System',
+    description: 'The foot contains 26 bones, 33 joints, and over 100 muscles, tendons, and ligaments. The arch acts as a shock-absorbing spring.',
+    functions: ['Support total body weight', 'Absorb impact force', 'Maintain balance and posture', 'Propel body forward'],
+    commonConditions: ['Flat feet', 'Plantar Fasciitis', 'Gout in big toe', 'Foot bone fracture', 'Cracked heels'],
+    searchKeywords: ['foot', 'heel', 'toe', 'ankle', 'plantar'],
+    color: '#52b6c0',
+  },
+  right_foot: {
+    id: 'right_foot',
+    name: 'Right Foot',
+    system: 'Musculoskeletal System',
+    description: 'The foot contains 26 bones, 33 joints, and over 100 muscles, tendons, and ligaments. The arch acts as a shock-absorbing spring.',
+    functions: ['Support total body weight', 'Absorb impact force', 'Maintain balance and posture', 'Propel body forward'],
+    commonConditions: ['Flat feet', 'Plantar Fasciitis', 'Gout in big toe', 'Foot bone fracture', 'Cracked heels'],
+    searchKeywords: ['foot', 'heel', 'toe', 'ankle', 'plantar'],
+    color: '#52b6c0',
+  },
+};
+
+export const SYSTEM_COLORS: Record<string, string> = {
+  'Nervous System': '#7c3aed',
+  'Musculoskeletal System': '#0369a1',
+  'Cardiovascular / Respiratory System': '#dc2626',
+  'Digestive System': '#16a34a',
+  'Musculoskeletal / Reproductive System': '#0284c7',
+  'Urinary System': '#0891b2',
+};
+
+export interface OrganInfo {
+  id: string;
+  name: string;
+  system: string;
+  description: string;
+  functions: string[];
+  commonConditions: string[];
+  color: string;
+  pos: [number, number, number];
+  scale: [number, number, number];
+  geo: 'sphere' | 'box' | 'capsule' | 'torus' | 'ellipsoid' | 'compound';
+  compoundParts?: Array<{
+    geo: 'sphere' | 'box' | 'capsule' | 'torus' | 'ellipsoid';
+    relPos: [number, number, number];
+    relScale: [number, number, number];
+    args?: number[];
+  }>;
+}
+
+export const ORGAN_DATA: Record<string, OrganInfo> = {
+  brain: {
+    id: 'brain',
+    name: 'Brain',
+    system: 'Nervous System',
+    description: 'Weighing about 1.4 kg and containing ~86 billion neurons, the brain is the processing center controlling all conscious and subconscious activities of the body.',
+    functions: ['Sensory processing', 'Motor control', 'Language and reasoning', 'Emotion and memory regulation'],
+    commonConditions: ['Stroke', 'Brain tumor', 'Alzheimer\'s disease', 'Parkinson\'s disease', 'Epilepsy', 'Traumatic brain injury'],
+    color: '#d4735a',
+    pos: [0, 0.83, 0.01],
+    scale: [0.070, 0.095, 0.110],
+    geo: 'sphere',
+  },
+  heart: {
+    id: 'heart',
+    name: 'Heart',
+    system: 'Cardiovascular / Respiratory System',
+    description: 'Beats ~100,000 times/day, pumping ~5 liters of blood/min. Consists of 4 chambers (2 atria, 2 ventricles), located slightly to the left in the chest.',
+    functions: ['Pump oxygen-rich blood to the body', 'Receive blood from lungs to left ventricle', 'Maintain blood pressure', 'Regulate heart rate'],
+    commonConditions: ['Myocardial infarction (Heart attack)', 'Heart failure', 'Arrhythmia', 'Valvular heart disease', 'Myocarditis'],
+    color: '#dc2626',
+    pos: [0.05, 0.45, 0.04],
+    scale: [0.055, 0.045, 0.030],
+    geo: 'sphere',
+  },
+  left_lung: {
+    id: 'left_lung',
+    name: 'Left Lung',
+    system: 'Cardiovascular / Respiratory System',
+    description: 'Has 2 lobes (upper and lower), slightly smaller than the right lung to accommodate the heart. Contains ~300 million alveoli for gas exchange.',
+    functions: ['O2 and CO2 gas exchange', 'Filter airborne pathogens', 'Maintain blood pH balance', 'Produce sound during speech'],
+    commonConditions: ['Pneumonia', 'Asthma', 'COPD', 'Lung cancer', 'Tuberculosis', 'Pneumothorax'],
+    color: '#3b82f6',
+    pos: [-0.10, 0.51, 0.02],
+    scale: [0.044, 0.092, 0.038],
+    geo: 'capsule',
+  },
+  right_lung: {
+    id: 'right_lung',
+    name: 'Right Lung',
+    system: 'Cardiovascular / Respiratory System',
+    description: 'Has 3 lobes (upper, middle, lower), slightly larger than the left lung. Performs about 20,000 breaths per day together with the left lung.',
+    functions: ['O2 and CO2 gas exchange', 'Filter airborne pathogens', 'Maintain blood pH balance', 'Produce sound during speech'],
+    commonConditions: ['Pneumonia', 'Asthma', 'COPD', 'Lung cancer', 'Tuberculosis', 'Pneumothorax'],
+    color: '#3b82f6',
+    pos: [0.10, 0.51, 0.02],
+    scale: [0.048, 0.092, 0.045],
+    geo: 'capsule',
+  },
+  liver: {
+    id: 'liver',
+    name: 'Liver',
+    system: 'Digestive System',
+    description: 'The largest internal organ (~1.5 kg), performing over 500 vital functions. Located in the upper right abdomen under the diaphragm.',
+    functions: ['Blood detoxification', 'Bile production to digest fats', 'Synthesis of plasma proteins', 'Glycogen and vitamin storage'],
+    commonConditions: ['Hepatitis B/C', 'Liver cirrhosis', 'Fatty liver disease', 'Liver cancer', 'Gallstones'],
+    color: '#92400e',
+    pos: [-0.05, 0.35, 0.04],
+    scale: [0.100, 0.045, 0.035],
+    geo: 'box',
+  },
+  stomach: {
+    id: 'stomach',
+    name: 'Stomach',
+    system: 'Digestive System',
+    description: 'Holds ~1–2 liters of food, secreting gastric acid (pH 1.5–3.5) and pepsin enzyme to digest protein. Located in the upper left abdomen.',
+    functions: ['Grind and mix food', 'Digest protein using acid and enzymes', 'Sterilize food', 'Deliver chyme to small intestine'],
+    commonConditions: ['Gastric ulcer (H. pylori)', 'Acid reflux (GERD)', 'Stomach cancer', 'Gastrointestinal bleeding', 'Pyloric stenosis'],
+    color: '#f59e0b',
+    pos: [0.07, 0.35, 0.04],
+    scale: [0.060, 0.060, 0.045],
+    geo: 'compound',
+    compoundParts: [
+      { geo: 'ellipsoid', relPos: [0, 0, 0], relScale: [0.6, 0.7, 0.5] },
+      { geo: 'sphere', relPos: [0.3, 0.45, 0], relScale: [0.40, 0.40, 0.40] },
+      { geo: 'capsule', relPos: [-0.55, -0.15, 0], relScale: [0.30, 0.6, 0.30], args: [0.4, 0.7, 6, 14] },
+    ],
+  },
+  left_kidney: {
+    id: 'left_kidney',
+    name: 'Left Kidney',
+    system: 'Urinary System',
+    description: 'Filters ~180 liters of blood per day, producing 1–2 liters of urine. Each kidney contains about 1 million nephrons.',
+    functions: ['Filter waste from blood', 'Regulate blood pressure', 'Balance electrolytes and pH', 'Produce erythropoietin for red cell creation'],
+    commonConditions: ['Kidney stones', 'Nephritis', 'Chronic kidney failure', 'Kidney cancer', 'Renal cyst'],
+    color: '#db2777',
+    pos: [-0.09, 0.27, -0.05],
+    scale: [0.045, 0.070, 0.035],
+    geo: 'capsule',
+  },
+  right_kidney: {
+    id: 'right_kidney',
+    name: 'Right Kidney',
+    system: 'Urinary System',
+    description: 'Located slightly lower than the left kidney due to the space taken by the liver. Shares the entire blood filtration workload.',
+    functions: ['Filter waste from blood', 'Regulate blood pressure', 'Balance electrolytes and pH', 'Produce erythropoietin for red cell creation'],
+    commonConditions: ['Kidney stones', 'Nephritis', 'Chronic kidney failure', 'Kidney cancer', 'Renal cyst'],
+    color: '#db2777',
+    pos: [0.09, 0.25, -0.05],
+    scale: [0.045, 0.070, 0.035],
+    geo: 'capsule',
+  },
+  intestines: {
+    id: 'intestines',
+    name: 'Intestines',
+    system: 'Digestive System',
+    description: 'Small intestine (6–7m) absorbs nutrients; large intestine (1.5m) absorbs water and forms stool. Takes up most of the lower abdomen.',
+    functions: ['Absorb nutrients (small intestine)', 'Absorb water and electrolytes (large intestine)', 'Houses 70% of the body\'s immune system', 'Produce serotonin and gut hormones'],
+    commonConditions: ['Appendicitis', 'Irritable bowel syndrome (IBS)', 'Colorectal cancer', 'Crohn\'s disease', 'Bowel obstruction'],
+    color: '#d97706',
+    pos: [0, 0.15, 0.04],
+    scale: [0.160, 0.105, 0.080],
+    geo: 'torus',
+  },
+  bladder: {
+    id: 'bladder',
+    name: 'Bladder',
+    system: 'Urinary System',
+    description: 'Stores 400–600 ml of urine. Detrusor muscle contracts when urinating. Located behind the pubic bone.',
+    functions: ['Store urine from kidneys', 'Excrete urine when full', 'Control voluntary urination'],
+    commonConditions: ['Cystitis (UTI)', 'Bladder cancer', 'Bladder stones', 'Urinary incontinence', 'Overactive bladder (OAB)'],
+    color: '#0891b2',
+    pos: [0, 0.05, 0.04],
+    scale: [0.055, 0.065, 0.045],
+    geo: 'ellipsoid',
+  },
+  reproductive_system: {
+    id: 'reproductive_system',
+    name: 'Reproductive System',
+    system: 'Reproductive System',
+    description: 'Consists of reproductive organs (prostate/testes for male, uterus/ovaries/fallopian tubes for female) located in the pelvic cavity below the bladder.',
+    functions: ['Produce gametes (sperm / egg)', 'Produce sex hormones (testosterone / estrogen)', 'Fertilization and pregnancy', 'Develop secondary sex characteristics'],
+    commonConditions: ['Uterine fibroids', 'Cervical cancer', 'Prostate cancer', 'Ovarian cyst', 'Infertility', 'Prostatitis'],
+    color: '#a78bfa',
+    pos: [0, -0.02, 0.02],
+    scale: [0.090, 0.070, 0.055],
+    geo: 'compound',
+    compoundParts: [
+      { geo: 'ellipsoid', relPos: [0, 0.20, 0], relScale: [0.30, 0.40, 0.35] },
+      { geo: 'ellipsoid', relPos: [-0.45, -0.20, 0], relScale: [0.18, 0.22, 0.18] },
+      { geo: 'ellipsoid', relPos: [0.45, -0.20, 0], relScale: [0.18, 0.22, 0.18] },
+      { geo: 'capsule', relPos: [-0.30, 0.10, 0], relScale: [0.40, 0.10, 0.10], args: [0.5, 1, 6, 14] },
+      { geo: 'capsule', relPos: [0.30, 0.10, 0], relScale: [0.40, 0.10, 0.10], args: [0.5, 1, 6, 14] },
+    ],
+  },
+};

@@ -1,0 +1,875 @@
+'use client';
+
+import { useEffect, useState, useRef } from 'react';
+import { motion } from 'framer-motion';
+import {
+  getDocuments, chatStream, chatGeneralStream,
+  getMyPlanUsage, chatFileStream,
+  DocumentInfo, PlanUsage,
+} from '@/lib/api';
+import { useAppStore } from '@/store/useAppStore';
+import {
+  Send, Square, Brain, Globe, Trash2, Zap,
+  MessageSquare, Clock, Plus, X, User, Sparkles, Paperclip,
+} from 'lucide-react';
+
+import { useI18n } from '@/lib/i18n/context';
+
+interface ChatSession {
+  id: string;
+  title: string;
+  createdAt: Date;
+  messages: ChatMessage[];
+}
+
+interface ChatMessage {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+  attachments?: ChatFile[];
+}
+
+interface ChatFile {
+  name: string;
+  type: string;
+  url: string;
+  size?: number;
+}
+
+/* ── Chat Session Sidebar ─────────────────────────────────────────────── */
+
+function ChatSidebar({
+  sessions,
+  currentSession,
+  onSelectSession,
+  onNewChat,
+  onDeleteSession,
+  userName,
+}: {
+  sessions: ChatSession[];
+  currentSession: ChatSession | null;
+  onSelectSession: (id: string) => void;
+  onNewChat: () => void;
+  onDeleteSession: (id: string) => void;
+  userName: string;
+}) {
+  const { t } = useI18n();
+
+  return (
+    <aside className="w-20 md:w-64 h-full bg-white dark:bg-[#111827] flex flex-col shrink-0 border-r border-gray-200 dark:border-white/10 overflow-hidden pt-4 transition-colors">
+      {/* New chat button */}
+      <button
+        onClick={onNewChat}
+        className="flex items-center gap-2 mx-2 mt-2 px-2 md:px-3 py-2 rounded-lg border border-gray-300 dark:border-white/10 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors text-gray-800 dark:text-gray-200"
+      >
+        <Plus size={18} />
+        <span className="hidden md:inline text-sm font-medium">{t.chat.new_chat}</span>
+      </button>
+
+      {/* Recents section */}
+      <div
+        className="flex-1 min-h-0 overflow-y-auto overscroll-contain mt-3 px-1 md:px-2"
+        style={{ scrollbarWidth: 'thin' }}
+      >
+        <div className="flex items-center gap-1 px-1 md:px-2 py-2 text-[10px] md:text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+          <Clock size={12} />
+          <span className="hidden md:inline">{t.chat.recents}</span>
+        </div>
+
+        <div className="space-y-0.5">
+          {sessions.map((session) => {
+            const displayTitle = session.title === 'New chat' ? t.chat.new_chat : session.title;
+            return (
+              <div
+                key={session.id}
+                className={`group flex items-center gap-1 px-1 md:px-2 py-2 rounded-lg transition-colors text-sm ${
+                  currentSession?.id === session.id
+                    ? 'bg-gray-200 dark:bg-white/10 text-gray-900 dark:text-white'
+                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white'
+                }`}
+              >
+                <button
+                  onClick={() => onSelectSession(session.id)}
+                  className="flex items-center gap-1.5 flex-1 min-w-0 text-left"
+                >
+                  <MessageSquare size={14} className="shrink-0" />
+                  <span className="truncate hidden md:inline">{displayTitle}</span>
+                  <span className="truncate md:hidden">{displayTitle.slice(0, 8)}...</span>
+                </button>
+                <button
+                  onClick={() => onDeleteSession(session.id)}
+                  className="opacity-0 group-hover:opacity-100 shrink-0 text-gray-400 hover:text-red-500 dark:hover:text-red-400 transition-all p-1"
+                  title={t.common.delete}
+                >
+                  <Trash2 size={12} />
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* User block */}
+      <div className="shrink-0 border-t border-gray-200 dark:border-white/10">
+        <div className="flex items-center gap-1 px-1 md:px-2 py-2 text-[10px] md:text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+          <User size={12} />
+          <span className="hidden md:inline">{t.chat.user}</span>
+        </div>
+        <div className="px-1 md:px-2 pb-3">
+          <button
+            className="w-full flex items-center gap-2 px-2 md:px-3 py-2 rounded-lg border border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors"
+            title="Account"
+          >
+            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-teal-500 to-purple-600 flex items-center justify-center shrink-0">
+              <User size={12} className="text-white" />
+            </div>
+            <span className="hidden md:inline text-xs text-gray-700 dark:text-gray-300 truncate">
+              {userName === 'Guest' ? t.chat.guest : userName}
+            </span>
+          </button>
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+/* ── AI Message Component ─────────────────────────────────────────── */
+
+function AiMessage({ content }: { content: string }) {
+  return (
+    <div className="chat-message-content max-w-none">
+      <StructuredMessage content={content} />
+    </div>
+  );
+}
+
+/* ── Structured Message Component ─────────────────────────────────── */
+
+interface TableCell {
+  content: string;
+  isBold?: boolean;
+}
+
+interface TableRow {
+  cells: TableCell[];
+}
+
+interface StructuredItem {
+  type: 'text' | 'table';
+  content?: string;
+  rows?: TableRow[]; // cho table
+  headerRow?: TableRow; // cho table
+}
+
+// Parse một dòng table thành các cells
+function parseTableRow(line: string): TableCell[] {
+  const cells = line
+    .split('|')
+    .filter((_, i, arr) => i > 0 && i < arr.length - 1)
+    .map(cell => {
+      const trimmed = cell.trim();
+      const boldMatch = trimmed.match(/^\*\*(.+)\*\*$/);
+      return {
+        content: boldMatch ? boldMatch[1] : trimmed,
+        isBold: !!boldMatch,
+      };
+    });
+  return cells;
+}
+
+// Kiểm tra xem dòng có phải là table row không
+function isTableRow(line: string): boolean {
+  const trimmed = line.trim();
+  return trimmed.startsWith('|') && trimmed.endsWith('|') && trimmed.includes('|');
+}
+
+// Kiểm tra xem dòng có phải là separator row (|---|---|) không
+function isTableSeparator(line: string): boolean {
+  const trimmed = line.trim();
+  return /^\|[\s\-:|]+\|$/.test(trimmed);
+}
+
+// Parse nội dung - chỉ xử lý table, text thường với bold
+function parseToStructured(content: string): StructuredItem[] {
+  const lines = content.split('\n');
+  const result: StructuredItem[] = [];
+  let pendingTableRows: string[] = [];
+
+  const flushTable = (rows: string[]) => {
+    if (rows.length < 2) return null;
+    const headerCells = parseTableRow(rows[0]);
+    const dataRows: TableRow[] = [];
+    for (let i = 2; i < rows.length; i++) {
+      if (!isTableSeparator(rows[i])) {
+        dataRows.push({ cells: parseTableRow(rows[i]) });
+      }
+    }
+    return {
+      type: 'table' as const,
+      headerRow: { cells: headerCells },
+      rows: dataRows,
+    } as StructuredItem;
+  };
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+
+    // Kiểm tra table
+    if (isTableRow(trimmed)) {
+      pendingTableRows.push(trimmed);
+      continue;
+    } else {
+      // Flush table nếu có
+      if (pendingTableRows.length > 0) {
+        const table = flushTable(pendingTableRows);
+        if (table) result.push(table);
+        pendingTableRows = [];
+      }
+    }
+
+    // Dòng text thường (bỏ các ký tự markdown đặc biệt ở đầu)
+    if (trimmed && !trimmed.startsWith('```') && !trimmed.startsWith('#')) {
+      result.push({
+        type: 'text',
+        content: trimmed,
+      });
+    }
+  }
+
+  // Flush table cuối cùng
+  if (pendingTableRows.length > 0) {
+    const table = flushTable(pendingTableRows);
+    if (table) result.push(table);
+  }
+
+  return result;
+}
+
+// Parse text để tách bold text ra
+function parseBoldText(text: string): { bold: boolean; text: string }[] {
+  const parts: { bold: boolean; text: string }[] = [];
+  const regex = /\*\*(.+?)\*\*/g;
+  let lastIndex = 0;
+  let match;
+
+  while ((match = regex.exec(text)) !== null) {
+    // Add text trước bold
+    if (match.index > lastIndex) {
+      parts.push({ bold: false, text: text.slice(lastIndex, match.index) });
+    }
+    // Add bold text
+    parts.push({ bold: true, text: match[1] });
+    lastIndex = regex.lastIndex;
+  }
+
+  // Add phần còn lại
+  if (lastIndex < text.length) {
+    parts.push({ bold: false, text: text.slice(lastIndex) });
+  }
+
+  return parts;
+}
+
+// Render text có bold
+function renderBoldText({ text, className }: { text?: string; className?: string }) {
+  const parts = parseBoldText(text || '');
+  if (parts.length === 0) return null;
+
+  return (
+    <span className={className}>
+      {parts.map((part, idx) =>
+        part.bold ? (
+          <strong key={idx} className="font-semibold">{part.text}</strong>
+        ) : (
+          <span key={idx}>{part.text}</span>
+        )
+      )}
+    </span>
+  );
+}
+
+function StructuredMessage({ content }: { content: string }) {
+  const structured = parseToStructured(content);
+
+  // Hiển thị text thường với bold + table
+  return (
+    <div className="structured-content text-xs leading-relaxed text-gray-700 dark:text-gray-200 whitespace-pre-wrap space-y-2">
+      {structured.map((item, idx) => (
+        <div key={idx}>
+          {/* Table block */}
+          {item.type === 'table' && item.headerRow && (
+            <div className="overflow-x-auto my-3">
+              <table className="w-full text-xs border-collapse">
+                <thead>
+                  <tr className="bg-gray-100 dark:bg-white/10">
+                    {item.headerRow.cells.map((cell, cIdx) => (
+                      <th
+                        key={cIdx}
+                        className="px-3 py-2 text-left font-semibold text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-white/20"
+                      >
+                        {renderBoldText({ text: cell.content, className: '' })}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {item.rows?.map((row, rIdx) => (
+                    <tr key={rIdx} className="hover:bg-gray-50 dark:hover:bg-white/5">
+                      {row.cells.map((cell, cIdx) => (
+                        <td
+                          key={cIdx}
+                          className="px-3 py-1.5 text-gray-700 dark:text-gray-200 border border-gray-300 dark:border-white/20"
+                        >
+                          {renderBoldText({ text: cell.content, className: '' })}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* Regular text */}
+          {item.type === 'text' && (
+            <p className="text-gray-700 dark:text-gray-200">
+              {renderBoldText({ text: item.content, className: '' })}
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ── Main Chat Component ──────────────────────────────────────────── */
+
+export default function ChatPage() {
+  const { user, token, initAuth, darkMode } = useAppStore();
+  const { t } = useI18n();
+
+  const [documents, setDocuments] = useState<DocumentInfo[]>([]);
+  const [planUsage, setPlanUsage] = useState<PlanUsage | null>(null);
+  const [learningMode] = useState<'beginner' | 'advanced' | 'researcher'>('advanced');
+
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+  const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentDomain, setCurrentDomain] = useState<'psychology' | 'general' | null>(null);
+  const [mode, setMode] = useState<'basic' | 'advanced'>('advanced');
+  const [showModeMenu, setShowModeMenu] = useState(false);
+
+  const [sessions, setSessions] = useState<ChatSession[]>([]);
+  const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const abortRef = useRef<AbortController | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    loadSessions();
+  }, []);
+
+  // Chỉ gọi các API cần auth sau khi token được hydrate từ localStorage
+  useEffect(() => {
+    // Đảm bảo đã initAuth một lần
+    if (!token) {
+      initAuth();
+      return;
+    }
+    getDocuments().then(setDocuments).catch(() => {});
+    getMyPlanUsage().then(setPlanUsage).catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
+
+  const loadSessions = () => {
+    try {
+      const saved = localStorage.getItem('chat.sessions');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        setSessions(parsed.map((s: any) => ({
+          ...s,
+          createdAt: new Date(s.createdAt),
+        })));
+      }
+    } catch {}
+  };
+
+  const saveSessions = (updater: ChatSession[] | ((prev: ChatSession[]) => ChatSession[])) => {
+    setSessions(prev => {
+      const next = typeof updater === 'function' ? updater(prev) : updater;
+      localStorage.setItem('chat.sessions', JSON.stringify(next));
+      return next;
+    });
+  };
+
+  const createNewSession = () => {
+    const newSession: ChatSession = {
+      id: Date.now().toString(),
+      title: 'New chat',
+      createdAt: new Date(),
+      messages: [],
+    };
+    saveSessions(prev => [newSession, ...prev]);
+    setCurrentSessionId(newSession.id);
+    setChatMessages([]);
+    setUploadedFiles([]);
+  };
+
+  const ACCEPTED_TYPES = {
+    'application/pdf': '.pdf',
+    'image/jpeg': '.jpg',
+    'image/png': '.jpg',
+    'image/gif': '.gif',
+    'image/webp': '.webp',
+    'image/bmp': '.bmp',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document': '.docx',
+    'application/msword': '.doc',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': '.xlsx',
+    'application/vnd.ms-excel': '.xls',
+  };
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
+    const valid = files.filter(f => f.type.startsWith('image/') || f.type === 'application/pdf' || f.name.match(/\.(pdf|docx?|xlsx?|jpg|jpeg|png|gif|webp|bmp)$/i));
+    if (!valid.length) return;
+    setUploadedFiles(prev => [...prev, ...valid]);
+    e.target.value = '';
+  };
+
+  const removeFile = (idx: number) => {
+    setUploadedFiles(prev => prev.filter((_, i) => i !== idx));
+  };
+
+  const formatFileSize = (bytes: number) => {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  };
+
+  const deleteSession = (id: string) => {
+    saveSessions(prev => prev.filter(s => s.id !== id));
+    if (currentSessionId === id) {
+      setCurrentSessionId(null);
+      setChatMessages([]);
+    }
+  };
+
+  const updateSessionMessages = (sessionId: string, messages: ChatMessage[]) => {
+    saveSessions(prev =>
+      prev.map(s =>
+        s.id === sessionId
+          ? {
+              ...s,
+              // Strip attachments (blob URLs) from saved messages — they won't work after reload
+              messages: messages.map(m => ({ ...m, attachments: undefined })),
+              title: messages.length > 0 && s.title === 'New chat'
+                ? messages[0].content.slice(0, 20) + (messages[0].content.length > 20 ? '...' : '')
+                : s.title,
+            }
+          : s
+      )
+    );
+  };
+
+  const selectSession = (id: string) => {
+    const session = sessions.find(s => s.id === id);
+    if (session) {
+      setCurrentSessionId(id);
+      setChatMessages(session.messages);
+    }
+  };
+
+  const clearChat = () => {
+    if (currentSessionId) {
+      updateSessionMessages(currentSessionId, []);
+    }
+    setChatMessages([]);
+  };
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatMessages]);
+
+  const handleSend = async () => {
+    if (!input.trim() || isLoading) return;
+
+    const rawQuery = input.trim();
+
+    // Create session lazily on first message (when no session exists yet)
+    let activeSessionId = currentSessionId;
+    if (!activeSessionId) {
+      const newSession: ChatSession = {
+        id: Date.now().toString(),
+        title: 'New chat',
+        createdAt: new Date(),
+        messages: [],
+      };
+      saveSessions(prev => [newSession, ...prev]);
+      setCurrentSessionId(newSession.id);
+      activeSessionId = newSession.id;
+    }
+
+    // Build attachment previews from uploaded files (object URLs for display)
+    const attachments: ChatFile[] = uploadedFiles.map(file => ({
+      name: file.name,
+      type: file.type,
+      url: URL.createObjectURL(file),
+      size: file.size,
+    }));
+
+    const userMsg: ChatMessage = {
+      id: Date.now().toString(),
+      role: 'user',
+      content: rawQuery,
+      attachments: attachments.length > 0 ? attachments : undefined,
+    };
+
+    const updatedMessages = [...chatMessages, userMsg];
+    setChatMessages(updatedMessages);
+    if (activeSessionId) updateSessionMessages(activeSessionId, updatedMessages);
+    setInput('');
+    // Reset uploaded files immediately when sending (don't wait for API)
+    setUploadedFiles([]);
+    setIsLoading(true);
+
+    // Inject mode instruction vào query gửi lên LLM (chỉ phía request, user vẫn thấy raw text).
+    // 'basic' → trả lời ngắn gọn (2-4 câu), 'advanced' → trả lời đầy đủ, sâu, chi tiết.
+    const isEnglish = !/[áàảãạâấầẩẫậăắằẳẵặéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵđÁÀẢÃẠÂẤẦẨẪẬĂẮẰẲẴẶÉÈẺẼẸÊẾỀỂỄỆÍÌỈĨỊÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÚÙỦŨỤƯỨỪỬỮỰÝỲỶỸỴĐ]/i.test(rawQuery) &&
+      /\b(what|is|how|to|the|in|of|and|a|an|depression|anxiety|cbt|ocd|bipolar|stress|hello|hi|who|why|where|affect|people|psychology)\b/i.test(rawQuery);
+
+    const modeInstruction = isEnglish
+      ? (mode === 'basic'
+          ? '[System: Please reply briefly and concisely in about 2-4 sentences. Avoid long listings.] '
+          : '[System: Please reply in detail, fully, and deeply. Include plenty of information, concrete examples, expert analysis, and related factors. If possible, cite references. Use markdown formatting with clear headings and bullet points. You can write longer if needed.] ')
+      : (mode === 'basic'
+          ? '[He thong: Hay tra loi ngan gon, suc tich trong khoang 2-4 cau. Tranh liet ke dai.] '
+          : '[He thong: Hay tra loi chi tiet, day du, sau sac. Bao gom nhieu thong tin, vi du cu the, phan tich chuyen su, va cac yeu to lien quan. Neu co the, hay trich dan nguon tham khao. Dung format markdown nhung nen co cau truc ro rang voi muc lon va muc nho. Co the tra loi dai hon neu can.] ');
+    const sentQuery = modeInstruction + rawQuery;
+
+    // Fast domain detection via keywords (no API call — instant, ~0ms).
+    // LLM detect-domain chỉ chạy nền để cập nhật UI, KHÔNG block streaming.
+    const FAST_KEYWORDS = [
+      'psychology', 'psychiatric', 'therapist', 'therapy',
+      'cognitive', 'behavioral', 'emotion',
+      'stress', 'anxiety', 'depression', 'trauma',
+      'psychoanalysis', 'freud', 'jung', 'attachment',
+      'dsm', 'icd', 'diagnosis', 'treatment',
+      'mental health', 'counseling',
+      'cbt', 'dbt', 'act', 'psychotherapy',
+      'personality', 'perception', 'memory',
+      'neuroscience', 'brain', 'mood',
+      'schizophrenia', 'bipolar', 'ocd', 'ptsd', 'adhd', 'autism',
+      'self-esteem', 'motivation',
+      'social psychology', 'developmental',
+    ];
+    const queryLower = rawQuery.toLowerCase();
+    const fastDomain = FAST_KEYWORDS.some(kw => queryLower.includes(kw)) ? 'psychology' : 'general';
+    setCurrentDomain(fastDomain as 'psychology' | 'general');
+
+    const assistantMsg: ChatMessage = {
+      id: (Date.now() + 1).toString(),
+      role: 'assistant',
+      content: '',
+    };
+    setChatMessages(prev => [...prev, assistantMsg]);
+
+    abortRef.current = new AbortController();
+    const docIds = documents.filter(d => d.status === 'ready').map(d => d.id);
+    const usePsychology = fastDomain === 'psychology';
+
+    const onChunk = (chunk: string) => {
+      setChatMessages(prev => {
+        const newPrev = prev.map(m =>
+          m.id === assistantMsg.id ? { ...m, content: m.content + chunk } : m
+        );
+        if (activeSessionId) updateSessionMessages(activeSessionId, newPrev);
+        return newPrev;
+      });
+    };
+
+    try {
+      if (uploadedFiles.length > 0) {
+        // Use file-chat endpoint when files are attached
+        await chatFileStream({
+          query: sentQuery,
+          files: uploadedFiles,
+          documentIds: docIds,
+          onChunk,
+          signal: abortRef.current.signal,
+        });
+      } else {
+        await chatStream(sentQuery, docIds, onChunk, abortRef.current.signal);
+      }
+    } catch (err: any) {
+      if (err?.name !== 'AbortError') {
+        const detail = err instanceof Error && err.message ? `\n\n${err.message}` : '';
+        setChatMessages(prev => {
+          const newPrev: ChatMessage[] = [
+            ...prev,
+            { id: (Date.now() + 1).toString(), role: 'assistant', content: `${t.chat.error_occurred}${detail}` },
+          ];
+          if (activeSessionId) updateSessionMessages(activeSessionId, newPrev);
+          return newPrev;
+        });
+      }
+    } finally {
+      setIsLoading(false);
+      setUploadedFiles([]);
+    }
+  };
+
+  const handleStop = () => {
+    abortRef.current?.abort();
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = Math.min(textareaRef.current.scrollHeight, 144) + 'px';
+    }
+  }, [input]);
+
+  const allDocIds = documents.filter(d => d.status === 'ready').map(d => d.id);
+
+  const displayName =
+    (user as any)?.full_name ||
+    (user as any)?.fullName ||
+    (user as any)?.username ||
+    (user as any)?.name ||
+    (user as any)?.email ||
+    'Guest';
+
+  return (
+    <div className="flex w-full bg-white dark:bg-[#0A0F1A] transition-colors" style={{ height: 'calc(100vh - 56px)' }}>
+      {/* ── Left Sidebar ── */}
+      <ChatSidebar
+        sessions={sessions}
+        currentSession={sessions.find(s => s.id === currentSessionId) || null}
+        onSelectSession={selectSession}
+        onNewChat={createNewSession}
+        onDeleteSession={deleteSession}
+        userName={displayName}
+      />
+
+      {/* ── Main Chat Area ── */}
+      <main className="flex-1 flex flex-col min-w-0 min-h-0 bg-white dark:bg-[#0A0F1A] overflow-hidden transition-colors">
+        {/* Messages - scrollable */}
+        <div
+          className="flex-1 min-h-0 overflow-y-auto overscroll-contain"
+          style={{ scrollbarWidth: 'thin' }}
+        >
+          <div className="max-w-3xl mx-auto px-6 py-6 space-y-3 h-full">
+            {/* Empty state — logo + greeting when no messages */}
+            {chatMessages.length === 0 && (
+              <div className="flex flex-col items-center justify-center h-full min-h-[60vh] gap-3">
+                <div className="w-20 h-20 rounded-full overflow-hidden shadow-lg ring-2 ring-teal-500/30">
+                  <img src="/Logo.jpeg" alt="Acamind" className="w-full h-full object-cover" />
+                </div>
+                <p className="text-base text-gray-600 dark:text-gray-300 text-center">
+                  {t.chat.hello} <span className="font-semibold text-teal-600 dark:text-teal-400">{displayName === 'Guest' ? t.chat.guest : displayName}</span>!!!
+                </p>
+              </div>
+            )}
+
+            {/* Chat messages */}
+            {chatMessages.map((msg, idx) => {
+              const isPendingAssistant = msg.role === 'assistant' && !msg.content && isLoading && idx === chatMessages.length - 1;
+              if (isPendingAssistant) return null;
+              return (
+                <motion.div
+                  key={msg.id}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} gap-1.5`}
+                >
+                  {msg.role === 'assistant' && (
+                    <div className="w-5 h-5 rounded-full bg-gradient-to-br from-teal-500 to-purple-600 flex items-center justify-center shrink-0 mt-0.5">
+                      <Brain size={8} className="text-white" />
+                    </div>
+                  )}
+                  <div
+                    className={`max-w-[85%] rounded-xl px-3 py-2 text-xs leading-relaxed ${
+                      msg.role === 'user'
+                        ? 'bg-gradient-to-br from-teal-500 to-purple-600 text-white'
+                        : 'bg-gray-100 dark:bg-white/10 text-gray-800 dark:text-gray-100'
+                    }`}
+                  >
+                    {msg.role === 'assistant' ? (
+                      <AiMessage content={msg.content} />
+                    ) : (
+                      <>
+                        {msg.content && <p>{msg.content}</p>}
+                        {msg.attachments && msg.attachments.length > 0 && (
+                          <div className="mt-2 flex flex-wrap gap-2">
+                            {msg.attachments.map((att, i) => (
+                              <a
+                                key={i}
+                                href={att.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-white/20 hover:bg-white/30 transition-colors text-xs max-w-[180px]"
+                                title={att.name}
+                              >
+                                {att.type.startsWith('image/') ? (
+                                  <img src={att.url} alt={att.name} className="w-10 h-10 object-cover rounded" />
+                                ) : (
+                                  <div className="w-10 h-10 flex items-center justify-center bg-white/20 rounded text-xs text-center leading-tight">
+                                    {att.name.split('.').pop()?.toUpperCase()}
+                                  </div>
+                                )}
+                                <span className="truncate">{att.name}</span>
+                              </a>
+                            ))}
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })}
+
+            {/* Typing indicator — only shown while waiting, replaces the empty assistant bubble */}
+            {isLoading && chatMessages[chatMessages.length - 1]?.content === '' && (
+              <motion.div
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex gap-1.5"
+              >
+                <div className="w-5 h-5 rounded-full bg-gradient-to-br from-teal-500 to-purple-600 flex items-center justify-center shrink-0 mt-0.5">
+                  <Brain size={8} className="text-white" />
+                </div>
+                <div className="bg-gray-100 dark:bg-white/10 rounded-xl px-3 py-2 flex gap-1">
+                  {[0, 1, 2].map(i => (
+                    <div
+                      key={i}
+                      className="w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-500 animate-bounce"
+                      style={{ animationDelay: `${i * 0.15}s` }}
+                    />
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            <div ref={messagesEndRef} />
+          </div>
+        </div>
+
+        {/* Input Area */}
+        <div className="shrink-0 px-4 py-4 border-t border-gray-200 dark:border-white/10 bg-white dark:bg-[#0A0F1A] transition-colors">
+          <div className="max-w-3xl mx-auto space-y-2">
+            {/* File preview chips */}
+            {uploadedFiles.length > 0 && (
+              <div className="flex flex-wrap gap-2 px-1">
+                {uploadedFiles.map((file, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center gap-1.5 pl-2 pr-1 py-1 rounded-full bg-teal-50 dark:bg-teal-900/20 border border-teal-200 dark:border-teal-700/30 text-xs text-teal-700 dark:text-teal-300 max-w-[200px]"
+                  >
+                    <Paperclip size={10} className="shrink-0" />
+                    <span className="truncate">{file.name}</span>
+                    <button
+                      onClick={() => removeFile(idx)}
+                      className="shrink-0 hover:text-red-500 dark:hover:text-red-400 ml-1"
+                    >
+                      <X size={10} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="flex gap-2 items-center bg-white dark:bg-white/5 rounded-full border border-gray-300 dark:border-white/10 px-4 py-2 shadow-sm transition-colors">
+              {/* Hidden file input */}
+              <input
+                ref={fileInputRef}
+                type="file"
+                multiple
+                accept="image/jpeg,image/png,image/gif,image/webp,image/bmp,application/pdf,.pdf,.jpg,.jpeg,.png,.gif,.webp,.bmp,.doc,.docx,.xls,.xlsx"
+                onChange={handleFileSelect}
+                className="hidden"
+              />
+
+              {/* Upload button */}
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className="shrink-0 p-1.5 rounded-full text-gray-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-colors"
+                title={t.chat.attach_file}
+                disabled={isLoading}
+              >
+                <Paperclip size={16} />
+              </button>
+
+              <textarea
+                ref={textareaRef}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSend();
+                  }
+                }}
+                placeholder={t.chat.type_message}
+                rows={1}
+                disabled={isLoading}
+                className="flex-1 bg-transparent text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 resize-none focus:outline-none text-sm"
+              />
+              {/* Mode */}
+              <div className="relative">
+                <button
+                  onClick={() => setShowModeMenu(s => !s)}
+                  className="shrink-0 px-3 py-1.5 rounded-full border border-gray-300 dark:border-white/10 text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors flex items-center gap-1"
+                  title={t.chat.choose_mode}
+                >
+                  <Sparkles size={12} />
+                  <span>{mode === 'basic' ? t.chat.basic : t.chat.advanced}</span>
+                </button>
+                {showModeMenu && (
+                  <div className="absolute bottom-full mb-2 right-0 bg-white dark:bg-[#1F2937] border border-gray-200 dark:border-white/10 rounded-lg shadow-lg overflow-hidden min-w-[120px]">
+                    {[
+                      { v: 'basic', label: t.chat.basic },
+                      { v: 'advanced', label: t.chat.advanced },
+                    ].map(opt => (
+                      <button
+                        key={opt.v}
+                        onClick={() => { setMode(opt.v as any); setShowModeMenu(false); }}
+                        className={`w-full text-left px-3 py-2 text-xs hover:bg-gray-100 dark:hover:bg-white/5 ${
+                          mode === opt.v
+                            ? 'text-gray-900 dark:text-white font-medium bg-gray-50 dark:bg-white/5'
+                            : 'text-gray-700 dark:text-gray-300'
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              {/* Send */}
+              <button
+                onClick={isLoading ? handleStop : handleSend}
+                disabled={!isLoading && !input.trim() && uploadedFiles.length === 0}
+                className="shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-teal-500 to-purple-600 flex items-center justify-center text-white disabled:opacity-40 disabled:cursor-not-allowed transition-opacity"
+                title={isLoading ? t.chat.stop : t.chat.send}
+              >
+                {isLoading ? <Square size={14} /> : <Send size={14} />}
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+}

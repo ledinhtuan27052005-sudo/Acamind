@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Clear Tabs</title>
+  <style>
+    body { font-family: system-ui; padding: 40px; text-align: center; }
+    .btn { padding: 12px 24px; font-size: 16px; background: #0D9488; color: white; border: none; border-radius: 8px; cursor: pointer; }
+    .btn:hover { background: #0F766E; }
+    .success { color: green; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Xóa lịch sử tabs</h2>
+  <button class="btn" onclick="clearTabs()">Xóa tất cả tabs</button>
+  <div id="result"></div>
+  <script>
+    function clearTabs() {
+      localStorage.removeItem('workspace.tabs');
+      localStorage.removeItem('workspace.recent');
+      localStorage.removeItem('workspace.active');
+      document.getElementById('result').innerHTML = '<p class="success">✅ Đã xóa! Refresh trang chính (http://localhost:3001) để thấy thay đổi.</p>';
+    }
+  </script>
+</body>
+</html>

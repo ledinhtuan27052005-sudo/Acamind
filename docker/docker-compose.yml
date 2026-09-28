@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: insight-pgvector
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: rag_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+    restart: unless-stopped
+
+  neo4j:
+    image: neo4j:5-community
+    container_name: insight-neo4j
+    environment:
+      NEO4J_AUTH: neo4j/secretpassword
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4jdata:/data
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  neo4jdata:

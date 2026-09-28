@@ -1,0 +1,92 @@
+[
+  {
+    "id": "brain",
+    "name_vi": "Não",
+    "name_latin": "Cerebrum",
+    "position": [0, 1.75, 0.1],
+    "symptoms": ["Đau đầu", "Chóng mặt", "Mất trí nhớ", "Buồn nôn"],
+    "description_basic": "Trung tâm điều khiển toàn bộ cơ thể. Triệu chứng thường gặp: đau đầu, chóng mặt.",
+    "description_advanced": "Cerebrum gồm 2 bán cầu não điều khiển vận động, nhận thức, ngôn ngữ. Đánh giá: GCS, CT/MRI sọ não.",
+    "layer": 3
+  },
+  {
+    "id": "heart",
+    "name_vi": "Tim",
+    "name_latin": "Cor",
+    "position": [-0.1, 1.3, 0.15],
+    "symptoms": ["Đau ngực", "Khó thở", "Tim đập nhanh", "Hồi hộp"],
+    "description_basic": "Bơm máu đi khắp cơ thể. Dấu hiệu cảnh báo: đau thắt ngực, khó thở khi gắng sức.",
+    "description_advanced": "Tim 4 buồng. Nhịp xoang bình thường 60-100 lần/phút. Đánh giá: ECG 12 chuyển đạo, Troponin, Echocardiography.",
+    "layer": 3
+  },
+  {
+    "id": "lung_left",
+    "name_vi": "Phổi trái",
+    "name_latin": "Pulmo sinister",
+    "position": [-0.2, 1.3, 0.1],
+    "symptoms": ["Khó thở", "Ho kéo dài", "Đau ngực khi thở", "Khạc đờm"],
+    "description_basic": "Cơ quan hô hấp. SpO2 bình thường ≥95%.",
+    "description_advanced": "Phổi trái 2 thùy (trên, dưới). Xử lý: X-quang phổi thẳng, CT ngực nếu cần.",
+    "layer": 3
+  },
+  {
+    "id": "lung_right",
+    "name_vi": "Phổi phải",
+    "name_latin": "Pulmo dexter",
+    "position": [0.2, 1.3, 0.1],
+    "symptoms": ["Khó thở", "Ho kéo dài", "Đau ngực khi thở", "Khạc đờm"],
+    "description_basic": "Cơ quan hô hấp. Phổi phải 3 thùy, lớn hơn phổi trái.",
+    "description_advanced": "Phổi phải 3 thùy (trên, giữa, dưới). Nghe phổi, đo SpO2 và chụp X-quang là các bước chẩn đoán ban đầu.",
+    "layer": 3
+  },
+  {
+    "id": "liver",
+    "name_vi": "Gan",
+    "name_latin": "Hepar",
+    "position": [0.15, 1.05, 0.1],
+    "symptoms": ["Đau hạ sườn phải", "Vàng da", "Mệt mỏi", "Chán ăn"],
+    "description_basic": "Lớn nhất trong các tuyến tiêu hóa. Dấu hiệu vàng da cảnh báo tổn thương gan.",
+    "description_advanced": "Gan 8 phân thùy Couinaud, nặng 1.2-1.5kg. AST/ALT >3× ULN = tổn thương đáng kể. Child-Pugh để đánh giá chức năng.",
+    "layer": 3
+  },
+  {
+    "id": "stomach",
+    "name_vi": "Dạ dày",
+    "name_latin": "Gaster",
+    "position": [-0.05, 1.0, 0.12],
+    "symptoms": ["Đau thượng vị", "Ợ chua", "Buồn nôn", "Đầy hơi sau ăn"],
+    "description_basic": "Tiêu hóa thức ăn. Đau bụng trên, ợ hơi sau ăn là triệu chứng phổ biến nhất.",
+    "description_advanced": "pH dạ dày 1.5-3.5. H.pylori gây >70% loét dạ dày tá tràng. Chẩn đoán: nội soi + CLO test.",
+    "layer": 3
+  },
+  {
+    "id": "spine",
+    "name_vi": "Cột sống",
+    "name_latin": "Columna vertebralis",
+    "position": [0, 1.1, -0.12],
+    "symptoms": ["Đau lưng", "Tê bì tay chân", "Cứng cổ buổi sáng", "Đau lan xuống chân"],
+    "description_basic": "Trục xương chính. Đau lưng là triệu chứng cơ xương khớp phổ biến nhất.",
+    "description_advanced": "33 đốt: 7 cổ + 12 ngực + 5 thắt lưng + 5 cùng + 4 cụt. MRI cột sống là gold standard cho thoát vị đĩa đệm.",
+    "layer": 2
+  },
+  {
+    "id": "kidney_left",
+    "name_vi": "Thận trái",
+    "name_latin": "Ren sinister",
+    "position": [-0.18, 0.85, -0.08],
+    "symptoms": ["Đau hông lưng", "Tiểu buốt", "Tiểu ra máu", "Sưng phù"],
+    "description_basic": "Lọc máu và bài tiết nước tiểu. Đau hông lưng có thể là dấu hiệu sỏi thận.",
+    "description_advanced": "Thận lọc ~180L huyết tương/ngày. eGFR là chỉ số quan trọng đánh giá chức năng. Siêu âm bụng để phát hiện sỏi.",
+    "layer": 2
+  },
+  {
+    "id": "kidney_right",
+    "name_vi": "Thận phải",
+    "name_latin": "Ren dexter",
+    "position": [0.18, 0.85, -0.08],
+    "symptoms": ["Đau hông lưng", "Tiểu buốt", "Tiểu ra máu", "Sưng phù"],
+    "description_basic": "Lọc máu và bài tiết nước tiểu. Thận phải thấp hơn thận trái do gan.",
+    "description_advanced": "Thận phải vị trí thấp hơn thận trái ~2cm do gan ép xuống. Đánh giá: urê, creatinin, tổng phân tích nước tiểu.",
+    "layer": 2
+  }
+]

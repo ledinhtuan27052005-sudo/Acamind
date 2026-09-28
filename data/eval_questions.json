@@ -1,0 +1,72 @@
+[
+  {
+    "question": "Phương pháp chẩn đoán giai đoạn trầm cảm nhẹ theo Phác đồ Tâm thần 2020 như thế nào?",
+    "ground_truth": "Theo Phác đồ Tâm thần 2020, chẩn đoán giai đoạn trầm cảm nhẹ yêu cầu có ít nhất 2 trong số 3 triệu chứng chủ yếu (khí sắc trầm, mất quan tâm hoặc thích thú, giảm năng lượng dẫn đến tăng mệt mỏi) và ít nhất 2 triệu chứng phổ biến khác, thời gian kéo dài ít nhất 2 tuần.",
+    "document_ids": [
+      "329f4480-8db5-4faf-b804-d33b5f052972"
+    ]
+  },
+  {
+    "question": "Phác đồ điều trị cơn hưng cảm cấp tính gồm những nhóm thuốc nào?",
+    "ground_truth": "Phác đồ điều trị hưng cảm cấp tính thường sử dụng các thuốc chỉnh khí sắc (như Lithium, Valproate, Carbamazepine) đơn trị liệu hoặc kết hợp với các thuốc an thần kinh thế hệ mới (như Olanzapine, Quetiapine, Risperidone).",
+    "document_ids": [
+      "329f4480-8db5-4faf-b804-d33b5f052972"
+    ]
+  },
+  {
+    "question": "Tâm lý học hành vi tập trung vào nghiên cứu đối tượng nào?",
+    "ground_truth": "Tâm lý học hành vi tập trung vào nghiên cứu hành vi khách quan có thể quan sát, đo lường được của con người và động vật dưới tác động của kích thích môi trường, phản đối việc nội quan các quá trình ý thức không thể quan sát trực tiếp.",
+    "document_ids": [
+      "39833f12-156e-4fcf-8c65-d8ffd7c15285"
+    ]
+  },
+  {
+    "question": "Cơ chế điều kiện hóa từ kết quả (operant conditioning) của Skinner hoạt động như thế nào?",
+    "ground_truth": "Điều kiện hóa từ kết quả hoạt động dựa trên nguyên lý củng cố: hành vi được lặp lại nhiều hơn nếu theo sau bởi củng cố tích cực (phần thưởng) hoặc củng cố tiêu cực (loại bỏ kích thích khó chịu), và giảm đi nếu theo sau bởi hình phạt.",
+    "document_ids": [
+      "39833f12-156e-4fcf-8c65-d8ffd7c15285"
+    ]
+  },
+  {
+    "question": "Theo Đổng Tâm Khiết, lo âu khác biệt với sợ hãi ở điểm nào?",
+    "ground_truth": "Theo tác giả, lo âu là phản ứng cảm xúc mơ hồ hướng về tương lai, đối với một mối đe dọa không xác định hoặc không rõ ràng. Trong khi đó, sợ hãi là phản ứng sinh lý và cảm xúc trực tiếp đối với một mối đe dọa cụ thể, rõ ràng đang hiện hữu trước mắt.",
+    "document_ids": [
+      "f44dfae1-4d78-45ed-80cf-60f49d4cbba6"
+    ]
+  },
+  {
+    "question": "Các kỹ thuật tự điều hòa cảm xúc hiệu quả khi bị lo âu cấp tính là gì?",
+    "ground_truth": "Các phương pháp điều hòa lo âu bao gồm kỹ thuật thở sâu (thở cơ hoành), kỹ thuật thư giãn cơ bắp tiến triển của Jacobson, và kỹ thuật tập trung vào thực tại (Grounding 5-4-3-2-1) để cắt đứt dòng suy nghĩ lo âu.",
+    "document_ids": [
+      "f44dfae1-4d78-45ed-80cf-60f49d4cbba6"
+    ]
+  },
+  {
+    "question": "Định nghĩa hiện tượng tâm lý theo giáo trình Tâm lý học đại cương của Nguyễn Quang Uẩn?",
+    "ground_truth": "Hiện tượng tâm lý là sự phản ánh hiện thực khách quan vào não người thông qua hoạt động của mỗi chủ thể. Tâm lý có bản chất xã hội - lịch sử và mang tính chủ thể sâu sắc.",
+    "document_ids": [
+      "7319e85e-580c-4f18-9700-38d098ea2dfb"
+    ]
+  },
+  {
+    "question": "Các loại chú ý được phân loại như thế nào trong tâm lý học đại cương?",
+    "ground_truth": "Chú ý được chia thành ba loại: Chú ý không chủ định (không cần nỗ lực ý chí, phụ thuộc kích thích ngoài), Chú ý có chủ định (cần nỗ lực ý chí, có mục đích rõ ràng), và Chú ý sau khi có chủ định (vẫn có mục đích nhưng không cần nỗ lực ý chí do đã trở thành thói quen/hứng thú).",
+    "document_ids": [
+      "7319e85e-580c-4f18-9700-38d098ea2dfb"
+    ]
+  },
+  {
+    "question": "Làm thế nào để sinh viên nhận biết các dấu hiệu sớm của stress học đường?",
+    "ground_truth": "Dấu hiệu stress học đường sớm bao gồm biến đổi giấc ngủ (mất ngủ hoặc ngủ quá nhiều), rối loạn ăn uống, khó tập trung, suy giảm kết quả học tập, trì hoãn công việc, cảm xúc nhạy cảm dễ cáu gắt và cảm giác kiệt sức kéo dài.",
+    "document_ids": [
+      "6ebbc1fd-9731-4562-8116-c293cf341fd4"
+    ]
+  },
+  {
+    "question": "Nguyên tắc hành động cốt lõi của sơ cứu tâm lý (PFA) là gì?",
+    "ground_truth": "Nguyên tắc hành động cốt lõi của sơ cứu tâm lý gồm 3 bước: Quan sát (Look - kiểm tra an toàn và người cần hỗ trợ), Lắng nghe (Listen - tiếp cận, lắng nghe không phán xét), và Kết nối (Link - giúp họ tiếp cận thông tin và dịch vụ hỗ trợ cần thiết).",
+    "document_ids": [
+      "fb6c6b1f-b3a7-40cd-a187-b1c00ffff052"
+    ]
+  }
+]

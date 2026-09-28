@@ -1,0 +1,332 @@
+{
+  "summary": {
+    "experiment_type": "pilot: 10 independent document-grounded questions",
+    "started_at_utc": "2026-09-16T15:19:16.045767+00:00",
+    "completed_at_utc": "2026-09-16T15:24:47.655108+00:00",
+    "gemini_rate_limit_interval_seconds": 10,
+    "total_cases": 10,
+    "successful_cases": 9,
+    "failed_cases": 1,
+    "mean_latency_seconds": 24.14,
+    "metrics": {
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0,
+      "context_quality": 0.867
+    },
+    "limitation": "Pilot evidence only. It does not include baseline/ablation or a held-out benchmark."
+  },
+  "cases": [
+    {
+      "case_id": "P01",
+      "document_id": "bf8bdb5e-1f00-47b9-bad3-1cce0c11732f",
+      "question": "Theo tài liệu, những yếu tố nào ảnh hưởng đến hứng thú học tập môn Tâm lý học đại cương của sinh viên?",
+      "started_at_utc": "2026-09-16T15:19:16.045767+00:00",
+      "http_status": 500,
+      "outcome": "error",
+      "error": "500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/api/v1/evaluate/run",
+      "answer": "",
+      "sources": [],
+      "latency_seconds": 23.031
+    },
+    {
+      "case_id": "P02",
+      "document_id": "9ac376e0-c3a7-4181-91be-63618d144be1",
+      "question": "Theo nghiên cứu, nhu cầu tâm lý cơ bản, động lực học tập và trì hoãn học tập có mối liên hệ như thế nào?",
+      "started_at_utc": "2026-09-16T15:19:49.078339+00:00",
+      "http_status": 200,
+      "outcome": "success",
+      "answer": "## Mối liên hệ giữa các biến số tâm lý\n\n- **Lý thuyết Tự Quyết (Self-Determination Theory - SDT)** đóng vai trò trọng tâm trong việc giải thích mối liên hệ giữa các nhu cầu tâm lý cơ bản và động lực [AP2017 Nguyen, Q. N, La, T. T. T., Phan, M. T., Ninh, D. T. (2017) Mối liên hệ giữa sự thảo mãn các nhu cầu tâm lý cơ bản, động lực học tập, và trì hoãn học tập ở sinh viên.pdf - Page 20].\n- **Nhu cầu tâm lý cơ bản** bao gồm ba yếu tố chính: nhu cầu gắn kết, nhu cầu năng lực và nhu cầu tự chủ [AP2017 Nguyen, Q. N, La, T. T. T., Phan, M. T., Ninh, D. T. (2017) Mối liên hệ giữa sự thảo mãn các nhu cầu tâm lý cơ bản, động lực học tập, và trì hoãn học tập ở sinh viên.pdf - Page 20; Page 21].\n- Khi môi trường xã hội tạo điều kiện thỏa mãn các nhu cầu tâm lý cơ bản này, cá nhân sẽ hình thành các loại **động lực tự chủ** (bao gồm động lực điều chỉnh xác nhận và động lực bên trong) [AP2017 Nguyen, Q. N, La, T. T. T., Phan, M. T., Ninh, D. T. (2017) Mối liên hệ giữa sự thảo mãn các nhu cầu tâm lý cơ bản, động lực học tập, và trì hoãn học tập ở sinh viên.pdf - Page 21].\n- **Động lực học tập bên trong** hoặc động lực học tập tự quyết thường gắn liền với tính tích cực và chủ động của người học [AP2017 Nguyen, Q. N, La, T. T. T., Phan, M. T., Ninh, D. T. (2017) Mối liên hệ giữa sự thảo mãn các nhu cầu tâm lý cơ bản, động lực học tập, và trì hoãn học tập ở sinh viên.pdf - Page 21].\n- Mặc dù chưa có nhiều nghiên cứu trực tiếp về mối liên hệ giữa sự thỏa mãn các nhu cầu tâm lý cơ bản với **trì hoãn học tập**, nhưng các kết quả nghiên cứu thực tiễn và lý thuyết cho thấy khả năng tồn tại mối liên hệ giữa biến số này với mức độ trì hoãn [AP2017 Nguyen, Q. N, La, T. T. T., Phan, M. T., Ninh, D. T. (2017) Mối liên hệ giữa sự thảo mãn các nhu cầu tâm lý cơ bản, động lực học tập, và trì hoãn học tập ở sinh viên.pdf - Page 20].\n\n## Bảng tóm tắt các yếu tố liên quan\n\n| Yếu tố | Vai trò/Đặc điểm |\n| :--- | :--- |\n| **Nhu cầu tâm lý cơ bản** | Gồm nhu cầu gắn kết, năng lực, tự chủ; là nền tảng thúc đẩy động lực [AP2017 Nguyen, Q. N, La, T. T. T., Phan, M. T., Ninh, D. T. (2017) Mối liên hệ giữa sự thảo mãn các nhu cầu tâm lý cơ bản, động lực học tập, và trì hoãn học tập ở sinh viên.pdf - Page 20; Page 21] |\n| **Động lực tự chủ** | Hình thành khi nhu cầu cơ bản được thỏa mãn; gắn liền với sự chủ động [AP2017 Nguyen, Q. N, La, T. T. T., Phan, M. T., Ninh, D. T. (2017) Mối liên hệ giữa sự thảo mãn các nhu cầu tâm lý cơ bản, động lực học tập, và trì hoãn học tập ở sinh viên.pdf - Page 21] |\n| **Trì hoãn học tập** | Có khả năng liên quan đến sự thỏa mãn nhu cầu tâm lý, cần thêm các nghiên cứu đa dạng về phương pháp [AP2017 Nguyen, Q. N, La, T. T. T., Phan, M. T., Ninh, D. T. (2017) Mối liên hệ giữa sự thảo mãn các nhu cầu tâm lý cơ bản, động lực học tập, và trì hoãn học tập ở sinh viên.pdf - Page 20] |\n\n*Đây là thông tin học thuật, không phải là sự thay thế cho lời khuyên chuyên môn.*",
+      "sources": [
+        {
+          "page": 20,
+          "preview": "cầu cần phải có thêm các nghiên cứu đa dạng hơn về thiết kế và phương pháp trong\nchủ đề trì hoãn.\nNhư đã đề cập, cách tiếp cận theo quan điểm môi trường hay tình huống là\nmột cách tiếp cận tuy không m"
+        },
+        {
+          "page": 20,
+          "preview": "mãn các nhu cầu tâm lý cơ bản với trì hoãn. Trong khi đó, lý thuyết và các kết quả\nnghiên cứu thực tiễn đều cho thấy có khả năng tồn tại một mối liên hệ giữa biến số\nnày với mức độ trì hoãn.\nSự thỏa m"
+        },
+        {
+          "page": 20,
+          "preview": "vai trò của môi trường xã hội đối với việc thúc đẩy và duy trì độc lực bên trong thông\nqua việc tạo điều kiện thuận lợi cho sự thỏa mãn các nhu cầu tâm lý cơ bản, bao gồm\nnhu cầu gắn kết, nhu cầu năng"
+        }
+      ],
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0,
+      "context_quality": 0.8,
+      "feedback": "Câu trả lời phản ánh chính xác nội dung được cung cấp trong ngữ cảnh. Ngữ cảnh giải thích rõ mối liên hệ giữa nhu cầu tâm lý và động lực, đồng thời thừa nhận sự thiếu hụt nghiên cứu về mối liên hệ trực tiếp với trì hoãn học tập, điều mà câu trả lời đã trình bày rất đầy đủ và có cấu trúc tốt.",
+      "latency_seconds": 16.203
+    },
+    {
+      "case_id": "P03",
+      "document_id": "4bf3ba8d-20b1-4355-b958-ff8ba73bd503",
+      "question": "Tài liệu nêu những nhu cầu tư vấn tâm lý học đường nào của học sinh THPT?",
+      "started_at_utc": "2026-09-16T15:20:15.284635+00:00",
+      "http_status": 200,
+      "outcome": "success",
+      "answer": "Dưới đây là tổng hợp các thông tin về nhu cầu tư vấn tâm lý học đường của học sinh THPT dựa trên tài liệu được cung cấp.\n\n*Lưu ý: Đây là thông tin học thuật, không thay thế cho lời khuyên chuyên môn.*\n\n## Các nhu cầu tư vấn tâm lý học đường của học sinh THPT\n\n- **Giải tỏa khó khăn tâm lý:** Học sinh có nhu cầu tìm đến phòng tham vấn để giải tỏa những khó khăn về tâm lý mà các em đang gặp phải [Đào-Lan-Hương-Nhu-cầu-được-tư-vấn-tâm-lý-học-đường-của-học-sinh-THPT.pdf - Page 8].\n- **Trau dồi kỹ năng sống:** Tư vấn tâm lý học đường được xem là một kênh để học sinh rèn luyện và phát triển các kỹ năng sống cần thiết [Đào-Lan-Hương-Nhu-cầu-được-tư-vấn-tâm-lý-học-đường-của-học-sinh-THPT.pdf - Page 8].\n- **Định hướng tương lai:** Học sinh có nhu cầu nhận được sự hỗ trợ để có định hướng tốt hơn cho tương lai của bản thân [Đào-Lan-Hương-Nhu-cầu-được-tư-vấn-tâm-lý-học-đường-của-học-sinh-THPT.pdf - Page 8].\n- **Nhu cầu chung:** Kết quả điều tra cho thấy hầu như tất cả học sinh THPT tại tỉnh Bắc Ninh được khảo sát đều có nhu cầu được trợ giúp tâm lý học đường [Đào-Lan-Hương-Nhu-cầu-được-tư-vấn-tâm-lý-học-đường-của-học-sinh-THPT.pdf - Page 10].\n\n## Sự khác biệt về nhu cầu theo địa bàn cư trú\n\n| Nhóm học sinh | Đặc điểm về nhu cầu/nhận thức |\n| :--- | :--- |\n| **Học sinh thành phố** | Nhận thức rõ về tầm quan trọng của tư vấn tâm lý học đường và là nhóm duy nhất được tiếp cận với các dịch vụ hỗ trợ tâm lý [Đào-Lan-Hương-Nhu-cầu-được-tư-vấn-tâm-lý-học-đường-của-học-sinh-THPT.pdf - Page 10]. |\n| **Học sinh nông thôn** | Có nhu cầu được tư vấn tâm lý cao hơn so với học sinh ở thành phố [Đào-Lan-Hương-Nhu-cầu-được-tư-vấn-tâm-lý-học-đường-của-học-sinh-THPT.pdf - Page 10]. |\n\n## Rào cản đối với việc đáp ứng nhu cầu\n\n- **Thiếu cơ sở vật chất:** Một trong những lý do khiến số lượng học sinh được hưởng dịch vụ tư vấn còn thấp là do các trường THPT hiện chưa có phòng tư vấn tâm lý học đường [Đào-Lan-Hương-Nhu-cầu-được-tư-vấn-tâm-lý-học-đường-của-học-sinh-THPT.pdf - Page 10].\n- **Tâm lý lưỡng lự:** Khoảng 17,5% học sinh bày tỏ sự lưỡng lự, cho rằng mình \"cần phải suy nghĩ thêm\" vì nghi ngờ khả năng giải quyết vấn đề của các chuyên gia tâm lý [Đào-Lan-Hương-Nhu-cầu-được-tư-vấn-tâm-lý-học-đường-của-học-sinh-THPT.pdf - Page 8].\n- **Yêu cầu đối với nhà tâm lý:** Để đáp ứng nhu cầu của học sinh, các chuyên gia cần tạo được uy tín, sự tin cậy và thân thiện để học sinh cảm thấy an tâm khi tìm đến hỗ trợ [Đào-Lan-Hương-Nhu-cầu-được-tư-vấn-tâm-lý-học-đường-của-học-sinh-THPT.pdf - Page 8].",
+      "sources": [
+        {
+          "page": 10,
+          "preview": "(Bài viết đã được công bố trong Tuyển tập công trình khoa\nhọc Hội thảo quốc gia mang tên “Giải pháp phát triển tư\nvấn tâm lý trong các nhà trường đáp ứng nhu cầu người\nhọc” do Hội Khoa học Tâm Lý-Giáo"
+        },
+        {
+          "page": 8,
+          "preview": "Vấn đề đặt ra ở đây là khi mở các phòng tâm lý học đường trong trường học thì ban lãnh\nđạo nhà trường, giáo viên, các chuyên gia tâm lý phải làm thế nào để nâng cao nhận thức của\ncác em đối với việc c"
+        },
+        {
+          "page": 2,
+          "preview": "Ninh các em học sinh đã được sử dụng các dịch vụ hỗ trợ tâm lý học đường chưa và nhu cầu\nđược trợ giúp tâm lý học đường (TLHĐ) của các em như thế nào?\n2. Phương pháp nghiên cứu\n2.1. Thu thập số liệu\n2"
+        },
+        {
+          "page": 10,
+          "preview": "4. Kết luận\nTừ kết quả điều tra cho thấy hầu như tất cả học sinh THPT trên địa bàn tỉnh Bắc Ninh\nđược điều tra đều có nhu cầu được trợ giúp tâm lý học đường. Học sinh THPT sống ở thành\nphố nhận thức v"
+        },
+        {
+          "page": 10,
+          "preview": "trường THPT chưa có phòng tư vấn tâm lý học đường. Kết quả nghiên cứu đặt ra một vấn đề\nlà nhu cầu được tư vấn tâm lý học đường của học sinh THPT là khá cao, các em có những khó\nkhăn tâm lý tuy nhiên "
+        }
+      ],
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0,
+      "context_quality": 1.0,
+      "feedback": "Câu trả lời đã trích xuất chính xác các nhu cầu tư vấn tâm lý học đường của học sinh THPT từ tài liệu cung cấp, bao gồm cả việc phân tích sự khác biệt theo địa bàn và các rào cản liên quan. Thông tin được trình bày rõ ràng, logic và hoàn toàn dựa trên ngữ cảnh.",
+      "latency_seconds": 27.18
+    },
+    {
+      "case_id": "P04",
+      "document_id": "4852c4eb-81a7-460f-af7e-e7772a58d04f",
+      "question": "Mục tiêu và đóng góp chính của hướng dẫn về linear mixed-effects models là gì?",
+      "started_at_utc": "2026-09-16T15:20:52.473277+00:00",
+      "http_status": 200,
+      "outcome": "success",
+      "answer": "## Mục tiêu và đóng góp của hướng dẫn về Linear Mixed-Effects Models (LMMs)\n\nDưới đây là các thông tin liên quan đến mục tiêu và đóng góp của bài viết về mô hình hỗn hợp tuyến tính (LMMs) dựa trên tài liệu được cung cấp:\n\n- **Mục tiêu chính**:\n    - Cung cấp một bài đánh giá giới thiệu về việc sử dụng **Linear Mixed-Effects Models (LMMs)** trong các nghiên cứu có thiết kế trong người tham gia (**within-participant designs**), vốn rất phổ biến trong tâm lý học thực nghiệm và khoa học thần kinh nhận thức [fpsyg-06-00002.pdf - Page 1].\n    - Hướng dẫn cách thực hiện các phân tích LMM thông qua một giao diện người dùng đồ họa đơn giản và miễn phí có tên là **LMMgui** [fpsyg-06-00002.pdf - Page 1].\n\n- **Đóng góp chính**:\n    - Giới thiệu **LMMgui**, một giao diện người dùng đồ họa miễn phí giúp thực hiện các phân tích LMM [fpsyg-06-00002.pdf - Page 1].\n    - Công cụ LMMgui sử dụng gói **lme4** trong môi trường thống kê **R** để hỗ trợ phân tích dữ liệu [fpsyg-06-00002.pdf - Page 1].\n    - Hướng dẫn này đóng vai trò là tài liệu hỗ trợ cho các nhà tâm lý học thực nghiệm, những người đã quen thuộc với các phương pháp như **rmANOVAs** và đang tìm cách tiếp cận với các mô hình hỗn hợp [fpsyg-06-00002.pdf - Page 5].\n    - Cung cấp một giải pháp thay thế đơn giản hóa cho việc sử dụng giao diện dòng lệnh (command-line interface) phức tạp trong R, mặc dù tác giả thừa nhận rằng LMMgui không toàn diện bằng các tùy chọn dòng lệnh [fpsyg-06-00002.pdf - Page 5].\n\n*Lưu ý: Đây là thông tin học thuật, không phải là sự thay thế cho lời khuyên chuyên môn.*",
+      "sources": [
+        {
+          "page": 1,
+          "preview": "[Trang 1]\nMINI REVIEW ARTICLE\npublished: 22 January 2015\ndoi: 10.3389/fpsyg.2015.00002\nLinear mixed-effects models for within-participant\npsychology experiments: an introductory tutorial and free,\ngra"
+        },
+        {
+          "page": 1,
+          "preview": "Switzerland\n*Correspondence:\nDavid A. Magezi, Neurology Unit,\nLaboratory for Cognitive and\nNeurological Sciences, Department\nof Medicine, Faculty of Science,\nUniversity of Fribourg, Chemin du\nMusée 5,"
+        },
+        {
+          "page": 1,
+          "preview": "(LMMgui). LMMgui uses the package lme4 (Bates et al., 2014a,b) in the statistical\nenvironment R (R Core Team).\nKeywords: linear mixed-effects models, experimental psychology, within-participant design"
+        },
+        {
+          "page": 6,
+          "preview": "7, 632–638. doi: 10.1177/1745691612463078\nConﬂict of Interest Statement: The author declares that the research was con-\nducted in the absence of any commercial or ﬁnancial relationships that could be\n"
+        },
+        {
+          "page": 5,
+          "preview": "eral (Crawley, 2013), and mixed-effects models in psychology\n(Baayen, 2008). For the reader already acquainted with the com-\nmand line interface of R, there are a number of helpful packages\nfor system"
+        }
+      ],
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0,
+      "context_quality": 1.0,
+      "feedback": "Câu trả lời chính xác, đầy đủ và bám sát nội dung được cung cấp trong ngữ cảnh.",
+      "latency_seconds": 23.946
+    },
+    {
+      "case_id": "P05",
+      "document_id": "fb28026c-84c7-4ee6-8548-8d13c0d9672b",
+      "question": "Theo tài liệu, biến độc lập và biến trung gian có vai trò gì trong thí nghiệm tâm lý xã hội?",
+      "started_at_utc": "2026-09-16T15:21:26.424798+00:00",
+      "http_status": 200,
+      "outcome": "success",
+      "answer": "__NO_CONTEXT__\nNo information found in the related documents.\n\nThis is academic information, not a substitute for professional advice.",
+      "sources": [
+        {
+          "page": 1,
+          "preview": "[Trang 1]\n\n[Trang 2]\n\n[Trang 3]\n\n[Trang 4]\n\n[Trang 5]\n\n[Trang 6]\n\n[Trang 7]\n\n[Trang 8]\n\n[Trang 9]\n\n[Trang 10]"
+        }
+      ],
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0,
+      "context_quality": 0.0,
+      "feedback": "The provided context consists of empty pages (Trang 1-10), therefore it contains no information to answer the question. The model correctly identified that no information was found.",
+      "latency_seconds": 14.307
+    },
+    {
+      "case_id": "P06",
+      "document_id": "97110b8c-f3f9-413c-acda-56a286dfe36c",
+      "question": "Theo Orne, giả thuyết của nhà thí nghiệm có thể ảnh hưởng đến người tham gia như thế nào?",
+      "started_at_utc": "2026-09-16T15:21:50.735352+00:00",
+      "http_status": 200,
+      "outcome": "success",
+      "answer": "Dưới đây là phân tích dựa trên tài liệu được cung cấp. \n\n*Lưu ý: Đây là thông tin học thuật, không phải là sự thay thế cho lời khuyên chuyên môn.*\n\n## Ảnh hưởng của giả thuyết và kỳ vọng của nhà thí nghiệm\n\n- Người tham gia thí nghiệm thường có thái độ sẵn sàng hợp tác và mong muốn hỗ trợ nhà nghiên cứu bằng cách báo cáo chính xác những điều mà nhà nghiên cứu đang kỳ vọng tìm thấy [Orne1962AmPsychologist.pdf - Page 1].\n- Các câu hỏi của nhà thí nghiệm có thể gợi ý trực tiếp về câu trả lời mà họ mong đợi nhận được từ người tham gia [Orne1962AmPsychologist.pdf - Page 1].\n- Người tham gia thường được coi là những người phản ứng thụ động với các kích thích, tuy nhiên giả định này khó có thể biện minh được trong thực tế [Orne1962AmPsychologist.pdf - Page 1].\n- Khi đã đồng ý tham gia, người tham gia ngầm chấp nhận thực hiện nhiều hành động theo yêu cầu mà không cần hỏi về mục đích hay thời lượng của các hành động đó [Orne1962AmPsychologist.pdf - Page 2].\n- Người tham gia có xu hướng đóng vai trò của mình và đặt bản thân dưới sự kiểm soát của nhà thí nghiệm, thậm chí sẵn sàng chịu đựng sự khó chịu, nhàm chán hoặc đau đớn nếu được yêu cầu [Orne1962AmPsychologist.pdf - Page 2].\n\n## Các yếu tố thuộc \"Bối cảnh thí nghiệm\" (Experimental Setting)\n\n- Phản ứng của người tham gia không chỉ bị ảnh hưởng bởi các kích thích được xác định nghiêm ngặt, mà còn bởi các yếu tố thuộc \"bối cảnh thí nghiệm\" [Orne1962AmPsychologist.pdf - Page 1; Orne1962AmPsychologist.pdf - Page 2].\n- Các yếu tố này bao gồm:\n    - Động lực của người tham gia trong tình huống thí nghiệm [Orne1962AmPsychologist.pdf - Page 1].\n    - Cách người tham gia nhận thức về nghiên cứu hành vi [Orne1962AmPsychologist.pdf - Page 1].\n    - Bản chất của các tín hiệu (cues) mà người tham gia thu nhận được trong quá trình tương tác [Orne1962AmPsychologist.pdf - Page 1].\n- Việc xác định rõ các tham số của bối cảnh thí nghiệm là cần thiết để thiết kế các biện pháp kiểm soát nhằm tách biệt ảnh hưởng của bối cảnh khỏi ảnh hưởng của các biến số thí nghiệm [Orne1962AmPsychologist.pdf - Page 2].",
+      "sources": [
+        {
+          "page": 1,
+          "preview": "[Trang 1]\nOrne, M.T., On the social psychology of the psychological experiment: With particular reference to\ndemand characteristics and their implications. American Psychologist, 1962, 17, 776-783.\nON"
+        },
+        {
+          "page": 1,
+          "preview": "problem that the subject of the experiment is assumed, at least implicitly, to be a passive responder to\nstimuli--an assumption difficult to justify. Further, in this type of model the experimental st"
+        },
+        {
+          "page": 1,
+          "preview": "to affect the subject's reaction to the well-defined stimuli in the situation? These factors comprise what\nwill be referred to here as the \"experimental setting.\"\nSince any experimental manipulation o"
+        },
+        {
+          "page": 2,
+          "preview": "777 SOCIAL PSYCHOLOGY OF THE PSYCHOLOGICAL EXPERIMENT\nsigned to isolate the effects of the experimental setting from the effects of the experimental variables.\nLater in this paper we shall propose cer"
+        },
+        {
+          "page": 2,
+          "preview": "context of our culture the roles of subject and experimenter are well understood and carry with them\nwell-delined mutual role expectations. A particularly striking aspect of the typical experimenter-s"
+        }
+      ],
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0,
+      "context_quality": 1.0,
+      "feedback": "Câu trả lời phản ánh chính xác và đầy đủ các luận điểm của Orne trong tài liệu được cung cấp, bao gồm cả thái độ hợp tác của người tham gia và khái niệm 'bối cảnh thí nghiệm' (experimental setting).",
+      "latency_seconds": 30.28
+    },
+    {
+      "case_id": "P07",
+      "document_id": "ebda0a7b-c075-45f2-9141-31264cb3a626",
+      "question": "Tài liệu về social psychology experimental tập trung vào những vấn đề hoặc phương pháp nào?",
+      "started_at_utc": "2026-09-16T15:22:31.063986+00:00",
+      "http_status": 200,
+      "outcome": "success",
+      "answer": "Dưới đây là tổng hợp các vấn đề và phương pháp chính trong thực nghiệm tâm lý học xã hội dựa trên tài liệu được cung cấp:\n\n## Các phương pháp nghiên cứu và phân tích dữ liệu\n- **Phân tích phương sai (Analysis of Variance):** Đây là kỹ thuật phân tích dữ liệu chủ đạo được áp dụng rộng rãi trong những năm 1950 và 1960 [Making_Social_Psychology_Experimental_A.pdf - Page 16].\n- **Thiết kế thực nghiệm:** Các thiết kế thực nghiệm đã được điều chỉnh để đáp ứng các yêu cầu khắt khe của kỹ thuật phân tích phương sai [Making_Social_Psychology_Experimental_A.pdf - Page 16].\n- **Ngẫu nhiên hóa (Randomization):** Đây là một trong những quy trình quan trọng định hình nên các khái niệm về \"cái xã hội\" trong thực nghiệm [Making_Social_Psychology_Experimental_A.pdf - Page 1].\n- **Kết hợp cộng dồn các biến (Additive combination of variables):** Một quy trình thống kê được sử dụng để định hình các khái niệm trong thực nghiệm [Making_Social_Psychology_Experimental_A.pdf - Page 1].\n- **Biến khái niệm (Conceptual variable):** Thuật ngữ này đã thay thế mô hình cấu trúc trong diễn ngôn tiêu chuẩn về thực nghiệm [Making_Social_Psychology_Experimental_A.pdf - Page 16].\n\n## Thay đổi trong quan niệm về \"cái xã hội\"\n- **Chuyển dịch từ tương tác nhóm sang thông điệp:** Trong các thiết kế phổ biến, các kích thích xã hội không còn được hiểu là hành vi của cá nhân khác hay tương tác nhóm, mà đơn thuần là các **thông điệp** [Making_Social_Psychology_Experimental_A.pdf - Page 16].\n- **Biến độc lập:** Bản chất của biến độc lập đã thay đổi, phản ánh sự thay đổi sâu sắc trong cách hiểu về các yếu tố xã hội trong thực nghiệm [Making_Social_Psychology_Experimental_A.pdf - Page 16].\n- **Tổng quát hóa thống kê:** Các cá nhân được chọn ngẫu nhiên vào các nhóm thực nghiệm được coi là mẫu của một quần thể thống kê, cho phép đưa ra các khái quát hóa dựa trên dữ liệu mẫu [Making_Social_Psychology_Experimental_A.pdf - Page 16].\n- **Hành vi xã hội:** Được xem xét dưới góc độ là kết quả của việc cá nhân đồng thời là thành viên của nhiều quần thể thống kê giả định [Making_Social_Psychology_Experimental_A.pdf - Page 16].\n\n## Bối cảnh lịch sử và phát triển ngành\n- **Sự chấp nhận của ngành:** Việc áp dụng các phương pháp thực nghiệm chuẩn hóa đã giúp tâm lý học xã hội trở nên dễ chấp nhận hơn trong lĩnh vực tâm lý học nói chung [Making_Social_Psychology_Experimental_A.pdf - Page 16].\n- **Sự kháng cự ban đầu:** Trong và sau Thế chiến II, vẫn tồn tại sự kháng cự đáng kể đối với việc công nhận tâm lý học xã hội là một ngành khoa học [Making_Social_Psychology_Experimental_A.pdf - Page 16].\n- **Nguồn gốc lịch sử:** Có sự tranh luận về nguồn gốc của thực nghiệm tâm lý học xã hội, với các mốc thời gian từ nghiên cứu của Norman Triplett (1898) đến các phân tích lịch sử sau này [Making_Social_Psychology_Experimental_A.pdf - Page 1].\n\n***\n\n*Disclaimer: Đây là thông tin học thuật, không phải là sự thay thế cho lời khuyên chuyên môn.*",
+      "sources": [
+        {
+          "page": 16,
+          "preview": "experimental design to the requirements of this technique. The conception of social psycho-\nlogical experimentation promoted by the post-Lewinians was in perfect accord with this\ndevelopment, and anal"
+        },
+        {
+          "page": 16,
+          "preview": "as structural model had dropped out of standard discourse on experimentation in social psy-\nchology, to be replaced by an entity called a “conceptual variable” (Aronson & Carlsmith,\n1968).\nThis reorie"
+        },
+        {
+          "page": 1,
+          "preview": "These ideas were poorly understood and were soon replaced by a methodological regime\nin which a new generation of statistical procedures and experimental design shaped im-\nplicit conceptions of the so"
+        },
+        {
+          "page": 16,
+          "preview": "of psychological variables. In the experimental paradigm of attitude change, these became the dependent variables\nin a process that was, as usual, conceived as unidirectional. But it is the nature of "
+        },
+        {
+          "page": 16,
+          "preview": "effects of which were being investigated consisted, not of other individuals or of group interaction but simply of\nmessages.\n[Trang 17]\n345\nMAKING SOCIAL PSYCHOLOGY EXPERIMENTAL\nable attribute. Predic"
+        }
+      ],
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0,
+      "context_quality": 1.0,
+      "feedback": "Câu trả lời rất đầy đủ, chính xác và bám sát vào nội dung của ngữ cảnh được cung cấp. Các ý chính về phương pháp (phân tích phương sai, ngẫu nhiên hóa, biến khái niệm) và vấn đề (thay đổi quan niệm về 'cái xã hội', bối cảnh lịch sử) đều được trích xuất và trình bày rõ ràng.",
+      "latency_seconds": 23.827
+    },
+    {
+      "case_id": "P08",
+      "document_id": "bcb74110-2a74-4228-afb3-68828092b3cb",
+      "question": "Các yếu tố nào liên quan đến việc làm của sinh viên chuyên ngành tâm lý học tham vấn được đề cập trong tài liệu?",
+      "started_at_utc": "2026-09-16T15:23:05.010679+00:00",
+      "http_status": 200,
+      "outcome": "success",
+      "answer": "Dưới đây là các yếu tố liên quan đến việc làm của sinh viên chuyên ngành tâm lý học tham vấn được tổng hợp từ tài liệu cung cấp:\n\n## Các yếu tố liên quan đến việc làm\n- **Thông tin cá nhân và tình trạng nghề nghiệp:** Các yếu tố bao gồm trình độ chuyên môn, nơi cư trú, tình trạng việc làm, thu nhập, thời gian tìm việc, sự thay đổi công việc và các phẩm chất/kỹ năng giúp hoàn thành công việc [DATSO9-2021.vitrivieclamsinhvienchuyennganhtamlyhocthamvan.pdf - Page 5].\n- **Kiến thức và kỹ năng chuyên môn:** Các kiến thức về tâm lý học tham vấn, tâm bệnh học, tham vấn cá nhân/gia đình/nhóm, kiến thức về văn hóa, bình đẳng giới và các kỹ năng đánh giá tâm lý, tham vấn cơ bản, phối hợp liên ngành được đánh giá là cần thiết trong công việc [DATSO9-2021.vitrivieclamsinhvienchuyennganhtamlyhocthamvan.pdf - Page 8].\n- **Kỹ năng mềm và thái độ:** Các kỹ năng như lắng nghe tích cực, thấu cảm, đặt câu hỏi, phản hồi được ứng dụng rộng rãi không chỉ trong trị liệu mà còn trong kinh doanh, giáo dục và giao tiếp xã hội [DATSO9-2021.vitrivieclamsinhvienchuyennganhtamlyhocthamvan.pdf - Page 12].\n- **Nguyên tắc đạo đức:** Sự tôn trọng, chấp nhận khách hàng, bảo mật, riêng tư và nguyên tắc không gây hại là những yếu tố cốt yếu tạo nên sự tin tưởng trong mối quan hệ liên cá nhân và công việc [DATSO9-2021.vitrivieclamsinhvienchuyennganhtamlyhocthamvan.pdf - Page 8; Page 12].\n- **Định hướng nghề nghiệp:** Công tác định hướng nghề nghiệp trong quá trình học tập giúp sinh viên xác định lĩnh vực và danh mục việc làm tiềm năng sau khi tốt nghiệp [DATSO9-2021.vitrivieclamsinhvienchuyennganhtamlyhocthamvan.pdf - Page 12].\n- **Thu nhập:** Thu nhập của nhà tâm lý học có xu hướng cao hơn so với người lao động làm công hưởng lương thông thường [DATSO9-2021.vitrivieclamsinhvienchuyennganhtamlyhocthamvan.pdf - Page 12].\n\n## Bảng tổng hợp các kỹ năng/kiến thức ứng dụng trong công việc\n| Nhóm yếu tố | Các thành phần cụ thể |\n| :--- | :--- |\n| **Kỹ năng tham vấn** | Lắng nghe tích cực, thấu cảm, đặt câu hỏi, phản hồi, đánh giá tâm lý [DATSO9-2021.vitrivieclamsinhvienchuyennganhtamlyhocthamvan.pdf - Page 8, 12] |\n| **Kiến thức chuyên môn** | Tâm bệnh học, tham vấn (cá nhân, gia đình, nhóm), văn hóa, bình đẳng giới [DATSO9-2021.vitrivieclamsinhvienchuyennganhtamlyhocthamvan.pdf - Page 8] |\n| **Đạo đức nghề nghiệp** | Tôn trọng, chấp nhận, bảo mật, riêng tư, không gây hại [DATSO9-2021.vitrivieclamsinhvienchuyennganhtamlyhocthamvan.pdf - Page 8, 12] |\n\n*Lưu ý: Đây là academic information, không phải là sự thay thế cho lời khuyên chuyên môn.*",
+      "sources": [
+        {
+          "page": 5,
+          "preview": "nghiệp, trình độ chuyên môn, nơi cư trú; 2/ Tình trạng việc làm, thu nhập, thời\ngian tìm được việc làm, những phẩm chất và kỹ năng giúp sinh viên hoàn\nthành công việc, sự thay đổi việc làm; 3/ Mức độ "
+        },
+        {
+          "page": 8,
+          "preview": "Trong quá trình đọc câu trả lời của những người tham gia nghiên cứu,\nchúng tôi nhiều lần đọc được những từ và cụm từ: các kỹ năng tham vấn căn\nbản, tôn trọng, chấp nhận khách hàng, các kiến thức tâm l"
+        },
+        {
+          "page": 12,
+          "preview": "vào khoảng 85.000 đô la Mỹ một năm (APA, 2015). Thu nhập của nhà tâm lý\nhọc trong và ngoài nước luôn có xu hướng cao hơn so với người lao động làm\ncông hưởng lương.\nKết quả khảo sát cho thấy, 1/3 số n"
+        },
+        {
+          "page": 12,
+          "preview": "yếu tạo nên sự tin tưởng trong mối quan hệ liên cá nhân. Ngoài ra, những kiến\nthức tâm lý học nói chung được tích lũy từ năm thứ nhất đến khi ra trường có tỷ\nlệ những người tham gia nghiên cứu đánh gi"
+        },
+        {
+          "page": 12,
+          "preview": "những bằng chứng có giá trị, ghi nhận chất lượng đào tạo của Khoa Tâm lý học\nnói chung, Bộ môn Tâm lý học tham vấn nói riêng là rất tốt. Trong quá trình học\ntập, sinh viên được trang bị và rèn luyện n"
+        }
+      ],
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0,
+      "context_quality": 1.0,
+      "feedback": "Câu trả lời đã tổng hợp đầy đủ và chính xác các yếu tố liên quan đến việc làm của sinh viên chuyên ngành tâm lý học tham vấn dựa trên tài liệu được cung cấp, bao gồm cả các yếu tố về thông tin cá nhân, kỹ năng chuyên môn, kỹ năng mềm, đạo đức nghề nghiệp và định hướng nghề nghiệp.",
+      "latency_seconds": 25.512
+    },
+    {
+      "case_id": "P09",
+      "document_id": "e17498d5-b10f-40aa-b8ae-adda98085b8e",
+      "question": "Tài liệu tâm lý học giáo dục trung học cơ sở đề cập những nội dung hoặc đối tượng giáo dục nào?",
+      "started_at_utc": "2026-09-16T15:23:40.531064+00:00",
+      "http_status": 200,
+      "outcome": "success",
+      "answer": "Dưới đây là các nội dung và đối tượng nghiên cứu được đề cập trong tài liệu về tâm lý học giáo dục trung học cơ sở:\n\n## Đối tượng nghiên cứu của Tâm lý học sư phạm\n- Nghiên cứu các đặc điểm và quy luật tâm lý trong hoạt động dạy học và giáo dục [Tam_ly_hoc_giao_duc_trung_hoc_co_so_va_t.pdf - Page 4].\n- Nghiên cứu cơ sở tâm lý của quá trình lĩnh hội tri thức, kỹ năng, kỹ xảo, các phẩm chất trí tuệ và nhân cách của người học [Tam_ly_hoc_giao_duc_trung_hoc_co_so_va_t.pdf - Page 4].\n- Nghiên cứu các yếu tố tâm lý thuộc về phía người làm công tác giáo dục [Tam_ly_hoc_giao_duc_trung_hoc_co_so_va_t.pdf - Page 4].\n- Nghiên cứu các vấn đề tâm lý trong mối quan hệ giữa giáo viên với học sinh và mối quan hệ qua lại giữa các học sinh với nhau [Tam_ly_hoc_giao_duc_trung_hoc_co_so_va_t.pdf - Page 4].\n- Nghiên cứu trẻ em ở một độ tuổi nhất định với tư cách là đối tượng của hoạt động dạy học và giáo dục [Tam_ly_hoc_giao_duc_trung_hoc_co_so_va_t.pdf - Page 5].\n\n## Nội dung về sự phát triển tâm lý học sinh Trung học cơ sở (THCS)\n- **Sự phát triển tư duy:** Đề cập đến quá trình chuyển đổi từ tư duy cụ thể (gắn liền với sự vật) sang tư duy trừu tượng và tư duy lý luận [Tam_ly_hoc_giao_duc_trung_hoc_co_so_va_t.pdf - Page 18, 25].\n- **Hoạt động học tập:** Nghiên cứu các khó khăn trong học tập do khoảng cách giữa cấu trúc nội dung khoa học và cấu trúc nhận thức của học sinh [Tam_ly_hoc_giao_duc_trung_hoc_co_so_va_t.pdf - Page 18].\n- **Động cơ và thái độ học tập:** \n    - Sự hình thành các động cơ học tập mới liên quan đến dự định nghề nghiệp và tự ý thức ở cuối cấp THCS [Tam_ly_hoc_giao_duc_trung_hoc_co_so_va_t.pdf - Page 17].\n    - Sự thay đổi trong thái độ đối với học tập: từ phụ thuộc vào giáo viên/điểm số sang sự phân hóa thái độ dựa trên hứng thú, sở thích, nội dung môn học và phương pháp giảng dạy [Tam_ly_hoc_giao_duc_trung_hoc_co_so_va_t.pdf - Page 17].\n- **Phát triển nhân cách:** Nghiên cứu các phẩm chất nhân cách của học sinh trong giai đoạn phát triển này [Tam_ly_hoc_giao_duc_trung_hoc_co_so_va_t.pdf - Page 18].\n\n*Lưu ý: Đây là academic information, không phải là sự thay thế cho lời khuyên chuyên môn.*",
+      "sources": [
+        {
+          "page": 4,
+          "preview": "lý học học sinh tiểu học, tâm lý học tuổi thiếu niên, tâm lý học người trưởng thành, tâm lý\nhọc người già,... Như vậy, tâm lý học học sinh THCS và THPT là một lĩnh vực nghiên\ncứu cụ thể về tâm lý trẻ "
+        },
+        {
+          "page": 5,
+          "preview": "hoạt động dạy học và giáo dục. Tâm lý học sư phạm nghiên cứu trẻ em với tư cách là đối\ntượng của hoạt động dạy học và giáo dục nhưng không phải là trẻ em nói chung mà là trẻ\nem ở một độ tuổi nhất định"
+        },
+        {
+          "page": 18,
+          "preview": "các phẩm chất nhân cách.\n3.4.1.3. Một số khó khăn và thiếu sót trong hoạt động học của học sinh Trung học cơ\nsở\n Trong hoạt động học, học sinh THCS thường gặp một số khó khăn, làm hạn chế\nviệc học của"
+        },
+        {
+          "page": 25,
+          "preview": "sinh phải tích cực hoạt động, tích cực suy nghĩ, tham gia xây dựng bài...\n3.5.2.4. Tư duy của thiếu niên\nChuyển từ tư duy cụ thể sang trừu tượng là nét đặc thù trong sự phát triển tư duy\ncủa học sinh "
+        },
+        {
+          "page": 17,
+          "preview": "lí luận. ở cuối tuổi THCS dần xuất hiện những động cơ học tập mới, có liên quan đến sự\nhình thành dự định nghề nghiệp và tự ý thức.\n Thứ ba: Thái độ đối với học tập ở của học sinh THCS đã được cấu trú"
+        }
+      ],
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0,
+      "context_quality": 1.0,
+      "feedback": "Câu trả lời đã tổng hợp đầy đủ và chính xác các nội dung, đối tượng giáo dục được đề cập trong ngữ cảnh cung cấp, bao gồm cả đối tượng nghiên cứu của tâm lý học sư phạm và các đặc điểm tâm lý cụ thể của học sinh THCS.",
+      "latency_seconds": 23.592
+    },
+    {
+      "case_id": "P10",
+      "document_id": "537b9a4e-e3d4-4fa6-912a-a79ebb7f8124",
+      "question": "Hãy nêu mục tiêu nghiên cứu hoặc kết quả chính được trình bày trong tài liệu này.",
+      "started_at_utc": "2026-09-16T15:24:14.129882+00:00",
+      "http_status": 200,
+      "outcome": "success",
+      "answer": "Dưới đây là tổng hợp các mục tiêu và kết quả nghiên cứu chính được trình bày trong tài liệu:\n\n*Lưu ý: Đây là thông tin học thuật, không phải là thay thế cho lời khuyên chuyên môn.*\n\n## Mục tiêu nghiên cứu\n- Khảo sát mức độ và các biểu hiện của **rối loạn truyền thông xã hội** ở sinh viên [Tap_chi_so_6-2023_3_8_-in_compressed_(1).pdf - Page 59].\n- Tìm hiểu mối quan hệ giữa rối loạn truyền thông xã hội và trải nghiệm sử dụng truyền thông xã hội của sinh viên trong vòng 1 năm qua [Tap_chi_so_6-2023_3_8_-in_compressed_(1).pdf - Page 59].\n\n## Kết quả nghiên cứu về rối loạn truyền thông xã hội\n- Tỷ lệ sinh viên mắc rối loạn truyền thông xã hội là 16,3% (80 sinh viên) [Tap_chi_so_6-2023_3_8_-in_compressed_(1).pdf - Page 60].\n- Tỷ lệ sinh viên thuộc nhóm nguy cơ là 27,3% (134 sinh viên) [Tap_chi_so_6-2023_3_8_-in_compressed_(1).pdf - Page 60].\n- Tỷ lệ sinh viên không có rối loạn truyền thông xã hội là 56,4% (276 sinh viên) [Tap_chi_so_6-2023_3_8_-in_compressed_(1).pdf - Page 60].\n- Biểu hiện phổ biến nhất là \"Sử dụng mạng xã hội để thoát khỏi cảm giác tiêu cực\", chiếm 68,2% [Tap_chi_so_6-2023_3_8_-in_compressed_(1).pdf - Page 60; Page 67].\n- Các biểu hiện khác bao gồm: lừa dối về thời gian sử dụng, tranh cãi hoặc xung đột với người thân về việc sử dụng mạng xã hội, và cảm thấy tồi tệ nếu không được sử dụng mạng xã hội [Tap_chi_so_6-2023_3_8_-in_compressed_(1).pdf - Page 67].\n- Mức độ phụ thuộc, tần suất và thời lượng sử dụng truyền thông xã hội càng lớn thì điểm số rối loạn càng cao [Tap_chi_so_6-2023_3_8_-in_compressed_(1).pdf - Page 67].\n\n## Kết quả nghiên cứu về cảm xúc tiêu cực khi học trực tuyến\n- Cảm xúc tiêu cực của sinh viên đối với việc học trực tuyến ở mức độ thấp (ĐTB chung = 2,19) [Tap_chi_so_6-2023_3_8_-in_compressed_(1).pdf - Page 175].\n- Cảm xúc \"khó chịu\" là cảm xúc tiêu cực phổ biến nhất (ĐTB = 2,38) [Tap_chi_so_6-2023_3_8_-in_compressed_(1).pdf - Page 175].\n- Nguyên nhân chính dẫn đến cảm xúc tiêu cực là do không được tương tác trực tiếp với giảng viên và bạn học (ĐTB = 3,79, mức độ rất cao) [Tap_chi_so_6-2023_3_8_-in_compressed_(1).pdf - Page 176].",
+      "sources": [
+        {
+          "page": 59,
+          "preview": "TÓM TẮT\nNgày nay, việc sử dụng các phương tiện truyền thông xã hội đã là một\nphần quan trọng trong cuộc sống. Tuy nhiên, lạm dụng cũng như quá lệ thuộc\nvào truyền thông xã hội có thể tác động tiêu cực"
+        },
+        {
+          "page": 175,
+          "preview": "Kết quả nghiên cứu thể hiện tại bảng số liệu trên cho thấy cảm xúc tiêu\ncực của sinh viên Trường Đại học Khoa học xã hội và nhân văn, Đại học Quốc\ngia Thành phố Hồ Chí Minh đối với việc học trực tuyến"
+        },
+        {
+          "page": 60,
+          "preview": "đột. Ít nhất năm hoặc nhiều hơn trong số 09 tiêu chí phải được đáp ứng để chẩn\nđoán chính thức về người dùng truyền thông xã hội mắc rối loạn, nhóm nguy\ncơ đáp ứng với 03 hoặc 04 tiêu chí.\n3. Kết quả "
+        },
+        {
+          "page": 67,
+          "preview": "viên). Trong đó, sinh viên thuộc nhóm nguy cơ là 27,3%. Về biểu hiện có sự\ntương quan mật thiết ở các mặt như “Lừa dối người khác về thời gian sử dụng\nmạng xã hội”, “Tranh cãi với người khác về việc s"
+        },
+        {
+          "page": 176,
+          "preview": "Kết quả nghiên cứu cho thấy, có nhiều lí do có thể lý giải cho kết quả\nnghiên cứu về những cảm xúc tiêu cực vẫn nảy sinh ở sinh viên khi học trực\ntuyến, mặc dù những cảm xúc này chỉ xuất hiện ở mức độ"
+        }
+      ],
+      "faithfulness": 1.0,
+      "answer_relevancy": 1.0,
+      "context_quality": 1.0,
+      "feedback": "Câu trả lời đã trích xuất chính xác các mục tiêu và kết quả nghiên cứu từ tài liệu cung cấp, bao gồm cả hai chủ đề chính là rối loạn truyền thông xã hội và cảm xúc tiêu cực khi học trực tuyến. Các thông tin được trình bày rõ ràng và có căn cứ từ ngữ cảnh.",
+      "latency_seconds": 33.518
+    }
+  ]
+}
