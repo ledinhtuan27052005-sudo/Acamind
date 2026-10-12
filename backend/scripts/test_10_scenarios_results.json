@@ -1,0 +1,818 @@
+[
+  {
+    "scenario_id": 1,
+    "title": "Phác đồ điều trị tâm thần phân liệt và liều lượng can thiệp",
+    "query": "Các giai đoạn điều trị và phác đồ can thiệp dùng thuốc đối với bệnh tâm thần phân liệt theo phác đồ hướng dẫn là gì?",
+    "target_content": "Phác đồ điều trị, liều dùng, giai đoạn tấn công / củng cố / duy trì",
+    "retrieved_chunks": [
+      {
+        "doc": "Phac-do-Tam-than_2020.pdf",
+        "page": 89,
+        "preview": "3.3.2. Chẩn đoán hình ảnh, thăm dò chức năng XQ tim phổi, siêu âm ổ bụng Điện não đồ, điện tâm đồ, lưu huyết não, siêu âm doppler xuyên sọ…Trong một s"
+      },
+      {
+        "doc": "Phac-do-Tam-than_2020.pdf",
+        "page": 85,
+        "preview": "loại an thần kinh khác nhau, hạn chế phối hợp từ 3 loại an thần kinh trở lên. Theo dõi chặt chẽ quá trình sử dụng thuốc để phát hiện và xử trí kịp thờ"
+      },
+      {
+        "doc": "Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc.pdf",
+        "page": 3,
+        "preview": "Khuyến nghị phác đồ: 1. Đối với trầm cảm mức độ trung bình: Ưu tiên chỉ định CBT đơn thuần 12-16 tuần. 2. Đối với trầm cảm mức độ nặng (BDI-II >= 29):"
+      },
+      {
+        "doc": "05_positive_recovery_psychotic_disorder.pdf",
+        "page": 11,
+        "preview": "Results regarding the PMH proﬁle of patients with psychotic disorder have shown that it is necessary to take the sociodemographic and clinical charact"
+      },
+      {
+        "doc": "05_positive_recovery_psychotic_disorder.pdf",
+        "page": 11,
+        "preview": "subjects are included. CONCLUSION This study contributes to increasing the scant existing knowledge of PMH in patients with psychotic disorder. It als"
+      }
+    ],
+    "citations": [
+      "[Phac-do-Tam-than_2020.pdf - Trang 85]",
+      "[Phac-do-Tam-than_2020.pdf - Trang 89]"
+    ],
+    "pages_cited": [
+      [
+        "Phac-do-Tam-than_2020.pdf",
+        85
+      ],
+      [
+        "Phac-do-Tam-than_2020.pdf",
+        89
+      ],
+      [
+        "Phac-do-Tam-than_2020.pdf",
+        89
+      ],
+      [
+        "Phac-do-Tam-than_2020.pdf",
+        85
+      ],
+      [
+        "Phac-do-Tam-than_2020.pdf",
+        85
+      ],
+      [
+        "Phac-do-Tam-than_2020.pdf",
+        89
+      ],
+      [
+        "Phac-do-Tam-than_2020.pdf",
+        85
+      ],
+      [
+        "Phac-do-Tam-than_2020.pdf",
+        89
+      ],
+      [
+        "Phac-do-Tam-than_2020.pdf",
+        85
+      ],
+      [
+        "Phac-do-Tam-than_2020.pdf",
+        85
+      ],
+      [
+        "Phac-do-Tam-than_2020.pdf",
+        85
+      ],
+      [
+        "Phac-do-Tam-than_2020.pdf",
+        85
+      ],
+      [
+        "Phac-do-Tam-than_2020.pdf",
+        85
+      ],
+      [
+        "Phac-do-Tam-than_2020.pdf",
+        85
+      ],
+      [
+        "Phac-do-Tam-than_2020.pdf",
+        89
+      ]
+    ],
+    "answer_snippet": "## I. Các giai đoạn điều trị và phác đồ can thiệp dùng thuốc đối với bệnh tâm thần phân liệt  Theo các hướng dẫn lâm sàng, việc điều trị bệnh **tâm thần phân liệt (Schizophrenia)** đòi hỏi sự kết hợp chặt chẽ giữa các liệu pháp hóa dược và các can thiệp tâm lý - xã hội [Phac-do-Tam-than_2020.pdf - Trang 85; Phac-do-Tam-than_2020.pdf - Trang 89]. Dưới đây là các giai đoạn điều trị và phác đồ can th",
+    "full_answer": "## I. Các giai đoạn điều trị và phác đồ can thiệp dùng thuốc đối với bệnh tâm thần phân liệt\n\nTheo các hướng dẫn lâm sàng, việc điều trị bệnh **tâm thần phân liệt (Schizophrenia)** đòi hỏi sự kết hợp chặt chẽ giữa các liệu pháp hóa dược và các can thiệp tâm lý - xã hội [Phac-do-Tam-than_2020.pdf - Trang 85; Phac-do-Tam-than_2020.pdf - Trang 89]. Dưới đây là các giai đoạn điều trị và phác đồ can thiệp cụ thể:\n\n### 1. Các giai đoạn điều trị lâm sàng\n* **Giai đoạn cấp tính:** Quá trình điều trị giai đoạn cấp được tiến hành tại các cơ sở chuyên khoa nhằm kiểm soát nhanh chóng các triệu chứng cấp tính của bệnh [Phac-do-Tam-than_2020.pdf - Trang 89].\n* **Giai đoạn duy trì và phòng tái phát:** Thực hiện điều trị duy trì sau cơn loạn thần đầu tiên, đồng thời quản lý, theo dõi và phòng ngừa tái phát ngay tại cộng đồng [Phac-do-Tam-than_2020.pdf - Trang 85]. Đồng thời, cần chú trọng việc giáo dục gia đình và cộng đồng nhằm thay đổi thái độ đối với người bệnh, tránh mặc cảm, kỳ thị và tăng cường phối hợp giữa thầy thuốc, gia đình và cộng đồng [Phac-do-Tam-than_2020.pdf - Trang 85].\n\n### 2. Nguyên tắc và phác đồ hóa dược trị liệu\n* **Nguyên tắc sử dụng thuốc:** \n  > \"Điều trị đơn trị liệu, nếu không đáp ứng hoặc đáp ứng kém thì đa trị liệu phối hợp 2 thuốc an thần kinh, hạn chế sử dụng phối hợp từ 3 thuốc an thần kinh trở lên.\" [Phac-do-Tam-than_2020.pdf - Trang 89]\n  Bên cạnh đó, cần theo dõi chặt chẽ quá trình điều trị để phát hiện sớm và xử trí kịp thời các tác dụng phụ của thuốc an thần kinh [Phac-do-Tam-than_2020.pdf - Trang 85; Phac-do-Tam-than_2020.pdf - Trang 89].\n* **Phác đồ hóa dược (Chọn một, hai hoặc ba thuốc trong danh mục):**\n  * **Các thuốc an thần kinh cổ điển:**\n    * **Chlorpromazin:** Dạng viên 25mg, ống 25mg; liều dùng $50 - 250\\text{mg}/24\\text{ giờ}$ [Phac-do-Tam-than_2020.pdf - Trang 85].\n    * **Levomepromazin:** Dạng viên 25mg; liều dùng $25 - 250\\text{mg}/24\\text{ giờ}$ [Phac-do-Tam-than_2020.pdf - Trang 85].\n    * **Haloperidol:** Dạng viên 1,5mg, viên 5mg, ống 5mg; liều dùng $5 - 30\\text{mg}/24\\text{ giờ}$ [Phac-do-Tam-than_2020.pdf - Trang 85].\n    * **Thioridazin:** Dạng viên 50mg; liều dùng $100 - 300\\text{mg}/\\text{ngày}$ [Phac-do-Tam-than_2020.pdf - Trang 85].\n  * **Các thuốc an thần kinh không điển hình** [Phac-do-Tam-than_2020.pdf - Trang 85].\n\n### 3. Phối hợp đa trị liệu toàn diện\n* Phác đồ điều trị chuẩn bao gồm sự kết hợp giữa **liệu pháp hóa dược** cùng với **liệu pháp tâm lý và phục hồi chức năng tại cộng đồng** nhằm tối ưu hóa hiệu quả điều trị triệu chứng dương tính, triệu chứng âm tính và thúc đẩy quá trình tái thích ứng xã hội cho người bệnh [Phac-do-Tam-than_2020.pdf - Trang 85; Phac-do-Tam-than_2020.pdf - Trang 89].\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*\n\n## Tài liệu tham khảo\n1. *Phac-do-Tam-than_2020.pdf - Trang 85, 89*"
+  },
+  {
+    "scenario_id": 2,
+    "title": "Hiệu quả can thiệp CBT và tỷ lệ thuyên giảm triệu chứng trầm cảm",
+    "query": "Các nghiên cứu thực nghiệm về ứng dụng Trí tuệ nhân tạo và CBT cho thấy tỷ lệ cải thiện và thuyên giảm triệu chứng trầm cảm (thang BDI-II hoặc PHQ-9) như thế nào?",
+    "target_content": "Số liệu định lượng, tỷ lệ %, thang đo BDI-II, PHQ-9 từ phần Results/Clinical Data",
+    "retrieved_chunks": [
+      {
+        "doc": "Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc.pdf",
+        "page": 1,
+        "preview": "### 2. ĐỐI TƯỢNG VÀ PHƯƠNG PHÁP NGHIÊN CỨU  - Cỡ mẫu nghiên cứu: N = 120 bệnh nhân (độ tuổi 22 - 58) được chẩn đoán xác định theo DSM-5. - Thiết kế th"
+      },
+      {
+        "doc": "Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc.pdf",
+        "page": 3,
+        "preview": "Khuyến nghị phác đồ: 1. Đối với trầm cảm mức độ trung bình: Ưu tiên chỉ định CBT đơn thuần 12-16 tuần. 2. Đối với trầm cảm mức độ nặng (BDI-II >= 29):"
+      },
+      {
+        "doc": "02_cognitive_distortions_mental_health_text.pdf",
+        "page": 1,
+        "preview": "population experienced at least one major depressive disorder episode in the past year [2]. Cognitive-behavioral therapy (CBT) has been shown to have "
+      },
+      {
+        "doc": "Tap_chi_so_6-2023_3_8_-in_compressed_(1).pdf",
+        "page": 138,
+        "preview": "tốt hơn sinh viên nam (ĐTB = 2.91 so với 2.87). Tuy nhiên sự khác biệt này không có ý nghĩa về mặt thống kê bởi kết quả kiểm định Independent Samples "
+      },
+      {
+        "doc": "6eb428d9-d785-451c-a0ff-051b3ee1c8b1_195-Article_Text-283-1-10-20230626.pdf",
+        "page": 1,
+        "preview": "đang điều trị tại khoa Thận và Lọc máu, thông tin được thu thập qua bộ câu hỏi có sẵn của thang lo âu và trầm cảm DASS-21. Với mục tiêu (1) mô tả tình"
+      }
+    ],
+    "citations": [
+      "[Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc.pdf - Trang 1]",
+      "[02_cognitive_distortions_mental_health_text.pdf - Trang 1]",
+      "[Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc.pdf - Trang 3]",
+      "[01_llms_mental_health_scoping_review.pdf - Trang 11]"
+    ],
+    "pages_cited": [
+      [
+        "Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc.pdf",
+        1
+      ],
+      [
+        "02_cognitive_distortions_mental_health_text.pdf",
+        1
+      ],
+      [
+        "02_cognitive_distortions_mental_health_text.pdf",
+        1
+      ],
+      [
+        "Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc.pdf",
+        3
+      ],
+      [
+        "Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc.pdf",
+        3
+      ],
+      [
+        "Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc.pdf",
+        3
+      ],
+      [
+        "01_llms_mental_health_scoping_review.pdf",
+        11
+      ],
+      [
+        "Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc.pdf",
+        3
+      ],
+      [
+        "01_llms_mental_health_scoping_review.pdf",
+        11
+      ]
+    ],
+    "answer_snippet": "## I. Tỷ lệ cải thiện và thuyên giảm triệu chứng trầm cảm trong các nghiên cứu thực nghiệm  Các nghiên cứu thực nghiệm lâm sàng và tổng quan khoa học đã đánh giá hiệu quả của các can thiệp tâm lý — tiêu biểu là **Liệu pháp Nhận thức Hành vi (Cognitive Behavioral Therapy - CBT)** theo mô thức của Aaron T. Beck — kết hợp cùng các công cụ hỗ trợ công nghệ và dược lý học trong việc cải thiện các thang",
+    "full_answer": "## I. Tỷ lệ cải thiện và thuyên giảm triệu chứng trầm cảm trong các nghiên cứu thực nghiệm\n\nCác nghiên cứu thực nghiệm lâm sàng và tổng quan khoa học đã đánh giá hiệu quả của các can thiệp tâm lý — tiêu biểu là **Liệu pháp Nhận thức Hành vi (Cognitive Behavioral Therapy - CBT)** theo mô thức của Aaron T. Beck — kết hợp cùng các công cụ hỗ trợ công nghệ và dược lý học trong việc cải thiện các thang đo trầm cảm chuẩn tắc như **BDI-II (Beck Depression Inventory)** và **PHQ-9** [Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc.pdf - Trang 1].\n\n### 1. Hiệu quả chung của Liệu pháp Nhận thức Hành vi (CBT)\n* Liệu pháp Nhận thức Hành vi (CBT) đã được chứng minh là có hiệu quả tích cực lớn đối với các bệnh nhân trải qua các triệu chứng lo âu và trầm cảm [02_cognitive_distortions_mental_health_text.pdf - Trang 1].\n* Thông qua việc giúp người bệnh tự nhận diện các mô thức tư duy tự động, thường mang tính phi lý và tạo ra nhận thức méo mó về thực tại (**méo mó nhận thức - Cognitive Distortions**), CBT góp phần nâng cao khả năng điều hòa cảm xúc và ngăn chặn tình trạng trầm cảm kháng trị [02_cognitive_distortions_mental_health_text.pdf - Trang 1; Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc.pdf - Trang 3].\n\n### 2. Tỷ lệ thuyên giảm theo phác đồ kết hợp và mức độ lâm sàng\nTheo dữ liệu từ các thử nghiệm lâm sàng ngẫu nhiên có đối chứng (**Randomized Controlled Trial - RCT**), hiệu quả can thiệp được phân hóa theo mức độ nặng của bệnh và phương thức điều trị:\n* Đối với trầm cảm mức độ nặng (với điểm số **BDI-II $\\ge 29$**), phác đồ điều trị kết hợp giữa CBT và thuốc **Sertraline** liều thấp ($50\\text{ mg/ngày}$) ngay từ đầu đạt tỷ lệ thuyên giảm tối đa lên đến **82.5%** [Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc.pdf - Trang 3].\n* Trong khi các thuốc ức chế tái hấp thu serotonin có chọn lọc (**Selective Serotonin Reuptake Inhibitors - SSRI**) mang lại hiệu quả cải thiện sinh học nhanh trong 4 tuần đầu, CBT lại đóng vai trò cung cấp các kỹ năng thích ứng nhận thức lâu dài [Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc.pdf - Trang 3].\n\n### 3. Ứng dụng công nghệ và Trí tuệ nhân tạo (AI) trong hỗ trợ chẩn đoán\nBên cạnh các thử nghiệm lâm sàng truyền thống, các nghiên cứu tổng quan phạm vi (**scoping review**) về Trí tuệ nhân tạo (AI) và các mô hình ngôn ngữ lớn (**Large Language Models - LLMs**) đã tích hợp nhiều bộ dữ liệu và công cụ khai thác hành vi tâm lý [01_llms_mental_health_scoping_review.pdf - Trang 11]. Các nền tảng công nghệ và công cụ hỗ trợ y văn (như hệ thống Acamind) hỗ trợ các nhà lâm sàng trong việc tra cứu nhanh số liệu thực chứng, phát hiện méo mó nhận thức và đánh giá tình trạng sức khỏe tâm thần từ các mẫu ngôn ngữ bệnh nhân nhằm tối ưu hóa tiến trình theo dõi trị liệu [Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc.pdf - Trang 3; 01_llms_mental_health_scoping_review.pdf - Trang 11].\n\n---\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*\n\n## Danh mục Tài liệu tham khảo\n- Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc.pdf - Trang 1, 3\n- 02_cognitive_distortions_mental_health_text.pdf - Trang 1\n- 01_llms_mental_health_scoping_review.pdf - Trang 11"
+  },
+  {
+    "scenario_id": 3,
+    "title": "Cơ chế chánh niệm (Mindfulness) tác động đến chất lượng giấc ngủ và tự kiểm soát",
+    "query": "Theo các nghiên cứu thực nghiệm về học sinh - sinh viên, thực hành chánh niệm (mindfulness) tác động đến chất lượng giấc ngủ và khả năng tự kiểm soát như thế nào? Cỡ mẫu và kết quả thống kê ra sao?",
+    "target_content": "Phương pháp nghiên cứu, cỡ mẫu N, tương quan thống kê r, p-value trong Methods & Results",
+    "retrieved_chunks": [
+      {
+        "doc": "08_mindfulness_students_sleep_self_control.pdf",
+        "page": 1,
+        "preview": "exercise, sleep regularity, self-control, and mental health. Data were analyzed using partial least squares structural equation modeling (PLS-SEM) wit"
+      },
+      {
+        "doc": "08_mindfulness_students_sleep_self_control.pdf",
+        "page": 2,
+        "preview": "and mental health, and promote theoretical understanding. Secondly, it emphasizes that sleep patterns, as a key behavioral channel, have a downstream "
+      },
+      {
+        "doc": "09_mindfulness_trauma_recovery.pdf",
+        "page": 3,
+        "preview": "outcomes may depend on the method of instruction as much as the person being instructed on mindfulness techniques. As a result, the tailoring of mindf"
+      },
+      {
+        "doc": "Tap_chi_so_6-2023_3_8_-in_compressed_(1).pdf",
+        "page": 53,
+        "preview": "53 và 0,220. Không ghi nhận mối liên quan giữa tình trạng stress và lo lắng kinh tế gia đình với p = 0,178. Học sinh có cha có trình độ học vấn đại họ"
+      },
+      {
+        "doc": "Tap_chi_so_6-2023_3_8_-in_compressed_(1).pdf",
+        "page": 53,
+        "preview": "quả này cho thấy số lượng học sinh đạt mức độ stress trong khả năng khống chế vẫn tương đối nhiều. Đây được xem là một dấu hiệu khá tích cực. Cần lưu "
+      }
+    ],
+    "citations": [
+      "[08_mindfulness_students_sleep_self_control.pdf - Trang 1]",
+      "[08_mindfulness_students_sleep_self_control.pdf - Trang 2]"
+    ],
+    "pages_cited": [
+      [
+        "08_mindfulness_students_sleep_self_control.pdf",
+        1
+      ],
+      [
+        "08_mindfulness_students_sleep_self_control.pdf",
+        2
+      ],
+      [
+        "08_mindfulness_students_sleep_self_control.pdf",
+        1
+      ],
+      [
+        "08_mindfulness_students_sleep_self_control.pdf",
+        2
+      ],
+      [
+        "08_mindfulness_students_sleep_self_control.pdf",
+        1
+      ],
+      [
+        "08_mindfulness_students_sleep_self_control.pdf",
+        2
+      ],
+      [
+        "08_mindfulness_students_sleep_self_control.pdf",
+        1
+      ],
+      [
+        "08_mindfulness_students_sleep_self_control.pdf",
+        1
+      ],
+      [
+        "08_mindfulness_students_sleep_self_control.pdf",
+        1
+      ],
+      [
+        "08_mindfulness_students_sleep_self_control.pdf",
+        1
+      ],
+      [
+        "08_mindfulness_students_sleep_self_control.pdf",
+        1
+      ],
+      [
+        "08_mindfulness_students_sleep_self_control.pdf",
+        1
+      ],
+      [
+        "08_mindfulness_students_sleep_self_control.pdf",
+        1
+      ],
+      [
+        "08_mindfulness_students_sleep_self_control.pdf",
+        1
+      ],
+      [
+        "08_mindfulness_students_sleep_self_control.pdf",
+        1
+      ],
+      [
+        "08_mindfulness_students_sleep_self_control.pdf",
+        2
+      ]
+    ],
+    "answer_snippet": "*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*  Dựa trên các tài liệu nghiên cứu thực nghiệm đã được cung cấp, dưới đây là tổng hợp chi tiết về tác động của **thực hành chánh niệm** (**mindfulness**) đối với chất lượng giấc ngủ và khả năng tự kiểm soát (**self-control** - **SC**) ở đối tượng học sinh - sinh viên, bao gồm cỡ mẫu và các kết",
+    "full_answer": "*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*\n\nDựa trên các tài liệu nghiên cứu thực nghiệm đã được cung cấp, dưới đây là tổng hợp chi tiết về tác động của **thực hành chánh niệm** (**mindfulness**) đối với chất lượng giấc ngủ và khả năng tự kiểm soát (**self-control** - **SC**) ở đối tượng học sinh - sinh viên, bao gồm cỡ mẫu và các kết quả thống kê tương ứng:\n\n## I. Tác động của thực hành chánh niệm đến giấc ngủ và khả năng tự kiểm soát\n\nCác kết quả nghiên cứu chỉ ra rằng **thực hành chánh niệm** (**mindfulness practice**) hoặc các hoạt động thể chất liên quan đến chánh niệm đóng vai trò là một yếu tố cấu trúc hành vi quan trọng, tác động trực tiếp và gián tiếp đến sự **regularity của giấc ngủ** (tính đều đặn của giấc ngủ) và nguồn lực **tự điều hòa** (**self-regulation**) [08_mindfulness_students_sleep_self_control.pdf - Trang 1; 08_mindfulness_students_sleep_self_control.pdf - Trang 2]. \n\n* **Mối liên hệ giữa chánh niệm và tính đều đặn của giấc ngủ:** Thực hành chánh niệm có mối tương quan và tác động tích cực đáng kể đến tính đều đặn của giấc ngủ ($\\beta = 0.457, p < 0.001$) [08_mindfulness_students_sleep_self_control.pdf - Trang 1]. Các khía cạnh cốt lõi như hướng sự chú ý trở lại (**Refocus**), ý thức tại thời điểm hiện tại (**current consciousness**), và không phản ứng với những xao lãng bên trong (**nonresponsiveness to internal distractions**) phản ánh năng lực tự điều hòa tổng quát của cá nhân [08_mindfulness_students_sleep_self_control.pdf - Trang 2].\n* **Mối liên hệ giữa giấc ngủ và khả năng tự kiểm soát:** Tính đều đặn của giấc ngủ hoạt động như một kênh hành vi then chốt có hiệu ứng hạ nguồn (downstream effect) đối với các nguồn lực tự điều tiết, trong đó giấc ngủ đều đặn tác động tích cực đến khả năng **tự kiểm soát** ($\\beta = 0.288, p < 0.001$) [08_mindfulness_students_sleep_self_control.pdf - Trang 1; 08_mindfulness_students_sleep_self_control.pdf - Trang 2].\n* **Tác động đến sức khỏe tâm thần:** Khả năng **tự kiểm soát** tiếp tục có tác động tích cực đến **sức khỏe tâm thần** ($\\beta = 0.296, p < 0.001$) [08_mindfulness_students_sleep_self_control.pdf - Trang 1]. Các phân tích trung gian (mediation analyses) xác định rằng tính đều đặn của giấc ngủ đóng vai trò trung gian đáng kể trong mối quan hệ giữa thực hành chánh niệm và khả năng tự kiểm soát, trong khi khả năng tự kiểm soát lại làm trung gian cho mối liên hệ giữa thực hành chánh niệm và sức khỏe tâm thần [08_mindfulness_students_sleep_self_control.pdf - Trang 1].\n\n```mermaid\nflowchart TD\n  A[\"Thực hành chánh niệm\"] --> B[\"Tính đều đặn của giấc ngủ\"]\n  B --> C[\"Khả năng tự kiểm soát\"]\n  C --> D[\"Sức khỏe tâm thần\"]\n```\n\n## II. Cỡ mẫu và kết quả thống kê chi tiết\n\nNghiên cứu khảo sát định lượng trên nhóm sinh viên đã áp dụng các phương pháp phân tích thống kê cấu trúc như sau:\n\n* **Cỡ mẫu nghiên cứu:** Khảo sát cắt ngang (**cross-sectional survey**) được tiến hành trên tổng số **$470$ sinh viên đại học tại Trung Quốc** (**Chinese undergraduate students**) [08_mindfulness_students_sleep_self_control.pdf - Trang 1].\n* **Công cụ đo lường và phương pháp phân tích:** Sử dụng các bảng hỏi tự báo cáo đã được chuẩn hóa (**validated self-report instruments**) để đo lường tập trung vào thực hành chánh niệm, tính đều đặn của giấc ngủ, khả năng tự kiểm soát và sức khỏe tâm thần [08_mindfulness_students_sleep_self_control.pdf - Trang 1]. Dữ liệu được phân tích bằng mô hình phương trình cấu trúc bình phương tối thiểu phần tử (**partial least squares structural equation modeling** - **PLS-SEM**) thông qua phần mềm SmartPLS 4.1 kết hợp quy trình lặp bootstrap (**bootstrapping procedures**) với $5.000$ lần lấy mẫu lại (**5,000 resamples**) nhằm kiểm định các hiệu ứng trung gian trực tiếp, gián tiếp và tuần tự [08_mindfulness_students_sleep_self_control.pdf - Trang 1].\n* **Các chỉ số thống kê đường dẫn cấu trúc (Structural Model Results):**\n  * Tác động từ chánh niệm đến tính đều đặn của giấc ngủ: $\\beta = 0.457, p < 0.001$ [08_mindfulness_students_sleep_self_control.pdf - Trang 1].\n  * Tác động từ tính đều đặn của giấc ngủ đến khả năng tự kiểm soát: $\\beta = 0.288, p < 0.001$ [08_mindfulness_students_sleep_self_control.pdf - Trang 1].\n  * Tác động từ khả năng tự kiểm soát đến sức khỏe tâm thần: $\\beta = 0.296, p < 0.001$ [08_mindfulness_students_sleep_self_control.pdf - Trang 1].\n\n---\n**Tài liệu tham khảo:**\n- [08_mindfulness_students_sleep_self_control.pdf - Trang 1]\n- [08_mindfulness_students_sleep_self_control.pdf - Trang 2]"
+  },
+  {
+    "scenario_id": 4,
+    "title": "Méo mó nhận thức (Cognitive Distortions) trong phân tích văn bản sức khỏe tâm thần",
+    "query": "Các dạng méo mó nhận thức (cognitive distortions) nào được nhận diện và phân loại trong các mô hình xử lý ngôn ngữ tự nhiên về sức khỏe tâm thần?",
+    "target_content": "Phân loại chi tiết các méo mó nhận thức trong phần nội dung phân tích",
+    "retrieved_chunks": [
+      {
+        "doc": "02_cognitive_distortions_mental_health_text.pdf",
+        "page": 5,
+        "preview": "0.68 0.68 0.68 1164 0.44 0.47 0.45 B. Cognitive distortion classiﬁcation Our second task involved the classiﬁcation of distorted text into the 15 dist"
+      },
+      {
+        "doc": "02_cognitive_distortions_mental_health_text.pdf",
+        "page": 8,
+        "preview": "has been paid to applying machine learning techniques from a cognitive-behavioral perspective as we have done in this paper. Cognitive distortion dete"
+      },
+      {
+        "doc": "02_cognitive_distortions_mental_health_text.pdf",
+        "page": 8,
+        "preview": "classiﬁcation tasks in other domains, relatively few works have explored these techniques in the context of mental health. Within this space, research"
+      },
+      {
+        "doc": "02_cognitive_distortions_mental_health_text.pdf",
+        "page": 2,
+        "preview": "was exempliﬁed by the passage. For detecting presence of distorted text, we assigned a binary label to each passage indicating whether any cognitive d"
+      },
+      {
+        "doc": "01_llms_mental_health_scoping_review.pdf",
+        "page": 11,
+        "preview": "detection N/A Reddit 3,523 cases Human Trained students Research only GoEmotions [103] Emotion classification N/A Reddit 58,009 cases Human Laymen Apa"
+      }
+    ],
+    "citations": [
+      "[02_cognitive_distortions_mental_health_text.pdf - Trang 5]",
+      "[01_llms_mental_health_scoping_review.pdf - Trang 11]"
+    ],
+    "pages_cited": [
+      [
+        "02_cognitive_distortions_mental_health_text.pdf",
+        5
+      ],
+      [
+        "02_cognitive_distortions_mental_health_text.pdf",
+        5
+      ],
+      [
+        "02_cognitive_distortions_mental_health_text.pdf",
+        5
+      ],
+      [
+        "02_cognitive_distortions_mental_health_text.pdf",
+        5
+      ],
+      [
+        "02_cognitive_distortions_mental_health_text.pdf",
+        5
+      ],
+      [
+        "01_llms_mental_health_scoping_review.pdf",
+        11
+      ],
+      [
+        "02_cognitive_distortions_mental_health_text.pdf",
+        5
+      ]
+    ],
+    "answer_snippet": "## I. Tổng quan về nhận diện và phân loại méo mó nhận thức  Trong lĩnh vực nghiên cứu sức khỏe tâm thần kết hợp với xử lý ngôn ngữ tự nhiên (Natural Language Processing), việc xác định và phân loại các **méo mó nhận thức** (**cognitive distortions**) đóng vai trò cốt lõi trong việc điều chỉnh phác đồ trị liệu và cung cấp phản hồi chuyên sâu cho cả bệnh nhân lẫn nhà trị liệu [02_cognitive_distortio",
+    "full_answer": "## I. Tổng quan về nhận diện và phân loại méo mó nhận thức\n\nTrong lĩnh vực nghiên cứu sức khỏe tâm thần kết hợp với xử lý ngôn ngữ tự nhiên (Natural Language Processing), việc xác định và phân loại các **méo mó nhận thức** (**cognitive distortions**) đóng vai trò cốt lõi trong việc điều chỉnh phác đồ trị liệu và cung cấp phản hồi chuyên sâu cho cả bệnh nhân lẫn nhà trị liệu [02_cognitive_distortions_mental_health_text.pdf - Trang 5]. Các nghiên cứu thực nghiệm đã mở rộng danh mục phân loại từ các tập dữ liệu nhỏ lên đến **15 danh mục méo mó nhận thức riêng biệt** nhằm đánh giá chính xác các văn bản tâm lý không kịch bản từ các chương trình trị liệu trực tuyến [02_cognitive_distortions_mental_health_text.pdf - Trang 5, Trang 8].\n\n---\n\n## II. Các dạng méo mó nhận thức cụ thể được phân loại\n\nDựa trên các nghiên cứu về văn bản sức khỏe tâm thần và bộ dữ liệu phân loại đa lớp, các dạng méo mó nhận thức (**cognitive distortions**) tiêu biểu được nhận diện bao gồm:\n\n1. **Cá nhân hóa (Personalization):** Xu hướng tự nhận hoàn toàn trách nhiệm hoặc quy chụp lỗi lầm về bản thân cho các sự kiện tiêu cực bên ngoài [02_cognitive_distortions_mental_health_text.pdf - Trang 5].\n2. **Tư duy cực đoan / Tư duy nhị nguyên (Polarized Thinking):** Lối suy nghĩ theo kiểu \"trắng - đen\", tuyệt đối hóa vấn đề mà không nhìn nhận các khía cạnh trung gian hay mức độ xám [02_cognitive_distortions_mental_health_text.pdf - Trang 5].\n3. **Quy tắc \"Phải\" / \"Nên\" (Should’s):** Áp đặt các kỳ vọng, tiêu chuẩn cứng nhắc hoặc áp lực đạo đức khắt khe đối với bản thân hoặc người khác (ví dụ: *\"Tôi phải luôn hoàn hảo\"*), dễ dẫn đến cảm giác tội lỗi hoặc thất vọng [02_cognitive_distortions_mental_health_text.pdf - Trang 5].\n\nBên cạnh đó, các mô hình học máy (machine learning) và xử lý ngôn ngữ tự nhiên còn ứng dụng các tập dữ liệu lớn như *Therapist Q&A* và các bộ dữ liệu từ nền tảng trực tuyến để phát hiện tự động các mẫu ngôn ngữ mang tính sai lệch nhận thức trong các đoạn hội thoại hoặc nhật ký tâm lý của người bệnh [01_llms_mental_health_scoping_review.pdf - Trang 11; 02_cognitive_distortions_mental_health_text.pdf - Trang 5, Trang 8].\n\n---\n\n## Danh mục Tài liệu tham khảo\n\n1. `02_cognitive_distortions_mental_health_text.pdf` - Trang 5, Trang 8.\n2. `01_llms_mental_health_scoping_review.pdf` - Trang 11.\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+  },
+  {
+    "scenario_id": 5,
+    "title": "Mối quan hệ giữa thỏa mãn nhu cầu tâm lý cơ bản và sự trì hoãn học tập",
+    "query": "Nghiên cứu về mối liên hệ giữa sự thỏa mãn các nhu cầu tâm lý cơ bản, động lực học tập và trì hoãn học tập ở sinh viên đưa ra kết quả thống kê và hệ số tương quan như thế nào?",
+    "target_content": "Hệ số tương quan, kết quả khảo sát từ trang nội dung bài báo khoa học",
+    "retrieved_chunks": [
+      {
+        "doc": "AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf",
+        "page": 26,
+        "preview": "bản thì sinh viên sẽ hạn chế được ý muốn trì hoãn - vốn thường được biểu hiện thông qua những vấn đề về cảm xúc như ác cảm với công việc, lo âu, căng "
+      },
+      {
+        "doc": "AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf",
+        "page": 5,
+        "preview": "mối tương quan nghịch giữa sự thỏa mãn các nhu cầu tâm lý cơ bản đối với mức độ trì hoãn trong học tập, (4) Sự thỏa mãn các nhu cầu tâm lý cơ bản có ả"
+      },
+      {
+        "doc": "AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf",
+        "page": 5,
+        "preview": "thấp hơn so với những cá nhân có động lực bên trong thấp hoặc chỉ có động lực bên ngoài (Burnam và c.s., 2014). Do đó, đặt ra khả năng là có một mối l"
+      },
+      {
+        "doc": "AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf",
+        "page": 43,
+        "preview": "Kết quả nghiên cứu chỉ ra rằng trì hoãn học tập có mối tương quan nghịch với các loại động lực học tập tự chủ (động lực điều chỉnh xác nhận, động lực "
+      },
+      {
+        "doc": "04_psy_llm_global_mental_health.pdf",
+        "page": 2,
+        "preview": "model pre-trained with Large Language Models (LLMs) and further trained with Q&A from professional psychologists and large-scale crawled psychological"
+      }
+    ],
+    "citations": [
+      "[AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf - Trang 43]",
+      "[AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf - Trang 26]",
+      "[AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf - Trang 5]"
+    ],
+    "pages_cited": [
+      [
+        "AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf",
+        43
+      ],
+      [
+        "AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf",
+        26
+      ],
+      [
+        "AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf",
+        26
+      ],
+      [
+        "AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf",
+        43
+      ],
+      [
+        "AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf",
+        43
+      ],
+      [
+        "AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf",
+        43
+      ],
+      [
+        "AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf",
+        43
+      ],
+      [
+        "AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf",
+        43
+      ],
+      [
+        "AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf",
+        5
+      ]
+    ],
+    "answer_snippet": "## I. Kết quả nghiên cứu về mối liên hệ giữa sự thỏa mãn nhu cầu tâm lý cơ bản, động lực học tập và trì hoãn học tập  Theo các kết quả nghiên cứu được ghi nhận trong tài liệu chuyên ngành, mối quan hệ giữa **sự thỏa mãn các nhu cầu tâm lý cơ bản** (**Basic Psychological Needs Satisfaction**), **động lực học tập** (**Learning Motivation**) và **trì hoãn học tập** (**Academic Procrastination**) đã đ",
+    "full_answer": "## I. Kết quả nghiên cứu về mối liên hệ giữa sự thỏa mãn nhu cầu tâm lý cơ bản, động lực học tập và trì hoãn học tập\n\nTheo các kết quả nghiên cứu được ghi nhận trong tài liệu chuyên ngành, mối quan hệ giữa **sự thỏa mãn các nhu cầu tâm lý cơ bản** (**Basic Psychological Needs Satisfaction**), **động lực học tập** (**Learning Motivation**) và **trì hoãn học tập** (**Academic Procrastination**) đã được làm rõ thông qua các phân tích thống kê chuyên sâu như phân tích tương quan, phân tích hồi quy, phân tích tương quan bán phần và phân tích mô hình mạng SEM [AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf - Trang 43]. \n\nCụ thể, các kết quả thống kê và chiều hướng tương quan giữa các biến số được tổng hợp như sau:\n\n* **Mối tương quan nghịch giữa sự thỏa mãn nhu cầu tâm lý cơ bản và trì hoãn học tập:** Nghiên cứu chỉ ra rằng có mối tương quan nghịch giữa sự thỏa mãn các nhu cầu tâm lý cơ bản đối với mức độ trì hoãn trong học tập [AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf - Trang 26, Trang 43]. Điều này có nghĩa là sinh viên có mức độ thỏa mãn các nhu cầu tâm lý cơ bản càng cao thì mức độ trì hoãn trong học tập càng thấp [AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf - Trang 26].\n* **Mối tương quan với các loại động lực học tập tự chủ:** Trì hoãn học tập có mối tương quan nghịch với các loại động lực học tập tự chủ bao gồm động lực điều chỉnh xác nhận, động lực hướng đến hiểu biết, động lực hướng đến thành tựu và động lực hướng đến trải nghiệm [AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf - Trang 43].\n* **Ảnh hưởng gián tiếp thông qua động lực học tập:** Sự thỏa mãn các nhu cầu tâm lý cơ bản có ảnh hưởng gián tiếp đối với trì hoãn học tập một phần thông qua động lực học tập [AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf - Trang 43]. \n  * Cụ thể, sự thỏa mãn nhu cầu gắn kết và nhu cầu tự chủ góp phần làm tăng sự thỏa mãn nhu cầu năng lực [AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf - Trang 43].\n  * Đến lượt mình, sự thỏa mãn nhu cầu năng lực giúp làm giảm tình trạng thiếu động lực học tập và làm tăng động lực hướng đến thành tựu ở học sinh, sinh viên, từ đó làm giảm mức độ trì hoãn [AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf - Trang 43].\n  * Bên cạnh đó, sự thỏa mãn nhu cầu năng lực cũng có thể làm tăng động lực hướng đến hiểu biết của sinh viên và từ đó làm tăng mức độ trì hoãn [AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf - Trang 43].\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*\n\n## Danh mục Tài liệu tham khảo\n- [AP2017_Nguyen,_Q._N,_La,_T._T._T.,_Phan,_M._T.,_Ninh,_D._T._(2017)_Mối_liên_hệ_giữa_sự_thảo_mãn_các_nhu_cầu_tâm_lý_cơ_bản,_động_lực_học_tập,_và_trì_hoãn_học_tập_ở_sinh_viên.pdf - Trang 5, 26, 43]"
+  },
+  {
+    "scenario_id": 6,
+    "title": "Quy trình sơ cứu tâm lý ban đầu (Psychological First Aid - PFA)",
+    "query": "Quy trình và nguyên tắc hành động cốt lõi trong sơ cứu tâm lý khẩn cấp (PFA) gồm những bước nào đối với người bị sang chấn?",
+    "target_content": "Các bước can thiệp chi tiết (Quan sát, Lắng nghe, Kết nối) trong sổ tay sơ cứu tâm lý",
+    "retrieved_chunks": [
+      {
+        "doc": "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        "page": 24,
+        "preview": "» Approach people who may need support.  » Ask about people’s needs and concerns.  » Listen to people, and help them to feel calm. LINK  » Help people"
+      },
+      {
+        "doc": "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        "page": 23,
+        "preview": "Đây là những câu hỏi chuẩn bị quan trọng giúp bạn hiểu thêm về tình huống khủng hoảng mà bạn đang phải giải quyết, để thực hiện sơ cứu tâm lý hiệu quả"
+      },
+      {
+        "doc": "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        "page": 60,
+        "preview": "3. Be aware of other emergency response measures. 4. Look after yourself. PFA ACTION PRINCIPLES: PREPARE  » Learn about the crisis event.  » Learn abo"
+      },
+      {
+        "doc": "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        "page": 60,
+        "preview": "3. Lưu ý các biện pháp ứng phó khẩn cấp khác. 4. Tự chăm sóc bản thân mình. Các nguyên tắc hành động của sơ cứu tâm lý: Quan Sát Đánh giá sự an toàn. "
+      },
+      {
+        "doc": "1_Tap_chi_Y_hoc_Tham_hoa_va_Bong_So_3_2022_19922-139-222_Văn_bản_của_bài_báo.pdf",
+        "page": 4,
+        "preview": "Ảnh 2: Hỗ trợ tâm lý cho người dân trong và sau thảm họa (Nguồn: http://redcrosslatalks.org/mental-health- volunteers-offer-psychological-first-aid) 5"
+      }
+    ],
+    "citations": [
+      "[K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 60]",
+      "[1_Tap_chi_Y_hoc_Tham_hoa_va_Bong_So_3_2022_19922-139-222_Văn_bản_của_bài_báo.pdf - Trang 6]",
+      "[K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 24]"
+    ],
+    "pages_cited": [
+      [
+        "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        60
+      ],
+      [
+        "1_Tap_chi_Y_hoc_Tham_hoa_va_Bong_So_3_2022_19922-139-222_Văn_bản_của_bài_báo.pdf",
+        6
+      ],
+      [
+        "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        60
+      ],
+      [
+        "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        60
+      ],
+      [
+        "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        60
+      ],
+      [
+        "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        60
+      ],
+      [
+        "1_Tap_chi_Y_hoc_Tham_hoa_va_Bong_So_3_2022_19922-139-222_Văn_bản_của_bài_báo.pdf",
+        6
+      ],
+      [
+        "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        24
+      ],
+      [
+        "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        24
+      ],
+      [
+        "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        24
+      ],
+      [
+        "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        24
+      ],
+      [
+        "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        24
+      ],
+      [
+        "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        24
+      ],
+      [
+        "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        24
+      ],
+      [
+        "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        24
+      ],
+      [
+        "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        24
+      ],
+      [
+        "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        24
+      ],
+      [
+        "K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf",
+        24
+      ]
+    ],
+    "answer_snippet": "## I. Quy trình và nguyên tắc hành động cốt lõi trong sơ cứu tâm lý khẩn cấp (PFA)  Sơ cứu tâm lý (**Psychological First Aid - PFA**) là một đáp ứng nhân đạo nhằm hỗ trợ những người đang trải qua sự đau khổ và cần sự giúp đỡ trong các tình huống khủng hoảng hoặc sang chấn [K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 60; 1_Tap_chi_Y_hoc_Tham_hoa_va_Bong_So_3_2022_19922-139-222_Văn_bản_của_bài_",
+    "full_answer": "## I. Quy trình và nguyên tắc hành động cốt lõi trong sơ cứu tâm lý khẩn cấp (PFA)\n\nSơ cứu tâm lý (**Psychological First Aid - PFA**) là một đáp ứng nhân đạo nhằm hỗ trợ những người đang trải qua sự đau khổ và cần sự giúp đỡ trong các tình huống khủng hoảng hoặc sang chấn [K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 60; 1_Tap_chi_Y_hoc_Tham_hoa_va_Bong_So_3_2022_19922-139-222_Văn_bản_của_bài_báo.pdf - Trang 6]. Việc cung cấp sơ cứu tâm lý đòi hỏi tuân thủ các nguyên tắc hành động cốt lõi và quy trình ba bước cơ bản.\n\n### 1. Nguyên tắc hành động cốt lõi khi cung cấp sơ cứu tâm lý\nCung cấp sơ cứu tâm lý một cách có trách nhiệm đòi hỏi phải tuân thủ các nguyên tắc sau:\n* Tôn trọng các quy tắc về an toàn, nhân phẩm và quyền lợi của người bị nạn [K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 60].\n* Điều chỉnh hành vi ứng xử để phù hợp với nền tảng văn hóa của đối tượng [K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 60].\n* Lưu ý và phối hợp với các biện pháp ứng phó khẩn cấp khác [K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 60].\n* Đảm bảo tự chăm sóc bản thân cho người hỗ trợ [K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 60].\n\nBên cạnh đó, nội dung sơ cứu tâm lý bao gồm việc cung cấp sự chăm sóc và hỗ trợ thiết thực nhưng không quấy rầy hay xâm phạm, đánh giá nhu cầu và mối quan tâm, bảo vệ mọi người khỏi bị tổn hại thêm [1_Tap_chi_Y_hoc_Tham_hoa_va_Bong_So_3_2022_19922-139-222_Văn_bản_của_bài_báo.pdf - Trang 6].\n\n---\n\n### 2. Ba nguyên tắc hành động (Quy trình thực hiện) trong sơ cứu tâm lý\nQuy trình hành động cơ bản của sơ cứu tâm lý dựa trên ba trụ cột chính được gọi là **Quan sát, Lắng nghe và Kết nối** (**LOOK, LISTEN, LINK**) [K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 24, 60]:\n\n#### a) Quan sát (Look)\n* Kiểm tra và đánh giá sự an toàn của khu vực khủng hoảng [K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 24, 60].\n* Xác định những người thực sự cần sự trợ giúp cơ bản khẩn cấp [K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 24, 60].\n* Đánh giá những người có biểu hiện đau khổ nghiêm trọng (**serious distress reactions**) [K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 24, 60].\n\n#### b) Lắng nghe (Listen)\n* Chủ động tiếp cận những người có thể cần sự hỗ trợ [K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 24, 60].\n* Hỏi thăm về các nhu cầu và những lo lắng của họ [K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 24, 60].\n* Lắng nghe người bị nạn và hỗ trợ giúp họ bình tĩnh trở lại [K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 24, 60].\n\n#### c) Kết nối (Link)\n* Giúp mọi người nhận ra các nhu cầu cơ bản của mình và tiếp cận các dịch vụ thiết thực [K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 24, 60].\n* Hỗ trợ họ đối mặt và giải quyết các vấn đề gặp phải [K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 24, 60].\n* Cung cấp thông tin cần thiết [K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 24, 60].\n* Kết nối người bị nạn với những người thân yêu và các nguồn lực hỗ trợ xã hội [K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf - Trang 24, 60].\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*\n\n## Danh mục Tài liệu tham khảo\n- K008-Sách-sơ-cứu-tâm-lý-25_07-đã-nén.pdf\n- 1_Tap_chi_Y_hoc_Tham_hoa_va_Bong_So_3_2022_19922-139-222_Văn_bản_của_bài_báo.pdf"
+  },
+  {
+    "scenario_id": 7,
+    "title": "Tác động của mạng xã hội đến tâm lý vị thành niên qua phân tích hồi quy",
+    "query": "Nghiên cứu về mối liên hệ giữa thời gian sử dụng mạng xã hội và mức độ an lạc (well-being) của trẻ vị thành niên sử dụng cỡ mẫu bao nhiêu và kết quả hồi quy ra sao?",
+    "target_content": "Cỡ mẫu, phương pháp thống kê, kết quả kiểm định p-value từ phần Methodology & Results",
+    "retrieved_chunks": [
+      {
+        "doc": "07_adolescent_wellbeing_social_networks.pdf",
+        "page": 1,
+        "preview": "provide social support and positively affect well-being. The current study aimed to explore adolescents’ experiences with sharing something difficult "
+      },
+      {
+        "doc": "07_adolescent_wellbeing_social_networks.pdf",
+        "page": 8,
+        "preview": "is warranted. Strengths and limitations A strength of the current study was the investigation of specific aspects of social media use rather than the "
+      },
+      {
+        "doc": "Tap_chi_so_6-2023_3_8_-in_compressed_(1).pdf",
+        "page": 116,
+        "preview": "Mức độ sử dụng mạng xã hội (8) Pearson Correlation .382** .301** .426** .246** .202** .406** .252** 1 Sig. (2-tailed) .000 .000 .000 .000 .000 .000 .0"
+      },
+      {
+        "doc": "Tap_chi_so_6-2023_3_8_-in_compressed_(1).pdf",
+        "page": 117,
+        "preview": "Trong mô hình này, biến động cơ “giải trí” (Beat = 0,262), “tương tác với người khác” (Beat = 0,122) và \"chia sẻ thông tin\" (Beat = 0,118) là ba biến "
+      },
+      {
+        "doc": "08_mindfulness_students_sleep_self_control.pdf",
+        "page": 4,
+        "preview": "Inclusion and Exclusion Criteria. Participants were included if they met the following criteria: \t(1)\tFull time undergraduate enrollment; \t(2)\tBetween"
+      }
+    ],
+    "citations": [
+      "[07_adolescent_wellbeing_social_networks.pdf - Trang 1]"
+    ],
+    "pages_cited": [
+      [
+        "07_adolescent_wellbeing_social_networks.pdf",
+        1
+      ],
+      [
+        "07_adolescent_wellbeing_social_networks.pdf",
+        1
+      ],
+      [
+        "07_adolescent_wellbeing_social_networks.pdf",
+        1
+      ],
+      [
+        "07_adolescent_wellbeing_social_networks.pdf",
+        1
+      ]
+    ],
+    "answer_snippet": "Dựa trên các tài liệu khoa học được cung cấp, dưới đây là thông tin chi tiết về cỡ mẫu và kết quả phân tích hồi quy trong nghiên cứu về mối liên hệ giữa việc sử dụng mạng xã hội và mức độ an lạc (well-being) của trẻ vị thành niên:  ## I. Cỡ mẫu nghiên cứu Nghiên cứu khảo sát cắt ngang (cross-sectional study) về trải nghiệm của trẻ vị thành niên khi chia sẻ điều khó khăn trên mạng xã hội và mối liê",
+    "full_answer": "Dựa trên các tài liệu khoa học được cung cấp, dưới đây là thông tin chi tiết về cỡ mẫu và kết quả phân tích hồi quy trong nghiên cứu về mối liên hệ giữa việc sử dụng mạng xã hội và mức độ an lạc (well-being) của trẻ vị thành niên:\n\n## I. Cỡ mẫu nghiên cứu\nNghiên cứu khảo sát cắt ngang (cross-sectional study) về trải nghiệm của trẻ vị thành niên khi chia sẻ điều khó khăn trên mạng xã hội và mối liên hệ với mức độ an lạc đã sử dụng một cỡ mẫu gồm **2.023 trẻ vị thành niên** đến từ các trường trung học phổ thông (với độ tuổi trung bình là 17,4; trong đó 55,6% là nữ) [07_adolescent_wellbeing_social_networks.pdf - Trang 1].\n\n## II. Kết quả phân tích hồi quy\nNghiên cứu đã sử dụng phương pháp hồi quy tuyến tính bội (multiple linear regression), điều chỉnh theo các yếu tố tuổi, giới tính, tần suất/thời gian sử dụng mạng xã hội và số lượng bạn thân để khám phá mối liên hệ giữa việc chia sẻ điều khó khăn trên mạng xã hội và sức khỏe tâm thần / mức độ an lạc (**mental well-being**) [07_adolescent_wellbeing_social_networks.pdf - Trang 1]:\n\n1. **Tác động của việc chia sẻ nội dung khó khăn:** Kết quả cho thấy việc chia sẻ một điều khó khăn trên mạng xã hội (dù là với một vài bạn bè/người thân hay qua một bài đăng công khai) có mối liên hệ với **mức độ an lạc thấp hơn** [07_adolescent_wellbeing_social_networks.pdf - Trang 1].\n2. **Vai trò của sự hỗ trợ xã hội:** Ngược lại, sự hỗ trợ xã hội được cảm nhận (như cảm thấy dễ nói chuyện hơn, nhận được sự hỗ trợ, có trải nghiệm tích cực) sau khi chia sẻ điều khó khăn lại có mối liên hệ với **mức độ an lạc cao hơn** [07_adolescent_wellbeing_social_networks.pdf - Trang 1].\n\n—\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*\n\n## Tài liệu tham khảo\n- `07_adolescent_wellbeing_social_networks.pdf` (Trang 1)"
+  },
+  {
+    "scenario_id": 8,
+    "title": "Hiệu ứng kỳ vọng của người làm thí nghiệm (Rosenthal Effect)",
+    "query": "Trong nghiên cứu thực nghiệm của Robert Rosenthal, hiệu ứng kỳ vọng của nhà nghiên cứu lên đối tượng thí nghiệm (chuột và con người) được thiết kế và kiểm chứng như thế nào?",
+    "target_content": "Thiết kế thực nghiệm, quy trình thí nghiệm, số liệu chứng minh từ phần thân bài báo",
+    "retrieved_chunks": [
+      {
+        "doc": "Rosenthal1963AmScientist.pdf",
+        "page": 1,
+        "preview": "[Trang 1] Sigma Xi, The Scientific Research Society ON THE SOCIAL PSYCHOLOGY OF THE PSYCHOLOGICAL EXPERIMENT: 1, 2 THE EXPERIMENTER'S HYPOTHESIS AS UN"
+      },
+      {
+        "doc": "Rosenthal1963AmScientist.pdf",
+        "page": 1,
+        "preview": "All use subject to JSTOR Terms and Conditions [Trang 2] ON THE SOCIAL PSYCHOLOGY OF THE PSYCHOLOGICAL EXPERIMENT:12 THE EXPERIMENTER'S HYPOTHESIS AS U"
+      },
+      {
+        "doc": "tam-ly-hoc-hanh-vi-khuong-nguy.pdf",
+        "page": 45,
+        "preview": "Về vấn đề này, trước tiên chúng ta quay lại với con chó của Pavlov. Con chó trong thí nghiệm này đã phải chịu sự hy sinh không hề nhỏ. Tuyến nước bọt "
+      },
+      {
+        "doc": "tam-ly-hoc-hanh-vi-khuong-nguy.pdf",
+        "page": 157,
+        "preview": "không còn nữa, đồng nghĩa với việc, đôi tay và các cơ quan trong cơ thể cậu đều được luyện tập một cách lành mạnh. Sau đó, những người tiến hành thí n"
+      },
+      {
+        "doc": "Orne1962AmPsychologist.pdf",
+        "page": 5,
+        "preview": "effect of another facet of the college student's attitude toward science. While the student wants studies to \"work,\" he feels he must be honest in his"
+      }
+    ],
+    "citations": [],
+    "pages_cited": [],
+    "answer_snippet": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải.  *Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+    "full_answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải.\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+  },
+  {
+    "scenario_id": 9,
+    "title": "Cơ chế hình thành phản xạ có điều kiện và củng cố hành vi",
+    "query": "Trong giáo trình tâm lý học và tâm lý học hành vi, quy luật hình thành phản xạ có điều kiện và các chế độ củng cố (reinforcement schedules) được giải thích chi tiết như thế nào?",
+    "target_content": "Quy luật phản xạ, chế độ củng cố từ các chương lý thuyết chuyên sâu",
+    "retrieved_chunks": [
+      {
+        "doc": "2014_GIAO_TRINH_TAM_LY_HOC_2.pdf",
+        "page": 98,
+        "preview": "- Việc hình thành và củng cố các hành vi được điều khiển trực tiếp bởi các kích thích. Việc duy trì hoặc làm mất các hành vi đã có bằng cách củng cố h"
+      },
+      {
+        "doc": "tam-ly-hoc-hanh-vi-khuong-nguy.pdf",
+        "page": 59,
+        "preview": "thích. Như vậy, cơ thể đó sẽ bắt buộc phải hình thành một kiểu thói quen có thể khiến kích thích A mất đi hiệu lực khi tác động lên mình, hoặc bằng mộ"
+      },
+      {
+        "doc": "2014_GIAO_TRINH_TAM_LY_HOC_2.pdf",
+        "page": 97,
+        "preview": "của người học ở đầu ra. Quá trình xử lý, liên kết, lưu trữ và khôi phục thông tin liên quan trực tiếp tới cơ chế làm việc của trí nhớ và tư duy của ng"
+      },
+      {
+        "doc": "tam-ly-hoc-hanh-vi-khuong-nguy.pdf",
+        "page": 73,
+        "preview": "một “mini-program”. Theo phương pháp này, các hoạt động thường ngày của con trẻ như tập viết, đánh đàn… đều có thể phân tách ra thành vô số phản xạ có"
+      },
+      {
+        "doc": "2014_GIAO_TRINH_TAM_LY_HOC_2.pdf",
+        "page": 98,
+        "preview": "gần nhau (phân biệt 21 với 12, b với d…); Sự dập tắt phản xạ: làm mất phản ứng đã được hình thành bằng cách giảm hoặc làm mất kích thích không điều ki"
+      }
+    ],
+    "citations": [
+      "[2014_GIAO_TRINH_TAM_LY_HOC_2.pdf - Trang 97]",
+      "[2014_GIAO_TRINH_TAM_LY_HOC_2.pdf - Trang 98]",
+      "[tam-ly-hoc-hanh-vi-khuong-nguy.pdf - Trang 59]",
+      "[tam-ly-hoc-hanh-vi-khuong-nguy.pdf - Trang 73]"
+    ],
+    "pages_cited": [
+      [
+        "2014_GIAO_TRINH_TAM_LY_HOC_2.pdf",
+        97
+      ],
+      [
+        "2014_GIAO_TRINH_TAM_LY_HOC_2.pdf",
+        97
+      ],
+      [
+        "2014_GIAO_TRINH_TAM_LY_HOC_2.pdf",
+        97
+      ],
+      [
+        "2014_GIAO_TRINH_TAM_LY_HOC_2.pdf",
+        97
+      ],
+      [
+        "2014_GIAO_TRINH_TAM_LY_HOC_2.pdf",
+        98
+      ],
+      [
+        "2014_GIAO_TRINH_TAM_LY_HOC_2.pdf",
+        98
+      ],
+      [
+        "2014_GIAO_TRINH_TAM_LY_HOC_2.pdf",
+        98
+      ],
+      [
+        "2014_GIAO_TRINH_TAM_LY_HOC_2.pdf",
+        98
+      ],
+      [
+        "tam-ly-hoc-hanh-vi-khuong-nguy.pdf",
+        59
+      ],
+      [
+        "tam-ly-hoc-hanh-vi-khuong-nguy.pdf",
+        59
+      ],
+      [
+        "tam-ly-hoc-hanh-vi-khuong-nguy.pdf",
+        73
+      ],
+      [
+        "2014_GIAO_TRINH_TAM_LY_HOC_2.pdf",
+        97
+      ],
+      [
+        "tam-ly-hoc-hanh-vi-khuong-nguy.pdf",
+        59
+      ]
+    ],
+    "answer_snippet": "## I. Cơ sở lý luận và quy luật hình thành phản xạ có điều kiện  Theo các tài liệu chuyên ngành, mô hình dạy học và hình thành hành vi theo điều kiện hóa cổ điển (Classical Conditioning) có cơ sở lý luận bắt nguồn từ thuyết hành vi cổ điển của J. Watson (1878-1958) [2014_GIAO_TRINH_TAM_LY_HOC_2.pdf - Trang 97].   Cơ sở sinh lý của quá trình hình thành hành vi dựa trên các phản ứng trong phản xạ có",
+    "full_answer": "## I. Cơ sở lý luận và quy luật hình thành phản xạ có điều kiện\n\nTheo các tài liệu chuyên ngành, mô hình dạy học và hình thành hành vi theo điều kiện hóa cổ điển (Classical Conditioning) có cơ sở lý luận bắt nguồn từ thuyết hành vi cổ điển của J. Watson (1878-1958) [2014_GIAO_TRINH_TAM_LY_HOC_2.pdf - Trang 97]. \n\nCơ sở sinh lý của quá trình hình thành hành vi dựa trên các phản ứng trong phản xạ có điều kiện cổ điển do I.P. Pavlov phát hiện:\n* Từ một kích thích không điều kiện (Unconditioned Stimulus) dẫn đến một phản ứng không điều kiện (Unconditioned Response) của cơ thể [2014_GIAO_TRINH_TAM_LY_HOC_2.pdf - Trang 97].\n* Khi có một kích thích khác đi cùng với kích thích không điều kiện và được củng cố nhiều lần, đến một thời điểm nhất định, sự xuất hiện riêng của kích thích đi kèm sẽ dẫn đến phản ứng [2014_GIAO_TRINH_TAM_LY_HOC_2.pdf - Trang 97]. \n* Khi đó, kích thích đi kèm được gọi là **kích thích có điều kiện** (Conditioned Stimulus), và phản ứng nảy sinh do kích thích đó được gọi là **phản xạ có điều kiện** (Conditioned Response) [2014_GIAO_TRINH_TAM_LY_HOC_2.pdf - Trang 97-98].\n\nBên cạnh đó, quá trình hình thành và củng cố các hành vi được điều khiển trực tiếp bởi các kích thích, trong đó việc duy trì hoặc làm mất các hành vi đã có thực hiện thông qua việc ôn tập thường xuyên [2014_GIAO_TRINH_TAM_LY_HOC_2.pdf - Trang 98].\n\n---\n\n## II. Các quy luật của điều kiện hóa cổ điển trong học tập và hành vi\n\nCác loại điều kiện hóa cổ điển thường được áp dụng trong quá trình dạy học và hình thành hành vi bao gồm các quy luật cốt lõi sau:\n\n1. **Khái quát hóa (Generalization):** \n   > \"Hành vi được hình thành bởi kích thích tương tự với kích thích có điều kiện ban đầu (nếu đã học được phản ứng đèn đỏ - dừng lại, thì sẽ có xu hướng đi chậm lại với các kích thích màu đỏ)\" [2014_GIAO_TRINH_TAM_LY_HOC_2.pdf - Trang 98].\n\n2. **Phân biệt (Discrimination):** \n   > Hình thành các phản ứng khác nhau với các kích thích gần nhau (ví dụ: phân biệt số 21 với số 12, hoặc phân biệt chữ cái b với chữ d) [2014_GIAO_TRINH_TAM_LY_HOC_2.pdf - Trang 98].\n\n3. **Sự dập tắt phản xạ (Extinction):** \n   > Làm mất phản ứng đã được hình thành bằng cách giảm hoặc làm mất kích thích không điều kiện (khi kích thích có điều kiện không được củng cố) [2014_GIAO_TRINH_TAM_LY_HOC_2.pdf - Trang 98].\n\n---\n\n## III. Vai trò và ý nghĩa của việc hình thành thói quen thích ứng\n\nCon người hình thành nên thói quen nhằm mục đích thích ứng với hoàn cảnh tốt hơn, với cơ chế hành động dựa trên mong muốn thoát khỏi kích thích đang tác động để đạt được trạng thái thoải mái [tam-ly-hoc-hanh-vi-khuong-nguy.pdf - Trang 59]. \n\n> \"Tựu trung lại, mỗi cơ thể đều cần một hệ thống ứng phó với kích thích. Như vậy, cơ thể đó sẽ bắt buộc phải hình thành một kiểu thói quen có thể khiến kích thích A mất đi hiệu lực khi tác động lên mình, hoặc bằng một cách nào đó thoát ra khỏi phạm vi của kích thích này.\" [tam-ly-hoc-hanh-vi-khuong-nguy.pdf - Trang 59].\n\nCác hoạt động thường ngày hay những khuôn mẫu phản ứng phức tạp đều có thể được phân tách thành vô số phản xạ có điều kiện liên kết với nhau, trong đó sự kiểm soát từ môi trường hoặc từ người lớn đóng vai trò định hướng quá trình hình thành thói quen của chủ thể [tam-ly-hoc-hanh-vi-khuong-nguy.pdf - Trang 73].\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*\n\n---\n**Tài liệu tham khảo:**\n- [2014_GIAO_TRINH_TAM_LY_HOC_2.pdf - Trang 97, 98]\n- [tam-ly-hoc-hanh-vi-khuong-nguy.pdf - Trang 59, 73]"
+  },
+  {
+    "scenario_id": 10,
+    "title": "Thách thức đạo đức và giới hạn lâm sàng khi ứng dụng LLM trong tâm lý học",
+    "query": "Các bài báo tổng quan về mô hình ngôn ngữ lớn (LLM) trong sức khỏe tâm thần chỉ ra những rủi ro đạo đức, ảo giác (hallucination) và hạn chế lâm sàng nào trong phần thảo luận?",
+    "target_content": "Phần Thảo luận (Discussion), Ethical Considerations và Hạn chế lâm sàng",
+    "retrieved_chunks": [
+      {
+        "doc": "01_llms_mental_health_scoping_review.pdf",
+        "page": 1,
+        "preview": "5School of Biomedical Informatics, University of Texas Health Science at Houston, Houston, USA. 6Australian Artificial Intelligence Institute, Univers"
+      },
+      {
+        "doc": "01_llms_mental_health_scoping_review.pdf",
+        "page": 1,
+        "preview": "Abstract Objectieve: This review aims to deliver a comprehensive analysis of Large Language Models (LLMs) utilization in mental health care, evaluatin"
+      },
+      {
+        "doc": "04_psy_llm_global_mental_health.pdf",
+        "page": 19,
+        "preview": "for small organisations and enterprises with limited resources, showcasing the possibilities of deploying AI capabilities effectively. 8 Limitations a"
+      },
+      {
+        "doc": "AI_Powered_Cognitive_Behavioral_Therapy.pdf",
+        "page": 1,
+        "preview": "their tendency to ‘hallucinate’ critically ham- pers their reliability and limits their widespread adoption in real-world applications. Hallucination "
+      },
+      {
+        "doc": "Clinical_Psychotherapy_Dialogue_Systems.pdf",
+        "page": 9,
+        "preview": "enable breakthroughs in personalized services and large-scale research. Nevertheless, these advancements bring forth ethical challenges. The potential"
+      }
+    ],
+    "citations": [
+      "[Clinical_Psychotherapy_Dialogue_Systems.pdf - Trang 9]",
+      "[AI_Powered_Cognitive_Behavioral_Therapy.pdf - Trang 1]",
+      "[04_psy_llm_global_mental_health.pdf - Trang 19]"
+    ],
+    "pages_cited": [
+      [
+        "Clinical_Psychotherapy_Dialogue_Systems.pdf",
+        9
+      ],
+      [
+        "AI_Powered_Cognitive_Behavioral_Therapy.pdf",
+        1
+      ],
+      [
+        "AI_Powered_Cognitive_Behavioral_Therapy.pdf",
+        1
+      ],
+      [
+        "AI_Powered_Cognitive_Behavioral_Therapy.pdf",
+        1
+      ],
+      [
+        "04_psy_llm_global_mental_health.pdf",
+        19
+      ],
+      [
+        "04_psy_llm_global_mental_health.pdf",
+        19
+      ],
+      [
+        "04_psy_llm_global_mental_health.pdf",
+        19
+      ],
+      [
+        "04_psy_llm_global_mental_health.pdf",
+        19
+      ],
+      [
+        "AI_Powered_Cognitive_Behavioral_Therapy.pdf",
+        1
+      ],
+      [
+        "Clinical_Psychotherapy_Dialogue_Systems.pdf",
+        9
+      ]
+    ],
+    "answer_snippet": "Dựa trên các tài liệu nghiên cứu khoa học được cung cấp, dưới đây là tổng hợp về các rủi ro đạo đức, hiện tượng ảo giác (**hallucination**) và các hạn chế lâm sàng của các mô hình ngôn ngữ lớn (**Large Language Models - LLMs**) trong lĩnh vực sức khỏe tâm thần:  ## I. Rủi ro đạo đức (Ethical Risks) Các nghiên cứu và tài liệu tổng quan đã chỉ ra những thách thức đạo đức nghiêm trọng khi ứng dụng tr",
+    "full_answer": "Dựa trên các tài liệu nghiên cứu khoa học được cung cấp, dưới đây là tổng hợp về các rủi ro đạo đức, hiện tượng ảo giác (**hallucination**) và các hạn chế lâm sàng của các mô hình ngôn ngữ lớn (**Large Language Models - LLMs**) trong lĩnh vực sức khỏe tâm thần:\n\n## I. Rủi ro đạo đức (Ethical Risks)\nCác nghiên cứu và tài liệu tổng quan đã chỉ ra những thách thức đạo đức nghiêm trọng khi ứng dụng trí tuệ nhân tạo và LLM vào chăm sóc sức khỏe tâm thần và tâm lý học:\n1. **Dự đoán tâm lý không đồng thuận và lạm dụng dữ liệu:** Tiềm năng suy luận các đặc điểm tâm lý từ dấu chân kỹ thuật số (*digital footprints*) mở ra hướng đánh giá trắc nghiệm tâm lý quy mô lớn, nhưng đồng thời làm dấy lên các thách thức đạo đức nghiêm trọng về \"khả năng dự đoán tâm lý không đồng thuận\" (*non-consensual psychological predictions*) và các hình thức lạm dụng dữ liệu khác [Clinical_Psychotherapy_Dialogue_Systems.pdf - Trang 9].\n2. **Vấn đề vi phạm quyền riêng tư:** Việc các mô hình ngôn ngữ lớn xử lý thông tin nhạy cảm đi kèm với rủi ro nghiêm trọng về việc lan truyền thông tin sai lệch và vi phạm quyền riêng tư của người bệnh [AI_Powered_Cognitive_Behavioral_Therapy.pdf - Trang 1].\n\n## II. Hiện tượng ảo giác (Hallucination)\n1. **Định nghĩa và bản chất:** Hiện tượng ảo giác trong ngữ cảnh của các mô hình ngôn ngữ lớn đề cập đến việc \"tạo ra văn bản hoặc phản hồi trông có vẻ hợp lý về mặt cú pháp, trôi chảy và tự nhiên nhưng lại sai sót về mặt thực tế, vô nghĩa hoặc không trung thực so với nguồn đầu vào được cung cấp\" [AI_Powered_Cognitive_Behavioral_Therapy.pdf - Trang 1].\n2. **Hậu quả lâm sàng:** Xu hướng \"ảo giác\" này cản trở nghiêm trọng độ tin cậy của mô hình và giới hạn khả năng ứng dụng rộng rãi của chúng trong các tình huống thực tế, dẫn đến nguy cơ lan truyền thông tin sai lệch gây tổn hại cho người sử dụng [AI_Powered_Cognitive_Behavioral_Therapy.pdf - Trang 1].\n\n## III. Hạn chế lâm sàng (Clinical Limitations)\n1. **Thiếu khả năng nhận biết giao tiếp phi ngôn ngữ:** Giao tiếp phi ngôn ngữ (*nonverbal communication*) là một trong những yếu tố then chốt quyết định kết quả tư vấn tâm lý (Hill, Siegelman, Gronsky, et al. 1981) [04_psy_llm_global_mental_health.pdf - Trang 19]. Một nhà tư vấn được đào tạo bài bản thường có khả năng nắm bắt các tín hiệu tinh tế ngay cả khi bệnh nhân thiếu phản hồi [04_psy_llm_global_mental_health.pdf - Trang 19]. Ngược lại, các mô hình LLM độc lập (như Psy-LLM) chỉ dựa thuần túy vào văn bản đầu vào và không thể bổ sung hay thay thế được các khía cạnh quan trọng này trong trị liệu thực tế [04_psy_llm_global_mental_health.pdf - Trang 19].\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*\n\n## Danh mục Tài liệu tham khảo\n- [04_psy_llm_global_mental_health.pdf - Trang 19]\n- [AI_Powered_Cognitive_Behavioral_Therapy.pdf - Trang 1]\n- [Clinical_Psychotherapy_Dialogue_Systems.pdf - Trang 9]"
+  }
+]

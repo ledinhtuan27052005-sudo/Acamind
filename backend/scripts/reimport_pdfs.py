@@ -74,7 +74,10 @@ def main():
         db.add(doc)
         existing_ids.add(doc_id)
         inserted += 1
-        print(f"  [+] {filename[:60]}")
+        try:
+            print(f"  [+] {filename[:60]}")
+        except Exception:
+            print(f"  [+] {filename[:60].encode('ascii', 'replace').decode('ascii')}")
 
     db.commit()
     db.close()

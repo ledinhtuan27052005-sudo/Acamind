@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useAppStore } from '@/store/useAppStore';
 import { getLibraryArticles, analyzeArticles, LibraryArticle, AnalysisResult } from '@/lib/api';
 import { useI18n } from '@/lib/i18n/context';
+import { GuestBlockScreen } from '@/components/auth/AuthRequiredModal';
 import {
   BarChart2, Search, BookOpen, Check, X, Loader2,
   ChevronDown, ChevronUp, AlertCircle, Sparkles, Globe, Target
@@ -211,6 +212,7 @@ function ComparisonTable({
 export default function AnalysisPage() {
   const { user } = useAppStore();
   const { t } = useI18n();
+  const [mounted, setMounted] = useState(false);
 
   const [articles, setArticles] = useState<LibraryArticle[]>([]);
   const [selected, setSelected] = useState<Set<string>>(new Set());
@@ -220,6 +222,10 @@ export default function AnalysisPage() {
   const [analyzing, setAnalyzing] = useState(false);
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const loadArticles = useCallback(async () => {
     setLoading(true);
@@ -231,7 +237,24 @@ export default function AnalysisPage() {
     }
   }, []);
 
-  useEffect(() => { loadArticles(); }, [loadArticles]);
+  useEffect(() => {
+    if (user) {
+      loadArticles();
+    } else {
+      setLoading(false);
+    }
+  }, [user, loadArticles]);
+
+  if (mounted && !user) {
+    return (
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center p-4">
+        <GuestBlockScreen
+          title="Yêu cầu đăng nhập để phân tích nghiên cứu"
+          description="Tính năng phân tích, đối chiếu và phát hiện khoảng trống tri thức giữa các bài báo khoa học yêu cầu tài khoản đã đăng nhập."
+        />
+      </div>
+    );
+  }
 
   const filtered = articles.filter(a => {
     const q = search.toLowerCase();

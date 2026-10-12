@@ -7,6 +7,7 @@ import { useAppStore } from '@/store/useAppStore';
 import { useI18n } from '@/lib/i18n/context';
 
 import NotificationBell from '@/components/NotificationBell';
+import LanguageSelector from '@/components/LanguageSelector';
 import { UserAvatar } from '@/components/ClientLayout';
 import { useWorkspaceTabs } from './WorkspaceTabsContext';
 import { WorkspaceTabBar } from './WorkspaceTabBar';
@@ -88,7 +89,7 @@ export function WorkspaceHeader({ onLogout }: WorkspaceHeaderProps) {
           {darkMode ? <Sun className="w-[16px] h-[16px]" /> : <Moon className="w-[16px] h-[16px]" />}
         </button>
 
-
+        <LanguageSelector />
 
         {user && <NotificationBell />}
 

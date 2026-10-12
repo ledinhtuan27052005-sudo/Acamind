@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from typing import Optional
 import bcrypt
 from jose import JWTError, jwt
-from fastapi import HTTPException, Depends
+from fastapi import HTTPException, Depends, Query
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 from app.core.config import settings
@@ -42,9 +42,16 @@ def _decode_user_id(credentials: Optional[HTTPAuthorizationCredentials]) -> Opti
 
 def get_optional_user(
     credentials: Optional[HTTPAuthorizationCredentials] = Depends(security),
+    token: Optional[str] = Query(None),
     db: Session = Depends(get_db),
 ):
     user_id = _decode_user_id(credentials)
+    if not user_id and token:
+        try:
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+            user_id = payload.get("sub")
+        except JWTError:
+            user_id = None
     if not user_id:
         return None
     from app.models.document import User
@@ -53,17 +60,22 @@ def get_optional_user(
 
 def get_current_user(
     credentials: Optional[HTTPAuthorizationCredentials] = Depends(security),
+    token: Optional[str] = Query(None),
     db: Session = Depends(get_db),
 ):
-    if not credentials:
-        raise HTTPException(401, "Cần đăng nhập để thực hiện thao tác này")
     user_id = _decode_user_id(credentials)
+    if not user_id and token:
+        try:
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+            user_id = payload.get("sub")
+        except JWTError:
+            user_id = None
     if not user_id:
-        raise HTTPException(401, "Token không hợp lệ hoặc đã hết hạn")
+        raise HTTPException(401, "Vui lòng đăng nhập để sử dụng tính năng này")
     from app.models.document import User
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
-        raise HTTPException(401, "Tài khoản không tồn tại")
+        raise HTTPException(401, "Tài khoản không tồn tại hoặc đã hết hạn")
     # Auto-downgrade org members whose membership expired
     if user.plan_expires_at and user.plan_expires_at < datetime.now() and user.plan not in ("free",):
         user.plan = "free"

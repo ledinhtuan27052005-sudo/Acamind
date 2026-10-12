@@ -19,28 +19,13 @@ from app.services.generator import (
 from app.services.web_scraper import duckduckgo_search
 from app.services.file_parser import parse_file
 from app.services.llm_client import llm_configuration_error
-from app.core.security import get_optional_user
+from app.core.security import get_optional_user, get_current_user
 from app.core.plan_utils import get_limits, count_today_chats
 
 logger = logging.getLogger(__name__)
 
 
-def detect_language(query: str) -> str:
-    # Loại bỏ chỉ dẫn chế độ của hệ thống (nếu có từ frontend)
-    clean_q = re.sub(r'^\[he\s+thong:[^\]]+\]', '', query, flags=re.IGNORECASE).strip()
-    clean_q = re.sub(r'^\[system:[^\]]+\]', '', clean_q, flags=re.IGNORECASE).strip()
-
-    # Kiểm tra các ký tự có dấu đặc trưng tiếng Việt
-    vi_chars = set("áàảãạâấầẩẫậăắằẳẵặéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵđ"
-                   "ÁÀẢÃẠÂẤẦẨẪẬĂẮẰẲẴẶÉÈẺẼẸÊẾỀỂỄỆÍÌỈĨỊÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÚÙỦŨỤƯỨỪỬỮỰÝỲỶỸỴĐ")
-    if any(c in vi_chars for c in clean_q):
-        return "vi"
-    # Kiểm tra từ vựng tiếng Anh phổ biến
-    en_words = {"what", "is", "how", "to", "the", "in", "of", "and", "a", "an", "depression", "anxiety", "cbt", "ocd", "bipolar", "stress", "hello", "hi", "who", "why", "where", "affect", "people", "psychology"}
-    words = set(clean_q.lower().split())
-    if words.intersection(en_words):
-        return "en"
-    return "vi"
+from app.services.cross_lingual import detect_language
 
 
 PREDEFINED_QA = {
@@ -142,14 +127,14 @@ router = APIRouter()
 
 class ChatRequest(BaseModel):
     query: str
-    document_ids: list[str]
+    document_ids: Optional[list[str]] = []
     mode: Optional[str] = "single"
     force_web_search: Optional[bool] = False  # nếu True: bỏ qua RAG, dùng web search luôn
 
 
 class AnswerRequest(BaseModel):
     query: str
-    document_ids: list[str]
+    document_ids: Optional[list[str]] = []
 
 
 class ExportRequest(BaseModel):
@@ -168,11 +153,15 @@ class GeneralSearchRequest(BaseModel):
 # ── Main chat (RAG + psychology) ───────────────────────────────────────────────
 
 @router.post("")
-def chat(request: ChatRequest, db: Session = Depends(get_db), current_user=Depends(get_optional_user)):
+def chat(request: ChatRequest, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
     if not request.query.strip():
         raise HTTPException(400, "Câu hỏi không được để trống")
-    if not request.document_ids:
-        raise HTTPException(400, "Phải chọn ít nhất 1 tài liệu")
+    search_doc_ids = request.document_ids if (request.document_ids and len(request.document_ids) > 0) else None
+    if search_doc_ids is None:
+        from app.models.document import Document
+        ready_count = db.query(Document.id).filter(Document.status == "ready").count()
+        if ready_count == 0:
+            raise HTTPException(400, "Hệ thống chưa có tài liệu nào sẵn sàng. Vui lòng tải tài liệu lên.")
 
     # Bóc tách câu hỏi thực tế của người dùng (loại bỏ chỉ dẫn hệ thống)
     clean_q = re.sub(r'^\[he\s+thong:[^\]]+\]', '', request.query, flags=re.IGNORECASE).strip()
@@ -181,37 +170,37 @@ def chat(request: ChatRequest, db: Session = Depends(get_db), current_user=Depen
     # Phát hiện ngôn ngữ thực sự của câu hỏi (tiếng Anh hay tiếng Việt)
     lang = detect_language(clean_q)
 
-    # Chuẩn hóa chỉ dẫn hệ thống theo đúng ngôn ngữ của câu hỏi
+    # Chuẩn hóa chỉ dẫn hệ thống theo đúng ngôn ngữ của câu hỏi và giới hạn đúng trọng tâm
     sent_query = request.query
     if lang == "en":
-        if "[he thong:" in request.query.lower():
-            if "ngan gon" in request.query.lower() or "suc tich" in request.query.lower():
+        if "[he thong:" in request.query.lower() or "[system:" in request.query.lower():
+            if any(kw in request.query.lower() for kw in ["ngan gon", "suc tich", "briefly", "concisely"]):
                 sent_query = re.sub(
-                    r'^\[he\s+thong:[^\]]+\]',
-                    '[System: Please reply briefly and concisely in about 2-4 sentences. Avoid long listings.] ',
+                    r'^\[(?:he\s+thong|system):[^\]]+\]',
+                    '[System: Please reply concisely in about 2-4 sentences strictly answering the question. Avoid unasked topics.] ',
                     request.query,
                     flags=re.IGNORECASE
                 )
             else:
                 sent_query = re.sub(
-                    r'^\[he\s+thong:[^\]]+\]',
-                    '[System: Please reply in detail, fully, and deeply. Include plenty of information, concrete examples, expert analysis, and related factors. If possible, cite references. Use markdown formatting with clear headings and bullet points. You can write longer if needed.] ',
+                    r'^\[(?:he\s+thong|system):[^\]]+\]',
+                    '[System: Please provide a thorough, accurate response focused strictly on what is asked. Cite page numbers from documents. Strictly do not expand into unasked topics.] ',
                     request.query,
                     flags=re.IGNORECASE
                 )
     else:
-        if "[system:" in request.query.lower():
-            if "briefly" in request.query.lower() or "concisely" in request.query.lower():
+        if "[he thong:" in request.query.lower() or "[system:" in request.query.lower():
+            if any(kw in request.query.lower() for kw in ["ngan gon", "suc tich", "briefly", "concisely"]):
                 sent_query = re.sub(
-                    r'^\[system:[^\]]+\]',
-                    '[He thong: Hay tra loi ngan gon, suc tich trong khoang 2-4 cau. Tranh liet ke dai.] ',
+                    r'^\[(?:he\s+thong|system):[^\]]+\]',
+                    '[He thong: Hay tra loi ngan gon, suc tich trong khoang 2-4 cau, dung trong tam cau hoi. Tranh liet ke dai va khong mo rong sang chu de khac.] ',
                     request.query,
                     flags=re.IGNORECASE
                 )
             else:
                 sent_query = re.sub(
-                    r'^\[system:[^\]]+\]',
-                    '[He thong: Hay tra loi chi tiet, day du, sau sac. Bao gom nhieu thong tin, vi du cu the, phan tich chuyen su, va cac yeu to lien quan. Neu co the, hay trich dan nguon tham khao. Dung format markdown nhung nen co cau truc ro rang voi muc lon va muc nho. Co the tra loi dai hon neu can.] ',
+                    r'^\[(?:he\s+thong|system):[^\]]+\]',
+                    '[He thong: Hay tra loi day du, sau sac, dung trong tam cau hoi. Trinh bay ro rang kem trich dan so trang tu tai lieu. Tuyet doi khong mo rong lan man sang cac chu de ngoai pham vi cau hoi.] ',
                     request.query,
                     flags=re.IGNORECASE
                 )
@@ -239,18 +228,18 @@ def chat(request: ChatRequest, db: Session = Depends(get_db), current_user=Depen
                 "Nâng cấp lên Pro để không giới hạn."
             )
 
-    # ── Phase A: thử L1 memory TRƯỚC ──
+    # ── Phase A: thử L1 memory TRƯỚC (chỉ khi user chọn số ít tài liệu cụ thể) ──
     used_memory = False
     context_chunks: list[dict] = []
-    if not request.force_web_search:
+    if not request.force_web_search and search_doc_ids and len(search_doc_ids) <= 5:
         try:
             # Dùng clean_q để tìm kiếm L1 memory tránh bị nhiễu bởi system prompt
-            memory_chunks = retrieve_via_memory(clean_q, request.document_ids, db)
+            memory_chunks = retrieve_via_memory(clean_q, search_doc_ids, db)
             if memory_chunks:
                 # Enrich doc_title/authors từ bảng documents
                 doc_meta_rows = db.execute(
                     text("SELECT id, title, authors, filename FROM documents WHERE id = ANY(CAST(:ids AS uuid[]))"),
-                    {"ids": request.document_ids},
+                    {"ids": search_doc_ids},
                 ).fetchall()
                 meta_map = {str(r.id): r for r in doc_meta_rows}
                 for c in memory_chunks:
@@ -273,7 +262,8 @@ def chat(request: ChatRequest, db: Session = Depends(get_db), current_user=Depen
     if not context_chunks:
         try:
             # Dùng clean_q để retrieve L2 RAG chính xác hơn
-            context_chunks = retrieve(clean_q, request.document_ids, db)
+            # search_doc_ids=None kích hoạt tìm kiếm toàn bộ 500+ tài liệu bằng HNSW vector + FTS cực nhanh
+            context_chunks = retrieve(clean_q, search_doc_ids, db, top_k=12)
         except Exception as ret_err:
             logger.warning("L2 retrieve failed: %s", ret_err)
             try:
@@ -298,7 +288,15 @@ def chat(request: ChatRequest, db: Session = Depends(get_db), current_user=Depen
     if config_error:
         raise HTTPException(status_code=503, detail=config_error)
 
-    raw_stream = generate_stream(sent_query, context_chunks, lang)
+    # Tìm các hình ảnh / sơ đồ / bảng biểu liên quan đến các chunks được trích xuất
+    available_figures = []
+    try:
+        from app.services.figure_extractor import get_figures_for_chunks
+        available_figures = get_figures_for_chunks(context_chunks, db)
+    except Exception as fig_err:
+        logger.warning("Không thể lấy figures cho context_chunks: %s", fig_err)
+
+    raw_stream = generate_stream(sent_query, context_chunks, lang, available_figures)
 
     def stream_with_saving():
         collected: list[str] = []
@@ -316,7 +314,7 @@ def chat(request: ChatRequest, db: Session = Depends(get_db), current_user=Depen
                 _save_chat_history(db, str(current_user.id), request.query, final_answer, request.document_ids)
             return
 
-        # Trích xuất citations và build tài liệu tham khảo
+        # Trích xuất citations và build tài liệu tham khảo (hỗ trợ cả multi-document citations [f1 - P1; f2 - P2])
         import re
         citation_pattern = re.compile(r'\[([^\]]+)\]')
         raw_citations = citation_pattern.findall(full_answer)
@@ -335,38 +333,41 @@ def chat(request: ChatRequest, db: Session = Depends(get_db), current_user=Depen
         # Build danh sách references
         seen_keys: set[str] = set()
         refs_lines: list[str] = []
+        ref_idx = 1
         for raw in raw_citations:
-            key = raw.strip()
-            if not key or key in seen_keys:
-                continue
-            seen_keys.add(key)
-            match = re.search(r'([^\[]+?)\s*-\s*Trang\s+(\d+)', key)
-            if match:
-                fname = match.group(1).strip()
-                page = match.group(2).strip()
-                found_doc = None
-                for doc_id, doc_info in doc_map.items():
-                    if fname == doc_info["filename"] or fname == doc_info["title"]:
-                        found_doc = doc_info
-                        break
-                if found_doc:
-                    title_part = found_doc["title"] or found_doc["filename"]
-                    authors_part = f" ({found_doc['authors']})" if found_doc["authors"] else ""
-                    refs_lines.append(f"- {title_part}{authors_part} — Trang {page}")
-                else:
-                    refs_lines.append(f"- {fname} — Trang {page}")
-
-        clean_answer = citation_pattern.sub('', full_answer)
+            sub_parts = raw.split(';')
+            for sub in sub_parts:
+                key = sub.strip()
+                if not key or key in seen_keys:
+                    continue
+                match = re.search(r'([^\[]+?)\s*-\s*(?:Page|Trang)\s+(\d+)', key, re.IGNORECASE)
+                if match:
+                    seen_keys.add(key)
+                    fname = match.group(1).strip()
+                    page = match.group(2).strip()
+                    found_doc = None
+                    for doc_id, doc_info in doc_map.items():
+                        if fname == doc_info["filename"] or fname == doc_info["title"]:
+                            found_doc = doc_info
+                            break
+                    if found_doc:
+                        title_part = found_doc["title"] or found_doc["filename"]
+                        authors_part = f" — *{found_doc['authors']}*" if found_doc["authors"] else ""
+                        refs_lines.append(f"{ref_idx}. [{fname} - Page {page}] **{title_part}**{authors_part}")
+                    else:
+                        refs_lines.append(f"{ref_idx}. [{fname} - Page {page}]")
+                    ref_idx += 1
 
         references_block = ""
         if refs_lines:
+            heading = "## References\n\n" if lang == "en" else "## Tài liệu tham khảo\n\n"
             references_block = (
                 "\n\n---\n"
-                "## Tài liệu tham khảo\n\n"
+                + heading
                 + "\n".join(refs_lines)
             )
 
-        final_answer = clean_answer + references_block
+        final_answer = full_answer + references_block
 
         if references_block:
             yield references_block
@@ -436,12 +437,16 @@ def chat_general(
 # ── Non-streaming answer ───────────────────────────────────────────────────────
 
 @router.post("/answer")
-def chat_answer(request: AnswerRequest, db: Session = Depends(get_db)):
+def chat_answer(request: AnswerRequest, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
     """Non-streaming: trả về câu trả lời + context chunks (dùng cho RAGAS)."""
     if not request.query.strip():
         raise HTTPException(400, "Câu hỏi không được để trống")
     if not request.document_ids:
-        raise HTTPException(400, "Phải chọn ít nhất 1 tài liệu")
+        from app.models.document import Document
+        ready_docs = db.query(Document).filter(Document.status == "ready").all()
+        if not ready_docs:
+            raise HTTPException(400, "Hệ thống chưa có tài liệu nào sẵn sàng. Vui lòng tải tài liệu lên.")
+        request.document_ids = [str(d.id) for d in ready_docs]
 
     context_chunks = retrieve(request.query, request.document_ids, db)
     if not context_chunks:
@@ -450,7 +455,14 @@ def chat_answer(request: AnswerRequest, db: Session = Depends(get_db)):
             "contexts": [],
         }
 
-    answer = generate_answer(request.query, context_chunks)
+    available_figures = []
+    try:
+        from app.services.figure_extractor import get_figures_for_chunks
+        available_figures = get_figures_for_chunks(context_chunks, db)
+    except Exception:
+        pass
+
+    answer = generate_answer(request.query, context_chunks, available_figures=available_figures)
     return {
         "answer": answer,
         "contexts": [
@@ -494,7 +506,7 @@ def chat_with_files(
     files: list[UploadFile] = File(default=[]),
     document_ids: str = Form("[]"),  # JSON array string
     db: Session = Depends(get_db),
-    current_user=Depends(get_optional_user),
+    current_user=Depends(get_current_user),
 ):
     """Chat with inline uploaded files (PDF, DOCX, XLSX, images).
     Files are parsed on-the-fly and their text is injected as context for the LLM.
@@ -510,6 +522,11 @@ def chat_with_files(
         doc_ids = json.loads(document_ids) if document_ids and document_ids != "[]" else []
     except json.JSONDecodeError:
         doc_ids = []
+
+    if not doc_ids:
+        from app.models.document import Document
+        ready_docs = db.query(Document).filter(Document.status == "ready").all()
+        doc_ids = [str(d.id) for d in ready_docs]
 
     # Validate & parse each file
     import os
@@ -600,3 +617,106 @@ def chat_with_files(
         stream_with_saving(),
         media_type="text/plain; charset=utf-8",
     )
+
+
+# ── Scientific & Evidence-Based Research Appraisal Endpoints ────────────────
+
+class AppraiseRequest(BaseModel):
+    query: str
+    answer: str
+    document_ids: Optional[list[str]] = []
+
+
+@router.post("/appraise")
+def appraise_answer(
+    req: AppraiseRequest,
+    db: Session = Depends(get_db)
+):
+    """
+    Thẩm định khoa học toàn diện cho câu trả lời theo 7 tiêu chuẩn học thuật:
+    1. Oxford CEBM Evidence Level Grading & Recommendation Grade
+    2. PICO Framework Extraction Card
+    3. Consensus & Scientific Debate Matrix
+    4. Peer-Review Socratic Questions (Devil's Advocate)
+    5. Psychometric Scale Inspector & Cut-Offs (BDI-II, PHQ-9, GAD-7, DASS-21, HAM-D)
+    6. International Citations (BibTeX, RIS, APA 7th)
+    7. Interactive Semantic Knowledge Graph
+    """
+    from app.services.scientific_appraiser import appraise_scientific_context
+
+    context_chunks = []
+    # Nếu client truyền document_ids, chỉ lấy metadata hoặc chunks của các tài liệu đó
+    if req.document_ids:
+        cand_ids_str = ", ".join([f"'{d}'" for d in req.document_ids])
+        try:
+            rows = db.execute(text(f"""
+                SELECT id, title, authors, year, filename 
+                FROM documents 
+                WHERE id IN ({cand_ids_str})
+            """)).fetchall()
+            for r in rows:
+                context_chunks.append({
+                    "document_id": str(r.id),
+                    "doc_title": r.title or r.filename,
+                    "doc_authors": r.authors or "",
+                    "doc_filename": r.filename or "Tài liệu.pdf",
+                    "content": ""
+                })
+        except Exception:
+            pass
+
+    appraisal = appraise_scientific_context(req.query, req.answer, context_chunks, db)
+    return appraisal
+
+
+
+class CitationExportRequest(BaseModel):
+    document_ids: Optional[list[str]] = []
+    format: str = "bibtex"  # "bibtex", "ris", "apa7"
+    custom_docs: Optional[list[dict]] = []
+
+
+@router.post("/export-citation")
+def export_citation(req: CitationExportRequest, db: Session = Depends(get_db)):
+    from app.services.scientific_appraiser import (
+        generate_bibtex_entry, generate_ris_entry, generate_apa7_citation
+    )
+    docs = []
+    if req.document_ids:
+        cand_ids_str = ", ".join([f"'{d}'" for d in req.document_ids])
+        rows = db.execute(text(f"""
+            SELECT id, title, authors, year, filename 
+            FROM documents 
+            WHERE id IN ({cand_ids_str})
+        """)).fetchall()
+        for r in rows:
+            docs.append({
+                "id": str(r.id),
+                "title": r.title or r.filename,
+                "authors": r.authors or "",
+                "year": r.year or 2023,
+                "filename": r.filename or "Tài liệu.pdf"
+            })
+    if not docs and req.custom_docs:
+        docs = req.custom_docs
+
+    fmt = req.format.lower()
+    if fmt == "bibtex":
+        content = "\n\n".join([generate_bibtex_entry(d) for d in docs])
+        filename = "citations.bib"
+        media_type = "application/x-bibtex"
+    elif fmt == "ris":
+        content = "\n\n".join([generate_ris_entry(d) for d in docs])
+        filename = "citations.ris"
+        media_type = "application/x-research-info-systems"
+    else:
+        content = "\n\n".join([generate_apa7_citation(d) for d in docs])
+        filename = "citations_apa7.txt"
+        media_type = "text/plain; charset=utf-8"
+
+    return Response(
+        content=content.encode("utf-8"),
+        media_type=media_type,
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'}
+    )
+

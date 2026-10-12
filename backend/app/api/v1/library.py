@@ -15,7 +15,7 @@ from sqlalchemy import or_
 from pydantic import BaseModel
 
 from app.db.postgres import get_db
-from app.models.document import Document, User
+from app.models.document import Document, User, Chunk
 from app.core.security import get_current_user, get_optional_user
 
 router = APIRouter()

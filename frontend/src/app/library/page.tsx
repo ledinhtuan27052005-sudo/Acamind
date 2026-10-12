@@ -32,6 +32,7 @@ import {
 import { NeuralCard } from '@/components/ui/NeuralCard';
 import { NeuralBadge } from '@/components/ui/NeuralBadge';
 import { NeuralButton } from '@/components/ui/NeuralButton';
+import { AuthRequiredModal, AuthRequiredBanner } from '@/components/auth/AuthRequiredModal';
 
 // ── Category color helpers ─────────────────────────────────────────────────
 
@@ -279,6 +280,7 @@ export default function LibraryPage() {
 
   const [documents, setDocuments] = useState<DocumentInfo[]>([]);
   const [uploading, setUploading] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const [message, setMessage] = useState<{ text: string; type: 'info' | 'success' | 'error' } | null>(null);
   const [summaryModal, setSummaryModal] = useState<{ docId: string; text: string } | null>(null);
   const [loadingSummary, setLoadingSummary] = useState<string | null>(null);
@@ -311,6 +313,11 @@ export default function LibraryPage() {
   // ── Upload Handlers ──────────────────────────────────────────────────
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!user) {
+      setShowAuthModal(true);
+      if (e.target) e.target.value = '';
+      return;
+    }
     const file = e.target.files?.[0];
     if (!file) return;
     if (file.size > 50 * 1024 * 1024) {
@@ -365,6 +372,10 @@ export default function LibraryPage() {
   const handleDrop = async (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragOver(false);
+    if (!user) {
+      setShowAuthModal(true);
+      return;
+    }
     const file = e.dataTransfer.files[0];
     if (file && file.type === 'application/pdf') {
       await performUpload(file);
@@ -386,6 +397,10 @@ export default function LibraryPage() {
   };
 
   const handleSummarize = async (id: string) => {
+    if (!user) {
+      setShowAuthModal(true);
+      return;
+    }
     setLoadingSummary(id);
     try {
       const summary = await summarizeDocument(id);
@@ -518,6 +533,9 @@ export default function LibraryPage() {
 
       {/* Content */}
       <div className="max-w-6xl mx-auto px-4 md:px-6 py-6 space-y-6">
+        {!user && (
+          <AuthRequiredBanner message="Vui lòng đăng nhập để tóm tắt tài liệu bằng AI, tải lên tài liệu mới và lưu trữ ghi chú cá nhân" />
+        )}
         {/* Upload Zone */}
         {canUpload ? (
           <motion.div
@@ -775,6 +793,13 @@ export default function LibraryPage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <AuthRequiredModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        title="Yêu cầu đăng nhập tài khoản"
+        description="Bạn cần đăng nhập tài khoản Acamind để tóm tắt tài liệu bằng AI, tải lên tài liệu mới và tương tác với trợ lý thông minh."
+      />
     </div>
   );
 }

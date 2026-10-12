@@ -1,7 +1,7 @@
-import uuid, os, shutil, sys, time, logging
+import uuid, os, shutil, sys, time, logging, re, io
 from typing import Optional
-from fastapi import APIRouter, UploadFile, File, Form, BackgroundTasks, Depends, HTTPException, Body
-from fastapi.responses import FileResponse
+from fastapi import APIRouter, UploadFile, File, Form, BackgroundTasks, Depends, HTTPException, Body, Query
+from fastapi.responses import FileResponse, StreamingResponse
 from sqlalchemy.orm import Session
 from sqlalchemy import func, or_
 from app.db.postgres import get_db
@@ -49,9 +49,12 @@ def _run_pipeline(file_path: str, document_id: str, db_url: str):
             raise ValueError(f"Document {document_id} not found in DB")
 
         # 3. Chunk text
+        if parsed.get("ocr_recovered_count", 0) > 0:
+            logger.info("Document %s: Phục hồi thành công %d trang scan qua Gemini Vision OCR", document_id, parsed["ocr_recovered_count"])
+
         chunks = chunk_text(parsed["full_text"], document_id, parsed["pages"])
         if not chunks:
-            raise ValueError("PDF không có text (có thể là PDF scan hoặc corrupted)")
+            raise ValueError("PDF không có văn bản hợp lệ (đã kiểm tra qua PyMuPDF và Vision OCR). Vui lòng kiểm tra lại tài liệu.")
 
         # 4. Lưu full text từng trang vào page_texts (Mục 3: kho bộ nhớ toàn văn)
         from sqlalchemy import text as sql_text
@@ -93,7 +96,14 @@ def _run_pipeline(file_path: str, document_id: str, db_url: str):
             except Exception:
                 pass  # Nếu cột neo4j_synced chưa tồn tại, bỏ qua — không chặn pipeline.
 
-        # 8. Mark as ready
+        # 8. Trích xuất sơ đồ, hình ảnh & bảng biểu (Multimodal Figure Extraction)
+        try:
+            from app.services.figure_extractor import extract_and_save_figures
+            extract_and_save_figures(file_path, document_id, db)
+        except Exception as fig_err:
+            logger.warning("Trích xuất sơ đồ thất bại cho %s: %s", document_id, fig_err)
+
+        # 9. Mark as ready
         doc.status = "ready"
         db.commit()
         print(f"[INFO] [OK] Pipeline done: {document_id} - {len(chunks)} chunks")
@@ -401,6 +411,54 @@ def list_documents(db: Session = Depends(get_db), current_user=Depends(get_optio
     }
 
 
+@router.get("/lookup")
+def lookup_document(
+    q: Optional[str] = Query(None),
+    filename: Optional[str] = Query(None),
+    title: Optional[str] = Query(None),
+    db: Session = Depends(get_db),
+    current_user=Depends(get_optional_user),
+):
+    """Tìm nhanh document theo filename/title phục vụ việc nhảy trang citation (Nhóm 4)."""
+    target = (q or filename or title or "").strip()
+    if not target:
+        raise HTTPException(400, "Vui lòng nhập từ khóa tìm kiếm")
+
+    # Loại bỏ đuôi .pdf nếu có để so sánh linh hoạt
+    clean_target = re.sub(r'\.pdf$', '', target, flags=re.IGNORECASE).strip()
+
+    doc = db.query(Document).filter(
+        or_(
+            Document.filename == target,
+            Document.filename.ilike(f"%{clean_target}%"),
+            Document.title.ilike(f"%{clean_target}%"),
+        )
+    ).first()
+
+    if not doc:
+        raise HTTPException(404, f"Không tìm thấy tài liệu phù hợp với '{target}'")
+
+    return {
+        "id": str(doc.id),
+        "filename": doc.filename,
+        "title": doc.title,
+        "total_pages": doc.total_pages,
+        "authors": doc.authors,
+        "year": doc.year,
+        "has_file": bool(doc.file_path and os.path.exists(doc.file_path)),
+    }
+
+
+import uuid
+
+def _is_valid_uuid(val: str) -> bool:
+    try:
+        uuid.UUID(str(val))
+        return True
+    except (ValueError, TypeError, AttributeError):
+        return False
+
+
 @router.get("/{document_id}/file")
 def get_document_file(
     document_id: str,
@@ -408,6 +466,8 @@ def get_document_file(
     current_user=Depends(get_optional_user),
 ):
     """Serve PDF file — inline for viewing, supports download via browser."""
+    if not _is_valid_uuid(document_id):
+        raise HTTPException(404, "Mã tài liệu không hợp lệ")
     doc = db.query(Document).filter(Document.id == document_id).first()
     if not doc:
         raise HTTPException(404, "Không tìm thấy tài liệu")
@@ -441,8 +501,130 @@ def get_document_file(
     )
 
 
+@router.get("/{document_id}/highlighted-file")
+def get_highlighted_document_file(
+    document_id: str,
+    page: Optional[int] = Query(None, description="Trang cần highlight (1-indexed)"),
+    highlight: Optional[str] = Query(None, description="Đoạn văn trích dẫn hoặc từ khóa cần highlight"),
+    db: Session = Depends(get_db),
+    current_user=Depends(get_optional_user),
+):
+    """Serve PDF file đã được nhúng lớp highlight màu vàng trực tiếp tại đoạn văn trích dẫn."""
+    if not _is_valid_uuid(document_id):
+        raise HTTPException(404, "Mã tài liệu không hợp lệ")
+    doc = db.query(Document).filter(Document.id == document_id).first()
+    if not doc:
+        raise HTTPException(404, "Không tìm thấy tài liệu")
+
+    # Access control: same visibility rules as list_documents
+    if current_user and current_user.role == "admin":
+        pass
+    elif current_user:
+        if doc.user_id and str(doc.user_id) != str(current_user.id):
+            from app.models.document import User as UserModel
+            uploader = db.query(UserModel).filter(UserModel.id == doc.user_id).first()
+            if not uploader or uploader.role not in ("admin", "researcher"):
+                raise HTTPException(403, "Không có quyền xem tài liệu này")
+    else:
+        if doc.user_id:
+            from app.models.document import User as UserModel
+            uploader = db.query(UserModel).filter(UserModel.id == doc.user_id).first()
+            if not uploader or uploader.role not in ("admin", "researcher"):
+                raise HTTPException(403, "Vui lòng đăng nhập để xem tài liệu này")
+
+    if not os.path.exists(doc.file_path):
+        raise HTTPException(404, f"File không còn tồn tại trên server: {doc.filename}")
+
+    from urllib.parse import quote
+    encoded_filename = quote(doc.filename)
+
+    # Nếu không có yêu cầu highlight hoặc trang, fallback trả về file gốc
+    if not highlight or not page:
+        return FileResponse(
+            doc.file_path,
+            media_type="application/pdf",
+            headers={"Content-Disposition": f"inline; filename*=UTF-8''{encoded_filename}"},
+        )
+
+    try:
+        from app.services.pdf_highlighter import generate_highlighted_pdf_stream
+        pdf_bytes = generate_highlighted_pdf_stream(doc.file_path, page, highlight)
+        return StreamingResponse(
+            io.BytesIO(pdf_bytes),
+            media_type="application/pdf",
+            headers={
+                "Content-Disposition": f"inline; filename*=UTF-8''{encoded_filename}",
+                "Cache-Control": "private, max-age=300",
+            },
+        )
+    except Exception as e:
+        logger.warning(f"Failed to generate highlighted PDF for doc {document_id}: {e}")
+        return FileResponse(
+            doc.file_path,
+            media_type="application/pdf",
+            headers={"Content-Disposition": f"inline; filename*=UTF-8''{encoded_filename}"},
+        )
+
+
+@router.get("/{document_id}/highlight-meta")
+def get_document_highlight_meta(
+    document_id: str,
+    page: int = Query(..., description="Trang cần kiểm tra (1-indexed)"),
+    query: str = Query(..., description="Từ khóa hoặc đoạn văn cần tìm tọa độ"),
+    db: Session = Depends(get_db),
+    current_user=Depends(get_optional_user),
+):
+    """Lấy danh sách bounding boxes và terms khớp trên trang."""
+    if not _is_valid_uuid(document_id):
+        raise HTTPException(404, "Mã tài liệu không hợp lệ")
+    doc = db.query(Document).filter(Document.id == document_id).first()
+    if not doc or not os.path.exists(doc.file_path):
+        raise HTTPException(404, "Không tìm thấy tài liệu")
+
+    try:
+        from app.services.pdf_highlighter import get_highlight_metadata
+        meta = get_highlight_metadata(doc.file_path, page, query)
+        return meta
+    except Exception as e:
+        logger.error(f"Error getting highlight meta: {e}")
+        return {"page": page, "rects": [], "terms": [], "grounded_sentence": ""}
+
+
+@router.get("/{document_id}/figures")
+def list_document_figures(document_id: str, db: Session = Depends(get_db)):
+    """Lấy danh sách các sơ đồ, biểu đồ và bảng biểu đã trích xuất của tài liệu."""
+    from app.models.document import DocumentFigure
+    if not _is_valid_uuid(document_id):
+        raise HTTPException(404, "Mã tài liệu không hợp lệ")
+    figs = db.query(DocumentFigure).filter(DocumentFigure.document_id == document_id).order_by(DocumentFigure.page_number).all()
+    return [
+        {
+            "id": str(f.id),
+            "page_number": f.page_number,
+            "figure_type": f.figure_type,
+            "caption": f.caption,
+            "image_filename": f.image_filename,
+            "url": f"/api/v1/document/{document_id}/figures/{f.image_filename}",
+        }
+        for f in figs
+    ]
+
+
+@router.get("/{document_id}/figures/{figure_name}")
+def get_document_figure(document_id: str, figure_name: str, db: Session = Depends(get_db)):
+    """Phục vụ ảnh sơ đồ / biểu đồ / bảng biểu trích xuất từ tài liệu."""
+    from app.services.figure_extractor import FIGURES_STORAGE_DIR
+    safe_name = os.path.basename(figure_name)
+    file_path = os.path.join(FIGURES_STORAGE_DIR, str(document_id), safe_name)
+    if not os.path.exists(file_path):
+        raise HTTPException(404, f"Không tìm thấy sơ đồ: {safe_name}")
+    return FileResponse(file_path, media_type="image/png")
+
+
 @router.get("/{document_id}")
 def get_document(document_id: str, db: Session = Depends(get_db)):
+    if not _is_valid_uuid(document_id):
+        raise HTTPException(404, "Mã tài liệu không hợp lệ")
     doc = db.query(Document).filter(Document.id == document_id).first()
     if not doc:
         raise HTTPException(404, "Không tìm thấy tài liệu")

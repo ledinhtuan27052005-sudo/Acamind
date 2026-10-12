@@ -4,6 +4,8 @@ import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { fetchGraph, fetchAuthorPapers, GraphData } from '@/lib/api';
 import KnowledgeGraph from '@/components/graph/KnowledgeGraph';
+import { useAppStore } from '@/store/useAppStore';
+import { GuestBlockScreen } from '@/components/auth/AuthRequiredModal';
 import Link from 'next/link';
 import {
   Search,
@@ -18,6 +20,8 @@ import { NeuralCard } from '@/components/ui/NeuralCard';
 import { NeuralBadge } from '@/components/ui/NeuralBadge';
 
 export default function GraphPage() {
+  const { user } = useAppStore();
+  const [mounted, setMounted] = useState(false);
   const [data, setData] = useState<GraphData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -25,6 +29,10 @@ export default function GraphPage() {
   const [searching, setSearching] = useState(false);
   const [filtered, setFiltered] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const loadAll = async () => {
     setLoading(true);
@@ -64,8 +72,23 @@ export default function GraphPage() {
   };
 
   useEffect(() => {
-    loadAll();
-  }, []);
+    if (user) {
+      loadAll();
+    } else {
+      setLoading(false);
+    }
+  }, [user]);
+
+  if (mounted && !user) {
+    return (
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center p-4">
+        <GuestBlockScreen
+          title="Yêu cầu đăng nhập để khám phá Đồ thị Tri thức"
+          description="Hệ thống Knowledge Graph liên kết tác giả, bài báo và chủ đề nghiên cứu chuyên sâu chỉ dành cho tài khoản đã đăng nhập."
+        />
+      </div>
+    );
+  }
 
   const busy = loading || searching;
   const authorCount = data?.stats?.total_authors ?? data?.nodes.filter((n) => n.type === 'author').length ?? 0;

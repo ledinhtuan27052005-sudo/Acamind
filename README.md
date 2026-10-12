@@ -15,7 +15,7 @@
 **Acamind** là hệ thống trợ lý học thuật thông minh ứng dụng kiến trúc **Retrieval-Augmented Generation (RAG)** chuyên sâu cho lĩnh vực tâm lý học (song ngữ Anh - Việt). Hệ thống giải quyết triệt để vấn đề ảo giác dữ kiện (factual hallucination) của các mô hình ngôn ngữ lớn (LLMs) thông qua:
 1. **Parallel Hybrid Retrieval:** Kết hợp tìm kiếm vector ngữ nghĩa dày đặc (*Dense semantic search* via `multilingual-e5-base` trên chỉ mục đồ thị HNSW) và tìm kiếm từ khóa thưa thớt (*Sparse lexical search* via Okapi BM25 trên chỉ mục PostgreSQL GIN), hợp nhất qua **Reciprocal Rank Fusion (RRF)**.
 2. **Dynamic Confident Skip Reranking:** Thuật toán tự động nhận diện độ lệch tin cậy ($\Delta \text{RRF} \ge 2.5$) để bỏ qua mô hình Cross-Encoder đắt đỏ trên các truy vấn rõ ràng, giảm độ trễ rerank từ **467 ms** xuống còn **0.08 ms** (tiết kiệm 86.3% thời gian xử lý).
-3. **Multi-Engine Ingestion & Scan Circuit-Breaker:** Đường ống trích xuất PDF đa công cụ (`pdfplumber` + `PyMuPDF`) tích hợp bộ phát hiện tài liệu scan ($<50$ chars/trang), tự động kích hoạt **Safe Refusal** trong 1.50 giây để ngăn chặn 100% rủi ro sinh ảo giác từ tài liệu hỏng.
+3. **Multi-Engine Ingestion & Auto-Healing Vision OCR:** Đường ống trích xuất PDF đa công cụ (`pdfplumber` + `PyMuPDF`) tích hợp cơ chế Scan Circuit-Breaker tự động nhận diện trang scan ($<50$ chars/trang) và kích hoạt **Gemini Multimodal Vision OCR** để số hóa hoàn chỉnh tài liệu (bảo toàn cấu trúc 2 cột, bảng biểu số liệu thống kê, và phân cấp đề mục Markdown); đồng thời kích hoạt **Safe Refusal** khi tài liệu hoàn toàn không có dữ liệu thực tế nhằm ngăn chặn 100% rủi ro sinh ảo giác.
 4. **Dual-Memory Hierarchy:** Tầng bộ nhớ đệm L1 Compressed Cache (0.12s) kết hợp kho tri thức L2 pgvector/Neo4j.
 
 ---

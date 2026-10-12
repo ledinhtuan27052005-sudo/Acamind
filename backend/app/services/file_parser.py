@@ -27,19 +27,34 @@ def _clean(text: str) -> str:
 
 
 def _pdf_to_text(data: bytes) -> str:
-    """Extract text from PDF using PyMuPDF (fast, handles embedded images too)."""
+    """Extract text from PDF using PyMuPDF (fast, handles embedded images and scanned pages with Vision OCR)."""
     parts = []
     with fitz.open(stream=data, filetype="pdf") as doc:
         for page_num in range(len(doc)):
             page = doc[page_num]
             text = page.get_text()
-            if text.strip():
+            if text.strip() and len(text.strip()) >= 50:
                 parts.append(f"[Trang {page_num + 1}]\n{text}")
             else:
-                # Page may be a scan — try to get images
-                images = page.get_images(full=True)
-                if images:
-                    parts.append(f"[Trang {page_num + 1}] [Hình ảnh — không thể trích xuất văn bản]")
+                # Trang scan hoặc text quá ngắn (< 50 chars) -> thử chạy Vision OCR
+                ocr_success = False
+                try:
+                    pix = page.get_pixmap(dpi=150)
+                    img_bytes = pix.tobytes("jpeg")
+                    ocr_res = _image_to_text(img_bytes, "jpeg")
+                    if ocr_res and not ocr_res.startswith("[Hình ảnh — không thể") and not ocr_res.startswith("[Hình ảnh — API lỗi"):
+                        parts.append(f"[Trang {page_num + 1}] (OCR Tự động)\n{ocr_res}")
+                        ocr_success = True
+                except Exception as e:
+                    logger.warning("Auto OCR failed in inline chat for page %d: %s", page_num + 1, e)
+
+                if not ocr_success:
+                    if text.strip():
+                        parts.append(f"[Trang {page_num + 1}]\n{text}")
+                    else:
+                        images = page.get_images(full=True)
+                        if images:
+                            parts.append(f"[Trang {page_num + 1}] [Hình ảnh — không thể trích xuất văn bản tự động]")
 
     text = '\n\n'.join(parts)
     return _clean(text)

@@ -167,3 +167,15 @@ class Payment(Base):
     completed_at = Column(DateTime, nullable=True)
     expires_at = Column(DateTime, nullable=False)
     reviewed_by = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=True)
+
+
+class DocumentFigure(Base):
+    __tablename__ = "document_figures"
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    document_id = Column(UUID(as_uuid=True), ForeignKey("documents.id", ondelete="CASCADE"), nullable=False)
+    page_number = Column(Integer, nullable=False)
+    figure_type = Column(String(50), default="figure")  # "figure" | "table" | "diagram"
+    caption = Column(Text, nullable=True)
+    image_filename = Column(String(500), nullable=False)
+    bbox = Column(String(100), nullable=True)
+    created_at = Column(DateTime, default=datetime.now)

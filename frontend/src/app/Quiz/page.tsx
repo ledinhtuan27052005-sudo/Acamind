@@ -5,11 +5,19 @@ import { NeuralCard } from '@/components/ui/NeuralCard';
 import { NeuralBadge } from '@/components/ui/NeuralBadge';
 import { ClipboardList, FileText, Zap, Loader2, ChevronRight } from 'lucide-react';
 import { getDocuments, type DocumentInfo } from '@/lib/api';
+import { useAppStore } from '@/store/useAppStore';
+import { GuestBlockScreen } from '@/components/auth/AuthRequiredModal';
 import Link from 'next/link';
 
 export default function QuizPage() {
+  const { user } = useAppStore();
+  const [mounted, setMounted] = useState(false);
   const [docs, setDocs] = useState<DocumentInfo[]>([]);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     getDocuments()
@@ -20,6 +28,17 @@ export default function QuizPage() {
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
+
+  if (mounted && !user) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-surface-base flex items-center justify-center p-4">
+        <GuestBlockScreen
+          title="Yêu cầu đăng nhập để làm Quiz ôn tập"
+          description="Tính năng tạo bộ câu hỏi trắc nghiệm tự động từ tài liệu PDF và chấm điểm thông minh chỉ dành cho tài khoản đã đăng nhập."
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-surface-base transition-colors duration-300">

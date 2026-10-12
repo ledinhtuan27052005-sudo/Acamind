@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 const api = axios.create({
  baseURL: `${API_URL}/api/v1`,
@@ -169,6 +169,15 @@ export const fetchDocumentBlob = async (id: string): Promise<Blob> => {
  });
  if (!res.ok) throw new Error('Cannot download PDF file');
  return res.blob();
+};
+
+export const lookupDocument = async (query: string): Promise<DocumentInfo | null> => {
+  try {
+    const res = await api.get('/document/lookup', { params: { q: query } });
+    return res.data;
+  } catch {
+    return null;
+  }
 };
 
 // ── Plan API ──────────────────────────────────────────────────────────────────
@@ -1487,4 +1496,121 @@ export const generateSlides = async (documentId: string, numSlides = 8, style = 
  const res = await api.post('/features/slides', { document_id: documentId, num_slides: numSlides, style });
  return res.data;
 };
+
+// ── Scientific Appraisal & Evidence-Based Research ─────────────────────────
+
+export interface CebmEvaluation {
+  level: string;
+  level_label: string;
+  grade: string;
+  grade_label: string;
+  study_design: string;
+  stars: string;
+  badge_color: string;
+  description: string;
+}
+
+export interface PicoFramework {
+  has_pico: boolean;
+  population: string;
+  intervention: string;
+  comparison: string;
+  outcome: string;
+  source_type: string;
+}
+
+export interface ConsensusMatrix {
+  consensus_percentage: number;
+  caveats_percentage: number;
+  summary: string;
+  debate_points: string[];
+  consensus_label: string;
+}
+
+export interface PeerReviewQuestion {
+  title: string;
+  critique_point: string;
+  question: string;
+  category: string;
+}
+
+export interface PsychometricScale {
+  code: string;
+  name: string;
+  authors: string;
+  items_count: number;
+  score_range: string;
+  cutoffs: {
+    range: string;
+    severity: string;
+    color: string;
+    clinical_action: string;
+  }[];
+  clinical_threshold: number;
+  description: string;
+}
+
+export interface KnowledgeGraphData {
+  nodes: {
+    id: string;
+    label: string;
+    type: 'disorder' | 'intervention' | 'scale' | 'outcome' | 'document';
+    category: string;
+    color: string;
+  }[];
+  edges: {
+    source: string;
+    target: string;
+    label: string;
+  }[];
+  total_nodes: number;
+  total_edges: number;
+}
+
+export interface ScientificAppraisal {
+  cebm: CebmEvaluation;
+  pico: PicoFramework;
+  consensus: ConsensusMatrix;
+  peer_review_questions: PeerReviewQuestion[];
+  detected_scales: PsychometricScale[];
+  citations: {
+    bibtex: string;
+    ris: string;
+    apa7: string[];
+    docs: { id: string; title: string; authors: string; year: number; filename: string }[];
+  };
+  knowledge_graph: KnowledgeGraphData;
+  total_sources_appraised: number;
+}
+
+export const appraiseAnswer = async (
+  query: string,
+  answer: string,
+  documentIds?: string[]
+): Promise<ScientificAppraisal> => {
+  const res = await api.post('/chat/appraise', {
+    query,
+    answer,
+    document_ids: documentIds || [],
+  });
+  return res.data;
+};
+
+export const exportCitationFile = async (
+  format: 'bibtex' | 'ris' | 'apa7',
+  documentIds?: string[],
+  customDocs?: any[]
+): Promise<Blob> => {
+  const res = await api.post(
+    '/chat/export-citation',
+    {
+      format,
+      document_ids: documentIds || [],
+      custom_docs: customDocs || [],
+    },
+    { responseType: 'blob' }
+  );
+  return res.data;
+};
+
 

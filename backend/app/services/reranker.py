@@ -132,10 +132,10 @@ class FlagRerankerWrapper:
         try:
             if hasattr(self._model, "compute_score"):
                 # FlagReranker: compute_score nhận list of pairs, trả về list float
-                scores = self._model.compute_score(pairs, normalize=True)
+                scores = self._model.compute_score(pairs, batch_size=16, normalize=True)
             else:
                 # CrossEncoder
-                raw = self._model.predict(pairs)
+                raw = self._model.predict(pairs, batch_size=16)
                 # Convert numpy → python list
                 try:
                     scores = [float(x) for x in raw]
@@ -166,13 +166,16 @@ def _env_use_llm_rerank() -> bool:
     return os.getenv("RERANK_BACKEND", "flag").lower() == "llm"
 
 
-def rerank(query: str, chunks: list[dict], top_n: int = 8) -> list[dict]:
+def rerank(query: str, chunks: list[dict], top_n: int = 8, trans_query: str | None = None) -> list[dict]:
     """Rerank danh sách chunks, trả về top_n chunks theo thứ tự liên quan giảm dần.
+    Hỗ trợ đối chiếu đa ngữ (Cross-Lingual): tính điểm tương đồng trên cả câu hỏi gốc
+    và câu hỏi đã dịch, giữ điểm cao nhất để không bỏ sót tài liệu khác ngôn ngữ.
 
     Args:
         query: Câu hỏi gốc.
         chunks: List chunks từ RRF fusion (đã có content/page_number/...).
         top_n: Số chunks trả về.
+        trans_query: Câu hỏi đã dịch (nếu có).
 
     Returns:
         List chunks đã rerank (giữ nguyên schema đầu vào + thêm `rerank_score`).
@@ -185,31 +188,50 @@ def rerank(query: str, chunks: list[dict], top_n: int = 8) -> list[dict]:
             c["rerank_score"] = 0.0
         return chunks
 
-    chunk_ids = [str(c.get("id") or c.get("chunk_id") or i) for i, c in enumerate(chunks)]
-    ck = _cache_key(query, chunk_ids)
+    # Giới hạn tối đa 20 candidates đưa vào Cross-Encoder để CPU inference siêu tốc
+    eval_candidates = chunks[:20]
+    tail_candidates = chunks[20:]
+
+    cache_q = f"{query}__trans__{trans_query}" if trans_query else query
+    chunk_ids = [str(c.get("id") or c.get("chunk_id") or i) for i, c in enumerate(eval_candidates)]
+    ck = _cache_key(cache_q, chunk_ids)
     if ck in _rerank_cache:
         return _rerank_cache[ck][:top_n]
 
     if _env_use_llm_rerank():
-        ranked = _llm_rerank(query, chunks, top_n)
+        eval_q = f"{query} ({trans_query})" if trans_query else query
+        ranked = _llm_rerank(eval_q, eval_candidates, top_n)
     else:
         try:
             reranker = get_reranker()
-            scores = reranker.score(query, chunks)
+            scores_orig = reranker.score(query, eval_candidates)
+            if trans_query and trans_query.strip().lower() != query.strip().lower():
+                scores_trans = reranker.score(trans_query, eval_candidates)
+                scores = [max(float(so or 0.0), float(st or 0.0)) for so, st in zip(scores_orig, scores_trans)]
+            else:
+                scores = [float(s or 0.0) for s in scores_orig]
+
             # Sort chunks theo score giảm dần
             indexed = sorted(
-                zip(chunks, scores),
+                zip(eval_candidates, scores),
                 key=lambda x: x[1] if x[1] is not None else 0.0,
                 reverse=True,
             )
             ranked = []
-            for c, s in indexed[:top_n]:
+            for c, s in indexed:
                 c2 = dict(c)
                 c2["rerank_score"] = float(s) if s is not None else 0.0
                 ranked.append(c2)
+            # Thêm các candidates còn lại vào đuôi nếu cần
+            for tc in tail_candidates:
+                tc2 = dict(tc)
+                tc2["rerank_score"] = 0.0
+                ranked.append(tc2)
+            ranked = ranked[:top_n]
         except Exception as e:
             logger.warning("FlagReranker lỗi → fallback LLM rerank: %s", e)
-            ranked = _llm_rerank(query, chunks, top_n)
+            eval_q = f"{query} ({trans_query})" if trans_query else query
+            ranked = _llm_rerank(eval_q, chunks, top_n)
 
     # Cache (LRU đơn giản)
     if len(_rerank_cache) >= _RERANK_CACHE_MAX:

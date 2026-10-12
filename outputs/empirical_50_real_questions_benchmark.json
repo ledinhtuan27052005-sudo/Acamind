@@ -1,0 +1,1661 @@
+{
+  "summary": {
+    "metadata": {
+      "total_questions": 50,
+      "comparative_questions_count": 8,
+      "duration_seconds": 412.36,
+      "database": "PostgreSQL 16 + pgvector (rag_db)",
+      "llm_model": "Gemini 2.5 Flash-Lite",
+      "embedding_model": "intfloat/multilingual-e5-base (768d)"
+    },
+    "retrieval_all_50": {
+      "acamind": {
+        "ret_p50": 247.2,
+        "ret_mean": 212.6
+      },
+      "naive_dense": {
+        "ret_p50": 65.1,
+        "ret_mean": 64.6
+      },
+      "bm25_lexical": {
+        "ret_p50": 7.2,
+        "ret_mean": 7.3
+      }
+    },
+    "comparative_8_cases": {
+      "acamind": {
+        "ret_mean": 250.0,
+        "llm_mean": 2243.6,
+        "e2e_mean": 2493.6,
+        "faithfulness": 0.6875,
+        "cite_accuracy": 0.4779
+      },
+      "naive_dense": {
+        "ret_mean": 65.0,
+        "llm_mean": 1888.9,
+        "e2e_mean": 1953.9,
+        "faithfulness": 0.675,
+        "cite_accuracy": 0.3516
+      },
+      "bm25_lexical": {
+        "ret_mean": 6.1,
+        "llm_mean": 1421.4,
+        "e2e_mean": 1427.5,
+        "faithfulness": 0.6562,
+        "cite_accuracy": 0.2188
+      }
+    },
+    "acamind_overall_50": {
+      "ret_p50": 247.2,
+      "ret_mean": 212.6,
+      "llm_mean": 1704.7,
+      "e2e_p50": 1375.7,
+      "e2e_p90": 3477.6,
+      "faithfulness": 0.668,
+      "cite_accuracy": 0.3728,
+      "skip_rate": 20.0
+    }
+  },
+  "results": [
+    {
+      "id": "REAL_Q_01",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'AlignQuant: Tile-Aligned Mixed-Precision Quantization for Efficient LLM Generation' là gì?",
+      "acamind": {
+        "retrieval_ms": 251.2,
+        "llm_ms": 1105.02,
+        "e2e_ms": 1356.2,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải.",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 0.0%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 66.2,
+        "llm_ms": 808.08,
+        "e2e_ms": 874.3,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải.",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 7.1,
+        "llm_ms": 1126.17,
+        "e2e_ms": 1133.3,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. (Các tài liệu cung cấp chỉ đề cập đến phần mở đầu và tóm tắt của bài báo liên quan đến phương pháp lượng tử hóa AlignQuant trong lĩnh vực khoa học máy tính, không chứa thông tin về tâm lý học lâm sàng hay các tiêu chí theo yêu cầu hệ thống chuyên môn tâm lý học của Acamind).",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0
+      }
+    },
+    {
+      "id": "REAL_Q_02",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'What Matters for Latent Reasoning with Flow Matching' là gì?",
+      "acamind": {
+        "retrieval_ms": 240.4,
+        "llm_ms": 2766.93,
+        "e2e_ms": 3007.3,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để trả lời đầy đủ về giả thuyết khoa học và phương pháp luận chi tiết của bài báo, do ngữ cảnh chỉ cung cấp phần tóm tắt (abstract) và giới thiệu (introduction) ngắn gọn. \n\nDựa trên các tài liệu được cung cấp trong hệ thống, dưới đây là các thông tin liên quan đến mục tiêu và định hướng nghiên cứu:\n\n## Mục tiêu nghiên cứu và vấn đề đặt ra\n- Nghiên cứu tập trung vào **lập luận tiềm ẩn (latent reasoning)**, cho phép các mô hình ngôn ngữ lớn (LLM) suy nghĩ trong không gian liên tục và chỉ diễn đạt câu trả lời ra bên ngoài [2610.06666v1.pdf - Trang 1].\n- Đề xuất rằng một tư duy tiềm ẩn hiệu quả phải đáp ứng **năm yêu cầu**: hữu ích (giúp tạo ra câu trả lời đúng), đa dạng (lấy mẫu lại tạo ra quỹ đạo suy nghĩ khác nhau), giải thích được (chuỗi suy nghĩ được giải mã phản ánh đúng quá trình suy luận), có thể tinh chỉnh bằng năng lực tính toán khi suy luận, và hiệu quả (chi phí thấp hơn chuỗi suy nghĩ tường minh - explicit CoT với độ chính xác tương đương) [2610.06666v1.pdf - Trang 1].\n- Giải quyết ba hạn chế của phương pháp chuỗi suy nghĩ tường minh (explicit CoT): chi phí tăng theo độ dài chuỗi, tốn kém cho các phần văn xuôi ít giá trị, và việc đơn luồng cam kết từ các token đầu tiên khiến việc khám phá hướng đi khác phải tạo sinh thêm [2610.06666v1.pdf - Trang 1].\n\n## Phương pháp tiếp cận (Dựa trên ngữ cảnh giới hạn)\n- Tập trung vào phương pháp **khớp dòng chảy trong không gian tiềm ẩn đã học (flow matching in a learned latent space)** [2610.06666v1.pdf - Trang 1].\n- Phát triển công thức **Flow-based Latent Reasoning (FLaRe)** bao gồm các yếu tố: không gian tiềm ẩn mã hóa gì, cách định hình dòng chảy, cách đọc câu trả lời, và giai đoạn huấn luyện cuối cùng trên các suy nghĩ đã được kiểm chứng của mô hình [2610.06666v1.pdf - Trang 1].\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.7,
+        "cite_accuracy": 1.0,
+        "cite_count": 5,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 6.4%, trích dẫn hợp lệ: 5/5"
+      },
+      "naive_dense": {
+        "retrieval_ms": 55.4,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 4.3,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_03",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'TIDE 2.0: an open, model-agnostic engine for keyed de-identification of clinical notes' là gì?",
+      "acamind": {
+        "retrieval_ms": 250.5,
+        "llm_ms": 1117.9,
+        "e2e_ms": 1368.4,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. (Các tài liệu cung cấp chỉ đề cập đến phần Tóm tắt và Giới thiệu của bài báo, mô tả về công cụ TIDE 2.0 và các thách thức trong việc ẩn danh ghi chú lâm sàng, nhưng không nêu cụ thể mục tiêu nghiên cứu, giả thuyết khoa học hay toàn bộ phương pháp luận chính).",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 1.9%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 65.5,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 6.4,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_04",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Aligning Multimodal Patient Evidence with Biomedical Knowledge Graphs for Clinical LLMs' là gì?",
+      "acamind": {
+        "retrieval_ms": 243.0,
+        "llm_ms": 2598.39,
+        "e2e_ms": 2841.4,
+        "answer": "## Mục tiêu nghiên cứu\n- Phát triển hệ thống **MM-KG (Multimodal Knowledge Graph)** nhằm liên kết bằng chứng đa phương thức của bệnh nhân với tri thức y sinh bên ngoài cho các mô hình ngôn ngữ lớn lâm sàng (**clinical LLMs**) [2610.06685v1.pdf - Trang 1; 2610.06685v1.pdf - Trang 3].\n- Đại diện hóa các quan sát đa phương thức, không đồng nhất của bệnh nhân và các khái niệm y sinh thành các lớp riêng biệt trong một đồ thị có kiểu (typed graph), được kết nối bằng các cạnh căn chỉnh tường minh [2610.06685v1.pdf - Trang 3].\n\n## Giả thuyết khoa học\n- Các câu hỏi lâm sàng thường phụ thuộc vào việc liên kết bằng chứng đa phương thức của bệnh nhân với tri thức y sinh bên ngoài, nhưng các hệ thống dự đoán hiện tại hiếm khi thể hiện rõ ràng các liên kết này [2610.06685v1.pdf - Trang 1].\n- Đồ thị tri thức mang lại lợi ích cho các LLM lâm sàng không phải dưới dạng ngữ cảnh nền (background context), mà dưới dạng các liên kết tường minh giữa bằng chứng đa phương thức của bệnh nhân và mối quan hệ mà câu hỏi yêu cầu [2610.06685v1.pdf - Trang 1].\n- Việc kết hợp bằng chứng bệnh nhân và tri thức y sinh giúp giải quyết các câu hỏi mà nếu chỉ dựa vào từng nguồn riêng lẻ thì không thể quyết định được [2610.06685v1.pdf - Trang 1].\n\n## Phương pháp luận chính\n- **Bộ điều hòa theo phương thức (Modality-specific harmonizers)**: Chuyển đổi văn bản hồ sơ sức khỏe điện tử (**EHR text**), hình ảnh (**imaging**), dữ liệu bộ gen (**genomic**) và mẫu sinh học (**biospecimen**) thành các quan sát có kiểu được ánh xạ tới các khái niệm UMLS [2610.06685v1.pdf - Trang 3].\n- **Bộ căn chỉnh ưu tiên định tuyến (Route-prioritized aligner)**: Liên kết các quan sát đã được chuẩn hóa với một đồ thị tri thức y sinh [2610.06685v1.pdf - Trang 3].\n- **Truy xuất có điều kiện theo truy vấn (Query-conditioned retrieval)**: Chọn lọc một đồ thị con nhỏ gọn (**compact subgraph**) để sử dụng ở hạ nguồn bởi một mô hình ngôn ngữ lớn hoặc mạng thần kinh đồ thị [2610.06685v1.pdf - Trang 3].\n- **Thiết kế đánh giá 2 × 2**: Tách biệt bằng chứng bệnh nhân, tri thức y sinh và sự tương tác giữa chúng trên các tập dữ liệu MIMIC và ADNI [2610.06685v1.pdf - Trang 1].\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.65,
+        "cite_accuracy": 0.4444,
+        "cite_count": 9,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 8.4%, trích dẫn hợp lệ: 4/9"
+      },
+      "naive_dense": {
+        "retrieval_ms": 58.0,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 4.5,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_05",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Hi-M imaging of chromatin architecture in adult Drosophila brain cryosections' là gì?",
+      "acamind": {
+        "retrieval_ms": 247.3,
+        "llm_ms": 1583.84,
+        "e2e_ms": 1831.1,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. (Các tài liệu cung cấp chỉ đề cập đến phần Tóm tắt, Giới thiệu và thông tin tác giả của bài báo, chứ không trình bày chi tiết về \"giả thuyết khoa học\" của nghiên cứu).",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 0.0%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 62.3,
+        "llm_ms": 1472.57,
+        "e2e_ms": 1534.9,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. (Các tài liệu cung cấp chỉ đề cập đến tóm tắt, giới thiệu phương pháp Hi-M và quy trình thực hiện trên mô não ruồi giấm, nhưng không trình bày rõ ràng phần giả thuyết khoa học cụ thể).",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 5.1,
+        "llm_ms": 1319.72,
+        "e2e_ms": 1324.8,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. (Các tài liệu cung cấp chỉ đề cập đến tóm tắt và phần giới thiệu của phương pháp Hi-M, chưa trình bày đầy đủ mục tiêu nghiên cứu cụ thể và giả thuyết khoa học của toàn bộ bài báo).",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0
+      }
+    },
+    {
+      "id": "REAL_Q_06",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Selective Transfer of RL Updates for Visual Reasoning' là gì?",
+      "acamind": {
+        "retrieval_ms": 244.5,
+        "llm_ms": 986.45,
+        "e2e_ms": 1231.0,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải.",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 0.0%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 59.5,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 5.1,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_07",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Flattening the Connectome Spectrum: A Spectral Filter for FC Induces a Pretraining Target for fMRI Encoders' là gì?",
+      "acamind": {
+        "retrieval_ms": 249.0,
+        "llm_ms": 1122.22,
+        "e2e_ms": 1371.2,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để trả lời toàn bộ cấu trúc chi tiết về mục tiêu nghiên cứu và giả thuyết khoa học của bài báo, do ngữ cảnh chỉ cung cấp phần tóm tắt (abstract) và giới thiệu (introduction) ngắn gọn.",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 4.7%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 64.0,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 5.9,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_08",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'CLM-as-a-Judge: Evaluating an Open Contrastive Decision Model on Public Judge Benchmarks' là gì?",
+      "acamind": {
+        "retrieval_ms": 251.1,
+        "llm_ms": 1072.46,
+        "e2e_ms": 1323.6,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để trả lời đầy đủ về giả thuyết khoa học và phương pháp luận chi tiết của bài báo (ngữ cảnh hiện tại chỉ cung cấp phần tóm tắt và giới thiệu sơ lược về kết quả đánh giá mô hình Contrastive-LM).",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 2.2%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 66.1,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 4.4,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_09",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Learning to Retrieve via Reinforcement Learning in Embedding Space' là gì?",
+      "acamind": {
+        "retrieval_ms": 239.7,
+        "llm_ms": 1081.19,
+        "e2e_ms": 1320.9,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để trả lời đầy đủ về giả thuyết khoa học của bài báo (ngữ cảnh chỉ cung cấp phần tóm tắt và giới thiệu về mục tiêu và phương pháp luận).",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 0.0%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 54.7,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 4.3,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_10",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'CliniCIRCA: A Modular LLM Framework for Constructing Longitudinal Mental Health Patient Journeys from Raw EHR Narratives' là gì?",
+      "acamind": {
+        "retrieval_ms": 248.5,
+        "llm_ms": 2607.36,
+        "e2e_ms": 2855.9,
+        "answer": "## Mục tiêu nghiên cứu\n- Xây dựng một framework mã nguồn mở dựa trên mô hình ngôn ngữ lớn (**LLM**) đa giai đoạn mang tên **CliniCIRCA**.\n- Thực hiện việc tái thiết lập các biên niên sử lâm sàng (Clinical Annals) dựa trên mốc lịch (Calendar-anchored) và nhận biết sự thiếu chính xác (Imprecision-aware) [2609.19585v1.pdf - Trang 1].\n- Phân loại tạm thời các sự kiện lâm sàng qua các bản tóm tắt xuất viện không có dấu thời gian ở cấp độ sự kiện trong lĩnh vực chăm sóc sức khỏe tâm thần [2609.19585v1.pdf - Trang 1].\n- Thúc đẩy việc tóm tắt có căn cứ về mặt thời gian để nén các nguồn tài liệu thành các bản ghi theo trình tự thời gian được nhóm theo ngày [2609.19585v1.pdf - Trang 1].\n\n## Phương pháp luận chính\n- Sử dụng **14.882 lượt nhập viện sức khỏe tâm thần từ MIMIC-III** để khởi tạo nghiên cứu [2609.19585v1.pdf - Trang 1].\n- Xây dựng bộ chuẩn mực (benchmark) gồm **52 bản tóm tắt xuất viện**, từ đó hệ thống tạo ra **15.891 sự kiện được gắn thẻ thời gian** [2609.19585v1.pdf - Trang 1].\n- Áp dụng phương pháp đánh giá có sự tham gia của bác sĩ lâm sàng trong vòng lặp (**clinician-in-the-loop evaluation**) để sửa chữa 629 lỗi, tạo ra các nhãn tiêu chuẩn vàng được xác thực [2609.19585v1.pdf - Trang 1].\n- Mở rộng quy mô framework để tạo ra **1.000 mốc thời gian tiêu chuẩn bạc** nhằm sử dụng làm dữ liệu huấn luyện [2609.19585v1.pdf - Trang 1].\n- Đánh giá năng lực của 5 mô hình mã nguồn mở thông qua việc tinh chỉnh hướng dẫn (**instruction tuning**) so với phương pháp nhắc lệnh không có mẫu (zero-shot) và ít mẫu (few-shot) đối với các tác vụ trích xuất sự kiện, gắn thẻ thời gian và tóm tắt [2609.19585v1.pdf - Trang 1].\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.7,
+        "cite_accuracy": 1.0,
+        "cite_count": 8,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 9.9%, trích dẫn hợp lệ: 8/8"
+      },
+      "naive_dense": {
+        "retrieval_ms": 63.5,
+        "llm_ms": 3189.95,
+        "e2e_ms": 3253.4,
+        "answer": "## Mục tiêu nghiên cứu và phương pháp luận của CliniCIRCA\n\n- **Khái niệm hành trình lâm sàng**: Trong chăm sóc sức khỏe tâm thần, việc lập luận dựa trên **hành trình bệnh nhân** (longitudinal progression of biological, psychological, and social events) là một nhiệm vụ cốt lõi giúp bác sĩ lâm sàng giải thích tình trạng hiện tại và định hướng điều trị [2609.19585v1.pdf - Trang 1].\n- **Thách thức từ dữ liệu văn bản thuần**: Các hành trình này thường nằm rải rác trong các văn bản tường thuật phi cấu trúc (disparate unstructured text narratives), không được tài liệu hóa dưới dạng dòng thời gian rõ ràng, khiến việc khôi phục cấu trúc thời gian trở thành một thách thức lớn trong xử lý ngôn ngữ tự nhiên lâm sàng (clinical NLP) [2609.19585v1.pdf - Trang 1].\n- **Mục tiêu nghiên cứu**: Giới thiệu **CliniCIRCA**, một khung mô hình ngôn ngữ lớn (LLM) đa giai đoạn dành cho việc tái tạo các biên niên sử lâm sàng được neo theo lịch và nhận biết sự không chính xác (Calendar-anchored, Imprecision-aware Reconstruction of Clinical Annals) [2609.19585v1.pdf - Trang 1].\n- **Tính mới của mục tiêu**: Đây là khung đầu tiên nhằm phân loại thời gian các sự kiện lâm sàng trên các tóm tắt xuất viện phi cấu trúc mà không có mốc thời gian ở cấp độ sự kiện (event-level timestamps) [2609.19585v1.pdf - Trang 1].\n\n## Phương pháp luận và Quy trình nghiên cứu\n\n- **Xây dựng bộ chuẩn (Benchmark)**: Nghiên cứu bắt đầu từ 14.882 trường hợp nhập viện vì sức khỏe tâm thần trong cơ sở dữ liệu MIMIC-III để xây dựng một bộ chuẩn gồm 52 bản tóm tắt xuất viện [2609.19585v1.pdf - Trang 1].\n- **Trích xuất và Gắn nhãn**: Khung CliniCIRCA tạo ra 15.891 sự kiện được gắn nhãn thời gian từ 52 bản tóm tắt này [2609.19585v1.pdf - Trang 1].\n- **Đánh giá có sự tham gia của bác sĩ (Clinician-in-the-loop)**: Tiến hành đánh giá và sửa chữa 629 lỗi dựa trên sự tham gia trực tiếp của bác sĩ lâm sàng để tạo ra các nhãn tiêu chuẩn vàng (gold-standard labels) đã được xác thực [2609.19585v1.pdf - Trang 1, Trang 1].\n- **Tóm tắt dựa trên nền tảng thời gian**: Các dòng thời gian sau khi được hiệu chỉnh sẽ thúc đẩy giai đoạn tóm tắt dựa trên nền tảng thời gian (temporally grounded summarization stage), nén từng nguồn 1,52 lần thành một hồ sơ theo thứ tự thời gian được nhóm theo ngày [2609.19585v1.pdf - Trang 1].\n- **Mở rộng quy mô và Tinh chỉnh hướng dẫn (Instruction Tuning)**: Mở rộng khung để tạo ra 1.000 dòng thời gian chuẩn bạc (silver-standard timelines) và đánh giá chúng làm dữ liệu huấn luyện, so sánh với phương pháp nhắc lệnh không mẫu (zero-shot) và ít mẫu (few-shot) để cải thiện các mô hình mã nguồn mở trong việc trích xuất sự kiện, gắn nhãn thời gian và tóm tắt [2609.19585v1.pdf - Trang 1].\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.7,
+        "cite_accuracy": 1.0
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 5.1,
+        "llm_ms": 3123.88,
+        "e2e_ms": 3129.0,
+        "answer": "## Mục tiêu nghiên cứu\n- Xây dựng **CliniCIRCA**, một khuôn khổ mô hình ngôn ngữ lớn (LLM) đa giai đoạn phục vụ cho việc tái tạo biên niên sử lâm sàng dựa trên lịch và nhận thức độ chính xác (Calendar-anchored, Imprecision-aware Reconstruction of Clinical Annals) [2609.19585v1.pdf - Trang 1].\n- Giải quyết thách thức trong việc khôi phục cấu trúc thời gian từ các tệp tường thuật văn bản y tế chưa có cấu trúc (như tóm tắt xuất viện), nơi các sự kiện có thể bị lặp lại, tường thuật phi tuần tự hoặc chỉ liên kết thông qua các biểu thức thời gian tương đối [2609.19585v1.pdf - Trang 1, Trang 5].\n- Phân loại thời gian các sự kiện lâm sàng trên các bản tóm tắt xuất viện mà không cần dấu thời gian ở cấp độ sự kiện (event-level timestamps) [2609.19585v1.pdf - Trang 1].\n\n## Giả thuyết khoa học\n- Quá trình suy luận trên hành trình của bệnh nhân — bao gồm sự tiến triển theo chiều dọc của các sự kiện sinh học, tâm lý và xã hội — thường nằm rải rác ở các văn bản tường thuật thô chưa có cấu trúc trong hồ sơ sức khỏe điện tử (EHR), khiến việc khôi phục thời gian trở nên khó khăn [2609.19585v1.pdf - Trang 1].\n- Việc tinh chỉnh hướng dẫn (instruction tuning) nói chung sẽ cải thiện hiệu suất của các mô hình nguồn mở trong việc trích xuất sự kiện, gắn thẻ thời gian và tóm tắt trên cả dữ liệu chuẩn bạc (silver-standard) và dữ liệu được đánh giá, xác thực bởi bác sĩ lâm sàng [2609.19585v1.pdf - Trang 1].\n\n## Phương pháp luận chính\n- Sử dụng dữ liệu từ 14.882 ca nhập viện sức khỏe tâm thần trong cơ sở dữ liệu MIMIC-III [2609.19585v1.pdf - Trang 1].\n- Xây dựng một bộ chuẩn (benchmark) gồm 52 bản tóm tắt xuất viện, từ đó hệ thống tạo ra 15.891 sự kiện được gắn thẻ thời gian [2609.19585v1.pdf - Trang 1].\n- Thực hiện quy trình đánh giá có sự tham gia của bác sĩ lâm sàng (clinician-in-the-loop) để sửa chữa 629 lỗi và tạo ra các nhãn chuẩn vàng (gold-standard) đã được xác minh [2609.19585v1.pdf - Trang 1, Trang 3].\n- Ứng dụng các mốc thời gian đã sửa chữa để thúc đẩy giai đoạn tóm tắt có căn cứ về mặt thời gian (temporally grounded summarization), giúp nén mỗi nguồn 1,52 lần thành một bản ghi theo thứ tự thời gian được nhóm theo ngày [2609.19585v1.pdf - Trang 3].\n- Mở rộng quy mô khuôn khổ để tạo ra 1.000 mốc thời gian chuẩn bạc (silver-standard timelines) và đánh giá chúng như dữ liệu huấn luyện [2609.19585v1.pdf - Trang 3].\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.65,
+        "cite_accuracy": 0.75
+      }
+    },
+    {
+      "id": "REAL_Q_11",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'ChartBmkAgent: Harness-Governed Multi-Agent Construction of Chart QA Benchmarks from Sparse Error-Taxonomy Specifications' là gì?",
+      "acamind": {
+        "retrieval_ms": 253.4,
+        "llm_ms": 2118.81,
+        "e2e_ms": 2372.2,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để trả lời đầy đủ về giả thuyết khoa học của bài báo (ngữ cảnh chỉ cung cấp phần tóm tắt và giới thiệu về mục tiêu và phương pháp, không nêu rõ giả thuyết). Dưới đây là các thông tin về mục tiêu nghiên cứu và phương pháp luận dựa trên ngữ cảnh:\n\n## Mục tiêu nghiên cứu\n- Khắc phục tình trạng vòng đời phát triển bộ tiêu chuẩn (benchmark) truyền thống không theo kịp tốc độ phát triển của **mô hình ngôn ngữ lớn đa phương thức (MLLMs)** [2610.08106v1.pdf - Trang 1].\n- Rút ngắn chu kỳ phát triển bộ tiêu chuẩn bằng cách biến các khoảng trống năng lực được quan sát thành các mẫu đánh giá có mục tiêu theo yêu cầu [2610.08106v1.pdf - Trang 1].\n- Xây dựng hoàn chỉnh các mẫu **Hỏi đáp biểu đồ (Chart QA)** từ các đặc tả phân loại lỗi thưa thớt (sparse error-taxonomy specifications) để chuyển đổi khoảng trống năng lực thành bằng chứng chẩn đoán có mục tiêu [2610.08106v1.pdf - Trang 1].\n\n## Phương pháp luận chính\n- Giới thiệu hệ thống **ChartBmkAgent**, một hệ thống xây dựng đa tác nhân được quản lý bởi khung trung tâm (central harness) [2610.08106v1.pdf - Trang 1].\n- Chuyển đổi mô tả thành bảng, biểu đồ, câu hỏi, câu trả lời và quy trình xác thực [2610.08106v1.pdf - Trang 1].\n- Sử dụng khung trung tâm để quản lý các tác nhân chuyên biệt, yêu cầu bằng chứng cụ thể theo từng giai đoạn về sự phù hợp với danh mục lỗi ban đầu và ghi lại cơ sở cho mỗi quyết định chấp nhận [2610.08106v1.pdf - Trang 1].\n\nLưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.",
+        "faithfulness": 0.7,
+        "cite_accuracy": 1.0,
+        "cite_count": 6,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 4.0%, trích dẫn hợp lệ: 6/6"
+      },
+      "naive_dense": {
+        "retrieval_ms": 68.4,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 5.2,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_12",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'MASC: A Multi-Agent Self-Calibration Framework with Latent Construct Alignment for Consistent Client Role-Playing in Psychological Counseling' là gì?",
+      "acamind": {
+        "retrieval_ms": 253.2,
+        "llm_ms": 2758.11,
+        "e2e_ms": 3011.3,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để trả lời đầy đủ về giả thuyết khoa học và phương pháp luận chi tiết của bài báo (ngữ cảnh hiện tại chỉ cung cấp phần tóm tắt ngắn gọn và giới thiệu sơ lược). Dựa trên các đoạn ngữ cảnh có sẵn [2610.08250v1.pdf - Trang 1, 2, 3, 4, 5], các thông tin được ghi nhận như sau:\n\n## Mục tiêu nghiên cứu\n- Phát triển một khung làm việc có tên là **MASC** (Multi-Agent Self-Calibration) kết hợp căn chỉnh cấu trúc tiềm ẩn để đảm bảo đóng vai khách hàng (client role-playing) nhất quán trong các cuộc trò chuyện tư vấn tâm lý [2610.08250v1.pdf - Trang 1].\n- Giải quyết các hạn chế của phương pháp đóng vai hiện tại vốn dễ dẫn đến hiện tượng trôi dạt nhân vật (**persona drift**), tính hợp tác không thực tế, và trạng thái tâm lý, hành động giao tiếp, cảm xúc không nhất quán [2610.08250v1.pdf - Trang 1].\n- Giới thiệu **CRPC-Bench** (Client Role-Playing Consistency Benchmark) làm bộ tiêu chuẩn đánh giá tích hợp cho cả đặc điểm khách hàng ổn định và động lực tâm lý tiến triển [2610.08250v1.pdf - Trang 1].\n- Cung cấp nền tảng thống nhất để phát triển và đánh giá các mô phỏng khách hàng có tính mạch lạc tâm lý phục vụ cho nghiên cứu và đào tạo tư vấn có sự hỗ trợ của AI [2610.08250v1.pdf - Trang 1].\n\n## Phương pháp luận và Giải pháp được đề xuất\n- Đề xuất khung **MASC** tạo ra một vòng lặp hiệu chuẩn tích hợp việc tạo ra dựa trên cấu trúc hướng dẫn (**construct-guided generation**), tinh chỉnh cộng tác (**collaborative refinement**), xác minh tính nhất quán (**consistency verification**), và sửa đổi dựa trên trí nhớ (**memory-based revision**) [2610.08250v1.pdf - Trang 1].\n- Xây dựng bộ chuẩn **CRPC-Bench** bao gồm thông tin hồ sơ cấp độ phiên (**session-level profile information**), các đặc điểm tính cách **Big-Five**, cùng với trạng thái tâm lý cấp độ lượt lời (**turn-level psychological state**), hành động giao tiếp và biểu hiện cảm xúc [2610.08250v1.pdf - Trang 1].\n- Khởi tạo CRPC-Bench trên 38 hồ sơ khách hàng phỏng vấn động lực (**motivational interviewing client profiles**) có bổ sung chú thích về tính cách và cảm xúc [2610.08250v1.pdf - Trang 1].\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.7,
+        "cite_accuracy": 1.0,
+        "cite_count": 7,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 13.5%, trích dẫn hợp lệ: 7/7"
+      },
+      "naive_dense": {
+        "retrieval_ms": 68.2,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 5.0,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_13",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Efficiency and robustness partition the solution space for memory in recurrent networks' là gì?",
+      "acamind": {
+        "retrieval_ms": 247.9,
+        "llm_ms": 1211.98,
+        "e2e_ms": 1459.9,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. Các tài liệu được cung cấp chỉ đề cập đến phần tóm tắt (abstract) và phần mở đầu (introduction) của bài báo, trong đó chưa trình bày đầy đủ các phần chi tiết về giả thuyết khoa học hay phương pháp luận chính của nghiên cứu.\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 3.1%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 62.9,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 4.9,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_14",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Theories of Mind as Domain-Specific Languages of Thought' là gì?",
+      "acamind": {
+        "retrieval_ms": 242.0,
+        "llm_ms": 1396.92,
+        "e2e_ms": 1638.9,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để trả lời đầy đủ về giả thuyết khoa học chi tiết và phương pháp luận chính của bài báo. Các đoạn trích dẫn chỉ cung cấp tóm tắt ngắn về việc đề xuất hình thức hóa lý thuyết tâm trí (theory of mind) nhưng chưa mô tả chi tiết phương pháp luận.",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 3.8%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 57.0,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 4.1,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_15",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Making COMET Comparable Across Scripts: Diagnosis and Correction of Tokeniser-Induced Script Bias in Indic MT Evaluation' là gì?",
+      "acamind": {
+        "retrieval_ms": 251.6,
+        "llm_ms": 1542.69,
+        "e2e_ms": 1794.3,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để trả lời đầy đủ về toàn bộ phương pháp luận chi tiết và giả thuyết khoa học mở rộng ngoài các đoạn trích dẫn ngắn được cung cấp về hiện tượng chệch chữ viết (script bias) và COMET-QN.",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 7.3%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 66.6,
+        "llm_ms": 1448.95,
+        "e2e_ms": 1515.5,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải.",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 4.5,
+        "llm_ms": 1212.11,
+        "e2e_ms": 1216.6,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. (Các tài liệu cung cấp chỉ đề cập đến phần Tóm tắt và Giới thiệu của bài báo về độ chệch kịch bản trong đánh giá dịch máy, nhưng không chứa đầy đủ toàn bộ phần phương pháp luận chi tiết và giả thuyết khoa học hoàn chỉnh ngoài phạm vi đoạn trích).\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0
+      }
+    },
+    {
+      "id": "REAL_Q_16",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Neural noise enables accurate internal simulation of rare events' là gì?",
+      "acamind": {
+        "retrieval_ms": 243.2,
+        "llm_ms": 3186.61,
+        "e2e_ms": 3429.8,
+        "answer": "## Mục tiêu nghiên cứu\n- Nghiên cứu cách bộ não xây dựng một **mô hình nội tâm (internal model)** chính xác về thế giới để tạo ra các dự đoán và định hướng hành vi [2609.18033v1.pdf - Trang 1].\n- Giải quyết bài toán ước lượng cấu trúc thống kê của môi trường từ kinh nghiệm hạn chế, đặc biệt là đối với các **sự kiện hiếm (rare events)** mà tần suất quan sát được có thể thấp hơn hoặc cao hơn đáng kể so với tần suất thực tế [2609.18033v1.pdf - Trang 1].\n- Cung cấp một khung lý thuyết kiểm chứng được nhằm tìm hiểu xem sự thay đổi về độ biến động thần kinh có thể làm suy giảm độ trung thực của mô hình nội tâm trong các rối loạn như **bệnh Parkinson (Parkinson’s disease)** như thế nào [2609.18033v1.pdf - Trang 1].\n\n## Giả thuyết khoa học\n- **Nhiễu thần kinh (neural noise)** — được mô hình hóa như các biến động ngẫu nhiên có tương quan theo thời gian trong hoạt động của các đơn vị thần kinh trong quá trình phát lại — đóng vai trò quan trọng đối với mô phỏng nội tâm trung thực [2609.18033v1.pdf - Trang 1].\n- Nếu không có sự biến động này (tức là phát lại tất yếu/deterministic replay), hệ thống sẽ đánh giá thấp hoặc đánh giá quá cao một cách có hệ thống các sự kiện hiếm [2609.18033v1.pdf - Trang 1].\n- **Nhiễu ở mức độ vừa phải (moderate noise)** giúp khôi phục cả tần suất xuất hiện biên (marginal) lẫn tần suất xuất hiện có điều kiện (conditional) của các sự kiện [2609.18033v1.pdf - Trang 1].\n- Nhiễu vừa phải cũng làm mở rộng phạm vi các giá trị tham số tạo ra quá trình phát lại chính xác, giúp mô hình trở nên mạnh mẽ và ổn định hơn trước sự biến động của tham số [2609.18033v1.pdf - Trang 1].\n- Các kết quả này hỗ trợ giả thuyết rằng mô phỏng nội tâm có sự hỗ trợ của nhiễu hoạt động như một cơ chế tiềm năng để bù đắp cho các **lỗi lấy mẫu (sampling errors)** phát sinh từ kinh nghiệm hạn chế [2609.18033v1.pdf - Trang 1].\n\n## Phương pháp luận chính\n- Sử dụng mô hình **Mạng thần kinh lan truyền độ tin cậy Bayes (Bayesian Confidence Propagation Neural Network - BCPNN)** [2609.18033v1.pdf - Trang 1].\n- Huấn luyện mạng trên các chuỗi sự kiện được lấy từ một quá trình ngẫu nhiên **chuỗi Markov (Markov-chain random walk)** với các tần suất sự kiện được kiểm soát [2609.18033v1.pdf - Trang 1].\n- Coi cấu trúc Markov cơ bản là sự thật mặt đất (ground truth) để cho phép mạng tạo ra quá trình phát lại tự trị (autonomous replay) dựa trên cấu trúc đã học [2609.18033v1.pdf - Trang 1].\n- Đánh giá độ trung thực của quá trình phát lại (replay fidelity) ở cả hai cấp độ: **tần suất sự kiện biên (marginal event frequencies)** và **cấu trúc chuyển đổi có điều kiện (conditional transition structure)** [2609.18033v1.pdf - Trang 1].\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.7,
+        "cite_accuracy": 1.0,
+        "cite_count": 12,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 16.2%, trích dẫn hợp lệ: 12/12"
+      },
+      "naive_dense": {
+        "retrieval_ms": 58.2,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 5.3,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_17",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Existence of an infinite family of substrates satisfying all the postulates of integrated information theory, exclusion included, with arbitrarily large integrated information' là gì?",
+      "acamind": {
+        "retrieval_ms": 251.4,
+        "llm_ms": 3219.18,
+        "e2e_ms": 3470.6,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để trả lời đầy đủ và chi tiết về giả thuyết khoa học, mục tiêu nghiên cứu cụ thể cũng như toàn bộ phương pháp luận của bài báo (ngữ cảnh chỉ cung cấp phần tóm tắt ngắn và giới thiệu mở đầu, chưa mô tả chi tiết giả thuyết và phương pháp). \n\nDưới đây là các thông tin sơ lược được trích xuất từ tài liệu liên quan đến nội dung này:\n\n## Mục tiêu nghiên cứu và vấn đề đặt ra\n- Nghiên cứu tập trung vào việc tìm hiểu khoảng giá trị (**range**) của đại lượng thông tin tích hợp ($\\Phi$) trong **Lý thuyết thông tin tích hợp (Integrated Information Theory - IIT)** [2610.02219v1.pdf - Trang 1].\n- Đặt ra câu hỏi cơ bản: Thông tin tích hợp của một hệ thống có kích thước cho trước lớn đến mức nào và những kiến trúc nào đạt được mức đó [2610.02219v1.pdf - Trang 1]?\n- Chỉ ra sự thiếu hụt thông tin về cận dưới (**lower side**) của đại lượng $\\Phi$, trong khi cận trên đã được biết đến và phát triển theo cấp số siêu mũ (**hyper-exponentially**) [2610.02219v1.pdf - Trang 1].\n- Trình bày sự tồn tại của một họ các thể nền (**substrates**) thỏa mãn tất cả các tiên đề của IIT (bao gồm cả nguyên lý loại trừ - exclusion) với thông tin tích hợp lớn tùy ý [2610.02219v1.pdf - Trang 1].\n\n## Phát hiện và Kết quả chính\n- Chứng minh rằng với mọi $N \\ge 8$ và $3 \\nmid N$, hệ thống $A_N$ (vòng gồm $N$ đơn vị nhị phân, trong đó mỗi đơn vị nhận phép toán exclusive-or của chính nó và hai láng giềng theo chiều kim đồng hồ) là một **complex**: thông tin tích hợp của hệ thống $\\varphi_s$ vượt trội nghiêm ngặt so với mọi hệ thống con thực sự không rỗng [2610.02219v1.pdf - Trang 1].\n- Tại trạng thái toàn số 1 ($\\mathbf{1}$), thông tin tích hợp $\\Phi$ thỏa mãn công thức cận dưới: $\\Phi_{\\max}(A_N, \\mathbf{1}) \\ge 2^{\\lfloor N^2/8 \\rfloor} \\cdot 2^{-N} / (2^N - 1)$ [2610.02219v1.pdf - Trang 1].\n- Logarit cơ số 2 của $\\Phi$ tăng theo hàm bậc hai đối với số lượng đơn vị [2610.02219v1.pdf - Trang 1].\n\n## Phương pháp luận\n- Sử dụng công cụ trợ giúp chứng minh **Lean 4** để kiểm chứng các định nghĩa của IIT 4.0 đối với mọi phát biểu và bổ đề mà không có bước nào chưa được chứng minh (**no unproved steps**) [2610.02219v1.pdf - Trang 1].\n- Dựa trên các cung liền kề của vòng để xác định cơ chế bất khả quy và chứng minh số lượng bậc hai các cung chia sẻ một đơn vị [2610.02219v1.pdf - Trang 1].\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.7,
+        "cite_accuracy": 1.0,
+        "cite_count": 9,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 10.3%, trích dẫn hợp lệ: 9/9"
+      },
+      "naive_dense": {
+        "retrieval_ms": 66.4,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 4.3,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_18",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Compact Robot Policies Need Fine-Grained Visual Representations' là gì?",
+      "acamind": {
+        "retrieval_ms": 240.2,
+        "llm_ms": 1386.44,
+        "e2e_ms": 1626.6,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để trả lời chi tiết về mục tiêu nghiên cứu và phương pháp luận mở rộng của bài báo, ngoài các thông tin tóm tắt về việc xây dựng chính sách CoRP và đánh giá hiệu suất trực quan.",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 2.3%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 55.2,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 4.4,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_19",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'A Novel Sentence Stress Detection Framework Leveraging Auxiliary Word-Stress Modeling and Loss Optimization' là gì?",
+      "acamind": {
+        "retrieval_ms": 252.3,
+        "llm_ms": 1888.39,
+        "e2e_ms": 2140.7,
+        "answer": "## Mục tiêu nghiên cứu\n\n- Đề xuất một phương pháp tiếp cận hiệu quả cho **nhận diện trọng âm câu** (**sentence stress detection** - **SSD**) bằng cách kết hợp SSD với **nhận diện trọng âm từ** (**word stress detection** - **WSD**) bổ trợ thông qua một mô hình mới [2610.07626v1.pdf - Trang 1].\n- Khắc phục việc các nghiên cứu trước đây thường coi SSD và WSD là hai nhiệm vụ độc lập, từ đó bỏ qua sự phụ thuộc lẫn nhau của chúng vào các tín hiệu **âm nhịp** (**prosodic cues**) như cao độ, thời lượng và cường độ [2610.07626v1.pdf - Trang 1].\n\n## Phương pháp luận chính\n\n- Xây dựng khung mô hình mới kết hợp giữa SSD và WSD phụ trợ [2610.07626v1.pdf - Trang 1].\n- Giới thiệu một bộ chuẩn hóa trọng âm khoảng từ (**word-span stress regularizer** - **WSR**) nhằm tập trung các xác suất SSD ở mức độ token trong phạm vi khoảng của từng từ được nhấn trọng âm [2610.07626v1.pdf - Trang 1].\n- Thực hiện thực nghiệm trên tập dữ liệu chuẩn **TinyStress-15K** để đánh giá hiệu suất của phương pháp đề xuất so với các mô hình cơ sở mạnh [2610.07626v1.pdf - Trang 1].\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.7,
+        "cite_accuracy": 1.0,
+        "cite_count": 5,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 14.5%, trích dẫn hợp lệ: 5/5"
+      },
+      "naive_dense": {
+        "retrieval_ms": 67.3,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 5.3,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_20",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Test-Time Agent Evolution for Long-Horizon Legal Reasoning' là gì?",
+      "acamind": {
+        "retrieval_ms": 243.3,
+        "llm_ms": 1301.7,
+        "e2e_ms": 1545.0,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. Các ngữ cảnh hiện tại chỉ trình bày tóm tắt (Abstract) và phần giới thiệu (Introduction) sơ lược về các thách thức trong lý luận pháp lý dài hạn và giải pháp TALA, nhưng không đề cập cụ thể chi tiết về \"giả thuyết khoa học\" và \"phương pháp luận chính\".\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 4.4%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 58.3,
+        "llm_ms": 1236.91,
+        "e2e_ms": 1295.2,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. (Các tài liệu cung cấp chỉ đề cập đến phần mở đầu và tóm tắt về lý luận pháp lý, hệ thống tác nhân pháp lý và phương pháp TALA, nhưng không chứa đầy đủ nội dung chi tiết về giả thuyết khoa học hay toàn bộ phương pháp luận chính).",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 5.5,
+        "llm_ms": 1248.36,
+        "e2e_ms": 1253.9,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải.",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0
+      }
+    },
+    {
+      "id": "REAL_Q_21",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Knowing When Not to Answer: Cross-Domain and ' và (2) 'IdeaLens: Detecting AI Ideas in Long-form Wri'.",
+      "acamind": {
+        "retrieval_ms": 257.7,
+        "llm_ms": 1574.38,
+        "e2e_ms": 1832.1,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để so sánh đầy đủ nội dung của toàn bộ hai bài báo, vì ngữ cảnh chỉ cung cấp các đoạn trích ngắn (tóm tắt/trang đầu) và không chứa toàn bộ nội dung chi tiết của hai nghiên cứu.",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 0.0%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 72.7,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 9.3,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_22",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'SIGMA: Self-Improving Alignment Generalizatio' và (2) 'Does an Agent's History Tell You When Compact'.",
+      "acamind": {
+        "retrieval_ms": 254.0,
+        "llm_ms": 1071.89,
+        "e2e_ms": 1325.9,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để so sánh đầy đủ nội dung theo yêu cầu, do các tệp tin ngữ cảnh hiện tại chỉ chứa phần mở đầu (trang 1) của hai bài báo khoa học và chưa bao gồm toàn bộ phương pháp, đối tượng cũng như kết luận chi tiết của cả hai nghiên cứu.",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 0.0%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 69.0,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 7.8,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_23",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Increasing Width Allows Greedy Layer-wise Tra' và (2) 'HygieneRoboBench: Benchmarking Hygiene-Aware '.",
+      "acamind": {
+        "retrieval_ms": 280.3,
+        "llm_ms": 1324.09,
+        "e2e_ms": 1604.4,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để so sánh đầy đủ nội dung chi tiết của cả hai bài báo, vì ngữ cảnh chỉ cung cấp các đoạn trích ngắn (phần mở đầu/tóm tắt) về mạng thần kinh học tập tự giám sát [2610.00753v1.pdf - Trang 1] và đánh giá lập kế hoạch vệ sinh cho robot gia dụng [2610.08642v1.pdf - Trang 1], chứ không chứa toàn bộ dữ liệu cấu trúc của hai nghiên cứu này.",
+        "faithfulness": 0.7,
+        "cite_accuracy": 1.0,
+        "cite_count": 2,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 4.5%, trích dẫn hợp lệ: 2/2"
+      },
+      "naive_dense": {
+        "retrieval_ms": 95.3,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 10.3,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_24",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Disentangling Paradigm, Identifier, and Decod' và (2) 'Heterarchy in the Brain: Control as a Spectru'.",
+      "acamind": {
+        "retrieval_ms": 280.5,
+        "llm_ms": 3260.34,
+        "e2e_ms": 3540.8,
+        "answer": "## Phương pháp tiếp cận (Methodological Approach)\n\n- Đối với bài báo **\"Disentangling Paradigm, Identifier, and Decoding in Generative Retrieval\"**: Phương pháp tiếp cận tập trung vào lĩnh vực trí tuệ nhân tạo và xử lý ngôn ngữ tự nhiên, cụ thể là đánh giá việc huấn luyện mô hình ngôn ngữ để tạo định danh (identifier) của tài liệu liên quan, đồng thời phân tích sự thay đổi giữa bộ giải mã tự hồi quy (autoregressive decoder) và khuếch tán (diffusion) trên tập dữ liệu NQ320K [2610.08716v1.pdf - Trang 1].\n- Đối với bài báo **\"Heterarchy in the Brain: Control as a Spectrum, Not a Chain of Command\"**: Phương pháp tiếp cận dựa trên thần kinh học và tâm lý học lâm sàng/nhận thức, sử dụng các ghi chép tế bào trên toàn bộ não, phân tích mức độ (graded analyses), nghiên cứu gây nhiễu nhân quả (causal perturbation), và nghiên cứu kết nối định hướng (directed-connectivity) [2610.04643v1.pdf - Trang 1].\n\n## Đối tượng nghiên cứu (Research Subjects)\n\n- Đối với bài báo về **Generative Retrieval**: Đối tượng nghiên cứu là các mô hình ngôn ngữ lớn, các phương pháp giải mã (decoding), định danh tài liệu (identifier) và các công thức huấn luyện trong hệ thống truy xuất thông tin [2610.08716v1.pdf - Trang 1].\n- Đối với bài báo về **Heterarchy in the Brain**: Đối tượng nghiên cứu là hệ thần kinh của não bộ, các quần thể chức năng vượt qua ranh giới tế bào kiến trúc (cytoarchitectural boundaries), các mạch tương hỗ (reciprocal circuits), hệ thống hành động song song, và các vùng cấu trúc như vỏ não, nhân xám dưới vỏ (subcortical mechanisms), tiểu não và đồi thị [2610.04643v1.pdf - Trang 1; 2610.04643v1.pdf - Trang 3].\n\n## Kết luận chính (Main Conclusions)\n\n- Đối với bài báo về **Generative Retrieval**: Các tác giả chỉ ra rằng những nghiên cứu gần đây thay thế bộ giải mã tự hồi quy bằng khuếch tán nhưng lại đồng thời thay đổi định danh, công thức huấn luyện và giải mã, dẫn đến việc không thể quy kết sự khác biệt cho riêng một **mô hình** (paradigm) cụ thể nào [2610.08716v1.pdf - Trang 1].\n- Đối với bài báo về **Heterarchy in the Brain**: Các tác giả kết luận rằng việc coi não bộ là một hệ thống **phân cấp điều khiển** (control hierarchy) thực chất chỉ là nhầm lẫn một cấu hình thành một kiến trúc; sự kiểm soát mang tính quan hệ, phụ thuộc vào ngữ cảnh và các yếu tố như tính cấp bách hay nhu cầu sinh tồn [2610.04643v1.pdf - Trang 1; 2610.04643v1.pdf - Trang 3].\n- Trật tự phân cấp trong não bộ chỉ đặc trưng cho các cấu hình bị giới hạn thời gian (time-bounded configurations), trong khi **tính dị cấp** (**heterarchy**) đặc trưng cho toàn bộ tiết mục của kiến trúc qua các hoàn cảnh [2610.04643v1.pdf - Trang 3].\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.65,
+        "cite_accuracy": 0.5714,
+        "cite_count": 7,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 12.0%, trích dẫn hợp lệ: 4/7"
+      },
+      "naive_dense": {
+        "retrieval_ms": 95.5,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 11.2,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_25",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Have I Seen Enough? Frozen Video-Language Mod' và (2) 'Grid-cell firing fields lack local sixfold sy'.",
+      "acamind": {
+        "retrieval_ms": 267.4,
+        "llm_ms": 4855.58,
+        "e2e_ms": 5123.0,
+        "answer": "## Tổng quan về hai bài báo nghiên cứu\n\n- Bài báo thứ nhất có tựa đề **\"Have I Seen Enough? Frozen Video-Language Models Encode Evidence Readiness\"** (tác giả: Dan Ben-Ami, Kobi Cohen, Chaim Baskin) [2610.08560v1.pdf - Trang 1].\n- Bài báo thứ hai có tựa đề **\"Grid-cell firing fields lack local sixfold symmetry\"** (tác giả: Anian Kerscher) [2609.31145v1.pdf - Trang 1].\n\n## So sánh và đối chiếu phương pháp tiếp cận, đối tượng và kết luận\n\n| Tiêu chí so sánh | Bài báo (1): \"Have I Seen Enough?...\" | Bài báo (2): \"Grid-cell firing fields lack...\" |\n| :--- | :--- | :--- |\n| **Lĩnh vực nghiên cứu** | Trí tuệ nhân tạo, mô hình video-ngôn ngữ (Video-Language Models) [2610.08560v1.pdf - Trang 1]. | Thần kinh học tính toán (Computational Neuroscience), hệ thống thần kinh không gian [2609.31145v1.pdf - Trang 1]. |\n| **Đối tượng nghiên cứu** | Các mô hình video-ngôn ngữ đóng băng (frozen **VideoLLMs**) và cách chúng xử lý các video trực tuyến (streaming video) [2610.08560v1.pdf - Trang 1]. | Các trường hoạt động (firing fields) của **tế bào lưới** (grid cells) và cấu trúc góc bên trong của chúng [2609.31145v1.pdf - Trang 1, 2]. |\n| **Phương pháp tiếp cận** | Khảo sát xem các mô hình VideoLLMs chưa qua chỉnh sửa (unmodified model) có sẵn tín hiệu sẵn sàng về mặt bằng chứng (evidence-readiness signal) được dán nhãn từ các mốc thời gian hay không [2610.08560v1.pdf - Trang 1]. | Định lượng cấu trúc góc trong trường (within-field angular structure) sử dụng phân tích điều hòa (harmonic analysis), các mô phỏng khớp theo từng tế bào (per-cell matched simulations) giữ nguyên thống kê mẫu, quy mô trường và hình học mạng lưới sau khi hiệu chỉnh biến dạng elliptic toàn cục [2609.31145v1.pdf - Trang 1]. |\n| **Kết luận chính** | Các mô hình VideoLLMs đóng băng mang một tín hiệu sẵn sàng bằng chứng có thể đọc tuyến tính (linearly readable evidence-readiness signal) [2610.08560v1.pdf - Trang 1]. | Phân suất năng lượng sáu chiều (sixfold harmonic power fraction) ở các tế bào được khảo sát phù hợp với các trường tham chiếu tròn cục bộ; các trường thực nghiệm thể hiện sự điều biến sáu chiều ít hơn đáng kể so với mô phỏng [2609.31145v1.pdf - Trang 1]. |\n\n## Chi tiết bổ sung từ tài liệu\n\n- **Đối với mô hình VideoLLMs**: Các hệ thống hiện tại thường học quyết định về thời điểm đầy đủ bằng chứng như một trình kích hoạt riêng biệt, nhưng nghiên cứu cho thấy mô hình không chỉnh sửa đã tự tính toán tín hiệu này [2610.08560v1.pdf - Trang 1].\n- **Đối với tế bào lưới thần kinh**: Trong các mô hình lý thuyết, các trường hoạt động đơn lẻ thường được biểu diễn dưới dạng các khối hoạt động đối xứng xuyên tâm nhỏ gọn, trong khi đối xứng mạng lưới toàn cầu và đối xứng trường cục bộ là hai khái niệm độc lập về mặt logic [2609.31145v1.pdf - Trang 2, 3].\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.7,
+        "cite_accuracy": 1.0,
+        "cite_count": 10,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 19.7%, trích dẫn hợp lệ: 10/10"
+      },
+      "naive_dense": {
+        "retrieval_ms": 82.4,
+        "llm_ms": 1352.41,
+        "e2e_ms": 1434.8,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để thực hiện việc so sánh toàn diện hai bài báo như yêu cầu, vì ngữ cảnh chỉ cung cấp thông tin rời rạc về từng bài báo (`2609.31145v1.pdf` và `2610.08560v1.pdf`) thay vì nội dung chi tiết của toàn bộ cả hai công trình nghiên cứu.",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 8.3,
+        "llm_ms": 1205.27,
+        "e2e_ms": 1213.6,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. Ngữ cảnh hiện tại chỉ chứa thông tin về bài báo \"Grid-cell firing fields lack local sixfold symmetry\" (Tệp: 2609.31145v1.pdf) và không có bất kỳ thông tin nào về bài báo \"(1) 'Have I Seen Enough? Frozen Video-Language Mod'\".",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0
+      }
+    },
+    {
+      "id": "REAL_Q_26",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Discovering Subtypes of Neurodegenerative Pro' và (2) 'CoHyFuse: Condition-wise Hypergraph Fusion wi'.",
+      "acamind": {
+        "retrieval_ms": 255.2,
+        "llm_ms": 4729.62,
+        "e2e_ms": 4984.8,
+        "answer": "## Tổng quan phương pháp tiếp cận\n\n- **CoHyFuse**: Sử dụng mô hình **hypergraph** nhận thức điều kiện (condition-aware ROI-centric hypergraph framework) nhằm xây dựng ma trận tỷ lệ (incidence matrix) đặc thù cho từng trạng thái nhiệm vụ dựa trên các embedding hồ sơ kết nối chức năng (FC) theo từng điều kiện [2610.05913v1.pdf - Trang 1]. Phương pháp này cho phép cùng một vùng não (ROI) tạo ra các **hyperedge** đa ROI khác nhau giữa các pha nhiệm vụ, kết hợp với nhánh kết nối chức năng toàn phiên (whole-session FC) thông qua kỹ thuật **dual-view fusion** [2610.05913v1.pdf - Trang 1; 2610.05913v1.pdf - Trang 3].\n- **COMIND mở rộng (Neurodegenerative Subtype Discovery)**: Mở rộng mô hình COMIND bị ràng buộc bởi mạng lưới (network-constrained COMIND model) để đồng thời mô hình hóa **động lực mạng phi tuyến tính** (nonlinear network dynamics) và **xác định phân nhóm bệnh lý** (disease subtype identification) [2609.10890v1.pdf - Trang 2]. Mô hình này xem sự thoái hóa thần kinh như một hệ thống quỹ đạo logistic-diffusion ghép nối bị ràng buộc bởi kết nối cấu trúc, đồng thời tự động phát hiện phân nhóm bằng cách suy ra các mẫu không gian riêng biệt của nguồn bệnh lý vùng từ dữ liệu hình ảnh dọc (longitudinal imaging data) [2609.10890v1.pdf - Trang 2].\n\n## Đối tượng nghiên cứu và Dữ liệu\n\n- **CoHyFuse**: Nghiên cứu dựa trên nhóm thuần tập **AABC** với $N = 1.074$ để dự đoán nhận thức và độ tuổi, cùng với bộ dữ liệu bổ trợ **CMI-HBN** (N = 223) dùng cho bài toán phân loại chứng tăng động giảm chú ý (**ADHD**) [2610.05913v1.pdf - Trang 1].\n- **COMIND mở rộng**: Nghiên cứu tập trung vào việc mô hình hóa tiến triển thoái hóa thần kinh dựa trên dữ liệu hình ảnh dọc (longitudinal imaging data) và kết nối cấu trúc (structural connectivity) để phân tích các quỹ đạo bệnh lý [2609.10890v1.pdf - Trang 2].\n\n## Kết luận và Hiệu suất chính\n\n- **CoHyFuse**: Đạt hiệu suất dự đoán ngoại-tập-hợp (out-of-fold) tốt nhất trên tập AABC đối với chỉ số FACENAME Fluid Cognition Composite (FCC) (7.83 MAE, 0.439 $R^2$) và dự đoán độ tuổi VISMOTOR (7.52 MAE, 0.592 $R^2$) [2610.05913v1.pdf - Trang 1]. Trên tập CMI-HBN ADHD, mô hình đạt độ chính xác macro-AUC là 72.0% và độ chính xác phân loại là 74.2% [2610.05913v1.pdf - Trang 1]. Phân tích che khuất (occlusion analysis) xác định điều kiện **Distraction** là yếu tố điều khiển chính của dự đoán, chỉ ra mạng lưới Salience/Ventral Attention Network (SAN)–FrontoParietal Network (FPN) và các motif ROI do hyperedge xác định trong SAN là các mẫu quan trọng [2610.05913v1.pdf - Trang 1; 2610.05913v1.pdf - Trang 3].\n- **COMIND mở rộng**: Đóng góp chính là khả năng kết hợp mô hình tiến triển dựa trên tiến hóa logistic cơ bản với việc tự động khám phá phân nhóm bệnh lý thoái hóa thần kinh thông qua các quỹ đạo logistic-diffusion ghép nối [2609.10890v1.pdf - Trang 2].\n\n## Bảng so sánh tổng quan\n\n| Tiêu chí | CoHyFuse (Nguồn 1, 2, 3, 5) | COMIND mở rộng (Nguồn 4) |\n| :--- | :--- | :--- |\n| **Mục tiêu nghiên cứu** | Dự đoán nhận thức, độ tuổi và phân loại ADHD bằng kết nối chức năng nhiệm vụ (task-fMRI). | Mô hình hóa động lực mạng phi tuyến tính và tự động nhận diện phân nhóm bệnh lý thoái hóa thần kinh. |\n| **Phương pháp tiếp cận** | Hypergraph neural network với cấu trúc đa dạng hóa theo điều kiện nhiệm vụ và hợp nhất hai góc nhìn (dual-view fusion). | Hệ thống quỹ đạo logistic-diffusion ghép nối bị ràng buộc bởi kết nối cấu trúc và dữ liệu hình ảnh dọc. |\n| **Dữ liệu đánh giá** | Cohort AABC (N=1,074) và CMI-HBN ADHD (N=223). | Dữ liệu hình ảnh học thần kinh dọc (longitudinal imaging data). |\n| **Kết luận chính** | Cung cấp cấu trúc tập hợp ROI giải quyết theo trạng thái giúp tăng độ chính xác dự đoán; điều kiện Distraction là nhân tố chính. | Cho phép suy ra các không gian nguồn bệnh lý vùng khác nhau để phân loại phân nhóm thoái hóa thần kinh. |\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.7,
+        "cite_accuracy": 0.8,
+        "cite_count": 10,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 19.5%, trích dẫn hợp lệ: 8/10"
+      },
+      "naive_dense": {
+        "retrieval_ms": 70.2,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 9.1,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_27",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'FlatClip: A Geometry-Aware Surface-Level Base' và (2) 'zkLLMPoT: Efficient Zero Knowledge Proof of T'.",
+      "acamind": {
+        "retrieval_ms": 258.1,
+        "llm_ms": 1333.4,
+        "e2e_ms": 1591.5,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để so sánh đầy đủ hai bài báo theo yêu cầu, do các đoạn trích hiện tại chỉ cung cấp phần tóm tắt (abstract) rời rạc của hai nghiên cứu (một bên về thần kinh học/fMRI với mô hình FlatClip và một bên về công nghệ chuỗi khối/trí tuệ nhân tạo với mô hình zkLLMPoT) chứ không chứa nội dung chi tiết để đối chiếu sâu.\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 4.9%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 73.1,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 9.0,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_28",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'A foundation for systematic analysis of trans' và (2) 'Conceptualization and experimentation of asse'.",
+      "acamind": {
+        "retrieval_ms": 246.0,
+        "llm_ms": 969.49,
+        "e2e_ms": 1215.5,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải.",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 0.0%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 61.0,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 7.7,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_29",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Balancing Memory Pathways: Analyzing and Impr' và (2) 'Slow Context, Fast Symptoms: Multiscale Tempo'.",
+      "acamind": {
+        "retrieval_ms": 255.0,
+        "llm_ms": 1125.25,
+        "e2e_ms": 1380.2,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. (Các tài liệu cung cấp chỉ chứa thông tin về bài báo \"Balancing Memory Pathways...\" và một đoạn ngắn về \"Slow Context, Fast Symptoms\" nhưng không đủ nội dung chi tiết để so sánh toàn diện đối tượng, phương pháp và kết luận của cả hai bài báo theo yêu cầu).",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 11.5%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 70.0,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 9.0,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_30",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Symphony for Text Generation: Benchmarking Cl' và (2) 'Recursive Game Creator: An Agentic Product-Le'.",
+      "acamind": {
+        "retrieval_ms": 249.5,
+        "llm_ms": 988.36,
+        "e2e_ms": 1237.9,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. (Các tài liệu được cung cấp chỉ chứa thông tin về *Recursive Game Creator*, hoàn toàn không có thông tin về bài báo *'Symphony for Text Generation: Benchmarking Cl'*).",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 8.8%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 64.5,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 8.5,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_31",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'WorldSonus: Bringing Sound to Worlds' và (2) 'Are Language Models Script-Aware?'.",
+      "acamind": {
+        "retrieval_ms": 251.2,
+        "llm_ms": 1306.22,
+        "e2e_ms": 1557.4,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để thực hiện so sánh chi tiết và toàn diện theo yêu cầu về nội dung của hai bài báo, do ngữ cảnh chỉ cung cấp các đoạn trích ngắn (tóm tắt/lời mở đầu) của từng tài liệu.\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 0.0%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 66.2,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 8.1,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_32",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'ER-EDF: A Psychology-Grounded Emotion Regulat' và (2) 'When Teachers Smile or Frown: A Profile-Based'.",
+      "acamind": {
+        "retrieval_ms": 249.7,
+        "llm_ms": 3463.06,
+        "e2e_ms": 3712.8,
+        "answer": "## So sánh và đối chiếu hai nghiên cứu\n\n- Dựa trên các tài liệu được cung cấp, dưới đây là bảng so sánh chi tiết giữa hai bài báo: **(1) ER-EDF (2609.15089v1.pdf)** và **(2) When Teachers Smile or Frown (2609.15747v1.pdf)**.\n\n| Tiêu chí so sánh | Bài báo (1): ER-EDF | Bài báo (2): When Teachers Smile or Frown |\n| :--- | :--- | :--- |\n| **Đối tượng nghiên cứu** | Các mô hình ngôn ngữ lớn dạng âm thanh (**large audio–language models - LALMs**) và hệ thống sinh thoại đối thoại thấu cảm [2609.15089v1.pdf - Trang 1]. | 78 học sinh lớp VII và lớp VIII [2609.15747v1.pdf - Trang 1]. |\n| **Phương pháp tiếp cận** | Đề xuất khung **ER-EDF** (khung điều tiết cảm xúc dựa trên tâm lý học), tách biệt rõ ràng giữa việc nhận thức cảm xúc và điều tiết cảm xúc để tạo ra phản hồi thấu cảm thay vì chỉ phản chiếu cảm xúc (*affect mirroring*) [2609.15089v1.pdf - Trang 1]. | Phân tích dựa trên hồ sơ (*profile-based analysis*), sử dụng dữ liệu tự báo cáo, phân tích nhân tố khám phá (*exploratory factor analysis*) và mô hình cấu trúc Bayes (*Bayesian structural modelling*) [2609.15747v1.pdf - Trang 1]. |\n| **Kết luận chính** | Các mô hình LALMs hiện tại thiếu cơ chế điều tiết rõ ràng dẫn đến hiện tượng phản chiếu cảm xúc thay vì hỗ trợ được hiệu chỉnh; khung ER-EDF tích hợp liền mạch giúp tách bạch nhận thức trạng thái cảm xúc của người dùng và định hướng phản hồi thấu cảm [2609.15089v1.pdf - Trang 1]. | Xác định 3 hồ sơ cảm xúc học tập (nhiệt tình, mất động lực, dễ bị tổn thương); biểu cảm vui vẻ của giáo viên thúc đẩy chuyển đổi thích ứng, trong khi biểu cảm tức giận dẫn đến mất động lực; đồng thời nhận diện sự chuẩn bị và sự kìm hãm nhận thức là các chiều điều tiết [2609.15747v1.pdf - Trang 1]. |\n\n## Phân tích chi tiết phương pháp tiếp cận và cơ sở lý thuyết\n\n- **Bài báo (1) - ER-EDF**: \n  - Gốc rễ lý thuyết dựa trên các lý thuyết tâm lý học như **Mô hình Nhận thức - Hành động (Perception–Action Model)** và **lý thuyết điều tiết cảm xúc (emotion regulation theory)** [2609.15089v1.pdf - Trang 1].\n  - Tập trung giải quyết vấn đề kỹ thuật-tâm lý trong các hệ thống AI, trong đó nhận thức theo dõi trạng thái cảm xúc của người dùng còn điều tiết quyết định cách trạng thái đó dẫn dắt việc tạo ra phản hồi thấu cảm [2609.15089v1.pdf - Trang 1].\n\n- **Bài báo (2) - When Teachers Smile or Frown**:\n  - Khảo sát cách các **cảm xúc thành tích (achievement emotions)** như sự tận hưởng, lo lắng, buồn chán và tò mò định hình cách học sinh tiếp thu nhiệm vụ học tập [2609.15747v1.pdf - Trang 1].\n  - Nghiên cứu môi trường lớp học xã hội, nơi biểu cảm mặt và hành vi phi ngôn ngữ của giáo viên đóng vai trò là tín hiệu mạnh mẽ định hình trải nghiệmaffective của học sinh [2609.15747v1.pdf - Trang 1].\n\n## Lưu ý chuyên môn\n\n- *Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.7,
+        "cite_accuracy": 1.0,
+        "cite_count": 10,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 10.2%, trích dẫn hợp lệ: 10/10"
+      },
+      "naive_dense": {
+        "retrieval_ms": 64.7,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 8.4,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_33",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Partially Observable Zero-shot coordination b' và (2) 'Attraction to hierarchical feature memory exp'.",
+      "acamind": {
+        "retrieval_ms": 247.0,
+        "llm_ms": 1049.29,
+        "e2e_ms": 1296.3,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải vì ngữ cảnh hiện tại chỉ chứa nội dung của tài liệu về \"Attraction to hierarchical feature memory explains orientation bias\" và hoàn toàn không có thông tin về bài báo \"Partially Observable Zero-shot coordination b\".",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 17.1%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 62.0,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 7.4,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_34",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Decision-Related Cognitive Signatures from Fa' và (2) 'From Signals to Trajectories: A Primer on Low'.",
+      "acamind": {
+        "retrieval_ms": 255.0,
+        "llm_ms": 3073.71,
+        "e2e_ms": 3328.7,
+        "answer": "## Giới thiệu tổng quan\n\n- Bài báo (1) có tựa đề đầy đủ là **\"Decision-Related Cognitive Signatures from Fast-Slow Dynamics: A Low-Dimensional Observation-Operator Framework\"** do các tác giả Furkan Emre Isik và Ali Demirci thực hiện [2609.15918v1.pdf - Trang 1].\n- Bài báo (2) có tựa đề đầy đủ là **\"From Signals to Trajectories: A Primer on Low-Dimensional Dynamics in Human EEG and MEG\"** do nhóm tác giả Vanessa Hadid và cộng sự thực hiện [2609.32315v1.pdf - Trang 1].\n- Cả hai tài liệu đều tiếp cận nghiên cứu thần kinh học thông qua lăng kính động lực học chiều thấp (**low-dimensional dynamics**) [2609.32315v1.pdf - Trang 1; 2609.15918v1.pdf - Trang 1].\n\n## So sánh và đối chiếu chi tiết\n\n| Tiêu chí so sánh | Bài báo (1): Decision-Related Cognitive Signatures... | Bài báo (2): From Signals to Trajectories... |\n| :--- | :--- | :--- |\n| **Phương pháp tiếp cận** | - Sử dụng **khung toán tử quan sát chiều thấp** (**low-dimensional observation-operator framework**) dựa trên động lực học nhanh - chậm (**fast-slow dynamics**) để nghiên cứu các dấu ấn nhận thức liên quan đến quyết định [2609.15918v1.pdf - Trang 1]. | - Đề xuất phương pháp phân tích **quỹ đạo thần kinh** (**neural trajectory analysis**) dựa trên **Phân tích Thành phần Chính (PCA)** nhằm mở rộng khái niệm quỹ đạo thần kinh vào điện sinh lý học con người [2609.32315v1.pdf - Trang 1].<br>- Đặt PCA trong một gia đình rộng lớn hơn các phương pháp không gian trạng thái (**state-space methods**) [2609.32315v1.pdf - Trang 1]. |\n| **Đối tượng nghiên cứu** | - Tập trung vào các **chữ ký nhận thức liên quan đến quyết định** thông qua động lực học nhanh - chậm [2609.15918v1.pdf - Trang 1]. | - Tập trung vào các bản ghi điện sinh lý không xâm lấn ở người bao gồm **EEG và MEG** (điện não đồ và từ não đồ) [2609.32315v1.pdf - Trang 1]. |\n| **Kết luận và Mục tiêu chính** | - Xây dựng khuôn khổ toán học để nắm bắt các đặc trưng nhận thức từ dữ liệu động lực học phức tạp [2609.15918v1.pdf - Trang 1]. | - Cung cấp một hướng dẫn thực tế để làm cho các quỹ đạo thần kinh trở nên thiết thực và dễ diễn giải [2609.32315v1.pdf - Trang 1].<br>- Đưa khung khái niệm về động lực học cấp độ quần thể (**population-level neural dynamics**) vào thần kinh học nhận thức chủ đạo ở người [2609.32315v1.pdf - Trang 1].<br>- Giải quyết các thách thức như trộn không gian, độ nhạy tiền xử lý, tính hợp lệ và diễn giải quá mức [2609.32315v1.pdf - Trang 1]. |\n\n## Lưu ý lâm sàng\n\n- Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.",
+        "faithfulness": 0.7,
+        "cite_accuracy": 1.0,
+        "cite_count": 12,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 21.6%, trích dẫn hợp lệ: 12/12"
+      },
+      "naive_dense": {
+        "retrieval_ms": 70.0,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 7.9,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_35",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Nucleus Speculative Decoding: Plausibility-Aw' và (2) 'COMPASS 2.0: psychometric representational si'.",
+      "acamind": {
+        "retrieval_ms": 253.6,
+        "llm_ms": 4152.62,
+        "e2e_ms": 4406.2,
+        "answer": "## Phương pháp tiếp cận\n\n- **COMPASS 2.0**: Giới thiệu khung phân tích **psychometric representational similarity analysis** để so sánh cấu trúc điểm số lấy từ lời nói, bản tự báo cáo (self-report), cấu trúc câu hỏi (item wording) và lý thuyết tâm lý học [2610.06615v1.pdf - Trang 1]. Khung này được triển khai song song với việc chấm điểm cấu trúc ở cấp độ cá nhân (person-level construct scoring) [2610.06615v1.pdf - Trang 1]. Phương pháp này cũng kiểm tra cấu trúc câu hỏi và chất lượng tư vấn trên 34 công cụ và khung **Research Domain Criteria (RDoC)** [2610.06615v1.pdf - Trang 4].\n- **Nucleus Speculative Decoding (NSD)**: Đề xuất phương pháp xác thực nới lỏng kết hợp tính hợp lý (plausibility) của mô hình mục tiêu vào giải mã suy đoán (speculative decoding) [2610.07822v1.pdf - Trang 1]. NSD chấp nhận một token dự thảo nếu nó thỏa mãn quy tắc chấp nhận chuẩn hoặc thuộc **nucleus** của mô hình mục tiêu, giúp khắc phục sự hạn chế của quy tắc chấp nhận bảo thủ trong việc hiệu chỉnh phân phối chính xác [2610.07822v1.pdf - Trang 1].\n\n## Đối tượng nghiên cứu\n\n- **COMPASS 2.0**: Nghiên cứu các **phỏng vấn lâm sàng từ 275 người tham gia**, đồng thời kiểm tra 34 công cụ đánh giá tâm lý và khung Research Domain Criteria (RDoC) [2610.06615v1.pdf - Trang 1, 4].\n- **Nucleus Speculative Decoding (NSD)**: Nghiên cứu các **mô hình ngôn ngữ tự regressive** (autoregressive generation), sử dụng mô hình dự thảo nhẹ (lightweight draft model) và mô hình mục tiêu (target model) để tăng tốc độ sinh văn bản [2610.07822v1.pdf - Trang 1].\n\n## Kết luận chính\n\n- **COMPASS 2.0**: \n  - Các điểm số triệu chứng lấy từ ngôn ngữ phản ánh cách dùng từ (wording) nhiều hơn là bản tự báo cáo, và không phát hiện cấu trúc nào vượt ngoài cách dùng từ qua các bài kiểm tra đã đăng ký [2610.06615v1.pdf - Trang 4].\n  - Sự tương đồng hình học với bản tự báo cáo vẫn duy trì ngay cả khi gán cho người tham gia câu trả lời của người khác, trong khi điểm số ghép cặp cá nhân (person-paired scores) thể hiện mức độ đau khổ (distress) chung nhiều hơn là các triệu chứng cụ thể [2610.06615v1.pdf - Trang 4].\n  - Thỏa thuận về cấu trúc tâm lý có thể phản ánh bản thân bảng câu hỏi hơn là trạng thái thực tế của con người [2610.06615v1.pdf - Trang 1].\n- **Nucleus Speculative Decoding (NSD)**: \n  - Đặc trưng hóa về mặt lý thuyết về phân phối của phương pháp giải mã suy đoán nhận biết tính hợp lý [2610.07822v1.pdf - Trang 1].\n  - Giúp vượt qua hạn chế của việc giới hạn số lượng token dự thảo được giữ lại sau mỗi lần kiểm tra chuyển tiếp nhờ vào quy tắc chấp nhận bảo thủ của phương pháp cũ [2610.07822v1.pdf - Trang 1].\n\n## Bảng so sánh tổng quan\n\n| Tiêu chí | (1) Nucleus Speculative Decoding | (2) COMPASS 2.0 |\n| :--- | :--- | :--- |\n| **Lĩnh vực chuyên môn** | Trí tuệ nhân tạo / Xử lý ngôn ngữ tự nhiên [2610.07822v1.pdf - Trang 1] | Tâm lý học lâm sàng / Trí tuệ nhân tạo y tế [2610.06615v1.pdf - Trang 1] |\n| **Đối tượng mục tiêu** | Mô hình ngôn ngữ lớn và thuật toán sinh văn bản [2610.07822v1.pdf - Trang 1] | Bảng câu hỏi tâm thần, phỏng vấn lâm sàng và cấu trúc triệu chứng [2610.06615v1.pdf - Trang 1] |\n| **Mục đích cốt lõi** | Tăng tốc độ giải mã mô hình ngôn ngữ bằng phương pháp xác thực nới lỏng [2610.07822v1.pdf - Trang 1] | Phân biệt cấu trúc triệu chứng với tín hiệu cá nhân thông qua phân tích tương đồng đại diện tâmometric [2610.06615v1.pdf - Trang 1] |\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.7,
+        "cite_accuracy": 0.8235,
+        "cite_count": 17,
+        "dcsr_skipped": false,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 11.5%, trích dẫn hợp lệ: 14/17"
+      },
+      "naive_dense": {
+        "retrieval_ms": 68.6,
+        "llm_ms": 4599.75,
+        "e2e_ms": 4668.4,
+        "answer": "## Phương pháp tiếp cận (Methodological Approach)\n\n- Đối với bài báo **Nucleus Speculative Decoding**, phương pháp tiếp cận tập trung vào kỹ thuật giải mã dự đoán (**speculative decoding**), cụ thể là giới thiệu phương pháp **Nucleus Speculative Decoding (NSD)** — một phương pháp xác thực nới lỏng kết hợp tính hợp lý của mô hình mục tiêu [2610.07822v1.pdf - Trang 1].\n- Phương pháp của NSD chấp nhận một token dự thảo nếu nó thỏa mãn quy tắc chấp nhận chuẩn hoặc thuộc về **nucleus** của mô hình mục tiêu [2610.07822v1.pdf - Trang 1].\n- Đối với bài báo **COMPASS 2.0**, phương pháp tiếp cận thuộc về tâm lý học và AI, giới thiệu **phân tích độ tương đồng đại diện trắc nghiệm tâm lý** (**psychometric representational similarity analysis**), nhằm so sánh cấu trúc của điểm số lấy từ lời nói, tự báo cáo, cách diễn đạt câu hỏi và lý thuyết [2610.06615v1.pdf - Trang 1].\n- COMPASS 2.0 triển khai khung phân tích này bên cạnh việc chấm điểm cấu trúc ở cấp độ cá nhân (**person-level construct scoring**) [2610.06615v1.pdf - Trang 1].\n\n## Đối tượng nghiên cứu (Research Subjects/Domain)\n\n- Đối với bài báo **Nucleus Speculative Decoding**, đối tượng và lĩnh vực nghiên cứu là **mô hình ngôn ngữ lớn (LLMs)**, quá trình sinh tự hồi quy (**autoregressive generation**), hiệu suất giải mã và việc tối ưu hóa tốc độ tạo token [2610.07822v1.pdf - Trang 1, 4].\n- Đối với bài báo **COMPASS 2.0**, đối tượng nghiên cứu là các bảng hỏi tâm thần học từ lời nói, dữ liệu tự báo cáo, cấu trúc triệu chứng và các cuộc phỏng vấn lâm sàng (**clinical interviews**) [2610.06615v1.pdf - Trang 1].\n\n## Kết luận chính (Main Findings/Conclusions)\n\n- Đối với bài báo **Nucleus Speculative Decoding**, phương pháp xác thực nhận thức tính hợp lý (**plausibility-aware verification**) cung cấp một cách tiếp cận hiệu quả cho việc xác thực nới lỏng và nâng cao hiệu quả giải mã dự đoán [2610.07822v1.pdf - Trang 5].\n- Phương pháp NSD giúp tăng tốc độ đáng kể (lên tới $3.15\\times$ so với giải mã dự đoán tiêu chuẩn) nhờ vào việc kéo dài độ dài được chấp nhận, cho phép nhiều token đầu ra chia sẻ chi phí của mỗi lượt xác thực mục tiêu [2610.07822v1.pdf - Trang 5].\n- Đối với bài báo **COMPASS 2.0**, các mục được diễn đạt tương tự nhau có thể gây ra hiện tượng hiệp phương sai (**covariance**) mà không có tín hiệu tâm lý thực sự [2610.06615v1.pdf - Trang 1].\n- Khung phân tích của COMPASS 2.0 có khả năng phân biệt rõ ràng giữa cấu trúc triệu chứng (**symptom structure**) và tín hiệu cá nhân (**personal signal**), đồng thời sự đồng thuận với báo cáo tự thân có thể phản ánh chính bảng hỏi hơn là bản thân con người [2610.06615v1.pdf - Trang 1].\n\n## Bảng so sánh tổng quan\n\n| Tiêu chí so sánh | Nucleus Speculative Decoding (2610.07822v1.pdf) | COMPASS 2.0 (2610.06615v1.pdf) |\n| :--- | :--- | :--- |\n| **Lĩnh vực chuyên môn** | Trí tuệ nhân tạo, Xử lý ngôn ngữ tự nhiên (NLP) [2610.07822v1.pdf - Trang 1]. | Tâm thần học tính toán, Tâm lý học lâm sàng [2610.06615v1.pdf - Trang 1]. |\n| **Mục tiêu cốt lõi** | Tăng tốc độ sinh mã của LLM thông qua giải mã dự đoán nới lỏng [2610.07822v1.pdf - Trang 1, 4]. | Phân biệt cấu trúc triệu chứng khỏi tín hiệu cá nhân trong bảng hỏi tâm thần [2610.06615v1.pdf - Trang 1]. |\n| **Đóng góp kỹ thuật** | Đề xuất quy tắc xác thực dựa trên nucleus (NSD) [2610.07822v1.pdf - Trang 1]. | Đề xuất phân tích độ tương đồng đại diện trắc nghiệm tâm lý [2610.06615v1.pdf - Trang 1]. |\n| **Kết quả nổi bật** | Tăng tốc độ giải mã vượt trội so với phương pháp chuẩn [2610.07822v1.pdf - Trang 5]. | Làm rõ việc các mục tương tự gây hiệp phương sai giả tạo không có tín hiệu tâm lý [2610.06615v1.pdf - Trang 1]. |\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 0.7,
+        "cite_accuracy": 0.8125
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 9.1,
+        "llm_ms": 1115.37,
+        "e2e_ms": 1124.5,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải (tài liệu chỉ cung cấp ngữ cảnh về \"COMPASS 2.0: Psychometric Representational Similarity Analysis Distinguishes Symptom Structure From Personal Signal\", không có thông tin về bài báo 'Nucleus Speculative Decoding: Plausibility-Aw').",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0
+      }
+    },
+    {
+      "id": "REAL_Q_36",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Discovering Subtypes of Neurodegene | CoHyFuse: Condition-wise Hypergraph | FlatClip: A Geometry-Aware Surface-",
+      "acamind": {
+        "retrieval_ms": 70.2,
+        "llm_ms": 1118.36,
+        "e2e_ms": 1188.6,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. (Ngữ cảnh hiện tại không chứa tài liệu \"Discovering Subtypes of Neurodegene\" và nội dung chi tiết về \"FlatClip\", do đó không thể tổng hợp đủ nhóm 3 nghiên cứu theo yêu cầu).",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": true,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 2.6%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 70.1,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 13.2,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_37",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: CoHyFuse: Condition-wise Hypergraph | FlatClip: A Geometry-Aware Surface- | zkLLMPoT: Efficient Zero Knowledge ",
+      "acamind": {
+        "retrieval_ms": 68.5,
+        "llm_ms": 835.87,
+        "e2e_ms": 904.4,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải do ngữ cảnh không chứa dữ liệu về nghiên cứu \"zkLLMPoT\".",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": true,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 0.0%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 68.4,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 11.5,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_38",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: FlatClip: A Geometry-Aware Surface- | zkLLMPoT: Efficient Zero Knowledge  | A foundation for systematic analysi",
+      "acamind": {
+        "retrieval_ms": 65.6,
+        "llm_ms": 1277.12,
+        "e2e_ms": 1342.7,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải vì các tài liệu được cung cấp (2609.31204v1.pdf, 2610.01894v1.pdf, 2610.08258v1.pdf) đều thuộc lĩnh vực khoa học máy tính, học máy, xử lý tín hiệu thần kinh và bảo mật trí tuệ nhân tạo, hoàn toàn không chứa các nội dung về tâm lý học lâm sàng, chẩn đoán tâm thần, phác đồ điều trị hay khuyến nghị lâm sàng.",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": true,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 0.0%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 65.5,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 12.7,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_39",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: zkLLMPoT: Efficient Zero Knowledge  | A foundation for systematic analysi | Conceptualization and experimentati",
+      "acamind": {
+        "retrieval_ms": 63.8,
+        "llm_ms": 811.49,
+        "e2e_ms": 875.3,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải.",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": true,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 0.0%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 63.7,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 11.3,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_40",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: A foundation for systematic analysi | Conceptualization and experimentati | Balancing Memory Pathways: Analyzin",
+      "acamind": {
+        "retrieval_ms": 59.5,
+        "llm_ms": 1216.11,
+        "e2e_ms": 1275.6,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải vì các tài liệu được cung cấp tập trung vào học máy (machine learning), mô hình Transformer, RNN, kỹ thuật tractography trong cộng hưởng từ và mô hình ngôn ngữ kết hợp (hybrid LMs), hoàn toàn không chứa nội dung về tâm lý học lâm sàng, chẩn đoán hay khuyến nghị lâm sàng cho các rối loạn tâm thần.",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": true,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 10.3%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 59.4,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 10.3,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_41",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Conceptualization and experimentati | Balancing Memory Pathways: Analyzin | Slow Context, Fast Symptoms: Multis",
+      "acamind": {
+        "retrieval_ms": 61.4,
+        "llm_ms": 1183.79,
+        "e2e_ms": 1245.2,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ ba nhóm nghiên cứu có tên \"Conceptualization and experimentati\", \"Balancing Memory Pathways: Analyzin\", và \"Slow Context, Fast Symptoms: Multis\" như yêu cầu của bạn, do ngữ cảnh hiện tại chỉ cung cấp một phần rời rạc từ các tài liệu khoa học về mô hình ngôn ngữ lai (hybrid LMs) và động lực học tâm lý (slow-fast psychological dynamics).",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": true,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 16.9%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 61.3,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 9.9,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_42",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Balancing Memory Pathways: Analyzin | Slow Context, Fast Symptoms: Multis | Symphony for Text Generation: Bench",
+      "acamind": {
+        "retrieval_ms": 69.1,
+        "llm_ms": 1194.29,
+        "e2e_ms": 1263.4,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. (Các tài liệu được cung cấp trong ngữ cảnh hiện tại không bao gồm các nghiên cứu có tiêu đề \"Balancing Memory Pathways: Analyzin\" hay \"Slow Context, Fast Symptoms: Multis\", mà chỉ chứa các đoạn trích từ bài báo \"Symphony for Text Generation: Benchmarking Clinical Note Generation\" và một bài báo về mô hình ngôn ngữ lai).",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": true,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 18.2%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 69.0,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 11.2,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_43",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Slow Context, Fast Symptoms: Multis | Symphony for Text Generation: Bench | Recursive Game Creator: An Agentic ",
+      "acamind": {
+        "retrieval_ms": 66.0,
+        "llm_ms": 1275.48,
+        "e2e_ms": 1341.5,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để tổng hợp các khuyến nghị lâm sàng/thực hành cho cả 3 nghiên cứu được yêu cầu, do ngữ cảnh chỉ cung cấp thông tin tóm tắt (abstract) về kỹ thuật phát triển game (Recursive Game Creator), đánh giá ghi chú lâm sàng (Symphony for Text Generation), và động lực học tâm lý đa tỷ trọng (Slow Context, Fast Symptoms) mà chưa đầy đủ nội dung chi tiết về khuyến nghị lâm sàng cho toàn bộ các nhóm nghiên cứu này.",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": true,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 16.4%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 65.9,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 12.0,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_44",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Symphony for Text Generation: Bench | Recursive Game Creator: An Agentic  | WorldSonus: Bringing Sound to World",
+      "acamind": {
+        "retrieval_ms": 69.4,
+        "llm_ms": 1071.86,
+        "e2e_ms": 1141.3,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải vì ngữ cảnh cung cấp không có tài liệu nào về \"Recursive Game Creator: An Agentic\" và chỉ chứa một phần thông tin về \"Symphony for Text Generation\" cùng \"WorldSonus\".",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": true,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 11.8%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 69.3,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 11.6,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_45",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Recursive Game Creator: An Agentic  | WorldSonus: Bringing Sound to World | Are Language Models Script-Aware?",
+      "acamind": {
+        "retrieval_ms": 63.6,
+        "llm_ms": 795.43,
+        "e2e_ms": 859.0,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải (ngữ cảnh hiện tại không chứa tài liệu về \"Recursive Game Creator: An Agentic\").",
+        "faithfulness": 0.6,
+        "cite_accuracy": 0.0,
+        "cite_count": 0,
+        "dcsr_skipped": true,
+        "diagnostics": "Độ bám ngữ cảnh từ vựng: 0.0%, trích dẫn hợp lệ: 0/0"
+      },
+      "naive_dense": {
+        "retrieval_ms": 63.5,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 11.6,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_46",
+      "type": "Safe Refusal (Edge)",
+      "query": "Quy trình sản xuất pin xe điện thể rắn Lithium-Sulfur theo tiêu chuẩn công nghiệp là gì?",
+      "acamind": {
+        "retrieval_ms": 236.9,
+        "llm_ms": 799.95,
+        "e2e_ms": 1036.9,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải.",
+        "faithfulness": 1.0,
+        "cite_accuracy": 1.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Từ chối an toàn chuẩn xác"
+      },
+      "naive_dense": {
+        "retrieval_ms": 51.9,
+        "llm_ms": 1002.62,
+        "e2e_ms": 1054.5,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải.\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 1.0,
+        "cite_accuracy": 1.0
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 4.1,
+        "llm_ms": 1020.46,
+        "e2e_ms": 1024.6,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. Các tài liệu được cung cấp chỉ chứa thông tin về phương pháp lượng hóa mô hình ngôn ngữ lớn (AlignQuant) [2610.07457v1.pdf - Trang 1], không có nội dung nào liên quan đến quy trình sản xuất pin xe điện thể rắn Lithium-Sulfur.\n\n*(Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.)*",
+        "faithfulness": 1.0,
+        "cite_accuracy": 1.0
+      }
+    },
+    {
+      "id": "REAL_Q_47",
+      "type": "Safe Refusal (Edge)",
+      "query": "Phương trình phản ứng hạt nhân tổng hợp nhiệt hạch Tokamak vận hành ra sao?",
+      "acamind": {
+        "retrieval_ms": 233.7,
+        "llm_ms": 786.75,
+        "e2e_ms": 1020.5,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải.",
+        "faithfulness": 1.0,
+        "cite_accuracy": 1.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Từ chối an toàn chuẩn xác"
+      },
+      "naive_dense": {
+        "retrieval_ms": 48.7,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 2.9,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_48",
+      "type": "Safe Refusal (Edge)",
+      "query": "Trích xuất số liệu thử nghiệm tại trang 9999 của tài liệu nghiên cứu thần kinh học?",
+      "acamind": {
+        "retrieval_ms": 233.0,
+        "llm_ms": 793.87,
+        "e2e_ms": 1026.9,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải.\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 1.0,
+        "cite_accuracy": 1.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Từ chối an toàn chuẩn xác"
+      },
+      "naive_dense": {
+        "retrieval_ms": 48.0,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 3.9,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_49",
+      "type": "Safe Refusal (Edge)",
+      "query": "Cách điều chế hợp kim titan ứng dụng trong công nghệ hàng không vũ trụ?",
+      "acamind": {
+        "retrieval_ms": 237.7,
+        "llm_ms": 908.84,
+        "e2e_ms": 1146.5,
+        "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải.\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*",
+        "faithfulness": 1.0,
+        "cite_accuracy": 1.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Từ chối an toàn chuẩn xác"
+      },
+      "naive_dense": {
+        "retrieval_ms": 52.7,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 3.2,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    },
+    {
+      "id": "REAL_Q_50",
+      "type": "Safe Refusal (Edge)",
+      "query": "Thuật toán định tuyến giao thông cho hệ thống vệ tinh quỹ đạo thấp Starlink?",
+      "acamind": {
+        "retrieval_ms": 229.2,
+        "llm_ms": 834.02,
+        "e2e_ms": 1063.2,
+        "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải.",
+        "faithfulness": 1.0,
+        "cite_accuracy": 1.0,
+        "cite_count": 0,
+        "dcsr_skipped": false,
+        "diagnostics": "Từ chối an toàn chuẩn xác"
+      },
+      "naive_dense": {
+        "retrieval_ms": 44.2,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      },
+      "bm25_lexical": {
+        "retrieval_ms": 2.7,
+        "llm_ms": null,
+        "e2e_ms": null,
+        "answer": null,
+        "faithfulness": null,
+        "cite_accuracy": null
+      }
+    }
+  ]
+}

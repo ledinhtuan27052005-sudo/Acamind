@@ -6,6 +6,8 @@ import type { DocumentInfo } from '@/lib/api';
 import { NeuralCard } from '@/components/ui/NeuralCard';
 import { NeuralBadge } from '@/components/ui/NeuralBadge';
 import { NeuralButton } from '@/components/ui/NeuralButton';
+import { useAppStore } from '@/store/useAppStore';
+import { GuestBlockScreen } from '@/components/auth/AuthRequiredModal';
 import { GraduationCap, Send, Loader2, FileText, BookOpen, Lightbulb, Zap, ChevronRight, Sparkles } from 'lucide-react';
 
 interface Message {
@@ -28,6 +30,8 @@ const STARTER_QUESTIONS = [
 ];
 
 export default function LearnPage() {
+ const { user } = useAppStore();
+ const [mounted, setMounted] = useState(false);
  const [docs, setDocs] = useState<DocumentInfo[]>([]);
  const [docId, setDocId] = useState('');
  const [level, setLevel] = useState('beginner');
@@ -38,12 +42,29 @@ export default function LearnPage() {
  const bottomRef = useRef<HTMLDivElement>(null);
 
  useEffect(() => {
- getDocuments().then(d => {
- const ready = d.filter(doc => doc.status === 'ready');
- setDocs(ready);
- if (ready.length > 0 && !docId) setDocId(ready[0].id);
- });
+   setMounted(true);
  }, []);
+
+ useEffect(() => {
+ if (user) {
+   getDocuments().then(d => {
+   const ready = d.filter(doc => doc.status === 'ready');
+   setDocs(ready);
+   if (ready.length > 0 && !docId) setDocId(ready[0].id);
+   });
+ }
+ }, [user]);
+
+ if (mounted && !user) {
+   return (
+     <div className="min-h-screen bg-gray-50 dark:bg-surface-base flex items-center justify-center p-4">
+       <GuestBlockScreen
+         title="Yêu cầu đăng nhập để học tập cùng AI"
+         description="Tính năng gia sư học tập đa cấp độ (Beginner / Advanced / Researcher) từ tài liệu nghiên cứu yêu cầu tài khoản đã đăng nhập."
+       />
+     </div>
+   );
+ }
 
  useEffect(() => {
  bottomRef.current?.scrollIntoView({ behavior: 'smooth' });

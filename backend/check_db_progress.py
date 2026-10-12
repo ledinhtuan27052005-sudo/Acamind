@@ -1,0 +1,10 @@
+import psycopg2
+conn = psycopg2.connect("postgresql://admin:secret@localhost:5432/rag_db")
+cur = conn.cursor()
+cur.execute("SELECT count(1) FROM documents WHERE category = 'arxiv_benchmark_500';")
+print("Benchmark docs in DB:", cur.fetchone()[0])
+cur.execute("SELECT count(1) FROM chunks;")
+print("Total chunks in DB:", cur.fetchone()[0])
+cur.execute("SELECT count(1) FROM documents;")
+print("Total docs in DB:", cur.fetchone()[0])
+conn.close()

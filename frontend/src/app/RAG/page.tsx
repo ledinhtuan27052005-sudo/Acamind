@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { getDocuments, DocumentInfo, runEvaluation, EvalResult } from '@/lib/api';
+import { useAppStore } from '@/store/useAppStore';
+import { GuestBlockScreen } from '@/components/auth/AuthRequiredModal';
 
 function ScoreBar({ label, value }: { label: string; value: number }) {
  const pct = Math.round(value * 100);
@@ -25,6 +27,8 @@ function ScoreBar({ label, value }: { label: string; value: number }) {
 }
 
 export default function EvaluatePage() {
+ const { user } = useAppStore();
+ const [mounted, setMounted] = useState(false);
  const [docs, setDocs] = useState<DocumentInfo[]>([]);
  const [selectedIds, setSelectedIds] = useState<string[]>([]);
  const [question, setQuestion] = useState('');
@@ -33,10 +37,27 @@ export default function EvaluatePage() {
  const [error, setError] = useState('');
 
  useEffect(() => {
- getDocuments()
- .then(d => setDocs(d.filter(doc => doc.status === 'ready')))
- .catch(console.error);
+   setMounted(true);
  }, []);
+
+ useEffect(() => {
+ if (user) {
+   getDocuments()
+   .then(d => setDocs(d.filter(doc => doc.status === 'ready')))
+   .catch(console.error);
+ }
+ }, [user]);
+
+ if (mounted && !user) {
+   return (
+     <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center p-4">
+       <GuestBlockScreen
+         title="Yêu cầu đăng nhập để đánh giá RAG"
+         description="Hệ thống chấm điểm độ tin cậy và sự liên quan của câu trả lời AI yêu cầu tài khoản đã đăng nhập."
+       />
+     </div>
+   );
+ }
 
  const toggleDoc = (id: string) =>
  setSelectedIds(prev =>

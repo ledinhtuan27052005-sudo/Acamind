@@ -42,7 +42,9 @@ class LargeUploadMiddleware(BaseHTTPMiddleware):
 Base.metadata.create_all(bind=engine)
 
 # Add new columns to existing tables if missing
-with engine.connect() as _conn:
+try:
+    _conn = engine.connect()
+    _conn.execute(text("SET lock_timeout = '2s'"))
     _conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS avatar_url VARCHAR(1000)"))
     _conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS is_oauth BOOLEAN DEFAULT FALSE"))
     _conn.execute(text("ALTER TABLE users ADD COLUMN IF NOT EXISTS plan VARCHAR(50) DEFAULT 'free'"))
@@ -318,6 +320,9 @@ with engine.connect() as _conn:
             {"k": _k, "v": _v, "d": _d},
         )
     _conn.commit()
+    _conn.close()
+except Exception as _e:
+    _logger.warning("Startup schema migration notice: %s", _e)
 
 app = FastAPI(
     title="Acamind — Academic RAG System",
@@ -331,31 +336,34 @@ app = FastAPI(
 # Failures ở đây KHÔNG block server ready — model sẽ load lazy khi cần.
 @app.on_event("startup")
 def _warm_models_at_startup():
-    try:
-        from app.services.embedder import _get_model
-        model = _get_model()
-        # Encode 1 dummy query để warm pipeline encode thực sự (không chỉ load weights)
-        _ = model.encode(
-            ["query: warmup", "passage: warmup"],
-            normalize_embeddings=True,
-            show_progress_bar=False,
-            convert_to_numpy=True,
-        )
-        _logger.info(
-            "Embedding model warmed OK (dim=%d)", model.get_sentence_embedding_dimension()
-        )
-    except Exception as e:
-        _logger.warning("Embedding warmup failed (non-fatal, will load lazily): %s", e)
+    import threading
 
-    try:
-        # Chỉ warm FlagReranker nếu backend được cấu hình dùng (mặc định 'flag').
-        import os as _os
-        if _os.getenv("RERANK_BACKEND", "flag").lower() != "llm":
-            from app.services.reranker import get_reranker
-            reranker = get_reranker()
-            _logger.info("Reranker warmed OK: %s", type(reranker._model).__name__ if hasattr(reranker, "_model") and reranker._model else "lazy")
-    except Exception as e:
-        _logger.warning("Reranker warmup failed (non-fatal, will load lazily): %s", e)
+    def _warm_worker():
+        try:
+            from app.services.embedder import _get_model
+            model = _get_model()
+            _ = model.encode(
+                ["query: warmup", "passage: warmup"],
+                normalize_embeddings=True,
+                show_progress_bar=False,
+                convert_to_numpy=True,
+            )
+            _logger.info(
+                "Embedding model warmed OK (dim=%d)", model.get_sentence_embedding_dimension()
+            )
+        except Exception as e:
+            _logger.warning("Embedding warmup failed (non-fatal, will load lazily): %s", e)
+
+        try:
+            import os as _os
+            if _os.getenv("RERANK_BACKEND", "flag").lower() != "llm":
+                from app.services.reranker import get_reranker
+                reranker = get_reranker()
+                _logger.info("Reranker warmed OK: %s", type(reranker._model).__name__ if hasattr(reranker, "_model") and reranker._model else "lazy")
+        except Exception as e:
+            _logger.warning("Reranker warmup failed (non-fatal, will load lazily): %s", e)
+
+    threading.Thread(target=_warm_worker, daemon=True, name="model-warmup").start()
 
 # Middleware phải được add theo thứ tự ngược: add cuối cùng = chạy đầu tiên
 app.add_middleware(

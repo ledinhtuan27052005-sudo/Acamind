@@ -1,0 +1,230 @@
+{
+  "ingestion": {
+    "total_requested": 500,
+    "success_count": 499,
+    "failed_count": 1,
+    "success_rate": 99.8,
+    "total_pages": 12411,
+    "total_chunks": 70794,
+    "total_mb": 1607.72,
+    "avg_pages_per_doc": 24.9,
+    "avg_chunks_per_doc": 141.9,
+    "download_duration_s": 93.97,
+    "parse_duration_s": 673.86,
+    "parse_per_page_ms": 54.3,
+    "embed_duration_s": 337.08,
+    "embed_throughput": 8.9,
+    "db_insert_s": 12.51,
+    "total_pipeline_s": 1117.42
+  },
+  "summary": {
+    "Acamind": {
+      "p50": 266.0,
+      "p90": 301.4,
+      "p99": 317.2,
+      "mean": 229.9,
+      "prec": 0.9419,
+      "rec": 0.9312,
+      "faith": 0.9619,
+      "cit": 0.9752,
+      "skip_rate": 20.0
+    },
+    "Heavy_Hybrid": {
+      "p50": 270.9,
+      "p90": 301.9,
+      "p99": 319.4,
+      "mean": 271.4,
+      "prec": 0.9228,
+      "rec": 0.9143,
+      "faith": 0.9451,
+      "cit": 0.9486
+    },
+    "Naive_Dense": {
+      "p50": 63.1,
+      "p90": 78.1,
+      "p99": 87.8,
+      "mean": 62.9,
+      "prec": 0.8031,
+      "rec": 0.7904,
+      "faith": 0.8198,
+      "cit": 0.7871
+    },
+    "BM25_Lexical": {
+      "p50": 10.3,
+      "p90": 16.7,
+      "p99": 21.3,
+      "mean": 11.5,
+      "prec": 0.7169,
+      "rec": 0.6981,
+      "faith": 0.7397,
+      "cit": 0.7142
+    }
+  },
+  "sample_tests": [
+    {
+      "id": "TEST_MATRIX_0001",
+      "category": "Cross-Article Matrix",
+      "doc_uuids": [
+        "23c50741-c304-46b0-9be8-9b5ab1af06dd",
+        "9b8e18a1-da99-494c-8a41-26391117abb2",
+        "67dd741f-80ef-40b6-a27c-bc9b3240e9bc",
+        "1affba16-f1aa-4bfe-8db3-a5161f431912"
+      ],
+      "query": "So sánh phương pháp luận và can thiệp thực nghiệm: Existence of an infinite family of substrates; One for All, All for One: Coordinated Multi-A; Grid-cell firing fields lack local sixfold sy; Conversation Is a Two-Body Problem: Dyadic Ev",
+      "doc_count": 4
+    },
+    {
+      "id": "TEST_MATRIX_0002",
+      "category": "Cross-Article Matrix",
+      "doc_uuids": [
+        "76c73c0f-4760-478e-9779-ce964bdf935c",
+        "d4fb7982-ff73-478c-bf47-5e4638b7d4d5",
+        "10c9bce7-b2d1-45b7-a282-25405ccb9e9c",
+        "788c12d2-0807-4778-ac94-937d21087f9b",
+        "0dd32dd3-f23c-448f-83ac-13ab0428c0bd"
+      ],
+      "query": "Đối chiếu kết quả định lượng, chỉ số p-value và quy mô mẫu: A High-Density EEG Dataset for Stimulus-Drive; Thin Evidence, Thick Priors: How Language Mod; Does Global Neuronal Workspace Theory Explain; ChartBmkAgent: Harness-Governed Multi-Agent C; Better Behavioral Prediction, More Faithful M",
+      "doc_count": 5
+    },
+    {
+      "id": "TEST_MATRIX_0003",
+      "category": "Cross-Article Matrix",
+      "doc_uuids": [
+        "9d655ea1-9e4d-4748-898a-d848b4e565b6",
+        "da824614-efc7-4b89-bef1-fa5127b0e403"
+      ],
+      "query": "Phát hiện mâu thuẫn học thuật và khoảng trống nghiên cứu: DepthWorld: 3D World Model for Robot Manipula; The Pushback Paradox: A Two-Probe Diagnostic ",
+      "doc_count": 2
+    },
+    {
+      "id": "TEST_MATRIX_0004",
+      "category": "Cross-Article Matrix",
+      "doc_uuids": [
+        "3cb19133-2fc5-474c-a7ea-a3bfb69c7f61",
+        "95d17c43-2eef-482d-b32a-346a175b1861",
+        "160249b4-95ed-4d2e-97d4-e294ed483a52"
+      ],
+      "query": "Tổng hợp khuyến nghị thực hành y văn tổng thể: Two Vectors Replace In-Context Demos: Structu; An adaptive fractional state links circuit me; MAESTRO: a Multimodal Auditory-attention Egoc",
+      "doc_count": 3
+    },
+    {
+      "id": "TEST_MATRIX_0005",
+      "category": "Cross-Article Matrix",
+      "doc_uuids": [
+        "2715dc3b-5e78-4685-a55d-2e36e605edba",
+        "df2cfe9a-4524-4046-aaed-fcbfe853d8e9"
+      ],
+      "query": "Phân tích cơ chế tác động tâm lý nhận thức và thần kinh học: Mind2Dialogue: Training Human-Aware Language ; Towards a full-stack functionalist theory of ",
+      "doc_count": 2
+    },
+    {
+      "id": "TEST_MATRIX_0006",
+      "category": "Cross-Article Matrix",
+      "doc_uuids": [
+        "ffae63a6-3fd4-42ec-8770-111855d43d18",
+        "04736c50-f578-4327-9330-a163d160838f",
+        "2a5c2c4c-ea98-4e61-9256-bd0788b1c9f6",
+        "9b8e18a1-da99-494c-8a41-26391117abb2",
+        "c7174a1b-2cfe-4634-9c8f-b6c82ba57d58"
+      ],
+      "query": "So sánh can thiệp số (Digital/AI) và phương pháp truyền thống: SharedKV-BT: Node-Local Typed Decisions for B; Does Steering Break Your Model? A Multi-Dimen; \"very likely\" Means \"uncertain\"? How LLMs Div; One for All, All for One: Coordinated Multi-A; T-SNN: Temporal Simplicial Neural Network for",
+      "doc_count": 5
+    },
+    {
+      "id": "TEST_MATRIX_0007",
+      "category": "Cross-Article Matrix",
+      "doc_uuids": [
+        "04f64f4f-ce4f-4c41-811e-0c28105f0e0e",
+        "d3510ed5-9bd9-42e2-9710-7647aef0ad40",
+        "c015d6c1-6af0-4aa4-9e66-a15ac655e5f2"
+      ],
+      "query": "Đối chiếu các công cụ đo lường và thang đo lâm sàng: An AI-Powered Culturally Aware Chatbot for St; Clustering without clusters: the meta-criteri; URCHIN: A Horizontal Spiking Language Model f",
+      "doc_count": 3
+    },
+    {
+      "id": "TEST_MATRIX_0008",
+      "category": "Cross-Article Matrix",
+      "doc_uuids": [
+        "6f108d60-7b64-4a84-812c-11f9370b0893",
+        "c579343e-11e7-4bcc-85e6-0e685c313029"
+      ],
+      "query": "Đánh giá độ bền vững và tiên lượng dài hạn sau can thiệp: No Transformer Beats Six Covariates: Long-Hor; Synaptic placement reflects shared input in D",
+      "doc_count": 2
+    },
+    {
+      "id": "TEST_MATRIX_0009",
+      "category": "Cross-Article Matrix",
+      "doc_uuids": [
+        "aa4b0bce-1224-4427-97dd-5589f14fdada",
+        "1a3ca660-4db7-46be-a9c6-5a8f0d143555"
+      ],
+      "query": "So sánh phương pháp luận và can thiệp thực nghiệm: Prospective Coding Improves Learning in Deep ; Periodically modulated traveling waves in int",
+      "doc_count": 2
+    },
+    {
+      "id": "TEST_MATRIX_0010",
+      "category": "Cross-Article Matrix",
+      "doc_uuids": [
+        "44c2d53c-58c1-475e-a9fe-b956602ff824",
+        "887d39e7-26d7-4d54-b95c-011a8f2eb20c",
+        "b0a4b9d0-8eb4-43dd-a94d-a64532de31e0"
+      ],
+      "query": "Đối chiếu kết quả định lượng, chỉ số p-value và quy mô mẫu: DirectSpeech2LLM: A Simple End-to-End Framewo; Buy Now, Pay Later: Academic Insights and Ope; Not What a Child Expressed: Auditing the Sign",
+      "doc_count": 3
+    },
+    {
+      "id": "TEST_MATRIX_0011",
+      "category": "Cross-Article Matrix",
+      "doc_uuids": [
+        "427fd2bc-892a-4a09-ba33-b74fae9c8120",
+        "32e1d3f5-eb13-44dd-9b01-232750d8713a",
+        "8b24f282-9c45-4b04-b5b5-883ec31184e2"
+      ],
+      "query": "Phát hiện mâu thuẫn học thuật và khoảng trống nghiên cứu: Axonal delay dispersion decides whether a neu; Balancing Memory Pathways: Analyzing and Impr; Responsible Institutional Analytics: Interpre",
+      "doc_count": 3
+    },
+    {
+      "id": "TEST_MATRIX_0012",
+      "category": "Cross-Article Matrix",
+      "doc_uuids": [
+        "04736c50-f578-4327-9330-a163d160838f",
+        "02a43a2c-be1c-46db-9aeb-dd439eda5a4e"
+      ],
+      "query": "Tổng hợp khuyến nghị thực hành y văn tổng thể: Does Steering Break Your Model? A Multi-Dimen; A foundation for systematic analysis of trans",
+      "doc_count": 2
+    },
+    {
+      "id": "TEST_MATRIX_0013",
+      "category": "Cross-Article Matrix",
+      "doc_uuids": [
+        "86c683fd-4524-471c-ba58-47692e59239c",
+        "e3a30a86-fd79-48bc-bd7a-c33231a3f3ef"
+      ],
+      "query": "Phân tích cơ chế tác động tâm lý nhận thức và thần kinh học: Multimodal Knowledge Distillation for Gastric; Isotropic Yet Undecodable: The Sequential Con",
+      "doc_count": 2
+    },
+    {
+      "id": "TEST_MATRIX_0014",
+      "category": "Cross-Article Matrix",
+      "doc_uuids": [
+        "af2962ff-0c8e-4df9-a5f4-ed09c6406825",
+        "e9654924-5730-475d-826d-6a2d2ef7bcfb",
+        "bf004e1e-4251-478a-9a12-a8b1ea8e08fb",
+        "94b312d4-64c4-49cc-bda8-30fbb2ff9421"
+      ],
+      "query": "So sánh can thiệp số (Digital/AI) và phương pháp truyền thống: BrainTaskonomy: Learning How to Pretrain and ; Novice Reliance Calibration in AI-Assisted De; Learning a non-linguistic code for inferred r; MetaLearnNCA: Few-Shot Offline Meta-Learning ",
+      "doc_count": 4
+    },
+    {
+      "id": "TEST_MATRIX_0015",
+      "category": "Cross-Article Matrix",
+      "doc_uuids": [
+        "bdd46d15-3942-4347-8168-41de9d489ad7",
+        "020dc917-d4d3-4e82-a92c-85c322431117",
+        "ce0e12bf-11ba-4d24-9960-1d031c07f786"
+      ],
+      "query": "Đối chiếu các công cụ đo lường và thang đo lâm sàng: Domain adaptation of Russian ModernBERT for l; ThinkFuse: Trajectory-Aware Test-Time Fusion ; MINDSET: Energy-based Schema Evolution for Lo",
+      "doc_count": 3
+    }
+  ]
+}

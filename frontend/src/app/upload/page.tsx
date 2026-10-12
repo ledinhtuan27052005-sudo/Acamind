@@ -10,6 +10,7 @@ import {
 import { useAppStore } from '@/store/useAppStore';
 import { uploadDocument, getDocuments, getCategories, getMyPlanUsage, DocumentInfo, DbCategory, PlanUsage } from '@/lib/api';
 import { useI18n } from '@/lib/i18n/context';
+import { GuestBlockScreen } from '@/components/auth/AuthRequiredModal';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -202,11 +203,11 @@ export default function UploadPage() {
 
   if (!user) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[50vh] gap-4 p-6">
-        <p className="text-slate-500">{t.upload.login_prompt}</p>
-        <Link href="/login" className="px-4 py-2 bg-[#002D72] text-white rounded-lg hover:bg-[#1E88E5] transition-colors">
-          {t.auth.login}
-        </Link>
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center p-4">
+        <GuestBlockScreen
+          title="Yêu cầu đăng nhập để tải lên tài liệu"
+          description="Bạn cần đăng nhập tài khoản Nhà nghiên cứu hoặc Quản trị viên để đóng góp tài liệu vào thư viện Acamind."
+        />
       </div>
     );
   }

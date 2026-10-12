@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Manrope } from 'next/font/google';
 import './globals.css';
+import 'katex/dist/katex.min.css';
 import ClientLayout from '@/components/ClientLayout';
 import { I18nProvider } from '@/lib/i18n/context';
 
