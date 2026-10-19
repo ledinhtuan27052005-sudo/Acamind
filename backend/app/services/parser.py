@@ -227,7 +227,9 @@ def parse_pdf(file_path: str, enable_ocr: bool = True, max_ocr_workers: int = 5)
         for page_num in range(total):
             page = doc[page_num]
             text = clean_text(page.get_text("text"))
-            is_scanned = len(text.strip()) < _SCAN_PAGE_MIN_CHARS
+            # Phát hiện trang scan: text quá ngắn (< 50 chars) HOẶC lớp text layer bị lỗi font nặng (chứa nhiều ký tự hỏng như ·, \ufffd)
+            corrupt_dots = text.count('·') + text.count('\ufffd')
+            is_scanned = (len(text.strip()) < _SCAN_PAGE_MIN_CHARS) or (corrupt_dots >= 15 or (len(text) > 0 and corrupt_dots / len(text) > 0.03))
             if is_scanned:
                 scanned_indices.append(page_num)
 

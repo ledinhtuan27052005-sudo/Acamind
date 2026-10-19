@@ -1,0 +1,62 @@
+{
+  "query_id": "REAL_Q_34",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Decision-Related Cognitive Signatures from Fa' và (2) 'From Signals to Trajectories: A Primer on Low'.",
+  "is_ooc": false,
+  "system": "ACAMIND",
+  "gate_passed": true,
+  "gate_score": 0.867987,
+  "dcsr_skipped": false,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 22029.01,
+  "retrieval_warm_ms": 1212.52,
+  "llm_ms": 4620.08,
+  "e2e_cold_ms": 26649.09,
+  "e2e_warm_ms": 5832.6,
+  "provided_chunks": [
+    {
+      "id": "9134e21c-e7fa-45bb-b863-551239a27293",
+      "document_id": "d3976c5b-a374-40ea-9852-bd62beebc0db",
+      "filename": "2609.15918v1.pdf",
+      "page_number": 1,
+      "content": "Decision-Related Cognitive Signatures from Fast-Slow Dynamics:\nA Low-Dimensional Observation-Operator Framework\nFurkan Emre Isik∗and Ali Demirci†\nIstanbul Technical University, Department of Mathematics Engineering,\nFaculty of Science and Letters, Istanbul, 34469, Turkey\n(Dated: September 15, 2026)\n1\narXiv:2609.15918v1  [nlin.CD]  14 Sep 2026"
+    },
+    {
+      "id": "bad09b6c-af3b-49ce-8629-cb61fd483fe6",
+      "document_id": "e9816221-d331-447d-b90c-61626ca505d8",
+      "filename": "2609.32315v1.pdf",
+      "page_number": 1,
+      "content": "1 \n \nFrom Signals to Trajectories: A Primer on Low-Dimensional Dynamics in \nHuman EEG and MEG \n \n \nVanessa Hadid 1,4, Hamza Abdelhedi2,5,7, Annalisa Pascarella3, Sara A. Solla8,9,10, Paul Cisek6,11, \nKarim Jerbi2,4,5,6 \n \n1  McGill University Health Centre, McGill University, Montréal, QC, Canada \n2 Cognitive and Computational Neuroscience Laboratory, Université de Montréal, QC, Canada \n3  Institute of Applied Mathematics M. Picone, National Council of Research, Rome, Italy \n4 Psychology Department, Université de Montréal, QC, Canada \n5 MILA (Quebec Artificial Intelligence Institute), Montreal, QC, Canada \n6 Centre UNIQUE (Quebec Neuro-AI Research Center), Montreal, QC, Canada \n7 Pharmacology and Physiology Department, Université de Montréal, QC, Canada"
+    },
+    {
+      "id": "b7ccbac2-fc4f-4893-ac3b-6e987402bd01",
+      "document_id": "d3976c5b-a374-40ea-9852-bd62beebc0db",
+      "filename": "2609.15918v1.pdf",
+      "page_number": 18,
+      "content": "Hopf boundaries unless nonlinear bifurcation conditions are established. The slow-fast and\nstability results identify structures compatible with the observed signatures, while the ob-\nservation layer prevents latent dynamics from being treated as directly observed cognitive\nmechanisms.\nThe framework numerically illustrates T1–T3 and analytically characterizes the attracting-\nequilibrium regime associated with T4. It is a generative-sufficiency framework and does not\nconstitute either an empirical validation of the model or an identification of the underlying\npsychological mechanism. A natural next step is therefore empirical. If temporally resolved\nexperimental data capable of representing the evolution of decision-related behavior become"
+    },
+    {
+      "id": "3ebfd4b0-75ad-47d0-9858-d0caf202b1c7",
+      "document_id": "e9816221-d331-447d-b90c-61626ca505d8",
+      "filename": "2609.32315v1.pdf",
+      "page_number": 1,
+      "content": "challenges such as spatial mixing, preprocessing sensitivity, validation, and overinterpretation. \nFinally, we situate PCA within a broader family of state-space methods. By making neural \ntrajectories practical and interpretable, this primer offers a guide for bringing the conceptual \nframework of population-level dynamics into mainstream human cognitive neuroscience. \n \nKeywords: \n \nNeural trajectories, State-space analysis, Neural manifolds, Principal component analysis (PCA), \nDimensionality reduction, EEG, MEG, Electrophysiology, Population-level neural dynamics, latent \nvariable models, Neural population coding, Time-resolved neuroimaging"
+    },
+    {
+      "id": "e3e61d21-4ecb-4061-8114-dfca7f9d53a4",
+      "document_id": "d3976c5b-a374-40ea-9852-bd62beebc0db",
+      "filename": "2609.15918v1.pdf",
+      "page_number": 16,
+      "content": "V.\nDISCUSSION\nThe analytical results and model-generated demonstrations can now be considered to-\ngether to clarify what the framework does, and does not, imply about observable decision-\nrelated dynamics. The discussion below focuses on the relation between latent dynamical\nstructure and observable signatures, the information restriction imposed by the observation\noperator, and the interpretive scope of the resulting correspondence with the behavioral\nliterature.\nA.\nOne system, multiple observable signatures\nThe principal result is structural: several organizations of observable decision-related time\nseries can be generated within one low-dimensional model. The three-equilibrium wedge\nestablishes multiplicity and a central saddle; branch coexistence becomes bistability only"
+    },
+    {
+      "id": "13bc23e0-7130-4f3c-b991-5c026764a76e",
+      "document_id": "e9816221-d331-447d-b90c-61626ca505d8",
+      "filename": "2609.32315v1.pdf",
+      "page_number": 12,
+      "content": "principal axes were then estimated from this matrix, and the data were projected onto the first K PC \naxes, yielding a reduced representation of dimensions (T × N × S) × K (cf. Figure 2). \nBecause the principal axes are estimated from all subjects and conditions simultaneously, the \nresulting state space provides a common low-dimensional coordinate system for comparing neural \ndynamics across participants and task conditions. By identifying dominant axes of covariance, PCA \ntransforms the original high-dimensional (N_ch=64) signal into a lower-dimensional (K=3) space. The \ntemporal evolution of the data can be visualized as trajectories in the low-dimensional PC space. \nThe component time courses (Figure 2b)—reveal how strongly each principal component is"
+    }
+  ],
+  "answer": "## I. Giới thiệu chung và Bối cảnh tài liệu\n\nDựa trên ngữ cảnh được cung cấp từ hai bài báo nghiên cứu khoa học, ta tiến hành so sánh và đối chiếu giữa hai công trình:\n1. **Bài báo (1)**: *\"Decision-Related Cognitive Signatures from Fast-Slow Dynamics: A Low-Dimensional Observation-Operator Framework\"* (Isik & Demirci) [2609.15918v1.pdf - Trang 1].\n2. **Bài báo (2)**: *\"From Signals to Trajectories: A Primer on Low-Dimensional Dynamics in Human EEG and MEG\"* (Hadid et al.) [2609.32315v1.pdf - Trang 1].\n\n---\n\n## II. So sánh và Đối chiếu chi tiết\n\n### 1. Phương pháp tiếp cận (Methodological Approaches)\n* **Bài báo (1)**: Sử dụng **khung toán tử quan sát chiều thấp (Low-Dimensional Observation-Operator Framework)** và **động lực học nhanh - chậm (Fast-Slow Dynamics)** để tạo ra các chữ ký nhận thức liên quan đến quyết định (Decision-Related Cognitive Signatures) [2609.15918v1.pdf - Trang 1]. Phương pháp này mang tính chất lý thuyết và mô hình hóa tạo sinh (generative-sufficiency framework), minh họa bằng số các chế độ T1–T3 và phân tích đặc trưng chế độ cân bằng hấp dẫn (attracting-equilibrium regime) [2609.15918v1.pdf - Trang 18].\n* **Bài báo (2)**: Tập trung vào **phân tích không gian trạng thái (State-Space Analysis)** và **phương pháp phân tích thành phần chính (Principal Component Analysis - PCA)** nhằm giảm chiều dữ liệu (Dimensionality Reduction) cho tín hiệu điện não đồ (**electroencephalography - EEG**) và từ não đồ (**magnetoencephalography - MEG**) [2609.32315v1.pdf - Trang 1]. Phương pháp này biến đổi tín hiệu không gian chiều cao ($N_{ch}=64$) thành không gian chiều thấp hơn ($K=3$) để trực quan hóa quỹ đạo thần kinh (neural trajectories) [2609.32315v1.pdf - Trang 12].\n\n### 2. Đối tượng và Dữ liệu nghiên cứu (Subjects and Data Focus)\n* **Bài báo (1)**: Không tập trung vào dữ liệu thực nghiệm sinh học thần kinh cá nhân hay nhóm người cụ thể trong các đoạn trích, mà tập trung vào **cấu trúc động lực học ẩn (latent dynamical structure)**, hệ thống toán học bao gồm nêm ba điểm cân bằng (three-equilibrium wedge) và các đường biên Hopf (Hopf boundaries) [2609.15918v1.pdf - Trang 16] [2609.15918v1.pdf - Trang 18].\n* **Bài báo (2)**: Đối tượng nghiên cứu là **dữ liệu điện sinh lý người** thu nhận từ các hệ thống **EEG và MEG** ở cấp độ quần thể thần kinh (population-level neural dynamics) [2609.32315v1.pdf - Trang 1]. Phương pháp ước tính trục chính được thực hiện đồng thời trên tất cả các đối tượng và điều kiện nhiệm vụ nhằm tạo ra hệ tọa độ không gian trạng thái chung [2609.32315v1.pdf - Trang 12].\n\n### 3. Kết luận chính và Đóng góp (Main Conclusions and Contributions)\n* **Bài báo (1)**: Kết luận chính mang tính cấu trúc: **nhiều tổ chức của chuỗi thời gian quan sát liên quan đến quyết định có thể được tạo ra trong một mô hình chiều thấp duy nhất** [2609.15918v1.pdf - Trang 16]. Tác giả nhấn mạnh đây là khung tạo sinh đủ (generative-sufficiency framework), không phải là sự xác thực thực nghiệm hay nhận dạng cơ chế tâm lý trực tiếp; lớp quan sát ngăn cản việc coi động lực học ẩn là cơ chế nhận thức quan sát trực tiếp [2609.15918v1.pdf - Trang 18].\n* **Bài báo (2)**: Kết luận rằng bằng cách làm cho các quỹ đạo thần kinh trở nên thiết thực và dễ diễn giải, **PCA cung cấp một hướng dẫn đưa khung khái niệm động lực học cấp độ quần thể vào khoa học thần kinh nhận thức người chủ đạo** [2609.32315v1.pdf - Trang 1]. Bài báo đồng thời giải quyết các thách thức như trộn không gian, độ nhạy tiền xử lý, tính hợp lệ và hiện tượng diễn giải quá mức (overinterpretation) trong phân tích không gian trạng thái [2609.32315v1.pdf - Trang 1].\n\n---\n\n## III. Bảng tổng hợp đối chiếu\n\n| Tiêu chí so sánh | Bài báo (1): Isik & Demirci | Bài báo (2): Hadid et al. |\n| :--- | :--- | :--- |\n| **Khung phương pháp** | Động lực học nhanh - chậm và Toán tử quan sát chiều thấp [2609.15918v1.pdf - Trang 1] | Phân tích không gian trạng thái và Phân tích thành phần chính (PCA) [2609.32315v1.pdf - Trang 1] |\n| **Đối tượng / Dữ liệu** | Mô hình toán học lý thuyết và cấu trúc động lực học ẩn [2609.15918v1.pdf - Trang 16] | Tín hiệu điện sinh lý người từ EEG và MEG [2609.32315v1.pdf - Trang 1] |\n| **Đóng góp chính** | Chứng minh một hệ thống chiều thấp có thể tạo ra nhiều chữ ký quan sát khác nhau [2609.15918v1.pdf - Trang 16] | Cung cấp hướng dẫn thực tiễn để ứng dụng quỹ đạo thần kinh vào khoa học thần kinh nhận thức [2609.32315v1.pdf - Trang 1] |\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+}

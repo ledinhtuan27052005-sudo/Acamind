@@ -1,0 +1,62 @@
+{
+  "query_id": "REAL_Q_42",
+  "type": "Literature Synthesis",
+  "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Balancing Memory Pathways: Analyzin | Slow Context, Fast Symptoms: Multis | Symphony for Text Generation: Bench",
+  "is_ooc": false,
+  "system": "ACAMIND",
+  "gate_passed": true,
+  "gate_score": 0.988794,
+  "dcsr_skipped": false,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 20918.05,
+  "retrieval_warm_ms": 962.75,
+  "llm_ms": 4429.33,
+  "e2e_cold_ms": 25347.38,
+  "e2e_warm_ms": 5392.08,
+  "provided_chunks": [
+    {
+      "id": "49c2f8c5-f554-47e7-9d79-1034ce46dc23",
+      "document_id": "55a67f34-2e6f-4e72-9f64-ea39d65610f8",
+      "filename": "2610.06750v1.pdf",
+      "page_number": 1,
+      "content": "BALANCING MEMORY PATHWAYS: ANALYZING AND\nIMPROVING MEMORY UTILIZATION IN HYBRID LMS\nHyunji Lee1∗\nJoykirat Singh1\nZaid Khan1\nJustin Chih-Yao Chen1\nElias Stengel-Eskin2\nAlessandro Sordoni3\nArman Cohan4\nMohit Bansal1\n1UNC Chapel Hill\n2The University of Texas at Austin\n3Mila\n4Yale University\nABSTRACT\nRecurrent–attention hybrid language models (LMs), which interleave attention\nand recurrent layers, are increasingly used to combine the efficiency of the re-\ncurrent layers with the strong performance of attention layers. Prior work sug-\ngests that attention and recurrent layers offer complementary pathways to use past\ninformation: attention supports precise memory recall from earlier tokens, while\nrecurrent layers support consolidation of disparate information over long contexts."
+    },
+    {
+      "id": "e4f008a1-53d3-4344-988a-b635a460a00e",
+      "document_id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+      "filename": "2609.22935v2.pdf",
+      "page_number": 3,
+      "content": "SLOW–FAST PSYCHOLOGICAL DYNAMICS\n3\nSlow Context, Fast Symptoms: Multiscale Temporal Dynamics and Context-Induced\nCoupling in Psychological Systems\nChanges in psychological states can occur over short timescales, while the context that\nshapes those changes often evolves more slowly. Symptoms, affect, and attention can shift over\nshort timescales, while stress exposure, social isolation, financial strain, biological vulnerability,\nand environmental context often change more slowly. Slow context does not simply sit outside\npsychological dynamics. It can change how easily faster states become active, how long they\npersist, and how easily they recover.\nPsychopathology symptom networks offer a useful case for studying this slow–fast"
+    },
+    {
+      "id": "1166bb88-0dd7-4d74-8f78-1f4b1ae16e18",
+      "document_id": "785d9d25-1de9-4f62-a604-a413b7f21b73",
+      "filename": "2610.08161v1.pdf",
+      "page_number": 1,
+      "content": "Symphony for Text Generation\nBenchmarking Clinical Note Generation\nDaniel Varab\nVictor Petrén Bach Hansen\nMatthew Newton\nAsbjørn W Helge\nKevin Pelgrims\nMathias Baltzersen*\nAdrian Young-San Roessler\nVanessa Klungtvedt\nMaximilian Brand\nLasse Krogsbøll\nHenrik Cullen\nLars Maaløe\nAbstract\nAmbient documentation systems are rapidly gaining adoption, yet their impact\non clinical note quality remains poorly characterized. We introduce MedConv, a\nmultilingual dataset of 300 clinical encounters in English, Danish, and German, and\nuse it alongside the Ambient Clinical Intelligence benchmark (ACI-BENCH) to\ncompare Corti, a clinical AI platform, with two leading, accessible ambient scribe\nsoftware applications built on general-purpose AI. We present a controlled clinical"
+    },
+    {
+      "id": "b304ab86-2bb4-45f3-8935-de26b77d545c",
+      "document_id": "55a67f34-2e6f-4e72-9f64-ea39d65610f8",
+      "filename": "2610.06750v1.pdf",
+      "page_number": 16,
+      "content": "effective coordination under joint training.\nC.3.3\nADDING AN AUXILIARY LOSS TO ENCOURAGE LATENT MEMORY USE IMPROVES\nPERFORMANCE\nKey Observation: Adding an auxiliary loss that encourages the model to use a designated\nmemory pathway improves memory coordination and overall performance.\nThe gains are\nlargest when pathway selection follows the verbatim criterion identified in Appendix C.3.1.\nThe previous section shows that naive joint training leads to imbalanced use of the two memory\npathways, with the model relying predominantly on textual memory and underutilizing information\ncaptured by latent memory. We therefore examine whether an auxiliary objective that explicitly en-\ncourages the model to make use of the underutilized latent memory improves memory coordination"
+    },
+    {
+      "id": "73d3368b-58c9-404f-bc27-0d7be927f6ef",
+      "document_id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+      "filename": "2609.22935v2.pdf",
+      "page_number": 1,
+      "content": "SLOW–FAST PSYCHOLOGICAL DYNAMICS\n1\nSlow Context, Fast Symptoms: Multiscale Temporal Dynamics and Context-Induced\nCoupling in Psychological Systems\nKyuri Park*1, Denny Borsboom3, Mike Lees1,2, Lourens Waldorp3, Johan Bollen1, and Vítor V.\nVasconcelos1,2\n1 University of Amsterdam, Informatics Institute, Computational Science Lab\n2 University of Amsterdam, Institute for Advanced Study\n3 University of Amsterdam, Department of Psychology\nAuthor Note\nAuthor contact information. Kyuri Park (k.park@uva.nl); Vítor V. Vasconcelos\n(v.v.vasconcelos@uva.nl); Mike Lees (m.h.lees@uva.nl); Denny Borsboom\n(d.borsboom@uva.nl); Lourens Waldorp (l.j.waldorp@uva.nl); Johan Bollen\n(j.l.t.m.bollen@uva.nl).\nCorrespondence. *Correspondence concerning this article should be addressed to Kyuri\nPark."
+    },
+    {
+      "id": "c6f4335b-9abe-4fd1-95dd-e02d4310266b",
+      "document_id": "785d9d25-1de9-4f62-a604-a413b7f21b73",
+      "filename": "2610.08161v1.pdf",
+      "page_number": 14,
+      "content": "B\nSymphony for Text Generation\nText Generation API endpoints\nSymphony exposes clinical text and document generation via\nseveral API endpoints spanning general LLM inference, clinical fact extraction (FactsR [Hansen et al.,\n2025]) and guided document synthesis, and working in tandem with Symphony for speech-to-text\n[Nix et al., 2026], Symphony for medical coding [Edin et al., 2026], and agentic orchestration of\nmulti-step clinical workflows. The guided document synthesis API accepts multiple forms of clinical\ncontext and return schema-controlled, structured clinical documents based on fully API-configurable\ntemplates. This modular architecture enables straightforward customization and orchestration of"
+    }
+  ],
+  "answer": "## I. Tổng hợp các đóng góp cốt lõi từ ba nghiên cứu\n\nDựa trên các tài liệu đã được tải lên, ba nghiên cứu thuộc các lĩnh vực khác nhau (mô hình ngôn ngữ lai, động lực học tâm lý, và đánh giá tạo văn bản y khoa) đóng góp các khía cạnh cốt lõi sau:\n\n### 1. Balancing Memory Pathways: Analyzing and Improving Memory Utilization in Hybrid LMs\n* **Đóng góp cốt lõi về mô hình ngôn ngữ:** Nghiên cứu phân tích cách các mô hình ngôn ngữ lai kết hợp cơ chế chú ý (attention layers) và lớp hồi tiếp (recurrent layers) để tận dụng thông tin quá khứ. Cụ thể, các lớp chú ý hỗ trợ việc **truy hồi bộ nhớ chính xác** (precise memory recall) từ các token trước đó, trong khi các lớp hồi tiếp hỗ trợ **củng cố thông tin rời rạc** trong các ngữ cảnh dài [2610.06750v1.pdf - Trang 1].\n* **Thực nghiệm cải tiến:** Quá trình huấn luyện chung (joint training) nguyên thủy thường dẫn đến việc mô hình mất cân bằng, lạm dụng bộ nhớ văn bản và bỏ quên **bộ nhớ tiềm ẩn** (latent memory). Nghiên cứu chỉ ra rằng việc bổ sung một hàm mất mát phụ trợ (auxiliary loss) giúp khuyến khích mô hình sử dụng tuyến bộ nhớ tiềm ẩn đang bị thiếu sử dụng, từ đó cải thiện sự phối hợp bộ nhớ và nâng cao hiệu suất tổng thể [2610.06750v1.pdf - Trang 16].\n\n### 2. Slow Context, Fast Symptoms: Multiscale Temporal Dynamics and Context-Induced Coupling in Psychological Systems\n* **Đóng góp cốt lõi về động lực học tâm lý:** Nghiên cứu phân tích **động lực học tâm lý đa tỷ lệ thời gian** (multiscale temporal dynamics) và hiện tượng ghép nối do bối cảnh (context-induced coupling) trong hệ thống tâm lý. Các trạng thái tâm lý, triệu chứng, cảm xúc (affect) và sự chú ý có thể biến đổi trên **thời gian ngắn** (short timescales), trong khi các yếu tố bối cảnh định hình chúng thay đổi chậm hơn [2609.22935v2.pdf - Trang 3].\n* **Cơ chế tác động:** Các yếu tố bối cảnh chậm bao gồm việc tiếp xúc với căng thẳng (stress exposure), cô lập xã hội (social isolation), áp lực tài chính (financial strain), tính dễ tổn thương sinh học (biological vulnerability) và bối cảnh môi trường. Bối cảnh chậm không đứng ngoài các động lực tâm lý mà trực tiếp thay đổi mức độ hoạt hóa của các trạng thái nhanh, thời gian duy trì và tốc độ phục hồi của chúng [2609.22935v2.pdf - Trang 3].\n\n### 3. Symphony for Text Generation: Benchmarking Clinical Note Generation\n* **Đóng góp cốt lõi về y khoa số và tài nguyên dữ liệu:** Nghiên cứu giới thiệu **MedConv**, một bộ dữ liệu đa ngôn ngữ gồm 300 ca tiếp xúc lâm sàng bằng tiếng Anh, tiếng Đan Mạch và tiếng Đức. Bộ dữ liệu này được sử dụng cùng với chuẩn **Ambient Clinical Intelligence benchmark (ACI-BENCH)** nhằm đánh giá tác động của các hệ thống ghi chép tự động (ambient documentation systems) đối với chất lượng ghi chú lâm sàng [2610.08161v1.pdf - Trang 1].\n* **Kiến trúc API tạo văn bản:** Nền tảng Symphony cung cấp các điểm cuối API tạo văn bản và tài liệu y khoa thông qua suy luận LLM tổng quát, trích xuất sự thật lâm sàng (**FactsR** [Hansen et al., 2025]), tổng hợp tài liệu có hướng dẫn, kết hợp với chuyển giọng nói thành văn bản [Nix et al., 2026], mã hóa y tế [Edin et al., 2026] và điều phối tác nhân (agentic orchestration) cho các quy trình lâm sàng nhiều bước [2610.08161v1.pdf - Trang 14].\n\n---\n\n## II. Khuyến nghị lâm sàng và thực hành\n\n> *\"Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.\"*\n\n* **Trong can thiệp và đánh giá tâm lý lâm sàng:** Cần nhìn nhận các triệu chứng tâm lý (như lo âu, trầm cảm, biến động cảm xúc) gắn liền với bối cảnh vĩ mô thay đổi chậm (áp lực tài chính, căng thẳng mạn tính, cô lập xã hội). Việc điều trị cần giải quyết cả triệu chứng cấp tính (thời gian ngắn) lẫn việc điều chỉnh bối cảnh nền tảng nhằm cải thiện tốc độ phục hồi và giảm thời gian duy trì trạng thái bệnh lý [2609.22935v2.pdf - Trang 3].\n* **Trong ứng dụng trí tuệ nhân tạo và công nghệ y tế:** Khi triển khai các hệ thống tài liệu xung quanh môi trường lâm sàng (ambient documentation systems) hoặc nền tảng AI như Corti và Symphony, cần ứng dụng các chuẩn đánh giá đa ngôn ngữ (như MedConv và ACI-BENCH) để kiểm soát chất lượng ghi chú y khoa, đảm bảo tính cấu trúc và độ chính xác của dữ liệu trích xuất nhằm hỗ trợ tối ưu các quy trình làm việc lâm sàng [2610.08161v1.pdf - Trang 1] [2610.08161v1.pdf - Trang 14]."
+}

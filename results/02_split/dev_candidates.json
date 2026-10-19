@@ -1,0 +1,422 @@
+[
+  {
+    "query_id": "DEV_Q_01",
+    "category": "Factual Q&A",
+    "query_text": "According to 'Predictors of Loneliness in Older Adults Using Multimodal Analysis of Speech and Language' (2609.02606v1.pdf, page 3), what specific empirical findings or methodological details are reported regarding linguistic, features, reflecting, negative, tone, self-focus?",
+    "candidate_doc_id": "0ce281a5-830b-4a3f-a608-86241233d138",
+    "candidate_filename": "2609.02606v1.pdf",
+    "candidate_page": "3",
+    "evidence_quote": "linguistic features reflecting negative tone and self-focus will correlate with higher loneliness, while social and affective language will correlate with lower loneliness, and (iii) a multimodal model combining both modalities will outperform unimodal approaches. Results: The following analyses are exploratory and descriptive in nature and are intended to characterize patterns of association within demographic strata rather than to support causa",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_02",
+    "category": "Factual Q&A",
+    "query_text": "According to 'The Psychological Costs of Artificial Intelligence Adoption in Software Engineering' (2609.03456v1.pdf, page 10), what specific empirical findings or methodological details are reported regarding Alami, Initial, meeting, program, director, background?",
+    "candidate_doc_id": "503c9b35-a715-4137-ad89-a3ac1105a48b",
+    "candidate_filename": "2609.03456v1.pdf",
+    "candidate_page": "10",
+    "evidence_quote": "10 Alami, et al. Jan. 2026 Feb. 2026 Mar. 2026 Aug. 2026 May 2026 Initial meeting CIO, CTO & AI program director: background and context understanding 20th of Jan. 2026 Participant recruitment Study communicated via AI program director; 20 practitioners volunteered, plus the AI Program Director N=21 Semi-structured interviews Interviews with the 20 participants Context understanding: four meetings with the AI program director, between Jan. and en",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_03",
+    "category": "Factual Q&A",
+    "query_text": "According to 'DementiaCare-Bench: A Modality-Validated Video Benchmark' (2609.12929v1.pdf, page 2), what specific empirical findings or methodological details are reported regarding benchmark, dementia, caregiving, comprises, caregiv-, videos?",
+    "candidate_doc_id": "a17d1aba-d1e2-4f15-8420-6184accb65f5",
+    "candidate_filename": "2609.12929v1.pdf",
+    "candidate_page": "2",
+    "evidence_quote": "benchmark for dementia caregiving. It comprises 56 caregiv- ing videos from 11 publicly available training sources, seg- mented into 94 clips across nine clinically grounded BPSD categories, with 2,023 multiple-choice questions in 14 cate- gories. 38 of the videos are paired: the same incident appears twice, once with the common caregiver response and once with the expert-recommended one. A question about whether a response was appropriate theref",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_04",
+    "category": "Factual Q&A",
+    "query_text": "According to 'Beyond Benefit or Risk: Perceived Impact Profiles of Human-AI Affective Interaction and Their Associations with Psychological Functioning' (2609.16645v1.pdf, page 9), what specific empirical findings or methodological details are reported regarding Frequencies, calculated, coded-segment, participant, levels, Participant?",
+    "candidate_doc_id": "d5d03f96-d60e-4dc9-a542-7ce6907bc820",
+    "candidate_filename": "2609.16645v1.pdf",
+    "candidate_page": "9",
+    "evidence_quote": "Frequencies were calculated at both the coded-segment and participant levels. Participant counts were based on unique participant IDs, such that a participant was counted only once within each node, subtheme, or overarching theme regardless of the number of relevant segments. Participant percentages used the full interview sample as the denominator (N = 52). Illustrative quotations were translated from Chinese into English and checked against the",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_05",
+    "category": "Factual Q&A",
+    "query_text": "According to 'Deep Persona: A Psychologically Grounded Architecture and Evaluation Framework for Role-Playing Agents and Simulations' (2609.22255v1.pdf, page 8), what specific empirical findings or methodological details are reported regarding human, behavior, defined, using, Mahalanobis, distance?",
+    "candidate_doc_id": "9e59b28f-3ed9-430a-8a82-b311f46a5433",
+    "candidate_filename": "2609.22255v1.pdf",
+    "candidate_page": "8",
+    "evidence_quote": "human behavior is defined using the Mahalanobis distance: dM(SA) = q (SA −µh)T Σ−1 h (SA −µh). The squared Mahalanobis distance, d2 M, fol- lows a χ2 distribution with n degrees of free- dom (here n = 4), enabling statistical testing of whether the agent significantly deviates from human-like behavior. A non-significant result (p > 0.05) indicates that the agent’s profile is sta- tistically indistinguishable from the human base- line. Beyond hypo",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_06",
+    "category": "Factual Q&A",
+    "query_text": "According to 'Foundation-model-based multi-label phenotyping of combined hyperkinetic movement disorders' (2609.22369v1.pdf, page 6), what specific empirical findings or methodological details are reported regarding multi-label, output, Dystonia, Tremor, Myoclonus, Chorea?",
+    "candidate_doc_id": "0cb02e5a-8998-41fd-b30d-5787c775dfe4",
+    "candidate_filename": "2609.22369v1.pdf",
+    "candidate_page": "6",
+    "evidence_quote": "multi-label output Dystonia Tremor Myoclonus Chorea Athetosis Ballismus Stereotypies Tics Shared backbone — trained once, frozen during transfer Patient-level decision — recalibrated per site b Train-once, calibrate-then-deploy study design Development datasets Standardized adult examination n = 25 (21 patients + 4 controls) train once Shared backbone SAM 3 + TabICLv2 frozen after training applied unchanged / no retraining Applied to three indepe",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_07",
+    "category": "Factual Q&A",
+    "query_text": "According to 'CG-Probes: Recovering Guardrail Directions from Patient Query Embeddings' (2609.31062v1.pdf, page 2), what specific empirical findings or methodological details are reported regarding principles, autoregressive, LLMs, probing, reading, residual?",
+    "candidate_doc_id": "b940d9fc-a595-44ca-acca-222d4d1524e6",
+    "candidate_filename": "2609.31062v1.pdf",
+    "candidate_page": "2",
+    "evidence_quote": "these principles to autoregressive LLMs by probing (i.e., reading from residual streams) and steering (i.e., adding concept vectors dur- ing generation to shift model output) along linear directions [58]. The concept vectors can be computed as mean differences over contrastive pairs [42]—requiring only a written description of the target concept [12]—and DiM probes rival trained classifiers [26]. The probing requires white-box access to internal ",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_08",
+    "category": "Factual Q&A",
+    "query_text": "According to 'COMPASS 2.0: psychometric representational similarity analysis distinguishes symptom structure from personal signal' (2610.06615v1.pdf, page 2), what specific empirical findings or methodological details are reported regarding Whether, measure, tracks, right, person, requires?",
+    "candidate_doc_id": "af22f194-5bbd-4ba3-8c8a-3de79b1123e2",
+    "candidate_filename": "2610.06615v1.pdf",
+    "candidate_page": "2",
+    "evidence_quote": "Whether a measure tracks the right person requires a separate, person-paired test. Clinical applications also require scores. COMPASS (Computational Mapping of Psychometric Assessment in Speech and Semantics) applies instrument scoring keys to the same item activity profiles, estimating symptoms, alliance or other constructs, following them over a conversation and comparing them between speakers. Our earlier version introduced alliance scoring in",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_09",
+    "category": "Factual Q&A",
+    "query_text": "According to 'MedPrune: Topology-Efficient Multimodal Multi-Agent Communication Evolution for Medical VQA Tasks' (2610.06695v1.pdf, page 7), what specific empirical findings or methodological details are reported regarding 22.49, 33.70, 72.49, 34.42, 40.78, 85.84?",
+    "candidate_doc_id": "994b4ec5-42ec-47de-af9d-bb7f9486854a",
+    "candidate_filename": "2610.06695v1.pdf",
+    "candidate_page": "7",
+    "evidence_quote": "22.49 33.70 72.49 34.42 40.78 85.84 89.71 72.11±1.4 MMedAgent-RL 19.12 31.97 70.05 34.23 38.84 87.12 82.09 69.35±0.5 Adaptive Evolving M3Prune 21.76 33.40 71.62 31.30 39.52 86.54 89.04 71.70±0.3 ARG-Designer† 21.98 33.67 71.91 31.65 39.86 86.23 88.82 71.64±0.6 Ours 22.67 34.34 73.24 35.26 41.38 90.66 95.79 75.94±0.8 Table 1: The performance of full-set and few-shot training with Qwen3-VL (8B). Due to space limitation, the results across different",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_10",
+    "category": "Factual Q&A",
+    "query_text": "According to 'Kurate: Scalable Scientific Quality Analysis' (2610.07306v1.pdf, page 17), what specific empirical findings or methodological details are reported regarding comparable, ours, because, Kurate, scored, against?",
+    "candidate_doc_id": "ede2182d-cb42-4634-a2db-43a7da6b978a",
+    "candidate_filename": "2610.07306v1.pdf",
+    "candidate_page": "17",
+    "evidence_quote": "comparable to ours, because Kurate is also scored against those consensus labels. The agreement between the two human annotators (AC1 0.782) instead measures how much two experts agree with each other. The third figure is the agreement of the baseline system with the consensus labels (AC1 0.796, F1 0.822). A.2 Results for each benchmark item Tables 7 and 8 give the counts for each item under the benchmark’s own item identifiers, for both measures",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_11",
+    "category": "Factual Q&A",
+    "query_text": "According to 'Closing Ambient Clinical Documentation Gaps with Automated Provider Queries' (2610.07502v1.pdf, page 5), what specific empirical findings or methodological details are reported regarding mative, questions, study, features, predict, per-turn?",
+    "candidate_doc_id": "4bf065f9-ebf0-453c-85c1-3522318297ad",
+    "candidate_filename": "2610.07502v1.pdf",
+    "candidate_page": "5",
+    "evidence_quote": "mative questions we study which features predict the per-turn change in the task metric (∆metric). Ev- ery question is scored post-hoc by an LLM judge on five 0–5 rubrics; the rubrics were developed with clinical experts and evaluated with Claude Opus 4.6 (Appendix E). Figure 2 plots the mean ∆metric inside each rubric bin, and Figure 3 aggre- gates by question category. Table 6 reports the per-feature Pearson correla- tion with ∆metric across th",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_12",
+    "category": "Factual Q&A",
+    "query_text": "According to 'No Transformer Beats Six Covariates: Long-Horizon Prediction of Depressive Symptoms from Childhood Essays' (2610.07764v1.pdf, page 3), what specific empirical findings or methodological details are reported regarding except, Social, class, follows, Reg-, istrar?",
+    "candidate_doc_id": "95015d2c-34e1-4b78-8397-d03a044c97e1",
+    "candidate_filename": "2610.07764v1.pdf",
+    "candidate_page": "3",
+    "evidence_quote": "age 11 except sex. Social class follows the UK Reg- istrar General’s classification (Galobardes et al., 2006), and cognitive ability comes from teacher- administered verbal and non-verbal tests. Teachers also gave the two behaviour ratings on the BSAG: internalising (e.g. withdrawal) and externalising (e.g. hostility), where higher scores mean more problems. Both ratings are early markers of later mental-health problems (Roza et al., 2003; Clark ",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_13",
+    "category": "Cross-Article Comparison",
+    "query_text": "How does the analysis of Kang, explanations, lower, perceived, competence, defer in 'Novice Reliance Calibration in AI-Assisted Decision Making: The Role of Explanations and Self-Assessment' (2610.07800v1.pdf, p.2) differ from the findings on JIANG, Research, manuscript, ABSTRACT, central, challenge in 'A self-learning scientific agent for X-ray diffraction' (2610.07862v1.pdf, p.2)?",
+    "candidate_doc_id": "64ffa87c-128f-4c4a-a41a-2eb9aff184ab;73e9f029-d19b-461c-a05a-bda559052ad1",
+    "candidate_filename": "2610.07800v1.pdf;2610.07862v1.pdf",
+    "candidate_page": "2610.07800v1.pdf:p2;2610.07862v1.pdf:p2",
+    "evidence_quote": "[Doc1 p2] Kang et al. their explanations, while those with lower perceived competence may defer to the AI by default. Through a between-subjects study with 110 participants work- ing on a clinical entity extrac || [Doc2 p2] GAN JIANG Research manuscript ABSTRACT A central challenge for scientific agents is to turn analytical experience into reusable expertise grounded in physical evidence. Here we introduce Gan Jiang, a",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_14",
+    "category": "Cross-Article Comparison",
+    "query_text": "How does the analysis of analysis, Implementation, Details, Hyperparameters, Candidate, instances in 'SAGE: Semantic Anchor-Guided Evolution for Grounded Medical QA Data Synthesis' (2610.08093v1.pdf, p.13) differ from the findings on Domain, Sensor, Tokens, Compression, Speedup, Clinical in 'Sensor-Language-Action Models' (2610.08244v1.pdf, p.28)?",
+    "candidate_doc_id": "5de42efe-3c4f-44ed-a18b-fe8c58daabbe;90988e1f-3a4c-4aee-924b-8b5771f7190b",
+    "candidate_filename": "2610.08093v1.pdf;2610.08244v1.pdf",
+    "candidate_page": "2610.08093v1.pdf:p13;2610.08244v1.pdf:p28",
+    "evidence_quote": "[Doc1 p13] analysis (MIT). B Implementation Details and Hyperparameters Candidate instances are sampled with a tempera- ture of 0.7, top-p of 0.95, and a maximum genera- tion length of 4,096 tokens. For each eli || [Doc2 p28] Domain Sensor Tokens↓ Compression↑ Speedup↑ Clinical 5801.0 →400.4 14.49× 3.4× OR 3915.8 →838.0 4.67× 1.7× CGM 33.0 →21.0 1.57× 1× F. Additional Examples F.1. Multi-faceted Caption Examples Examples 3",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_15",
+    "category": "Cross-Article Comparison",
+    "query_text": "How does the analysis of Curriculum, verl, Unless, otherwise, noted, follow in 'MedZERO: Self-Evolving Agents for Open-Ended Medical Reasoning Through Controlled Knowledge Accumulation' (2610.08327v1.pdf, p.15) differ from the findings on Knee3DVLM, Dual-Sequence, Full-Volume, Vision, Language, Modeling in 'Knee3DVLM: Dual-Sequence Full-Volume Vision-Language Modeling for Comprehensive Knee MRI Assessment' (2610.08482v1.pdf, p.2)?",
+    "candidate_doc_id": "cf261ad1-c41e-486a-b117-4700827b065e;3db9d70b-6bcc-42ae-8adc-2ce6d6be7104",
+    "candidate_filename": "2610.08327v1.pdf;2610.08482v1.pdf",
+    "candidate_page": "2610.08327v1.pdf:p15;2610.08482v1.pdf:p2",
+    "evidence_quote": "[Doc1 p15] Curriculum RL (verl). Unless otherwise noted, we follow the repository defaults: training with GRPO [25], global batch size 8, rollout width 4, max batched tokens 6144, max response length 512, traine || [Doc2 p2] Knee3DVLM: Dual-Sequence Full-Volume Vision–Language Modeling and DESS findings across the whole joint; a DESS-only model cannot fully reproduce this multi-sequence workflow. Medical VLMs first demons",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_16",
+    "category": "Cross-Article Comparison",
+    "query_text": "How does the analysis of correlation, configuration, expected, totals, same, model in 'Language-model ratings of depression reflect the rater more than the patient' (2610.08501v1.pdf, p.23) differ from the findings on KHAN, MAHAPATRA, MEDCORE, Introduction, Medical, image in 'MedCORE: Criteria-Grounded Clinical Reasoning for Interpretable Medical Image Diagnosis' (2610.08528v1.pdf, p.2)?",
+    "candidate_doc_id": "595b2e7a-6608-4a65-b9d5-ef020e342ff1;bb21b654-4a17-448b-9bd9-2127cc47f0b3",
+    "candidate_filename": "2610.08501v1.pdf;2610.08528v1.pdf",
+    "candidate_page": "2610.08501v1.pdf:p23;2610.08528v1.pdf:p2",
+    "evidence_quote": "[Doc1 p23] correlation of the configuration’s expected totals with those of the same model, format and view under each of the other four templates. 1.7 Remedies For calibration, we randomly drew n participants ( || [Doc2 p2] 2 KHAN, KHAN, MAHAPATRA: MEDCORE 1 Introduction Medical image diagnosis is increasingly supported by deep visual models, yet the dominant formulation still treats diagnosis as a direct mapping from pi",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_17",
+    "category": "Cross-Article Comparison",
+    "query_text": "How does the analysis of plan, used, second, judge, evaluate, flagged in 'Incidental information contaminates patient notes and disrupts clinical reasoning in large language models' (2610.08585v1.pdf, p.3) differ from the findings on nonlinearity, them, identical, RQFs, series, transfer in 'Prospective Coding Improves Learning in Deep Continuous-Time Recurrent Networks' (2609.04134v1.pdf, p.16)?",
+    "candidate_doc_id": "f7b96686-9686-44ed-83c7-a7a436f80c0f;8cb1cc42-494a-4152-a51a-6fbce7154e4f",
+    "candidate_filename": "2610.08585v1.pdf;2609.04134v1.pdf",
+    "candidate_page": "2610.08585v1.pdf:p3;2609.04134v1.pdf:p16",
+    "evidence_quote": "[Doc1 p3] plan, we used a second LLM judge to evaluate all flagged notes. We report three outcomes: (1) misattribution of the aside to the patient, (2) correct attribution with use in the patient’s assessment o || [Doc2 p16] nonlinearity between them. With N identical RQFs in series, the transfer function is HN(s) = H(s)N, so by Eq. (A.8) the cascade magnitude squared is |HN(ιΩ)|2 = α2N α2 + (Ω−ω0)2 N , (A.16) which peaks",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_18",
+    "category": "Cross-Article Comparison",
+    "query_text": "How does the analysis of CREATIVE, ENDOWMENT, EFFECT, Despite, work, idea in 'Creators Have Difficulty Abandoning Ideas They Generated' (2609.05115v1.pdf, p.6) differ from the findings on Theorem, Suppose, conditions, hold, some, addition in 'Nonparametric heterogeneous causal mediation with orthogonal machine learning' (2609.08097v2.pdf, p.25)?",
+    "candidate_doc_id": "e2a4a156-33ae-4a1a-845e-7b81ce8e9366;19beab86-e179-4958-b233-cd6a6b5e7db8",
+    "candidate_filename": "2609.05115v1.pdf;2609.08097v2.pdf",
+    "candidate_page": "2609.05115v1.pdf:p6;2609.08097v2.pdf:p25",
+    "evidence_quote": "[Doc1 p6] THE CREATIVE ENDOWMENT EFFECT 6 Despite this work on idea selection, few studies have directly examined how generation and selection may interact. Accordingly, the present studies investigate an under || [Doc2 p25] Theorem 7. Suppose that all the conditions in Theorem 6 hold, with some ν ≥4 and an ≍√log K. In addition, assume that ∥g∥P,∞≲1, dΣ ∞= oP(1), mG n m4n + √log KlKcK ≲ √log K, (mG n + dΣ ∞)n1/ν = oP(1),",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_19",
+    "category": "Cross-Article Comparison",
+    "query_text": "How does the analysis of logical, impacts, HWAMW, interface, itself, intended in 'The House with a Million Windows: Interactive Fiction for Narrative Restorying' (2609.12537v1.pdf, p.7) differ from the findings on 5.40, 4.41, CPsyCounD, Zhang, 4.89, 5.81 in 'Steering the Compass: Aligning Dynamic Psychological Counseling Conversations with Cognitive Behavioral Therapy Strategies' (2609.20565v1.pdf, p.4)?",
+    "candidate_doc_id": "fb227ceb-2fe5-45f1-8d18-44773f589591;e9111e2b-130f-4f9c-871f-2df916c84a67",
+    "candidate_filename": "2609.12537v1.pdf;2609.20565v1.pdf",
+    "candidate_page": "2609.12537v1.pdf:p7;2609.20565v1.pdf:p4",
+    "evidence_quote": "[Doc1 p7] logical impacts of the HWAMW interface. While HWAMW itself was not intended to be a controlled experiment, we designed a within-subjects experiment to see we observed any statistically significant dif || [Doc2 p4] 5.40 4.41 − − − CPsyCounD (Zhang et al., 2024) 4.89 5.81 4.73 − − − SMILE (Qiu et al., 2024) 4.97 5.50 4.76 − − − Cactus (Lee et al., 2024) 5.76 5.94 5.60 5.00 5.70 5.37 STRATCBT (Ours) 5.84∗ 5.95 5.7",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_20",
+    "category": "Cross-Article Comparison",
+    "query_text": "How does the analysis of common, empirical, framework, boundary, construction, threat in 'Unifying Models of Intergroup Hostility in Online Discourse' (2609.20808v1.pdf, p.2) differ from the findings on Context, Method, Negative, Positive, negative, BASE in 'Debias It Yourself: Teaching LLMs Cognitive Bias Mitigation Interventions' (2609.40124v1.pdf, p.28)?",
+    "candidate_doc_id": "217de20c-6959-47f9-94b7-66098b2863a0;d4fee98b-fc75-4e63-a03b-eb9ac14b5af6",
+    "candidate_filename": "2609.20808v1.pdf;2609.40124v1.pdf",
+    "candidate_page": "2609.20808v1.pdf:p2;2609.40124v1.pdf:p28",
+    "evidence_quote": "[Doc1 p2] a common empirical framework: boundary construction, threat construction, scapegoating, negative evaluation, de- humanization, and action orientation. We evaluate theory- derived structural relationsh || [Doc2 p28] Context Method Negative ↓ Positive ↑ |∆g| negative ↓ ∆negative vs BASE ↓ Respect BASE 20.93 66.00 8.93 0.00 Respect DIY-SHOW 0 6.63 81.70 9.00 −14.30 Respect DIY-SHOW 1 10.50 78.97 10.47 −10.43 Respec",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_21",
+    "category": "Cross-Article Comparison",
+    "query_text": "How does the analysis of Collaborative, Knowledge, Translation, autoethnography, examine, field in 'Lessons from Trauma-Informed Training on Technology-Facilitated Abuse for Gender-Based Violence Advocates' (2610.02688v1.pdf, p.3) differ from the findings on Figure, Static, deployment, versus, test-time, learning in 'PsyEvo: A Personalized Counseling Agent That Self-Evolves at Test Time' (2610.02885v1.pdf, p.2)?",
+    "candidate_doc_id": "36d0bd0e-c6a4-45ce-a069-e67d6d9405b6;99c99226-6a5f-4705-a45c-4d4a2d9e85f0",
+    "candidate_filename": "2610.02688v1.pdf;2610.02885v1.pdf",
+    "candidate_page": "2610.02688v1.pdf:p3;2610.02885v1.pdf:p2",
+    "evidence_quote": "[Doc1 p3] Collaborative Knowledge Translation: Through autoethnography, we examine how field ex- perience, positionality, and relationships with host organizations shaped the intervention (§ 5). We surface tens || [Doc2 p2] ··· Figure 1: Static deployment versus test-time learning in psychological counseling. (a) A stati- cally deployed counselor keeps its parameters fixed across sessions; (b) PsyEvo keeps the backbone f",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_22",
+    "category": "Literature Synthesis",
+    "query_text": "What overarching conclusion emerges when combining the findings on linguistic, features, reflecting, negative, tone, self-focus ('Predictors of Loneliness in Older Adults Using Multimodal Analysis of Speech and Language'), Alami, Initial, meeting, program, director, background ('The Psychological Costs of Artificial Intelligence Adoption in Software Engineering'), and benchmark, dementia, caregiving, comprises, caregiv-, videos ('DementiaCare-Bench: A Modality-Validated Video Benchmark') — specifically regarding: \"linguistic features reflecting negative tone and self-focus will correlate with higher lon\"?",
+    "candidate_doc_id": "0ce281a5-830b-4a3f-a608-86241233d138;503c9b35-a715-4137-ad89-a3ac1105a48b;a17d1aba-d1e2-4f15-8420-6184accb65f5",
+    "candidate_filename": "2609.02606v1.pdf;2609.03456v1.pdf;2609.12929v1.pdf",
+    "candidate_page": "2609.02606v1.pdf:p3;2609.03456v1.pdf:p10;2609.12929v1.pdf:p2",
+    "evidence_quote": "[Doc1 p3] linguistic features reflecting negative tone and self-focus will correlate with higher loneliness, while social and affective language will || [Doc2 p10] 10 Alami, et al. Jan. 2026 Feb. 2026 Mar. 2026 Aug. 2026 May 2026 Initial meeting CIO, CTO & AI program director: background and context und || [Doc3 p2] benchmark for dementia caregiving. It comprises 56 caregiv- ing videos from 11 publicly available training sources, seg- mented into 94 clip",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_23",
+    "category": "Literature Synthesis",
+    "query_text": "What overarching conclusion emerges when combining the findings on Frequencies, calculated, coded-segment, participant, levels, Participant ('Beyond Benefit or Risk: Perceived Impact Profiles of Human-AI Affective Interaction and Their Associations with Psychological Functioning'), human, behavior, defined, using, Mahalanobis, distance ('Deep Persona: A Psychologically Grounded Architecture and Evaluation Framework for Role-Playing Agents and Simulations'), and multi-label, output, Dystonia, Tremor, Myoclonus, Chorea ('Foundation-model-based multi-label phenotyping of combined hyperkinetic movement disorders') — specifically regarding: \"Frequencies were calculated at both the coded-segment and participant levels. Participant \"?",
+    "candidate_doc_id": "d5d03f96-d60e-4dc9-a542-7ce6907bc820;9e59b28f-3ed9-430a-8a82-b311f46a5433;0cb02e5a-8998-41fd-b30d-5787c775dfe4",
+    "candidate_filename": "2609.16645v1.pdf;2609.22255v1.pdf;2609.22369v1.pdf",
+    "candidate_page": "2609.16645v1.pdf:p9;2609.22255v1.pdf:p8;2609.22369v1.pdf:p6",
+    "evidence_quote": "[Doc1 p9] Frequencies were calculated at both the coded-segment and participant levels. Participant counts were based on unique participant IDs, such || [Doc2 p8] human behavior is defined using the Mahalanobis distance: dM(SA) = q (SA −µh)T Σ−1 h (SA −µh). The squared Mahalanobis distance, d2 M, fol- || [Doc3 p6] multi-label output Dystonia Tremor Myoclonus Chorea Athetosis Ballismus Stereotypies Tics Shared backbone — trained once, frozen during tran",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_24",
+    "category": "Literature Synthesis",
+    "query_text": "What overarching conclusion emerges when combining the findings on principles, autoregressive, LLMs, probing, reading, residual ('CG-Probes: Recovering Guardrail Directions from Patient Query Embeddings'), Whether, measure, tracks, right, person, requires ('COMPASS 2.0: psychometric representational similarity analysis distinguishes symptom structure from personal signal'), and 22.49, 33.70, 72.49, 34.42, 40.78, 85.84 ('MedPrune: Topology-Efficient Multimodal Multi-Agent Communication Evolution for Medical VQA Tasks') — specifically regarding: \"these principles to autoregressive LLMs by probing (i.e., reading from residual streams) a\"?",
+    "candidate_doc_id": "b940d9fc-a595-44ca-acca-222d4d1524e6;af22f194-5bbd-4ba3-8c8a-3de79b1123e2;994b4ec5-42ec-47de-af9d-bb7f9486854a",
+    "candidate_filename": "2609.31062v1.pdf;2610.06615v1.pdf;2610.06695v1.pdf",
+    "candidate_page": "2609.31062v1.pdf:p2;2610.06615v1.pdf:p2;2610.06695v1.pdf:p7",
+    "evidence_quote": "[Doc1 p2] these principles to autoregressive LLMs by probing (i.e., reading from residual streams) and steering (i.e., adding concept vectors dur- ing || [Doc2 p2] Whether a measure tracks the right person requires a separate, person-paired test. Clinical applications also require scores. COMPASS (Compu || [Doc3 p7] 22.49 33.70 72.49 34.42 40.78 85.84 89.71 72.11±1.4 MMedAgent-RL 19.12 31.97 70.05 34.23 38.84 87.12 82.09 69.35±0.5 Adaptive Evolving M3Pru",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_25",
+    "category": "Literature Synthesis",
+    "query_text": "What overarching conclusion emerges when combining the findings on comparable, ours, because, Kurate, scored, against ('Kurate: Scalable Scientific Quality Analysis'), mative, questions, study, features, predict, per-turn ('Closing Ambient Clinical Documentation Gaps with Automated Provider Queries'), and except, Social, class, follows, Reg-, istrar ('No Transformer Beats Six Covariates: Long-Horizon Prediction of Depressive Symptoms from Childhood Essays') — specifically regarding: \"comparable to ours, because Kurate is also scored against those consensus labels. The agre\"?",
+    "candidate_doc_id": "ede2182d-cb42-4634-a2db-43a7da6b978a;4bf065f9-ebf0-453c-85c1-3522318297ad;95015d2c-34e1-4b78-8397-d03a044c97e1",
+    "candidate_filename": "2610.07306v1.pdf;2610.07502v1.pdf;2610.07764v1.pdf",
+    "candidate_page": "2610.07306v1.pdf:p17;2610.07502v1.pdf:p5;2610.07764v1.pdf:p3",
+    "evidence_quote": "[Doc1 p17] comparable to ours, because Kurate is also scored against those consensus labels. The agreement between the two human annotators (AC1 0.782) || [Doc2 p5] mative questions we study which features predict the per-turn change in the task metric (∆metric). Ev- ery question is scored post-hoc by an || [Doc3 p3] age 11 except sex. Social class follows the UK Reg- istrar General’s classification (Galobardes et al., 2006), and cognitive ability comes f",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_26",
+    "category": "Literature Synthesis",
+    "query_text": "What overarching conclusion emerges when combining the findings on Kang, explanations, lower, perceived, competence, defer ('Novice Reliance Calibration in AI-Assisted Decision Making: The Role of Explanations and Self-Assessment'), JIANG, Research, manuscript, ABSTRACT, central, challenge ('A self-learning scientific agent for X-ray diffraction'), and analysis, Implementation, Details, Hyperparameters, Candidate, instances ('SAGE: Semantic Anchor-Guided Evolution for Grounded Medical QA Data Synthesis') — specifically regarding: \"Kang et al. their explanations, while those with lower perceived competence may defer to t\"?",
+    "candidate_doc_id": "64ffa87c-128f-4c4a-a41a-2eb9aff184ab;73e9f029-d19b-461c-a05a-bda559052ad1;5de42efe-3c4f-44ed-a18b-fe8c58daabbe",
+    "candidate_filename": "2610.07800v1.pdf;2610.07862v1.pdf;2610.08093v1.pdf",
+    "candidate_page": "2610.07800v1.pdf:p2;2610.07862v1.pdf:p2;2610.08093v1.pdf:p13",
+    "evidence_quote": "[Doc1 p2] Kang et al. their explanations, while those with lower perceived competence may defer to the AI by default. Through a between-subjects study || [Doc2 p2] GAN JIANG Research manuscript ABSTRACT A central challenge for scientific agents is to turn analytical experience into reusable expertise gr || [Doc3 p13] analysis (MIT). B Implementation Details and Hyperparameters Candidate instances are sampled with a tempera- ture of 0.7, top-p of 0.95, and",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_27",
+    "category": "Literature Synthesis",
+    "query_text": "What overarching conclusion emerges when combining the findings on Domain, Sensor, Tokens, Compression, Speedup, Clinical ('Sensor-Language-Action Models'), Curriculum, verl, Unless, otherwise, noted, follow ('MedZERO: Self-Evolving Agents for Open-Ended Medical Reasoning Through Controlled Knowledge Accumulation'), and Knee3DVLM, Dual-Sequence, Full-Volume, Vision, Language, Modeling ('Knee3DVLM: Dual-Sequence Full-Volume Vision-Language Modeling for Comprehensive Knee MRI Assessment') — specifically regarding: \"Domain Sensor Tokens↓ Compression↑ Speedup↑ Clinical 5801.0 →400.4 14.49× 3.4× OR 3915.8 →\"?",
+    "candidate_doc_id": "90988e1f-3a4c-4aee-924b-8b5771f7190b;cf261ad1-c41e-486a-b117-4700827b065e;3db9d70b-6bcc-42ae-8adc-2ce6d6be7104",
+    "candidate_filename": "2610.08244v1.pdf;2610.08327v1.pdf;2610.08482v1.pdf",
+    "candidate_page": "2610.08244v1.pdf:p28;2610.08327v1.pdf:p15;2610.08482v1.pdf:p2",
+    "evidence_quote": "[Doc1 p28] Domain Sensor Tokens↓ Compression↑ Speedup↑ Clinical 5801.0 →400.4 14.49× 3.4× OR 3915.8 →838.0 4.67× 1.7× CGM 33.0 →21.0 1.57× 1× F. Additi || [Doc2 p15] Curriculum RL (verl). Unless otherwise noted, we follow the repository defaults: training with GRPO [25], global batch size 8, rollout width || [Doc3 p2] Knee3DVLM: Dual-Sequence Full-Volume Vision–Language Modeling and DESS findings across the whole joint; a DESS-only model cannot fully repro",
+    "human_confirmed_relevant": "Y"
+  },
+  {
+    "query_id": "DEV_Q_28",
+    "category": "Safe Refusal (Out-of-Domain)",
+    "query_text": "How does malolactic fermentation duration inside French oak barrels alter the anthocyanin-tannin polymerization index in Cabernet Sauvignon winemaking?",
+    "candidate_doc_id": "NONE",
+    "candidate_filename": "NONE",
+    "candidate_page": "NONE",
+    "evidence_quote": "Enology / Winemaking (Out-of-domain; 0 hits in corpus)",
+    "human_confirmed_relevant": "N"
+  },
+  {
+    "query_id": "DEV_Q_29",
+    "category": "Safe Refusal (Out-of-Domain)",
+    "query_text": "What is the optimal split application ratio of urea, superphosphate, and potassium chloride fertilizer for salinity-tolerant ST25 paddy rice during panicle initiation?",
+    "candidate_doc_id": "NONE",
+    "candidate_filename": "NONE",
+    "candidate_page": "NONE",
+    "evidence_quote": "Agronomy / Rice Cultivation (Out-of-domain; 0 hits in corpus)",
+    "human_confirmed_relevant": "N"
+  },
+  {
+    "query_id": "DEV_Q_30",
+    "category": "Safe Refusal (Out-of-Domain)",
+    "query_text": "In Romantic-era counterpoint, how does Fryderyk Chopin resolve enharmonic German augmented sixth and diminished seventh chords in Op. 48 Nocturnes?",
+    "candidate_doc_id": "NONE",
+    "candidate_filename": "NONE",
+    "candidate_page": "NONE",
+    "evidence_quote": "Music Theory / Classical Harmony (Out-of-domain; 0 hits in corpus)",
+    "human_confirmed_relevant": "N"
+  },
+  {
+    "query_id": "DEV_HARD_01",
+    "category": "In-Domain Unanswerable (Hard Refusal)",
+    "query_text": "In postpartum depression trials of intravenous Brexanolone (Zulresso) infused at 90 mcg/kg/h over 60 hours, what was the mean reduction on the EPDS scale at hour 60?",
+    "candidate_doc_id": "NONE",
+    "candidate_filename": "NONE",
+    "candidate_page": "NONE",
+    "evidence_quote": "Verified 0 hits in all 70,825 chunks & 12,411 pages for clinical keyword 'brexanolone'. Expected: Safe Refusal.",
+    "human_confirmed_relevant": "N"
+  },
+  {
+    "query_id": "DEV_HARD_02",
+    "category": "In-Domain Unanswerable (Hard Refusal)",
+    "query_text": "In the phase 3 WATERFALL clinical trial of oral Zuranolone (Zurzuvae) 50 mg once nightly for 14 days, what was the least-squares mean change in HAMD-17 score at day 15?",
+    "candidate_doc_id": "NONE",
+    "candidate_filename": "NONE",
+    "candidate_page": "NONE",
+    "evidence_quote": "Verified 0 hits in all 70,825 chunks & 12,411 pages for clinical keyword 'zuranolone'. Expected: Safe Refusal.",
+    "human_confirmed_relevant": "N"
+  },
+  {
+    "query_id": "DEV_HARD_03",
+    "category": "In-Domain Unanswerable (Hard Refusal)",
+    "query_text": "What effect size (Cohen's d) on the MADRS total score was reported for Lumateperone (Caplyta) 42 mg/day monotherapy in patients with bipolar II depression?",
+    "candidate_doc_id": "NONE",
+    "candidate_filename": "NONE",
+    "candidate_page": "NONE",
+    "evidence_quote": "Verified 0 hits in all 70,825 chunks & 12,411 pages for clinical keyword 'lumateperone'. Expected: Safe Refusal.",
+    "human_confirmed_relevant": "N"
+  },
+  {
+    "query_id": "DEV_HARD_04",
+    "category": "In-Domain Unanswerable (Hard Refusal)",
+    "query_text": "How many points did Pimavanserin (Nuplazid) 34 mg reduce hallucinations and delusions on the SAPS-PD scale in Parkinson's disease psychosis?",
+    "candidate_doc_id": "NONE",
+    "candidate_filename": "NONE",
+    "candidate_page": "NONE",
+    "evidence_quote": "Verified 0 hits in all 70,825 chunks & 12,411 pages for clinical keyword 'pimavanserin'. Expected: Safe Refusal.",
+    "human_confirmed_relevant": "N"
+  },
+  {
+    "query_id": "DEV_HARD_05",
+    "category": "In-Domain Unanswerable (Hard Refusal)",
+    "query_text": "In the KINECT-3 randomized trial of Valbenazine (Ingrezza) 80 mg/day for tardive dyskinesia, what was the mean change in the Abnormal Involuntary Movement Scale (AIMS) score?",
+    "candidate_doc_id": "NONE",
+    "candidate_filename": "NONE",
+    "candidate_page": "NONE",
+    "evidence_quote": "Verified 0 hits in all 70,825 chunks & 12,411 pages for clinical keyword 'valbenazine'. Expected: Safe Refusal.",
+    "human_confirmed_relevant": "N"
+  },
+  {
+    "query_id": "DEV_HARD_06",
+    "category": "In-Domain Unanswerable (Hard Refusal)",
+    "query_text": "What incidence of somnolence and depression was reported in the ARM-TD clinical trial of Deutetrabenazine (Austedo) for tardive dyskinesia?",
+    "candidate_doc_id": "NONE",
+    "candidate_filename": "NONE",
+    "candidate_page": "NONE",
+    "evidence_quote": "Verified 0 hits in all 70,825 chunks & 12,411 pages for clinical keyword 'deutetrabenazine'. Expected: Safe Refusal.",
+    "human_confirmed_relevant": "N"
+  },
+  {
+    "query_id": "DEV_HARD_07",
+    "category": "In-Domain Unanswerable (Hard Refusal)",
+    "query_text": "During acute opioid withdrawal management with alpha-2 agonist Lofexidine (Lucemyra) 0.54 mg QID, what was the mean Short Opiate Withdrawal Scale (SOWS-Gossop) score on day 3?",
+    "candidate_doc_id": "NONE",
+    "candidate_filename": "NONE",
+    "candidate_page": "NONE",
+    "evidence_quote": "Verified 0 hits in all 70,825 chunks & 12,411 pages for clinical keyword 'lofexidine'. Expected: Safe Refusal.",
+    "human_confirmed_relevant": "N"
+  },
+  {
+    "query_id": "DEV_HARD_08",
+    "category": "In-Domain Unanswerable (Hard Refusal)",
+    "query_text": "In the EMERGENT-3 phase 3 trial of Xanomeline-Trospium (Cobenfy / KarXT) for acute schizophrenia, what was the placebo-adjusted reduction in PANSS total score at week 5?",
+    "candidate_doc_id": "NONE",
+    "candidate_filename": "NONE",
+    "candidate_page": "NONE",
+    "evidence_quote": "Verified 0 hits in all 70,825 chunks & 12,411 pages for clinical keyword 'xanomeline'. Expected: Safe Refusal.",
+    "human_confirmed_relevant": "N"
+  },
+  {
+    "query_id": "DEV_HARD_09",
+    "category": "In-Domain Unanswerable (Hard Refusal)",
+    "query_text": "In adult ADHD clinical trials of extended-release Viloxazine (Qelbree) 400 mg/day, what reduction on the Adult ADHD Investigator Symptom Rating Scale (AISRS) was achieved?",
+    "candidate_doc_id": "NONE",
+    "candidate_filename": "NONE",
+    "candidate_page": "NONE",
+    "evidence_quote": "Verified 0 hits in all 70,825 chunks & 12,411 pages for clinical keyword 'viloxazine'. Expected: Safe Refusal.",
+    "human_confirmed_relevant": "N"
+  },
+  {
+    "query_id": "DEV_HARD_10",
+    "category": "In-Domain Unanswerable (Hard Refusal)",
+    "query_text": "How many minutes did dual orexin receptor antagonist Daridorexant (Quviviq) 50 mg reduce wake time after sleep onset (WASO) and Insomnia Severity Index (ISI) at month 3?",
+    "candidate_doc_id": "NONE",
+    "candidate_filename": "NONE",
+    "candidate_page": "NONE",
+    "evidence_quote": "Verified 0 hits in all 70,825 chunks & 12,411 pages for clinical keyword 'daridorexant'. Expected: Safe Refusal.",
+    "human_confirmed_relevant": "N"
+  },
+  {
+    "query_id": "DEV_HARD_11",
+    "category": "In-Domain Unanswerable (Hard Refusal)",
+    "query_text": "In the SUNRISE-1 trial comparing Lemborexant (Dayvigo) 10 mg against zolpidem tartrate extended-release, what was the polysomnographic latency to persistent sleep (LPS) ratio?",
+    "candidate_doc_id": "NONE",
+    "candidate_filename": "NONE",
+    "candidate_page": "NONE",
+    "evidence_quote": "Verified 0 hits in all 70,825 chunks & 12,411 pages for clinical keyword 'lemborexant'. Expected: Safe Refusal.",
+    "human_confirmed_relevant": "N"
+  },
+  {
+    "query_id": "DEV_HARD_12",
+    "category": "In-Domain Unanswerable (Hard Refusal)",
+    "query_text": "What was the HAMD-17 remission rate after 8 weeks of extended-release Gepirone (Exxua) 72.6 mg/day in major depressive disorder?",
+    "candidate_doc_id": "NONE",
+    "candidate_filename": "NONE",
+    "candidate_page": "NONE",
+    "evidence_quote": "Verified 0 hits in all 70,825 chunks & 12,411 pages for clinical keyword 'gepirone'. Expected: Safe Refusal.",
+    "human_confirmed_relevant": "N"
+  }
+]

@@ -372,7 +372,15 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["X-Context-Pages", "X-Document-IDs"],
+    expose_headers=[
+        "X-Context-Pages",
+        "X-Document-IDs",
+        "X-Pipeline-Telemetry",
+        "X-Literature-Matrix",
+        "X-Literature-Radar",
+        "X-Memory-Hit",
+        "X-No-Context",
+    ],
 )
 # Thêm middleware tăng giới hạn upload 200MB
 app.add_middleware(LargeUploadMiddleware, max_upload_size=200 * 1024 * 1024)

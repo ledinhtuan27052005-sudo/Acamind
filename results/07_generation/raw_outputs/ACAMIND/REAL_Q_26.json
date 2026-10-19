@@ -1,0 +1,62 @@
+{
+  "query_id": "REAL_Q_26",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Discovering Subtypes of Neurodegenerative Pro' và (2) 'CoHyFuse: Condition-wise Hypergraph Fusion wi'.",
+  "is_ooc": false,
+  "system": "ACAMIND",
+  "gate_passed": true,
+  "gate_score": 0.980253,
+  "dcsr_skipped": false,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 20153.78,
+  "retrieval_warm_ms": 972.86,
+  "llm_ms": 5337.45,
+  "e2e_cold_ms": 25491.23,
+  "e2e_warm_ms": 6310.31,
+  "provided_chunks": [
+    {
+      "id": "30454daf-7baf-4b3c-a4de-aa9ce6258b77",
+      "document_id": "476a95f4-d56e-401a-ad29-31c1338aea8b",
+      "filename": "2609.10890v1.pdf",
+      "page_number": 1,
+      "content": "Discovering Subtypes of Neurodegenerative\nProgression with a Scalable\nConnectome-Constrained Dynamic Model\nDaniel Semchin1, Emile d’Angremont2, Hao Ding1, Alan Antar1, Marco\nLorenzi3, Konstantinos Arfanakis1, Ysbrand van der Werf2, Paul Thompson4,\nand Boris Gutman1\n1 Illinois Institute of Technology, Chicago, IL, USA\n2 Amsterdam UMC, Amsterdam, The Netherlands\n3 Inria, Université Côte d’Azur, Sophia Antipolis, France\n4 University of Southern California, Los Angeles, CA, USA\nAbstract. Parkinson’s disease is clinically and biologically heteroge-\nneous, yet its spatiotemporal progression remains poorly characterized. We\npresent a connectome-constrained disease progression model that jointly\nestimates subject-specific disease time and data-driven subtypes from"
+    },
+    {
+      "id": "379b7d96-aa3c-483f-affc-99ea30205efe",
+      "document_id": "270d1d91-963f-4fe6-958c-9dc4fc18cf8f",
+      "filename": "2610.05913v1.pdf",
+      "page_number": 8,
+      "content": "mators.\nVI. CONCLUSION\nWe presented CoHyFuse, a condition-aware ROI-centered\nhypergraph fusion framework for task-fMRI prediction. CoHy-\nFuse constructs condition-wise top-Kq hypergraphs and fuses\nHGNN-based condition embeddings with a complementary\nwhole-session FC branch. Experiments on AABC and CMI-\nHBN benchmarks showed the best mean performance among\nevaluated baselines, and ablations supported the contributions\nof condition-specific hypergraph construction, heterogeneous\nKq, and dual-branch fusion. Interpretability analysis further\nidentified DIST-related SAN–FPN and SAN–SAN motifs as\nmodel-relevant patterns associated with FCC. Overall, Co-\nHyFuse provides a compact and interpretable framework for\nmodeling state-resolved hypergraph-defined ROI-set structure\nin task-fMRI.\nREFERENCES"
+    },
+    {
+      "id": "48c6da3d-faed-4a3c-9480-28564be052e0",
+      "document_id": "476a95f4-d56e-401a-ad29-31c1338aea8b",
+      "filename": "2609.10890v1.pdf",
+      "page_number": 8,
+      "content": "8\nD. Semchin et al.\nFig. 4. Contingency tables of discovered subtype assignment versus clinical and genetic\ngroupings. From left to right: COMIND and SuStaIn TD/PIGD/Indeterminate motor\nphenotype classification, held-out validation cohort (n = 187); COMIND and SuStaIn\nversus genetic subgroup (GBA, LRRK2, PRKN, sporadic PD), full cohort (n = 312).\ntraining/validation split as COMIND; cross-validation favored a two-subtype\nsolution, selected via pySuStaIn’s built-in cross-validation information criterion\n(CVIC), resembling the Cortical and Subcortical staging patterns reported by\nShawa et al. [12] (Fig. 4). We compared subtype assignments from both methods\nagainst two independent groupings: TD/PIGD motor phenotype [13] and genetic"
+    },
+    {
+      "id": "5c4ea38d-2237-4f66-8c4d-65a41cc92acb",
+      "document_id": "270d1d91-963f-4fe6-958c-9dc4fc18cf8f",
+      "filename": "2610.05913v1.pdf",
+      "page_number": 1,
+      "content": "reconfiguration cues and session-level connectivity structure\nfor task-fMRI prediction.\nOur contributions are threefold:\n(i) We propose CoHyFuse, a condition-aware ROI-centered\nhypergraph fusion framework that constructs condition-\nwise top-Kq hypergraphs and integrates attention-fused\nHGNN embeddings with a complementary whole-\nsession FC branch, thereby capturing both condition-\nwise reconfiguration cues and session-level connectivity\nstructure for task-fMRI prediction.\n(ii) We evaluate CoHyFuse on two public fMRI datasets,\nand CoHyFuse achieves the best mean performance\namong evaluated baselines. Ablation results support the\neffectiveness of condition-specific hypergraph construc-\ntion, heterogeneous Kq, and dual-branch fusion.\n(iii) Applying CoHyFuse to FACENAME, we find that the"
+    },
+    {
+      "id": "621a6da1-f5e2-4180-8983-114318227358",
+      "document_id": "476a95f4-d56e-401a-ad29-31c1338aea8b",
+      "filename": "2609.10890v1.pdf",
+      "page_number": 2,
+      "content": "we extend the recently proposed network-constrained COMIND model [11] to\nenable simultaneous modeling of nonlinear network dynamics and disease subtype\nidentification. Our proposed method models neurodegeneration as a system of\ncoupled logistic-diffusion trajectories constrained by structural connectivity, and\nperforms automatic subtype discovery by inferring distinct spatial patterns of\nregional pathology sources from longitudinal imaging data.\n2\nMethods\nA number of the proposed progression models have used logistic evolution as the\nbasic model-building element. The idea is appealing as it mirrors our intuition that\nneurodegeneration has a gradual onset, a period of rapid advance, and a saturation\npoint. Indeed, the sigmoid is a solution to the logistic ODE ˙x = k(1 −x)x, a"
+    },
+    {
+      "id": "58745f17-63cd-4322-a87b-5aea539caf0d",
+      "document_id": "270d1d91-963f-4fe6-958c-9dc4fc18cf8f",
+      "filename": "2610.05913v1.pdf",
+      "page_number": 1,
+      "content": "CoHyFuse: Condition-wise Hypergraph Fusion with\nGlobal Connectome in Task-fMRI\nBoseong Kim1, Haejun Chung1, and Ikbeom Jang2\n1Hanyang University, Seoul, Republic of Korea\n2Hankuk University of Foreign Studies, Yongin, Republic of Korea\nCorrespondence: ijang@hufs.ac.kr; haejun@hanyang.ac.kr\nAbstract—Task-fMRI connectomes reveal state-dependent neu-\nral reconfigurations, yet conventional methods marginalize these\nsignals by aggregating distinct conditions into static pairwise\ngraphs, thereby obscuring condition-specific multi-ROI organiza-\ntion. We introduce CoHyFuse, a condition-aware ROI-centered\nhypergraph framework that constructs a task-state-specific inci-\ndence matrix from condition-wise functional connectivity (FC)-\nprofile embeddings, allowing the same ROI to form different"
+    }
+  ],
+  "answer": "## I. Giới thiệu chung và Mục tiêu nghiên cứu\n\nHai bài báo được phân tích đại diện cho hai hướng tiếp cận tiên tiến trong nghiên cứu thần kinh học và fMRI sử dụng mô hình tính toán:\n1. **Bài báo (1)**: *“Discovering Subtypes of Neurodegenerative Progression with a Scalable Connectome-Constrained Dynamic Model”* tập trung vào việc mô hình hóa sự tiến triển của bệnh thoái hóa thần kinh (cụ thể là bệnh Parkinson) và khám phá các phân nhóm bệnh dựa trên mô hình động lực học bị giới hạn bởi kết nối học (`connectome-constrained dynamic model`) [2609.10890v1.pdf - Trang 1] [2609.10890v1.pdf - Trang 2].\n2. **Bài báo (2)**: *“CoHyFuse: Condition-wise Hypergraph Fusion with Global Connectome in Task-fMRI”* đề xuất khung kết hợp siêu đồ thị (hypergraph fusion framework) để dự đoán trong fMRI nhiệm vụ (`task-fMRI`), giải quyết vấn đề cấu trúc đa vùng não (`multi-ROI`) phụ thuộc trạng thái (`state-dependent`) [2610.05913v1.pdf - Trang 1].\n\n---\n\n## II. So sánh và Đối chiếu chi tiết\n\n### 1. Phương pháp tiếp cận (Methodological Approaches)\n* **Bài báo (1) - COMIND mở rộng**: \n  - Mở rộng mô hình COMIND giới hạn bởi mạng (`network-constrained COMIND model`) để mô phỏng đồng thời động lực học mạng phi tuyến tính (`nonlinear network dynamics`) và nhận diện phân nhóm bệnh (`disease subtype identification`) [2609.10890v1.pdf - Trang 2].\n  - Mô hình hóa sự thoái hóa thần kinh như một hệ thống các quỹ đạo khuếch tán logistic kết hợp (`coupled logistic-diffusion trajectories`) bị ràng buộc bởi kết nối cấu trúc (`structural connectivity`) [2609.10890v1.pdf - Trang 2].\n  - Thực hiện khám phá phân nhóm tự động bằng cách suy ra các mẫu không gian khác nhau của các nguồn bệnh lý khu vực từ dữ liệu hình ảnh dọc (`longitudinal imaging data`) [2609.10890v1.pdf - Trang 2].\n* **Bài báo (2) - CoHyFuse**:\n  - Đề xuất khung kết hợp siêu đồ thị tập trung vào vùng quan tâm (ROI-centered hypergraph fusion framework) nhận biết điều kiện (`condition-aware`), xây dựng các siêu đồ thị top-$K_q$ theo từng điều kiện (`condition-wise top-$K_q$ hypergraphs`) [2610.05913v1.pdf - Trang 1].\n  - Tích hợp các nhúng siêu đồ thị đồ thị (Hypergraph Neural Network - HGNN) được dung hợp chú ý (`attention-fused HGNN embeddings`) với một nhánh kết nối chức năng toàn phiên (`whole-session functional connectivity - FC branch`) bổ sung [2610.05913v1.pdf - Trang 1].\n\n### 2. Đối tượng nghiên cứu và Dữ liệu (Study Subjects & Data)\n* **Bài báo (1)**: \n  - Nghiên cứu tập trung vào bệnh nhân mắc bệnh Parkinson (**Parkinson's disease**), một bệnh lý có sự không đồng nhất về mặt lâm sàng và sinh học [2609.10890v1.pdf - Trang 1].\n  - Sử dụng các nhóm thuần tập kiểm định (validation cohort, $n = 187$) và nhóm thuần tập toàn phần (full cohort, $n = 312$) để phân loại kiểu hình vận động (TD/PIGD/Indeterminate motor phenotype) và các phân nhóm di truyền (`GBA`, `LRRK2`, `PRKN`, `sporadic PD`) [2609.10890v1.pdf - Trang 8].\n* **Bài báo (2)**: \n  - Nghiên cứu tập trung vào dữ liệu hình ảnh cộng hưởng từ chức năng khi làm nhiệm vụ (**task-fMRI**) nhằm nắm bắt các tín hiệu tái cấu trúc thần kinh phụ thuộc trạng thái (`state-dependent neural reconfigurations`) [2610.05913v1.pdf - Trang 1].\n  - Đánh giá trên hai bộ dữ liệu fMRI công cộng là **AABC** và **CMI-HBN**, cũng như áp dụng trên bộ dữ liệu **FACENAME** [2610.05913v1.pdf - Trang 1].\n\n### 3. Kết luận chính và Đóng góp (Main Conclusions & Contributions)\n* **Bài báo (1)**:\n  - Phân tích chéo ủng hộ giải pháp hai phân nhóm (two-subtype solution) được lựa chọn thông qua tiêu chí thông tin kiểm định chéo của pySuStaIn (CVIC), giống với các mẫu dàn dựng vỏ não và dưới vỏ (Cortical and Subcortical staging patterns) [2609.10890v1.pdf - Trang 8].\n  - Cung cấp cách tiếp cận hiệu quả để ước tính đồng thời thời gian bệnh cụ thể của từng đối tượng (`subject-specific disease time`) và các phân nhóm dựa trên dữ liệu (`data-driven subtypes`) từ tiến triển thoái hóa thần kinh [2609.10890v1.pdf - Trang 1].\n* **Bài báo (2)**:\n  - Khung **CoHyFuse** đạt hiệuσ suất trung bình tốt nhất trong số các mô hình cơ sở (`baselines`) được đánh giá trên các tiêu chuẩn AABC và CMI-HBN [2610.05913v1.pdf - Trang 8].\n  - Các kết quả cắt bỏ (`ablations`) chứng minh hiệu quả của việc xây dựng siêu đồ thị đặc trưng theo điều kiện, tham số $K_q$ dị thể và sự kết hợp hai nhánh (`dual-branch fusion`) [2610.05913v1.pdf - Trang 8].\n  - Phân tích khả năng giải thích (`interpretability analysis`) xác định các mô típ liên quan đến DIST như `SAN–FPN` và `SAN–SAN` có liên quan đến `FCC` [2610.05913v1.pdf - Trang 8].\n\n---\n\n## III. Tóm tắt so sánh đối chiếu nhanh\n\n| Tiêu chí so sánh | Bài báo (1): Discovering Subtypes... [2609.10890v1.pdf] | Bài báo (2): CoHyFuse... [2610.05913v1.pdf] |\n| :--- | :--- | :--- |\n| **Lĩnh vực cốt lõi** | Tiến triển bệnh thoái hóa thần kinh (Parkinson's Disease) | Dự đoán fMRI nhiệm vụ (Task-fMRI prediction) |\n| **Mô hình toán học** | Quỹ đạo khuếch tán logistic kết hợp (`coupled logistic-diffusion`) | Siêu đồ thị điều kiện (`condition-wise hypergraphs`) kết hợp HGNN & nhánh FC |\n| **Đối tượng / Dữ liệu** | Dữ liệu hình ảnh dọc (`longitudinal imaging data`) trên bệnh nhân Parkinson ($n=312$) | Bộ dữ liệu fMRI công cộng: AABC, CMI-HBN, và FACENAME |\n| **Đóng góp thực nghiệm** | Khám phá tự động các phân nhóm không gian và ước tính thời gian bệnh cá thể hóa | Đạt hiệu suất vượt trội, giải thích các mô típ mạng liên quan đến trạng thái nhiệm vụ |\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+}

@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_14",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Theories of Mind as Domain-Specific Languages of Thought' là gì?",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 717.47,
+  "retrieval_warm_ms": 704.88,
+  "llm_ms": 4218.33,
+  "e2e_cold_ms": 4935.8,
+  "e2e_warm_ms": 4923.21,
+  "provided_chunks": [
+    {
+      "id": "08601493-54aa-4144-9e70-12225d9f9385",
+      "document_id": "1c2b38ad-b9a8-4b04-a6e9-75bc688a8cb2",
+      "filename": "2609.19598v1.pdf",
+      "page_number": 2,
+      "content": "and how our theories of mind might grow over the course of development.\nLong abstract:\nWhat kind of thing is a “theory of mind”? We propose to formalize theories\nof mind as domain-specialized programming languages, which can be used to reason about the\nmental states of other agents. Our proposal builds on the longstanding idea that thinking is akin\nto programming in an internal “language of thought.” But rather than positing a single general-\npurpose language for all of thought, we posit a collection of domain-specific languages of thought,\nwhose respective syntaxes and semantices encode the theories of various domains. We make this\nidea concrete in the domain of intuitive psychology using a real-world programming language"
+    },
+    {
+      "id": "60e6ac5b-2f1f-4c7f-b889-177d01829cd9",
+      "document_id": "1c2b38ad-b9a8-4b04-a6e9-75bc688a8cb2",
+      "filename": "2609.19598v1.pdf",
+      "page_number": 10,
+      "content": "approaches to formalizing intuitive theories, and, building on these approaches, we will show how\nmemo solves the problem of formalizing a theory of mind in a way that supports applying that\ntheory to build task-specific models with unbounded structural variation. Second, in Section 3,\nwe will show how, as a domain-specific programming language, memo itself only encodes theory-\nof-mind, but can interface with domain-general world knowledge and intuitive theories of other\ndomains to solve domain-general problems. We will discuss how the mind as a whole might decide\nwhen to apply theory-of-mind and which external knowledge to bring to bear, and we will discuss\nhow DSLs can help us understand the value of carving up knowledge into domains in the first"
+    },
+    {
+      "id": "64d0be50-3113-4f50-ba4d-9764ce3092ea",
+      "document_id": "1c2b38ad-b9a8-4b04-a6e9-75bc688a8cb2",
+      "filename": "2609.19598v1.pdf",
+      "page_number": 3,
+      "content": "Contents\n1\nWhat kind of thing is a theory of mind?\n3\n1.1\nThe challenges of formalizing theories-of-mind . . . . . . . . . . . . . . . . . . .\n6\n1.2\nOur proposal: theories of mind as programming languages . . . . . . . . . . . . .\n8\n2\nFormalizing a theory of mind as a DSL\n11\n2.1\nFrom Bayes nets to DSLs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .\n11\n2.2\nA brief introduction to the DSL memo . . . . . . . . . . . . . . . . . . . . . . . .\n14\n2.3\nWhat theoretical content is encoded in memo? . . . . . . . . . . . . . . . . . . . .\n18\n2.4\nConnections to game theory and multi-agent planning . . . . . . . . . . . . . . . .\n21\n3\nDomain-specificity in minds and machines\n23\n3.1\nAccessing domain-general knowledge in domain-specific languages . . . . . . . .\n26\n3.2"
+    },
+    {
+      "id": "4efbdde6-d0b9-4375-a261-bdcbdd8dd78c",
+      "document_id": "1c2b38ad-b9a8-4b04-a6e9-75bc688a8cb2",
+      "filename": "2609.19598v1.pdf",
+      "page_number": 50,
+      "content": "to begin formalizing many other theories-of-mind beyond θ and θ3. For example, we could start\ndesigning memo variants that formalize our hypotheses of the theories-of-mind held by aging\nminds, non-human primates (see Horschler, Berke, Santos, & Jara-Ettinger, 2023, for recent work\non formalizing NHP theories-of-mind), and potentially even AI systems (see Hu, Sosa, & Ullman,\n2025). These formalizations in turn would precisely specify how we think these theories-of-mind\ndiffer, committing to predictions that could be tested empirically.\nFurthermore, this approach allows us to express not only the theories-of-mind held by minds, but\nthe theories-of-mind that minds attribute to other minds: for example, how an adult might think"
+    },
+    {
+      "id": "c9bf7342-6af7-443d-bec8-1bc79a96753f",
+      "document_id": "1c2b38ad-b9a8-4b04-a6e9-75bc688a8cb2",
+      "filename": "2609.19598v1.pdf",
+      "page_number": 2,
+      "content": "Short abstract:\nWhat kind of thing is a “theory of mind”? We propose to formalize theories of\nmind as domain-specialized programming languages, which can be used to reason about the mental\nstates of other agents. This perspective allows us to apply ideas from programming language theory\nto lend insight into a variety of theoretical issues in theory-of-mind research: how a single, fixed\nintuitive theory can be used to reason about social situations with unbounded structural variation;\nhow a modular, domain-specialized cognitive system can interface with external world knowledge;\nand how our theories of mind might grow over the course of development.\nLong abstract:\nWhat kind of thing is a “theory of mind”? We propose to formalize theories"
+    }
+  ],
+  "answer": "Dựa trên các tài liệu được cung cấp, dưới đây là tổng hợp học thuật về mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong tài liệu:\n\n## I. Mục tiêu nghiên cứu và Giả thuyết khoa học\n\n### 1. Mục tiêu nghiên cứu\n* Nghiên cứu đặt ra câu hỏi cốt lõi về bản chất của **lý thuyết tâm trí** (**theory of mind**): *\"What kind of thing is a 'theory of mind'?\"* [2609.19598v1.pdf - Trang 2]. \n* Mục tiêu của nghiên cứu là tìm hiểu cách thức con người lý giải về các trạng thái tinh thần của các tác nhân khác [2609.19598v1.pdf - Trang 2], đồng thời giải quyết các vấn đề lý thuyết trong nghiên cứu về lý thuyết tâm trí như cách một lý thuyết trực giác cố định có thể suy luận về các tình huống xã hội có cấu trúc biến đổi vô hạn, cách hệ thống nhận thức chuyên biệt theo miền (domain-specialized cognitive system) giao tiếp với tri thức thế giới bên ngoài, và cách lý thuyết tâm trí phát triển theo quá trình sinh trưởng [2609.19598v1.pdf - Trang 2].\n\n### 2. Giả thuyết khoa học\n* Nghiên cứu đề xuất và giả thuyết hóa rằng **các lý thuyết tâm trí** (**theories of mind**) có thể được hình thức hóa thành **các ngôn ngữ lập trình chuyên biệt theo miền** (**domain-specialized programming languages** / **domain-specific languages of thought**), được sử dụng để suy luận về các trạng thái tinh thần của các tác nhân khác [2609.19598v1.pdf - Trang 2].\n* Ý tưởng này xây dựng dựa trên quan điểm lâu đời cho rằng tư duy tương tự như lập trình trong một \"ngôn ngữ của tư duy\" (**language of thought**) nội tại. Tuy nhiên, thay vì định vị một ngôn ngữ mục đích chung duy nhất cho toàn bộ tư duy, nghiên cứu giả định một tập hợp các ngôn ngữ của tư duy chuyên biệt theo từng miền, trong đó cú pháp và ngữ nghĩa tương ứng mã hóa các lý thuyết của các miền khác nhau [2609.19598v1.pdf - Trang 2].\n\n## II. Phương pháp luận chính\n\n* **Hình thức hóa lý thuyết tâm trí thành ngôn ngữ chuyên biệt (Formalizing theories-of-mind as DSLs):** \n  * Đề xuất phương pháp chuyển đổi từ mạng Bayes (**Bayes nets**) sang các ngôn ngữ lập trình chuyên biệt theo miền (**domain-specific languages** - **DSLs**) [2609.19598v1.pdf - Trang 3].\n  * Sử dụng một ngôn ngữ lập trình thực tế cụ thể mang tên **memo** để hiện thực hóa ý tưởng này trong lĩnh vực tâm lý học trực giác (**intuitive psychology**) [2609.19598v1.pdf - Trang 2, Trang 3].\n* **Ứng dụng lý thuyết ngôn ngữ lập trình:** \n  * Áp dụng các ý tưởng từ lý thuyết ngôn ngữ lập trình để giải quyết các vấn đề lý thuyết trong nghiên cứu lý thuyết tâm trí, chẳng hạn như cách xây dựng các mô hình cụ thể theo nhiệm vụ với cấu trúc biến đổi vô hạn thông qua cấu trúc bộ nhớ (`memo`) [2609.19598v1.pdf - Trang 2, Trang 10].\n* **Tích hợp tri thức liên miền:** \n  * Nghiên cứu phương pháp để một ngôn ngữ chuyên biệt theo miền (`memo`) có thể giao diện hóa với tri thức thế giới mang tính tổng quát theo miền (**domain-general world knowledge**) và các lý thuyết trực giác của các miền khác nhằm giải quyết các vấn đề chung [2609.19598v1.pdf - Trang 10].\n* **Mở rộng mô hình thực nghiệm và kiểm định:** \n  * Xây dựng các biến thể của `memo` để hình thức hóa các giả thuyết về lý thuyết tâm trí ở các độ tuổi khác nhau (như tâm trí người cao tuổi - aging minds), linh trưởng không phải con người (non-human primates), và hệ thống trí tuệ nhân tạo (AI systems), từ đó đưa ra các dự đoán có thể kiểm chứng bằng thực nghiệm (**empirical testing**) [2609.19598v1.pdf - Trang 50].\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*\n\n## Tài liệu tham khảo\n* [2609.19598v1.pdf - Trang 2]\n* [2609.19598v1.pdf - Trang 3]\n* [2609.19598v1.pdf - Trang 10]\n* [2609.19598v1.pdf - Trang 50]"
+}

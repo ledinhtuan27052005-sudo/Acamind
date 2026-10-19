@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_19",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'A Novel Sentence Stress Detection Framework Leveraging Auxiliary Word-Stress Modeling and Loss Optimization' là gì?",
+  "is_ooc": false,
+  "system": "Naive_Dense",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 107.28,
+  "retrieval_warm_ms": 114.77,
+  "llm_ms": 1141.82,
+  "e2e_cold_ms": 1249.1,
+  "e2e_warm_ms": 1256.59,
+  "provided_chunks": [
+    {
+      "id": "9578a3d5-e492-46f1-a6ec-f697f372c3ca",
+      "document_id": "f3f6486b-31d0-45d3-8b64-db68742f12c7",
+      "filename": "2610.07626v1.pdf",
+      "page_number": 1,
+      "content": "A Novel Sentence Stress Detection Framework Leveraging Auxiliary\nWord-Stress Modeling and Loss Optimization\nTien-Hong Lo ID , Fong-Chun Tsai ID , Ting-An Hung, Yu-Hsuan Hsieh, Yao-Ting Sung ID , Berlin\nChen ID\nNational Taiwan Normal University, Taiwan\n{teinhonglo,berlin}@ntnu.edu.tw\nAbstract\nProsodic stress is a crucial aspect of automatic pronunciation\nassessment (APA), encompassing both sentence stress detection\n(SSD) and word stress detection (WSD). SSD highlights seman-\ntically salient words that shape discourse meaning, while WSD\nidentifies the primary stressed syllable within each word to en-\nsure lexical clarity. However, most prior work treats SSD and\nWSD as independent tasks, overlooking their shared reliance on\nprosodic cues such as pitch, duration, and intensity. To address"
+    },
+    {
+      "id": "282fb46a-57fd-4120-b791-77c964a9bc95",
+      "document_id": "f3f6486b-31d0-45d3-8b64-db68742f12c7",
+      "filename": "2610.07626v1.pdf",
+      "page_number": 5,
+      "content": "42, 2017.\n[13] A. Suni, D. Aalto, and M. Vainio, “Hierarchical representa-\ntion of prosody for statistical speech synthesis,” arXiv preprint\narXiv:1510.01949, 2015.\n[14] I. Yosha, D. Shteyman, and Y. Adi, “WhiStress: Enriching Tran-\nscriptions with Sentence Stress Detection,” in Proceeding of In-\nterspeech, 2025, pp. 4718–4722.\n[15] T.-A. Hung, Y.-H. Hsieh, T.-H. Lo, Y.-C. Hsu, and B. Chen,\n“Exploring sentence stress detection using whisper-based speech\nmodels,” in in Proceedings of ROCLING, 2025, pp. 314–319.\n[16] L. Ferrer, H. Bratt, C. Richey, H. Franco, V. Abrash, and\nK. Precoda, “Classification of lexical stress using spectral and\nprosodic features for computer-assisted language learning sys-\ntems,” Speech Communication, vol. 69, pp. 31–45, 2015."
+    },
+    {
+      "id": "382c69d1-3be5-4638-9fb0-455ba2740319",
+      "document_id": "f3f6486b-31d0-45d3-8b64-db68742f12c7",
+      "filename": "2610.07626v1.pdf",
+      "page_number": 1,
+      "content": "since advanced word stress classification [22, 23, 24]. Recent\nwork has instead integrated adaptive loss functions that embed\nlinguistic constraints directly into training, reducing the need\nfor post-hoc correction [25]. More broadly, structured training\nobjectives for prosody often take the form of soft constraints\nor regularizers, such as entropy penalties or sparsity-inducing\nterms, to encourage well-formed stress patterns. Despite the\ncontinued efforts, SSD and WSD continue to be modeled inde-\npendently, leaving unexplored their shared reliance on prosodic\ncues and the potential benefits of a unified framework.\nTo tackle the aforementioned challenge,\nwe propose\nSTRAW, a Sentence sTress detection (SSD) framework built\non a frozen Whisper backbone that augments token-level SSD"
+    },
+    {
+      "id": "d9dd4aa2-3287-4237-b377-ad61a9b0a448",
+      "document_id": "f3f6486b-31d0-45d3-8b64-db68742f12c7",
+      "filename": "2610.07626v1.pdf",
+      "page_number": 1,
+      "content": "To tackle the aforementioned challenge,\nwe propose\nSTRAW, a Sentence sTress detection (SSD) framework built\non a frozen Whisper backbone that augments token-level SSD\nwith a word-span stress Regularizer (WSR) and an Auxiliary\nphone-level Word stress detection (WSD) branch. Unlike pre-\nvious approaches that treat SSD and WSD in isolation, the\nproposed framework supports both tasks within a common\nfrozen-Whisper framework.\nExperiments on the TinyStress\n[14] benchmark dataset demonstrate improvements over strong\nbaselines. The main contributions of this work are summarized\nas follows:\n1. We present a unified framework for stress detection with sep-\narate task-specific branches for Sentence Stress Detection\n(SSD) and Word Stress Detection (WSD).\narXiv:2610.07626v1  [eess.AS]  6 Oct 2026"
+    },
+    {
+      "id": "4ae7674d-23c5-4b04-956d-ff23779dfe60",
+      "document_id": "f3f6486b-31d0-45d3-8b64-db68742f12c7",
+      "filename": "2610.07626v1.pdf",
+      "page_number": 5,
+      "content": "lexical stress in english and arabic languages using deep learning.”\nin Proceedings of Interspeech, 2016, pp. 175–179.\n[23] Y. Ruan, X. Wang, H. Liu, Z. Ou, Y. Gao, J. Cheng, and Y. Qian,\n“An end-to-end approach for lexical stress detection based on\ntransformer,” arXiv preprint arXiv:1911.04862, 2019.\n[24] J. Mallela, P. S. Boyina, and C. Yarra, “A comparison of learned\nrepresentations with jointly optimized vae and dnn for syllable\nstress detection,” in Proceedings of ICSC, 2023, pp. 322–334.\n[25] S. H. Aluru, J. Mallela, and C. Yarra, “Post-net2.0: An adaptive\nweighted loss function driven by linguistic constraint for auto-\nmatic syllable stress detection,” in Proceedings of ICASSP, 2025,\npp. 1–5.\n[26] T. W. et al., “Transformers: State-of-the-art natural language pro-"
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

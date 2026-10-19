@@ -1,0 +1,174 @@
+{
+  "DEV": {
+    "n_answerable": 27,
+    "n_skipped_answerable": 10,
+    "skip_rate_answerable": 0.3704,
+    "on_skipped_answerable": {
+      "mean_overlap_at_8_vs_full": 0.6375,
+      "mean_ref_ndcg_at_8_vs_full": 0.5695,
+      "top1_changed_count": 7,
+      "top1_changed_rate": 0.7
+    },
+    "all_answerable_comparison": {
+      "gt_recall_at_8_full": 0.8025,
+      "gt_recall_at_8_dcsr": 0.7901,
+      "gt_ndcg_at_8_full": 0.8168,
+      "gt_ndcg_at_8_dcsr": 0.8167,
+      "gt_ndcg_at_10_full": 0.8219,
+      "gt_ndcg_at_10_dcsr": 0.8219
+    },
+    "by_category": {
+      "Cross-Article Comparison": {
+        "n_total": 9,
+        "n_skipped": 5,
+        "skip_rate": 0.5556,
+        "mean_overlap_at_8_all": 0.7639,
+        "mean_overlap_at_8_on_skipped": 0.575,
+        "mean_ref_ndcg_at_8_on_skipped": 0.5445,
+        "top1_changed_rate_on_skipped": 0.6,
+        "gt_recall_at_8_full": 0.6667,
+        "gt_recall_at_8_dcsr": 0.6667,
+        "gt_ndcg_at_8_full": 0.7019,
+        "gt_ndcg_at_8_dcsr": 0.7206
+      },
+      "Factual Q&A": {
+        "n_total": 12,
+        "n_skipped": 1,
+        "skip_rate": 0.0833,
+        "mean_overlap_at_8_all": 0.9583,
+        "mean_overlap_at_8_on_skipped": 0.5,
+        "mean_ref_ndcg_at_8_on_skipped": 0.2804,
+        "top1_changed_rate_on_skipped": 1.0,
+        "gt_recall_at_8_full": 1.0,
+        "gt_recall_at_8_dcsr": 1.0,
+        "gt_ndcg_at_8_full": 1.0,
+        "gt_ndcg_at_8_dcsr": 1.0
+      },
+      "In-Domain Unanswerable (Hard Refusal)": {
+        "n_total": 12,
+        "n_skipped": 2,
+        "skip_rate": 0.1667,
+        "mean_overlap_at_8_all": 0.9167,
+        "mean_overlap_at_8_on_skipped": 0.5,
+        "mean_ref_ndcg_at_8_on_skipped": 0.4103,
+        "top1_changed_rate_on_skipped": 1.0,
+        "gt_recall_at_8_full": 0.0,
+        "gt_recall_at_8_dcsr": 0.0,
+        "gt_ndcg_at_8_full": 0.0,
+        "gt_ndcg_at_8_dcsr": 0.0
+      },
+      "Literature Synthesis": {
+        "n_total": 6,
+        "n_skipped": 4,
+        "skip_rate": 0.6667,
+        "mean_overlap_at_8_all": 0.8333,
+        "mean_overlap_at_8_on_skipped": 0.75,
+        "mean_ref_ndcg_at_8_on_skipped": 0.6729,
+        "top1_changed_rate_on_skipped": 0.75,
+        "gt_recall_at_8_full": 0.6111,
+        "gt_recall_at_8_dcsr": 0.5556,
+        "gt_ndcg_at_8_full": 0.6229,
+        "gt_ndcg_at_8_dcsr": 0.594
+      },
+      "Safe Refusal (Out-of-Domain)": {
+        "n_total": 3,
+        "n_skipped": 0,
+        "skip_rate": 0.0,
+        "mean_overlap_at_8_all": 1.0,
+        "mean_overlap_at_8_on_skipped": null,
+        "mean_ref_ndcg_at_8_on_skipped": null,
+        "top1_changed_rate_on_skipped": null,
+        "gt_recall_at_8_full": 0.0,
+        "gt_recall_at_8_dcsr": 0.0,
+        "gt_ndcg_at_8_full": 0.0,
+        "gt_ndcg_at_8_dcsr": 0.0
+      }
+    }
+  },
+  "TEST": {
+    "n_answerable": 45,
+    "n_skipped_answerable": 14,
+    "skip_rate_answerable": 0.3111,
+    "on_skipped_answerable": {
+      "mean_overlap_at_8_vs_full": 0.5625,
+      "mean_ref_ndcg_at_8_vs_full": 0.7753,
+      "top1_changed_count": 5,
+      "top1_changed_rate": 0.3571
+    },
+    "all_answerable_comparison": {
+      "gt_recall_at_8_full": 0.563,
+      "gt_recall_at_8_dcsr": 0.5481,
+      "gt_ndcg_at_8_full": 0.5814,
+      "gt_ndcg_at_8_dcsr": 0.5701,
+      "gt_ndcg_at_10_full": 0.5876,
+      "gt_ndcg_at_10_dcsr": 0.5762
+    },
+    "by_category": {
+      "Cross-Article Comparison": {
+        "n_total": 15,
+        "n_skipped": 7,
+        "skip_rate": 0.4667,
+        "mean_overlap_at_8_all": 0.7917,
+        "mean_overlap_at_8_on_skipped": 0.5536,
+        "mean_ref_ndcg_at_8_on_skipped": 0.733,
+        "top1_changed_rate_on_skipped": 0.4286,
+        "gt_recall_at_8_full": 0.0,
+        "gt_recall_at_8_dcsr": 0.0,
+        "gt_ndcg_at_8_full": 0.0,
+        "gt_ndcg_at_8_dcsr": 0.0
+      },
+      "Factual Q&A": {
+        "n_total": 20,
+        "n_skipped": 4,
+        "skip_rate": 0.2,
+        "mean_overlap_at_8_all": 0.9187,
+        "mean_overlap_at_8_on_skipped": 0.5938,
+        "mean_ref_ndcg_at_8_on_skipped": 0.8928,
+        "top1_changed_rate_on_skipped": 0.0,
+        "gt_recall_at_8_full": 1.0,
+        "gt_recall_at_8_dcsr": 1.0,
+        "gt_ndcg_at_8_full": 1.0,
+        "gt_ndcg_at_8_dcsr": 1.0
+      },
+      "In-Domain Unanswerable (Hard Refusal)": {
+        "n_total": 10,
+        "n_skipped": 1,
+        "skip_rate": 0.1,
+        "mean_overlap_at_8_all": 0.95,
+        "mean_overlap_at_8_on_skipped": 0.5,
+        "mean_ref_ndcg_at_8_on_skipped": 0.2009,
+        "top1_changed_rate_on_skipped": 1.0,
+        "gt_recall_at_8_full": 0.0,
+        "gt_recall_at_8_dcsr": 0.0,
+        "gt_ndcg_at_8_full": 0.0,
+        "gt_ndcg_at_8_dcsr": 0.0
+      },
+      "Literature Synthesis": {
+        "n_total": 10,
+        "n_skipped": 3,
+        "skip_rate": 0.3,
+        "mean_overlap_at_8_all": 0.8625,
+        "mean_overlap_at_8_on_skipped": 0.5417,
+        "mean_ref_ndcg_at_8_on_skipped": 0.7172,
+        "top1_changed_rate_on_skipped": 0.6667,
+        "gt_recall_at_8_full": 0.5333,
+        "gt_recall_at_8_dcsr": 0.4667,
+        "gt_ndcg_at_8_full": 0.6164,
+        "gt_ndcg_at_8_dcsr": 0.5654
+      },
+      "Safe Refusal (Edge)": {
+        "n_total": 5,
+        "n_skipped": 0,
+        "skip_rate": 0.0,
+        "mean_overlap_at_8_all": 1.0,
+        "mean_overlap_at_8_on_skipped": null,
+        "mean_ref_ndcg_at_8_on_skipped": null,
+        "top1_changed_rate_on_skipped": null,
+        "gt_recall_at_8_full": 0.0,
+        "gt_recall_at_8_dcsr": 0.0,
+        "gt_ndcg_at_8_full": 0.0,
+        "gt_ndcg_at_8_dcsr": 0.0
+      }
+    }
+  }
+}

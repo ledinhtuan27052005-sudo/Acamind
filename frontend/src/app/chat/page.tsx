@@ -5,20 +5,25 @@ import { motion } from 'framer-motion';
 import {
   getDocuments, chatStream, chatGeneralStream,
   getMyPlanUsage, chatFileStream, lookupDocument,
-  DocumentInfo, PlanUsage,
+  DocumentInfo, PlanUsage, ChatTelemetryPayload,
+  verifyAtomicClaims, ClaimVerificationResult,
+  fetchNeuroClinicalGraph, NeuroClinicalGraphData,
 } from '@/lib/api';
 import { useAppStore } from '@/store/useAppStore';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   Send, Square, Brain, Globe, Trash2, Zap,
   MessageSquare, Clock, Plus, X, User, Sparkles, Paperclip, FileText, Lock,
-  Copy, Check, Download, Printer, Quote, BookOpen, ChevronRight,
+  Copy, Check, Download, Printer, Quote, BookOpen, ChevronRight, Table,
+  Activity, ShieldCheck, Award, ChevronDown, ChevronUp, Code, Eye, ExternalLink,
 } from 'lucide-react';
 import { SideBySidePdfViewer } from '@/components/ui/SideBySidePdfViewer';
 import { AuthRequiredModal, AuthRequiredBanner } from '@/components/auth/AuthRequiredModal';
 import { KatexMath } from '@/components/ui/KatexMath';
 import { FigureViewer } from '@/components/ui/FigureViewer';
 import { MermaidRenderer } from '@/components/ui/MermaidRenderer';
+import { cleanMarkdownText } from '@/components/ui/AcademicDocumentRenderer';
 
 import { useI18n } from '@/lib/i18n/context';
 
@@ -34,6 +39,7 @@ interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
   attachments?: ChatFile[];
+  telemetryPayload?: ChatTelemetryPayload | null;
 }
 
 interface ChatFile {
@@ -514,7 +520,7 @@ function parseToStructured(content: string): StructuredItem[] {
     if (rows.length < 2) return null;
     const headerCells = parseTableRow(rows[0]);
     const dataRows: TableRow[] = [];
-    for (let i = 2; i < rows.length; i++) {
+    for (let i = 1; i < rows.length; i++) {
       if (!isTableSeparator(rows[i])) {
         dataRows.push({ cells: parseTableRow(rows[i]) });
       }
@@ -638,7 +644,7 @@ function parseToStructured(content: string): StructuredItem[] {
 
     // 6. Blockquote (> Quote) - Khối trích lục từ tài liệu gốc
     if (trimmed.startsWith('>')) {
-      const quoteContent = trimmed.replace(/^>\s*/, '');
+      const quoteContent = trimmed.replace(/^>\s*/, '').replace(/^#+/, '').trim();
       result.push({
         type: 'blockquote',
         content: quoteContent,
@@ -647,12 +653,12 @@ function parseToStructured(content: string): StructuredItem[] {
     }
 
     // 7. Heading (#, ##, ###)
-    const headingMatch = trimmed.match(/^(#{1,6})\s+(.*)$/);
+    const headingMatch = trimmed.match(/^(#{1,6})\s*(.+)$/);
     if (headingMatch) {
       result.push({
         type: 'heading',
         level: headingMatch[1].length,
-        content: headingMatch[2],
+        content: headingMatch[2].replace(/\s*#+\s*$/, '').trim(),
       });
       continue;
     }
@@ -663,18 +669,18 @@ function parseToStructured(content: string): StructuredItem[] {
       result.push({
         type: 'numbered',
         numberPrefix: numberedMatch[1],
-        content: numberedMatch[2],
+        content: numberedMatch[2].replace(/^#{1,6}\s+/, ''),
       });
       continue;
     }
 
     // 9. Bullet point (- item, * item, • item, — item, ▪ item)
-    const bulletMatch = trimmed.match(/^[-*•—–▪✦✓]\s+(.*)$/);
+    const bulletMatch = trimmed.match(/^[-*+•—–▪✦✓]\s+(.*)$/);
     if (bulletMatch) {
       result.push({
         type: 'bullet',
         bulletGlyph: bulletMatch[0][0],
-        content: bulletMatch[1],
+        content: bulletMatch[1].replace(/^#{1,6}\s+/, ''),
       });
       continue;
     }
@@ -709,7 +715,7 @@ function parseToStructured(content: string): StructuredItem[] {
 // Parse bold text helper
 function parseBoldText(text: string): { bold: boolean; text: string }[] {
   const parts: { bold: boolean; text: string }[] = [];
-  const regex = /\*\*(.+?)\*\*/g;
+  const regex = /(?:\*\*(.+?)\*\*|__(.+?)__)/g;
   let lastIndex = 0;
   let match;
 
@@ -717,7 +723,7 @@ function parseBoldText(text: string): { bold: boolean; text: string }[] {
     if (match.index > lastIndex) {
       parts.push({ bold: false, text: text.slice(lastIndex, match.index) });
     }
-    parts.push({ bold: true, text: match[1] });
+    parts.push({ bold: true, text: match[1] || match[2] });
     lastIndex = regex.lastIndex;
   }
 
@@ -789,16 +795,36 @@ function renderRichText({
   let lastIndex = 0;
   let match: RegExpExecArray | null;
 
-  // Render inline math inside text
+  // Render inline math and clean inline code/markdown artifacts inside text
   const renderMathSpan = (raw: string, pfx: string) => {
     const mathParts = parseInlineMath(raw);
-    return mathParts.map((m, mIdx) =>
-      m.isMath ? (
-        <KatexMath key={`${pfx}-math-${mIdx}`} math={m.content} block={false} />
-      ) : (
-        <span key={`${pfx}-txt-${mIdx}`}>{m.content}</span>
-      )
-    );
+    return mathParts.map((m, mIdx) => {
+      if (m.isMath) {
+        return <KatexMath key={`${pfx}-math-${mIdx}`} math={m.content} block={false} />;
+      }
+      const codeSplit = m.content.split(/(\`[^\`\n]+?\`)/g);
+      return (
+        <span key={`${pfx}-txt-${mIdx}`}>
+          {codeSplit.map((seg, sIdx) => {
+            if (seg.startsWith('`') && seg.endsWith('`') && seg.length > 2) {
+              return (
+                <span
+                  key={sIdx}
+                  className="px-1.5 py-0.5 mx-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-semibold text-[0.92em]"
+                >
+                  {seg.slice(1, -1)}
+                </span>
+              );
+            }
+            const cleanSeg = seg
+              .replace(/^#{1,6}\s+/g, '')
+              .replace(/\*{2,}/g, '')
+              .replace(/`+/g, '');
+            return <span key={sIdx}>{cleanSeg}</span>;
+          })}
+        </span>
+      );
+    });
   };
 
   // Render italic inside non-bold or bold segments
@@ -865,29 +891,94 @@ function renderRichText({
       continue;
     }
 
-    // 2. Academic Citation: [filename.pdf - Page 3] hoặc [file1.pdf - Page 2; file2.pdf - Trang 5]
-    if (/(?:Page|Trang)\s*\d+/i.test(bracketInner)) {
+    // 2. Academic Citation: [filename.pdf - Page 3], [filename.pdf, Page 3], [filename.pdf - tr. 3] hoặc [file.xlsx - Sheet: DoanhThu]
+    if (/(?:Page|Trang|tr\.?|p\.?|pp\.?)\s*\d+/i.test(bracketInner) || /Sheet\s*:/i.test(bracketInner)) {
       const subItems = bracketInner.split(';');
       const citationButtons: React.ReactNode[] = [];
 
-      // Trích xuất câu hoặc đoạn văn ngữ cảnh làm snippet đối chứng
+      // Trích xuất chính xác câu từ hoặc trích đoạn trích dẫn làm snippet đối chứng
       let contextSnippet = '';
       const textBefore = text.slice(0, match.index).trim();
       if (textBefore) {
-        const cleanBefore = textBefore.replace(/\[[^\]]+\]/g, '').replace(/[\*\_]/g, '').trim();
-        const sentences = cleanBefore.split(/(?<=[.!?\n])\s+/);
-        contextSnippet = sentences[sentences.length - 1] || cleanBefore;
-        if (contextSnippet.length > 220) {
-          contextSnippet = contextSnippet.slice(-220).trim();
+        // 1. Kiểm tra nếu có câu trích dẫn trong ngoặc kép ngay trước citation: "..." hoặc “...”
+        const quoteMatch = textBefore.match(/(?:["“'«])([^"”'»\n]{6,350})(?:["”'»])\s*$/);
+        if (quoteMatch) {
+          contextSnippet = quoteMatch[1].trim();
         }
+
+        // 2. Kiểm tra nếu là khối trích dẫn markdown blockquote: > "..." hoặc > ...
+        if (!contextSnippet) {
+          const blockquoteMatch = textBefore.match(/(?:^|\n)\s*>\s*([^\n]{6,350})$/);
+          if (blockquoteMatch) {
+            contextSnippet = blockquoteMatch[1].replace(/^[“"'\s]+|[”"'\s]+$/g, '').trim();
+          }
+        }
+
+        // 3. Kiểm tra nếu là đầu mục danh sách (bullet point hoặc đánh số): - ... hoặc 1. ...
+        if (!contextSnippet) {
+          const bulletMatch = textBefore.match(/(?:^|\n)\s*(?:[-*•–—]|\d+\.)\s*([^\n]{6,350})$/);
+          if (bulletMatch) {
+            contextSnippet = bulletMatch[1].trim();
+          }
+        }
+
+        // 4. Kiểm tra nếu trong ô bảng dữ liệu Markdown: | ... [citation] |
+        if (!contextSnippet) {
+          const tableCellMatch = textBefore.match(/\|([^|\n]{4,250})$/);
+          if (tableCellMatch) {
+            contextSnippet = tableCellMatch[1].trim();
+          }
+        }
+
+        // 5. Trích xuất câu hoặc mệnh đề hoàn chỉnh trong đoạn văn
+        if (!contextSnippet) {
+          const cleanBefore = textBefore.replace(/\[[^\]]+\]/g, '').replace(/[\*\_]/g, '').trim();
+          const sentences = cleanBefore.split(/(?<=[.!?\n])\s+/);
+          let candidate = sentences[sentences.length - 1] || cleanBefore;
+          if (sentences.length >= 2 && candidate.length < 25) {
+            candidate = `${sentences[sentences.length - 2]} ${candidate}`.trim();
+          }
+          if (candidate.length > 280) {
+            const words = candidate.split(/\s+/);
+            candidate = words.slice(-35).join(' ');
+          }
+          contextSnippet = candidate;
+        }
+
+        // Dọn dẹp sạch sẽ các ký tự markdown bao bọc
+        contextSnippet = contextSnippet
+          .replace(/\[[^\]]+\]/g, '')
+          .replace(/[\*\_`]/g, '')
+          .replace(/^[“"'«\s]+|[”"'»\s]+$/g, '')
+          .trim();
       }
+
       if (!contextSnippet) {
-        contextSnippet = text.replace(/\[[^\]]+\]/g, '').replace(/[\*\_]/g, '').trim().slice(0, 180);
+        contextSnippet = text.replace(/\[[^\]]+\]/g, '').replace(/[\*\_`]/g, '').trim().slice(0, 180);
       }
 
       subItems.forEach((sub, subIdx) => {
-        const pageMatch = sub.match(/([^-\n]+?)\s*-\s*(?:Page|Trang)\s*(\d+)/i);
-        if (pageMatch) {
+        const pageMatch = sub.match(/([^\n]+?)\s*[-–—,:]\s*(?:Page|Trang|tr\.?|p\.?|pp\.?)\s*(\d+)/i);
+        const sheetMatch = sub.match(/([^-\n]+?)\s*-\s*Sheet\s*:\s*([^\]\n;]+)/i);
+
+        if (sheetMatch) {
+          const rawFilename = sheetMatch[1].trim();
+          const sheetName = sheetMatch[2].trim();
+          const shortName = rawFilename.length > 20 ? rawFilename.slice(0, 18) + '…' : rawFilename;
+          citationButtons.push(
+            <span
+              key={`cite-sheet-${match!.index}-${subIdx}`}
+              className="inline-flex items-center gap-1.5 px-2 py-0.5 mx-1 my-0.5 rounded-md text-[11.5px] font-medium bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-200 border border-emerald-300 dark:border-emerald-700/60 shadow-2xs select-none"
+              title={`Trích xuất từ tệp Excel: "${rawFilename}", Sheet: "${sheetName}"`}
+            >
+              <Table size={11} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
+              <span className="font-semibold truncate max-w-[130px]">{shortName}</span>
+              <span className="bg-emerald-200/80 dark:bg-emerald-800/70 px-1.5 py-0.2 rounded text-[10px] font-mono font-bold text-emerald-900 dark:text-emerald-100">
+                Sheet: {sheetName}
+              </span>
+            </span>
+          );
+        } else if (pageMatch) {
           const rawFilename = pageMatch[1].trim();
           const pageNum = parseInt(pageMatch[2], 10);
           const shortName = rawFilename.length > 22 ? rawFilename.slice(0, 19) + '…' : rawFilename;
@@ -1100,22 +1191,95 @@ function StructuredMessage({
   );
 }
 
-/* ── AI Message Component (Word / PDF Document Paper Sheet) ────────── */
+/* ── AI Message Component (Word / PDF Document Paper Sheet + Live Telemetry & EBP Badges) ── */
 
 function AiMessage({
   content,
   query,
   documentIds,
+  telemetryPayload,
   onCitationClick,
   onInjectPrompt,
 }: {
   content: string;
   query?: string;
   documentIds?: string[];
+  telemetryPayload?: ChatTelemetryPayload | null;
   onCitationClick?: (filename: string, page: number, snippet?: string) => void;
   onInjectPrompt?: (promptText: string) => void;
 }) {
+  const router = useRouter();
   const [copied, setCopied] = useState(false);
+  const [showTelemetryDetail, setShowTelemetryDetail] = useState(false);
+  const [copiedApaId, setCopiedApaId] = useState<string | null>(null);
+  const [copiedBibId, setCopiedBibId] = useState<string | null>(null);
+
+  // Feature 1: Claim-Level Entailment & Hallucination Shield (CLHV)
+  const [claimResult, setClaimResult] = useState<ClaimVerificationResult | null>(null);
+  const [claimLoading, setClaimLoading] = useState(false);
+  const [showClaimPanel, setShowClaimPanel] = useState(false);
+
+  // Feature 3: Interactive Neuro-Clinical Knowledge Graph <-> 3D Brain Bridge
+  const [neuroGraph, setNeuroGraph] = useState<NeuroClinicalGraphData | null>(null);
+  const [neuroLoading, setNeuroLoading] = useState(false);
+  const [showNeuroPanel, setShowNeuroPanel] = useState(false);
+
+  const tel = telemetryPayload?.telemetry;
+  const sourcesMeta = telemetryPayload?.sources || [];
+
+  const handleVerifyClaims = async () => {
+    if (showClaimPanel && claimResult) {
+      setShowClaimPanel(false);
+      return;
+    }
+    setShowClaimPanel(true);
+    if (claimResult || claimLoading) return;
+    setClaimLoading(true);
+    try {
+      const res = await verifyAtomicClaims(
+        query || '',
+        content,
+        documentIds && documentIds.length > 0 ? documentIds : undefined
+      );
+      setClaimResult(res);
+    } catch (e) {
+      console.error('Claim verification error:', e);
+    } finally {
+      setClaimLoading(false);
+    }
+  };
+
+  const handleOpenNeuroGraph = async () => {
+    if (showNeuroPanel && neuroGraph) {
+      setShowNeuroPanel(false);
+      return;
+    }
+    setShowNeuroPanel(true);
+    if (neuroGraph || neuroLoading) return;
+    setNeuroLoading(true);
+    try {
+      const res = await fetchNeuroClinicalGraph(
+        query || '',
+        content,
+        documentIds && documentIds.length > 0 ? documentIds : undefined
+      );
+      setNeuroGraph(res);
+    } catch (e) {
+      console.error('Neuro graph error:', e);
+    } finally {
+      setNeuroLoading(false);
+    }
+  };
+
+  const handleJumpTo3DBrain = (regionId: string) => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(
+        'acamind_3d_target',
+        JSON.stringify({ region_id: regionId, context_text: content })
+      );
+    }
+    router.push(`/3d?region=${encodeURIComponent(regionId)}&xray=1`);
+  };
 
   const handleCopy = () => {
     const cleanText = content
@@ -1136,10 +1300,28 @@ function AiMessage({
     printDocument(content, 'Bao_Cao_Trich_Xuat_Acamind');
   };
 
+  const copySourceCitation = (id: string, textToCopy: string, type: 'apa' | 'bib') => {
+    navigator.clipboard.writeText(textToCopy);
+    if (type === 'apa') {
+      setCopiedApaId(id);
+      setTimeout(() => setCopiedApaId(null), 2000);
+    } else {
+      setCopiedBibId(id);
+      setTimeout(() => setCopiedBibId(null), 2000);
+    }
+  };
+
+  const routeLabel =
+    tel?.route === 'cross_article_comparison'
+      ? `Cross-Article (M=${tel.num_targets})`
+      : tel?.route === 'literature_synthesis'
+      ? `Lit-Synthesis (M=${tel.num_targets})`
+      : 'Single-Focus (M=1)';
+
   return (
     <div className="group relative bg-white dark:bg-[#151a23] border border-slate-200/90 dark:border-slate-800 rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.05)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.35)] overflow-hidden transition-all hover:border-slate-300 dark:hover:border-slate-700">
       {/* ── Document Page Header Bar (Word / PDF Document Style) ── */}
-      <div className="flex items-center justify-between px-4 sm:px-6 py-2.5 bg-gradient-to-r from-slate-50 via-slate-100/70 to-slate-50 dark:from-[#1a202c] dark:via-[#1e2634] dark:to-[#1a202c] border-b border-slate-200 dark:border-slate-800 text-xs select-none">
+      <div className="flex items-center justify-between flex-wrap gap-2 px-4 sm:px-6 py-2.5 bg-gradient-to-r from-slate-50 via-slate-100/70 to-slate-50 dark:from-[#1a202c] dark:via-[#1e2634] dark:to-[#1a202c] border-b border-slate-200 dark:border-slate-800 text-xs select-none">
         <div className="flex items-center gap-2 min-w-0">
           <div className="w-6 h-6 rounded bg-teal-600/10 dark:bg-teal-400/20 text-teal-700 dark:text-teal-400 flex items-center justify-center shrink-0">
             <FileText size={14} />
@@ -1148,15 +1330,41 @@ function AiMessage({
             <span className="font-bold text-[11px] sm:text-xs tracking-wider uppercase text-slate-800 dark:text-slate-200 truncate">
               VĂN BẢN TRÍCH XUẤT & PHÂN TÍCH
             </span>
-            <span className="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800/60">
-              <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse"></span>
-              Định dạng Word / PDF
-            </span>
           </div>
         </div>
 
         {/* Toolbar actions */}
-        <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+        <div className="flex items-center flex-wrap gap-1 sm:gap-1.5 shrink-0">
+          {/* Feature 1: Claim-Level X-Ray Hallucination Shield */}
+          <button
+            type="button"
+            onClick={handleVerifyClaims}
+            className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-semibold transition-colors shadow-2xs cursor-pointer border ${
+              showClaimPanel
+                ? 'bg-emerald-600 text-white border-emerald-600'
+                : 'bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/60 dark:hover:bg-emerald-900/70 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800'
+            }`}
+            title="Kiểm chứng Chống Ảo giác Cấp độ Mệnh đề (X-Ray Claim Entailment Shield)"
+          >
+            <ShieldCheck size={12} />
+            <span>{claimLoading ? 'Đang kiểm chứng...' : 'Kiểm chứng X-Ray'}</span>
+          </button>
+
+          {/* Feature 3: Neuro-Clinical 3D Brain Graph Bridge */}
+          <button
+            type="button"
+            onClick={handleOpenNeuroGraph}
+            className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-semibold transition-colors shadow-2xs cursor-pointer border ${
+              showNeuroPanel
+                ? 'bg-indigo-600 text-white border-indigo-600'
+                : 'bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-950/60 dark:hover:bg-indigo-900/70 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800'
+            }`}
+            title="Đồ thị Tri thức Thần kinh – Tâm lý Liên kết Não bộ 3D"
+          >
+            <Brain size={12} />
+            <span>{neuroLoading ? 'Đang lập đồ thị...' : 'Đồ thị Não 3D'}</span>
+          </button>
+
           <button
             onClick={handleCopy}
             className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[11px] font-medium bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-colors shadow-2xs cursor-pointer"
@@ -1186,21 +1394,381 @@ function AiMessage({
         </div>
       </div>
 
+      {/* ── Live RAG Pipeline Telemetry Bar (Proposal 1: DCSR + Multi-Target Router + CRAG Gate) ── */}
+      {tel && (
+        <div className="border-b border-slate-200/80 dark:border-slate-800/90 bg-slate-50/70 dark:bg-[#111722] px-4 sm:px-6 py-2 text-[11px]">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center gap-1.5">
+              {/* Memory / Hybrid Tier */}
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-semibold bg-teal-500/10 text-teal-700 dark:text-teal-300 border border-teal-500/25">
+                <Activity size={11} />
+                {tel.memory_tier === 'L1_FAST_MEMORY' ? 'L1 Fast Memory' : `Hybrid RRF (k=${tel.rrf_k})`}
+              </span>
+
+              {/* Query Router */}
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-medium bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border border-indigo-500/25">
+                Router: {routeLabel}
+              </span>
+
+              {/* DCSR Gate */}
+              <span
+                className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-medium border ${
+                  tel.dcsr_fast_skip
+                    ? 'bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/25'
+                    : 'bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-500/25'
+                }`}
+              >
+                <Zap size={11} />
+                {tel.dcsr_fast_skip
+                  ? `DCSR Fast-Skip (Δ=${tel.dominance_ratio}, Conf=${tel.dcsr_confidence})`
+                  : `Cross-Encoder Rerank (Conf=${tel.dcsr_confidence})`}
+              </span>
+
+              {/* CRAG Gate */}
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-medium bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25">
+                <ShieldCheck size={11} />
+                CRAG: {tel.crag_passed ? 'Verified' : 'Abstain'} (S₂={tel.crag_score} ≥ τ={tel.crag_threshold})
+              </span>
+
+              {/* Latency */}
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-mono text-[10.5px] bg-slate-200/70 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                ⏱ {tel.latency_ms} ms
+              </span>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setShowTelemetryDetail((s) => !s)}
+              className="inline-flex items-center gap-1 text-[11px] font-semibold text-teal-700 dark:text-teal-400 hover:underline cursor-pointer shrink-0"
+            >
+              <span>{showTelemetryDetail ? 'Ẩn thông số' : 'Chi tiết thuật toán'}</span>
+              {showTelemetryDetail ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
+            </button>
+          </div>
+
+          {showTelemetryDetail && (
+            <div className="mt-2.5 pt-2.5 border-t border-slate-200/70 dark:border-slate-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-[11px]">
+              <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
+                <div className="font-bold text-slate-800 dark:text-slate-200 mb-1">1. Phân rã Đa mục tiêu (Eq. 9)</div>
+                <div className="text-slate-600 dark:text-slate-400 space-y-0.5">
+                  <div>Chế độ: <span className="font-mono font-semibold text-indigo-600 dark:text-indigo-400">{tel.route}</span></div>
+                  <div>Số mục tiêu (M): <span className="font-mono font-semibold">{tel.num_targets}</span> (Quota: {tel.quota_per_target}/mục tiêu)</div>
+                  <div className="truncate" title={tel.sub_queries?.join(' | ')}>
+                    Truy vấn con: <span className="italic">{tel.sub_queries?.join(' • ')}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
+                <div className="font-bold text-slate-800 dark:text-slate-200 mb-1">2. Truy hồi Lai RRF (k = {tel.rrf_k})</div>
+                <div className="text-slate-600 dark:text-slate-400 space-y-0.5">
+                  <div>Dense HNSW (384-d): <span className="font-mono font-semibold">{tel.vector_hits} ứng viên</span></div>
+                  <div>Title-Boosted GIN FTS: <span className="font-mono font-semibold">{tel.fts_hits} ứng viên</span></div>
+                  <div>Top-1 RRF Score: <span className="font-mono font-semibold text-teal-600 dark:text-teal-400">{tel.top_rrf_score}</span></div>
+                </div>
+              </div>
+
+              <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
+                <div className="font-bold text-slate-800 dark:text-slate-200 mb-1">3. Chọn lọc DCSR (Eq. 5–8)</div>
+                <div className="text-slate-600 dark:text-slate-400 space-y-0.5">
+                  <div>Độ tin cậy C(q): <span className="font-mono font-semibold">{tel.dcsr_confidence}</span> (τ_conf = 0.35)</div>
+                  <div>Tỷ số áp đảo Δ_RRF: <span className="font-mono font-semibold">{tel.dominance_ratio}</span> (τ_Δ = 1.05)</div>
+                  <div>Quyết định: <span className="font-semibold text-amber-600 dark:text-amber-400">{tel.dcsr_fast_skip ? 'Fast-Skip Cross-Encoder' : 'Chạy Cross-Encoder (K=16)'}</span></div>
+                </div>
+              </div>
+
+              <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
+                <div className="font-bold text-slate-800 dark:text-slate-200 mb-1">4. Cổng Kiểm định CRAG</div>
+                <div className="text-slate-600 dark:text-slate-400 space-y-0.5">
+                  <div>Điểm cổng S₂(q): <span className="font-mono font-semibold text-emerald-600 dark:text-emerald-400">{tel.crag_score}</span> (τ_min = {tel.crag_threshold})</div>
+                  <div>Số đoạn trích (Chunks): <span className="font-mono font-semibold">{tel.chunks_count} chunks / {tel.unique_docs} bài báo</span></div>
+                  <div>Thời gian truy hồi: <span className="font-mono font-semibold">{tel.latency_ms} ms</span></div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ── Feature 1: Claim-Level Entailment & Hallucination Shield (CLHV) Panel ── */}
+      {showClaimPanel && (
+        <div className="border-b border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/40 dark:bg-emerald-950/20 px-4 sm:px-6 py-4">
+          <div className="flex items-center justify-between flex-wrap gap-2 mb-3">
+            <div className="flex items-center gap-2">
+              <ShieldCheck size={16} className="text-emerald-600 dark:text-emerald-400" />
+              <span className="font-bold text-xs uppercase tracking-wider text-emerald-900 dark:text-emerald-200">
+                Khiên Kiểm chứng Chống Ảo giác Cấp độ Mệnh đề (Atomic Claim Entailment Shield)
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowClaimPanel(false)}
+              className="text-xs text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+            >
+              Đóng ✕
+            </button>
+          </div>
+
+          {claimLoading ? (
+            <div className="text-xs text-emerald-700 dark:text-emerald-300 py-3 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+              <span>Đang phân rã câu trả lời thành các mệnh đề nguyên tử (Atomic Claims) và đối chiếu hàm kéo theo ngữ nghĩa...</span>
+            </div>
+          ) : claimResult ? (
+            <div className="space-y-3">
+              {/* Summary Bar */}
+              <div className="flex flex-wrap items-center justify-between gap-2 p-3 rounded-xl bg-white dark:bg-slate-900/90 border border-emerald-200/80 dark:border-emerald-800/60 text-xs">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-bold text-slate-800 dark:text-slate-100">
+                    Độ Trung thực Học thuật (Faithfulness):{' '}
+                    <span className="text-emerald-600 dark:text-emerald-400 font-mono text-sm">
+                      {claimResult.faithfulness_score}%
+                    </span>
+                  </span>
+                  <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 font-semibold">
+                    🟢 Bảo chứng ({claimResult.entailed_count})
+                  </span>
+                  <span className="px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-300 font-semibold">
+                    🟡 Suy luận ({claimResult.extrapolated_count})
+                  </span>
+                  <span className="px-2 py-0.5 rounded-full bg-rose-500/15 text-rose-700 dark:text-rose-300 font-semibold">
+                    🔴 Chưa đủ bằng chứng ({claimResult.unverified_count})
+                  </span>
+                </div>
+                <span className="font-mono text-[10.5px] text-slate-500 dark:text-slate-400">
+                  {claimResult.formula}
+                </span>
+              </div>
+
+              {/* Atomic Claims List */}
+              <div className="space-y-2 max-h-80 overflow-y-auto pr-1">
+                {claimResult.claims.map((c) => {
+                  const isGreen = c.status === 'ENTAILED';
+                  const isAmber = c.status === 'EXTRAPOLATED';
+                  const cardCls = isGreen
+                    ? 'border-emerald-300/80 dark:border-emerald-800/70 bg-white dark:bg-slate-900/80'
+                    : isAmber
+                    ? 'border-amber-300/80 dark:border-amber-800/70 bg-white dark:bg-slate-900/80'
+                    : 'border-rose-300/80 dark:border-rose-800/70 bg-white dark:bg-slate-900/80';
+                  const badgeCls = isGreen
+                    ? 'bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border-emerald-500/30'
+                    : isAmber
+                    ? 'bg-amber-500/15 text-amber-800 dark:text-amber-300 border-amber-500/30'
+                    : 'bg-rose-500/15 text-rose-800 dark:text-rose-300 border-rose-500/30';
+
+                  return (
+                    <div key={c.index} className={`p-3 rounded-xl border ${cardCls} text-xs space-y-1.5`}>
+                      <div className="flex items-center justify-between flex-wrap gap-1.5">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <span className={`px-2 py-0.5 rounded-md font-bold text-[10.5px] border ${badgeCls}`}>
+                            Mệnh đề #{c.index}: {c.status_label} (S = {c.entailment_score} • {c.entailment_pct}%)
+                          </span>
+                          {c.key_terms_matched && c.key_terms_matched.length > 0 && (
+                            <span className="font-mono text-[10.5px] text-slate-500 dark:text-slate-400">
+                              Khớp thuật ngữ: {c.key_terms_matched.slice(0, 4).join(', ')}
+                            </span>
+                          )}
+                        </div>
+                        {c.matched_filename && c.matched_page > 0 && (
+                          <button
+                            type="button"
+                            onClick={() => onCitationClick?.(c.matched_filename, c.matched_page, c.evidence_snippet)}
+                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10.5px] font-semibold bg-teal-50 hover:bg-teal-100 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800 cursor-pointer"
+                          >
+                            <Eye size={10} />
+                            <span>Đối chiếu PDF ({(c.matched_title || c.matched_filename).slice(0, 28)} - Tr. {c.matched_page})</span>
+                          </button>
+                        )}
+                      </div>
+                      <p className="text-slate-800 dark:text-slate-200 font-medium leading-relaxed">
+                        {cleanMarkdownText(c.clean_text || c.claim_text)}
+                      </p>
+                      {c.evidence_snippet && (
+                        <div className="text-[11px] text-slate-600 dark:text-slate-400 italic bg-slate-50 dark:bg-slate-800/60 px-2.5 py-1.5 rounded-lg border-l-2 border-teal-500">
+                          Bằng chứng gốc ({c.matched_filename} - Tr. {c.matched_page}): “{cleanMarkdownText(c.evidence_snippet)}”
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ) : null}
+        </div>
+      )}
+
+      {/* ── Feature 3: Interactive Neuro-Clinical Knowledge Graph <-> 3D Brain Bridge Panel ── */}
+      {showNeuroPanel && (
+        <div className="border-b border-indigo-200 dark:border-indigo-900/60 bg-indigo-50/40 dark:bg-indigo-950/20 px-4 sm:px-6 py-4">
+          <div className="flex items-center justify-between flex-wrap gap-2 mb-3">
+            <div className="flex items-center gap-2">
+              <Brain size={16} className="text-indigo-600 dark:text-indigo-400" />
+              <span className="font-bold text-xs uppercase tracking-wider text-indigo-900 dark:text-indigo-200">
+                Đồ thị Tri thức Thần kinh – Tâm lý 4 Tầng &amp; Cầu nối Giải phẫu Não 3D
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowNeuroPanel(false)}
+              className="text-xs text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+            >
+              Đóng ✕
+            </button>
+          </div>
+
+          {neuroLoading ? (
+            <div className="text-xs text-indigo-700 dark:text-indigo-300 py-3 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-indigo-500 animate-ping" />
+              <span>Đang trích xuất mạng lưới Hội chứng – Vùng não 3D – Chất dẫn truyền thần kinh – Trị liệu...</span>
+            </div>
+          ) : neuroGraph ? (
+            <div className="space-y-3">
+              {neuroGraph.summary && (
+                <p className="text-xs text-indigo-900 dark:text-indigo-200 font-medium">
+                  {cleanMarkdownText(neuroGraph.summary)}
+                </p>
+              )}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {neuroGraph.brain_regions.map((reg) => (
+                  <div
+                    key={reg.region_3d_id}
+                    className="p-3.5 rounded-xl bg-white dark:bg-slate-900/90 border border-indigo-200/80 dark:border-indigo-800/70 space-y-2 text-xs shadow-2xs"
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <div className="flex items-center gap-1.5">
+                          <span
+                            className="w-2.5 h-2.5 rounded-full shrink-0"
+                            style={{ backgroundColor: reg.color }}
+                          />
+                          <span className="font-bold text-slate-900 dark:text-white">
+                            {cleanMarkdownText(reg.name_vi)}
+                          </span>
+                        </div>
+                        <div className="text-[10.5px] text-slate-500 dark:text-slate-400 mt-0.5">
+                          {cleanMarkdownText(reg.name_latin)}
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => handleJumpTo3DBrain(reg.region_3d_id)}
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-indigo-600 hover:bg-indigo-700 text-white shadow-xs transition-all cursor-pointer shrink-0"
+                      >
+                        <ExternalLink size={11} />
+                        <span>Mở Não 3D X-Ray</span>
+                      </button>
+                    </div>
+
+                    <div className="text-[11px] font-medium text-rose-700 dark:text-rose-300 bg-rose-50 dark:bg-rose-950/40 px-2.5 py-1 rounded-md border border-rose-200/60 dark:border-rose-800/50">
+                      ⚡ {cleanMarkdownText(reg.role_in_pathology)}
+                    </div>
+
+                    <div className="space-y-1 text-[11px]">
+                      <div>
+                        <span className="font-semibold text-slate-700 dark:text-slate-300">Chất dẫn truyền: </span>
+                        <span className="text-purple-700 dark:text-purple-300 font-medium">{reg.neurotransmitters.join(' • ')}</span>
+                      </div>
+                      <div>
+                        <span className="font-semibold text-slate-700 dark:text-slate-300">Can thiệp chuẩn: </span>
+                        <span className="text-emerald-700 dark:text-emerald-300">{cleanMarkdownText(reg.therapy_mechanism)}</span>
+                      </div>
+                      <div className="text-[10.5px] text-slate-500 dark:text-slate-400 italic">
+                        📚 {cleanMarkdownText(reg.citation)}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
+        </div>
+      )}
+
       {/* ── Document Page Body (A4 / Document Page Content) ── */}
       <div className="px-5 py-5 sm:px-7 sm:py-6 md:px-8 md:py-7">
         <StructuredMessage content={content} onCitationClick={onCitationClick} />
-      </div>
 
+        {/* ── Clinical Evidence Hierarchy Badges & One-Click APA 7th / BibTeX Citations (Proposal 5) ── */}
+        {sourcesMeta.length > 0 && (
+          <div className="mt-6 pt-5 border-t-2 border-slate-200/90 dark:border-slate-800">
+            <div className="flex items-center justify-between flex-wrap gap-2 mb-3">
+              <div className="flex items-center gap-2">
+                <Award size={16} className="text-teal-600 dark:text-teal-400 shrink-0" />
+                <h4 className="font-bold text-xs uppercase tracking-wider text-slate-800 dark:text-slate-200">
+                  Phân tầng Bằng chứng Y khoa (Oxford CEBM) & Trích dẫn Chuẩn Quốc tế ({sourcesMeta.length} nguồn)
+                </h4>
+              </div>
+            </div>
 
-      {/* ── Document Page Footer ── */}
-      <div className="px-5 sm:px-8 py-2 bg-slate-50/50 dark:bg-slate-900/40 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 select-none">
-        <div className="flex items-center gap-1.5">
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-          <span>Acamind Academic Assistant • Trích xuất đối chiếu từ tài liệu gốc</span>
-        </div>
-        <div className="hidden sm:flex items-center gap-2">
-          <span>Chuẩn học thuật DSM/APA</span>
-        </div>
+            <div className="space-y-2.5">
+              {sourcesMeta.map((src, sIdx) => {
+                const isTier1 = src.authority_tier === 'tier_1' || src.cebm_level.startsWith('1');
+                const isTier2 = src.authority_tier === 'tier_2' || src.cebm_level.startsWith('2');
+                const badgeClass = isTier1
+                  ? 'bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border-emerald-500/30'
+                  : isTier2
+                  ? 'bg-blue-500/15 text-blue-800 dark:text-blue-300 border-blue-500/30'
+                  : 'bg-violet-500/15 text-violet-800 dark:text-violet-300 border-violet-500/30';
+
+                return (
+                  <div
+                    key={`${src.document_id}-${sIdx}`}
+                    className="p-3 rounded-xl bg-slate-50/90 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/90 flex flex-col gap-2"
+                  >
+                    <div className="flex items-start justify-between gap-2 flex-wrap">
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-1.5 flex-wrap mb-1">
+                          <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10.5px] font-bold border ${badgeClass}`}>
+                            {isTier1 ? '🥇' : isTier2 ? '🥈' : '🥉'} {src.cebm_label} • {src.study_design || src.authority_label}
+                          </span>
+                          {src.pages?.map((pNum) => (
+                            <button
+                              key={pNum}
+                              type="button"
+                              onClick={() => onCitationClick?.(src.filename, pNum, src.title)}
+                              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10.5px] font-semibold bg-teal-50 hover:bg-teal-100 dark:bg-teal-950/60 dark:hover:bg-teal-900 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800 transition-colors cursor-pointer"
+                              title={`Mở PDF "${src.filename}" tại trang ${pNum} và tô sáng bằng chứng`}
+                            >
+                              <FileText size={10} />
+                              <span>Mở PDF Trang {pNum}</span>
+                            </button>
+                          ))}
+                        </div>
+                        <div className="font-bold text-xs text-slate-900 dark:text-slate-100">
+                          {src.title}
+                        </div>
+                        <div className="text-[11px] text-slate-600 dark:text-slate-400 italic mt-0.5">
+                          {src.apa7}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-1.5 shrink-0">
+                        <button
+                          type="button"
+                          onClick={() => copySourceCitation(src.document_id, src.apa7, 'apa')}
+                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-white dark:bg-slate-800 hover:bg-teal-50 dark:hover:bg-teal-950/50 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
+                          title="Copy trích dẫn chuẩn APA 7th Edition"
+                        >
+                          {copiedApaId === src.document_id ? <Check size={11} className="text-emerald-500" /> : <Copy size={11} />}
+                          <span>{copiedApaId === src.document_id ? 'Đã copy APA' : 'Copy APA 7th'}</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => copySourceCitation(src.document_id, src.bibtex, 'bib')}
+                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-white dark:bg-slate-800 hover:bg-purple-50 dark:hover:bg-purple-950/50 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
+                          title="Copy mã trích dẫn BibTeX cho Overleaf / LaTeX"
+                        >
+                          {copiedBibId === src.document_id ? <Check size={11} className="text-emerald-500" /> : <Code size={11} />}
+                          <span>{copiedBibId === src.document_id ? 'Đã copy .bib' : 'BibTeX'}</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -1533,7 +2101,17 @@ export default function ChatPage() {
           signal: abortRef.current.signal,
         });
       } else {
-        await chatStream(sentQuery, docIds, onChunk, abortRef.current.signal);
+        await chatStream(sentQuery, docIds, onChunk, abortRef.current.signal, {
+          onTelemetry: (payload) => {
+            setChatMessages(prev => {
+              const newPrev = prev.map(m =>
+                m.id === assistantMsg.id ? { ...m, telemetryPayload: payload } : m
+              );
+              if (activeSessionId) updateSessionMessages(activeSessionId, newPrev);
+              return newPrev;
+            });
+          },
+        });
       }
     } catch (err: any) {
       if (err?.name !== 'AbortError') {
@@ -1652,6 +2230,7 @@ export default function ChatPage() {
                             content={msg.content}
                             query={chatMessages.slice(0, idx).reverse().find(m => m.role === 'user')?.content || ''}
                             documentIds={allDocIds}
+                            telemetryPayload={msg.telemetryPayload}
                             onCitationClick={handleCitationClick}
                             onInjectPrompt={(promptText) => {
                               setInput(promptText);

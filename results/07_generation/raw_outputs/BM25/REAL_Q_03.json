@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_03",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'TIDE 2.0: an open, model-agnostic engine for keyed de-identification of clinical notes' là gì?",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 1107.97,
+  "retrieval_warm_ms": 1110.36,
+  "llm_ms": 1272.61,
+  "e2e_cold_ms": 2380.58,
+  "e2e_warm_ms": 2382.97,
+  "provided_chunks": [
+    {
+      "id": "8afdbb9b-a5a4-4994-809b-36c9c0792394",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 21,
+      "content": "person\nperson / model\nHH / HA\nSem-Detect\nhuman reviews / model rewrite of a human review /\nmodel reviews\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA\nMELD\nhuman / model / six attacks\nperson / model /\nmodel\nperson / model /\nmodel\nHH / AA / AA\nattacked\nLAMP\nmodel draft / the draft after a professional’s edit\nmodel\nmodel\n/\nmodel,\nedited\nAA / not placed\nARB\nhuman / model rewrite of a human article (h2l) /\nmodel (free llm) / llm2l\nperson / person /\nmodel / model\nperson / model /\nmodel / model\nHH / HA / AA /\nAA attacked\nGEDE\nhuman essay / model improves or rewrites it\nperson\nperson / model\nHH / HA\nmodel essay from the assignment / DIPPER, rewrite\nattack\nmodel\nmodel\nAA / AA at-\ntacked\nmodel essay from the student’s summary\nmodel\n(GEDE’s\nown label)\nmodel\nAA, shown but\nnot averaged"
+    },
+    {
+      "id": "ab8856aa-a4cc-47f0-8a07-a2bc88770ebe",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 21,
+      "content": "manized)\nperson\nmodel\nHA\nAI-BP, AI-EP: model review from the paper (and hu-\nmanized)\nmodel\nmodel\nAA (attacked)\nAI-HI: model review from the reviewer’s notes\nmixed\nmodel\nmixed\nDetectRL-X\nhuman / model / attacked model text (English rows)\nperson / model /\nmodel\nperson / model /\nmodel\nHH / AA / AA\nattacked\nStoryScope\nhuman stories / stories by five models\nperson / model\nperson / model\nHH / AA\nDetectionAI\nhuman\nessays\n/\nmodel\nessays\n/\nhumanized\n(StealthGPT, 2026)\nperson / model /\nmodel\nperson / model /\nmodel\nHH / AA / AA\nattacked\nOpAI-Bench\nv0: the human draft / v1–v8: successive model edits\nperson\nperson / model\nHH / HA\nSem-Detect\nhuman reviews / model rewrite of a human review /\nmodel reviews\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA\nMELD\nhuman / model / six attacks"
+    },
+    {
+      "id": "b9ed282a-1446-49b3-972a-34b84e3b30e9",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 21,
+      "content": "HH / HA\nmodel essay from the assignment / DIPPER, rewrite\nattack\nmodel\nmodel\nAA / AA at-\ntacked\nmodel essay from the student’s summary\nmodel\n(GEDE’s\nown label)\nmodel\nAA, shown but\nnot averaged\nPerkins et al.\nmodel text under six evasion techniques\nmodel\nmodel\nAA attacked\nHART\nhuman / model rephrase of human text / model / hu-\nmanized\nperson / person /\nmodel / model\nperson / model /\nmodel / model\nHH / HA / AA /\nAA attacked\nmodel text rewritten by a person\nmodel\nmodel, edited\nnot placed\nEpoch author imitation\nthe author’s text / model, plain prompt\nperson / model\nperson / model\nHH / AA\nmodel imitating the author from five passages\nmixed\nmodel\nmixed\nCoCoNUTS\nhuman review / model polishes or translates it /\nmodel review\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA"
+    },
+    {
+      "id": "329ebc51-0059-4555-8401-d88fa20541ef",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 21,
+      "content": "model imitating the author from five passages\nmixed\nmodel\nmixed\nCoCoNUTS\nhuman review / model polishes or translates it /\nmodel review\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA\nmodel review from the person’s review\nmixed\nmodel\nmixed\nELLIPSE\nessays by English learners\nperson\nperson\nHH\nAI-Researcher\nexpert reviews / proposals from expert ideas / model\nproposals\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA\npapers people wrote from a model’s idea\nmixed\nperson\nmixed\nAcademic Integrity\noriginal abstract / model abstract from it (and human-\nized)\nperson\nperson / model\nHH / HA\nGEN\nhuman / edited by an AI editor / written by an AI\nwriter\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA\nan AI editor adds details to a person’s text\nmixed\nmodel"
+    },
+    {
+      "id": "6703a9f3-1e18-4056-844f-3a4a616a287b",
+      "document_id": "bebd9c05-861a-4fa4-ab70-17f6c9eb8fb9",
+      "filename": "2610.07972v1.pdf",
+      "page_number": 17,
+      "content": "recent searches.\nGG-MAP-02\n(1) Open search from the map home screen; (2) Select the designated place from recent\nsearches; (3) Open directions to the designated place.\nGG-MAP-03\n(1) Open search from the map home screen; (2) Open the designated place details from\nrecent searches.\nGG-RBK-01\n(1) Open Me from the discovery home screen; (2) Open the saved-notes tab; (3) Open the\ndesignated note.\nGG-RBK-02\n(1) Open Me from the discovery home screen; (2) Open the liked-notes tab; (3) Open the\ndesignated note.\nGG-RBK-03\n(1) Open the designated note from the discovery feed; (2) Save the designated note.\nGG-RDT-01\n(1) Open the designated post from the home feed.\nGG-RDT-02\n(1) Open the designated post from the home feed; (2) Enter and submit the comment “Thank\nyou”.\nGG-RDT-03"
+    }
+  ],
+  "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

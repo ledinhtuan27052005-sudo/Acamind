@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_02",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'What Matters for Latent Reasoning with Flow Matching' là gì?",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 608.2,
+  "retrieval_warm_ms": 588.86,
+  "llm_ms": 1154.83,
+  "e2e_cold_ms": 1763.03,
+  "e2e_warm_ms": 1743.69,
+  "provided_chunks": [
+    {
+      "id": "0c860a20-73d8-451f-893a-43efcc3dae8a",
+      "document_id": "e28b7029-cd13-427d-a90d-5c97fceabe2e",
+      "filename": "2610.06666v1.pdf",
+      "page_number": 3,
+      "content": "ours, instead use a latent thought r = z = (z1, . . . , zM) ∈RM×d of M slots of dimension d, with z ∼pθ(z | q).\nHorizontal methods produce the slots one at a time, while parallel methods refine all of them together. After\nthinking, the answer is generated token by token from the question and the latent thought, a ∼pθ(a | q, z).\n2.2\nLatent Reasoning with Flow Matching\nIn this paper, we learn the latent thought z ∈RM×d via flow matching in a learned latent space, as in latent\ndiffusion (Lovelace et al., 2023; Kang et al., 2026), in two steps. First, a VAE (Kingma and Welling, 2014)\nis trained on the explicit CoT dataset to encode each CoT into a compressed latent code.\nThen, a flow"
+    },
+    {
+      "id": "d2eab824-13cb-4734-b821-5e9a4321930d",
+      "document_id": "d01fe37f-ec1b-4b84-8a0c-7a6ce4bd2076",
+      "filename": "2610.08726v1.pdf",
+      "page_number": 8,
+      "content": "out reasoning and 19.9 points with reasoning: robot-side\nrationale supervision alone does not explain the full gain.\n4.4\nMotion-Level Reasoning Outperforms Established Reasoning Formats\nFigure 6 Motion-level reasoning is what carries\nthe gain. Motion-level reasoning outperforms\nECoT-style reasoning [25], and augments it by\na large margin.\nWe next ask whether the benefit comes from motion-level\nreasoning specifically or from reasoning tokens in general. We\ncompare against a strong composite target in the style of\nECoT [25], which predicts the current subtask, visible-object\nbounding boxes, and a visual trace before the language action.\nMotion-level reasoning helps every target we tried (Fig. 6): it\nadds 7.1 points to FAST, 9.1 points to the ECoT composite,"
+    },
+    {
+      "id": "bf94eaab-55d5-4e44-9439-f82f4aebcf74",
+      "document_id": "09483afd-621d-476f-8202-da4a00bc5bd6",
+      "filename": "2610.08782v1.pdf",
+      "page_number": 22,
+      "content": "describe each task below and provide the corresponding prompts.\nD.1\nINTERACTION OBJECT REASONING\nGiven an input video, the VLM identifies the object manipulated by the hand and generates a textual\ndescription. This description is then passed to SAM3 as a prompt for automatic object segmentation.\nObject Identification Prompt\nDescribe the object interaction with hand, only return in [color object name] format.\nD.2\nMULTI-VIEW IMAGE GENERATION\nWe select object keyframes from the input video and provide them to an image generation model to\nsynthesize canonical views of the object. The placeholder {description} in the prompt is filled\nwith the object description obtained in the preceding reasoning step.\nCanonical View Generation Prompt"
+    },
+    {
+      "id": "c938a130-81d1-424c-9660-e674fcf0296a",
+      "document_id": "09483afd-621d-476f-8202-da4a00bc5bd6",
+      "filename": "2610.08782v1.pdf",
+      "page_number": 1,
+      "content": "4D-HOF: HAND-OBJECT FLOW MATCHING FOR\nFEED-FORWARD 4D INTERACTION RECONSTRUCTION\nShiqi Li1\nSean Cho1\nYijie Li1\nFengzhi Guo1\nBowen Wen2\nCheng Zhang1\n1Texas A&M University\n2NVIDIA\nhttps://tamu-visual-ai.github.io/4D-HOF\nFigure 1: 4D Hand-Object Flow Matching (4D-HOF). Given a monocular video of a hand interacting\nwith an unseen object, we learn a flow matching model for accurate and efficient 4D hand-object interaction\nreconstruction. Our method generalizes across diverse and challenging scenarios, including ambiguous depth\n(headset), occlusion (kettle), complex articulated hand poses (bar), and large object rotation (camera). Moreover,\n4D-HOF is substantially faster than prior optimization-based methods due to our feed-forward design.\nABSTRACT"
+    },
+    {
+      "id": "bb2e96ea-49f5-4f23-b6f5-da1e100ccdb4",
+      "document_id": "d01fe37f-ec1b-4b84-8a0c-7a6ce4bd2076",
+      "filename": "2610.08726v1.pdf",
+      "page_number": 4,
+      "content": "action expert learns to consume its representations.\nTraining objective. Let D denote the action dimension. The action expert, parameterized by flow matching [3],\npredicts at:t+K ∈RK×D in delta end-effector pose space, and is optimized by a flow matching loss LFM. Let\nLtext denote the expected masked token-level objective for language action and motion-level reasoning, and\nlet λtext weight the two objectives. The complete training loss is\nL = E(xt,at:t+K,mt,rt)∼pmix [λtextLtext + LFM]\n(2)\nwhere pmix is the fixed human–robot sampling distribution. In our model, K=30 is the action horizon. We\nset λtext=0.8, slightly downweighting the autoregressive VLM objective relative to continuous flow matching\nto align their convergence speed.\n4"
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

@@ -2,6 +2,8 @@ import re
 import io
 import logging
 import unicodedata
+import difflib
+from collections import defaultdict
 from typing import List, Dict, Any, Optional, Tuple
 import fitz  # PyMuPDF
 
@@ -30,10 +32,31 @@ def normalize_text(text: str) -> str:
     return re.sub(r'\s+', ' ', text).strip()
 
 
-def extract_tokens(text: str) -> set:
-    """Tách tập hợp các từ có ý nghĩa (bỏ stop words)."""
-    words = re.findall(r'\b[\w\-\.]{2,}\b', text.lower())
-    return {w for w in words if w not in STOPWORDS and not w.isdigit()}
+def clean_tok(token: str) -> str:
+    """Chuẩn hóa token: lowercase, NFC, loại bỏ ký tự bao bọc ngoài cùng nhưng giữ nguyên số liệu, % và dấu nối."""
+    if not token:
+        return ""
+    s = unicodedata.normalize('NFC', token.lower())
+    s = re.sub(r'^[^\w%]+|[^\w%]+$', '', s)
+    return s
+
+
+def extract_quote_candidate(query: str) -> str:
+    """Trích xuất đoạn trích dẫn cốt lõi nếu truy vấn chứa dấu ngoặc kép hoặc blockquote."""
+    if not query:
+        return ""
+    q = query.strip()
+    # 1. Tìm chuỗi nằm trong ngoặc kép "..." hoặc “...” hoặc '...'
+    m = re.search(r'["“\'«]([^"”\'»\n]{6,350})["”\'»]', q)
+    if m:
+        return m.group(1).strip()
+    # 2. Tìm dòng trích dẫn markdown blockquote > ...
+    m_bq = re.search(r'^\s*>\s*(.+)$', q, re.MULTILINE)
+    if m_bq:
+        cleaned = re.sub(r'^["“\'\s]+|["”\'\s]+$', '', m_bq.group(1)).strip()
+        if len(cleaned) >= 6:
+            return cleaned
+    return q
 
 
 def extract_evidence_anchors(text: str) -> List[str]:
@@ -48,7 +71,7 @@ def extract_evidence_anchors(text: str) -> List[str]:
     anchors.extend(pcts)
 
     # 2. Các chỉ số kiểm định thống kê và cỡ mẫu (ví dụ: p < 0.001, d = 0.95, N = 120, BDI-II, PHQ-9)
-    stats = re.findall(r'(?:p\s*[<>=]\s*\d+(?:\.\d+)?|d\s*=\s*\d+(?:\.\d+)?|N\s*=\s*\d+)', text, re.IGNORECASE)
+    stats = re.findall(r'(?:p\s*[<>=]\s*\d+(?:\.\d+)?|d\s*=\s*\d+(?:\.\d+)?|N\s*=\s*\d+|\b\d{4}\b)', text, re.IGNORECASE)
     anchors.extend(stats)
 
     # 3. Các thuật ngữ tiếng Anh gốc đặt trong dấu ngoặc đơn: (Cognitive psychology), (Behavioral psychology)
@@ -68,181 +91,267 @@ def extract_evidence_anchors(text: str) -> List[str]:
     seen = set()
     result = []
     for anc in anchors:
-        k = anc.strip()
-        k_lower = k.lower()
-        if k and k_lower not in seen:
-            seen.add(k_lower)
-            result.append(k)
+        k = clean_tok(anc)
+        if k and k not in seen:
+            seen.add(k)
+            result.append(anc.strip())
     return result
 
 
-def extract_sentences_from_page(page: fitz.Page) -> List[str]:
-    """Tách danh sách các câu hoàn chỉnh từ nội dung trang PDF, hỗ trợ cả bảng biểu, khối văn bản và đoạn văn."""
-    blocks = page.get_text("blocks")
-    if not blocks:
-        return []
+def segment_page_into_sentences(words: List[tuple]) -> List[Tuple[int, int, str, set]]:
+    """Phân đoạn các từ trên trang thành các đơn vị câu/mục logic hoàn chỉnh với chỉ số từ đầu và cuối.
+    
+    Returns:
+        List of tuples: (start_word_idx, end_word_idx, sentence_text, set_of_normalized_tokens)
+    """
+    sentences = []
+    current = []
+    start_idx = 0
 
-    sentences: List[str] = []
-    for b in blocks:
-        if len(b) > 6 and b[6] != 0:
-            continue
-        text = b[4].strip()
-        if not text:
-            continue
-        lines = [l.strip() for l in text.splitlines() if l.strip()]
-        if not lines:
-            continue
+    for idx, w in enumerate(words):
+        if not current:
+            start_idx = idx
+        current.append(w)
+        word_str = w[4]
+        is_terminal = False
 
-        # Nếu khối là bảng hoặc danh sách gồm nhiều dòng ngắn không kết thúc bằng dấu chấm
-        if len(lines) > 1 and any(len(l) < 35 for l in lines) and not any(l.endswith('.') for l in lines[:-1]):
-            row_str = ' '.join(lines)
-            if len(row_str) >= 15:
-                sentences.append(row_str)
-        else:
-            # Đoạn văn: nối các dòng bị ngắt và tách câu theo dấu kết thúc (. ! ?)
-            para = ' '.join(lines)
-            para = re.sub(r'\s+', ' ', para).strip()
-            raw_sents = re.split(r'(?<=[.!?])\s+', para)
-            for s in raw_sents:
-                s_clean = s.strip()
-                if len(s_clean) >= 20 and not s_clean.isdigit():
-                    sentences.append(s_clean)
+        # Kết thúc câu chuẩn bằng . ! ? (ngoại trừ từ viết tắt e.g., i.e., Dr., vs., al., fig., tab.)
+        if re.search(r'[.!?]$', word_str) and not re.search(r'\b(?:e\.g|i\.e|dr|mr|mrs|vs|al|fig|tab)\.$', word_str, re.I):
+            is_terminal = True
+        # Tiêu đề ngắn kết thúc bằng dấu hai chấm (ví dụ: 'Materials and Methods:', 'Table 1:')
+        elif word_str.endswith(':') and len(current) <= 6:
+            is_terminal = True
+        # Ranh giới block văn bản trong PDF
+        elif idx + 1 < len(words) and words[idx + 1][5] != w[5]:
+            is_terminal = True
+
+        if is_terminal:
+            stext = ' '.join(cw[4] for cw in current).strip()
+            if len(stext) >= 8:
+                toks = {clean_tok(cw[4]) for cw in current if clean_tok(cw[4]) and clean_tok(cw[4]) not in STOPWORDS}
+                sentences.append((start_idx, idx, stext, toks))
+            current = []
+
+    if current:
+        stext = ' '.join(cw[4] for cw in current).strip()
+        if len(stext) >= 8:
+            toks = {clean_tok(cw[4]) for cw in current if clean_tok(cw[4]) and clean_tok(cw[4]) not in STOPWORDS}
+            sentences.append((start_idx, len(words) - 1, stext, toks))
+
     return sentences
 
 
-def ground_and_search_page_rects(
-    page: fitz.Page,
-    query: str
-) -> Tuple[List[fitz.Rect], str, List[str]]:
-    """Thuật toán Smart Evidence Grounding:
-    Định vị chính xác câu văn / đoạn văn nguồn trong tài liệu PDF và trả về tọa độ highlight.
-    
-    Returns:
-        rects: Danh sách bounding boxes trên trang cần bôi vàng.
-        grounded_sentence: Câu nguyên văn trên trang PDF khớp nhất với luận điểm của AI.
-        highlighted_terms: Danh sách các thuật ngữ, số liệu cốt lõi được bôi vàng.
+def span_to_line_rects(words: List[tuple], start_idx: int, end_idx: int) -> List[fitz.Rect]:
+    """Chuyển đổi một dải từ (start_idx..end_idx) trên trang thành danh sách các hình chữ nhật bao quanh từng dòng.
+    Đảm bảo:
+    - Bắt đầu chính xác ở từ đầu tiên của dòng đầu.
+    - Kết thúc chính xác ở từ cuối cùng của dòng cuối.
+    - Không bị thừa ra ngoài phạm vi văn bản, không thiếu dòng do ngắt dòng hay gạch nối.
     """
-    rects: List[fitz.Rect] = []
-    grounded_sentence = ""
-    highlighted_terms: List[str] = []
+    lines = defaultdict(list)
+    for idx in range(start_idx, end_idx + 1):
+        w = words[idx]
+        lines[(w[5], w[6])].append(w)
 
-    if not query:
-        return rects, grounded_sentence, highlighted_terms
+    rects = []
+    # Sắp xếp các dòng theo thứ tự đọc từ trên xuống dưới, từ trái sang phải
+    for key, lwords in sorted(lines.items(), key=lambda item: (min(w[1] for w in item[1]), min(w[0] for w in item[1]))):
+        x0 = min(w[0] for w in lwords)
+        y0 = min(w[1] for w in lwords)
+        x1 = max(w[2] for w in lwords)
+        y1 = max(w[3] for w in lwords)
+        # Thêm một chút padding vi mô (0.5pt) để phủ màu đẹp mắt mà không chạm sang dòng khác
+        rects.append(fitz.Rect(x0 - 0.5, y0 - 0.5, x1 + 0.5, y1 + 0.5))
 
-    clean_query = normalize_text(query.strip().strip('"\'*[]()'))
-    if not clean_query:
-        return rects, grounded_sentence, highlighted_terms
+    return rects
 
-    # ── PASS 1: Thử tìm chính xác nguyên câu nếu có trong PDF ──
-    if len(clean_query) <= 120:
-        found = page.search_for(clean_query)
-        if found:
-            return found, clean_query, [clean_query[:50]]
 
-    # ── PASS 2: Semantic Sentence Grounding (Định vị câu tương đồng nhất) ──
-    page_sentences = extract_sentences_from_page(page)
-    query_tokens = extract_tokens(clean_query)
-    anchors = extract_evidence_anchors(clean_query)
+def find_word_sequence_span(words: List[tuple], query_text: str) -> Optional[Tuple[int, int, str]]:
+    """Tìm dải từ khớp chính xác hoặc mờ liên tục với truy vấn trích dẫn."""
+    q_toks = [clean_tok(t) for t in query_text.split() if clean_tok(t)]
+    if not q_toks:
+        return None
 
-    # Mở rộng song ngữ (Cross-lingual glossary expansion) nếu có thuật ngữ tâm lý học
+    page_toks = [clean_tok(w[4]) for w in words]
+    m = len(q_toks)
+
+    # 1. Khớp chính xác toàn bộ chuỗi token liên tục
+    for i in range(len(page_toks) - m + 1):
+        if page_toks[i : i + m] == q_toks:
+            stext = ' '.join(words[k][4] for k in range(i, i + m))
+            return (i, i + m - 1, stext)
+
+    # 2. Khớp chuỗi con dài nhất (Longest common sub-sequence contiguous match) nếu truy vấn dài
+    if m >= 5:
+        best_sub = None
+        best_len = 0
+        min_sub_len = max(4, int(m * 0.45))
+        for sub_len in range(m, min_sub_len - 1, -1):
+            for start_q in range(m - sub_len + 1):
+                sub_q = q_toks[start_q : start_q + sub_len]
+                for i in range(len(page_toks) - sub_len + 1):
+                    if page_toks[i : i + sub_len] == sub_q:
+                        if sub_len > best_len:
+                            best_len = sub_len
+                            best_sub = (i, i + sub_len - 1)
+                            break
+                if best_sub:
+                    break
+            if best_sub:
+                break
+        if best_sub and best_len >= 4 and (best_len / m) >= 0.45:
+            stext = ' '.join(words[k][4] for k in range(best_sub[0], best_sub[1] + 1))
+            return (best_sub[0], best_sub[1], stext)
+
+    # 3. Fuzzy SequenceMatcher qua difflib nếu có từ bị thiếu dấu hoặc sai lệch nhẹ
+    matcher = difflib.SequenceMatcher(None, page_toks, q_toks)
+    blocks = [b for b in matcher.get_matching_blocks() if b.size > 0]
+    if blocks:
+        total_matched = sum(b.size for b in blocks)
+        if total_matched >= 4 and (total_matched / m) >= 0.50:
+            start = blocks[0].a
+            end = blocks[-1].a + blocks[-1].size - 1
+            # Đảm bảo phạm vi dải từ không bị trải quá rộng sang các đoạn văn khác
+            if (end - start + 1) <= m * 1.6 + 5:
+                stext = ' '.join(words[k][4] for k in range(start, end + 1))
+                return (start, end, stext)
+
+    return None
+
+
+def ground_sentence_semantically(
+    words: List[tuple],
+    sentences: List[Tuple[int, int, str, set]],
+    query_text: str
+) -> Optional[Tuple[int, int, str]]:
+    """Định vị câu nguồn tốt nhất trên trang PDF bằng thuật toán phân tích ngữ nghĩa và mỏ neo chứng cứ."""
+    q_clean = normalize_text(query_text)
+    q_raw_tokens = [clean_tok(t) for t in q_clean.split() if clean_tok(t) and clean_tok(t) not in STOPWORDS]
+    if not q_raw_tokens:
+        return None
+    q_tokens = set(q_raw_tokens)
+
+    # Trích xuất anchors (số liệu %, p-value, năm, mã số, thuật ngữ viết tắt)
+    anchors = [clean_tok(a) for a in extract_evidence_anchors(q_clean) if clean_tok(a)]
+
+    # Mở rộng thuật ngữ song ngữ Anh - Việt
     try:
         from app.services.cross_lingual import PSYCHOLOGY_GLOSSARY_VI_TO_EN, PSYCHOLOGY_GLOSSARY_EN_TO_VI
-        q_lower = clean_query.lower()
+        q_lower = q_clean.lower()
         for vi_k, en_v in PSYCHOLOGY_GLOSSARY_VI_TO_EN.items():
             if vi_k in q_lower:
                 for t in en_v.split():
-                    if len(t) >= 4:
-                        query_tokens.add(t.lower())
+                    c = clean_tok(t)
+                    if len(c) >= 3 and c not in STOPWORDS:
+                        q_tokens.add(c)
         for en_k, vi_v in PSYCHOLOGY_GLOSSARY_EN_TO_VI.items():
             if en_k in q_lower:
                 for t in vi_v.split():
-                    if len(t) >= 4:
-                        query_tokens.add(t.lower())
+                    c = clean_tok(t)
+                    if len(c) >= 3 and c not in STOPWORDS:
+                        q_tokens.add(c)
     except Exception as e:
         logger.debug(f"Glossary expansion skip: {e}")
 
     best_sent = None
     best_score = 0.0
 
-    for s in page_sentences:
-        s_norm = normalize_text(s)
-        s_tokens = extract_tokens(s_norm)
-        overlap = query_tokens.intersection(s_tokens)
-
-        # Thưởng điểm nếu câu trên trang chứa đúng số liệu % hoặc thuật ngữ mỏ neo
-        bonus = 0.0
-        for anc in anchors:
-            if anc.lower() in s_norm.lower():
-                bonus += 0.35
-
-        score = (len(overlap) / (len(query_tokens) + 1e-6)) + bonus
+    for s_idx, e_idx, stext, s_toks in sentences:
+        overlap = q_tokens.intersection(s_toks)
+        anchor_hits = sum(1 for a in anchors if any(a in tok for tok in s_toks))
+        
+        # Điểm tương đồng được tính dựa trên tỷ lệ bao phủ token ngữ nghĩa và thưởng điểm mỏ neo số liệu
+        score = (len(overlap) + 2.5 * anchor_hits) / (len(q_tokens) + 1e-6)
         if score > best_score:
             best_score = score
-            best_sent = s_norm
+            best_sent = (s_idx, e_idx, stext)
 
-    # Nếu tìm thấy câu trên trang khớp ngữ cảnh (ngưỡng tin cậy >= 0.15)
     if best_sent and best_score >= 0.15:
-        grounded_sentence = best_sent
-        # Thử tìm kiếm nguyên câu
-        sent_rects = page.search_for(best_sent)
-        if sent_rects:
-            rects.extend(sent_rects)
-            highlighted_terms.append(best_sent[:60] + "...")
-        else:
-            # Nếu câu bị ngắt dòng hoặc ký tự lạ, chia thành các mệnh đề 6-10 từ
-            words = best_sent.split()
-            step = 8
-            for i in range(0, len(words), step):
-                chunk = " ".join(words[i:i + step])
-                if len(chunk) >= 12:
-                    c_rects = page.search_for(chunk)
-                    if c_rects:
-                        rects.extend(c_rects)
-            if rects:
-                highlighted_terms.append(best_sent[:60] + "...")
+        return best_sent
+    return None
 
-    # ── PASS 3: Highlight các mỏ neo số liệu định lượng (Percentages, stats, sample sizes) ──
-    # Các số liệu định lượng cụ thể luôn được bôi vàng để nổi bật trong bảng hoặc đoạn văn
+
+def ground_and_search_page_rects(
+    page: fitz.Page,
+    query: str
+) -> Tuple[List[fitz.Rect], str, List[str]]:
+    """Thuật toán Smart Evidence Grounding chuẩn xác cao:
+    Định vị chính xác câu văn hoặc đoạn văn nguồn trong tài liệu PDF và trả về tọa độ highlight hoàn chỉnh.
+    
+    Quy tắc cốt lõi:
+    - Đúng chính xác đoạn trích dẫn (không thừa ra các đoạn/số liệu khác trên trang).
+    - Phủ trọn vẹn toàn bộ các từ trong đoạn (không thiếu dòng hoặc cụm từ do ngắt dòng).
+    
+    Returns:
+        rects: Danh sách bounding boxes trên trang cần bôi vàng.
+        grounded_sentence: Đoạn nguyên văn trên trang PDF khớp nhất với luận điểm của AI.
+        highlighted_terms: Danh sách các thuật ngữ, trích đoạn cốt lõi được bôi vàng.
+    """
+    rects: List[fitz.Rect] = []
+    grounded_sentence = ""
+    highlighted_terms: List[str] = []
+
+    if not query or not query.strip():
+        return rects, grounded_sentence, highlighted_terms
+
+    clean_query = normalize_text(query)
+    core_quote = extract_quote_candidate(clean_query)
+
+    words = page.get_text("words")
+    if not words:
+        # Fallback cho trang PDF dạng ảnh thuần (chưa có text layer)
+        return rects, grounded_sentence, highlighted_terms
+
+    # ── BƯỚC 1: Tìm dải từ khớp trực tiếp từ trích dẫn cốt lõi ──
+    span = find_word_sequence_span(words, core_quote)
+    if not span and core_quote != clean_query:
+        span = find_word_sequence_span(words, clean_query)
+
+    # ── BƯỚC 2: Định vị ngữ nghĩa theo cấu trúc câu hoàn chỉnh trên trang ──
+    sentences = segment_page_into_sentences(words)
+    if not span and sentences:
+        span = ground_sentence_semantically(words, sentences, core_quote)
+        if not span and core_quote != clean_query:
+            span = ground_sentence_semantically(words, sentences, clean_query)
+
+    # ── BƯỚC 3: Tạo hình chữ nhật bao quanh dải từ đã định vị ──
+    if span:
+        s_idx, e_idx, text_matched = span
+        grounded_sentence = text_matched
+        rects = span_to_line_rects(words, s_idx, e_idx)
+        highlighted_terms.append(text_matched[:80] + ("..." if len(text_matched) > 80 else ""))
+        return rects, grounded_sentence, highlighted_terms
+
+    # ── BƯỚC 4: Fallback mỏ neo đơn lẻ (nếu chỉ có 1 số liệu hoặc từ viết tắt đặc trưng) ──
+    anchors = extract_evidence_anchors(core_quote or clean_query)
     for anc in anchors:
-        is_numeric_stat = any(c.isdigit() for c in anc) or '<' in anc or '>' in anc or '=' in anc
-        if is_numeric_stat:
-            anc_rects = page.search_for(anc)
-            if anc_rects:
-                rects.extend(anc_rects)
-                if anc not in highlighted_terms:
-                    highlighted_terms.append(anc)
+        anc_clean = clean_tok(anc)
+        if not anc_clean:
+            continue
+        # Tìm vị trí xuất hiện của anchor trong danh sách từ
+        for idx, w in enumerate(words):
+            if anc_clean in clean_tok(w[4]):
+                # Xác định câu chứa anchor này thay vì bôi vàng đơn lẻ khắp trang
+                target_sent = None
+                for s_idx, e_idx, stext, s_toks in sentences:
+                    if s_idx <= idx <= e_idx:
+                        target_sent = (s_idx, e_idx, stext)
+                        break
+                if target_sent:
+                    s_idx, e_idx, stext = target_sent
+                    grounded_sentence = stext
+                    rects = span_to_line_rects(words, s_idx, e_idx)
+                    highlighted_terms.append(stext[:80] + ("..." if len(stext) > 80 else ""))
+                    return rects, grounded_sentence, highlighted_terms
+                else:
+                    # Bôi vàng từ đó
+                    r = fitz.Rect(w[0] - 0.5, w[1] - 0.5, w[2] + 0.5, w[3] + 0.5)
+                    rects.append(r)
+                    grounded_sentence = w[4]
+                    highlighted_terms.append(w[4])
+                    return rects, grounded_sentence, highlighted_terms
 
-    # ── PASS 4: Fallback các từ viết tắt và mệnh đề con nếu chưa có rect nào ──
-    if not rects:
-        for anc in anchors:
-            anc_rects = page.search_for(anc)
-            if anc_rects:
-                rects.extend(anc_rects)
-                if anc not in highlighted_terms:
-                    highlighted_terms.append(anc)
-
-    if not rects:
-        clauses = re.split(r'[,;.\n]', clean_query)
-        for cl in clauses:
-            cl_clean = cl.strip().strip('"\'*[]()')
-            if 10 <= len(cl_clean) <= 60:
-                c_rects = page.search_for(cl_clean)
-                if c_rects:
-                    rects.extend(c_rects)
-                    highlighted_terms.append(cl_clean)
-
-    # ── PASS 5: Deduplicate & merge rects ──
-    unique_rects: List[fitz.Rect] = []
-    for r in rects:
-        is_dup = False
-        for ur in unique_rects:
-            if abs(r.x0 - ur.x0) < 3 and abs(r.y0 - ur.y0) < 3 and abs(r.x1 - ur.x1) < 3 and abs(r.y1 - ur.y1) < 3:
-                is_dup = True
-                break
-        if not is_dup:
-            unique_rects.append(r)
-
-    return unique_rects, grounded_sentence, highlighted_terms
+    return rects, grounded_sentence, highlighted_terms
 
 
 def search_page_rects(page: fitz.Page, query: str) -> List[fitz.Rect]:
@@ -277,14 +386,21 @@ def generate_highlighted_pdf_stream(
 
         if query and query.strip():
             rects, _, _ = ground_and_search_page_rects(page, query)
-            for r in rects:
+            if rects:
                 try:
-                    annot = page.add_highlight_annot(r)
+                    annot = page.add_highlight_annot(rects)
                     # Màu vàng dạ quang chuẩn tài liệu học thuật (Amber/Gold: RGB 1.0, 0.88, 0.20)
                     annot.set_colors(stroke=(1.0, 0.88, 0.20))
                     annot.update()
                 except Exception as e:
-                    logger.debug(f"Could not add highlight annot: {e}")
+                    # Fallback bôi từng rect nếu add_highlight_annot theo list gặp lỗi trên phiên bản PyMuPDF cũ
+                    for r in rects:
+                        try:
+                            annot = page.add_highlight_annot(r)
+                            annot.set_colors(stroke=(1.0, 0.88, 0.20))
+                            annot.update()
+                        except Exception:
+                            pass
 
         return doc.tobytes(garbage=3, deflate=True)
     finally:
@@ -305,7 +421,7 @@ def get_highlight_metadata(
 
         page = doc[page_number - 1]
         rects, grounded_sentence, terms = ground_and_search_page_rects(page, query)
-        
+
         return {
             "page": page_number,
             "page_width": page.rect.width,

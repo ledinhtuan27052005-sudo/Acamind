@@ -33,6 +33,7 @@ import { NeuralCard } from '@/components/ui/NeuralCard';
 import { NeuralBadge } from '@/components/ui/NeuralBadge';
 import { NeuralButton } from '@/components/ui/NeuralButton';
 import { AuthRequiredModal, AuthRequiredBanner } from '@/components/auth/AuthRequiredModal';
+import { AcademicDocumentRenderer } from '@/components/ui/AcademicDocumentRenderer';
 
 // ── Category color helpers ─────────────────────────────────────────────────
 
@@ -773,11 +774,7 @@ export default function LibraryPage() {
 
               {/* Modal Content */}
               <div className="p-6 overflow-y-auto max-h-[60vh]">
-                <div className="prose prose-sm dark:prose-invert max-w-none">
-                  <div className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap leading-relaxed">
-                    {summaryModal.text}
-                  </div>
-                </div>
+                <AcademicDocumentRenderer content={summaryModal.text} />
               </div>
 
               {/* Modal Footer */}

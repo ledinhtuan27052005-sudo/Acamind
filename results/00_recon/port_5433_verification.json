@@ -1,0 +1,157 @@
+{
+  "doc_groups": [
+    {
+      "group": "arxiv_500",
+      "doc_count": 499,
+      "sum_pages": 12411
+    },
+    {
+      "group": "other",
+      "doc_count": 5,
+      "sum_pages": 39
+    }
+  ],
+  "chunk_groups": [
+    {
+      "group": "arxiv_500",
+      "chunk_count": 70825,
+      "emb_count": 70825,
+      "char_min": 1,
+      "char_avg": 715.35,
+      "char_p50": 759.0,
+      "char_max": 800
+    },
+    {
+      "group": "other",
+      "chunk_count": 234,
+      "emb_count": 234,
+      "char_min": 95,
+      "char_avg": 731.48,
+      "char_p50": 749.0,
+      "char_max": 799
+    }
+  ],
+  "page_texts_groups": [
+    {
+      "group": "arxiv_500",
+      "page_texts_count": 12406,
+      "tsv_count": 12406
+    },
+    {
+      "group": "other",
+      "page_texts_count": 39,
+      "tsv_count": 39
+    }
+  ],
+  "other_docs_on_5433": [
+    {
+      "id": "a46ad95f-8541-4693-811a-807251ee25e1",
+      "filename": "Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc.pdf",
+      "title": "Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc",
+      "category": null,
+      "total_pages": 3
+    },
+    {
+      "id": "9f4e5f9b-569a-4e7b-b55a-245dff288b72",
+      "filename": "Du_lieu_test.pdf",
+      "title": "Báo cáo thực nghiệm đối sánh & dữ liệu test hệ thống Acamind",
+      "category": "Research & Statistics",
+      "total_pages": 7
+    },
+    {
+      "id": "862481cd-5292-47e6-a49d-8a4582a2229f",
+      "filename": "Psychological_Profiling_and_Assessment.pdf",
+      "title": "Psychological_Profiling_and_Assessment",
+      "category": "DSM / ICD / Diagnosis",
+      "total_pages": 6
+    },
+    {
+      "id": "1297d4e9-7c6b-4aab-a874-3025a9c62910",
+      "filename": "Theory_of_Mind_Cognitive_Psychology.pdf",
+      "title": "Theory_of_Mind_Cognitive_Psychology",
+      "category": "Cognitive Psychology",
+      "total_pages": 10
+    },
+    {
+      "id": "aaaccfe9-7533-42ed-beaf-e0b5ccdeb4fb",
+      "filename": "Clinical_Psychotherapy_Dialogue_Systems.pdf",
+      "title": "Clinical_Psychotherapy_Dialogue_Systems",
+      "category": "Psychotherapy",
+      "total_pages": 13
+    }
+  ],
+  "all_chunks_norm_check": {
+    "total": 71059,
+    "with_emb": 71059,
+    "null_emb": 0,
+    "min_norm": 1.0,
+    "avg_norm": 1.0,
+    "max_norm": 1.0,
+    "non_unit_count": 0
+  },
+  "e5_passage_prefix_verification": [
+    {
+      "chunk_id": "00010855-5305-4ba5-908e-d1c0c9c38f64",
+      "content_len": 786,
+      "cosine_sim_stored_vs_fresh_passage_prefix": 1.00000012,
+      "max_abs_diff": 3.1e-07
+    },
+    {
+      "chunk_id": "00022baf-4aac-4262-ada2-38a1a084c035",
+      "content_len": 737,
+      "cosine_sim_stored_vs_fresh_passage_prefix": 1.0,
+      "max_abs_diff": 1.5e-07
+    },
+    {
+      "chunk_id": "00023cfa-9829-4373-84d2-a07766bbed8f",
+      "content_len": 701,
+      "cosine_sim_stored_vs_fresh_passage_prefix": 1.00000012,
+      "max_abs_diff": 3.5e-07
+    },
+    {
+      "chunk_id": "00043f5f-5256-4163-a1e1-4ba0e5f42caa",
+      "content_len": 295,
+      "cosine_sim_stored_vs_fresh_passage_prefix": 1.00000012,
+      "max_abs_diff": 1.5e-07
+    },
+    {
+      "chunk_id": "0004c4c5-87ac-4f28-b27c-98df779ea3d6",
+      "content_len": 788,
+      "cosine_sim_stored_vs_fresh_passage_prefix": 1.0,
+      "max_abs_diff": 2.6e-07
+    }
+  ],
+  "hnsw_ef_search_default": "40",
+  "relation_sizes": [
+    {
+      "name": "chunks",
+      "size_pretty": "59 MB",
+      "size_bytes": 61734912
+    },
+    {
+      "name": "chunks_embedding_idx",
+      "size_pretty": "278 MB",
+      "size_bytes": 291651584
+    },
+    {
+      "name": "idx_page_texts_tsv",
+      "size_pretty": "23 MB",
+      "size_bytes": 23805952
+    },
+    {
+      "name": "documents",
+      "size_pretty": "208 kB",
+      "size_bytes": 212992
+    },
+    {
+      "name": "document_summaries",
+      "size_pretty": "24 kB",
+      "size_bytes": 24576
+    },
+    {
+      "name": "page_texts",
+      "size_pretty": "8104 kB",
+      "size_bytes": 8298496
+    }
+  ]
+}

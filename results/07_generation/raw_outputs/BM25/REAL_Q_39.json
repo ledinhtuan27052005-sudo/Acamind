@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_39",
+  "type": "Literature Synthesis",
+  "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: zkLLMPoT: Efficient Zero Knowledge  | A foundation for systematic analysi | Conceptualization and experimentati",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 920.52,
+  "retrieval_warm_ms": 906.48,
+  "llm_ms": 1266.04,
+  "e2e_cold_ms": 2186.56,
+  "e2e_warm_ms": 2172.52,
+  "provided_chunks": [
+    {
+      "id": "e5637b79-8973-4e6e-aa05-8a57f87b57a7",
+      "document_id": "29f37a1a-a219-4181-b173-4e7e8f28407d",
+      "filename": "2609.34801v1.pdf",
+      "page_number": 37,
+      "content": "0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n2\n53\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n2\n53\n3000\n1000\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n2\n71\n2500\n500\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n2\n71\n2500\n500\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n3\n11\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n3\n11\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n3\n23\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n3\n23\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n3\n37\n2000\n250\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n3\n37\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n3\n53\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n3\n53\n2750\n750\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n3\n71\n2000\n0\nFalse\nFalse\nFalse\nCore cohort"
+    },
+    {
+      "id": "91233c62-8da7-46cb-9094-a042b77f36a3",
+      "document_id": "29f37a1a-a219-4181-b173-4e7e8f28407d",
+      "filename": "2609.34801v1.pdf",
+      "page_number": 37,
+      "content": "False\nFalse\nCore cohort\nFiLM population\n3\n53\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n3\n53\n2750\n750\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n3\n71\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n3\n71\n2250\n250\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n4\n11\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n4\n11\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n4\n23\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n4\n23\n2500\n500\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n4\n37\n2250\n250\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n4\n37\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n4\n53\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n4\n53\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n4\n71\n2250\n250\nFalse\nFalse\nFalse\nCore cohort"
+    },
+    {
+      "id": "aa76cbf5-4099-4a14-83d0-928d08838906",
+      "document_id": "29f37a1a-a219-4181-b173-4e7e8f28407d",
+      "filename": "2609.34801v1.pdf",
+      "page_number": 36,
+      "content": "2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n0\n23\n2250\n250\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n0\n23\n2500\n500\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n0\n37\n2500\n500\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n0\n37\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n0\n53\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n0\n53\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n0\n71\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n0\n71\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n1\n11\n2250\n250\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n1\n11\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n1\n23\n2500\n500\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n1\n23\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n1\n37\n2000\n0\nFalse\nFalse\nFalse"
+    },
+    {
+      "id": "fcca27cb-b5d7-4d21-950f-b5a19aec5e1c",
+      "document_id": "29f37a1a-a219-4181-b173-4e7e8f28407d",
+      "filename": "2609.34801v1.pdf",
+      "page_number": 37,
+      "content": "Cohort\nFamily\nFold\nSeed\nRun steps\nSelected\nTrain flat\nVal. flat\nBoth flat\nCore cohort\nLoRA population\n1\n53\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n1\n71\n2500\n500\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n1\n71\n2500\n500\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n2\n11\n4250\n2250\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n2\n11\n4250\n2250\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n2\n23\n6500\n4500\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n2\n23\n2250\n250\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n2\n37\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n2\n37\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n2\n53\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n2\n53\n3000\n1000\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n2\n71\n2500\n500\nFalse\nFalse\nFalse"
+    },
+    {
+      "id": "563628d5-9cd4-47b0-a7e3-28857af83ae6",
+      "document_id": "5a1c0eef-3e0b-420d-b8ae-eaee041efca3",
+      "filename": "2609.38819v1.pdf",
+      "page_number": 6,
+      "content": "future video generation is 0.222, the shared contribution is 0.111, and the unique contribution of\nthe observed video is −0.006 (Figure 2c). The unique contribution of future video generation is\nabove the unique contribution of the observed video in every division (p = 0.002, Appendix A.9).\nOnly in Primary Visual does the shared contribution, 0.151, exceed the unique contribution of future\nvideo generation, 0.089. In every other division the unique contribution of future video generation\nexceeds both the unique contribution of the observed video and the shared contribution. The shared\ncontribution and the unique contribution of future video generation are 0.142 and 0.175 in Early\n6"
+    }
+  ],
+  "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

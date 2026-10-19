@@ -1,0 +1,62 @@
+{
+  "query_id": "REAL_Q_33",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Partially Observable Zero-shot coordination b' và (2) 'Attraction to hierarchical feature memory exp'.",
+  "is_ooc": false,
+  "system": "ACAMIND",
+  "gate_passed": true,
+  "gate_score": 0.942955,
+  "dcsr_skipped": true,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 1211.88,
+  "retrieval_warm_ms": 1186.66,
+  "llm_ms": 6016.2,
+  "e2e_cold_ms": 7228.08,
+  "e2e_warm_ms": 7202.86,
+  "provided_chunks": [
+    {
+      "id": "03fde071-6219-4eaa-a160-d7af0be36008",
+      "document_id": "91d5f553-f676-4abb-860a-d2ba8b9b7809",
+      "filename": "2610.08142v1.pdf",
+      "page_number": 1,
+      "content": "Partially Observable Zero-shot coordination by\nPredicting Intention of Partner\nJinnyeong Yang∗\nYuhwan Jeong∗\nHoyong Kwon∗\nMinseok Kim†\nJihun Kim†\nKuk-Jin Yoon\nKAIST, Visual Intelligence Lab\n{jinnyeong6118, jeongyh98, kwonhoyong3, alstjrx1x1, jihun1998,\nkjyoon}@kaist.ac.kr\nAbstract\nZero-shot coordination in embodied settings requires acting while the partner\nis intermittently out of view, leaving existing methods with ambiguous partner\nrepresentations and uncertainty over hidden partner states. We propose Predicting\nIntention of Partner (PIP) to jointly address these challenges. PIP uses a Joint-\nview VAE to distill richer training-time evidence from the union of both agents’\nlocal observations into a partner representation available from local observations"
+    },
+    {
+      "id": "35f8a904-44a1-49b6-9c01-c427cae85934",
+      "document_id": "ae2016eb-dd29-4f45-a425-729824bdbe14",
+      "filename": "2609.40204v1.pdf",
+      "page_number": 2,
+      "content": "degrees\n90\n45\n0\n45\n90\n15\n10\n5\n0\n5\n10\n15\ndata\nsimple feature combination\nhierarchical feature combination\nL\nrelative orientation Sn–{Sn–1, Rn–1}\nbias E[Rn–Sn]\n90\n45\n0\n45\n90\n15\n10\n5\n0\n5\n10\n15\ndata\nsimple feature combination\nhierarchical feature combination\nM\nsample Sn\nbias E[Rn–Sn]\n90\n45\n0\n45\n90\n90\n45\n0\n45\n90\n20\n10\n0\n10\n20\nN\nattracted to\nreflection\nattracted to\nprev. resp.\nattracted to\nreflection\nattracted to\nprev. resp.\nanti-cardinal bias in hier. model\nsample Sn\nprevious response Rn–1\npro-cardinal\nanti-cardinal\n90\n45\n0\n45\n90\n90\n45\n0\n45\n90\n0.10\n0.05\n0.00\n0.05\n0.10\nO\nERP similarity\nsample Sn\nreference {Sn′ }\nnorm. mahanalobis distance\nFigure 1:\nAttraction to hierarchical feature memory explains orientation bias.\n(A) Task: 86 participants (after exclusions)"
+    },
+    {
+      "id": "30f98eb8-0e1f-40f7-a2da-d86ffa9be370",
+      "document_id": "91d5f553-f676-4abb-860a-d2ba8b9b7809",
+      "filename": "2610.08142v1.pdf",
+      "page_number": 2,
+      "content": "(b) Partially observable\n(a) Fully observable\n?\n?\n?\n?\nWhere is my partner?\nWhat is my partner doing?\nEgo\nPartner\nFigure 1: Illustration of coordination under dynamic and spatial partial observability in Burrito-PO.\n(a) Under full observation, the partner state is directly available. (b) Under a restricted local view, the\npartner may leave the visible region, creating ambiguity over its location and behavior.\nthis kind have only recently been taken up as ZSC problems, with existing studies focusing on\nenvironment design [10] or symmetry [31]. Yet the failure modes induced by viewpoint-based partial\nobservability itself remain underexplored.\nIn this work, we study ZSC under dynamic and spatial partial observability. We identify two"
+    },
+    {
+      "id": "019fee74-07fe-4b2b-b26b-73cc7392495a",
+      "document_id": "ae2016eb-dd29-4f45-a425-729824bdbe14",
+      "filename": "2609.40204v1.pdf",
+      "page_number": 1,
+      "content": "Attraction to hierarchical feature memory explains orientation bias\nKira M. D¨usterwald1,*, Peter Vincent2, Ana Kapros1, Athena Akrami2 and Maneesh Sahani1\n1 Gatsby Computational Neuroscience Unit and 2 Sainsbury Wellcome Centre, University College London\nSummary: When recalling the orientation of recent\nstimuli, observers are systematically biased away from\nthe cardinal axes. The prevailing explanation is that\nthis “anti-cardinal bias” arises because cardinal ori-\nentations are encoded with greater neural resources\nand therefore less noise, consistent with efficient cod-\ning of environmentally common features. Under this\naccount, the bias should occur independently for each\nstimulus; any serial attraction towards previously seen\norientations should be weak and independent of abso-"
+    },
+    {
+      "id": "c61ae5bc-22fe-4c41-a6fd-63f913343ae4",
+      "document_id": "91d5f553-f676-4abb-860a-d2ba8b9b7809",
+      "filename": "2610.08142v1.pdf",
+      "page_number": 2,
+      "content": "deployment, the policy therefore acts solely from its own observations and its self-estimated beliefs.\nIntegrating these two components, we propose Predicting Intention of Partner (PIP), a framework for\nzero-shot coordination under dynamic and spatial partial observability. The Joint-view VAE improves\nthe diversity of generated partners, and the Partner-state Belief enables belief-aware decision making.\nPIP thus jointly addresses partner generation and policy learning from incomplete observations. We\nevaluate PIP on Overcooked-PO, Burrito-PO, and Melting Pot [1, 4, 23], benchmarks that combine\ndynamic cooperative tasks with spatial partial observability. PIP achieves strong coordination\nperformance with both unseen partners and humans, and further analyses demonstrate that each"
+    },
+    {
+      "id": "f7f8fa10-0b72-4447-9054-f0fd24f338d3",
+      "document_id": "ae2016eb-dd29-4f45-a425-729824bdbe14",
+      "filename": "2609.40204v1.pdf",
+      "page_number": 2,
+      "content": "0.10\nO\nERP similarity\nsample Sn\nreference {Sn′ }\nnorm. mahanalobis distance\nFigure 1:\nAttraction to hierarchical feature memory explains orientation bias.\n(A) Task: 86 participants (after exclusions)\nperformed 400 trials each online. Trials began with two sample grating stimuli at orientations drawn independently and uniformly\naround the circle. After a delay, one grating location was cued; after a further delay, a randomly oriented manipulandum grating\nappeared and participants used arrow keys to rotate this to match the recalled orientation at the cued location. Data are pooled\nacross all participants. (B) Cued samples Sn and behavioural responses Rn generate a joint histogram with a bimodal Rn marginal."
+    }
+  ],
+  "answer": "## I. Giới thiệu chung và Mục tiêu nghiên cứu\n\nHai bài báo thuộc hai lĩnh vực khoa học khác nhau — một trong lĩnh vực trí tuệ nhân tạo/tác tử tự trị (**Artificial Intelligence / Multi-agent Systems**) và một trong lĩnh vực thần kinh học tính toán/tâm lý học nhận thức (**Computational Neuroscience / Cognitive Psychology**).\n\n*   **Bài báo (1):** *Partially Observable Zero-shot coordination by Predicting Intention of Partner* nghiên cứu về bài toán phối hợp không điểm dừng (**Zero-shot coordination - ZSC**) trong môi trường hiện thân (**embodied settings**) có tính quan sát một phần về mặt không gian và động lực học (**dynamic and spatial partial observability**) [2610.08142v1.pdf - Trang 1] [2610.08142v1.pdf - Trang 2]. Mục tiêu là giải quyết sự mơ hồ về trạng thái và hành vi của đối tác khi đối tác tạm thời khuất tầm nhìn [2610.08142v1.pdf - Trang 1] [2610.08142v1.pdf - Trang 2].\n*   **Bài báo (2):** *Attraction to hierarchical feature memory explains orientation bias* nghiên cứu về hiện tượng sai lệch định hướng trong nhận thức thị giác (**orientation bias**), cụ thể là hiện tượng thiên kiến tránh trục chính (**anti-cardinal bias**) khi con người ghi nhớ và hồi tưởng lại định hướng của các kích thích thị giác gần đây [2609.40204v1.pdf - Trang 1].\n\n---\n\n## II. So sánh và Đối chiếu chi tiết\n\n### 1. Phương pháp tiếp cận (Approaches)\n\n*   **Bài báo (1) - PIP Framework:** \n    *   Đề xuất khung **Predicting Intention of Partner (PIP)** để đồng thời giải quyết các thách thức về tạo lập đối tác và học chính sách từ các quan sát chưa đầy đủ [2610.08142v1.pdf - Trang 1] [2610.08142v1.pdf - Trang 2].\n    *   Sử dụng **Joint-view VAE** để chắt lọc các bằng chứng phong phú hơn trong quá trình huấn luyện từ tập hợp các quan sát cục bộ của cả hai tác tử thành biểu diễn đối tác [2610.08142v1.pdf - Trang 1] [2610.08142v1.pdf - Trang 2].\n    *   Sử dụng **Partner-state Belief** nhằm hỗ trợ ra quyết định nhận thức được niềm tin (**belief-aware decision making**) [2610.08142v1.pdf - Trang 2].\n*   **Bài báo (2) - Mô hình Bộ nhớ Đặc trưng Phân cấp (Hierarchical Feature Memory Model):**\n    *   Đề xuất cách giải thích thiên kiến hướng thông qua sự thu hút đối với bộ nhớ đặc trưng phân cấp (**attraction to hierarchical feature memory**), thay thế cho cách giải thích truyền thống dựa trên nguồn lực thần kinh mã hóa [2609.40204v1.pdf - Trang 1].\n    *   Thiết kế thực nghiệm hành vi trực tuyến với nhiệm vụ xoay thanh lưới (**grating stimuli**) để khớp với hướng được gợi nhớ tại vị trí được chỉ định sau một khoảng thời gian trễ [2609.40204v1.pdf - Trang 2].\n\n### 2. Đối tượng và Dữ liệu nghiên cứu (Subjects & Data)\n\n*   **Bài báo (1):** \n    *   Đối tượng nghiên cứu là các tác tử nhân tạo (artificial agents) trong các môi trường chuẩn mực mô phỏng nhiệm vụ hợp tác động lực học kết hợp quan sát một phần không gian.\n    *   Đánh giá trên các môi trường chuẩn: **Overcooked-PO**, **Burrito-PO** và **Melting Pot** [2610.08142v1.pdf - Trang 2].\n*   **Bài báo (2):** \n    *   Đối tượng nghiên cứu là con người tham gia thực nghiệm (human participants).\n    *   Dữ liệu thu thập từ **86 người tham gia** (sau khi loại bỏ các dữ liệu không đạt tiêu chuẩn), mỗi người thực hiện **400 lần thử nghiệm (trials)** trực tuyến [2609.40204v1.pdf - Trang 2].\n\n### 3. Kết luận chính (Main Conclusions)\n\n*   **Bài báo (1):** \n    *   Khung **PIP** giúp cải thiện tính đa dạng của các đối tác được tạo ra và cho phép tác tử thực hiện phối hợp mạnh mẽ dựa trên quan sát và tự ước tính niềm tin của chính mình [2610.08142v1.pdf - Trang 2].\n    *   Đạt hiệu suất phối hợp mạnh mẽ với cả đối tác chưa từng thấy trước đó và con người trong các bài kiểm tra benchmark [2610.08142v1.pdf - Trang 2].\n*   **Bài báo (2):** \n    *   Chứng minh rằng thiên kiến \"anti-cardinal bias\" (hướng ra xa các trục chính) cùng với hiện tượng thu hút nối tiếp (**serial attraction**) đối với các định hướng đã thấy trước đó có thể được giải thích một cách thống nhất thông qua mô hình **bộ nhớ đặc trưng phân cấp**, vượt qua giới hạn của giả định mã hóa hiệu quả truyền thống [2609.40204v1.pdf - Trang 1].\n\n---\n\n## III. Bảng tổng hợp đối chiếu\n\n| Tiêu chí so sánh | Bài báo (1): Partially Observable Zero-shot coordination... | Bài báo (2): Attraction to hierarchical feature memory... |\n| :--- | :--- | :--- |\n| **Lĩnh vực** | Trí tuệ nhân tạo / Đa tác tử (AI & Multi-agent Systems) | Thần kinh học tính toán & Tâm lý học nhận thức [2609.40204v1.pdf - Trang 1] |\n| **Mục tiêu cốt lõi** | Giải quyết bài toán phối hợp không điểm dừng khi quan sát một phần không gian và động lực học [2610.08142v1.pdf - Trang 1] [2610.08142v1.pdf - Trang 2]. | Giải thích nguyên nhân gây ra sai lệch định hướng (**orientation bias**) và thiên kiến tránh trục chính [2609.40204v1.pdf - Trang 1]. |\n| **Phương pháp** | Khung **PIP** (Joint-view VAE và Partner-state Belief) [2610.08142v1.pdf - Trang 1] [2610.08142v1.pdf - Trang 2]. | Mô hình **bộ nhớ đặc trưng phân cấp** kết hợp thực nghiệm hành vi [2609.40204v1.pdf - Trang 1] [2609.40204v1.pdf - Trang 2]. |\n| **Đối tượng / Dữ liệu** | Các tác tử nhân tạo trong Overcooked-PO, Burrito-PO, Melting Pot [2610.08142v1.pdf - Trang 2]. | **86 người tham gia** với **400 lần thử nghiệm** trực tuyến mỗi người [2609.40204v1.pdf - Trang 2]. |\n\n---\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+}

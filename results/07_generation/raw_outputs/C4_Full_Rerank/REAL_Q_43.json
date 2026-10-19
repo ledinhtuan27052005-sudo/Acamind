@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_43",
+  "type": "Literature Synthesis",
+  "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Slow Context, Fast Symptoms: Multis | Symphony for Text Generation: Bench | Recursive Game Creator: An Agentic ",
+  "is_ooc": false,
+  "system": "C4_Full_Rerank",
+  "gate_passed": true,
+  "gate_score": 0.744552,
+  "dcsr_skipped": false,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 21943.42,
+  "retrieval_warm_ms": 1038.45,
+  "llm_ms": 1225.59,
+  "e2e_cold_ms": 23169.01,
+  "e2e_warm_ms": 2264.04,
+  "provided_chunks": [
+    {
+      "id": "fdfd631e-34a5-49a3-abde-8cfc3586f8d5",
+      "document_id": "96d5f9a7-b2a8-4573-b8b5-febd35e9331e",
+      "filename": "2610.08621v1.pdf",
+      "page_number": 1,
+      "content": "RECURSIVE GAME CREATOR:\nAN AGENTIC PRODUCT-LEVEL\nEXPERIENCE-ORIENTED GAME HARNESS\nJiajun Chen1,2,3,†, Haoyu Wu1,2,†, Mingda Jia1,2,3,†, Xihui Liu1,2,3,∗\n1HKU MMLab\n2The University of Hong Kong\n3Shenzhen Loop Area Institute\nABSTRACT\nRecent game design agents have made substantial progress in generating playable games. However,\nprogram correctness does not ensure an enjoyable experience for players. We present Recursive\nGame Creator, an experience-oriented harness to advance agentic game development from rough\ngame prototypes into entertaining games. Recursive Game Creator organizes recursive development\naround four components: Designer, Builder, Player, and Reviewer. The Designer translates user"
+    },
+    {
+      "id": "39d108ad-e37a-4f80-8e9b-f9b41b7cb92d",
+      "document_id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+      "filename": "2609.22935v2.pdf",
+      "page_number": 12,
+      "content": "SLOW–FAST PSYCHOLOGICAL DYNAMICS\n12\nTable 1\nMain components of the slow–fast model.\nFast symptom layer\nComponent\nSymbol\nInterpretation\nSymptom state\nSi,t\nWhether symptom i is inactive or active at time t.\nBaseline activation\nτi\nBaseline log-odds of activation when symptom i receives no input\nfrom the rest of the network.\nSymptom coupling\nωi j\nPairwise coupling between symptoms i and j; an active symptom j\ncontributes ωij to symptom i’s local input.\nLocal input\nηi,t\nTotal input determining symptom i’s activation probability.\nSlow-context loading\nγi\nSensitivity of symptom i’s activation tendency to the slow contextual\nstate Pt.\nMean symptom\nactivation\nmt\nProportion of symptoms active at time t.\nRecent symptom\nactivation\n¯mt"
+    },
+    {
+      "id": "32cb4e94-0cc1-44e7-bc03-9953f9d3195b",
+      "document_id": "87a33d4e-cc6b-4844-8a4c-ccca32cb4aed",
+      "filename": "2610.06689v1.pdf",
+      "page_number": 12,
+      "content": "Danqi Chen, and Yuhao Zhang. Lost in the maze: Overcoming context limitations in long-horizon\nagentic search. arXiv preprint arXiv:2510.18939, 2025.\nAlex L Zhang, Tim Kraska, and Omar Khattab.\nRecursive language models.\narXiv preprint\narXiv:2512.24601, 2025.\nQizheng Zhang, Changran Hu, Shubhangi Upasani, Boyuan Ma, Fenglu Hong, Vamsidhar Kama-\nnuru, Jay Rainton, Chen Wu, Mengmeng Ji, Hanchen Li, et al. Agentic context engineering:\nEvolving contexts for self-improving language models. In International Conference on Learning\nRepresentations, volume 2026, pp. 86069–86100, 2026a.\nZhen Zhang, Liangcai Su, Zhuo Chen, Xiang Lin, Haotian Xu, Simon Shaolei Du, Kaiyu Yang,\nBo An, Lidong Bing, and Xinyu Wang. Argus: Evidence assembly for scalable deep research"
+    },
+    {
+      "id": "64874995-6b80-41e8-b3f3-a13cb7ccef2b",
+      "document_id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+      "filename": "2609.22935v2.pdf",
+      "page_number": 7,
+      "content": "SLOW–FAST PSYCHOLOGICAL DYNAMICS\n7\nconsequences of context acting on symptom dynamics. The final analysis also points to a\npractical implication: when slower contextual processes are plausible, measuring them alongside\nsymptoms may help distinguish symptom–symptom coupling from associations induced by\nshared contextual input. The approach provides a computational framework for studying\npsychological dynamics across timescales without treating fast symptom dynamics and slow\ncontext as isolated parts of the system.\nA slow–fast model of symptom dynamics\nWe introduce the model in stages. We begin with fast probabilistic dynamics for binary\nsymptom states. We then add a slow contextual field Pt, which shifts symptom activation without"
+    },
+    {
+      "id": "4826c895-4bfa-4f3e-a97b-7433e4723d44",
+      "document_id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+      "filename": "2609.22935v2.pdf",
+      "page_number": 9,
+      "content": "SLOW–FAST PSYCHOLOGICAL DYNAMICS\n9\nbetween symptoms i and j. Thus, τi gives the activation tendency of symptom i when it receives\nno input from the rest of the network, while active symptoms with nonzero couplings shift this\ntendency through the summed interaction term.\nIn the simulations, one fast step consists of a random-order sweep through the symptoms,\nupdating each symptom once conditional on the current states of the others. We write Snew\ni\nto\nemphasize that the update is local to symptom i, rather than a synchronous update of all\nsymptoms at once.\nAdding slow context\nThe slow–fast extension adds a contextual state Pt that evolves more slowly than symptom\nactivation. Rather than changing the symptom–symptom couplings, slow context enters as an\nadditional term in the local input:"
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

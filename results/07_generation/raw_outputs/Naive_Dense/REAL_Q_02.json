@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_02",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'What Matters for Latent Reasoning with Flow Matching' là gì?",
+  "is_ooc": false,
+  "system": "Naive_Dense",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 385.09,
+  "retrieval_warm_ms": 101.2,
+  "llm_ms": 1235.49,
+  "e2e_cold_ms": 1620.58,
+  "e2e_warm_ms": 1336.69,
+  "provided_chunks": [
+    {
+      "id": "e724c414-973c-47d9-a77f-2650f1597f65",
+      "document_id": "e28b7029-cd13-427d-a90d-5c97fceabe2e",
+      "filename": "2610.06666v1.pdf",
+      "page_number": 2,
+      "content": "new questions, generating thoughts from pure noise as at inference and backpropagating the answer loss through\nthe full rollout. Our main contributions are:\n• A simple training recipe. Through controlled ablations, we identify the training choices that make latent flow\nmatching work for reasoning, from learning the latent space to self-training on verified rollouts, and combine\nthem into FLaRe.\n• Requirements for latent reasoning, and probes for them. We define five requirements an effective latent\nthought must meet, that it be useful, diverse, explainable, refinable and efficient, design a probe for each, and\nshow that FLaRe improves on prior latent methods in all five.\n• Improved accuracy and efficiency. FLaRe compares favorably with prior latent methods on arithmetic"
+    },
+    {
+      "id": "6413bba3-dcfc-40d6-88fa-75dd6332e34d",
+      "document_id": "e28b7029-cd13-427d-a90d-5c97fceabe2e",
+      "filename": "2610.06666v1.pdf",
+      "page_number": 1,
+      "content": "What Matters for Latent Reasoning with Flow Matching\nYassine Ouali1\nAdrian Bulat1,2\nGeorgios Tzimiropoulos1,3\n1Samsung AI Cambridge\n2Technical University of Iasi\n3Queen Mary University of London\nAbstract.\nLatent reasoning lets a large language model (LLM) think in a continuous space and verbalize\nonly the answer. We argue that an effective latent thought must meet five requirements: it should be\nuseful, helping produce the correct answer rather than merely changing it, diverse, so that resampling\nyields different reasoning trajectories, explainable, so that a decoded chain of thought (CoT) reflects\nreasoning the answer actually follows, refinable with more inference compute, and efficient, costing less"
+    },
+    {
+      "id": "963f4bd7-2825-4fd1-9458-c47a74d29ccf",
+      "document_id": "e28b7029-cd13-427d-a90d-5c97fceabe2e",
+      "filename": "2610.06666v1.pdf",
+      "page_number": 1,
+      "content": "reasoning the answer actually follows, refinable with more inference compute, and efficient, costing less\nthan an explicit CoT at comparable accuracy. Current methods rarely meet these requirements: they\nlearn shortcuts from the question, distill the explicit CoT into their weights, or imitate it one token at a\ntime. We focus on flow matching in a learned latent space, the family we argue is best placed to meet\nthem, and identify the training choices that make it work. The result is Flow-based Latent Reasoning\n(FLaRe), a simple recipe covering what the latent space encodes and how to shape it, where to train\nthe flow, how to read out the answer, and a final stage of training on the model’s own verified thoughts."
+    },
+    {
+      "id": "8a094e35-f783-45d0-b208-c1f8b52301ee",
+      "document_id": "e28b7029-cd13-427d-a90d-5c97fceabe2e",
+      "filename": "2610.06666v1.pdf",
+      "page_number": 1,
+      "content": "small code costs less to generate than an explicit CoT. As for usefulness, it depends on the method’s design\nchoices, which must ensure that the answer relies on the thought.\nConcretely, latent flow matching starts by training a variational autoencoder (VAE) to compress CoTs into a\nlatent space. Conditioned on the question, a flow model then refines Gaussian noise into a latent thought in\nthis space, from which the same model generates the final answer autoregressively. In practice, with standard\ntext diffusion, this pipeline falls far behind explicit CoT, and it works only when a few training choices are\nmade right. We present these choices as a simple recipe, Flow-based Latent Reasoning (FLaRe), that follows the\n1\narXiv:2610.06666v1  [cs.LG]  5 Oct 2026"
+    },
+    {
+      "id": "1f91737b-94ff-4945-8e7b-f81aacb4c807",
+      "document_id": "e28b7029-cd13-427d-a90d-5c97fceabe2e",
+      "filename": "2610.06666v1.pdf",
+      "page_number": 1,
+      "content": "et al., 2026) or text planning (Lovelace et al., 2025). In this work, we argue that an effective latent thought\nmust meet five requirements: it should be useful, diverse, explainable, refinable and efficient. We focus on flow\nmatching in a learned latent space, as in latent diffusion models (Lovelace et al., 2023; Zhang et al., 2023; Kang\net al., 2026), since it offers a direct route to four of them. Different noise draws yield different thoughts, a\ndecoder reads each thought back as an explicit CoT, more denoising steps give a thought more compute, and a\nsmall code costs less to generate than an explicit CoT. As for usefulness, it depends on the method’s design\nchoices, which must ensure that the answer relies on the thought."
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

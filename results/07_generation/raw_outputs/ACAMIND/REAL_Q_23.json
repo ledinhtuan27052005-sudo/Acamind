@@ -1,0 +1,62 @@
+{
+  "query_id": "REAL_Q_23",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Increasing Width Allows Greedy Layer-wise Tra' và (2) 'HygieneRoboBench: Benchmarking Hygiene-Aware '.",
+  "is_ooc": false,
+  "system": "ACAMIND",
+  "gate_passed": true,
+  "gate_score": 0.993691,
+  "dcsr_skipped": false,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 22512.53,
+  "retrieval_warm_ms": 1089.39,
+  "llm_ms": 4412.23,
+  "e2e_cold_ms": 26924.76,
+  "e2e_warm_ms": 5501.62,
+  "provided_chunks": [
+    {
+      "id": "8e1cb536-65e3-4bb7-bc34-d169ed94b754",
+      "document_id": "f295a661-e926-4a04-92f7-78e0d77b8eeb",
+      "filename": "2610.00753v1.pdf",
+      "page_number": 10,
+      "content": "Preprint. Under review.\nsupervised learning in representation pretraining makes it an important setting in which to study\nalternative training paradigms.\nOverall, we identified an architectural condition where greedy layer-wise training can produce rep-\nresentations of comparable quality to those learned through end-to-end backpropagation. We show\nthat increased width benefits greedy layer-wise training, narrowing the performance gap with end-\nto-end backpropagation. We point to differences in representational geometry as a potential reason\nfor improved greedy layer-wise representations. Together, these results motivate width as a primary\nvariable determining the efficacy of local learning paradigms.\nAI USE STATEMENT"
+    },
+    {
+      "id": "0a3e2b27-1b80-4241-af8f-d7b1bbb0ea29",
+      "document_id": "c650be82-a45d-4a83-b3d6-6661c17fcab4",
+      "filename": "2610.08642v1.pdf",
+      "page_number": 8,
+      "content": "We introduced HygieneRoboBench, with 624 instances\nacross 134 task families. Controlled construction and inde-\npendent evaluation assess household service planning under\ncontact history, user priorities, and contact events. All seven\nplanners perform worse as structural task difficulty increases,\ndemonstrating the benchmark’s ability to distinguish perfor-\nmance across task complexity. Controlled pairs further reveal\ndifferences in optimal planning that safe completion counts\nalone do not capture. Hygiene-NSP achieves the highest\noverall SR and OSR, at 94.4% and 90.4%, respectively, with\nno invalid submitted continuations.\nHygieneRoboBench provides a common basis for evaluat-\ning hygiene decisions within complete service tasks, connect-"
+    },
+    {
+      "id": "4149294c-6a7e-4923-a7f1-afda31340bfd",
+      "document_id": "f295a661-e926-4a04-92f7-78e0d77b8eeb",
+      "filename": "2610.00753v1.pdf",
+      "page_number": 3,
+      "content": "Preprint. Under review.\nOther research has studied factors that might inhibit local learning. For example, Bartunov et al.\n(2018) found that learning rules fall behind as network depth increases. Indeed, a major limitation\nof local learning is the tendency for local updates to discard information that is useful for later\nlayers (Wang et al., 2021). We hypothesized that width could provide a solution as increasing width\nincreases the capacity of each layer. However, the effect of width on the performance of these locally\ntrained networks has not been well explored. Here, we investigate whether increasing width may\nimprove greedy layer-wise training more than end-to-end training, allowing it to approach or exceed\nend-to-end training in performance.\n3\nMETHOD\n3.1\nEXPERIMENTAL DESIGN"
+    },
+    {
+      "id": "e74f8c8e-9792-4a1f-a65a-ddc562d475c7",
+      "document_id": "c650be82-a45d-4a83-b3d6-6661c17fcab4",
+      "filename": "2610.08642v1.pdf",
+      "page_number": 2,
+      "content": "they lack a systematic joint assessment of these hygiene\ndecisions. Such an assessment must distinguish when contact\nhistory changes which continuation is optimal and when the\nsame continuation remains optimal. Table I summarizes their\ncoverage.\nWe introduce HygieneRoboBench to evaluate household\nservice planning under contact-dependent hygiene risks. It\ntests whether robots meet user needs despite unexpected\nevents and within time and resource limits. The benchmark\ncontains 624 instances across 134 task families and spans\nseven household areas. It covers five activity groups: food\npreparation, dishware and dining, cleaning and laundry,\nbedroom and storage, and pet and household care. Tasks\ncapture contamination propagation through two grippers and"
+    },
+    {
+      "id": "a462a972-e4d8-4c1c-8c9a-f25d2297557f",
+      "document_id": "f295a661-e926-4a04-92f7-78e0d77b8eeb",
+      "filename": "2610.00753v1.pdf",
+      "page_number": 9,
+      "content": "Preprint. Under review.\nmodels than for end-to-end-trained ones, and greedy training led to higher accuracy for the widest\nnetworks we studied (Fig. 5b).\n5\nDISCUSSION\nWe investigated the effect of width on the performance of networks trained with greedy layer-wise\ntraining, asking for what architectures a network trained with restricted credit assignment can pro-\nduce representations comparable in performance to networks trained end-to-end. Across four and\neight layer convolutional neural networks trained with the Barlow Twins loss on the CIFAR-10\ndataset, increasing network width disproportionately improved the categorization accuracy (assessed\nwith a kNN probe) of greedy layer-wise trained networks compared to end-to-end trained networks."
+    },
+    {
+      "id": "8ec1376e-5231-42e6-88ca-773318193142",
+      "document_id": "c650be82-a45d-4a83-b3d6-6661c17fcab4",
+      "filename": "2610.08642v1.pdf",
+      "page_number": 2,
+      "content": "projection reduces the planning representation while preserv-\ning the information needed for the current continuation.\nAll seven evaluated planners show lower performance as\nthe benchmark’s structural task difficulty increases. On con-\ntrolled history pairs, considering cost optimality alongside\nsafe completion changes the relative ranking of planners.\nHygiene-NSP achieves the highest overall rates of safe\nresolution (94.4%) and optimal safe resolution (90.4%).\nOur contributions are:\n• Problem and benchmark. We introduce HygieneR-\noboBench to evaluate planning with contamination\npropagation through two grippers and shared objects.\nIt tests how robots use contact history and respond\nto unexpected events while meeting hygiene and user\nrequirements within time and resource limits."
+    }
+  ],
+  "answer": "Dưới đây là phần so sánh và đối chiếu chi tiết giữa hai nghiên cứu dựa trên các tài liệu đã được cung cấp trong ngữ cảnh:\n\n## I. Tổng quan phương pháp tiếp cận\n\n### 1. Bài báo \"Increasing Width Allows Greedy Layer-wise Training to Rival End-to-End Backpropagation in Self-Supervised Learning\"\n* **Phương pháp tiếp cận:** Nghiên cứu tập trung khám phá các điều kiện kiến trúc (cụ thể là **độ rộng** — **width**) để cải thiện hiệu suất của phương pháp huấn luyện theo từng lớp tham lam (**greedy layer-wise training**), nhằm thu hẹp khoảng cách hiệu suất với phương pháp lan truyền ngược đầu - cuối truyền thống (**end-to-end backpropagation**) trong học tự giám sát (**self-supervised learning**). \n* Nhóm tác giả đã thực nghiệm trên các mô hình mạng nơ-ron tích chập (**Convolutional Neural Networks - CNN**) từ 4 đến 8 lớp, sử dụng hàm mất mát Barlow Twins (**Barlow Twins loss**) [2610.00753v1.pdf - Trang 9].\n\n### 2. Bài báo \"HygieneRoboBench: Benchmarking Hygiene-Aware Planning for Household Robots\"\n* **Phương pháp tiếp cận:** Nghiên cứu giới thiệu một bộ benchmark đánh giá mới mang tên **HygieneRoboBench**, nhằm kiểm tra và hoạch định dịch vụ gia đình có nhận thức về vệ sinh (**hygiene-aware planning**) dưới tác động của lịch sử tiếp xúc, ưu tiên của người dùng và các sự kiện tiếp xúc [2610.08642v1.pdf - Trang 8].\n* Đánh giá khả năng xử lý rủi ro vệ sinh phụ thuộc vào tiếp xúc, bao gồm sự lan truyền ô nhiễm thông qua hai tay gắp (**grippers**) và các đối tượng chung [2610.08642v1.pdf - Trang 2].\n\n---\n\n## II. Đối tượng và dữ liệu nghiên cứu\n\n### 1. Bài báo về Huấn luyện theo từng lớp (Greedy Layer-wise Training)\n* **Đối tượng:** Các mạng nơ-ron tích chập (**Convolutional Neural Networks - CNN**) có độ sâu từ 4 và 8 lớp [2610.00753v1.pdf - Trang 9].\n* **Dữ liệu / Tác vụ:** Huấn luyện trên tập dữ liệu **CIFAR-10**, đánh giá độ chính xác phân loại bằng kỹ thuật kiểm định k-nearest neighbors (**kNN probe**) [2610.00753v1.pdf - Trang 9].\n\n### 2. Bài báo về Hoạch định vệ sinh cho Robot (HygieneRoboBench)\n* **Đối tượng:** 7 thuật toán hoạch định (**planners**) khác nhau thực hiện các tác vụ dịch vụ gia đình [2610.08642v1.pdf - Trang 8].\n* **Dữ liệu / Tác vụ:** Bộ benchmark bao gồm **624 tình huống (instances)** trên **134 họ tác vụ (task families)**, trải rộng trên 7 khu vực trong gia đình và chia thành 5 nhóm hoạt động: chuẩn bị thực phẩm, đồ dùng ăn uống, dọn dẹp và giặt ủi, phòng ngủ và kho chứa, chăm sóc vật nuôi và gia đình [2610.08642v1.pdf - Trang 2].\n\n---\n\n## III. Kết luận chính của hai nghiên cứu\n\n### 1. Kết luận từ nghiên cứu về Huấn luyện theo từng lớp\n* Việc **tăng độ rộng mạng (increased width)** mang lại lợi ích lớn cho huấn luyện theo từng lớp tham lam, giúp thu hẹp đáng kể khoảng cách hiệu suất so với phương pháp lan truyền ngược đầu - cuối [2610.00753v1.pdf - Trang 10].\n* Sự gia tăng độ rộng đã cải thiện không cân xứng độ chính xác phân loại của các mạng huấn luyện theo từng lớp, thậm chí đạt độ chính xác cao hơn đối với các mạng rộng nhất được nghiên cứu [2610.00753v1.pdf - Trang 9].\n\n### 2. Kết luận từ nghiên cứu về Hoạch định vệ sinh cho Robot (HygieneRoboBench)\n* Tất cả **7 bộ hoạch định (planners)** đều có hiệu suất giảm sút khi độ khó cấu trúc tác vụ (**structural task difficulty**) tăng lên, điều này chứng minh khả năng phân biệt hiệu suất theo độ phức tạp của benchmark [2610.08642v1.pdf - Trang 8].\n* Xét về hiệu suất tổng thể, thuật toán **Hygiene-NSP** đạt tỷ lệ giải quyết an toàn tổng thể (**Safe Resolution - SR**) cao nhất là 94.4% và tỷ lệ giải quyết an toàn tối ưu (**Optimal Safe Resolution - OSR**) là 90.4%, không có phần tiếp tục không hợp lệ nào được gửi lên [2610.08642v1.pdf - Trang 8].\n\n---\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+}

@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_07",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Flattening the Connectome Spectrum: A Spectral Filter for FC Induces a Pretraining Target for fMRI Encoders' là gì?",
+  "is_ooc": false,
+  "system": "Naive_Dense",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 221.36,
+  "retrieval_warm_ms": 107.9,
+  "llm_ms": 3917.26,
+  "e2e_cold_ms": 4138.62,
+  "e2e_warm_ms": 4025.16,
+  "provided_chunks": [
+    {
+      "id": "eb08fcfc-92c8-4021-8791-bd245ff3ab17",
+      "document_id": "d41ab0fb-f18f-425b-93f9-a966cf4c64ac",
+      "filename": "2609.37642v1.pdf",
+      "page_number": 9,
+      "content": "Flattening the eigenvalues of each subject’s FC matrix improves prediction and fingerprinting, and\nthe flattened connectome is a usable pretraining target. The transform is one eigendecomposition per\nsubject and can replace the FC matrix in any existing pipeline. It could strengthen the effects found\nin studies that relate FC to behaviour, diagnosis or identity.\nScanning time and sample size are the main costs of an fMRI study. FCα∗and the encoders stay\nahead of FC with fewer subjects and shorter scans (Figure 4, Tables 3 and 4). This matters most for\nclinical cohorts, where long scans and large samples are hard to obtain.\nNeither the transform nor the released encoders need a GPU (Appendix I). The encoders were"
+    },
+    {
+      "id": "475b1f20-c13b-4fbd-a4d3-7adc89b1be24",
+      "document_id": "d41ab0fb-f18f-425b-93f9-a966cf4c64ac",
+      "filename": "2609.37642v1.pdf",
+      "page_number": 1,
+      "content": "Preprint\nFLATTENING THE CONNECTOME SPECTRUM:\nA SPECTRAL FILTER FOR FC INDUCES A PRETRAINING\nTARGET FOR FMRI ENCODERS\nGiovanni Marraffini1,2, Victoria Shevchenko2,\nCarlo Alberto Barbano1, Demian Wassermann1\n1Inria Saclay Île-de-France, CEA, Université Paris-Saclay, Palaiseau, France\n2Sigma Nova\ngiovanni.marraffini@gmail.com\nABSTRACT\nSelf-supervised pretraining reshaped prediction in language and vision, and brain\nfoundation models (BFMs) inherited its promise. Representations learned from\nlarge unlabelled corpora should capture individual functional dynamics and gener-\nalise across cohorts. However, kernel ridge regression (KRR) fitted on functional\nconnectivity (FC) matrices still predicts individual phenotypes more accurately"
+    },
+    {
+      "id": "8e32ec1d-c8a3-48a0-aeeb-1bc754181612",
+      "document_id": "d41ab0fb-f18f-425b-93f9-a966cf4c64ac",
+      "filename": "2609.37642v1.pdf",
+      "page_number": 1,
+      "content": "model on about 4,000 hours of fMRI from 162 open datasets, whereby we align\nthe pairwise similarities between the embeddings of recording snippets with those\nbetween the recalibrated connectomes. Our model performs on par with the best\nof the 6 published BFMs we tested while having an order of magnitude fewer\nparameters. Our encoder performs better than FC on short scans and in smaller\ncohorts, especially in fingerprinting. We release the pretrained model weights, the\ncode and the pretraining data, preprocessed and parcellated.\n1\nINTRODUCTION\nFunctional connectivity (FC), the matrix of pairwise correlations between regional fMRI timeseries,\nreliably captures subject-specific variance, enabling the prediction of subject identity from distinct"
+    },
+    {
+      "id": "0e30a3a4-4901-4447-ac89-bfe479811409",
+      "document_id": "d41ab0fb-f18f-425b-93f9-a966cf4c64ac",
+      "filename": "2609.37642v1.pdf",
+      "page_number": 2,
+      "content": "(Figure 1, Table 2). We also observe that flattening the FC’s spectrum by applying an exponentiation\nbetween 0 and 1 improves the prediction on most phenotypes on every dataset and parcellation we\ntest. In particular, it improves fingerprinting far more than sex or age prediction (Table 3). The same\nspectrum-flattened connectome serves as a pretraining target. We train a small encoder to preserve\nthe pairwise similarities between the spectrum-flattened connectomes which then reaches comparable\nperformance to the best published BFMs we tested on most datasets and tasks, with an order of\nmagnitude fewer parameters. Furthermore, in some tasks and datasets it gets significantly better than\nevery other tested BFM. In summary, our contributions are:"
+    },
+    {
+      "id": "a24d0855-ac2e-4ac1-8780-3a9c25625de6",
+      "document_id": "d41ab0fb-f18f-425b-93f9-a966cf4c64ac",
+      "filename": "2609.37642v1.pdf",
+      "page_number": 9,
+      "content": "raw FC, but neither reaches its teacher FCα∗(Table 9). On short scans and with fewer subjects the\nencoders are above KRR on FC (Tables 4 and 17, Figure 10), which is the most common case for\nstudies on individual traits and is precisely where a pretrained model is needed.\nThe objective transfers part of the transform’s structure, enough to pass every published BFM on the\ncomposite and to beat raw FC on short scans with fewer subjects. Given that the loss aligns global\npairwise distances, we hypothesize a bigger batch should close the gap even further.\n6\nCONCLUSIONS\nFlattening the eigenvalues of each subject’s FC matrix improves prediction and fingerprinting, and\nthe flattened connectome is a usable pretraining target. The transform is one eigendecomposition per"
+    }
+  ],
+  "answer": "## I. Mục tiêu nghiên cứu\n\nBài báo **\"Flattening the Connectome Spectrum: A Spectral Filter for FC Induces a Pretraining Target for fMRI Encoders\"** đặt mục tiêu khắc phục các thách thức trong các mô hình nền tảng não bộ (**Brain Foundation Models - BFMs**) kế thừa từ học tiền huấn luyện tự giám sát (**self-supervised pretraining**). Cụ thể, nghiên cứu nhằm:\n* Làm phẳng phổ giá trị riêng (**flattening the eigenvalues**) của ma trận kết nối chức năng (**Functional Connectivity - FC**) cho từng đối tượng bằng cách áp dụng phép lũy thừa trong khoảng từ $0$ đến $1$ [2609.37642v1.pdf - Trang 1, Trang 2].\n* Chứng minh rằng ma trận kết nối đã được làm phẳng phổ (**spectrum-flattened connectome**) cải thiện đáng kể khả năng dự đoán kiểu hình cá nhân, đặc biệt là nhận dạng cá thể (**fingerprinting**), vượt trội hơn so với ma trận FC thô trên các bản ghi quét ngắn (**short scans**) và các nhóm mẫu nhỏ hơn (**smaller cohorts**) [2609.37642v1.pdf - Trang 1, Trang 3, Trang 4].\n* Sử dụng kết nối đã làm phẳng phổ này làm mục tiêu tiền huấn luyện (**pretraining target**) để huấn luyện một bộ mã hóa (**encoder**) nhỏ, đạt hiệu suất tương đương hoặc vượt trội hơn so với các mô hình BFMs đã công bố với số lượng tham số ít hơn hẳn một bậc đại lượng [2609.37642v1.pdf - Trang 1, Trang 4].\n\n---\n\n## II. Giả thuyết khoa học\n\n* **Về phổ giá trị riêng và dự đoán:** Tác giả giả thuyết rằng việc làm phẳng phổ giá trị riêng của ma trận FC của mỗi đối tượng giúp cải thiện độ chính xác trong việc dự đoán các kiểu hình (**phenotypes**), tác vụ nhận dạng cá thể (**fingerprinting**), và tạo ra một mục tiêu tiền huấn luyện khả dụng [2609.37642v1.pdf - Trang 9].\n* **Về hiệu năng của bộ mã hóa trên dữ liệu giới hạn:** Giả thuyết rằng việc căn chỉnh khoảng cách cặp toàn cầu (**global pairwise distances**) giúp bộ mã hóa vượt trội hơn phương pháp hồi quy sườn kernel (**Kernel Ridge Regression - KRR**) trên FC thô khi đối mặt với thời gian quét ngắn và quy mô mẫu nhỏ — vốn là bài toán thực tế phổ biến nhất trong các nghiên cứu về đặc điểm cá nhân và là nơi các mô hình tiền huấn luyện phát huy tác dụng [2609.37642v1.pdf - Trang 5, Trang 9].\n\n---\n\n## III. Phương pháp luận chính\n\n* **Phép biến đổi phổ (Spectral Transform):** Thực hiện một phép phân tích riêng phần (**eigendecomposition**) cho mỗi đối tượng và áp dụng phép lũy thừa từ $0$ đến $1$ nhằm làm phẳng các giá trị riêng của ma trận FC ($FC_{\\alpha^*}$), qua đó thay thế ma trận FC truyền thống trong các đường ống xử lý dữ liệu (**pipelines**) [2609.37642v1.pdf - Trang 1, Trang 9].\n* **Tiền huấn luyện tự giám sát (Self-Supervised Pretraining):** Huấn luyện mô hình trên khoảng $4.000$ giờ dữ liệu fMRI từ $162$ tập dữ liệu mở, thông qua việc căn chỉnh sự tương đồng theo cặp giữa các nhúng (**embeddings**) của các đoạn ghi hình với các kết nối đã được hiệu chuẩn lại (**recalibrated connectomes**) [2609.37642v1.pdf - Trang 3].\n* **Đánh giá và kiểm định:** Kiểm tra hiệu năng của các bộ mã hóa (**encoders**) và ma trận kết nối đã biến đổi trên các tác vụ dự đoán giới tính, độ tuổi, các kiểu hình thần kinh khác nhau và nhiệm vụ nhận dạng cá thể (**fingerprinting**) trên nhiều tập dữ liệu cũng như phương pháp phân vùng (**parcellations**) [2609.37642v1.pdf - Trang 4].\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+}

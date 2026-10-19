@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_32",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'ER-EDF: A Psychology-Grounded Emotion Regulat' và (2) 'When Teachers Smile or Frown: A Profile-Based'.",
+  "is_ooc": false,
+  "system": "C4_Full_Rerank",
+  "gate_passed": true,
+  "gate_score": 0.871691,
+  "dcsr_skipped": false,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 17554.92,
+  "retrieval_warm_ms": 1157.18,
+  "llm_ms": 4105.91,
+  "e2e_cold_ms": 21660.83,
+  "e2e_warm_ms": 5263.09,
+  "provided_chunks": [
+    {
+      "id": "fffe43d6-c066-4ba8-b398-4588e294feec",
+      "document_id": "31bf9ecc-1160-4b06-853c-0da4d0781fe6",
+      "filename": "2609.15747v1.pdf",
+      "page_number": 1,
+      "content": "When Teachers Smile or Frown: A Profile-Based Analysis of\nAchievement Emotions\nRudra Mukhopadhyay, Satyaki Mazumder, Koel Das\nJanuary 2026\nAbstract\nAchievement emotions shape how students engage with and learn from academic tasks, yet most studies ex-\namine individual emotions rather than co-occurring affective profiles and their dynamics. We examined latent\nachievement-emotion profiles and their transitions following exposure to different instructor facial expressions\nduring a video lecture. Self-reported data from 78 Grade VII and VIII students revealed three profiles: enthusias-\ntic, demotivated, and vulnerable. Profile transitions differed across instructor conditions, with happy expressions"
+    },
+    {
+      "id": "d072904b-8632-4b85-9381-8fd90a9d6bf6",
+      "document_id": "e8d1f6bf-10c8-4921-b96e-94860070a8bc",
+      "filename": "2609.15089v1.pdf",
+      "page_number": 8,
+      "content": "appropriate responses. However, SER-tuned Back-\nbone still remains below Full ER-EDF on the main\nemotion-aware metrics, showing that perception\nalone does not fully solve empathetic generation.\nThis is consistent with our motivating hypothesis:\nexisting systems that treat emotion merely as a\nconditioning signal are insufficient, because em-\npathetic dialogue generation requires an explicit\nregulation step that determines how the perceived\nemotion should shape the response.\n6\nConclusion\nIn this work, we presented ER-EDF, a psychology-\ngrounded emotion regulation framework for empa-\nthetic dialogue generation in large audio-language\nmodels. ER-EDF separates emotion perception\nfrom regulation-aware response planning: it maps\nspeech emotion predictions into a unified valence-"
+    },
+    {
+      "id": "2ae0b0dd-2f58-4ab3-b1c3-7829dba77aee",
+      "document_id": "e8d1f6bf-10c8-4921-b96e-94860070a8bc",
+      "filename": "2609.15089v1.pdf",
+      "page_number": 2,
+      "content": "a psychology-grounded framework for regulation-\naware empathetic dialogue generation in large au-\ndio–language models (LALMs). ER-EDF decou-\nples emotion perception from emotion regulation,\ntreating them as distinct but coupled components.\nMoreover, we construct novel spoken empathetic\ndialogue datasets and introduce empathy-aware\nevaluation metrics. Evaluations across five LALMs\nand two datasets show that ER-EDF consistently\ninduces more empathetic responses, validated by\nboth objective metrics and human evaluation. Our\ncontributions are summarized:\n• We introduce ER-EDF, the first model-\nagnostic\nframework\nthat\noperationalizes\nGross’s process model of emotion regulation\nfor empathetic dialog generation in LALMs.\n• We construct an empathetic spoken dialogue"
+    },
+    {
+      "id": "49ff04ea-b08d-4ae4-b482-b96f822eebd5",
+      "document_id": "e8d1f6bf-10c8-4921-b96e-94860070a8bc",
+      "filename": "2609.15089v1.pdf",
+      "page_number": 2,
+      "content": "tion. This conflation risks producing responses that\nmirror user affect rather than regulating it toward\nsupportive communication.\nMoreover, explicit emotion regulation mecha-\nnisms and standardized evaluation protocols for\nempathetic response generation remain underex-\nplored. There is also a lack of spoken empathetic\ndatasets that support model development in this\nsetting. Current evaluation methods are largely lex-\nically driven and fail to capture higher-level empa-\nthetic behavior, highlighting the need for empathy-\naware evaluation protocols.\nTo address this gap, we i) propose ER-EDF,\na psychology-grounded framework for regulation-\naware empathetic dialogue generation in large au-\ndio–language models (LALMs). ER-EDF decou-\nples emotion perception from emotion regulation,"
+    },
+    {
+      "id": "9508d270-fa7d-42cf-8bbf-067ca630446d",
+      "document_id": "e8d1f6bf-10c8-4921-b96e-94860070a8bc",
+      "filename": "2609.15089v1.pdf",
+      "page_number": 9,
+      "content": "different dialogue contexts.\nSecond, the current emotion regulation policy in\nER-EDF is predefined according to emotion regula-\ntion theory and valence-arousal rules. This design\nmakes the framework interpretable and easy to au-\ndit, which is important for affect-sensitive dialogue\nsystems. A promising future direction is to ex-\ntend this rule-based policy into a learned dynamic\nregulation module. Such a module could infer reg-\nulation goals and response strategies from richer\nconversational signals, including speaker identity,\ndialogue history, pragmatic intent, and the user’s re-\naction to previous responses, while still preserving\nthe interpretability of the regulation decision.\nThird, ER-EDF currently uses a discrete valence-\narousal mapping to unify heterogeneous emotion"
+    }
+  ],
+  "answer": "## I. So sánh và đối chiếu hai nghiên cứu\n\nDựa trên các tài liệu được cung cấp, dưới đây là phần so sánh và đối chiếu chi tiết giữa hai bài báo **(1) ER-EDF** (`2609.15089v1.pdf`) và **(2) When Teachers Smile or Frown** (`2609.15747v1.pdf`) về phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính.\n\n---\n\n### 1. Phương pháp tiếp cận (Approaches)\n\n*   **Bài báo (1) - ER-EDF:** \n    *   Đề xuất khung **ER-EDF** (**Emotion Regulation-Empathetic Dialogue Framework**) nhằm hiện thực hóa **mô hình quá trình điều hòa cảm xúc của Gross** (Gross’s process model of emotion regulation) để tạo ra các đoạn hội thoại có sự đồng cảm trong các mô hình ngôn ngữ lớn âm thanh (Large Audio–Language Models - LALMs) [2609.15089v1.pdf - Trang 2, 3].\n    *   Phương pháp tiếp cận cốt lõi là **tách biệt nhận thức cảm xúc** (emotion perception) khỏi **quá trình lập kế hoạch phản hồi nhận thức quy định** (regulation-aware response planning), tránh việc chỉ coi cảm xúc là tín hiệu điều kiện đơn thuần [2609.15089v1.pdf - Trang 2, 8].\n*   **Bài báo (2) - When Teachers Smile or Frown:** \n    *   Sử dụng **phân tích dựa trên hồ sơ** (profile-based analysis) nhằm kiểm tra các **hồ sơ cảm xúc thành tích tiềm ẩn** (latent achievement-emotion profiles) và sự chuyển đổi của chúng [2609.15089v1.pdf - Trang 1].\n    *   Phương pháp tiếp cận tập trung vào việc ghi nhận dữ liệu tự báo cáo (self-reported data) từ học sinh khi tiếp xúc với các biểu cảm khuôn mặt khác nhau của giảng viên trong video bài giảng [2609.15089v1.pdf - Trang 1].\n\n---\n\n### 2. Đối tượng nghiên cứu (Study Subjects & Scope)\n\n*   **Bài báo (1) - ER-EDF:** \n    *   Đối tượng nghiên cứu tập trung vào các **mô hình ngôn ngữ lớn âm thanh** (Large Audio-Language Models - LALMs) thông qua việc đánh giá trên 5 LALMs khác nhau và 2 tập dữ liệu hội thoại đồng cảm bằng giọng nói mới được xây dựng [2609.15089v1.pdf - Trang 2].\n    *   Phạm vi nghiên cứu hướng đến việc tối ưu hóa giao tiếp đồng cảm, nhận diện dự đoán cảm xúc giọng nói (speech emotion predictions) và lập chính sách điều hòa cảm xúc dựa trên các quy tắc **valence-arousal** [2609.15089v1.pdf - Trang 8, 9].\n*   **Bài báo (2) - When Teachers Smile or Frown:** \n    *   Đối tượng nghiên cứu là con người thực tế, cụ thể gồm **78 học sinh lớp VII và VIII** (Grade VII and VIII students) [2609.15089v1.pdf - Trang 1].\n    *   Phạm vi nghiên cứu tập trung vào **cảm xúc thành tích** (achievement emotions) — yếu tố định hình cách học sinh tương tác và học tập từ các nhiệm vụ học thuật — dưới sự tác động của biểu cảm khuôn mặt giảng viên (như nụ cười hoặc cau mày) [2609.15089v1.pdf - Trang 1].\n\n---\n\n### 3. Kết luận chính (Main Conclusions)\n\n*   **Bài báo (1) - ER-EDF:** \n    *   Khung ER-EDF giúp **cải thiện nhất quán các phản hồi mang tính đồng cảm cao hơn**, được minh chứng bằng cả các chỉ số khách quan lẫn đánh giá từ con người [2609.15089v1.pdf - Trang 2].\n    *   Nghiên cứu chỉ ra rằng việc chỉ dựa vào nhận thức cảm xúc (perception alone) là chưa đủ để tạo ra phản hồi đồng cảm; hệ thống bắt buộc phải có **bước điều hòa cảm xúc rõ ràng** (explicit regulation step) để định hình cách cảm xúc ảnh hưởng đến câu trả lời [2609.15089v1.pdf - Trang 8].\n*   **Bài báo (2) - When Teachers Smile or Frown:** \n    *   Phát hiện ra **ba hồ sơ cảm xúc thành tích tiềm ẩn** chính ở học sinh bao gồm: **nhiệt tình** (enthusiastic), **mất động lực** (demotivated) và **dễ bị tổn thương** (vulnerable) [2609.15089v1.pdf - Trang 1].\n    *   Sự chuyển đổi giữa các hồ sơ cảm xúc của học sinh có sự khác biệt rõ rệt tùy theo các điều kiện biểu cảm khuôn mặt của giảng viên, trong đó biểu cảm vui vẻ (happy expressions) tạo ra những tác động chuyển đổi đặc thù [2609.15089v1.pdf - Trang 1].\n\n---\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*\n\n## Tài liệu tham khảo\n*   Mukhopadhyay, R., Mazumder, S., & Das, K. (2026). When Teachers Smile or Frown: A Profile-Based Analysis of Achievement Emotions [2609.15747v1.pdf - Trang 1].\n*   Tài liệu nghiên cứu khung ER-EDF: ER-EDF: A Psychology-Grounded Emotion Regulation Framework for Empathetic Dialogue Generation in Large Audio-Language Models [2609.15089v1.pdf - Trang 2, 8, 9]."
+}

@@ -1,0 +1,62 @@
+{
+  "query_id": "REAL_Q_21",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Knowing When Not to Answer: Cross-Domain and ' và (2) 'IdeaLens: Detecting AI Ideas in Long-form Wri'.",
+  "is_ooc": false,
+  "system": "ACAMIND",
+  "gate_passed": true,
+  "gate_score": 0.997212,
+  "dcsr_skipped": false,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 22772.2,
+  "retrieval_warm_ms": 1239.67,
+  "llm_ms": 4183.0,
+  "e2e_cold_ms": 26955.2,
+  "e2e_warm_ms": 5422.67,
+  "provided_chunks": [
+    {
+      "id": "a2252ba5-b80f-46ec-8208-dc13b05a3158",
+      "document_id": "56ff2466-5fe2-4009-b9fe-a6cecc5d3a00",
+      "filename": "2610.08413v1.pdf",
+      "page_number": 1,
+      "content": "Knowing When Not to Answer: Cross-Domain and Multi-Turn\nGeneralization of Latent Underspecification Signals\nJerzy Kami´nski\nIlya Galyukshev\nArtem Kuznetsov\nDanil Fedorov\nKirill Redko\nSergey Chuprin\nAidar Shumbalov\nStanislav Chumakov\nAnna Kalyuzhnaya\nITMO University, Saint Petersburg, Russia\nAbstract\nLarge language models routinely answer ques-\ntions that cannot be answered from the informa-\ntion given, and in dialogue they answer before\nenough has been said. Unanswerability is lin-\nearly decodable from hidden states, but it is un-\nclear which of its forms share a representation\nand whether the signal is useful in dialogue. We\ncontribute a turn-labeled multi-turn benchmark\n(423 conversations, 1,661 labeled turn-states)\nand an evaluation harness with a simulated user"
+    },
+    {
+      "id": "82770597-7377-4369-aebc-67b95281b5c2",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 1,
+      "content": "Preprint\nIDEALENS: DETECTING AI IDEAS IN LONG-FORM WRITING\nRishanth Rajendhran\u0011\nMinjoon Choi\u0011\nJenna Russell\u0011\nRamya Namuduri\u0011\nDeniz B¨ol¨oni-Turgut\u0011\nMarzena Karpinska{\nJohn WietingÛ\nMohit Iyyer\u0011\n\u0011 University of Maryland\nÛ Google DeepMind\n{ Simon Fraser University\n{rishanth, miyyer}@umd.edu\n§ CODE\n|\nMODELS & DATA\n|\n DEMO\nABSTRACT\nWhile modern AI detectors identify who wrote the words, emerging policies on AI\nuse increasingly hinge on a different question: who came up with the ideas? We\nintroduce IDEALENS, a detector that identifies whether a document’s ideas came\nfrom a human or AI (idea provenance), regardless of who wrote its words. To\nfocus IDEALENS on ideas rather than prose, we represent documents as outlines:"
+    },
+    {
+      "id": "73f4ee31-e6cd-44d4-8884-c654f369a600",
+      "document_id": "56ff2466-5fe2-4009-b9fe-a6cecc5d3a00",
+      "filename": "2610.08413v1.pdf",
+      "page_number": 13,
+      "content": "–\n–\nvanilla, answering user\n0.764\n0.598\n0.506\n0.811\nprobe gate, answering user\n0.693\n0.681\n0.584\n0.853\ncost gate, answering user\n0.669\n0.690\n0.407\n0.856\nuser turns, vanilla→probe\n4.3→4.8 4.0→4.9\n4.1→4.9\n4.2→5.3\n“no further details” ≥1, probe\n0.71\n0.62\n0.68\n0.77\nTable 9: Multi-turn success under the scripted user (two\nmodels) and the answering user. The cost-sensitive gate\ndoes not improve on τ=0.5. The last row is the share\nof probe-gated conversations in which the model asked\nat least one question that the hidden constraints could\nnot answer.\n(Gemma) of replies. Table 10 splits within-turn\nAUROC (turns 2–4) by whether any earlier reply\nin the context was truncated. Under our threshold\nfixed before the split was run (|∆| ≥0.05) trunca-\ntion is material, with a model-specific sign. It does"
+    },
+    {
+      "id": "63e8154f-1d00-433b-9bd5-40f9f1615b54",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 6,
+      "content": "one author (x-axis) and where they are by different authors (y-axis). IDEALENS is the only detector\naccurate with both shared (95.3%) and mixed (81.3%) authorship.10\ndetails).9 Prose detectors should label these stories as human, while idea detectors should label them\nas AI. We also include the 50 original AI stories, which all detectors should label as AI.\nIDEASHIFT-X: idea detection in multilingual documents.\nWhile prose detectors rely on\nlanguage-specific features (e.g., vocabulary choice, sentence structure), IDEALENS uses an LLM\nextractor that can generate English outlines for documents in any language. Thus, even though IDE-\nALENS is trained only on English documents, we can apply it to documents in other languages with-"
+    },
+    {
+      "id": "070cc6f9-57d9-4cba-b78a-4e60bfbeb298",
+      "document_id": "56ff2466-5fe2-4009-b9fe-a6cecc5d3a00",
+      "filename": "2610.08413v1.pdf",
+      "page_number": 13,
+      "content": "specification\nThanks for helping verify our benchmark. You\nhave one file, annotate_<your-letter>.html\n(alpha, beta, ...). Open it in any browser — no\ninstall, works offline, and your progress saves\nautomatically.\nWhat you’re checking. Each item is a short con-\nversation where the user reveals the task one piece\nper turn. We’ve auto-labeled every turn as:\n• UNDERSPECIFIED — the task can’t be\nanswered yet (information still missing), or\n• ANSWERABLE — enough has been said\nto answer.\nYour job: is that label correct at every turn?\nThe rule: a turn is answerable once all the ES-\nSENTIAL constraints have appeared (blue-\nbordered turns). OPTIONAL turns (orange) are\nredundant extra detail — they must not change\nwhether the task is answerable.\nSo the label\nshould switch from UNDERSPECIFIED to AN-"
+    },
+    {
+      "id": "92e7e991-ba21-41ee-96a0-dc773393bc20",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 7,
+      "content": "bels 94.7% of documents as human, compared to 50.7% for PROSELENS and 43.8% for Pangram\n4 (Table 19). In GEDE (Gehring & Paaßen, 2025), IDEALENS flags only 0.5% of human essays\nas AI after minor corrections made by an LLM (vs Pangram 4’s 54.6% and PROSELENS’s 45.8%)\nand 2.6% after a rewrite preserving the original content (vs Pangram 4’s 94.3% and PROSELENS’s\n77.1%). In HART (Bao et al., 2025), IDEALENS flags 4.9% of LLM paraphrases of human docu-\nments, compared to 42.8% by Pangram 4 and 44.5% by PROSELENS. In the Academic Integrity\ndataset (Karr et al., 2026), it flags 8.2% of abstracts that an LLM generated from a human-written\nreference abstract, compared to Pangram 4’s 96.4% and PROSELENS’s 83.9%.\nIDEALENS detects AI ideas in TWICETOLD’s human-written prose.\nIDEALENS flags 68%"
+    }
+  ],
+  "answer": "## I. So sánh và đối chiếu hai nghiên cứu\n\nDưới đây là phần tổng hợp, so sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: *(1) Knowing When Not to Answer: Cross-Domain and Multi-Turn Generalization of Latent Underspecification Signals* [2610.08413v1.pdf - Trang 1] và *(2) IdeaLens: Detecting AI Ideas in Long-form Writing* [2610.06778v1.pdf - Trang 1].\n\n---\n\n### 1. Phương pháp tiếp cận (Methodological Approaches)\n\n*   **Bài báo (1) - *Knowing When Not to Answer*:**\n    *   Tập trung nghiên cứu tín hiệu thiếu thông tin (latent underspecification signals) trong các mô hình ngôn ngữ lớn (**Large Language Models - LLMs**).\n    *   Xây dựng một bộ tiêu chuẩn đa lượt có gán nhãn từng lượt (**turn-labeled multi-turn benchmark**) gồm 423 cuộc hội thoại và 1.661 trạng thái lượt được gán nhãn [2610.08413v1.pdf - Trang 1], kèm theo một bộ công cụ đánh giá với người dùng giả lập (**evaluation harness with a simulated user**) [2610.08413v1.pdf - Trang 1].\n    *   Các trạng thái lượt hội thoại được tự động gán nhãn thành **UNDERSPECIFIED** (chưa đủ thông tin để trả lời) hoặc **ANSWERABLE** (đã đủ thông tin để trả lời) dựa trên việc các ràng buộc thiết yếu (**essential constraints**) đã xuất hiện hay chưa [2610.08413v1.pdf - Trang 13].\n\n*   **Bài báo (2) - *IdeaLens*:**\n    *   Tập trung phát hiện nguồn gốc ý tưởng (**idea provenance**) trong các văn bản dài (long-form writing) nhằm xác định xem ý tưởng đến từ con người hay AI, bất kể ai là người viết câu chữ [2610.06778v1.pdf - Trang 1].\n    *   Để tập trung vào ý tưởng thay vì văn phong (**prose**), phương pháp này biểu diễn các tài liệu dưới dạng dàn ý (**outlines**) [2610.06778v1.pdf - Trang 1].\n    *   Sử dụng một bộ trích xuất LLM (**LLM extractor**) có khả năng tạo ra các dàn ý bằng tiếng Anh cho các tài liệu bằng bất kỳ ngôn ngữ nào (**IDEASHIFT-X**), cho phép áp dụng sang các ngôn ngữ khác dù chỉ được huấn luyện trên tài liệu tiếng Anh [2610.06778v1.pdf - Trang 6].\n\n---\n\n### 2. Đối tượng nghiên cứu (Research Subjects & Data)\n\n*   **Bài báo (1) - *Knowing When Not to Answer*:**\n    *   Đối tượng nghiên cứu là các hội thoại nhiều lượt (**multi-turn conversations**) trong đó người dùng tiết lộ nhiệm vụ từng phần qua mỗi lượt [2610.08413v1.pdf - Trang 13].\n    *   Dữ liệu bao gồm 423 cuộc hội thoại tương ứng với 1.661 trạng thái lượt được gán nhãn để kiểm tra khả năng nhận biết thời điểm không nên trả lời của các LLM (như mô hình Gemma) [2610.08413v1.pdf - Trang 1] [2610.08413v1.pdf - Trang 13].\n\n*   **Bài báo (2) - *IdeaLens*:**\n    *   Đối tượng nghiên cứu là các văn bản viết dạng dài [2610.06778v1.pdf - Trang 1], các câu chuyện, bài luận (ví dụ trong GEDE, HART, và Academic Integrity dataset) có sự tham gia của con người và AI [2610.06778v1.pdf - Trang 7].\n    *   Dữ liệu bao gồm các tài liệu gốc do AI tạo ra, các bài luận của con người sau khi được chỉnh sửa nhỏ, viết lại hoặc dịch nghĩa, nhằm đánh giá độ chính xác của bộ phát hiện trong các điều kiện tác giả chung (shared authorship) và hỗn hợp (mixed authorship) [2610.06778v1.pdf - Trang 6] [2610.06778v1.pdf - Trang 7].\n\n---\n\n### 3. Kết luận chính (Main Findings & Conclusions)\n\n*   **Bài báo (1) - *Knowing When Not to Answer*:**\n    *   Tình trạng không thể trả lời (**unanswerability**) có thể được giải mã tuyến tính từ các trạng thái ẩn (**hidden states**) [2610.08413v1.pdf - Trang 1].\n    *   Việc áp dụng các cổng kiểm soát chi phí hoặc cổng thăm dò (**probe/cost gates**) giúp cải thiện hiệu suất thành công trong các cuộc hội thoại nhiều lượt dưới sự điều phối của người dùng mô phỏng và người dùng thực tế [2610.08413v1.pdf - Trang 13].\n\n*   **Bài báo (2) - *IdeaLens*:**\n    *   **IDEALENS** là bộ phát hiện duy nhất đạt độ chính xác cao với cả tác giả chung (95.3%) và tác giả hỗn hợp (81.3%) [2610.06778v1.pdf - Trang 6].\n    *   Công cụ này vượt trội hơn các bộ phát hiện văn phong truyền thống (như PROSELENS hay Pangram 4) khi gắn nhãn chính xác các bài viết của con người ngay cả sau khi có sự can thiệp chỉnh sửa nhỏ của LLM, viết lại nội dung, hay tạo bản tóm tắt học thuật [2610.06778v1.pdf - Trang 7].\n\n---\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+}

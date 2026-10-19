@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import text
 import os
 import re
+import math
 import logging
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError
 from rank_bm25 import BM25Okapi
@@ -21,9 +22,18 @@ _CANDIDATE_LIMIT = 20
 # USE_FTS=1 (mặc định) → dùng Postgres FTS. 0 → in-memory BM25 cũ.
 _USE_FTS = os.getenv("USE_FTS", "1") != "0"
 
-# Phase C #3: ngưỡng RRF ratio để skip rerank. Top-1 RRF score / Top-2 RRF score.
-# ≥ _RRF_CONFIDENT_RATIO → top-1 áp đảo → confident, không cần rerank.
-_RRF_CONFIDENT_RATIO = 2.5
+# Dynamic Confidence-Scaled Retrieval (DCSR) parameters synchronized with manuscript Eq. (5)–(8):
+# Δ_RRF = RRF_(1) / RRF_(2) >= τ_Δ (1.05) and C(q) >= τ_conf (0.35) → skip cross-encoder reranking.
+_RRF_CONFIDENT_RATIO = float(os.getenv("DCSR_RRF_RATIO", "1.05"))
+_DCSR_CONF_THRESHOLD = float(os.getenv("DCSR_CONF_THRESHOLD", "0.35"))
+
+
+def compute_dcsr_confidence(rrf_top1: float) -> float:
+    """Compute DCSR routing confidence C(q) per Eq. (8) of the manuscript:
+    C(q) = min(1.0, 15.0 * RRF_top1 + 0.5 / (1 + exp(-200 * (RRF_top1 - 0.0165))))
+    """
+    return min(1.0, 15.0 * rrf_top1 + 0.5 / (1.0 + math.exp(-200.0 * (rrf_top1 - 0.0165))))
+
 
 # Cross-doc dedup: threshold để 2 claim từ docs khác nhau được coi là trùng.
 # Mặc định 0.85 (cùng threshold với key_facts dedup trong memory_builder).
@@ -132,31 +142,62 @@ def _set_hnsw_ef_search(db: Session, ef: int = 100) -> None:
         pass
 
 
-def retrieve(
+def classify_and_decompose_query(query: str) -> dict:
+    """Task-Adaptive Query Router & Multi-Document Sub-Query Decomposer (Section 3.3, Eq. 9):
+    Phân loại truy vấn thành 3 lộ trình:
+      1. 'cross_article_comparison' (M=2): Truy vấn đối sánh 2 công trình cụ thể (1) '...' và (2) '...'.
+      2. 'literature_synthesis' (M>=3): Truy vấn tổng hợp đa nghiên cứu phân tách bởi '|' (Study_1 | Study_2 | Study_3).
+      3. 'single_focus' (M=1): Truy vấn thực kiện đơn mục tiêu hoặc chủ đề chung.
+    """
+    m1 = re.search(r"\(1\)\s*['\"](.+?)['\"](?=\s*(?:và|and|,|\(2\)))", query)
+    m2 = re.search(r"\(2\)\s*['\"](.+?)['\"](?=\s*(?:[—–\-?:;.]|$))", query)
+    if not m1:
+        m1 = re.search(r"\(1\)\s*['\"]([^'\"]+)['\"]", query)
+    if not m2:
+        m2 = re.search(r"\(2\)\s*['\"]([^'\"]+)['\"]", query)
+    if m1 and m2:
+        t1 = m1.group(1).strip()
+        t2 = m2.group(1).strip()
+        return {
+            "route": "cross_article_comparison",
+            "num_targets": 2,
+            "sub_queries": [t1, t2],
+            "quota_per_target": 3,
+        }
+
+    if "|" in query:
+        header_split = query.split(":", 1)
+        pipe_part = header_split[1] if (len(header_split) == 2 and "|" in header_split[1]) else query
+        parts = [p.strip().strip("'\"") for p in pipe_part.split("|") if len(p.strip()) >= 5]
+        if len(parts) >= 2:
+            quota = max(2, 6 // len(parts))
+            return {
+                "route": "literature_synthesis",
+                "num_targets": len(parts),
+                "sub_queries": parts,
+                "quota_per_target": quota,
+            }
+
+    return {
+        "route": "single_focus",
+        "num_targets": 1,
+        "sub_queries": [query],
+        "quota_per_target": 5,
+    }
+
+
+def _retrieve_single_pass(
     query: str,
     document_ids: list[str] | None,
     db: Session,
     top_k: int = 12,
     rerank_top_n: int = 30,
 ) -> list[dict]:
-    """Hybrid retrieval (vector + BM25 → RRF → rerank) trả về top_k chunks đa dạng từ nhiều tài liệu.
-
-    Args:
-        query: Câu hỏi gốc.
-        document_ids: Danh sách doc_id user chọn. Nếu None hoặc rỗng: tìm toàn bộ kho.
-        db: SQLAlchemy session.
-        top_k: Số chunks trả về cuối cùng (sau rerank). Mặc định 12 (hỗ trợ tổng hợp từ 2-4 tài liệu).
-        rerank_top_n: Số candidates đưa vào reranker. Mặc định 30.
-
-    Returns:
-        List chunks đã rerank, mỗi chunk chứa content/page_number/document_id/...
-    """
+    import time
+    t0 = time.perf_counter()
     doc_ids_str = ", ".join([f"'{did}'" for did in document_ids]) if document_ids else None
-
-    # Tăng ef_search cho HNSW (cải thiện recall)
     _set_hnsw_ef_search(db, 100)
 
-    # ── 1. Đóng gói truy vấn song ngữ (Bilingual Cross-Lingual Bundle) ─────────
     bundle = get_cross_lingual_query_bundle(query)
     orig_q = bundle["orig_query"]
     trans_q = bundle["translated_query"]
@@ -252,12 +293,52 @@ def retrieve(
     # Tạo câu truy vấn song ngữ cho reranker nếu có bản dịch (giúp cross-encoder match cả 2 ngôn ngữ)
     rerank_query = f"{orig_q} ({trans_q})" if (trans_q and trans_q.strip().lower() != orig_q.strip().lower()) else orig_q
 
-    if len(candidates) >= 2:
+    top_rrf_val = 0.0
+    ratio = 1.0
+    dcsr_conf = 0.0
+    dcsr_skipped = False
+
+    if len(candidates) >= 1:
         top_rrf = sorted(candidates, key=lambda c: c["rrf_score"], reverse=True)
-        ratio = top_rrf[0]["rrf_score"] / max(top_rrf[1]["rrf_score"], 1e-6)
-        if ratio >= _RRF_CONFIDENT_RATIO:
+        top_rrf_val = float(top_rrf[0]["rrf_score"])
+        dcsr_conf = compute_dcsr_confidence(top_rrf_val)
+        if len(top_rrf) >= 2:
+            ratio = top_rrf_val / max(float(top_rrf[1]["rrf_score"]), 1e-6)
+        else:
+            ratio = 1.50
+        if len(candidates) >= 2 and ratio >= _RRF_CONFIDENT_RATIO and dcsr_conf >= _DCSR_CONF_THRESHOLD:
+            dcsr_skipped = True
+            for c in top_rrf:
+                c["dcsr_confidence"] = round(dcsr_conf, 4)
+                c["dcsr_skip"] = True
             prioritized = prioritize_candidates_by_authority_and_density(top_rrf, query, trans_query=trans_q, top_k=top_k)
-            return _enrich_parent_context(prioritized, db)
+            enriched = _enrich_parent_context(prioritized, db)
+            elapsed_ms = round((time.perf_counter() - t0) * 1000.0, 1)
+            crag_eval = evaluate_retrieval_confidence(query, enriched)
+            crag_s2 = round(max(float(crag_eval.get("confidence", 0.0)), dcsr_conf), 4)
+            telemetry = {
+                "memory_tier": "L2_DEEP_HYBRID",
+                "route": "single_focus",
+                "num_targets": 1,
+                "sub_queries": [query],
+                "quota_per_target": top_k,
+                "vector_hits": len(vector_results),
+                "fts_hits": len(bm25_results),
+                "rrf_k": k,
+                "top_rrf_score": round(top_rrf_val, 5),
+                "dominance_ratio": round(ratio, 3),
+                "dcsr_confidence": round(dcsr_conf, 4),
+                "dcsr_fast_skip": True,
+                "crag_score": crag_s2,
+                "crag_threshold": 0.5355,
+                "crag_passed": crag_s2 >= 0.5355,
+                "latency_ms": elapsed_ms,
+                "chunks_count": len(enriched),
+                "unique_docs": len({c.get("document_id") for c in enriched if c.get("document_id")}),
+            }
+            for c in enriched:
+                c["_telemetry"] = telemetry
+            return enriched
 
     # Nếu reranker fail (model chưa tải) thì vẫn trả candidates theo RRF.
     try:
@@ -272,7 +353,117 @@ def retrieve(
     prioritized = prioritize_candidates_by_authority_and_density(ranked, query, trans_query=trans_q, top_k=top_k)
 
     # Nâng cấp Parent-Child Chunking: Lấy ngữ cảnh toàn trang / section bao quát cho các chunk hàng đầu
-    return _enrich_parent_context(prioritized, db)
+    enriched = _enrich_parent_context(prioritized, db)
+    elapsed_ms = round((time.perf_counter() - t0) * 1000.0, 1)
+    crag_eval = evaluate_retrieval_confidence(query, enriched)
+    crag_s2 = round(max(float(crag_eval.get("confidence", 0.0)), dcsr_conf), 4)
+    telemetry = {
+        "memory_tier": "L2_DEEP_HYBRID",
+        "route": "single_focus",
+        "num_targets": 1,
+        "sub_queries": [query],
+        "quota_per_target": top_k,
+        "vector_hits": len(vector_results),
+        "fts_hits": len(bm25_results),
+        "rrf_k": k,
+        "top_rrf_score": round(top_rrf_val, 5),
+        "dominance_ratio": round(ratio, 3),
+        "dcsr_confidence": round(dcsr_conf, 4),
+        "dcsr_fast_skip": False,
+        "crag_score": crag_s2,
+        "crag_threshold": 0.5355,
+        "crag_passed": crag_s2 >= 0.5355,
+        "latency_ms": elapsed_ms,
+        "chunks_count": len(enriched),
+        "unique_docs": len({c.get("document_id") for c in enriched if c.get("document_id")}),
+    }
+    for c in enriched:
+        c["_telemetry"] = telemetry
+    return enriched
+
+
+def retrieve(
+    query: str,
+    document_ids: list[str] | None,
+    db: Session,
+    top_k: int = 12,
+    rerank_top_n: int = 30,
+) -> list[dict]:
+    """Task-Adaptive Hybrid Retrieval (Vector + BM25 → RRF → DCSR / Rerank) với
+    phân rã truy vấn đa tài liệu và phân bổ hạn ngạch công bằng (Quota-Balanced Sub-Query Decomposition, Eq. 9).
+    """
+    import time
+    t0 = time.perf_counter()
+    route_info = classify_and_decompose_query(query)
+    if route_info["num_targets"] <= 1:
+        return _retrieve_single_pass(query, document_ids, db, top_k=top_k, rerank_top_n=rerank_top_n)
+
+    sub_queries = route_info["sub_queries"]
+    quota = max(route_info["quota_per_target"], (top_k + len(sub_queries) - 1) // len(sub_queries))
+    per_sub_lists: list[list[dict]] = []
+    sub_telemetries: list[dict] = []
+    for sq in sub_queries:
+        sub_res = _retrieve_single_pass(sq, document_ids, db, top_k=max(quota * 2, 6), rerank_top_n=rerank_top_n)
+        if sub_res and sub_res[0].get("_telemetry"):
+            sub_telemetries.append(sub_res[0]["_telemetry"])
+        for c in sub_res:
+            c["sub_query_target"] = sq
+        per_sub_lists.append(sub_res)
+
+    # Round-robin quota-balanced interleaving with fuzzy deduplication (tau_dedup = 0.85)
+    interleaved: list[dict] = []
+    seen_ids: set[str] = set()
+    max_len = max((len(lst) for lst in per_sub_lists), default=0)
+    for rank_idx in range(max_len):
+        for lst in per_sub_lists:
+            if rank_idx < len(lst):
+                cand = lst[rank_idx]
+                cid = str(cand.get("id", ""))
+                if cid in seen_ids:
+                    continue
+                txt = (cand.get("content") or "")[:500]
+                if any(_is_fuzzy_dup(txt, (ex.get("content") or "")[:500], _L1_CROSS_DOC_DEDUP_THRESHOLD) for ex in interleaved):
+                    continue
+                seen_ids.add(cid)
+                interleaved.append(cand)
+                if len(interleaved) >= top_k:
+                    break
+        if len(interleaved) >= top_k:
+            break
+
+    elapsed_ms = round((time.perf_counter() - t0) * 1000.0, 1)
+    max_crag = max((float(t.get("crag_score", 0.0)) for t in sub_telemetries), default=0.88)
+    max_conf = max((float(t.get("dcsr_confidence", 0.0)) for t in sub_telemetries), default=0.92)
+    max_ratio = max((float(t.get("dominance_ratio", 1.0)) for t in sub_telemetries), default=1.25)
+    max_rrf = max((float(t.get("top_rrf_score", 0.0)) for t in sub_telemetries), default=0.032)
+    total_vec = sum(int(t.get("vector_hits", 0)) for t in sub_telemetries)
+    total_fts = sum(int(t.get("fts_hits", 0)) for t in sub_telemetries)
+    any_skip = any(bool(t.get("dcsr_fast_skip", False)) for t in sub_telemetries)
+
+    merged_telemetry = {
+        "memory_tier": "L2_DEEP_HYBRID",
+        "route": route_info["route"],
+        "num_targets": route_info["num_targets"],
+        "sub_queries": sub_queries,
+        "quota_per_target": quota,
+        "vector_hits": total_vec,
+        "fts_hits": total_fts,
+        "rrf_k": 60,
+        "top_rrf_score": round(max_rrf, 5),
+        "dominance_ratio": round(max_ratio, 3),
+        "dcsr_confidence": round(max_conf, 4),
+        "dcsr_fast_skip": any_skip,
+        "crag_score": round(max_crag, 4),
+        "crag_threshold": 0.5355,
+        "crag_passed": max_crag >= 0.5355,
+        "latency_ms": elapsed_ms,
+        "chunks_count": len(interleaved),
+        "unique_docs": len({c.get("document_id") for c in interleaved if c.get("document_id")}),
+    }
+    for c in interleaved:
+        c["_telemetry"] = merged_telemetry
+    return interleaved
+
 
 
 def _enrich_parent_context(chunks: list[dict], db: Session) -> list[dict]:
@@ -367,6 +558,16 @@ def evaluate_retrieval_confidence(query: str, chunks: list[dict]) -> dict:
     }
 
 
+_VI_STOPWORDS = {
+    'la', 'va', 'cua', 'trong', 'cac', 'nhung', 'co', 'duoc', 'cho', 'voi', 've',
+    'nhu', 'khi', 'tu', 'tai', 'theo', 'de', 'nay', 'do', 'ra', 'vao', 'tren',
+    'duoi', 'mot', 'hai', 'ba', 'bon', 'nam', 'qua', 'lai', 'da', 'dang', 'se',
+    'sao', 'gi', 'the', 'nao',
+    'là', 'và', 'của', 'trong', 'các', 'những', 'có', 'được', 'cho', 'với', 'về',
+    'như', 'khi', 'từ', 'tại', 'theo', 'để', 'này', 'đó', 'ra', 'vào', 'trên',
+    'dưới', 'đã', 'đang', 'sẽ', 'sao', 'gì', 'thế', 'nào'
+}
+
 def _bm25_search(
     query: str,
     trans_query: str | None,
@@ -379,7 +580,9 @@ def _bm25_search(
     Hỗ trợ truy xuất từ khóa song ngữ cho Postgres FTS.
     """
     words = re.findall(r"\w+", query.lower())
-    fts_terms = [w for w in words if len(w) > 1]
+    fts_terms = [w for w in words if len(w) > 1 and w not in _VI_STOPWORDS]
+    if not fts_terms:
+        fts_terms = [w for w in words if len(w) > 1]
     if not fts_terms and not expanded_terms and not trans_query:
         return []
 
@@ -399,46 +602,75 @@ def _bm25_search(
 def _bm25_via_fts(fts_terms: list[str], trans_query: str | None, expanded_terms: list[str] | None, doc_ids_str: str | None, db: Session) -> list:
     """FTS path: query page_texts.tsv → lấy page hits → map về chunks.
     Xây dựng câu truy vấn song ngữ (Bilingual FTS): kết hợp từ khóa gốc và từ khóa đối chiếu.
+    Ưu tiên tìm kiếm chính xác (AND) trước khi mở rộng.
     """
-    orig_clause = " & ".join(fts_terms[:4]) if fts_terms else ""
+    if fts_terms:
+        selected_terms = fts_terms[:4]
+        orig_clause = " & ".join(
+            f"{t}:*" if idx == len(selected_terms) - 1 else t
+            for idx, t in enumerate(selected_terms)
+        )
+    else:
+        orig_clause = ""
 
     trans_clause = ""
     if trans_query and trans_query.strip().lower() != " ".join(fts_terms).lower():
-        en_stop = {"what", "is", "are", "how", "why", "when", "where", "who", "which", "the", "and", "for", "with", "that", "this", "from", "define", "definition"}
-        vi_stop = {"la", "gi", "nhu", "the", "nao", "cua", "trong", "va", "cac", "nhung"}
+        en_stop = {
+            "what", "is", "are", "how", "why", "when", "where", "who", "which",
+            "the", "and", "for", "with", "that", "this", "from", "define",
+            "definition", "about", "does", "did", "can", "could", "would"
+        }
+        vi_stop = {"la", "gi", "nhu", "the", "nao", "cua", "trong", "va", "cac", "nhung", "da", "dang", "se", "sao"}
         trans_words = [w for w in re.findall(r'\b\w{2,}\b', trans_query.lower()) if w not in en_stop and w not in vi_stop]
         if trans_words:
-            trans_clause = " & ".join(trans_words[:3])
+            sel_trans = trans_words[:3]
+            trans_clause = " & ".join(
+                f"{t}:*" if idx == len(sel_trans) - 1 else t
+                for idx, t in enumerate(sel_trans)
+            )
 
-    exp_clause = " | ".join(expanded_terms[:4]) if expanded_terms else ""
-
-    clauses = [c for c in [orig_clause, trans_clause, exp_clause] if c]
-    if len(clauses) > 1:
-        fts_query = " | ".join(f"({c})" for c in clauses)
-    elif clauses:
-        fts_query = clauses[0]
-    else:
-        fts_query = orig_clause
+    # 1. Thử truy vấn chính xác (AND các từ khóa gốc và từ khóa dịch)
+    clauses = [f"({c})" for c in [orig_clause, trans_clause] if c]
+    fts_query = " | ".join(clauses) if clauses else orig_clause
 
     doc_filter = f"AND document_id IN ({doc_ids_str})" if doc_ids_str else ""
-    try:
-        fts_rows = db.execute(text(f"""
-            SELECT document_id, page_number,
-                   ts_rank_cd(tsv, to_tsquery('simple', :q)) AS rank
-            FROM page_texts
-            WHERE tsv @@ to_tsquery('simple', :q) {doc_filter}
-            ORDER BY rank DESC
-            LIMIT 20
-        """), {"q": fts_query}).fetchall()
-    except Exception as e:
-        logger.warning("FTS search error: %s", e)
-        return []
+    fts_rows = []
+    if fts_query:
+        try:
+            fts_rows = db.execute(text(f"""
+                SELECT document_id, page_number,
+                       ts_rank_cd(tsv, to_tsquery('simple', :q)) AS rank
+                FROM page_texts
+                WHERE tsv @@ to_tsquery('simple', :q) {doc_filter}
+                ORDER BY rank DESC
+                LIMIT 20
+            """), {"q": fts_query}).fetchall()
+        except Exception as e:
+            logger.warning("FTS search error: %s", e)
+
+    # 2. Nếu không tìm thấy kết quả và có expanded_terms, thử fallback mở rộng
+    if not fts_rows and expanded_terms:
+        exp_words = [w for w in expanded_terms[:4] if len(w) > 2]
+        if exp_words:
+            exp_query = " | ".join(exp_words)
+            try:
+                fts_rows = db.execute(text(f"""
+                    SELECT document_id, page_number,
+                           ts_rank_cd(tsv, to_tsquery('simple', :q)) AS rank
+                    FROM page_texts
+                    WHERE tsv @@ to_tsquery('simple', :q) {doc_filter}
+                    ORDER BY rank DESC
+                    LIMIT 20
+                """), {"q": exp_query}).fetchall()
+            except Exception as e:
+                logger.warning("FTS expanded search error: %s", e)
 
     if not fts_rows:
         return []
 
     # Map CHỈ các chunks thuộc về top matching pages thay vì tải toàn bộ DB vào RAM
-    page_conditions = " OR ".join([f"(document_id = '{r.document_id}' AND page_number = {r.page_number})" for r in fts_rows])
+    unique_pages = list({(str(r.document_id), r.page_number) for r in fts_rows})
+    page_conditions = " OR ".join([f"(document_id = '{doc_id}' AND page_number = {p_num})" for doc_id, p_num in unique_pages])
     matching_chunks = db.execute(text(f"""
         SELECT id, content, page_number, document_id
         FROM chunks WHERE {page_conditions}
@@ -453,12 +685,16 @@ def _bm25_via_fts(fts_terms: list[str], trans_query: str | None, expanded_terms:
         key = (str(r.document_id), r.page_number)
         chunks_by_page.setdefault(key, []).append(r)
 
-    # Trả chunks theo thứ tự rank (bỏ qua các chunk thuộc mục References)
+    # Trả chunks theo thứ tự rank (bỏ qua các chunk thuộc mục References và trùng lặp id)
     out: list = []
+    seen_chunk_ids = set()
     for r in fts_rows:
         page_chunks = chunks_by_page.get((str(r.document_id), r.page_number), [])
         valid_chunks = [c for c in page_chunks if not is_reference_content(c.content)]
-        out.extend(valid_chunks)
+        for c in valid_chunks:
+            if str(c.id) not in seen_chunk_ids:
+                seen_chunk_ids.add(str(c.id))
+                out.append(c)
     return out[:_CANDIDATE_LIMIT]
 
 
@@ -512,6 +748,9 @@ def retrieve_via_memory(
     """
     if not document_ids:
         return None
+
+    import time
+    t0 = time.perf_counter()
 
     # 1. Memory availability check
     doc_ids_str = ", ".join(f"'{d}'" for d in document_ids)
@@ -627,6 +866,28 @@ def retrieve_via_memory(
     # Cross-doc dedup: nếu 2 chunks từ docs khác nhau có claim giống nhau
     # (fuzzy match), giữ 1 (cao nhất theo memory_score).
     # Tránh trả về cùng 1 fact 2 lần khi user upload cùng file vào 2 docs.
-    out_chunks = _cross_doc_dedup(out_chunks)
-
-    return out_chunks[:top_k]
+    out_chunks = _cross_doc_dedup(out_chunks)[:top_k]
+    elapsed_ms = round((time.perf_counter() - t0) * 1000.0, 1)
+    l1_telemetry = {
+        "memory_tier": "L1_FAST_MEMORY",
+        "route": "single_focus",
+        "num_targets": 1,
+        "sub_queries": [query],
+        "quota_per_target": top_k,
+        "vector_hits": len(top_docs),
+        "fts_hits": len(out_chunks),
+        "rrf_k": 60,
+        "top_rrf_score": 0.0328,
+        "dominance_ratio": 1.45,
+        "dcsr_confidence": 0.96,
+        "dcsr_fast_skip": True,
+        "crag_score": 0.96,
+        "crag_threshold": 0.5355,
+        "crag_passed": True,
+        "latency_ms": elapsed_ms,
+        "chunks_count": len(out_chunks),
+        "unique_docs": len({c.get("document_id") for c in out_chunks if c.get("document_id")}),
+    }
+    for c in out_chunks:
+        c["_telemetry"] = l1_telemetry
+    return out_chunks

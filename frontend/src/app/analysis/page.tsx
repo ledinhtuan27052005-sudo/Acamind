@@ -5,6 +5,7 @@ import { useAppStore } from '@/store/useAppStore';
 import { getLibraryArticles, analyzeArticles, LibraryArticle, AnalysisResult } from '@/lib/api';
 import { useI18n } from '@/lib/i18n/context';
 import { GuestBlockScreen } from '@/components/auth/AuthRequiredModal';
+import { cleanMarkdownText } from '@/components/ui/AcademicDocumentRenderer';
 import {
   BarChart2, Search, BookOpen, Check, X, Loader2,
   ChevronDown, ChevronUp, AlertCircle, Sparkles, Globe, Target
@@ -110,7 +111,7 @@ function ComparisonTable({
           <Sparkles className="w-5 h-5 text-teal-500 flex-shrink-0 mt-0.5 drop-shadow-[0_0_8px_rgba(20,184,166,0.4)]" />
           <div>
             <p className="text-sm font-semibold text-teal-800 dark:text-teal-300 mb-1">{t.analysis.summary}</p>
-            <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed">{analysis.summary}</p>
+            <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed">{cleanMarkdownText(analysis.summary)}</p>
           </div>
         </div>
       </div>
@@ -144,10 +145,10 @@ function ComparisonTable({
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                 {analysis.comparison_table.map((row, ri) => (
                   <tr key={ri} className="hover:bg-slate-100 dark:hover:bg-slate-800/60 dark:hover:bg-gray-800/30 transition-colors">
-                    <td className="px-4 py-3 font-medium text-slate-700 dark:text-slate-200">{row.factor}</td>
+                    <td className="px-4 py-3 font-medium text-slate-700 dark:text-slate-200">{cleanMarkdownText(row.factor)}</td>
                     {row.values.map((val, vi) => (
                       <td key={vi} className="px-4 py-3 text-center text-slate-600 dark:text-slate-300 text-xs">
-                        {val || '—'}
+                        {cleanMarkdownText(val) || '—'}
                       </td>
                     ))}
                   </tr>
@@ -163,9 +164,9 @@ function ComparisonTable({
           {analysis.common_themes.map((theme: any, i: number) => (
             <div key={i} className="bg-glass-card p-4 rounded-xl space-y-1.5 hover:shadow-md transition-shadow">
               <h4 className="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
-                <div className="w-1.5 h-1.5 rounded-full bg-teal-400" /> {theme.theme}
+                <div className="w-1.5 h-1.5 rounded-full bg-teal-400" /> {cleanMarkdownText(theme.theme)}
               </h4>
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">{theme.explanation}</p>
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">{cleanMarkdownText(theme.explanation)}</p>
             </div>
           ))}
         </div>
@@ -175,8 +176,8 @@ function ComparisonTable({
         <div className="space-y-3">
           {analysis.differences.map((diff: any, i: number) => (
             <div key={i} className="bg-glass-card p-4 rounded-xl border-l-4 border-purple-400 space-y-1.5">
-              <h4 className="font-semibold text-slate-800 dark:text-slate-200">{diff.aspect}</h4>
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">{diff.difference}</p>
+              <h4 className="font-semibold text-slate-800 dark:text-slate-200">{cleanMarkdownText(diff.aspect)}</h4>
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">{cleanMarkdownText(diff.difference)}</p>
             </div>
           ))}
         </div>
@@ -187,9 +188,9 @@ function ComparisonTable({
           {analysis.research_gaps.map((gap: any, i: number) => (
             <div key={i} className="bg-glass-card p-4 rounded-xl border-l-4 border-amber-400 space-y-1.5">
               <h4 className="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-                <Target className="w-4 h-4 text-amber-500" /> {gap.gap}
+                <Target className="w-4 h-4 text-amber-500" /> {cleanMarkdownText(gap.gap)}
               </h4>
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">{gap.implication}</p>
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">{cleanMarkdownText(gap.implication)}</p>
             </div>
           ))}
         </div>
@@ -200,7 +201,7 @@ function ComparisonTable({
           <h4 className="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-purple-500 drop-shadow-[0_0_8px_rgba(168,85,247,0.4)]" /> {t.analysis.recommendation}
           </h4>
-          <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">{analysis.recommendation}</p>
+          <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">{cleanMarkdownText(analysis.recommendation)}</p>
         </div>
       )}
     </div>

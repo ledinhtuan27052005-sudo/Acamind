@@ -1,0 +1,19 @@
+{
+  "query_id": "REAL_Q_42",
+  "type": "Literature Synthesis",
+  "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Balancing Memory Pathways: Analyzin | Slow Context, Fast Symptoms: Multis | Symphony for Text Generation: Bench",
+  "is_ooc": false,
+  "system": "C4_Full_Rerank",
+  "gate_passed": false,
+  "gate_score": 0.107555,
+  "dcsr_skipped": false,
+  "gate_refused": true,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 20918.05,
+  "retrieval_warm_ms": 962.75,
+  "llm_ms": 0.0,
+  "e2e_cold_ms": 20918.05,
+  "e2e_warm_ms": 962.75,
+  "provided_chunks": [],
+  "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. (Từ chối bởi CRAG Gate)"
+}

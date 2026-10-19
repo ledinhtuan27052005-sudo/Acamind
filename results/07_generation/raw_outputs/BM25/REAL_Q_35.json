@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_35",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Nucleus Speculative Decoding: Plausibility-Aw' và (2) 'COMPASS 2.0: psychometric representational si'.",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 1021.35,
+  "retrieval_warm_ms": 1007.61,
+  "llm_ms": 1521.14,
+  "e2e_cold_ms": 2542.49,
+  "e2e_warm_ms": 2528.75,
+  "provided_chunks": [
+    {
+      "id": "74a1a2ce-d106-420a-938a-0a806313d690",
+      "document_id": "70c9ced3-7830-43fb-9cd8-9a16af88bfdd",
+      "filename": "2610.08678v1.pdf",
+      "page_number": 5,
+      "content": "draft models under standard decoding. We define\nPRR =\nx −xdraft\nxtarget −xdraft\n,\n(5)\nwhich measures the fraction of the target performance\nretained by speculative decoding: PRR = 0 matches the\ndraft model, and PRR = 1 matches the target model. We\nalso report raw scores for direct interpretation in Table 3.\n• Inference Speedup (SPD). SPD is the ratio between the\nwall-clock decoding time of the target model under stan-\ndard decoding and that of speculative decoding. Larger\nvalues indicate faster inference, e.g., SPD = 2 means\nthat speculative decoding achieves a 2× speedup against\nstandard autoregressive decoding of the target model.\nSpeculative Decoding Methods.\nWe consider the loss-\nless method and six lossy speculative decoding methods:"
+    },
+    {
+      "id": "75342d6b-563c-48e9-8200-9813cae8499d",
+      "document_id": "5690719e-88dd-416e-bd32-fa49f1b5aba5",
+      "filename": "2610.07822v1.pdf",
+      "page_number": 6,
+      "content": "Baselines.\nWe use target model autoregressive decoding as the primary reference for generation\nquality and latency. We compare Nucleus Sampling (NS), which modifies the sampling distribution\nthrough temperature and nucleus truncation. Standard speculative decoding (SD) [4, 17] serves\nas the exact distribution-preserving acceleration baseline. We further compare with relaxed\nspeculative verification methods, including ASD [10], Cactus [13], and MARS [23], which trade\nexact verification guarantees for improved acceptance or efficiency. As for decoding parameters,\nall methods use temperature T = 1.0. For Nucleus Sampling, we use top −p = 0.95 following the\ncommon decoding configuration. For NSD, we set the nucleus threshold θ = 0.95 in the main\nexperiments.\n4.2 Main Results"
+    },
+    {
+      "id": "c4e95316-89ab-486e-ae52-030046b410ee",
+      "document_id": "5690719e-88dd-416e-bd32-fa49f1b5aba5",
+      "filename": "2610.07822v1.pdf",
+      "page_number": 2,
+      "content": "cation is the main bottleneck, yet it still rejects many proposals that remain plausible for target\nmodel. To fix this issue, we introduce Nucleus Speculative Decoding (NSD), a simple but ef-\nfective method that supplements standard speculative decoding with a target-nucleus acceptance\ncondition. At each proposed position, the target nucleus contains the highest-probability tokens\nwhose cumulative probability mass reaches a threshold [16]. NSD accepts a proposal if it either\npasses the speculative verification or belongs to target nucleus.\nAlthough NSD relaxes the exact distribution guarantee of speculative decoding, we prove that\nits distributional deviation is exactly determined by the draft model’s excess probability within"
+    },
+    {
+      "id": "5addd2a9-a96e-40a0-b53a-72ff2ed83f03",
+      "document_id": "94ee6457-8d25-433a-9e6f-a0c21f367d68",
+      "filename": "2610.07659v1.pdf",
+      "page_number": 3,
+      "content": "Preprint.\nDrafting\nVerification\nDrafting\n7 drafted tokens\n7 drafted tokens\n7 drafted tokens\n7 / 7 accepted\n3 / 7 accepted\n10 / 14 accepted\n7 generated tokens\n3 generated tokens\n10 generated tokens\nRepeat while 𝑓𝑔𝑎𝑡𝑒= Yes\n(a) Standard speculative decoding\n(b) Looped speculative decoding\nVerification\nVerification\n𝑓𝑔𝑎𝑡𝑒= No\n…\nDrafting\n3.90ms\n3.90ms\n22.45ms\n22.45ms\n23.24ms\n3.90ms\nFigure 2: Comparison of speculative and looped speculative decoding. We assume that the target\nmodel accepts all 7 tokens of the first drafting stage and 3 of 7 from the second, 10 tokens in total.\nThe bonus token that each verification produces is omitted for clarity. (a) Speculative decoding\nverifies after each drafting stage and needs two verifications. (b) Looped speculative decoding skips"
+    },
+    {
+      "id": "99c08f7e-36c4-4803-9f87-e4b0629366c0",
+      "document_id": "5690719e-88dd-416e-bd32-fa49f1b5aba5",
+      "filename": "2610.07822v1.pdf",
+      "page_number": 3,
+      "content": "on draft-target KL divergence has also been explored as an alternative to learned judges [25].\nInspired by nucleus sampling [16], NSD introduces a different relaxation: a draft token is accepted\nif it satisfies the standard acceptance rule or belongs to the target nucleus. Unlike approaches that\nreplace the verification criterion, NSD retains the original residual correction and bonus sampling\nmechanisms, providing a simple nucleus-based acceptance condition using target probabilities\nalready computed during verification.\n3 Nucleus Speculative Decoding\nWe introduce Nucleus Speculative Decoding (NSD), a simple yet effective method for speculative\ndecoding. NSD accepts a draft proposal if it passes the standard acceptance verification or"
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để so sánh và đối chiếu hai bài báo \"Nucleus Speculative Decoding: Plausibility-Aw\" và \"COMPASS 2.0: psychometric representational si\" (ngữ cảnh hiện tại chỉ chứa các tài liệu kỹ thuật về mô hình giải mã suy đoán - speculative decoding và không có tài liệu nào đề cập đến bài báo COMPASS 2.0 hay khía cạnh trắc nghiệm tâm lý học - psychometric)."
+}

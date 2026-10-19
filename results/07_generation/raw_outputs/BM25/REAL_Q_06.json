@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_06",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Selective Transfer of RL Updates for Visual Reasoning' là gì?",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 717.85,
+  "retrieval_warm_ms": 750.54,
+  "llm_ms": 3304.75,
+  "e2e_cold_ms": 4022.6,
+  "e2e_warm_ms": 4055.29,
+  "provided_chunks": [
+    {
+      "id": "15ca7678-d9ee-4a75-946d-cc7756d6d43c",
+      "document_id": "bf8f3658-cbab-451f-9c9d-8eac835c49dd",
+      "filename": "2610.07987v1.pdf",
+      "page_number": 23,
+      "content": "Preprint\nFine-graned representation\nCoarse-gained representation\nOriginal\nAdaptive · Visual tokens: 900 → 525\nOriginal\nAdaptive · Visual tokens: 832 → 463\nOriginal\nAdaptive · Visual tokens: 1976 → 848\nOriginal\nAdaptive · Visual tokens: 1280 → 725\nOriginal\nAdaptive · Visual tokens: 1380 → 840\nOriginal\nAdaptive · Visual tokens: 1380 → 705\nOriginal\nAdaptive · Visual tokens: 1380 → 669\nOriginal\nAdaptive · Visual tokens: 1380 → 774\nOriginal\nAdaptive · Visual tokens: 1932 → 963\nOriginal\nAdaptive · Visual tokens: 576 → 366\nOriginal\nAdaptive · Visual tokens: 1728 → 918\nOriginal\nAdaptive · Visual tokens: 1728 → 969\nOriginal\nAdaptive · Visual tokens: 504 → 273\nOriginal\nAdaptive · Visual tokens: 252 → 189\nOriginal\nAdaptive · Visual tokens: 196 → 100\nOriginal\nAdaptive · Visual tokens: 1900 → 1171"
+    },
+    {
+      "id": "3ad3d462-f57b-4ddb-b869-3b5fef7a237a",
+      "document_id": "bf8f3658-cbab-451f-9c9d-8eac835c49dd",
+      "filename": "2610.07987v1.pdf",
+      "page_number": 22,
+      "content": "Preprint\nFine-graned representation\nCoarse-gained representation\nOriginal\nAdaptive · Visual tokens: 900 → 384\nOriginal\nAdaptive · Visual tokens: 832 → 343\nOriginal\nAdaptive · Visual tokens: 1976 → 1055\nOriginal\nAdaptive · Visual tokens: 1280 → 578\nOriginal\nAdaptive · Visual tokens: 1380 → 672\nOriginal\nAdaptive · Visual tokens: 1380 → 579\nOriginal\nAdaptive · Visual tokens: 1380 → 573\nOriginal\nAdaptive · Visual tokens: 1380 → 636\nOriginal\nAdaptive · Visual tokens: 1932 → 885\nOriginal\nAdaptive · Visual tokens: 576 → 339\nOriginal\nAdaptive · Visual tokens: 1728 → 744\nOriginal\nAdaptive · Visual tokens: 1728 → 774\nOriginal\nAdaptive · Visual tokens: 504 → 210\nOriginal\nAdaptive · Visual tokens: 252 → 99\nOriginal\nAdaptive · Visual tokens: 196 → 70\nOriginal\nAdaptive · Visual tokens: 1900 → 916"
+    },
+    {
+      "id": "c39616f6-06f0-4006-bfe2-3280348ab46c",
+      "document_id": "ba3e8c35-9ab2-4648-bd91-d154a150ef32",
+      "filename": "2610.08659v1.pdf",
+      "page_number": 1,
+      "content": "training-stage update, isolating the parameter changes induced by reinforcement\nlearning (RL). Yet transferring this update in full remains suboptimal: we find that\nits components differ substantially in cross-model transferability, with dominant\ndirections transferring more effectively than the complete update. Based on this\nfinding, we introduce Selective-RL, which isolates the RL-stage update, retains\nits dominant matrix-wise directions with magnitude preservation, and transfers\nthem to the language modules of a VLM. Across three model families and five\nvisual-reasoning benchmarks, Selective-RL improves full-update interpolation in\n12 of 15 comparisons, including an 8.55 percentage-point MathVision gain on the\nQwen recipient. Matched controls show that update magnitude or arbitrary low"
+    },
+    {
+      "id": "4701ccc7-cee3-4946-a874-1ce209d89590",
+      "document_id": "ba3e8c35-9ab2-4648-bd91-d154a150ef32",
+      "filename": "2610.08659v1.pdf",
+      "page_number": 1,
+      "content": "Under review as a conference paper at ICLR 2027\nSELECTIVE TRANSFER OF RL UPDATES\nFOR VISUAL REASONING\nSuxin Ji1\nHungtao Wan2\nMingjun Liu3\nAn Zhang4\n1University of Pennsylvania\n2Independent Researcher\n3University of Electronic Science and Technology of China\n4Chongqing University\nABSTRACT\nModel merging provides a training-free way to transfer reasoning capabilities\nfrom language models to vision-language models (VLMs), but endpoint-based\ntransfer can conflate pre-existing model differences with changes acquired dur-\ning reasoning post-training. We instead formulate capability transfer around the\ntraining-stage update, isolating the parameter changes induced by reinforcement\nlearning (RL). Yet transferring this update in full remains suboptimal: we find that"
+    },
+    {
+      "id": "ce11c40c-2bc2-44ee-ab76-0f8a6287578f",
+      "document_id": "bf8f3658-cbab-451f-9c9d-8eac835c49dd",
+      "filename": "2610.07987v1.pdf",
+      "page_number": 20,
+      "content": "Preprint\nOriginal image\nFastV †\nVisionWeave\n(a) Printed and handwritten form\nVisual tokens: 506 → 253\nVisual tokens: 484 → 265\n(b) Dense numeric table\nVisual tokens: 494 → 247\nVisual tokens: 468 → 468\nVisionWeave: Fine-grained visual representations\nVisionWeave: Coarse-grained visual representations\nFastV † : Retained visual tokens\nFastV † : Dropped visual tokens\nFigure 11: VisionWeave adapts visual granularity to document content rather than imposing fixed\ntoken savings.\n(a) RealWorld\nVisual Tokens 1728 → 765 (−55.7%)\n(b) Text\nVisual Tokens 1976 → 1346 (−31.9%)\n(c) Driving\nVisual Tokens 1380 → 651 (−52.8%)\n(d) Chart\nVisual Tokens 1900 → 979 (−48.5%)\nFine-graned representation\nCoarse-gained representation"
+    }
+  ],
+  "answer": "## I. Mục tiêu nghiên cứu\n\nBài báo \"Selective Transfer of RL Updates for Visual Reasoning\" đặt ra mục tiêu khắc phục những hạn chế của phương pháp ghép nối mô hình truyền thống (model merging) trong việc chuyển giao năng lực suy luận từ mô hình ngôn ngữ lớn (language models) sang mô hình ngôn ngữ-thị giác (Vision-Language Models - VLMs) [2610.08659v1.pdf - Trang 1]. Cụ thể, nghiên cứu nhằm:\n* Phát triển một phương pháp chuyển giao khả năng suy luận trực tiếp dựa trên quá trình cập nhật trong giai đoạn huấn luyện (training-stage update) [2610.08659v1.pdf - Trang 1].\n* Cô lập các thay đổi tham số được tạo ra bởi quá trình học tăng cường (**Reinforcement Learning - RL**) để tránh việc nhập nhằng giữa sự khác biệt ban đầu của mô hình và những thay đổi có được sau quá trình hậu huấn luyện suy luận [2610.08659v1.pdf - Trang 1].\n\n---\n\n## II. Giả thuyết khoa học\n\nGiả thuyết cốt lõi được đặt ra trong nghiên cứu dựa trên các phát hiện thực nghiệm về khả năng chuyển giao chéo (cross-model transferability):\n* **Giả thuyết về tính tối ưu của việc chuyển giao toàn bộ:** Việc chuyển giao toàn bộ phần cập nhật từ quá trình học tăng cường (RL-stage update) vẫn mang lại hiệu quả dưới mức tối ưu (suboptimal) do các thành phần bên trong có mức độ chuyển giao chéo rất khác nhau [2610.08659v1.pdf - Trang 1].\n* **Giả thuyết về hướng chiếm ưu thế:** Các hướng chiếm ưu thế (dominant directions) trong ma trận cập nhật có khả năng chuyển giao hiệu quả và ưu việt hơn so với toàn bộ tập hợp cập nhật hoàn chỉnh [2610.08659v1.pdf - Trang 1].\n\n---\n\n## III. Phương pháp luận chính\n\nĐể hiện thực hóa mục tiêu và kiểm định giả thuyết, nghiên cứu đề xuất phương pháp luận mang tên **Selective-RL** với các đặc điểm kỹ thuật chính sau:\n\n1. **Cô lập cập nhật học tăng cường (RL-stage update isolation):** Phương pháp tiến hành cô lập sự thay đổi tham số do quá trình học tăng cường (**Reinforcement Learning - RL**) tạo ra thay vì sử dụng phương pháp chuyển giao dựa trên điểm cuối (endpoint-based transfer) vốn dễ bị nhiễu bởi các khác biệt có sẵn của mô hình [2610.08659v1.pdf - Trang 1].\n2. **Giữ lại ma trận hướng chiếm ưu thế và bảo toàn độ lớn:** Phương pháp **Selective-RL** giữ lại các hướng theo ma trận chiếm ưu thế (dominant matrix-wise directions) đi kèm với cơ chế bảo toàn độ lớn (magnitude preservation) [2610.08659v1.pdf - Trang 1].\n3. **Chuyển giao sang mô hình nhận (Recipient VLM):** Các thành phần sau khi được lọc và xử lý sẽ được chuyển giao trực tiếp vào các mô hình ngôn ngữ của mô hình ngôn ngữ-thị giác (**Vision-Language Model - VLM**) [2610.08659v1.pdf - Trang 1].\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*\n\n---\n\n## Danh mục Tài liệu tham khảo\n* [2610.08659v1.pdf - Trang 1]"
+}

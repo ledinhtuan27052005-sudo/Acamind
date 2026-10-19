@@ -1,0 +1,401 @@
+{
+  "model": "intfloat/multilingual-e5-base",
+  "l2_norms_with_normalize_true": {
+    "empty_raw": 1.0,
+    "space_raw": 1.0,
+    "newline_raw": 1.0,
+    "passage_prefix_only": 1.0,
+    "passage_plus_space": 1.0,
+    "passage_plus_newline": 1.0
+  },
+  "l2_norms_with_normalize_false": {
+    "empty_raw": 1.0,
+    "space_raw": 1.0,
+    "newline_raw": 1.0,
+    "passage_prefix_only": 0.9999998807907104,
+    "passage_plus_space": 0.9999998807907104,
+    "passage_plus_newline": 0.9999998807907104
+  },
+  "is_near_zero_vector": false,
+  "explanation": "Both with normalize_embeddings=True and normalize_embeddings=False, all empty strings ('', ' ', '\\n', 'passage: ') have exact L2 norm = 1.0 because intfloat/multilingual-e5-base includes a built-in Normalize() layer in its SentenceTransformer module pipeline. They are NEVER near-zero vectors (contradicting the manuscript claim in Section 1.1). Due to the narrow anisotropic cone of contrastive E5 embeddings, the vector for 'passage: ' has a cosine similarity of 0.7786-0.8182 (median 0.8004) with 'query: <q>' across the 50 test queries, placing it at rank 96 to 15,992 (median rank 3,550) among the 70,825 real chunks (0/50 queries in top-40 when 70,825 real chunks exist, though in an unguarded database with sparse relevant chunks or scanned-only uploads it is returned directly to the LLM).",
+  "cosine_sim_query_vs_passage_empty_50_queries": {
+    "min": 0.778633,
+    "p25": 0.787695,
+    "median": 0.800394,
+    "mean": 0.799656,
+    "p75": 0.811512,
+    "max": 0.8182
+  },
+  "cosine_sim_query_vs_raw_empty_50_queries": {
+    "min": 0.757181,
+    "median": 0.787158,
+    "mean": 0.786026,
+    "max": 0.807863
+  },
+  "top1_real_chunk_cosine_50_queries": {
+    "min": 0.799182,
+    "median": 0.847191,
+    "max": 0.902904
+  },
+  "rank_of_empty_chunk_in_70825_corpus_across_50_queries": {
+    "min_rank": 96,
+    "p25_rank": 1073,
+    "median_rank": 3550,
+    "mean_rank": 5028.6,
+    "max_rank": 15992,
+    "queries_where_empty_chunk_enters_top10": 0,
+    "queries_where_empty_chunk_enters_top40": 0,
+    "per_query": [
+      {
+        "id": "REAL_Q_01",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.794386,
+        "top1_real_sim": 0.879538,
+        "rank_in_70825": 13769
+      },
+      {
+        "id": "REAL_Q_02",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.785311,
+        "top1_real_sim": 0.846896,
+        "rank_in_70825": 11357
+      },
+      {
+        "id": "REAL_Q_03",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.792857,
+        "top1_real_sim": 0.902904,
+        "rank_in_70825": 6787
+      },
+      {
+        "id": "REAL_Q_04",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.789736,
+        "top1_real_sim": 0.877887,
+        "rank_in_70825": 15762
+      },
+      {
+        "id": "REAL_Q_05",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.798533,
+        "top1_real_sim": 0.892732,
+        "rank_in_70825": 2800
+      },
+      {
+        "id": "REAL_Q_06",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.787593,
+        "top1_real_sim": 0.847221,
+        "rank_in_70825": 6823
+      },
+      {
+        "id": "REAL_Q_07",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.794579,
+        "top1_real_sim": 0.858494,
+        "rank_in_70825": 8892
+      },
+      {
+        "id": "REAL_Q_08",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.784072,
+        "top1_real_sim": 0.866749,
+        "rank_in_70825": 8630
+      },
+      {
+        "id": "REAL_Q_09",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.782718,
+        "top1_real_sim": 0.863241,
+        "rank_in_70825": 14100
+      },
+      {
+        "id": "REAL_Q_10",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.791557,
+        "top1_real_sim": 0.896796,
+        "rank_in_70825": 5577
+      },
+      {
+        "id": "REAL_Q_11",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.786036,
+        "top1_real_sim": 0.882746,
+        "rank_in_70825": 15992
+      },
+      {
+        "id": "REAL_Q_12",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.787999,
+        "top1_real_sim": 0.902585,
+        "rank_in_70825": 14722
+      },
+      {
+        "id": "REAL_Q_13",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.783113,
+        "top1_real_sim": 0.848231,
+        "rank_in_70825": 11219
+      },
+      {
+        "id": "REAL_Q_14",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.780436,
+        "top1_real_sim": 0.840209,
+        "rank_in_70825": 4658
+      },
+      {
+        "id": "REAL_Q_15",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.796387,
+        "top1_real_sim": 0.883733,
+        "rank_in_70825": 8309
+      },
+      {
+        "id": "REAL_Q_16",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.786735,
+        "top1_real_sim": 0.868002,
+        "rank_in_70825": 6825
+      },
+      {
+        "id": "REAL_Q_17",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.778633,
+        "top1_real_sim": 0.849918,
+        "rank_in_70825": 2986
+      },
+      {
+        "id": "REAL_Q_18",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.780681,
+        "top1_real_sim": 0.832326,
+        "rank_in_70825": 6394
+      },
+      {
+        "id": "REAL_Q_19",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.785467,
+        "top1_real_sim": 0.860934,
+        "rank_in_70825": 14545
+      },
+      {
+        "id": "REAL_Q_20",
+        "type": "Factual Q&A",
+        "sim_passage_empty": 0.789622,
+        "top1_real_sim": 0.871375,
+        "rank_in_70825": 3884
+      },
+      {
+        "id": "REAL_Q_21",
+        "type": "Cross-Article Comparison",
+        "sim_passage_empty": 0.807994,
+        "top1_real_sim": 0.838147,
+        "rank_in_70825": 2452
+      },
+      {
+        "id": "REAL_Q_22",
+        "type": "Cross-Article Comparison",
+        "sim_passage_empty": 0.806612,
+        "top1_real_sim": 0.834942,
+        "rank_in_70825": 1098
+      },
+      {
+        "id": "REAL_Q_23",
+        "type": "Cross-Article Comparison",
+        "sim_passage_empty": 0.808795,
+        "top1_real_sim": 0.838764,
+        "rank_in_70825": 817
+      },
+      {
+        "id": "REAL_Q_24",
+        "type": "Cross-Article Comparison",
+        "sim_passage_empty": 0.806922,
+        "top1_real_sim": 0.831527,
+        "rank_in_70825": 1181
+      },
+      {
+        "id": "REAL_Q_25",
+        "type": "Cross-Article Comparison",
+        "sim_passage_empty": 0.816704,
+        "top1_real_sim": 0.844179,
+        "rank_in_70825": 307
+      },
+      {
+        "id": "REAL_Q_26",
+        "type": "Cross-Article Comparison",
+        "sim_passage_empty": 0.807897,
+        "top1_real_sim": 0.83676,
+        "rank_in_70825": 1015
+      },
+      {
+        "id": "REAL_Q_27",
+        "type": "Cross-Article Comparison",
+        "sim_passage_empty": 0.813671,
+        "top1_real_sim": 0.838341,
+        "rank_in_70825": 421
+      },
+      {
+        "id": "REAL_Q_28",
+        "type": "Cross-Article Comparison",
+        "sim_passage_empty": 0.802256,
+        "top1_real_sim": 0.827751,
+        "rank_in_70825": 517
+      },
+      {
+        "id": "REAL_Q_29",
+        "type": "Cross-Article Comparison",
+        "sim_passage_empty": 0.805649,
+        "top1_real_sim": 0.836183,
+        "rank_in_70825": 2586
+      },
+      {
+        "id": "REAL_Q_30",
+        "type": "Cross-Article Comparison",
+        "sim_passage_empty": 0.804357,
+        "top1_real_sim": 0.837508,
+        "rank_in_70825": 3367
+      },
+      {
+        "id": "REAL_Q_31",
+        "type": "Cross-Article Comparison",
+        "sim_passage_empty": 0.802603,
+        "top1_real_sim": 0.850153,
+        "rank_in_70825": 4596
+      },
+      {
+        "id": "REAL_Q_32",
+        "type": "Cross-Article Comparison",
+        "sim_passage_empty": 0.808371,
+        "top1_real_sim": 0.838043,
+        "rank_in_70825": 624
+      },
+      {
+        "id": "REAL_Q_33",
+        "type": "Cross-Article Comparison",
+        "sim_passage_empty": 0.807028,
+        "top1_real_sim": 0.830764,
+        "rank_in_70825": 1598
+      },
+      {
+        "id": "REAL_Q_34",
+        "type": "Cross-Article Comparison",
+        "sim_passage_empty": 0.812332,
+        "top1_real_sim": 0.834062,
+        "rank_in_70825": 1065
+      },
+      {
+        "id": "REAL_Q_35",
+        "type": "Cross-Article Comparison",
+        "sim_passage_empty": 0.809053,
+        "top1_real_sim": 0.835432,
+        "rank_in_70825": 1710
+      },
+      {
+        "id": "REAL_Q_36",
+        "type": "Literature Synthesis",
+        "sim_passage_empty": 0.816398,
+        "top1_real_sim": 0.854192,
+        "rank_in_70825": 1701
+      },
+      {
+        "id": "REAL_Q_37",
+        "type": "Literature Synthesis",
+        "sim_passage_empty": 0.8182,
+        "top1_real_sim": 0.854885,
+        "rank_in_70825": 1500
+      },
+      {
+        "id": "REAL_Q_38",
+        "type": "Literature Synthesis",
+        "sim_passage_empty": 0.817351,
+        "top1_real_sim": 0.858672,
+        "rank_in_70825": 837
+      },
+      {
+        "id": "REAL_Q_39",
+        "type": "Literature Synthesis",
+        "sim_passage_empty": 0.814193,
+        "top1_real_sim": 0.856381,
+        "rank_in_70825": 3591
+      },
+      {
+        "id": "REAL_Q_40",
+        "type": "Literature Synthesis",
+        "sim_passage_empty": 0.814766,
+        "top1_real_sim": 0.840613,
+        "rank_in_70825": 5039
+      },
+      {
+        "id": "REAL_Q_41",
+        "type": "Literature Synthesis",
+        "sim_passage_empty": 0.814627,
+        "top1_real_sim": 0.845245,
+        "rank_in_70825": 5453
+      },
+      {
+        "id": "REAL_Q_42",
+        "type": "Literature Synthesis",
+        "sim_passage_empty": 0.814089,
+        "top1_real_sim": 0.847162,
+        "rank_in_70825": 6613
+      },
+      {
+        "id": "REAL_Q_43",
+        "type": "Literature Synthesis",
+        "sim_passage_empty": 0.816883,
+        "top1_real_sim": 0.85585,
+        "rank_in_70825": 5625
+      },
+      {
+        "id": "REAL_Q_44",
+        "type": "Literature Synthesis",
+        "sim_passage_empty": 0.816002,
+        "top1_real_sim": 0.859031,
+        "rank_in_70825": 3510
+      },
+      {
+        "id": "REAL_Q_45",
+        "type": "Literature Synthesis",
+        "sim_passage_empty": 0.814177,
+        "top1_real_sim": 0.854042,
+        "rank_in_70825": 8940
+      },
+      {
+        "id": "REAL_Q_46",
+        "type": "Safe Refusal (Edge)",
+        "sim_passage_empty": 0.78595,
+        "top1_real_sim": 0.81685,
+        "rank_in_70825": 161
+      },
+      {
+        "id": "REAL_Q_47",
+        "type": "Safe Refusal (Edge)",
+        "sim_passage_empty": 0.779863,
+        "top1_real_sim": 0.799182,
+        "rank_in_70825": 274
+      },
+      {
+        "id": "REAL_Q_48",
+        "type": "Safe Refusal (Edge)",
+        "sim_passage_empty": 0.79453,
+        "top1_real_sim": 0.816067,
+        "rank_in_70825": 208
+      },
+      {
+        "id": "REAL_Q_49",
+        "type": "Safe Refusal (Edge)",
+        "sim_passage_empty": 0.792951,
+        "top1_real_sim": 0.812711,
+        "rank_in_70825": 96
+      },
+      {
+        "id": "REAL_Q_50",
+        "type": "Safe Refusal (Edge)",
+        "sim_passage_empty": 0.796147,
+        "top1_real_sim": 0.819331,
+        "rank_in_70825": 498
+      }
+    ]
+  }
+}

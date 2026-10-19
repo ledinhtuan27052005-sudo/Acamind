@@ -1,0 +1,19 @@
+{
+  "query_id": "REAL_Q_34",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Decision-Related Cognitive Signatures from Fa' và (2) 'From Signals to Trajectories: A Primer on Low'.",
+  "is_ooc": false,
+  "system": "C4_Full_Rerank",
+  "gate_passed": false,
+  "gate_score": 0.013834,
+  "dcsr_skipped": false,
+  "gate_refused": true,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 22029.01,
+  "retrieval_warm_ms": 1212.52,
+  "llm_ms": 0.0,
+  "e2e_cold_ms": 22029.01,
+  "e2e_warm_ms": 1212.52,
+  "provided_chunks": [],
+  "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. (Từ chối bởi CRAG Gate)"
+}

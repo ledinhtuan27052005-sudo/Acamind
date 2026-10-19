@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_34",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Decision-Related Cognitive Signatures from Fa' và (2) 'From Signals to Trajectories: A Primer on Low'.",
+  "is_ooc": false,
+  "system": "Naive_Dense",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 87.89,
+  "retrieval_warm_ms": 96.11,
+  "llm_ms": 1468.27,
+  "e2e_cold_ms": 1556.16,
+  "e2e_warm_ms": 1564.38,
+  "provided_chunks": [
+    {
+      "id": "542be8d4-b1f9-4e4f-9fbb-5b9352e9ce52",
+      "document_id": "445e8518-19e8-441c-8541-6cbd26ae5934",
+      "filename": "2609.32932v1.pdf",
+      "page_number": 13,
+      "content": "Thomas L. Griffiths, Falk Lieder, and Noah D. Goodman.\nRational Use of Cognitive Re-\nsources: Levels of Analysis Between the Computational and the Algorithmic.\nTopics in\nCognitive Science, 7(2):217–229, 2015. ISSN 1756-8765. doi: 10.1111/tops.12142. URL\nhttps://onlinelibrary.wiley.com/doi/abs/10.1111/tops.12142.\nDaya Guo, Dejian Yang, Haowei Zhang, Junxiao Song, Peiyi Wang, Qihao Zhu, Runxin Xu, Ruoyu\nZhang, Shirong Ma, Xiao Bi, Xiaokang Zhang, Xingkai Yu, Yu Wu, Z. F. Wu, Zhibin Gou,\nZhihong Shao, Zhuoshu Li, Ziyi Gao, Aixin Liu, Bing Xue, Bingxuan Wang, Bochao Wu, Bei\nFeng, Chengda Lu, Chenggang Zhao, Chengqi Deng, Chong Ruan, Damai Dai, Deli Chen, Dongjie\nJi, Erhang Li, Fangyun Lin, Fucong Dai, Fuli Luo, Guangbo Hao, Guanting Chen, Guowei Li,"
+    },
+    {
+      "id": "d042831e-dbe8-44d8-a2a4-9764e77686a4",
+      "document_id": "f89e31a5-e0f6-4814-a9aa-58b712f1eb77",
+      "filename": "2610.08778v1.pdf",
+      "page_number": 10,
+      "content": "Linguistics, 2024. doi: 10.18653/v1/2024.acl-long.662.\nLouis Alfieri, Timothy J. Nokes-Malach, and Christian D. Schunn.\nLearning through case\ncomparisons: A meta-analytic review.\nEducational Psychologist, 48(2):87–113, 2013.\ndoi:\n10.1080/00461520.2013.775712.\nChristina Areizaga Barbieri, Dana Miller-Cotto, Sarah N. Clerjuste, and Kamal Chawla. A meta-\nanalysis of the worked examples effect on mathematics performance. Educational Psychology\nReview, 35(1):11, 2023. doi: 10.1007/s10648-023-09745-1.\nHamsa Bastani, Osbert Bastani, Alp Sungu, Haosen Ge, ¨Ozge Kabakcı, and Rei Mariman. Gen-\nerative AI without guardrails can harm learning: Evidence from high school mathematics. Pro-\nceedings of the National Academy of Sciences, 122(26):e2422633122, 2025. doi: 10.1073/pnas.\n2422633122."
+    },
+    {
+      "id": "dc244e2f-bbb4-45a0-891e-ce23d8c6c310",
+      "document_id": "128d2c46-70bf-43bc-9208-8c3d53364cce",
+      "filename": "2609.26579v1.pdf",
+      "page_number": 9,
+      "content": "sure. arXiv:2605.27996.\nMeta. 2025. Llama 4 Model Card.\nMinson, J. A. 2026.\nHow to Disagree Better: The Se-\ncret to Less Conflict and More Influence.\nAvery.\nISBN\n9780593855003.\nMinson, J. A.; and Chen, F. S. 2022. Receptiveness to Oppos-\ning Views: Conceptualization and Integrative Review. Per-\nsonality and Social Psychology Review: An Official Journal\nof the Society for Personality and Social Psychology, Inc,\n26(2): 93–111.\nMinson, J. A.; Chen, F. S.; and Tinsley, C. H. 2020. Why\nWon’t You Listen to Me? Measuring Receptiveness to Op-\nposing Views. Management Science, 66(7): 3069–3094.\nMoore, J.; Mehta, A.; Agnew, W.; Anthis, J. R.; Louie, R.;\nMai, Y.; Yin, P.; Cheng, M.; Paech, S. J.; Klyman, K.; Chan-\ncellor, S.; Lin, E.; Haber, N.; and Ong, D. C. 2026. Charac-"
+    },
+    {
+      "id": "fe05b30d-8fc2-4f77-911b-f7baff86ab41",
+      "document_id": "6bb1a0c6-d806-44f8-b0c1-c4c207e0c911",
+      "filename": "2610.07700v1.pdf",
+      "page_number": 3,
+      "content": "TABLE I: Comparison of keystroke-based approaches across language (EN: English, KR: Korean, VI: Vietnamese), representation (rhythmic, temporal, deep),\nclassifiers (RF: random forest, ML: classical machine learning), threat assumptions, and writing modes (B: bona fide, T: transcribe LLM, P: paraphrase LLM,\nFT/FP: adversarial variants).\nWork\nLang\nCognition\nModeling\nClassifier\nThreat\nModes\nCrossley et al. [7]\nEN\nImplicit\nRhythmic\nRF\nNone\n{B, T}\nKundu et al. [5]\nEN\nNone\nDeep\nTypeNet\nNone\n{B, T}\nRoh et al. [6]\nKR\nExplicit\nRhythmic, Temporal\nML\nNone\n{B, T, P}\nMehta et al. [8]\nEN\nImplicit\nTemporal, Deep\nTypeNet, ML\nStatistical\n{B, T, P}\nOurs\nVI\nExplicit\nRhythmic, Temporal, Deep\nML, 1D-CNN, TypeNet\nBehavioral\n{B, T, P, FT, FP}\ning keystroke-based models against text-based detectors and"
+    },
+    {
+      "id": "f7c7a5be-1b76-41c2-9766-8b1db479ca57",
+      "document_id": "d05d79f0-6afe-4859-b96c-77f5faaba661",
+      "filename": "2609.39080v1.pdf",
+      "page_number": 5,
+      "content": "“Long-\nterm recordings of motor and premotor cortical spiking activity\nduring reaching in monkeys,” DANDI Archive 000688, version\n0.250122.1735, 2025.\n[19] E. Perez, F. Strub, H. de Vries, V. Dumoulin, and A. Courville,\n“FiLM: Visual reasoning with a general conditioning layer,” in Proc.\nAAAI Conf. Artif. Intell., 2018, pp. 3942–3951.\n[20] W. Peebles and S. Xie, “Scalable diffusion models with transform-\ners,” in Proc. IEEE/CVF Int. Conf. Comput. Vis. (ICCV), 2023, pp.\n4195–4205.\n[21] J. Lee et al.,\n“Set Transformer: A framework for attention-based\npermutation-invariant neural networks,” in Proc. ICML, 2019, pp.\n3744–3753.\n[22] A. Jaegle et al., “Perceiver: General perception with iterative atten-\ntion,” in Proc. ICML, 2021, pp. 4651–4664."
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải vì các tài liệu được cung cấp ('2610.08778v1.pdf' và '2610.07700v1.pdf') không chứa nội dung hoặc thông tin về hai bài báo có tên 'Decision-Related Cognitive Signatures from Fa' và 'From Signals to Trajectories: A Primer on Low'.\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+}

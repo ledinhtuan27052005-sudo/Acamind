@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_43",
+  "type": "Literature Synthesis",
+  "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Slow Context, Fast Symptoms: Multis | Symphony for Text Generation: Bench | Recursive Game Creator: An Agentic ",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 933.27,
+  "retrieval_warm_ms": 958.32,
+  "llm_ms": 1553.31,
+  "e2e_cold_ms": 2486.58,
+  "e2e_warm_ms": 2511.63,
+  "provided_chunks": [
+    {
+      "id": "b7d88b6a-3f51-47c3-bada-449e6c93c847",
+      "document_id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+      "filename": "2609.22935v2.pdf",
+      "page_number": 2,
+      "content": "psychopathology symptom networks. Network models often focus on symptom–symptom\ncoupling, but symptoms also unfold within slow context. Context can be understood as changing\nsymptom activation tendencies, but the feedback between the two is less often made explicit.\nSlow context can shape fast symptom activation, and sustained symptom activation can, in turn,\nfeed back into slow context. We formalize this coupling in a computational slow–fast model.\nSimulations show that contextual input can shift symptom activation without changing\nsymptom–symptom coupling. Perturbations to context can produce temporary symptom increases\nfollowed by recovery. Symptom-to-context feedback can slow recovery and, when stronger,"
+    },
+    {
+      "id": "39d108ad-e37a-4f80-8e9b-f9b41b7cb92d",
+      "document_id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+      "filename": "2609.22935v2.pdf",
+      "page_number": 12,
+      "content": "SLOW–FAST PSYCHOLOGICAL DYNAMICS\n12\nTable 1\nMain components of the slow–fast model.\nFast symptom layer\nComponent\nSymbol\nInterpretation\nSymptom state\nSi,t\nWhether symptom i is inactive or active at time t.\nBaseline activation\nτi\nBaseline log-odds of activation when symptom i receives no input\nfrom the rest of the network.\nSymptom coupling\nωi j\nPairwise coupling between symptoms i and j; an active symptom j\ncontributes ωij to symptom i’s local input.\nLocal input\nηi,t\nTotal input determining symptom i’s activation probability.\nSlow-context loading\nγi\nSensitivity of symptom i’s activation tendency to the slow contextual\nstate Pt.\nMean symptom\nactivation\nmt\nProportion of symptoms active at time t.\nRecent symptom\nactivation\n¯mt"
+    },
+    {
+      "id": "c6f4335b-9abe-4fd1-95dd-e02d4310266b",
+      "document_id": "785d9d25-1de9-4f62-a604-a413b7f21b73",
+      "filename": "2610.08161v1.pdf",
+      "page_number": 14,
+      "content": "B\nSymphony for Text Generation\nText Generation API endpoints\nSymphony exposes clinical text and document generation via\nseveral API endpoints spanning general LLM inference, clinical fact extraction (FactsR [Hansen et al.,\n2025]) and guided document synthesis, and working in tandem with Symphony for speech-to-text\n[Nix et al., 2026], Symphony for medical coding [Edin et al., 2026], and agentic orchestration of\nmulti-step clinical workflows. The guided document synthesis API accepts multiple forms of clinical\ncontext and return schema-controlled, structured clinical documents based on fully API-configurable\ntemplates. This modular architecture enables straightforward customization and orchestration of"
+    },
+    {
+      "id": "d854cdf5-414c-4615-b9be-209ef112691a",
+      "document_id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+      "filename": "2609.22935v2.pdf",
+      "page_number": 35,
+      "content": "SLOW–FAST PSYCHOLOGICAL DYNAMICS\n35\nAppendix A\nTechnical details of the slow–fast model\nThis appendix provides technical details that complement the streamlined model description in\nthe main text. The main text focuses on the conceptual structure of the slow–fast system and the\nkey equations needed to interpret the simulations. Here we collect implementation details for the\nfast-layer update, the smoothed symptom signal, the slow-field update, and the acute perturbation\nused in the recovery simulations.\nFast-layer update dynamics\nAt each slow time step t, the slow contextual field Pt is held fixed while the fast symptom\nlayer is updated. The fast layer consists of N binary symptom states,\nSi,t ∈{0,1},\nwhere Si,t = 0 denotes an inactive symptom and Si,t = 1 denotes an active symptom."
+    },
+    {
+      "id": "fdfd631e-34a5-49a3-abde-8cfc3586f8d5",
+      "document_id": "96d5f9a7-b2a8-4573-b8b5-febd35e9331e",
+      "filename": "2610.08621v1.pdf",
+      "page_number": 1,
+      "content": "RECURSIVE GAME CREATOR:\nAN AGENTIC PRODUCT-LEVEL\nEXPERIENCE-ORIENTED GAME HARNESS\nJiajun Chen1,2,3,†, Haoyu Wu1,2,†, Mingda Jia1,2,3,†, Xihui Liu1,2,3,∗\n1HKU MMLab\n2The University of Hong Kong\n3Shenzhen Loop Area Institute\nABSTRACT\nRecent game design agents have made substantial progress in generating playable games. However,\nprogram correctness does not ensure an enjoyable experience for players. We present Recursive\nGame Creator, an experience-oriented harness to advance agentic game development from rough\ngame prototypes into entertaining games. Recursive Game Creator organizes recursive development\naround four components: Designer, Builder, Player, and Reviewer. The Designer translates user"
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ cả 3 nghiên cứu được yêu cầu."
+}

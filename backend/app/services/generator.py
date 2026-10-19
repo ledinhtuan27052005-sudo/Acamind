@@ -5,15 +5,19 @@ from app.services.reference_filter import filter_reference_chunks, clean_referen
 llm_client = get_default_client()
 
 def _build_citation(chunk):
-    "[filename - Page X]"
+    "[filename - Page X] or [filename - Sheet: Y]"
     f = chunk.get("doc_filename","") or chunk.get("doc_title","") or "document"
     p = chunk.get("page_number","?")
+    if str(p).startswith("Sheet:"):
+        return f"[{f} - {p}]"
     return f"[{f} - Page {p}]"
 
 def _build_source_label(chunk):
-    "Label context: File name: X | Page Y"
+    "Label context: File name: X | Page Y or Sheet Y"
     f = chunk.get("doc_filename","") or chunk.get("doc_title","") or "document"
     p = chunk.get("page_number","?")
+    if str(p).startswith("Sheet:"):
+        return f"File name: {f} | {p}"
     return f"File name: {f} | Page {p}"
 
 
@@ -23,18 +27,14 @@ Bạn có nhiệm vụ tổng hợp và trả lời các câu hỏi dựa trên 
 QUY TẮC BẮT BUỘC:
 1. CHỈ trả lời dựa trên NGỮ CẢNH (DOCUMENT CONTEXT) được cung cấp từ các tài liệu đã tải lên.
 2. KHÔNG suy diễn hoặc bịa đặt thông tin không có trong tài liệu.
-3. Nếu NGỮ CẢNH hoàn toàn không chứa thông tin để trả lời câu hỏi, hãy trả về dòng đầu tiên chính xác là: __NO_CONTEXT__ kèm giải thích ngắn: "Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
-4. TRÍCH DẪN BẮT BUỘC: Đặt [ten_file.pdf - Trang X] ngay sau MỖI luận điểm, dữ kiện, tiêu chí hoặc định nghĩa được lấy từ tài liệu. Ví dụ: [ClinicalPsychology.pdf - Trang 7].
-   KHÔNG gom trích dẫn xuống cuối đoạn. KHÔNG bịa số trang nằm ngoài CONTEXT.
+3. Nếu NGỮ CẢNH hoàn toàn không chứa bất kỳ thông tin hay bài báo nào liên quan đến câu hỏi (ví dụ: câu hỏi ngoài miền như vật lý hạt nhân, pin xe điện, hàng không vũ trụ, hoặc số trang không tồn tại), hãy trả về dòng đầu tiên chính xác là: __NO_CONTEXT__ kèm giải thích ngắn: "Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+   TUYỆT ĐỐI KHÔNG trả về __NO_CONTEXT__ nếu các bài báo hoặc chủ đề được hỏi ĐÃ CÓ MẶT trong DOCUMENT CONTEXT (kể cả khi tiêu đề bài báo trong câu hỏi bị viết tắt/cắt ngắn, bài báo thuộc lĩnh vực AI/học máy/thần kinh học/sinh học, hoặc ngữ cảnh chỉ cung cấp phần Tóm tắt/Giới thiệu/Phương pháp/Kết luận). Khi bài báo mục tiêu đã xuất hiện trong DOCUMENT CONTEXT, BẮT BUỘC phải tổng hợp đầy đủ mục tiêu, giả thuyết/tiền đề khoa học, phương pháp tiếp cận, đối tượng/dữ liệu nghiên cứu và đóng góp thực nghiệm/ứng dụng thực hành dựa trên các đoạn trích hiện có.
+4. TRÍCH DẪN BẮT BUỘC CHÍNH XÁC TỪNG TRANG: Đặt đúng nhãn trích dẫn [ten_file.pdf - Trang X] (đã ghi sẵn tại mục 'Nhãn trích dẫn bắt buộc' của mỗi đoạn ngữ cảnh) ngay sau MỖI luận điểm, dữ kiện, tiêu chí hoặc định nghĩa được lấy từ đoạn đó. Ví dụ: [2610.07457v1.pdf - Trang 1].
+   - TUYỆT ĐỐI chỉ dùng đúng số trang PDF gốc `Trang X` được ghi trong nhãn của đoạn trích; KHÔNG nhầm số thứ tự đoạn trích với số trang, và KHÔNG bịa số trang nằm ngoài DOCUMENT CONTEXT.
+   - KHÔNG gộp nhiều số trang bằng dấu phẩy trong một ngoặc như `[file.pdf - Trang 1, 2]`; nếu trích dẫn nhiều trang phải viết tách từng nhãn `[file.pdf - Trang 1] [file.pdf - Trang 2]`.
 5. QUY TẮC TỔNG HỢP VÀ ĐỐI CHIẾU ĐA TÀI LIỆU (MULTI-DOCUMENT CROSS-CITATION - BẮT BUỘC):
-   - MỘT CÂU TRẢ LỜI KHÔNG ĐƯỢC CHỈ LẤY DUY NHẤT 1 TÀI LIỆU ĐỂ TRÍCH DẪN nếu trong DOCUMENT CONTEXT có từ 2 tài liệu trở lên.
-   - BẮT BUỘC PHẢI TỔNG HỢP VÀ TRÍCH DẪN TỐI THIỂU TỪ 2 ĐẾN 4 TÀI LIỆU KHÁC NHAU trong cùng một câu trả lời để tạo nên bài phân tích học thuật toàn diện, đa chiều:
-     + Trích dẫn định nghĩa lý thuyết, khái niệm hoặc cơ chế tâm lý từ tài liệu lý thuyết / giáo trình (ví dụ: [Giao_Trinh_Tam_Ly_Hoc.pdf - Trang X], [tam-ly-hoc-hanh-vi.pdf - Trang Y]).
-     + Trích dẫn số liệu lâm sàng thực nghiệm, tỷ lệ %, thang đo BDI-II/PHQ-9 từ báo cáo lâm sàng thực nghiệm (ví dụ: [Tai_Lieu_Scan_Thu_Nghiem_CBT_Tam_Ly_Hoc.pdf - Trang 2]).
-     + Trích dẫn phác đồ can thiệp chuẩn, chỉ định y khoa từ hướng dẫn điều trị chính thức (ví dụ: [Phac-do-Tam-than_2020.pdf - Trang Z]).
-     + Trích dẫn nghiên cứu mô hình AI/LLM hoặc phân tích chuyên sâu từ các bài báo khoa học liên quan.
-   - Khi nhiều tài liệu cùng đồng thuận hoặc bổ trợ cho một luận điểm, sử dụng cú pháp trích dẫn kép: [file_a.pdf - Trang X; file_b.pdf - Trang Y].
-   - Danh mục Tài liệu tham khảo ở cuối câu trả lời BẮT BUỘC phải thể hiện đầy đủ tất cả các tài liệu đã được trích dẫn (tối thiểu từ 2 tài liệu trở lên).
+   - Khi câu hỏi yêu cầu so sánh 2 bài báo hoặc tổng hợp nhóm 3 nghiên cứu, BẮT BUỘC phải phân tích, đối chiếu và trích dẫn ĐẦY ĐỦ TẤT CẢ các bài báo mục tiêu có mặt trong DOCUMENT CONTEXT (kèm nhãn [ten_file.pdf - Trang X] của từng bài báo).
+   - Danh mục Tài liệu tham khảo ở cuối câu trả lời BẮT BUỘC phải liệt kê đầy đủ các tệp PDF và số trang đã trích dẫn.
 6. Luôn trả lời bằng TIẾNG VIỆT chuẩn xác, mạch lạc, văn phong học thuật và giải thích rõ ràng các thuật ngữ chuyên ngành.
 7. Đối với các vấn đề sức khỏe tâm thần/lâm sàng, luôn bổ sung lưu ý: "Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn."
 8. Phân tích đa chiều trong đúng phạm vi câu hỏi: tổng hợp các quan điểm từ các tài liệu khác nhau nếu câu hỏi yêu cầu hoặc nếu có các góc nhìn học thuật khác nhau về đúng chủ đề được hỏi.
@@ -82,6 +82,12 @@ QUY TẮC BẮT BUỘC:
         A["Thực hành chánh niệm"] --> B["Điều hòa giấc ngủ"]
         B --> C["Tăng khả năng tự kiểm soát"]
       ```
+17. QUY TẮC XỬ LÝ TỆP EXCEL ĐA SHEET & BẢNG SỐ LIỆU ĐÍNH KÈM:
+    - Khi ngữ cảnh chứa tệp Excel có nhiều Sheet (ví dụ: [ten_file.xlsx - Sheet: TenSheet]):
+      + BẮT BUỘC phải đọc và đối chiếu toàn diện TẤT CẢ các Sheet có liên quan đến câu hỏi. Tuyệt đối không được chỉ nhìn vào Sheet đầu tiên mà bỏ qua các Sheet tiếp theo.
+      + Khi so sánh, tổng hợp hoặc tính toán (ví dụ: tổng doanh thu các chi nhánh, so sánh chỉ số qua các năm/các giai đoạn, danh sách đối tượng), phải lấy số liệu từ từng Sheet tương ứng, trình bày rõ số liệu của từng Sheet và kết quả tổng hợp.
+      + TRÍCH DẪN ĐÍCH DANH THEO TỪNG SHEET: Ghi rõ trích dẫn dạng [ten_file.xlsx - Sheet: TenSheet] ngay sau mỗi luận điểm, số liệu hoặc bảng biểu lấy từ Sheet đó.
+      + Nếu người dùng hỏi trực tiếp về tệp đính kèm, ưu tiên trả lời chuẩn xác dựa trên các sheet của tệp đó, không ép buộc phải trích dẫn tài liệu y khoa ngoài phạm vi câu hỏi.
 
 QUY CÁCH TRÌNH BÀY VĂN BẢN CHUẨN TÀI LIỆU WORD / PDF (BẮT BUỘC):
 - Trình bày câu trả lời theo chuẩn văn bản báo cáo khoa học chính quy (tương tự trang tài liệu Word, PDF).
@@ -178,6 +184,12 @@ MANDATORY RULES:
         A["Activating Event"] --> B["Beliefs"]
         B --> C["Consequences"]
       ```
+19. MULTI-SHEET EXCEL & TABULAR DATA RULES:
+    - When the context contains an Excel workbook with multiple sheets (e.g. [filename.xlsx - Sheet: SheetName]):
+      + You MUST inspect and cross-reference ALL sheets relevant to the query. Never restrict analysis to only the first sheet.
+      + For cross-sheet comparisons or aggregations (e.g. total revenue across branches, progress across experimental cohorts), extract figures from each individual sheet and present both per-sheet details and the combined summary.
+      + SHEET-SPECIFIC CITATIONS: Cite the exact sheet using [filename.xlsx - Sheet: SheetName] immediately after each metric or table from that sheet.
+      + When answering questions about user-uploaded spreadsheets, prioritize direct accuracy from the spreadsheet without forcing unrelated clinical literature citations.
 
 WORD / PDF DOCUMENT PRESENTATION RULES (MANDATORY):
 - Present the answer structured like a formal academic publication/report (Word / PDF document format).
@@ -231,21 +243,27 @@ def classify_query_domain(query: str) -> str:
 
 def build_psychology_prompt(query: str, context_chunks: list[dict], lang: str = "en", available_figures: list[dict] = None) -> list[dict]:
     clean_chunks = filter_reference_chunks(context_chunks)
+    if not clean_chunks and context_chunks:
+        clean_chunks = context_chunks
     context_text = ""
-    for i, chunk in enumerate(clean_chunks, 1):
-        filename = chunk.get("doc_filename") or chunk.get("doc_title") or "document"
+    for chunk in clean_chunks:
+        filename = chunk.get("doc_filename") or chunk.get("filename") or chunk.get("doc_title") or "document"
+        doc_title = chunk.get("doc_title") or chunk.get("title") or ""
         page = chunk.get("page_number", "?")
         auth_label = chunk.get("authority_label") or ""
         density_label = chunk.get("density_label") or ""
 
-        meta_parts = [f"File name: {filename}", f"Page {page}"]
+        cite_tag = f"[{filename} - Page {page}]" if lang == "en" else f"[{filename} - Trang {page}]"
+        meta_parts = [f"File name: {filename}", f"Trang PDF gốc: Trang {page}", f"Nhãn trích dẫn bắt buộc: {cite_tag}"]
+        if doc_title and doc_title.strip().lower() != filename.strip().lower():
+            meta_parts.insert(1, f"Title: {doc_title}")
         if auth_label:
             meta_parts.append(f"Độ uy tín: {auth_label}")
         if density_label:
             meta_parts.append(f"Mật độ thông tin: {density_label}")
 
         source_label = " | ".join(meta_parts)
-        context_text += f"\n[Source {i}] {source_label}:\n"
+        context_text += f"\n=== ĐOẠN TRÍCH TÀI LIỆU ({source_label}) ===\n"
         content = chunk.get("parent_context") or chunk.get("content", "")
         content = clean_reference_boundary(content)
         context_text += f"{content}\n"

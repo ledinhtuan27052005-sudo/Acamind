@@ -1,0 +1,62 @@
+{
+  "query_id": "REAL_Q_28",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'A foundation for systematic analysis of trans' và (2) 'Conceptualization and experimentation of asse'.",
+  "is_ooc": false,
+  "system": "ACAMIND",
+  "gate_passed": true,
+  "gate_score": 0.90143,
+  "dcsr_skipped": true,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 980.41,
+  "retrieval_warm_ms": 957.16,
+  "llm_ms": 5517.89,
+  "e2e_cold_ms": 6498.3,
+  "e2e_warm_ms": 6475.05,
+  "provided_chunks": [
+    {
+      "id": "667bd5d2-0ee6-4167-a06a-80807d405ca5",
+      "document_id": "f7c9bc4f-94fd-4745-ac60-e03da3aa9cb1",
+      "filename": "2609.30427v1.pdf",
+      "page_number": 1,
+      "content": "framework that includes theory-driven dimensions such as\nsource trustworthiness and diffusion pattern for the assessment\nof information credibility. The authors developed a structured\nframework that can systematically evaluate credibility sig-\nnals across multiple platforms. By combining computational\narXiv:2609.30427v1  [cs.LG]  24 Sep 2026"
+    },
+    {
+      "id": "c567c814-77c4-4aad-bbfa-aa8ae4f8a777",
+      "document_id": "5de42efe-3c4f-44ed-a18b-fe8c58daabbe",
+      "filename": "2610.08093v1.pdf",
+      "page_number": 2,
+      "content": "erative process that balances exploitation and ex-\nploration, as shown in Figure 1. To ensure fac-\ntual precision, SAGE employs atomic generation,\ntargeting individual semantic anchors via ontol-\nogy definitions to produce definition-centric ques-\ntions and mitigate hallucination risk. Meanwhile,\nSAGE utilizes associative generation, interweav-\ning multiple concepts as anchor to construct coher-\nent medical scenarios requiring multi-step reason-\ning. Crucially, these tracks operate concurrently,\nmaximizing the coverage of the concept space of\ncore concepts; they are refined through ongoing it-\nerative calibration that broadens the semantic scope\nof the synthesized dataset. This evolutionary loop\nenables bootstrapping from a minimal seed set, or-\n1https://www.ncbi.nlm.nih.gov/mesh/"
+    },
+    {
+      "id": "8d08b4b3-80f0-4cb5-b8b8-78beb93138ed",
+      "document_id": "8896d0ff-60ac-40f7-af61-9d1a345f5cad",
+      "filename": "2610.07205v1.pdf",
+      "page_number": 1,
+      "content": "characteristics, and demographics. We used the FACTRIA framework as input to a\ngenerative-AI chatbot designed to prompt users to reflect on these factors while ana-\nlyzing IA. A qualitative study with stakeholders, drawing on four authentic IA cases,\nand a transition network analysis showed that the chatbot prompted participants to\nrecognize how overlooked factors influenced their initial interpretation. Findings in-\ndicated that combining a structured framework with AI-based guidance can enhance\ncontext-aware, responsible interpretation of institutional data.\nKeywords: Institutional Analytics, Generative AI, Transition Network Analysis, Dash-\nboards\nCategories: I.2, L.3, L.3.1\nDOI: 10.3897/jucs.200690\n1\nIntroduction"
+    },
+    {
+      "id": "f08af57e-356f-48e5-9541-06e04c28ab21",
+      "document_id": "da53c65c-6ef9-4613-a882-d71c0694dad9",
+      "filename": "2609.13304v1.pdf",
+      "page_number": 1,
+      "content": "1 \n \nConceptualization and experimentation of asset market with \nprice manipulation \nPau Fonseca i Casas1, Aarón Montero Montero 2 \n1Corresponding Author. Universitat Politécnica de Catalunya. Statistics and Operations Research Department. \nCampus Nord. Jordi Girona 1–3 08034, Barcelona, Spain {pau.fonseca@upc.edu}. Tel. + 34 (93) 4017732; Fax. \n(+ 34) 93 4015855. \n2Universitat Oberta  de Catalunya, Barcelona, Spain {amonteromon@uoc.edu}. \n \n \n1. Abstract \nThe primary goal of this work is to reproduce the behavior of a human trader, detailing his or her psychological \nprocesses to understand the effects of his or her decisions on the final value of an asset. The second goal is to use"
+    },
+    {
+      "id": "a7ad4038-7101-4370-849a-eb2bc77734d4",
+      "document_id": "9a6c7717-92e2-4d8f-8de0-1cec4a55d2fd",
+      "filename": "2610.01894v1.pdf",
+      "page_number": 1,
+      "content": "A foundation for systematic analysis of transformers and RNNs for \ntractography \nEmmanuelle Renauld1, Philippe Poulin1, Hugo Larochelle2, \nAntoine Théberge1, Maxime Descoteaux1,3 \n \n1 Computer Sciences Department, Université de Sherbrooke 2 Mila, Université de Montréal  \n3 Imeka Solutions Inc, Sherbrooke, QC, Canada \n \n \nAbstract: \n \nMachine learning (ML) has emerged as a promising approach for improving diffusion MRI \n(dMRI) tractography, a task that remains limited by the intrinsic tension between local diffusion \ninformation and global anatomical plausibility. In this work, we systematically evaluate recurrent \nneural networks (RNNs) and Transformer models for iterative tractography, with particular"
+    },
+    {
+      "id": "a249f878-7aac-40fa-a703-7428de255616",
+      "document_id": "5de42efe-3c4f-44ed-a18b-fe8c58daabbe",
+      "filename": "2610.08093v1.pdf",
+      "page_number": 2,
+      "content": "Notably, it also exceeds the results achieved by sev-\neral high-quality open-source datasets and models\ntrained on massive data.\nIn summary, our main contributions are:\n• We introduce SAGE, a Semantic Anchor-\nGuided Evolution framework for synthesizing\nhigh-quality, grounded medical QA data using\nsmall models and public taxonomies, without\nreliance on large corpora or external APIs.\n• We propose a parallel, iterative synthesis strat-\negy that integrates atomic generation for fac-\ntual coverage and associative generation for\nreasoning complexity, dynamically balancing\nexploitation and exploration.\n• SAGE-grounded data substantially improve\nfactual reliability and consistency. Models\nfine-tuned on SAGE data consistently outper-\nform strong baselines on medical QA bench-"
+    }
+  ],
+  "answer": "Dưới đây là phần so sánh và đối chiếu chi tiết giữa hai bài nghiên cứu **(1) 'A foundation for systematic analysis of transformers and RNNs for tractography'** (`2610.01894v1.pdf`) và **(2) 'Conceptualization and experimentation of asset market with price manipulation'** (`2609.13304v1.pdf`) dựa trên các tài liệu đã cung cấp.\n\n---\n\n## I. Tổng quan phương pháp tiếp cận (Methodological Approaches)\n\n### 1. Bài báo (1): Phân tích hệ thống Transformers và RNNs cho kỹ thuật bó sợi thần kinh (Tractography)\n* **Phương pháp tiếp cận:** Nghiên cứu tập trung vào lĩnh vực học máy (**Machine Learning - ML**) áp dụng cho ảnh cộng hưởng từ khuếch tán (**diffusion MRI - dMRI**) tractography [2610.01894v1.pdf - Trang 1].\n* **Trọng tâm kỹ thuật:** Đánh giá một cách có hệ thống các mô hình mạng nơ-ron hồi tiếp (**Recurrent Neural Networks - RNNs**) và mô hình **Transformer** trong việc thực hiện quá trình bó sợi lặp đi lặp lại (**iterative tractography**) nhằm giải quyết sự căng thẳng nội tại giữa thông tin khuếch tán cục bộ và tính hợp lý về mặt giải phẫu toàn cầu [2610.01894v1.pdf - Trang 1].\n\n### 2. Bài báo (2): Mô hình hóa và thực nghiệm thị trường tài sản với hành vi thao túng giá\n* **Phương pháp tiếp cận:** Nghiên cứu thuộc lĩnh vực mô phỏng hành vi, mô phỏng quá trình tâm lý và kinh tế học thực nghiệm.\n* **Mục tiêu phương pháp:** Tái tạo hành vi của một nhà giao dịch con người (**human trader**), đồng thời mô tả chi tiết các quá trình tâm lý (**psychological processes**) của họ nhằm hiểu rõ tác động từ các quyết định giao dịch đối với giá trị cuối cùng của một tài sản [2609.13304v1.pdf - Trang 1].\n\n---\n\n## II. Đối tượng nghiên cứu (Research Subjects / Scope)\n\n* **Bài báo (1):** Đối tượng nghiên cứu là các mô hình thuật toán học máy (**Transformers** và **RNNs**) được ứng dụng để xử lý và phân tích dữ liệu hình ảnh thần kinh học (**dMRI tractography**) [2610.01894v1.pdf - Trang 1].\n* **Bài báo (2):** Đối tượng nghiên cứu là **con người (nhà giao dịch)** trong môi trường thị trường tài chính, cụ thể là phân tích các tiến trình tâm lý và hành vi ra quyết định dẫn đến hành vi thao túng giá tài sản [2609.13304v1.pdf - Trang 1].\n\n---\n\n## III. Kết luận chính và Mục tiêu nghiên cứu (Main Findings & Goals)\n\n### 1. Bài báo (1): Sức hút và giới hạn của ML trong Tractography\n* **Mục tiêu và phát hiện:** Học máy đã nổi lên như một phương pháp đầy hứa hẹn để cải thiện kỹ thuật dMRI tractography [2610.01894v1.pdf - Trang 1]. Tuy nhiên, nhiệm vụ này vẫn gặp phải giới hạn lớn bởi sự căng thẳng nội tại giữa thông tin khuếch tán cục bộ (**local diffusion information**) và tính hợp lý về mặt giải phẫu toàn cầu (**global anatomical plausibility**) [2610.01894v1.pdf - Trang 1].\n\n### 2. Bài báo (2): Mô phỏng tâm lý giao dịch và thao túng giá\n* **Mục tiêu chính (Mục tiêu 1):** Tái tạo hành vi của một nhà giao dịch con người, chi tiết hóa các quá trình tâm lý của họ để hiểu các tác động từ quyết định lên giá trị tài sản [2609.13304v1.pdf - Trang 1].\n* **Mục tiêu phụ (Mục tiêu 2):** Sử dụng các mô hình này để phân tích hệ quả của hành vi thao túng giá trên thị trường tài sản [2609.13304v1.pdf - Trang 1].\n\n---\n\n## IV. Bảng tổng hợp đối chiếu trực diện\n\n| Tiêu chí so sánh | Bài báo (1): *A foundation for systematic analysis of transformers and RNNs...* | Bài báo (2): *Conceptualization and experimentation of asset market...* |\n| :--- | :--- | :--- |\n| **Lĩnh vực / Miền nghiên cứu** | Học máy (**Machine Learning**), Xử lý ảnh y tế / Thần kinh học (**dMRI Tractography**) [2610.01894v1.pdf - Trang 1]. | Kinh tế học thực nghiệm, Tâm lý học hành vi giao dịch (**Human Trader Psychology**) [2609.13304v1.pdf - Trang 1]. |\n| **Đối tượng mục tiêu** | Các kiến trúc mạng học sâu: **Transformers** và **RNNs** [2610.01894v1.pdf - Trang 1]. | Nhà giao dịch là con người (**human trader**) và các tiến trình tâm lý của họ [2609.13304v1.pdf - Trang 1]. |\n| **Vấn đề cốt lõi** | Giải quyết sự mâu thuẫn giữa thông tin cục bộ và tính hợp lý giải phẫu toàn cầu [2610.01894v1.pdf - Trang 1]. | Hiểu rõ quá trình tâm lý đằng sau các quyết định gây thao túng giá trị tài sản [2609.13304v1.pdf - Trang 1]. |\n| **Đóng góp chính** | Đánh giá hệ thống hiệu năng của Transformers và RNNs trong phương pháp bó sợi lặp [2610.01894v1.pdf - Trang 1]. | Mô phỏng và hình thành hóa khung hành vi giao dịch và thao túng giá [2609.13304v1.pdf - Trang 1]. |\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*\n\n## Danh mục Tài liệu tham khảo\n* `2610.01894v1.pdf` - Trang 1\n* `2609.13304v1.pdf` - Trang 1"
+}

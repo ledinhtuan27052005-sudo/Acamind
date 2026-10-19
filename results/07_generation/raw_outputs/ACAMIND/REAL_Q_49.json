@@ -1,0 +1,19 @@
+{
+  "query_id": "REAL_Q_49",
+  "type": "Safe Refusal (Edge)",
+  "query": "Cách điều chế hợp kim titan ứng dụng trong công nghệ hàng không vũ trụ?",
+  "is_ooc": true,
+  "system": "ACAMIND",
+  "gate_passed": false,
+  "gate_score": 0.001422,
+  "dcsr_skipped": false,
+  "gate_refused": true,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 22878.62,
+  "retrieval_warm_ms": 163.35,
+  "llm_ms": 0.0,
+  "e2e_cold_ms": 22878.62,
+  "e2e_warm_ms": 163.35,
+  "provided_chunks": [],
+  "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. (Từ chối bởi CRAG Gate)"
+}

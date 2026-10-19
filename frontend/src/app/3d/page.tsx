@@ -4,12 +4,22 @@ import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BODY_DATA, ORGAN_DATA, SYSTEM_COLORS } from '@/lib/bodyData';
-import { getDocuments, DocumentInfo, chatStream } from '@/lib/api';
+import { getDocuments, DocumentInfo, chatStream, fetchNeuroClinicalGraph, NeuroClinicalGraphData, NeuroBrainRegionCard } from '@/lib/api';
 import RegionPanel from '@/components/body/RegionPanel';
 import SymptomForm from '@/components/body/SymptomForm';
 import { NeuralCard } from '@/components/ui/NeuralCard';
 import { NeuralBadge } from '@/components/ui/NeuralBadge';
+import { AcademicDocumentRenderer, cleanMarkdownText } from '@/components/ui/AcademicDocumentRenderer';
 import { useI18n } from '@/lib/i18n/context';
+
+const NEURO_BRAIN_IDS = [
+  'prefrontal_cortex',
+  'amygdala',
+  'hippocampus',
+  'anterior_cingulate',
+  'hypothalamus_hpa',
+  'striatum_nucleus',
+];
 
 const BodyViewer3D = dynamic(
   () => import('@/components/body/BodyViewer3D'),
@@ -42,7 +52,7 @@ function EmptyPanel() {
   return (
     <div className="h-full flex flex-col items-center justify-center text-center px-6 space-y-4">
       <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-neural-100 to-cortex-100 dark:from-neural-900/50 dark:to-cortex-900/50 flex items-center justify-center">
-        <span className="text-4xl">🫁</span>
+        <span className="text-4xl">🧠</span>
       </div>
       <div>
         <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
@@ -109,9 +119,7 @@ function RagDrawer({
                   <span className="text-sm ml-2">{t.atlas.thinking}</span>
                 </div>
               ) : (
-                <div className="prose-chat text-sm text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">
-                  {answer || t.atlas.no_info}
-                </div>
+                <AcademicDocumentRenderer content={answer || t.atlas.no_info} />
               )}
             </div>
           </motion.div>
@@ -139,6 +147,10 @@ export default function BodyPage() {
   const [savedNotif, setSavedNotif] = useState(false);
   const [xray, setXray] = useState(false);
 
+  // Neuro-Clinical 3D Graph state
+  const [neuroGraph, setNeuroGraph] = useState<NeuroClinicalGraphData | null>(null);
+  const [neuroLoading, setNeuroLoading] = useState(false);
+
   const getUserType = (): 'patient' | 'student' | 'expert' => {
     if (typeof window === 'undefined') return 'patient';
     return (localStorage.getItem('user_type') ?? 'patient') as 'patient' | 'student' | 'expert';
@@ -148,10 +160,51 @@ export default function BodyPage() {
     getDocuments()
       .then((d) => setDocs(d.filter((doc) => doc.status === 'ready')))
       .catch(console.error);
+
+    // Load default Neuro-Clinical 3D Knowledge Graph catalog
+    setNeuroLoading(true);
+    fetchNeuroClinicalGraph('Trầm cảm, lo âu, PTSD, mất ngủ, stress, động lực')
+      .then((res) => setNeuroGraph(res))
+      .catch(console.error)
+      .finally(() => setNeuroLoading(false));
+
+    // Check deep-link from URL query or localStorage (from Chat / Literature / Health)
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const qRegion = params.get('region');
+      const qXray = params.get('xray');
+      const storedTarget = localStorage.getItem('acamind_3d_target');
+
+      if (qRegion) {
+        if (qXray === '1' || NEURO_BRAIN_IDS.includes(qRegion) || ORGAN_DATA[qRegion]) {
+          setXray(true);
+        }
+        handleSelect(qRegion);
+      } else if (storedTarget) {
+        try {
+          const parsed = JSON.parse(storedTarget);
+          localStorage.removeItem('acamind_3d_target');
+          if (parsed.region_id) {
+            setXray(true);
+            handleSelect(parsed.region_id);
+          }
+          if (parsed.context_text) {
+            fetchNeuroClinicalGraph(parsed.context_text)
+              .then((res) => setNeuroGraph(res))
+              .catch(console.error);
+          }
+        } catch {
+          // ignore
+        }
+      }
+    }
   }, []);
 
   const handleSelect = (id: string) => {
     setSelected(id);
+    if (NEURO_BRAIN_IDS.includes(id) || ORGAN_DATA[id]) {
+      setXray(true);
+    }
     const bodyInfo = BODY_DATA[id];
     const organInfo = ORGAN_DATA[id];
     if (bodyInfo) {
@@ -233,6 +286,10 @@ export default function BodyPage() {
   };
 
   const selectedInfo = selected ? (BODY_DATA[selected] ?? ORGAN_DATA[selected] ?? null) : null;
+  const activeNeuroNode: NeuroBrainRegionCard | null =
+    selected && neuroGraph?.brain_regions
+      ? neuroGraph.brain_regions.find((r) => r.region_3d_id === selected) ?? null
+      : null;
 
   return (
     <div className="flex h-full relative overflow-hidden">
@@ -241,8 +298,8 @@ export default function BodyPage() {
         <BodyViewer3D selected={selected} onSelect={handleSelect} xray={xray} />
 
         {/* Top bar */}
-        <div className="absolute top-3 left-1/2 -translate-x-1/2 flex items-center gap-2 pointer-events-none">
-          <div className="bg-gray-900/80 backdrop-blur text-gray-300 text-xs px-4 py-2 rounded-full">
+        <div className="absolute top-3 left-1/2 -translate-x-1/2 flex items-center gap-2 pointer-events-none z-10">
+          <div className="bg-gray-900/80 backdrop-blur text-gray-300 text-xs px-4 py-2 rounded-full border border-white/10">
             {selected
               ? `✦ ${((BODY_DATA[selected] ?? ORGAN_DATA[selected])?.name)}`
               : xray
@@ -260,6 +317,48 @@ export default function BodyPage() {
             <span className="text-sm">🔬</span>
             {xray ? t.atlas.xray_btn_on : t.atlas.xray_btn_off}
           </button>
+        </div>
+
+        {/* Floating Neuro-Clinical 3D Quick Bar on Top-Left */}
+        <div className="absolute top-14 left-3 z-10 w-64 bg-gray-950/85 backdrop-blur-md border border-indigo-500/30 rounded-2xl p-3 text-white shadow-xl">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-300">
+              🧠 Bản đồ Thần kinh – Tâm lý 3D
+            </span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              X-Ray Bridge
+            </span>
+          </div>
+          <p className="text-[11px] text-gray-400 mb-2 leading-snug">
+            Chọn vùng não chuyên biệt để bật X-Ray 3D &amp; xem Đồ thị Nhân quả 4 Tầng:
+          </p>
+          <div className="grid grid-cols-1 gap-1 max-h-52 overflow-y-auto pr-1">
+            {NEURO_BRAIN_IDS.map((nid) => {
+              const organ = ORGAN_DATA[nid];
+              if (!organ) return null;
+              const isSel = selected === nid;
+              return (
+                <button
+                  key={nid}
+                  onClick={() => {
+                    setXray(true);
+                    handleSelect(nid);
+                  }}
+                  className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left text-xs transition-all ${
+                    isSel
+                      ? 'bg-indigo-600/90 text-white font-semibold shadow-sm'
+                      : 'bg-gray-900/70 text-gray-300 hover:bg-gray-800/90'
+                  }`}
+                >
+                  <span
+                    className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: organ.color, boxShadow: isSel ? `0 0 8px ${organ.color}` : undefined }}
+                  />
+                  <span className="truncate">{organ.name}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Region Panel */}
@@ -286,11 +385,11 @@ export default function BodyPage() {
       </div>
 
       {/* Sidebar */}
-      <div className="w-72 bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-800 flex flex-col">
+      <div className="w-80 bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-800 flex flex-col">
         {/* Systems list */}
         <div className="p-4 border-b border-gray-100 dark:border-gray-800">
           <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3 font-semibold">{t.atlas.systems}</p>
-          <div className="space-y-3 max-h-72 overflow-auto pr-1">
+          <div className="space-y-3 max-h-56 overflow-auto pr-1">
             {Object.entries(SYSTEM_COLORS).map(([sys, color]) => {
               const parts = Object.values(BODY_DATA).filter((p) => p.system === sys);
               if (parts.length === 0) return null;
@@ -321,9 +420,9 @@ export default function BodyPage() {
 
         {/* Selected region info */}
         {selectedInfo ? (
-          <div className="flex-1 p-5 space-y-4 overflow-y-auto">
+          <div className="flex-1 p-4 space-y-4 overflow-y-auto">
             <div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2 font-semibold">{t.atlas.system}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1.5 font-semibold">{t.atlas.system}</p>
               <NeuralBadge
                 style={{ backgroundColor: `${SYSTEM_COLORS[selectedInfo.system] ?? '#6b7280'}20`, color: SYSTEM_COLORS[selectedInfo.system] ?? '#6b7280', borderColor: `${SYSTEM_COLORS[selectedInfo.system] ?? '#6b7280'}30` } as React.CSSProperties}
                 className="text-white"
@@ -331,6 +430,67 @@ export default function BodyPage() {
                 {selectedInfo.system}
               </NeuralBadge>
             </div>
+
+            {/* 4-Layer Causal Neuro-Clinical Graph Panel when a Neuro Region is selected */}
+            {activeNeuroNode && (
+              <div className="rounded-xl border border-indigo-200 dark:border-indigo-800/60 bg-indigo-50/60 dark:bg-indigo-950/30 p-3.5 space-y-3">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-xs font-bold text-indigo-800 dark:text-indigo-300">
+                    🧬 Đồ thị Nhân quả 4 Tầng
+                  </span>
+                  <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 truncate">
+                    {cleanMarkdownText(activeNeuroNode.name_latin)}
+                  </span>
+                </div>
+
+                <div>
+                  <p className="text-[11px] font-bold text-gray-700 dark:text-gray-300 mb-1">
+                    1. Hội chứng Lâm sàng (DSM-5 / ICD-11):
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    {(selectedInfo.commonConditions ?? []).map((s, idx) => (
+                      <span key={idx} className="text-[11px] px-2 py-0.5 rounded-md bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">
+                        {cleanMarkdownText(s)}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-[11px] font-bold text-gray-700 dark:text-gray-300 mb-1">
+                    2. Cơ chế Sinh lý bệnh (Pathology):
+                  </p>
+                  <div className="text-[11px] font-medium text-rose-700 dark:text-rose-300 bg-rose-50 dark:bg-rose-950/40 border border-rose-200/70 dark:border-rose-800/50 rounded-lg px-2.5 py-1.5 leading-relaxed">
+                    ⚡ {cleanMarkdownText(activeNeuroNode.role_in_pathology)}
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-[11px] font-bold text-gray-700 dark:text-gray-300 mb-1">
+                    3. Chất dẫn truyền Thần kinh:
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    {activeNeuroNode.neurotransmitters.map((nt, idx) => (
+                      <span key={idx} className="text-[11px] px-2 py-0.5 rounded-md bg-purple-100/70 dark:bg-purple-900/40 text-purple-800 dark:text-purple-200">
+                        {cleanMarkdownText(nt)}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-[11px] font-bold text-gray-700 dark:text-gray-300 mb-1">
+                    4. Can thiệp &amp; Trị liệu Dựa trên Bằng chứng:
+                  </p>
+                  <div className="text-[11px] text-emerald-800 dark:text-emerald-300 bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200/70 dark:border-emerald-800/50 rounded-lg px-2.5 py-1.5 leading-relaxed">
+                    {cleanMarkdownText(activeNeuroNode.therapy_mechanism)}
+                  </div>
+                  <p className="text-[10px] text-gray-500 dark:text-gray-400 mt-1 italic">
+                    📚 {cleanMarkdownText(activeNeuroNode.citation)}
+                  </p>
+                </div>
+              </div>
+            )}
 
             <div>
               <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">{t.atlas.functions}</p>
@@ -352,7 +512,7 @@ export default function BodyPage() {
                 <button
                   onClick={() =>
                     handleSearch(
-                      `Information about ${selectedInfo.name} in medicine: functions, pathology, and treatment`
+                      `Phân tích cơ chế sinh học thần kinh, giải phẫu chức năng, bệnh lý học và phác đồ điều trị liên quan đến ${selectedInfo.name}`
                     )
                   }
                   className="w-full btn-neural py-2.5 text-sm"

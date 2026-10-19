@@ -6,6 +6,7 @@ import type { DocumentInfo, SlideData } from '@/lib/api';
 import { NeuralCard } from '@/components/ui/NeuralCard';
 import { NeuralBadge } from '@/components/ui/NeuralBadge';
 import { NeuralButton } from '@/components/ui/NeuralButton';
+import { cleanMarkdownText } from '@/components/ui/AcademicDocumentRenderer';
 import { Presentation, FileText, Loader2, Sparkles, ChevronDown, ChevronRight, Download, Settings2, Wand2, BarChart3, BookOpen, Users, GraduationCap, Microscope } from 'lucide-react';
 
 const STYLES = [
@@ -230,8 +231,8 @@ export default function SlidesPage() {
  <FileText className="w-4 h-4 opacity-75" />
  <span className="text-xs opacity-75 truncate max-w-[300px]">{selectedDoc?.title || selectedDoc?.filename}</span>
  </div>
- <h2 className="text-2xl md:text-3xl font-bold mb-2">{result.title}</h2>
- <p className="text-sm opacity-90 mb-4">{result.subtitle}</p>
+ <h2 className="text-2xl md:text-3xl font-bold mb-2">{cleanMarkdownText(result.title)}</h2>
+ <p className="text-sm opacity-90 mb-4">{cleanMarkdownText(result.subtitle)}</p>
  <div className="flex items-center gap-3 text-xs opacity-75">
  <span className="px-2 py-1 rounded-lg bg-white/20">{result.slides.length} slides</span>
  <span className="px-2 py-1 rounded-lg bg-white/20 capitalize">{style}</span>
@@ -268,7 +269,7 @@ export default function SlidesPage() {
  {slide.number}
  </div>
  <div className="flex-1 min-w-0">
- <p className="font-semibold text-gray-900 dark:text-white">{slide.title}</p>
+ <p className="font-semibold text-gray-900 dark:text-white">{cleanMarkdownText(slide.title)}</p>
  <div className="flex items-center gap-3 mt-1">
  <span className="text-xs px-2 py-0.5 rounded-md capitalize" style={{ background: `${colorConfig.icon}15`, color: colorConfig.icon }}>
  {slide.type}
@@ -289,7 +290,7 @@ export default function SlidesPage() {
  {slide.bullets.map((b, j) => (
  <li key={j} className="flex items-start gap-3 text-sm text-gray-700 dark:text-gray-200">
  <div className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ background: colorConfig.icon }} />
- {b}
+ {cleanMarkdownText(b)}
  </li>
  ))}
  </ul>
@@ -297,7 +298,7 @@ export default function SlidesPage() {
  <div className="p-3 rounded-xl bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-800">
  <p className="text-xs text-gray-500 dark:text-gray-400">
  <span className="font-semibold not-italic">📝 Notes: </span>
- {slide.speaker_note}
+ {cleanMarkdownText(slide.speaker_note)}
  </p>
  </div>
  )}

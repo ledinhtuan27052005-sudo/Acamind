@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_16",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Neural noise enables accurate internal simulation of rare events' là gì?",
+  "is_ooc": false,
+  "system": "Naive_Dense",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 144.02,
+  "retrieval_warm_ms": 58.01,
+  "llm_ms": 1485.58,
+  "e2e_cold_ms": 1629.6,
+  "e2e_warm_ms": 1543.59,
+  "provided_chunks": [
+    {
+      "id": "e8d1eed0-b595-4ef9-ba9d-28704b8046c7",
+      "document_id": "3ea7a0f2-1564-43b1-a749-edb272af9339",
+      "filename": "2609.18033v1.pdf",
+      "page_number": 1,
+      "content": "Neural noise enables accurate internal simulation of\nrare events\nHeng Zhang1,∗, Pawel Herman2,†, and Zenas C. Chao1,∗,†\n1International Research Center for Neurointelligence (WPI-IRCN), UTIAS, The University\nof Tokyo, Japan\n2Division of Computational Science and Technology, KTH Royal Institute of Technology,\nStockholm, Sweden\n∗Corresponding authors: rogerzhangheng@gmail.com, zenas.c.chao@gmail.com\n†Co-senior authors\nSeptember 17, 2026\nAbstract\nThe brain needs an accurate internal model of the world to generate predictions and guide\nbehavior. However, it must estimate the statistical structure of the environment from limited\nexperience. This is particularly difficult for rare events, whose observed frequencies in a limited"
+    },
+    {
+      "id": "3399cfca-42af-45d3-a10f-6f134a99a003",
+      "document_id": "3ea7a0f2-1564-43b1-a749-edb272af9339",
+      "filename": "2609.18033v1.pdf",
+      "page_number": 25,
+      "content": "Figure 1: Overview of internal model simulation of rare events, and the corrective role of neural\nnoise. (A) A rare event in daily life: a child is almost hit by a rushing car, replays the near-miss offline\nduring sleep, and acts more cautiously at the crossing afterward, a single experience reshaping prediction\nand behaviour. (B) Task and learning: a ground-truth Markov chain of densely connected common event\ngroups (blue) joined by chained rare event groups (red) generates training sequences by random walks, and\nfrom these finite samples the BCPNN learns its internal model, the weight matrix shown and the unit biases,\nthrough local Hebbian and Bayesian plasticity. (C) Internal simulation: cued and left to run, the trained"
+    },
+    {
+      "id": "54ebd3da-6c96-4a5f-bac3-320c5004a1f8",
+      "document_id": "3ea7a0f2-1564-43b1-a749-edb272af9339",
+      "filename": "2609.18033v1.pdf",
+      "page_number": 17,
+      "content": "[8] Marcelo G. Mattar and Nathaniel D. Daw. Prioritized memory access explains planning\nand hippocampal replay.\nNature Neuroscience, 21(11):1609–1617, 2018.\ndoi:\n10.1038/\ns41593-018-0232-z.\n[9] Lars Buesing, Johannes Bill, Bernhard Nessler, and Wolfgang Maass. Neural dynamics as\nsampling: a model for stochastic computation in recurrent networks of spiking neurons. PLoS\nComputational Biology, 7(11):e1002211, 2011. doi: 10.1371/journal.pcbi.1002211.\n[10] A. Aldo Faisal, Luc P. J. Selen, and Daniel M. Wolpert. Noise in the nervous system. Nature\nReviews Neuroscience, 9(4):292–303, 2008. doi: 10.1038/nrn2258.\n[11] Mark D. McDonnell and Lawrence M. Ward. The benefits of noise in neural systems: bridging\ntheory and experiment. Nature Reviews Neuroscience, 12(7):415–425, 2011. doi: 10.1038/"
+    },
+    {
+      "id": "31e5d8af-dc49-43f1-8f88-8da0c5816e06",
+      "document_id": "3ea7a0f2-1564-43b1-a749-edb272af9339",
+      "filename": "2609.18033v1.pdf",
+      "page_number": 8,
+      "content": "its low-value region reflects a training failure rather than a robustness effect (Fig. 6D) and is set\naside. Overall, the same tolerance holds across four mechanistically distinct parameters makes it a\nproperty of the noisy dynamics, each with a distinct provisional neuromodulatory counterpart we\ntake up in the Discussion.\nDiscussion\nSummary of the findings\nWe proposed that noise-assisted internal simulation is what lets an internal model faithfully estimate\nrare events from limited experience: without it, the model fails even after learning the structure well.\nSpecifically, we cast rarity as a structural feature of a cyclic Markov chain, evaluated simulation at\n8"
+    },
+    {
+      "id": "36fa808f-aab6-481d-9248-5c08f327bc60",
+      "document_id": "bf5c5dc2-03e6-4201-bec2-c21655d3fca7",
+      "filename": "2610.00616v1.pdf",
+      "page_number": 20,
+      "content": "reliability amid noise and chaos. Nature Communications, 10(1):3792, 2019.\n[5] A Aldo Faisal, Luc PJ Selen, and Daniel M Wolpert. Noise in the nervous system. Nature\nreviews neuroscience, 9(4):292–303, 2008.\n[6] G. Hu, T. Ditzinger, C.Z. Ning, and H. Haken. Stochastic resonance without external periodic\nforce. Physical Review Letters, 71(6):807–810, August 1993.\n[7] Arkady S Pikovsky and Jürgen Kurths. Coherence resonance in a noise-driven excitable system.\nPhysical Review Letters, 78(5):775, 1997.\n[8] Mark D McDonnell and Lawrence M Ward. The benefits of noise in neural systems: bridging\ntheory and experiment. Nature Reviews Neuroscience, 12(7):415–425, 2011.\n[9] Eric Forgoston and Richard O Moore. A primer on noise-induced transitions in applied dy-"
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để trả lời toàn bộ các ý về mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính của bài báo (ngữ cảnh hiện tại chỉ cung cấp phần tóm tắt ngắn, mô tả hình vẽ ở trang 25 và một phần thảo luận, chưa cung cấp đầy đủ các phần chi tiết nói trên)."
+}

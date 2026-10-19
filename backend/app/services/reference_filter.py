@@ -119,6 +119,11 @@ def filter_reference_chunks(chunks: list[dict]) -> list[dict]:
 
     filtered = []
     for c in chunks:
+        # File đính kèm tải lên trong chat (Excel, Word, Ảnh...) không phải là tài liệu thư mục để lọc bỏ
+        if c.get("document_id") == "inline_file":
+            filtered.append(c)
+            continue
+
         content = c.get("content", "")
         if not content:
             continue

@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_44",
+  "type": "Literature Synthesis",
+  "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Symphony for Text Generation: Bench | Recursive Game Creator: An Agentic  | WorldSonus: Bringing Sound to World",
+  "is_ooc": false,
+  "system": "Naive_Dense",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 126.59,
+  "retrieval_warm_ms": 118.48,
+  "llm_ms": 1592.86,
+  "e2e_cold_ms": 1719.45,
+  "e2e_warm_ms": 1711.34,
+  "provided_chunks": [
+    {
+      "id": "5080bbc0-460e-4c58-a796-86935a13133c",
+      "document_id": "785d9d25-1de9-4f62-a604-a413b7f21b73",
+      "filename": "2610.08161v1.pdf",
+      "page_number": 10,
+      "content": "Aci-bench: a novel ambient clinical intelligence dataset for benchmarking automatic visit note\ngeneration. Scientific data, 10(1):586, 2023.\nArne Nix, Robert James, Lasse Borgholt, Anna B. Ekner, Lana Krumm, Julius Severin, Dan Engel,\nLars Maaløe, and Jakob Havtorn. Symphony for speech-to-text: Supporting real-time medical\nvoice interfaces, 2026. URL https://arxiv.org/abs/2605.16545.\nJoakim Edin, Andreas Motzfeldt, Simon Flachs, and Lars Maaløe. Symphony for medical coding:\nA next-generation agentic system for scalable and explainable medical coding, 2026. URL\nhttps://arxiv.org/abs/2603.29709.\nVictor Petrén Bach Hansen, Lasse Krogsbøll, Jonas Lyngsø, Mathias Baltzersen, Andreas Motzfeldt,\nKevin Pelgrims, and Lars Maaløe. Factsr: A safer method for producing high quality healthcare"
+    },
+    {
+      "id": "c6f4335b-9abe-4fd1-95dd-e02d4310266b",
+      "document_id": "785d9d25-1de9-4f62-a604-a413b7f21b73",
+      "filename": "2610.08161v1.pdf",
+      "page_number": 14,
+      "content": "B\nSymphony for Text Generation\nText Generation API endpoints\nSymphony exposes clinical text and document generation via\nseveral API endpoints spanning general LLM inference, clinical fact extraction (FactsR [Hansen et al.,\n2025]) and guided document synthesis, and working in tandem with Symphony for speech-to-text\n[Nix et al., 2026], Symphony for medical coding [Edin et al., 2026], and agentic orchestration of\nmulti-step clinical workflows. The guided document synthesis API accepts multiple forms of clinical\ncontext and return schema-controlled, structured clinical documents based on fully API-configurable\ntemplates. This modular architecture enables straightforward customization and orchestration of"
+    },
+    {
+      "id": "e60a9b73-e356-41e6-9632-5a955b19a39d",
+      "document_id": "c47fdd2e-14fa-403a-a983-c3e63f73e40b",
+      "filename": "2610.07184v1.pdf",
+      "page_number": 12,
+      "content": "2026a.\nJianlyu Chen, Yuyang Hu, Hongjin Qian, Jiawei Liu, Wenqing Wei, Xiaolong Chen, Defu Lian, Zhicheng Dou, Chaozhuo\nLi, Qiwei Ye, et al. Repo-to-skill: Distilling github repositories into ai4ai skills. arXiv preprint arXiv:2609.02749, 2026b.\nZiru Chen, Shijie Chen, Yuting Ning, Qianheng Zhang, Boshi Wang, Botao Yu, Yifei Li, Zeyi Liao, Chen Wei, Zitong\nLu, et al. Scienceagentbench: Toward rigorous assessment of language agents for data-driven scientific discovery. In\nInternational Conference on Learning Representations, volume 2025, pp. 96934–96990, 2025.\nMingxuan Du, Benfeng Xu, Chiwei Zhu, Licheng Zhang, Xiaorui Wang, and Zhendong Mao. Deepresearch bench: A\ncomprehensive benchmark for deep research agents. In International Conference on Learning Representations, volume"
+    },
+    {
+      "id": "24445780-1f66-41c8-82d2-29cb712703fe",
+      "document_id": "ee0bb7fe-b1c6-45d0-b9b7-d23eb3458dd5",
+      "filename": "2610.08683v1.pdf",
+      "page_number": 5,
+      "content": "IEEE Automatic Speech Recognition and Understanding\nWorkshop (ASRU), 2025.\n[8] Guan-Ting Lin, Shih-Yun Shan Kuan, Qirui Wang, et al.,\n“Full-duplex-bench v1.5: Evaluating overlap handling\nfor full-duplex speech models,” in Proc. IEEE Int. Conf.\non Acoustics, Speech and Signal Processing (ICASSP),\n2026.\n[9] Siddhant Arora, Zhiyun Lu, Chung-Cheng Chiu, et al.,\n“Talking turns: Benchmarking audio foundation models\non turn-taking dynamics,” in Proc. Int. Conf. on Learning\nRepresentations (ICLR), 2025.\n[10] Bandhav Veluri, Benjamin N Peloquin, Bokai Yu, et al.,\n“Beyond turn-based interfaces: Synchronous LLMs as\nfull-duplex dialogue agents,” in Proc. EMNLP, 2024, pp.\n21390–21402.\n[11] Tu Anh Nguyen, Eugene Kharitonov, Jade Copet, et al.,\n“Generative spoken dialogue language modeling,” Trans-"
+    },
+    {
+      "id": "4b7a1f92-b21b-4a92-b3ab-f27b13fe0d59",
+      "document_id": "ee0bb7fe-b1c6-45d0-b9b7-d23eb3458dd5",
+      "filename": "2610.08683v1.pdf",
+      "page_number": 5,
+      "content": "“Moshi: A speech-text foundation model for real-time\ndialogue,” arXiv:2410.00037, 2024.\n[2] Rajarshi Roy, Jonathan Raiman, Sang-gil Lee, et al.,\n“PersonaPlex: Voice and role control for full duplex con-\nversational speech models,” arXiv:2602.06053, 2026.\n[3] Pengcheng Wang, Sheng Li, Jiyi Li, et al., “Agentic-\nDuplexGen: Decoupling content, timing, and acoustics\nfor synthetic dialogue speech,” arXiv:2608.16053, 2026.\n[4] Takyoung Kim, Kang wook Kim, Sang Hoon Woo,\net al., “DuplexGen: Adaptive synthesis of human-AI\nturn-taking dialogues,” arXiv:2607.26178, 2026.\n[5] Joon Sung Park, Joseph C. O’Brien, Carrie J. Cai, et al.,\n“Generative agents: Interactive simulacra of human be-\nhavior,” in Proc. 36th Annual ACM Symposium on User\nInterface Software and Technology (UIST), 2023."
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

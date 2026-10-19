@@ -1,0 +1,62 @@
+{
+  "query_id": "REAL_Q_39",
+  "type": "Literature Synthesis",
+  "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: zkLLMPoT: Efficient Zero Knowledge  | A foundation for systematic analysi | Conceptualization and experimentati",
+  "is_ooc": false,
+  "system": "ACAMIND",
+  "gate_passed": true,
+  "gate_score": 0.977717,
+  "dcsr_skipped": true,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 988.62,
+  "retrieval_warm_ms": 959.14,
+  "llm_ms": 1021.76,
+  "e2e_cold_ms": 2010.38,
+  "e2e_warm_ms": 1980.9,
+  "provided_chunks": [
+    {
+      "id": "44105053-8150-4440-bb54-38ef61e25b1a",
+      "document_id": "15edcab1-9ed6-4380-b92e-653f85cd76f2",
+      "filename": "2610.08258v1.pdf",
+      "page_number": 1,
+      "content": "ZKLLMPOT: EFFICIENT ZERO KNOWLEDGE PROOF\nOF TRAINING FOR LARGE LANGUAGE MODELS\nJunkai Liang1,3, Zhanpeng Guo2, Pengfei Wu1,3, Qingni Shen1,\nJiaheng Zhang4, Zhonghai Wu1, Haiyang Xue3, Shengfang Zhai4\n1 Peking University\n2 China Telecom Quantum Information Technology Group Co., Ltd\n3 Singapore Management University\n4 National University of Singapore\nABSTRACT\nAuditing the claimed outcomes of large language model (LLM) training is chal-\nlenging when model weights and training data are private, while cryptographi-\ncally proving the full training process is prohibitively expensive at Transformer\nscale. We present zkLLMPoT, a zero-knowledge framework that certifies auditor-\ndefined properties of a trained checkpoint through forward evaluation rather than"
+    },
+    {
+      "id": "667bd5d2-0ee6-4167-a06a-80807d405ca5",
+      "document_id": "f7c9bc4f-94fd-4745-ac60-e03da3aa9cb1",
+      "filename": "2609.30427v1.pdf",
+      "page_number": 1,
+      "content": "framework that includes theory-driven dimensions such as\nsource trustworthiness and diffusion pattern for the assessment\nof information credibility. The authors developed a structured\nframework that can systematically evaluate credibility sig-\nnals across multiple platforms. By combining computational\narXiv:2609.30427v1  [cs.LG]  24 Sep 2026"
+    },
+    {
+      "id": "9fa302bc-3bca-4976-bc2e-b130a02decfb",
+      "document_id": "f4b13337-b242-4c50-9858-e592b90c4131",
+      "filename": "2609.23508v1.pdf",
+      "page_number": 18,
+      "content": "Investigation, Formal analysis, Data curation, Conceptualization.\nGunnar Stevens: Writing – review & editing, Writing – origi­\nnal draft, Validation, Supervision, Resources, Project administration, \nMethodology, Investigation, Funding acquisition, Formal analysis, Data \ncuration, Conceptualization. Alexander Boden: Writing – review & \nediting, Supervision, Project administration, Methodology, Funding ac­\nquisition, Conceptualization. Lenneke Kuijer: Writing – review & \nediting, Validation, Supervision. Apostolos K. Vavouris: Writing – \nreview & editing, Validation, Investigation, Formal analysis, Data \ncuration. Md Shajalal: Writing – review & editing, Investigation, \nFormal analysis, Data curation. Philip Engelbutzeder: Writing – re­"
+    },
+    {
+      "id": "910100f3-c234-485a-9e0b-e41291ff7595",
+      "document_id": "15edcab1-9ed6-4380-b92e-653f85cd76f2",
+      "filename": "2610.08258v1.pdf",
+      "page_number": 1,
+      "content": "scale. We present zkLLMPoT, a zero-knowledge framework that certifies auditor-\ndefined properties of a trained checkpoint through forward evaluation rather than\nverification of its optimization trajectory. zkLLMPoT includes 2 phases: 1) The\ntrainer fixes the architecture and the model weights are committed. Then the audi-\ntor selects challenge sequences, preventing the trainer from modifying the check-\npoint in response to the audit data. 2) Then the trainer proves the objective value\nattained by the committed model on those sequences. This formulation makes\nthe certification cost independent of the number of training iterations, without\nrevealing model weights or requiring access to private training data. We build"
+    },
+    {
+      "id": "a7ad4038-7101-4370-849a-eb2bc77734d4",
+      "document_id": "9a6c7717-92e2-4d8f-8de0-1cec4a55d2fd",
+      "filename": "2610.01894v1.pdf",
+      "page_number": 1,
+      "content": "A foundation for systematic analysis of transformers and RNNs for \ntractography \nEmmanuelle Renauld1, Philippe Poulin1, Hugo Larochelle2, \nAntoine Théberge1, Maxime Descoteaux1,3 \n \n1 Computer Sciences Department, Université de Sherbrooke 2 Mila, Université de Montréal  \n3 Imeka Solutions Inc, Sherbrooke, QC, Canada \n \n \nAbstract: \n \nMachine learning (ML) has emerged as a promising approach for improving diffusion MRI \n(dMRI) tractography, a task that remains limited by the intrinsic tension between local diffusion \ninformation and global anatomical plausibility. In this work, we systematically evaluate recurrent \nneural networks (RNNs) and Transformer models for iterative tractography, with particular"
+    },
+    {
+      "id": "64c1a28e-419d-4e75-9afa-b1fbe687a0f1",
+      "document_id": "45d2dc52-191e-4f93-8ca7-dbb6d008982b",
+      "filename": "2609.24554v1.pdf",
+      "page_number": 7,
+      "content": "scribing how conceptual systems evolve, but less naturally express what conceptual structures are.\n6.2\nOPTIMIZATION-BASED REPRESENTATIONS\nOptimization approaches concepts as outcomes of objectives optimized under constraints. Concepts\nemerge because they support efficient prediction, decision making, communication, compression,\nor other task goals.\nThis perspective naturally supports learning, adaptation, generalization, and trade-offs between com-\npeting objectives. In modern ML, conceptual representations often emerge implicitly from loss\nfunctions, inductive biases, and training dynamics.\nIts principal limitation is that optimization alone says little about the internal structure of\nconcepts. Similarity, composition, inference, and abstraction depend on the representational frame-"
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

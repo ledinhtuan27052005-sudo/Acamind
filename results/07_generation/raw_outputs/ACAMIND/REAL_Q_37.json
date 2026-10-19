@@ -1,0 +1,62 @@
+{
+  "query_id": "REAL_Q_37",
+  "type": "Literature Synthesis",
+  "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: CoHyFuse: Condition-wise Hypergraph | FlatClip: A Geometry-Aware Surface- | zkLLMPoT: Efficient Zero Knowledge ",
+  "is_ooc": false,
+  "system": "ACAMIND",
+  "gate_passed": true,
+  "gate_score": 0.992645,
+  "dcsr_skipped": false,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 22232.08,
+  "retrieval_warm_ms": 788.98,
+  "llm_ms": 5130.25,
+  "e2e_cold_ms": 27362.33,
+  "e2e_warm_ms": 5919.23,
+  "provided_chunks": [
+    {
+      "id": "5c4ea38d-2237-4f66-8c4d-65a41cc92acb",
+      "document_id": "270d1d91-963f-4fe6-958c-9dc4fc18cf8f",
+      "filename": "2610.05913v1.pdf",
+      "page_number": 1,
+      "content": "reconfiguration cues and session-level connectivity structure\nfor task-fMRI prediction.\nOur contributions are threefold:\n(i) We propose CoHyFuse, a condition-aware ROI-centered\nhypergraph fusion framework that constructs condition-\nwise top-Kq hypergraphs and integrates attention-fused\nHGNN embeddings with a complementary whole-\nsession FC branch, thereby capturing both condition-\nwise reconfiguration cues and session-level connectivity\nstructure for task-fMRI prediction.\n(ii) We evaluate CoHyFuse on two public fMRI datasets,\nand CoHyFuse achieves the best mean performance\namong evaluated baselines. Ablation results support the\neffectiveness of condition-specific hypergraph construc-\ntion, heterogeneous Kq, and dual-branch fusion.\n(iii) Applying CoHyFuse to FACENAME, we find that the"
+    },
+    {
+      "id": "63ff7658-09e1-460f-b1d1-24795de99b53",
+      "document_id": "e2efa39b-80e9-4421-8e14-303c661db67e",
+      "filename": "2609.31204v1.pdf",
+      "page_number": 2,
+      "content": "spatial granularity\nROI-level\nVoxel-level\nSurface-level\nCoarse\nFine-grained\nLower \nperformance\nperformance\nHigher \nperformance ?\nFigure 1: Motivation. fMRI representations vary in spatial granularity. FlatClip studies surface-level\ncortical flatmaps as a geometry-aware middle ground.\nand then model regional time series or inter-regional relationships. These representations are efficient\nand scalable, but they are coarse: they depend on parcellation choices and may discard fine-grained\ncortical geometry [12, 13]. Voxel-based or volumetric models preserve more spatial detail and can\ncapture local structure more directly, but they require specialized 3D/4D architectures, substantial\ncomputation, and storage of high-dimensional fMRI volumes. This trade-off raises a practical"
+    },
+    {
+      "id": "44105053-8150-4440-bb54-38ef61e25b1a",
+      "document_id": "15edcab1-9ed6-4380-b92e-653f85cd76f2",
+      "filename": "2610.08258v1.pdf",
+      "page_number": 1,
+      "content": "ZKLLMPOT: EFFICIENT ZERO KNOWLEDGE PROOF\nOF TRAINING FOR LARGE LANGUAGE MODELS\nJunkai Liang1,3, Zhanpeng Guo2, Pengfei Wu1,3, Qingni Shen1,\nJiaheng Zhang4, Zhonghai Wu1, Haiyang Xue3, Shengfang Zhai4\n1 Peking University\n2 China Telecom Quantum Information Technology Group Co., Ltd\n3 Singapore Management University\n4 National University of Singapore\nABSTRACT\nAuditing the claimed outcomes of large language model (LLM) training is chal-\nlenging when model weights and training data are private, while cryptographi-\ncally proving the full training process is prohibitively expensive at Transformer\nscale. We present zkLLMPoT, a zero-knowledge framework that certifies auditor-\ndefined properties of a trained checkpoint through forward evaluation rather than"
+    },
+    {
+      "id": "58745f17-63cd-4322-a87b-5aea539caf0d",
+      "document_id": "270d1d91-963f-4fe6-958c-9dc4fc18cf8f",
+      "filename": "2610.05913v1.pdf",
+      "page_number": 1,
+      "content": "CoHyFuse: Condition-wise Hypergraph Fusion with\nGlobal Connectome in Task-fMRI\nBoseong Kim1, Haejun Chung1, and Ikbeom Jang2\n1Hanyang University, Seoul, Republic of Korea\n2Hankuk University of Foreign Studies, Yongin, Republic of Korea\nCorrespondence: ijang@hufs.ac.kr; haejun@hanyang.ac.kr\nAbstract—Task-fMRI connectomes reveal state-dependent neu-\nral reconfigurations, yet conventional methods marginalize these\nsignals by aggregating distinct conditions into static pairwise\ngraphs, thereby obscuring condition-specific multi-ROI organiza-\ntion. We introduce CoHyFuse, a condition-aware ROI-centered\nhypergraph framework that constructs a task-state-specific inci-\ndence matrix from condition-wise functional connectivity (FC)-\nprofile embeddings, allowing the same ROI to form different"
+    },
+    {
+      "id": "e7cde639-fd93-40ff-8c13-f18f7b460653",
+      "document_id": "e2efa39b-80e9-4421-8e14-303c661db67e",
+      "filename": "2609.31204v1.pdf",
+      "page_number": 1,
+      "content": "they represent brain activity. ROI- and connectivity-based models are efficient\nbut coarse, whereas voxel-level models preserve fine-grained spatial structure but\nrequire specialized 3D/4D architectures and costly fMRI-specific pretraining. We\nask how effectively an image-pretrained encoder can reuse the spatial organization\nof cortical activity. Motivated by evidence that macroscale brain activity is strongly\nconstrained by brain geometry, we introduce FlatClip, a frozen-encoder surface-\nlevel baseline that renders cortical activity as geometry-aware flatmap sequences\nand reuses a frozen SigLIP2 image encoder with only a lightweight downstream\nprobe. Across resting-state benchmarks, FlatClip serves as a competitive middle-"
+    },
+    {
+      "id": "910100f3-c234-485a-9e0b-e41291ff7595",
+      "document_id": "15edcab1-9ed6-4380-b92e-653f85cd76f2",
+      "filename": "2610.08258v1.pdf",
+      "page_number": 1,
+      "content": "scale. We present zkLLMPoT, a zero-knowledge framework that certifies auditor-\ndefined properties of a trained checkpoint through forward evaluation rather than\nverification of its optimization trajectory. zkLLMPoT includes 2 phases: 1) The\ntrainer fixes the architecture and the model weights are committed. Then the audi-\ntor selects challenge sequences, preventing the trainer from modifying the check-\npoint in response to the audit data. 2) Then the trainer proves the objective value\nattained by the committed model on those sequences. This formulation makes\nthe certification cost independent of the number of training iterations, without\nrevealing model weights or requiring access to private training data. We build"
+    }
+  ],
+  "answer": "## I. Tổng hợp các đóng góp cốt lõi của ba nghiên cứu\n\n### 1. CoHyFuse: Condition-wise Hypergraph Fusion with Global Connectome in Task-fMRI\n* **Đóng góp cốt lõi:**\n  * Đề xuất **CoHyFuse** — một khung siêu đồ thị tập trung vào vùng quan tâm (ROI-centered hypergraph framework) có nhận biết điều kiện (condition-aware), giúp xây dựng các siêu đồ thị top-$K_q$ theo từng điều kiện và tích hợp các nhúng siêu đồ thị đồ thị thần kinh (Hypergraph Neural Network - HGNN) được dung hợp chú ý với một nhánh kết nối chức năng toàn phiên (whole-session Functional Connectivity - FC) bổ trợ [2610.05913v1.pdf - Trang 1].\n  * Khung phương pháp này cho phép nắm bắt cả tín hiệu cấu hình lại theo từng điều kiện (condition-wise reconfiguration cues) và cấu trúc kết nối cấp độ phiên (session-level connectivity structure) để dự đoán task-fMRI [2610.05913v1.pdf - Trang 1].\n  * Khắc phục hạn chế của các phương pháp thông thường vốn làm mờ các tín hiệu thay đổi trạng thái thần kinh bằng cách gộp các điều kiện riêng biệt thành các đồ thị có cặp tĩnh (static pairwise graphs) [2610.05913v1.pdf - Trang 1].\n  * Đánh giá trên hai tập dữ liệu fMRI công khai, **CoHyFuse** đạt hiệu suất trung bình tốt nhất trong số các mô hình cơ sở (baselines) được đánh giá [2610.05913v1.pdf - Trang 1]. Các kết quả kiểm tra loại bỏ (ablation results) chứng minh hiệu quả của việc xây dựng siêu đồ thị đặc hiệu theo điều kiện, $K_q$ dị thể và sự dung hợp nhánh kép [2610.05913v1.pdf - Trang 1].\n\n### 2. FlatClip: A Geometry-Aware Surface-Level Baseline for fMRI Representation Learning\n* **Đóng góp cốt lõi:**\n  * Giới thiệu **FlatClip** — một đường cơ sở cấp độ bề mặt với bộ mã hóa đóng băng (frozen-encoder surface-level baseline), kết xuất hoạt động não bộ thành các chuỗi bản đồ phẳng có nhận thức về hình học (geometry-aware flatmap sequences) và tái sử dụng bộ mã hóa hình ảnh SigLIP2 đã đóng băng với chỉ một thăm dò hạ nguồn nhẹ (lightweight downstream probe) [2609.31204v1.pdf - Trang 1].\n  * Giải quyết bài toán đánh đổi về độ chi tiết không gian trong biểu diễn fMRI: Các mô hình dựa trên ROI và kết nối đạt hiệu quả cao nhưng thô, trong khi các mô hình cấp độ voxel (voxel-level) giữ lại chi tiết không gian tinh vi nhưng đòi hỏi kiến trúc 3D/4D chuyên biệt và chi phí huấn luyện trước tốn kém [2609.31204v1.pdf - Trang 1].\n  * Tận dụng bằng chứng cho thấy hoạt động não quy mô vĩ mô bị ràng buộc mạnh mẽ bởi hình học não bộ, giúp **FlatClip** đóng vai trò là một điểm giữa cạnh tranh qua các tiêu chuẩn trạng thái nghỉ (resting-state benchmarks) [2609.31204v1.pdf - Trang 1].\n\n### 3. zkLLMPoT: Efficient Zero Knowledge Proof of Training for Large Language Models\n* **Đóng góp cốt lõi:**\n  * Giới thiệu **zkLLMPoT** — một khung chứng thực không kiến thức (zero-knowledge framework) nhằm chứng nhận các thuộc tính do kiểm toán viên xác định của một điểm kiểm tra (checkpoint) đã được huấn luyện thông qua đánh giá chuyển tiếp (forward evaluation) thay vì xác minh quỹ đạo tối ưu hóa của nó [2610.08258v1.pdf - Trang 1].\n  * Khung này bao gồm 2 pha chính: \n    1. Người huấn luyện cố định kiến trúc và cam kết trọng số mô hình; sau đó kiểm toán viên chọn các chuỗi thử thách để ngăn chặn người huấn luyện sửa đổi điểm kiểm tra nhằm phản hồi dữ liệu kiểm toán [2610.08258v1.pdf - Trang 1].\n    2. Người huấn luyện chứng minh giá trị mục tiêu đạt được bởi mô hình đã cam kết trên các chuỗi đó [2610.08258v1.pdf - Trang 1].\n  * Giúp chi phí chứng nhận độc lập với số lần lặp huấn luyện, không làm lộ trọng số mô hình và không yêu cầu quyền truy cập vào dữ liệu huấn luyện riêng tư, giải quyết thách thức kiểm toán khi trọng số và dữ liệu huấn luyện được bảo mật trong các mô hình ngôn ngữ lớn (Large Language Models - LLM) [2610.08258v1.pdf - Trang 1].\n\n---\n\n## II. Khuyến nghị lâm sàng và thực hành\n\n> *\"Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.\"*\n\n* **Tích hợp tín hiệu động trong phân tích fMRI nhiệm vụ (Task-fMRI):** Các nhà nghiên cứu và thực hành lâm sàng nên ưu tiên áp dụng các phương pháp mô hình hóa cấu hình trạng thái thần kinh linh hoạt (như **CoHyFuse**) thay vì các đồ thị cặp tĩnh thông thường, nhằm nắm bắt chính xác hơn sự tổ chức đa ROI đặc hiệu theo từng trạng thái/điều kiện nhận thức [2610.05913v1.pdf - Trang 1].\n* **Lựa chọn mức độ chi tiết không gian trong học biểu diễn não bộ:** Khi xây dựng các mô hình học máy cho dữ liệu thần kinh hình ảnh, việc sử dụng các biểu diễn cấp độ bề mặt có nhận thức hình học (như **FlatClip**) có thể đóng vai trò là giải pháp trung gian tối ưu, cân bằng giữa hiệu quả tính toán của mô hình dựa trên ROI và độ chi tiết không gian của mô hình cấp độ voxel mà không cần kiến trúc 3D/4D phức tạp [2609.31204v1.pdf - Trang 1].\n* **Bảo mật và kiểm toán mô hình học máy trong y sinh/lâm sàng:** Khi triển khai các mô hình ngôn ngữ lớn hoặc mô hình AI nhạy cảm liên quan đến dữ liệu y tế/lâm sàng riêng tư, khung chứng thực không kiến thức (như **zkLLMPoT**) cung cấp cơ sở thực hành quan trọng để kiểm tra tính toàn vẹn và xác thực các thuộc tính của mô hình mà không làm rò rỉ dữ liệu huấn luyện hay trọng số độc quyền [2610.08258v1.pdf - Trang 1]."
+}

@@ -146,7 +146,8 @@ export function SideBySidePdfViewer({
   }
 
   // Tham số hash cho native browser PDF viewer
-  const searchHash = isHighlightActive && searchKeyword ? `&search=${encodeURIComponent(searchKeyword)}` : '';
+  // Khi đã bật backend highlight, không dùng browser #search để tránh trình duyệt tự bôi vàng dư thừa các từ khóa khác trên tài liệu
+  const searchHash = (!isHighlightActive && searchKeyword) ? `&search=${encodeURIComponent(searchKeyword)}` : '';
   const pdfUrl = `${API_URL}/api/v1/document/${documentId}/${endpoint}${queryParams}#page=${currentPage}${searchHash}&zoom=page-width`;
 
   return (

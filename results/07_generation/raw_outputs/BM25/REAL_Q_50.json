@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_50",
+  "type": "Safe Refusal (Edge)",
+  "query": "Thuật toán định tuyến giao thông cho hệ thống vệ tinh quỹ đạo thấp Starlink?",
+  "is_ooc": true,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 417.35,
+  "retrieval_warm_ms": 441.69,
+  "llm_ms": 1562.16,
+  "e2e_cold_ms": 1979.51,
+  "e2e_warm_ms": 2003.85,
+  "provided_chunks": [
+    {
+      "id": "59d65ced-b97b-4de1-ab4b-639fc38b3079",
+      "document_id": "af22f194-5bbd-4ba3-8c8a-3de79b1123e2",
+      "filename": "2610.06615v1.pdf",
+      "page_number": 20,
+      "content": "screen-negative\nhigh_075\nnone\nhigh\n0.003\nscreen-negative\nhigh_102\nnone\nhigh\n0.020\nscreen-negative\nhigh_104\nvimeo:11671267\nhigh\n0.002\nscreen-negative\nlow_093\nnone\nlow\n0.471\ntext match\nlow_094\nnone\nlow\n0.705\ntext match\nlow_095\nnone\nlow\n0.002\nscreen-negative\nlow_096\nnone\nlow\n0.008\nscreen-negative\nlow_097\nnone\nlow\n0.826\ntext match\nlow_098\nnone\nlow\n0.683\ntext match\nlow_099\nnone\nlow\n0.884\ntext match\nlow_100\nnone\nlow\n0.003\nscreen-negative\nlow_101\nnone\nlow\n0.003\nscreen-negative\nlow_102\nnone\nlow\n0.003\nscreen-negative\nlow_103\nnone\nlow\n0.004\nscreen-negative\nlow_104\nnone\nlow\n0.002\nscreen-negative\n20"
+    },
+    {
+      "id": "ed1620de-392a-498d-ba06-f32fd3d6a9d3",
+      "document_id": "2b8689c8-a82e-45fb-a2ee-d77d2e6f5096",
+      "filename": "2609.06826v1.pdf",
+      "page_number": 114,
+      "content": "Thus, the Base system does not necessarily have to be a system of another sensory \nmodality. It may be any other system with a stable, coactive representation: the speech \nsystem, motor system, spatial-attention system, interoceptive (physiological) system, \nproprioceptive system, emotional system, or another system. \nThe New system is the system in which we consider the process of forming connections \nbetween a pre-detector neuron (primitive detector) 𝑀1\n𝑁𝑒𝑤 and a detector neuron (concept-\nneuron) 𝑀2\n𝑁𝑒𝑤 under the control of 𝒜𝐵𝑎𝑠𝑒. This system may, for example, be the visual \nsystem."
+    },
+    {
+      "id": "1012a10d-d518-4be1-8313-93d8f72acf25",
+      "document_id": "8896d0ff-60ac-40f7-af61-9d1a345f5cad",
+      "filename": "2610.07205v1.pdf",
+      "page_number": 31,
+      "content": "Marques et al., Responsible Institutional Analytics: Interpreting Bias with AI Support\n3017\nTable V: System Usability Survey\nNo.\nItem\n1\nDid the system help you to get a more responsible interpretation?\n2\nI think that I would like to use this system frequently\n3\nI found the system unnecessarily complex\n4\nI thought the system was easy to use\n5\nI think that I would need the support of a technical person to be able to use this system\n6\nI found the various functions in this system were well integrated\n7\nI thought there was too much inconsistency in this system\n8\nI would imagine that most people would learn to use this system very quickly\n9\nI found the system very diﬀicult to use\n10\nI felt very confident using the system\n11"
+    },
+    {
+      "id": "b44e3a60-54d8-4e36-8707-3dc67d735607",
+      "document_id": "e66b429a-163c-4e2c-b9a3-4c04ec18f6d4",
+      "filename": "2610.08400v1.pdf",
+      "page_number": 27,
+      "content": "Preprint.\nTriclinic (n=2,022)\nMonoclinic (n=13,519)\nOrthorhombic (n=10,225)\nTetragonal (n=10,725)\nTrigonal (n=8,884)\nHexagonal (n=2,381)\nCubic (n=2,244)\n(a) Combined crystal systems.\nTriclinic (n=2,022)\nOther systems\nMonoclinic (n=13,519)\nOther systems\nOrthorhombic (n=10,225)\nOther systems\nTetragonal (n=10,725)\nOther systems\nTrigonal (n=8,884)\nOther systems\nHexagonal (n=2,381)\nOther systems\nCubic (n=2,244)\nOther systems\n(b) Each crystal system highlighted against the others in gray.\nFigure 5: UMAP visualization of crystal representations by crystal system.\n27"
+    },
+    {
+      "id": "87ba9b60-cad5-4d3c-ae4c-2311864f3422",
+      "document_id": "9fce0827-08f2-4e42-abc8-07e9f1559106",
+      "filename": "2609.40292v1.pdf",
+      "page_number": 2,
+      "content": "A\nA0\nx\ny\na\nb\nA1\nx\ny\na\nb\nc\nTwo RNNs\n0\n2\n4\n6\n8\n10\n12\n14\nTime\n0.0\n0.2\n0.4\n0.6\n0.8\n1.0\nState\nB\nIdentical Unperturbed Activity\nSystem 0\nSystem 1\n2\n4\n6\n8\n10\n12\n14\nDestination time\n0.0\n0.2\n0.4\n0.6\n0.8\n1.0\n1.2\nResponse\nC\nDiﬀerent Green's Response\nSystem 0\nSystem 1\nFigure 1: Routing is not determined by activity or local spectrum. Two linear\nrecurrent systems generate the same unperturbed trajectory and have the same\neigenvalues, but differ in whether a perturbation in y can influence x. The finite-\nhorizon Green’s operator records this source-to-destination difference directly.\ndifferent axes asks either which computations are reused? or when is influence routed? Our\ncontribution is intentionally narrow: we isolate why this routing is distinct from activity"
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. Các tài liệu trong hệ thống hiện tại chỉ đề cập đến các chủ đề về hệ thống nhận diện/mạng lưới thần kinh, khảo sát độ hữu dụng của hệ thống (System Usability Survey), biểu diễn hệ tinh thể (crystal systems) và toán tử Green trong hệ thống tái hồi tuyến tính (RNN), hoàn toàn không chứa thông tin về thuật toán định tuyến giao thông cho hệ thống vệ tinh quỹ đạo thấp Starlink."
+}

@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_08",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'CLM-as-a-Judge: Evaluating an Open Contrastive Decision Model on Public Judge Benchmarks' là gì?",
+  "is_ooc": false,
+  "system": "ACAMIND",
+  "gate_passed": true,
+  "gate_score": 0.555252,
+  "dcsr_skipped": true,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 1391.7,
+  "retrieval_warm_ms": 1395.02,
+  "llm_ms": 3916.16,
+  "e2e_cold_ms": 5307.86,
+  "e2e_warm_ms": 5311.18,
+  "provided_chunks": [
+    {
+      "id": "c24286db-0980-499e-a5fe-8d2a5991e813",
+      "document_id": "1de93935-7391-493e-9dee-d2fdd2b7413f",
+      "filename": "2610.07177v1.pdf",
+      "page_number": 1,
+      "content": "CLM-as-a-Judge: Evaluating an Open Contrastive Decision Model\non Public Judge Benchmarks\nGowthamkumar Nandakishore\nIndependent researcher\nOctober 2026\nAbstract\nAn open contrastive decision model is near chance as a judge on the hard public benchmarks:\nContrastive-LM/CLM-v0.1-8B scores between 0.351 (best-of-four, chance 0.250) and 0.593\n(pairwise, chance 0.500), is statistically indistinguishable from coin flipping on RM-Bench\nand JudgeBench, and answers every HaluEval item with one constant label, matching the\ntrivial always-first baseline at 0.581. Judges with the same parameter count score far higher\neverywhere: a reward model reaches 0.764 to 0.976 and a generative judge 0.611 to 0.778,\nand every gap to CLM is significant after Benjamini–Hochberg correction. Two properties do"
+    },
+    {
+      "id": "f781c960-9623-4f9c-8f5b-d9439b5f66b7",
+      "document_id": "1de93935-7391-493e-9dee-d2fdd2b7413f",
+      "filename": "2610.07177v1.pdf",
+      "page_number": 2,
+      "content": "length, where the generative and reward judges shift substantially with it. These properties\ncome from the architecture, not from accuracy, and they are the only properties this study can\nrecommend.\nContributions.\n1. A preregistered, artifact-complete evaluation of an open contrastive decision model as a judge\non six public benchmarks against generative, reward-model, and trivial baselines: CLM trails\nthe generative judge by 0.136 to 0.324 and the reward model by 0.289 to 0.525, all gaps\nsignificant at q = 0.05.\n2. Calibration and error-detection measurements for embedding-similarity confidence: one\npooled temperature (20.1) repairs expected calibration error from up to 0.402 to at most\n0.062.\n3. Measured order-flip and length-bias rates for four judge families: 0.0002 for CLM against"
+    },
+    {
+      "id": "d94bb980-c4c2-4faf-9a09-efa85289bb20",
+      "document_id": "1de93935-7391-493e-9dee-d2fdd2b7413f",
+      "filename": "2610.07177v1.pdf",
+      "page_number": 1,
+      "content": "funding from, or financial interest in Contrastive-LM, Alibaba/Qwen, Amazon/AWS, Convai\nInnovations, TypeSafe, meraGPT, or the publishers of any benchmark or baseline model\nused.\n1\nIntroduction\nDecision-only judges promise a fixed small cost per decision, a confidence score that is a model\nquantity rather than a sampled token, and immunity to the order in which candidate answers\nare presented. Whether an open contrastive decision model also delivers judging competence\nis an empirical question. This study answers it for Contrastive-LM/CLM-v0.1-8B under a\npreregistration frozen before any evaluation item was scored, against generative, reward-model,\nand trivial baselines measured on the same items under the same scoring rules."
+    },
+    {
+      "id": "80a013a3-0e48-47e9-9966-f1eab634f2ec",
+      "document_id": "1de93935-7391-493e-9dee-d2fdd2b7413f",
+      "filename": "2610.07177v1.pdf",
+      "page_number": 1,
+      "content": "Alibaba/Qwen, Amazon/AWS, Convai Innovations, TypeSafe, meraGPT, or the publishers of\nany benchmark or baseline model used.\n2\nRelated work\nJEV-as-a-Judge [21] evaluates a small decision model as a judge on public benchmarks and\nescalates to a stronger judge below a confidence threshold; this study follows that design (public\nbenchmarks with real labels, generative and reward-model comparators, calibration and error\ndetection, a measured cascade) and applies it to a different model class. No number from that\npaper is compared against a measured number here: its judges, hardware, and prompts differ.\nLLM-as-a-Verifier [16] studies verification as a general interface; BERT-as-a-Judge [9] shows a\n2"
+    },
+    {
+      "id": "8afdbb9b-a5a4-4994-809b-36c9c0792394",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 21,
+      "content": "person\nperson / model\nHH / HA\nSem-Detect\nhuman reviews / model rewrite of a human review /\nmodel reviews\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA\nMELD\nhuman / model / six attacks\nperson / model /\nmodel\nperson / model /\nmodel\nHH / AA / AA\nattacked\nLAMP\nmodel draft / the draft after a professional’s edit\nmodel\nmodel\n/\nmodel,\nedited\nAA / not placed\nARB\nhuman / model rewrite of a human article (h2l) /\nmodel (free llm) / llm2l\nperson / person /\nmodel / model\nperson / model /\nmodel / model\nHH / HA / AA /\nAA attacked\nGEDE\nhuman essay / model improves or rewrites it\nperson\nperson / model\nHH / HA\nmodel essay from the assignment / DIPPER, rewrite\nattack\nmodel\nmodel\nAA / AA at-\ntacked\nmodel essay from the student’s summary\nmodel\n(GEDE’s\nown label)\nmodel\nAA, shown but\nnot averaged"
+    }
+  ],
+  "answer": "## I. Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính\n\nDựa trên tài liệu nghiên cứu được cung cấp, dưới đây là tổng hợp chi tiết về mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính của bài báo **\"CLM-as-a-Judge: Evaluating an Open Contrastive Decision Model on Public Judge Benchmarks\"**:\n\n### 1. Mục tiêu nghiên cứu\n* Nghiên cứu đặt ra mục tiêu đánh giá năng lực của một mô hình quyết định đối lập mở (**open contrastive decision model**, cụ thể là mô hình **Contrastive-LM/CLM-v0.1-8B**) khi đóng vai trò làm giám khảo (**as a judge**) trên các bộ chuẩn đánh giá công khai khó (**hard public benchmarks**) [2610.07177v1.pdf - Trang 1].\n* Khảo sát các đặc tính kỹ thuật của mô hình như điểm số tin cậy dựa trên độ tương đồng nhúng (**embedding-similarity confidence**), hiệu chuẩn xác suất (**calibration**), tỷ lệ lỗi lổi do thứ tự (**order-flip**) và độ lệch độ dài (**length-bias**) so với các mô hình đối chứng (giám khảo tạo sinh - generative judge, mô hình phần thưởng - reward model và các đường cơ sở tối giản - trivial baselines) [2610.07177v1.pdf - Trang 1, Trang 2].\n\n### 2. Giả thuyết khoa học\n* **Giả thuyết cốt lõi:** Các giám khảo chỉ dựa trên quyết định (**decision-only judges**) mang lại những hứa hẹn về mặt chi phí cố định nhỏ cho mỗi quyết định, cung cấp điểm số tin cậy là một đại lượng của mô hình thay vì một token được lấy mẫu, và có khả năng miễn dịch với thứ tự xuất hiện của các câu trả lời ứng viên [2610.07177v1.pdf - Trang 1].\n* Nghiên cứu tiến hành kiểm định thực nghiệm câu hỏi liệu một mô hình quyết định đối lập mở có thực sự đem lại năng lực chấm thi/đánh giá (judging competence) hay không [2610.07177v1.pdf - Trang 1]. \n\n### 3. Phương pháp luận chính\n* **Thiết kế nghiên cứu tiền đăng ký (Preregistered Design):** Toàn bộ quá trình đánh giá được thực hiện theo một bản tiền đăng ký đã được đóng băng trước khi bất kỳ mục đánh giá nào được chấm điểm [2610.07177v1.pdf - Trang 1].\n* **Đối tượng thực nghiệm và so sánh:** Đánh giá mô hình **Contrastive-LM/CLM-v0.1-8B** trên sáu bộ chuẩn công khai (**six public benchmarks**) so với các đường cơ sở gồm mô hình tạo sinh (**generative judge**), mô hình phần thưởng (**reward model**) và các đường cơ sở tối giản (**trivial baselines**) dưới cùng một tập mục và quy tắc chấm điểm [2610.07177v1.pdf - Trang 1, Trang 2].\n* **Đo lường kiểm định thống kê và hiệu chuẩn:** \n  * Sử dụng phương pháp hiệu chỉnh **Benjamini–Hochberg correction** để kiểm định ý nghĩa thống kê của các khoảng cách hiệu suất [2610.07177v1.pdf - Trang 1].\n  * Đo lường hiệu chuẩn và phát hiện lỗi cho độ tin cậy tương đồng nhúng, trong đó một nhiệt độ gộp chung (**pooled temperature** = 20.1) được áp dụng để cải thiện sai số hiệu chuẩn kỳ vọng (**expected calibration error**) [2610.07177v1.pdf - Trang 2].\n  * Đo lường tỷ lệ lật thứ tự (**order-flip**) và độ lệch độ dài (**length-bias**) qua các họ giám khảo [2610.07177v1.pdf - Trang 2].\n\n---\n\n**Danh mục tài liệu tham khảo:**\n* [2610.07177v1.pdf - Trang 1]\n* [2610.07177v1.pdf - Trang 2]\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+}

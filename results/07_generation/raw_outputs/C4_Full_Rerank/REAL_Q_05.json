@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_05",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Hi-M imaging of chromatin architecture in adult Drosophila brain cryosections' là gì?",
+  "is_ooc": false,
+  "system": "C4_Full_Rerank",
+  "gate_passed": true,
+  "gate_score": 0.85903,
+  "dcsr_skipped": false,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 17955.27,
+  "retrieval_warm_ms": 542.9,
+  "llm_ms": 1627.7,
+  "e2e_cold_ms": 19582.97,
+  "e2e_warm_ms": 2170.6,
+  "provided_chunks": [
+    {
+      "id": "1bed3148-b37d-4e57-9f24-ff6d488c76d2",
+      "document_id": "4e204042-55c8-47d3-85f0-a683c2e5b5ab",
+      "filename": "2609.08776v1.pdf",
+      "page_number": 2,
+      "content": "Abstract \nHi-M combines fluorescence in situ hybridization (FISH), automated microfluidics, sequential imaging, \nand computational chromatin tracing to measure the three-dimensional organization of selected genomic \nregions in single cells. This chapter describes a Hi-M workflow adapted for cryosections of adult \nDrosophila melanogaster brains, enabling chromatin tracing while preserving tissue architecture and cell \nidentity. The protocol covers Oligopaint library design and amplification, fixation, brain dissection, \ncryoprotection, cryosectioning, sequential RNA-FISH for cell-type identification, sequential DNA-FISH \nlabeling, automated acquisition, and chromatin trace reconstruction. We also provide practical guidance"
+    },
+    {
+      "id": "7402ae57-4421-4442-b58d-2a14c53940f3",
+      "document_id": "4e204042-55c8-47d3-85f0-a683c2e5b5ab",
+      "filename": "2609.08776v1.pdf",
+      "page_number": 2,
+      "content": "imaged throughout the experiment to align successive imaging cycles and register the RNA- and \nDNA-FISH datasets. Multiple regions of interest (ROI) are acquired for each experiment to increase \nthroughput. \nThis chapter describes a Hi-M protocol for imaging chromatin organization in cryosections of adult \nDrosophila brains. Compared with previous Hi-M workflows developed for Drosophila embryos 12, the \nprotocol introduces several key adaptations. Adult heads are fixed prior to brain dissection, brains are \ncryoprotected in sucrose and embedded in OCT, and thin cryosections are mounted on activated"
+    },
+    {
+      "id": "5cd0964e-bbf1-4997-be96-8193a6cc4cf6",
+      "document_id": "4e204042-55c8-47d3-85f0-a683c2e5b5ab",
+      "filename": "2609.08776v1.pdf",
+      "page_number": 1,
+      "content": "Hi-M imaging of chromatin architecture in adult Drosophila \nbrain cryosections \n \nChristel Elkhoury Youhanna, Julie Garona, Marie Schaeffer, Christophe Houbron, Jean-Bernard Fiche, \nOlivier Messina, Marcelo Nollmann \n \nCentre de Biologie Structurale, Univ Montpellier, CNRS UMR5048, INSERM U1054, 29 rue de \nNavacelles, 34090 Montpellier, France  \n \nCorresponding author: Marcelo Nollmann, marcelo.nollmann@cnrs.fr"
+    },
+    {
+      "id": "059c299f-d12b-4ba0-a0d4-3ddfedd8f3c6",
+      "document_id": "4e204042-55c8-47d3-85f0-a683c2e5b5ab",
+      "filename": "2609.08776v1.pdf",
+      "page_number": 2,
+      "content": "Drosophila brain; Sequential imaging. \n1 Introduction \nChromatin folding contributes to transcriptional regulation by shaping the spatial organization of \npromoters, enhancers, and other regulatory elements 1,2. Population-based chromosome conformation \ncapture methods have revealed general principles of genome organization 3, yet they average chromatin \ncontacts across many cells, obscuring cell-to-cell variability 4. Imaging-based chromatin tracing methods \ncomplement chromosome conformation capture approaches by directly measuring three-dimensional (3D) \nchromatin organization in individual cells while preserving tissue architecture and cell identity 5–9. \nHi-M is a chromatin tracing method that combines RNA- and DNA-FISH with sequential imaging to"
+    },
+    {
+      "id": "083c9c4d-491c-478f-ad40-56d233a2c5df",
+      "document_id": "4e204042-55c8-47d3-85f0-a683c2e5b5ab",
+      "filename": "2609.08776v1.pdf",
+      "page_number": 23,
+      "content": "8 Figures  \nFigure 1. Overview of the Hi-M workflow. \na. Schematic of the Hi-M workflow. Adult brain cryosections mounted in a microfluidic chamber are \nimaged by automated sequential FISH hybridization. Regions of interest (ROIs) are selected for imaging, \nallowing simultaneous analysis of RNA expression and 3D chromatin organization at single-cell \nresolution. \nb. Sequential imaging strategy. RNA-FISH is first performed through multiple cycles of readout-probe \nhybridization, imaging, and chemical probe removal to identify cell types and measure transcript \nabundance. Nuclei are re-imaged at each cycle using DAPI-staining to register images. Following RNA \nimaging, DNA-FISH labeling is performed, the coverslip is realigned, and images of nuclei are used to"
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

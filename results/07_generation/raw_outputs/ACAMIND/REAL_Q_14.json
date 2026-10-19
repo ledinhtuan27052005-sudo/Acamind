@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_14",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Theories of Mind as Domain-Specific Languages of Thought' là gì?",
+  "is_ooc": false,
+  "system": "ACAMIND",
+  "gate_passed": true,
+  "gate_score": 0.746015,
+  "dcsr_skipped": false,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 27885.91,
+  "retrieval_warm_ms": 753.81,
+  "llm_ms": 3723.34,
+  "e2e_cold_ms": 31609.25,
+  "e2e_warm_ms": 4477.15,
+  "provided_chunks": [
+    {
+      "id": "08601493-54aa-4144-9e70-12225d9f9385",
+      "document_id": "1c2b38ad-b9a8-4b04-a6e9-75bc688a8cb2",
+      "filename": "2609.19598v1.pdf",
+      "page_number": 2,
+      "content": "and how our theories of mind might grow over the course of development.\nLong abstract:\nWhat kind of thing is a “theory of mind”? We propose to formalize theories\nof mind as domain-specialized programming languages, which can be used to reason about the\nmental states of other agents. Our proposal builds on the longstanding idea that thinking is akin\nto programming in an internal “language of thought.” But rather than positing a single general-\npurpose language for all of thought, we posit a collection of domain-specific languages of thought,\nwhose respective syntaxes and semantices encode the theories of various domains. We make this\nidea concrete in the domain of intuitive psychology using a real-world programming language"
+    },
+    {
+      "id": "c9bf7342-6af7-443d-bec8-1bc79a96753f",
+      "document_id": "1c2b38ad-b9a8-4b04-a6e9-75bc688a8cb2",
+      "filename": "2609.19598v1.pdf",
+      "page_number": 2,
+      "content": "Short abstract:\nWhat kind of thing is a “theory of mind”? We propose to formalize theories of\nmind as domain-specialized programming languages, which can be used to reason about the mental\nstates of other agents. This perspective allows us to apply ideas from programming language theory\nto lend insight into a variety of theoretical issues in theory-of-mind research: how a single, fixed\nintuitive theory can be used to reason about social situations with unbounded structural variation;\nhow a modular, domain-specialized cognitive system can interface with external world knowledge;\nand how our theories of mind might grow over the course of development.\nLong abstract:\nWhat kind of thing is a “theory of mind”? We propose to formalize theories"
+    },
+    {
+      "id": "64d0be50-3113-4f50-ba4d-9764ce3092ea",
+      "document_id": "1c2b38ad-b9a8-4b04-a6e9-75bc688a8cb2",
+      "filename": "2609.19598v1.pdf",
+      "page_number": 3,
+      "content": "Contents\n1\nWhat kind of thing is a theory of mind?\n3\n1.1\nThe challenges of formalizing theories-of-mind . . . . . . . . . . . . . . . . . . .\n6\n1.2\nOur proposal: theories of mind as programming languages . . . . . . . . . . . . .\n8\n2\nFormalizing a theory of mind as a DSL\n11\n2.1\nFrom Bayes nets to DSLs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .\n11\n2.2\nA brief introduction to the DSL memo . . . . . . . . . . . . . . . . . . . . . . . .\n14\n2.3\nWhat theoretical content is encoded in memo? . . . . . . . . . . . . . . . . . . . .\n18\n2.4\nConnections to game theory and multi-agent planning . . . . . . . . . . . . . . . .\n21\n3\nDomain-specificity in minds and machines\n23\n3.1\nAccessing domain-general knowledge in domain-specific languages . . . . . . . .\n26\n3.2"
+    },
+    {
+      "id": "ae9cb80c-afd2-4ded-80a1-cc467a38ca9c",
+      "document_id": "1c2b38ad-b9a8-4b04-a6e9-75bc688a8cb2",
+      "filename": "2609.19598v1.pdf",
+      "page_number": 56,
+      "content": "specialized but able to interact with the rest of knowledge, and could be subject to conceptual\nrevolutions over the course of development?\nTo address these problems, we proposed that it is fruitful to think of a theory of mind—and, in-\ndeed, any intuitive theory—as a type of domain-specialized programming language (DSL). This\nproposal allows us to make progress on at least three problems. First, treating a theory of mind\nas a DSL allows us to formalize in a fixed mathematical object the shared knowledge that sup-\nports reasoning about a wide variety of scenarios that vary structurally in the number of agents and\nrecursive levels of reasoning. Second, a DSL allows us to formalize a theory of mind in a way"
+    },
+    {
+      "id": "8eab0bb5-3616-43f5-8e1b-63d153b8aaa5",
+      "document_id": "1c2b38ad-b9a8-4b04-a6e9-75bc688a8cb2",
+      "filename": "2609.19598v1.pdf",
+      "page_number": 23,
+      "content": "causal grammar tradition (native support for theory-like operations like inference, counterfactual\nreasoning, causal learning). By attaining the best of both worlds, DSLs not only address the first\nchallenge of formalizing the shared theory-of-mind behind all situation-specific models, but also\npave the way for addressing the second challenge of explaining how theory-of-mind interacts with\nother knowledge, and the third challenge of formalizing alternate theories of mind. It is to these\nchallenges that we turn in the rest of this paper.\n3\nDomain-specificity in minds and machines\nWhen we set ourselves the goal of formalizing theories of mind, we stipulated that there is such\na thing as a “theory of mind” at all; that is, that humans have a well-defined domain-specialized"
+    }
+  ],
+  "answer": "Dựa trên các tài liệu được cung cấp trong hệ thống, dưới đây là tổng hợp học thuật về mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong tài liệu:\n\n## I. Mục tiêu nghiên cứu\n— Bài báo đặt ra câu hỏi trung tâm về bản chất của **lý thuyết tâm trí** (**Theory of Mind** - ToM): *\"What kind of thing is a ’theory of mind’?\"* [2609.19598v1.pdf - Trang 2].\n— Mục tiêu cốt lõi của nghiên cứu là chính thức hóa (formalize) các lý thuyết tâm trí như là những ngôn ngữ lập trình chuyên biệt theo từng lĩnh vực (**domain-specialized programming languages**), nhằm mục đích suy luận về trạng thái tinh thần của các tác nhân khác (*\"reason about the mental states of other agents\"*) [2609.19598v1.pdf - Trang 2].\n— Giải quyết các vấn đề lý thuyết chính trong nghiên cứu về **lý thuyết tâm trí** (**Theory of Mind**), bao gồm: cách một lý thuyết trực giác cố định có thể suy luận trong các tình huống xã hội có cấu trúc biến đổi vô hạn, cách hệ thống nhận thức chuyên biệt theo miền giao tiếp với tri thức thế giới bên ngoài, và cách các lý thuyết tâm trí phát triển trong suốt quá trình trưởng thành [2609.19598v1.pdf - Trang 2].\n\n## II. Giả thuyết khoa học\n— Suy nghĩ của con người mang tính chất tương tự như việc lập trình trong một **\"ngôn ngữ tư duy\"** nội tại (*\"language of thought\"*) [2609.19598v1.pdf - Trang 2].\n— Thay vì giả định chỉ có một ngôn ngữ vạn năng duy nhất cho mọi suy nghĩ, các tác giả đề xuất sự tồn tại của một tập hợp các ngôn ngữ tư duy chuyên biệt theo từng lĩnh vực (**domain-specific languages of thought**), trong đó cú pháp và ngữ nghĩa của chúng mã hóa các lý thuyết thuộc các lĩnh vực khác nhau [2609.19598v1.pdf - Trang 2].\n— Xem **lý thuyết tâm trí** (**Theory of Mind**) — và bất kỳ lý thuyết trực giác nào — như một dạng ngôn ngữ lập trình chuyên biệt miền (**Domain-Specific Language - DSL**), điều này cho phép giải quyết các thách thức về việc chính thức hóa tri thức chung làm nền tảng cho các tình huống thay đổi linh hoạt [2609.19598v1.pdf - Trang 56].\n\n## III. Phương pháp luận chính\n— **Chính thức hóa toán học và lập trình:** Đề xuất mô hình hóa các lý thuyết tâm trí thành các ngôn ngữ lập trình chuyên biệt miền (**Domain-Specific Languages - DSLs**) bằng cách sử dụng ngôn ngữ lập trình thực tế, qua đó chuyển đổi các mạng Bayes (**Bayes nets**) sang dạng **DSL** [2609.19598v1.pdf - Trang 2, 3, 56].\n— **Tích hợp truyền thống ngữ pháp nhân quả:** Kế thừa truyền thống ngữ pháp nhân quả (*\"causal grammar tradition\"*) nhằm cung cấp sự hỗ trợ bẩm sinh cho các thao tác mang tính lý thuyết như suy luận (*inference*), suy luận phản thực tế (*counterfactual reasoning*), và học tập nhân quả (*causal learning*) [2609.19598v1.pdf - Trang 23].\n— **Kết nối lý thuyết trò chơi và lập chiến lược đa tác nhân:** Sử dụng phương pháp kết nối giữa **DSL** với lý thuyết trò chơi (**game theory**) và lập kế hoạch đa tác nhân (**multi-agent planning**) để giải thích các trạng thái tinh thần phức tạp [2609.19598v1.pdf - Trang 3].\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*\n\n## Danh mục Tài liệu tham khảo\n1. `2609.19598v1.pdf` - Trang 2, 3, 23, 56."
+}

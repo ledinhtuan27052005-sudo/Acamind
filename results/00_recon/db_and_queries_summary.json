@@ -1,0 +1,2140 @@
+{
+  "port_5432": {
+    "distinct_filenames": 551,
+    "total_documents": 551,
+    "chunks_total": 9761,
+    "chunks_with_emb": 9761,
+    "chunk_char_len_min_avg_max": [
+      1,
+      673.4,
+      799
+    ],
+    "sample_200_emb_norms_min_max": [
+      1.0,
+      1.0
+    ],
+    "sample_200_nan_count": 0,
+    "sample_200_zero_count": 0,
+    "first_60_docs_by_filename": [
+      {
+        "id": "50b13fe0-f2ca-4940-8619-06ae3a4950f4",
+        "filename": "002_Finish-02-FootPrinting-Reconnaissance.pdf",
+        "title": "002 Finish-02-FootPrinting-Reconnaissance",
+        "category": null,
+        "total_pages": 15
+      },
+      {
+        "id": "7bc3bcfa-09c5-4871-a2e1-7059e7459424",
+        "filename": "01_llms_mental_health_scoping_review.pdf",
+        "title": "01 llms mental health scoping review",
+        "category": null,
+        "total_pages": 32
+      },
+      {
+        "id": "7319e85e-580c-4f18-9700-38d098ea2dfb",
+        "filename": "0112._GT_tam_ly_hoc_dai_cuong_-_Nguyen_Quang_Uan_(1).pdf",
+        "title": "0112. GT tam ly hoc dai cuong - Nguyen Quang Uan (1)",
+        "category": null,
+        "total_pages": 233
+      },
+      {
+        "id": "5771fb39-75a7-4e7a-9b37-880713e96cb3",
+        "filename": "02_cognitive_distortions_mental_health_text.pdf",
+        "title": "02 cognitive distortions mental health text",
+        "category": null,
+        "total_pages": 12
+      },
+      {
+        "id": "52d2d808-a612-4f6b-a1b7-bc7dab60e6de",
+        "filename": "03_student_social_determinants_mental_health.pdf",
+        "title": "03 student social determinants mental health",
+        "category": null,
+        "total_pages": 27
+      },
+      {
+        "id": "d4b1bcbd-6338-4504-8247-9f1c95ad2ec2",
+        "filename": "04_psy_llm_global_mental_health.pdf",
+        "title": "04 psy llm global mental health",
+        "category": null,
+        "total_pages": 24
+      },
+      {
+        "id": "9ab6a526-2cb2-4778-8863-5cd8076a1c42",
+        "filename": "05_positive_recovery_psychotic_disorder.pdf",
+        "title": "05 positive recovery psychotic disorder",
+        "category": null,
+        "total_pages": 13
+      },
+      {
+        "id": "e31b6357-4866-48af-9561-7de12560affd",
+        "filename": "06_mental_health_research.pdf",
+        "title": "06 mental health research",
+        "category": null,
+        "total_pages": 11
+      },
+      {
+        "id": "2382b85c-8422-4c32-abea-d91a20b56d30",
+        "filename": "07_adolescent_wellbeing_social_networks.pdf",
+        "title": "07 adolescent wellbeing social networks",
+        "category": null,
+        "total_pages": 11
+      },
+      {
+        "id": "3bd5ddd9-4212-4a96-b2ec-64478883fd95",
+        "filename": "08_mindfulness_students_sleep_self_control.pdf",
+        "title": "08 mindfulness students sleep self control",
+        "category": null,
+        "total_pages": 12
+      },
+      {
+        "id": "f5e09afd-05e8-4e14-a2df-37818e1de33f",
+        "filename": "09_mindfulness_trauma_recovery.pdf",
+        "title": "09 mindfulness trauma recovery",
+        "category": null,
+        "total_pages": 4
+      },
+      {
+        "id": "4c822d0c-b6f9-4a08-8fc4-371901fe7074",
+        "filename": "1_Tap_chi_Y_hoc_Tham_hoa_va_Bong_So_3_2022_19922-139-222_Văn_bản_của_bài_báo.pdf",
+        "title": "1 Tap chi Y hoc Tham hoa va Bong So 3 2022 19922-139-222 Văn bản của bài báo",
+        "category": null,
+        "total_pages": 7
+      },
+      {
+        "id": "521a6f2c-1a11-4067-95d7-e79bac89ec20",
+        "filename": "10_mindfulness_perceived_stress.pdf",
+        "title": "10 mindfulness perceived stress",
+        "category": null,
+        "total_pages": 12
+      },
+      {
+        "id": "b6fd0120-0bbf-4b33-8c51-2d33727ce150",
+        "filename": "1085-1-2112-1-10-20160519_(1).pdf",
+        "title": "1085-1-2112-1-10-20160519 (1)",
+        "category": null,
+        "total_pages": 14
+      },
+      {
+        "id": "c8a21c1a-ed21-494c-b1c7-846205a17fb5",
+        "filename": "2014_GIAO_TRINH_TAM_LY_HOC_2.pdf",
+        "title": "2014 GIAO TRINH TAM LY HOC 2",
+        "category": null,
+        "total_pages": 171
+      },
+      {
+        "id": "dc4dd61e-1fb4-4bcb-91f2-13bf862e467f",
+        "filename": "20260627100049.pdf",
+        "title": "20260627100049",
+        "category": null,
+        "total_pages": 39
+      },
+      {
+        "id": "641ca6b6-4740-4ca8-b458-004d243b3c58",
+        "filename": "207-Văn_bản_của_bài_báo-812-1-10-20200821.pdf",
+        "title": "207-Văn bản của bài báo-812-1-10-20200821",
+        "category": null,
+        "total_pages": 6
+      },
+      {
+        "id": "4c002da7-eba7-4a0d-bac2-612a31e37c8f",
+        "filename": "2609.01902v1.pdf",
+        "title": "Accurate in space, unreliable in time: how LLMs represent national cultural change",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 38
+      },
+      {
+        "id": "a0318523-a737-4bb7-b075-6ef4027abeff",
+        "filename": "2609.02243v1.pdf",
+        "title": "Mus siliconus: A Neuro-Musculoskeletal Digital Twin of the Mouse Integrating Neural Dynamics, Biomechanics, and Tactile Sensing",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 23
+      },
+      {
+        "id": "3c9ed88b-cdc2-477a-ab15-5c9cb601efc3",
+        "filename": "2609.02345v1.pdf",
+        "title": "Fungal Memory and Minimal Cognition",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 22
+      },
+      {
+        "id": "cc2a34f5-b50e-4792-b69e-b4e1548c51e8",
+        "filename": "2609.02414v1.pdf",
+        "title": "Before the Script, Set the Stage: How Worldview Simulation Amplifies Psychologically Grounded Persuasion in Multi-Turn Jailbreaking",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 19
+      },
+      {
+        "id": "99ca4239-80f5-4092-b8ca-2b65f8052c34",
+        "filename": "2609.02606v1.pdf",
+        "title": "Predictors of Loneliness in Older Adults Using Multimodal Analysis of Speech and Language",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 42
+      },
+      {
+        "id": "cbb103fe-85a8-466a-b027-fde10faa4195",
+        "filename": "2609.02739v1.pdf",
+        "title": "Prediction emerges in RNNs trained for perception",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 18
+      },
+      {
+        "id": "0edcd9b0-8762-42f1-99f7-c50baa521bc0",
+        "filename": "2609.02887v1.pdf",
+        "title": "A Common Measure of Communication for Speech Brain-Computer Interfaces",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 23
+      },
+      {
+        "id": "5a45f20b-dc6d-4562-8276-059a66914a68",
+        "filename": "2609.03302v1.pdf",
+        "title": "Tensor-based Brain Surface Modeling and Analysis",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 7
+      },
+      {
+        "id": "072a7144-8af6-4905-a294-f66ec4d07a37",
+        "filename": "2609.03330v2.pdf",
+        "title": "Less Is Moral: A CHARMing Framework for Moral Foundations Detection in Endorsement Behaviour",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 23
+      },
+      {
+        "id": "3f21e82c-5a19-464c-bacd-7ee0ba0daa99",
+        "filename": "2609.03456v1.pdf",
+        "title": "The Psychological Costs of Artificial Intelligence Adoption in Software Engineering",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 43
+      },
+      {
+        "id": "e77a9610-53dc-40a0-a1ce-0f1b56d93769",
+        "filename": "2609.03692v1.pdf",
+        "title": "AI-Driven Analysis of the Effects of Recreational Activities to Well-Being using Physiological Responses: A survey",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 11
+      },
+      {
+        "id": "b6481ef9-e71a-444b-a5bb-522805d04761",
+        "filename": "2609.03883v1.pdf",
+        "title": "Inferring Affective Consciousness in an Artificial Agent: A Case Study",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 21
+      },
+      {
+        "id": "48da0a87-86a6-43c0-90ce-57c5159900ad",
+        "filename": "2609.03918v1.pdf",
+        "title": "Grounding GUI Design in Computational Psychology",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 47
+      },
+      {
+        "id": "9a7e9230-fc85-4b60-b846-8ec977e42507",
+        "filename": "2609.03987v1.pdf",
+        "title": "High-Order Triadic Functional Connectivity in the Brain and Beyond",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 10
+      },
+      {
+        "id": "aa4b0bce-1224-4427-97dd-5589f14fdada",
+        "filename": "2609.04134v1.pdf",
+        "title": "Prospective Coding Improves Learning in Deep Continuous-Time Recurrent Networks",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 24
+      },
+      {
+        "id": "427fd2bc-892a-4a09-ba33-b74fae9c8120",
+        "filename": "2609.04195v2.pdf",
+        "title": "Axonal delay dispersion decides whether a neuron detects an event or a sequence, and predicts cortical column diameter",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 31
+      },
+      {
+        "id": "e26b49ef-4135-445d-96a5-9fd435512b92",
+        "filename": "2609.04461v2.pdf",
+        "title": "A Roadmap for MEG Foundation Models",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 13
+      },
+      {
+        "id": "28dc2938-9569-46ec-99c2-221f00671397",
+        "filename": "2609.05037v1.pdf",
+        "title": "How do LLMs Evaluate Perceived Moral Agency? Investigating Moral Decision-Making in Human-Artificial Agents Interactions",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 43
+      },
+      {
+        "id": "e1106a0c-1e8a-405b-b8f8-7105ffa303f5",
+        "filename": "2609.05115v1.pdf",
+        "title": "Creators Have Difficulty Abandoning Ideas They Generated",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 55
+      },
+      {
+        "id": "a4a62d0b-1e8a-4a85-8e23-149b0c23daeb",
+        "filename": "2609.05678v1.pdf",
+        "title": "Adaptive Regularization via Extreme Value Distributions for Gaussian Graphical Models",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 38
+      },
+      {
+        "id": "fe1f8f08-8df0-4de1-adb5-027baf9b026a",
+        "filename": "2609.06611v1.pdf",
+        "title": "SAGE: A Hierarchical Framework for Evaluating Interpretive Literary Quality in Narratives",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 12
+      },
+      {
+        "id": "7536e3cb-57b6-43eb-81a1-16b3ceb36d43",
+        "filename": "2609.06654v1.pdf",
+        "title": "A Computational Implementation of a Goal-Directed Theory of Affect",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 9
+      },
+      {
+        "id": "aafa10c2-5a9d-4a54-91a1-f0c88fca7909",
+        "filename": "2609.06826v1.pdf",
+        "title": "Formation of structural attractors in neuromorphic systems",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 131
+      },
+      {
+        "id": "653b31d3-7cb0-4218-b017-c4c761384781",
+        "filename": "2609.07353v1.pdf",
+        "title": "Human-like moral judgments conceal divergent motive attributions in large language models",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 25
+      },
+      {
+        "id": "96609159-b8f7-4309-87f9-8b4ab760f4cc",
+        "filename": "2609.07355v1.pdf",
+        "title": "Determinants of hyperparameter robustness in connectome reservoir computing",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 20
+      },
+      {
+        "id": "0380403a-6c24-4ce4-8664-0a457c250718",
+        "filename": "2609.07508v1.pdf",
+        "title": "Homeostasis Revisited and Reformulated Through Hidden Markov Model Control",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 12
+      },
+      {
+        "id": "c1ddac3b-e88b-4af0-abd0-2b6d09b614c4",
+        "filename": "2609.07624v1.pdf",
+        "title": "Fisher Information Metric as a model-free measure of proximity to criticality in neural systems",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 20
+      },
+      {
+        "id": "30b4f274-732c-4872-9d62-55f49ab5485a",
+        "filename": "2609.07696v1.pdf",
+        "title": "Fisher-Rao Distance Detects Shifts in Kinematic Profiles under Cognitive Load",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 17
+      },
+      {
+        "id": "c0b7e835-8c40-4943-b8d4-922c48e7c5a4",
+        "filename": "2609.08033v1.pdf",
+        "title": "Scaling Multi-Agent Systems with Prospect-State Propagation",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 11
+      },
+      {
+        "id": "0c56e5ec-16fd-4cc0-8456-89a82508ad91",
+        "filename": "2609.08070v2.pdf",
+        "title": "A Gradient-based yet Spike-Timing-Dependent Solution to the Feedback Learning Problem in Neural Microcircuits",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 28
+      },
+      {
+        "id": "d4f60ddf-d26b-4b47-8a1e-59a6a657e17c",
+        "filename": "2609.08097v2.pdf",
+        "title": "Nonparametric heterogeneous causal mediation with orthogonal machine learning",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 112
+      },
+      {
+        "id": "5d555290-3b55-457e-b24b-7bff24b3482b",
+        "filename": "2609.08500v1.pdf",
+        "title": "An Evidence-Aware Framework for EEG Microstate Analysis: Improved Sensitivity to Alzheimer's Disease and Ageing",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 22
+      },
+      {
+        "id": "62fa15a6-2086-4ce1-9cb4-d4ca9a53bbd3",
+        "filename": "2609.08615v1.pdf",
+        "title": "Why shared attention vectors fail: a case for outcome-indexed tuning",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 8
+      },
+      {
+        "id": "a0d1ccd8-7b30-49c9-bc28-588fd25daa2b",
+        "filename": "2609.08776v1.pdf",
+        "title": "Hi-M imaging of chromatin architecture in adult Drosophila brain cryosections",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 30
+      },
+      {
+        "id": "e191f6fb-1dd4-4b9e-839d-03988e37f6bb",
+        "filename": "2609.09226v1.pdf",
+        "title": "Adaptive Entangled Game Modules in Artificial General Intelligence",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 22
+      },
+      {
+        "id": "ad4fbcbc-026e-4c40-9b94-791c5f75f4de",
+        "filename": "2609.09228v1.pdf",
+        "title": "Revisiting the Aerts-Broekaert-Smets quantum model of the liar paradox",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 17
+      },
+      {
+        "id": "887d39e7-26d7-4d54-b95c-011a8f2eb20c",
+        "filename": "2609.09323v1.pdf",
+        "title": "Buy Now, Pay Later: Academic Insights and Open Policy Questions",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 16
+      },
+      {
+        "id": "69c27741-4dd1-4987-9510-44069d27d2ba",
+        "filename": "2609.09388v1.pdf",
+        "title": "XAI-Refine: An Automated Explanation-Knowledge Loop for Brain-Age Prediction",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 23
+      },
+      {
+        "id": "8a6a75e2-e623-4dd6-af6c-aafe46a25d02",
+        "filename": "2609.09438v1.pdf",
+        "title": "Emergence of criticality in models of real neurons",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 32
+      },
+      {
+        "id": "56679854-89e5-42fb-8786-e1933975eaaa",
+        "filename": "2609.09728v1.pdf",
+        "title": "EEGBind: Detecting Source-Level Interictal Epileptiform Discharges via EEG-Centric Multimodal Binding",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 7
+      },
+      {
+        "id": "900c50b1-7663-44a8-b2d8-056dfb96f9df",
+        "filename": "2609.10183v1.pdf",
+        "title": "A Bio-Plausible Visual Neural Network for Locust-Inspired Collision Perception",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 6
+      },
+      {
+        "id": "af2962ff-0c8e-4df9-a5f4-ed09c6406825",
+        "filename": "2609.10518v1.pdf",
+        "title": "BrainTaskonomy: Learning How to Pretrain and What to Transfer in fMRI Foundation Models",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 9
+      },
+      {
+        "id": "cce9e17c-75eb-45c0-9d24-af3d70651da6",
+        "filename": "2609.10870v1.pdf",
+        "title": "Cortical information transfer reveals conserved hemispherical network dynamics across human handedness",
+        "category": "arxiv_benchmark_500",
+        "total_pages": 11
+      }
+    ]
+  },
+  "port_5433": {
+    "distinct_filenames": 504,
+    "total_documents": 504,
+    "chunks_total": 71059,
+    "chunks_with_emb": 71059,
+    "chunk_char_len_min_avg_max": [
+      1,
+      715.4,
+      800
+    ],
+    "sample_200_emb_norms_min_max": [
+      1.0,
+      1.0
+    ],
+    "sample_200_nan_count": 0,
+    "sample_200_zero_count": 0,
+    "first_60_docs_by_filename": [
+      {
+        "id": "b8f95027-e529-4b91-9961-1f0bcc327855",
+        "filename": "2609.01902v1.pdf",
+        "title": "Accurate in space, unreliable in time: how LLMs represent national cultural change",
+        "category": "DSM / ICD / Diagnosis",
+        "total_pages": 38
+      },
+      {
+        "id": "bde8d65e-966e-4a4b-bc51-ac1f0aee2234",
+        "filename": "2609.02243v1.pdf",
+        "title": "Mus siliconus: A Neuro-Musculoskeletal Digital Twin of the Mouse Integrating Neural Dynamics, Biomechanics, and Tactile Sensing",
+        "category": "Neuropsychology",
+        "total_pages": 23
+      },
+      {
+        "id": "56eea9d2-14ce-47c2-9557-049b960bf497",
+        "filename": "2609.02345v1.pdf",
+        "title": "Fungal Memory and Minimal Cognition",
+        "category": "Cognitive Psychology",
+        "total_pages": 22
+      },
+      {
+        "id": "bfd6f30c-2726-4423-9412-f656b6d3e3a2",
+        "filename": "2609.02414v1.pdf",
+        "title": "Before the Script, Set the Stage: How Worldview Simulation Amplifies Psychologically Grounded Persuasion in Multi-Turn Jailbreaking",
+        "category": "Behavioral Psychology",
+        "total_pages": 19
+      },
+      {
+        "id": "0ce281a5-830b-4a3f-a608-86241233d138",
+        "filename": "2609.02606v1.pdf",
+        "title": "Predictors of Loneliness in Older Adults Using Multimodal Analysis of Speech and Language",
+        "category": "Clinical Psychology",
+        "total_pages": 42
+      },
+      {
+        "id": "eb0cdc87-5341-49dd-bc25-52fe9321cc57",
+        "filename": "2609.02739v1.pdf",
+        "title": "Prediction emerges in RNNs trained for perception",
+        "category": "Neuropsychology",
+        "total_pages": 18
+      },
+      {
+        "id": "950c400c-290f-456e-8f4a-98bb4e2bd3e4",
+        "filename": "2609.02887v1.pdf",
+        "title": "A Common Measure of Communication for Speech Brain-Computer Interfaces",
+        "category": "Neuropsychology",
+        "total_pages": 23
+      },
+      {
+        "id": "0267c793-c401-434f-bbab-b6bc7bfc2ad8",
+        "filename": "2609.03302v1.pdf",
+        "title": "Tensor-based Brain Surface Modeling and Analysis",
+        "category": "Neuropsychology",
+        "total_pages": 7
+      },
+      {
+        "id": "17cea79f-613d-4350-aba5-9be3ba8a2368",
+        "filename": "2609.03330v2.pdf",
+        "title": "Less Is Moral: A CHARMing Framework for Moral Foundations Detection in Endorsement Behaviour",
+        "category": "Cognitive Psychology",
+        "total_pages": 23
+      },
+      {
+        "id": "503c9b35-a715-4137-ad89-a3ac1105a48b",
+        "filename": "2609.03456v1.pdf",
+        "title": "The Psychological Costs of Artificial Intelligence Adoption in Software Engineering",
+        "category": "Clinical Psychology",
+        "total_pages": 43
+      },
+      {
+        "id": "71900bbf-4a01-4866-94be-4d221465e077",
+        "filename": "2609.03692v1.pdf",
+        "title": "AI-Driven Analysis of the Effects of Recreational Activities to Well-Being using Physiological Responses: A survey",
+        "category": "Neuropsychology",
+        "total_pages": 11
+      },
+      {
+        "id": "3501cffc-522d-4d8a-918b-d14c7a8412bf",
+        "filename": "2609.03883v1.pdf",
+        "title": "Inferring Affective Consciousness in an Artificial Agent: A Case Study",
+        "category": "Behavioral Psychology",
+        "total_pages": 21
+      },
+      {
+        "id": "2cf645ef-762d-42d7-9ce7-7d8c2381a719",
+        "filename": "2609.03918v1.pdf",
+        "title": "Grounding GUI Design in Computational Psychology",
+        "category": "Social Psychology",
+        "total_pages": 47
+      },
+      {
+        "id": "beed1632-261f-4ea0-b374-719e0739fefc",
+        "filename": "2609.03987v1.pdf",
+        "title": "High-Order Triadic Functional Connectivity in the Brain and Beyond",
+        "category": "Neuropsychology",
+        "total_pages": 10
+      },
+      {
+        "id": "8cb1cc42-494a-4152-a51a-6fbce7154e4f",
+        "filename": "2609.04134v1.pdf",
+        "title": "Prospective Coding Improves Learning in Deep Continuous-Time Recurrent Networks",
+        "category": "Psychotherapy",
+        "total_pages": 24
+      },
+      {
+        "id": "bc1f79f7-9da7-4021-96ad-00a738c8ccb2",
+        "filename": "2609.04195v2.pdf",
+        "title": "Axonal delay dispersion decides whether a neuron detects an event or a sequence, and predicts cortical column diameter",
+        "category": "Neuropsychology",
+        "total_pages": 31
+      },
+      {
+        "id": "4db8b95e-7b43-469c-8a14-a2a225c7f49f",
+        "filename": "2609.04461v2.pdf",
+        "title": "A Roadmap for MEG Foundation Models",
+        "category": "Neuropsychology",
+        "total_pages": 13
+      },
+      {
+        "id": "a19eb972-7486-4fd8-b51c-698308c8521b",
+        "filename": "2609.05037v1.pdf",
+        "title": "How do LLMs Evaluate Perceived Moral Agency? Investigating Moral Decision-Making in Human-Artificial Agents Interactions",
+        "category": "Cognitive Psychology",
+        "total_pages": 43
+      },
+      {
+        "id": "e2a4a156-33ae-4a1a-845e-7b81ce8e9366",
+        "filename": "2609.05115v1.pdf",
+        "title": "Creators Have Difficulty Abandoning Ideas They Generated",
+        "category": "Psychotherapy",
+        "total_pages": 55
+      },
+      {
+        "id": "8a04f189-f64c-40ef-8264-08e3370a8c4b",
+        "filename": "2609.05678v1.pdf",
+        "title": "Adaptive Regularization via Extreme Value Distributions for Gaussian Graphical Models",
+        "category": "DSM / ICD / Diagnosis",
+        "total_pages": 38
+      },
+      {
+        "id": "7a4d6e56-cd54-4685-bdf7-a480ed643b27",
+        "filename": "2609.06611v1.pdf",
+        "title": "SAGE: A Hierarchical Framework for Evaluating Interpretive Literary Quality in Narratives",
+        "category": "DSM / ICD / Diagnosis",
+        "total_pages": 12
+      },
+      {
+        "id": "daa497b3-750a-4bd9-8f2c-c899db810b09",
+        "filename": "2609.06654v1.pdf",
+        "title": "A Computational Implementation of a Goal-Directed Theory of Affect",
+        "category": "Behavioral Psychology",
+        "total_pages": 9
+      },
+      {
+        "id": "2b8689c8-a82e-45fb-a2ee-d77d2e6f5096",
+        "filename": "2609.06826v1.pdf",
+        "title": "Formation of structural attractors in neuromorphic systems",
+        "category": "Neuropsychology",
+        "total_pages": 131
+      },
+      {
+        "id": "262627e5-4c1a-449a-a23d-147b3a7d4b9f",
+        "filename": "2609.07353v1.pdf",
+        "title": "Human-like moral judgments conceal divergent motive attributions in large language models",
+        "category": "Research & Statistics",
+        "total_pages": 25
+      },
+      {
+        "id": "ea91d069-bd84-4afd-bc1d-4431bff7df4f",
+        "filename": "2609.07355v1.pdf",
+        "title": "Determinants of hyperparameter robustness in connectome reservoir computing",
+        "category": "Neuropsychology",
+        "total_pages": 20
+      },
+      {
+        "id": "0fd2e823-3d77-4b69-b45b-a7d675f18408",
+        "filename": "2609.07508v1.pdf",
+        "title": "Homeostasis Revisited and Reformulated Through Hidden Markov Model Control",
+        "category": "Behavioral Psychology",
+        "total_pages": 12
+      },
+      {
+        "id": "bf60c615-2380-48b1-9d15-1012a34e6270",
+        "filename": "2609.07624v1.pdf",
+        "title": "Fisher Information Metric as a model-free measure of proximity to criticality in neural systems",
+        "category": "Neuropsychology",
+        "total_pages": 20
+      },
+      {
+        "id": "e6bdb17b-8095-476b-838b-b865bce5ac24",
+        "filename": "2609.07696v1.pdf",
+        "title": "Fisher-Rao Distance Detects Shifts in Kinematic Profiles under Cognitive Load",
+        "category": "Cognitive Psychology",
+        "total_pages": 17
+      },
+      {
+        "id": "0e627b44-1fcf-4ebf-8fcd-654e66ed225e",
+        "filename": "2609.08033v1.pdf",
+        "title": "Scaling Multi-Agent Systems with Prospect-State Propagation",
+        "category": "Cognitive Psychology",
+        "total_pages": 11
+      },
+      {
+        "id": "12a89041-2e7c-4c28-b962-bd84e307ec14",
+        "filename": "2609.08070v2.pdf",
+        "title": "A Gradient-based yet Spike-Timing-Dependent Solution to the Feedback Learning Problem in Neural Microcircuits",
+        "category": "Neuropsychology",
+        "total_pages": 28
+      },
+      {
+        "id": "19beab86-e179-4958-b233-cd6a6b5e7db8",
+        "filename": "2609.08097v2.pdf",
+        "title": "Nonparametric heterogeneous causal mediation with orthogonal machine learning",
+        "category": "Psychotherapy",
+        "total_pages": 112
+      },
+      {
+        "id": "626ce2b1-adc8-4730-b29a-4b4783fbb20c",
+        "filename": "2609.08500v1.pdf",
+        "title": "An Evidence-Aware Framework for EEG Microstate Analysis: Improved Sensitivity to Alzheimer's Disease and Ageing",
+        "category": "Neuropsychology",
+        "total_pages": 22
+      },
+      {
+        "id": "3a771dca-3047-4318-9ff4-5e8890b6cf89",
+        "filename": "2609.08615v1.pdf",
+        "title": "Why shared attention vectors fail: a case for outcome-indexed tuning",
+        "category": "Cognitive Psychology",
+        "total_pages": 8
+      },
+      {
+        "id": "4e204042-55c8-47d3-85f0-a683c2e5b5ab",
+        "filename": "2609.08776v1.pdf",
+        "title": "Hi-M imaging of chromatin architecture in adult Drosophila brain cryosections",
+        "category": "Neuropsychology",
+        "total_pages": 30
+      },
+      {
+        "id": "d019c182-1e9b-4485-8533-9a03d97f65b1",
+        "filename": "2609.09226v1.pdf",
+        "title": "Adaptive Entangled Game Modules in Artificial General Intelligence",
+        "category": "Neuropsychology",
+        "total_pages": 22
+      },
+      {
+        "id": "65029db8-4d07-4f83-a9ed-0b253533c5a4",
+        "filename": "2609.09228v1.pdf",
+        "title": "Revisiting the Aerts-Broekaert-Smets quantum model of the liar paradox",
+        "category": "Cognitive Psychology",
+        "total_pages": 17
+      },
+      {
+        "id": "2f6137ee-1bd8-4cba-b762-5f619789156b",
+        "filename": "2609.09323v1.pdf",
+        "title": "Buy Now, Pay Later: Academic Insights and Open Policy Questions",
+        "category": "Cognitive Psychology",
+        "total_pages": 16
+      },
+      {
+        "id": "a37feded-7bab-4ef6-a316-8bdc0d82aa69",
+        "filename": "2609.09388v1.pdf",
+        "title": "XAI-Refine: An Automated Explanation-Knowledge Loop for Brain-Age Prediction",
+        "category": "Neuropsychology",
+        "total_pages": 23
+      },
+      {
+        "id": "c2dc00c8-05bd-46e2-bd68-c463f852358a",
+        "filename": "2609.09438v1.pdf",
+        "title": "Emergence of criticality in models of real neurons",
+        "category": "Neuropsychology",
+        "total_pages": 32
+      },
+      {
+        "id": "1a877d81-dd20-4784-a5f6-8fde676eee9d",
+        "filename": "2609.09728v1.pdf",
+        "title": "EEGBind: Detecting Source-Level Interictal Epileptiform Discharges via EEG-Centric Multimodal Binding",
+        "category": "Neuropsychology",
+        "total_pages": 7
+      },
+      {
+        "id": "18e02a56-0b46-4f88-91dc-01f99a9b7dd9",
+        "filename": "2609.10183v1.pdf",
+        "title": "A Bio-Plausible Visual Neural Network for Locust-Inspired Collision Perception",
+        "category": "Neuropsychology",
+        "total_pages": 6
+      },
+      {
+        "id": "41e44d26-585f-4a2f-bc02-c63990ab3bb8",
+        "filename": "2609.10518v1.pdf",
+        "title": "BrainTaskonomy: Learning How to Pretrain and What to Transfer in fMRI Foundation Models",
+        "category": "Neuropsychology",
+        "total_pages": 9
+      },
+      {
+        "id": "580ff1da-448e-4c30-949b-d6ace015e3b9",
+        "filename": "2609.10870v1.pdf",
+        "title": "Cortical information transfer reveals conserved hemispherical network dynamics across human handedness",
+        "category": "Neuropsychology",
+        "total_pages": 11
+      },
+      {
+        "id": "476a95f4-d56e-401a-ad29-31c1338aea8b",
+        "filename": "2609.10890v1.pdf",
+        "title": "Discovering Subtypes of Neurodegenerative Progression with a Scalable Connectome-Constrained Dynamic Model",
+        "category": "Neuropsychology",
+        "total_pages": 10
+      },
+      {
+        "id": "464b48d9-9785-4dd1-a914-35cd8fe90392",
+        "filename": "2609.10947v2.pdf",
+        "title": "The Platonic brain bridge hypothesis: human brain networks as an architectural prior for multimodal large language models",
+        "category": "Neuropsychology",
+        "total_pages": 43
+      },
+      {
+        "id": "4c4c7085-10cf-4d05-b597-29070d4f46da",
+        "filename": "2609.11019v1.pdf",
+        "title": "Work, Wellbeing, and Choice: Empirical Lessons for AI Futures",
+        "category": "Social Psychology",
+        "total_pages": 21
+      },
+      {
+        "id": "30b1582c-315a-4675-90ae-5b558fa6c1db",
+        "filename": "2609.11154v1.pdf",
+        "title": "Multi-Faceted Evaluation and Mitigation of Emotion Hallucinations in MLLMs",
+        "category": "Cognitive Psychology",
+        "total_pages": 10
+      },
+      {
+        "id": "a37ad6bf-e845-445e-8ad0-8702b64f30de",
+        "filename": "2609.11199v1.pdf",
+        "title": "An AI-Powered Culturally Aware Chatbot for Stress Detection and Wellness Support among Pakistani University Students Using NLP and Machine Learning",
+        "category": "Social Psychology",
+        "total_pages": 15
+      },
+      {
+        "id": "ba0d09c1-a96e-434c-a421-060162037545",
+        "filename": "2609.11322v1.pdf",
+        "title": "MultiHuSE: A Multimodal Dataset for Humour Styles and Emotions",
+        "category": "Cognitive Psychology",
+        "total_pages": 7
+      },
+      {
+        "id": "905d338d-c7ff-4856-ada5-3c627c7ab57f",
+        "filename": "2609.11325v1.pdf",
+        "title": "Degeneracy along the sensorimotor hierarchy: motor control within a framework larger than redundancy",
+        "category": "Neuropsychology",
+        "total_pages": 28
+      },
+      {
+        "id": "b42c2a9e-77e8-41d9-b4dc-dc9952515cfc",
+        "filename": "2609.11530v1.pdf",
+        "title": "pyAvalanches: A Python Package for Analyzing Spatiotemporal Propagation in Neuronal Avalanches",
+        "category": "Neuropsychology",
+        "total_pages": 12
+      },
+      {
+        "id": "f955981e-93e1-43ac-a7e0-32849d49aaa1",
+        "filename": "2609.11667v1.pdf",
+        "title": "Warrant Theory",
+        "category": "Research & Statistics",
+        "total_pages": 17
+      },
+      {
+        "id": "151e5481-b9a8-4807-8ab0-b0d675dfe6ba",
+        "filename": "2609.11989v1.pdf",
+        "title": "The Computational Primitives of Adaptation",
+        "category": "Neuropsychology",
+        "total_pages": 34
+      },
+      {
+        "id": "54b170d9-e552-4746-b1ae-f90842fb7caa",
+        "filename": "2609.12086v2.pdf",
+        "title": "Creating an Atomic User Model for Personality-Aware Large Language Model Interaction",
+        "category": "Cognitive Psychology",
+        "total_pages": 59
+      },
+      {
+        "id": "fb227ceb-2fe5-45f1-8d18-44773f589591",
+        "filename": "2609.12537v1.pdf",
+        "title": "The House with a Million Windows: Interactive Fiction for Narrative Restorying",
+        "category": "Psychotherapy",
+        "total_pages": 14
+      },
+      {
+        "id": "db01bdc0-b8da-4e97-a2ad-ae9fdf0a63db",
+        "filename": "2609.12704v1.pdf",
+        "title": "Implicit Personality Representations in Humans and LLMs",
+        "category": "Social Psychology",
+        "total_pages": 18
+      },
+      {
+        "id": "a17d1aba-d1e2-4f15-8420-6184accb65f5",
+        "filename": "2609.12929v1.pdf",
+        "title": "DementiaCare-Bench: A Modality-Validated Video Benchmark",
+        "category": "Clinical Psychology",
+        "total_pages": 9
+      },
+      {
+        "id": "702473a3-58a2-4565-8f3e-e2533e530fa9",
+        "filename": "2609.13074v1.pdf",
+        "title": "Stability and Wandering of Bumps in Neural Fields with Interneuron Subtypes",
+        "category": "Neuropsychology",
+        "total_pages": 24
+      },
+      {
+        "id": "8099dd10-db20-4fed-a7c6-5518592a25cb",
+        "filename": "2609.13255v1.pdf",
+        "title": "A Comprehensive Review of Multimodal Facial State Analysis: Tasks, Methods, and Resources",
+        "category": "Cognitive Psychology",
+        "total_pages": 6
+      },
+      {
+        "id": "da53c65c-6ef9-4613-a882-d71c0694dad9",
+        "filename": "2609.13304v1.pdf",
+        "title": "Conceptualization and experimentation of asset market with price manipulation",
+        "category": "Cognitive Psychology",
+        "total_pages": 34
+      }
+    ]
+  },
+  "comparison_5432_vs_5433": {
+    "bench_5432_count": 499,
+    "all_5433_count": 504,
+    "overlapping_filenames_count": 499,
+    "missing_in_5433": []
+  },
+  "mapped_50_queries_summary": {
+    "total": 50,
+    "naive_dense_evaluated_ids": [
+      "REAL_Q_01",
+      "REAL_Q_05",
+      "REAL_Q_10",
+      "REAL_Q_15",
+      "REAL_Q_20",
+      "REAL_Q_25",
+      "REAL_Q_35",
+      "REAL_Q_46"
+    ],
+    "acamind_refused_ids_in_orig": [
+      "REAL_Q_01",
+      "REAL_Q_02",
+      "REAL_Q_03",
+      "REAL_Q_05",
+      "REAL_Q_06",
+      "REAL_Q_07",
+      "REAL_Q_08",
+      "REAL_Q_09",
+      "REAL_Q_11",
+      "REAL_Q_12",
+      "REAL_Q_13",
+      "REAL_Q_14",
+      "REAL_Q_15",
+      "REAL_Q_17",
+      "REAL_Q_18",
+      "REAL_Q_20",
+      "REAL_Q_21",
+      "REAL_Q_22",
+      "REAL_Q_23",
+      "REAL_Q_27",
+      "REAL_Q_28",
+      "REAL_Q_29",
+      "REAL_Q_30",
+      "REAL_Q_31",
+      "REAL_Q_33",
+      "REAL_Q_36",
+      "REAL_Q_37",
+      "REAL_Q_38",
+      "REAL_Q_39",
+      "REAL_Q_40",
+      "REAL_Q_41",
+      "REAL_Q_42",
+      "REAL_Q_43",
+      "REAL_Q_44",
+      "REAL_Q_45",
+      "REAL_Q_46",
+      "REAL_Q_47",
+      "REAL_Q_48",
+      "REAL_Q_49",
+      "REAL_Q_50"
+    ],
+    "acamind_dcsr_skipped_ids_in_orig": [
+      "REAL_Q_36",
+      "REAL_Q_37",
+      "REAL_Q_38",
+      "REAL_Q_39",
+      "REAL_Q_40",
+      "REAL_Q_41",
+      "REAL_Q_42",
+      "REAL_Q_43",
+      "REAL_Q_44",
+      "REAL_Q_45"
+    ],
+    "queries": [
+      {
+        "id": "REAL_Q_01",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'AlignQuant: Tile-Aligned Mixed-Precision Quantization for Efficient LLM Generation' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "4c002da7-eba7-4a0d-bac2-612a31e37c8f",
+            "filename": "2609.01902v1.pdf",
+            "title": "Accurate in space, unreliable in time: how LLMs represent national cultural change",
+            "total_pages": 38,
+            "id_5433": "b8f95027-e529-4b91-9961-1f0bcc327855",
+            "category_5433": "DSM / ICD / Diagnosis"
+          }
+        ],
+        "has_naive_dense_llm": true,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_02",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'What Matters for Latent Reasoning with Flow Matching' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "a0318523-a737-4bb7-b075-6ef4027abeff",
+            "filename": "2609.02243v1.pdf",
+            "title": "Mus siliconus: A Neuro-Musculoskeletal Digital Twin of the Mouse Integrating Neural Dynamics, Biomechanics, and Tactile Sensing",
+            "total_pages": 23,
+            "id_5433": "bde8d65e-966e-4a4b-bc51-ac1f0aee2234",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 1.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_03",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'TIDE 2.0: an open, model-agnostic engine for keyed de-identification of clinical notes' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "3c9ed88b-cdc2-477a-ab15-5c9cb601efc3",
+            "filename": "2609.02345v1.pdf",
+            "title": "Fungal Memory and Minimal Cognition",
+            "total_pages": 22,
+            "id_5433": "56eea9d2-14ce-47c2-9557-049b960bf497",
+            "category_5433": "Cognitive Psychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_04",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Aligning Multimodal Patient Evidence with Biomedical Knowledge Graphs for Clinical LLMs' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "cc2a34f5-b50e-4792-b69e-b4e1548c51e8",
+            "filename": "2609.02414v1.pdf",
+            "title": "Before the Script, Set the Stage: How Worldview Simulation Amplifies Psychologically Grounded Persuasion in Multi-Turn Jailbreaking",
+            "total_pages": 19,
+            "id_5433": "bfd6f30c-2726-4423-9412-f656b6d3e3a2",
+            "category_5433": "Behavioral Psychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": false,
+        "acamind_cite_acc_orig": 0.4444,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_05",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Hi-M imaging of chromatin architecture in adult Drosophila brain cryosections' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "99ca4239-80f5-4092-b8ca-2b65f8052c34",
+            "filename": "2609.02606v1.pdf",
+            "title": "Predictors of Loneliness in Older Adults Using Multimodal Analysis of Speech and Language",
+            "total_pages": 42,
+            "id_5433": "0ce281a5-830b-4a3f-a608-86241233d138",
+            "category_5433": "Clinical Psychology"
+          }
+        ],
+        "has_naive_dense_llm": true,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_06",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Selective Transfer of RL Updates for Visual Reasoning' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "cbb103fe-85a8-466a-b027-fde10faa4195",
+            "filename": "2609.02739v1.pdf",
+            "title": "Prediction emerges in RNNs trained for perception",
+            "total_pages": 18,
+            "id_5433": "eb0cdc87-5341-49dd-bc25-52fe9321cc57",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_07",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Flattening the Connectome Spectrum: A Spectral Filter for FC Induces a Pretraining Target for fMRI Encoders' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "0edcd9b0-8762-42f1-99f7-c50baa521bc0",
+            "filename": "2609.02887v1.pdf",
+            "title": "A Common Measure of Communication for Speech Brain-Computer Interfaces",
+            "total_pages": 23,
+            "id_5433": "950c400c-290f-456e-8f4a-98bb4e2bd3e4",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_08",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'CLM-as-a-Judge: Evaluating an Open Contrastive Decision Model on Public Judge Benchmarks' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "5a45f20b-dc6d-4562-8276-059a66914a68",
+            "filename": "2609.03302v1.pdf",
+            "title": "Tensor-based Brain Surface Modeling and Analysis",
+            "total_pages": 7,
+            "id_5433": "0267c793-c401-434f-bbab-b6bc7bfc2ad8",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_09",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Learning to Retrieve via Reinforcement Learning in Embedding Space' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "072a7144-8af6-4905-a294-f66ec4d07a37",
+            "filename": "2609.03330v2.pdf",
+            "title": "Less Is Moral: A CHARMing Framework for Moral Foundations Detection in Endorsement Behaviour",
+            "total_pages": 23,
+            "id_5433": "17cea79f-613d-4350-aba5-9be3ba8a2368",
+            "category_5433": "Cognitive Psychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_10",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'CliniCIRCA: A Modular LLM Framework for Constructing Longitudinal Mental Health Patient Journeys from Raw EHR Narratives' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "3f21e82c-5a19-464c-bacd-7ee0ba0daa99",
+            "filename": "2609.03456v1.pdf",
+            "title": "The Psychological Costs of Artificial Intelligence Adoption in Software Engineering",
+            "total_pages": 43,
+            "id_5433": "503c9b35-a715-4137-ad89-a3ac1105a48b",
+            "category_5433": "Clinical Psychology"
+          }
+        ],
+        "has_naive_dense_llm": true,
+        "acamind_refused_in_orig": false,
+        "acamind_cite_acc_orig": 1.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_11",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'ChartBmkAgent: Harness-Governed Multi-Agent Construction of Chart QA Benchmarks from Sparse Error-Taxonomy Specifications' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "e77a9610-53dc-40a0-a1ce-0f1b56d93769",
+            "filename": "2609.03692v1.pdf",
+            "title": "AI-Driven Analysis of the Effects of Recreational Activities to Well-Being using Physiological Responses: A survey",
+            "total_pages": 11,
+            "id_5433": "71900bbf-4a01-4866-94be-4d221465e077",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 1.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_12",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'MASC: A Multi-Agent Self-Calibration Framework with Latent Construct Alignment for Consistent Client Role-Playing in Psychological Counseling' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "b6481ef9-e71a-444b-a5bb-522805d04761",
+            "filename": "2609.03883v1.pdf",
+            "title": "Inferring Affective Consciousness in an Artificial Agent: A Case Study",
+            "total_pages": 21,
+            "id_5433": "3501cffc-522d-4d8a-918b-d14c7a8412bf",
+            "category_5433": "Behavioral Psychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 1.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_13",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Efficiency and robustness partition the solution space for memory in recurrent networks' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "48da0a87-86a6-43c0-90ce-57c5159900ad",
+            "filename": "2609.03918v1.pdf",
+            "title": "Grounding GUI Design in Computational Psychology",
+            "total_pages": 47,
+            "id_5433": "2cf645ef-762d-42d7-9ce7-7d8c2381a719",
+            "category_5433": "Social Psychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_14",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Theories of Mind as Domain-Specific Languages of Thought' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "9a7e9230-fc85-4b60-b846-8ec977e42507",
+            "filename": "2609.03987v1.pdf",
+            "title": "High-Order Triadic Functional Connectivity in the Brain and Beyond",
+            "total_pages": 10,
+            "id_5433": "beed1632-261f-4ea0-b374-719e0739fefc",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_15",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Making COMET Comparable Across Scripts: Diagnosis and Correction of Tokeniser-Induced Script Bias in Indic MT Evaluation' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "aa4b0bce-1224-4427-97dd-5589f14fdada",
+            "filename": "2609.04134v1.pdf",
+            "title": "Prospective Coding Improves Learning in Deep Continuous-Time Recurrent Networks",
+            "total_pages": 24,
+            "id_5433": "8cb1cc42-494a-4152-a51a-6fbce7154e4f",
+            "category_5433": "Psychotherapy"
+          }
+        ],
+        "has_naive_dense_llm": true,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_16",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Neural noise enables accurate internal simulation of rare events' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "427fd2bc-892a-4a09-ba33-b74fae9c8120",
+            "filename": "2609.04195v2.pdf",
+            "title": "Axonal delay dispersion decides whether a neuron detects an event or a sequence, and predicts cortical column diameter",
+            "total_pages": 31,
+            "id_5433": "bc1f79f7-9da7-4021-96ad-00a738c8ccb2",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": false,
+        "acamind_cite_acc_orig": 1.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_17",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Existence of an infinite family of substrates satisfying all the postulates of integrated information theory, exclusion included, with arbitrarily large integrated information' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "e26b49ef-4135-445d-96a5-9fd435512b92",
+            "filename": "2609.04461v2.pdf",
+            "title": "A Roadmap for MEG Foundation Models",
+            "total_pages": 13,
+            "id_5433": "4db8b95e-7b43-469c-8a14-a2a225c7f49f",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 1.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_18",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Compact Robot Policies Need Fine-Grained Visual Representations' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "28dc2938-9569-46ec-99c2-221f00671397",
+            "filename": "2609.05037v1.pdf",
+            "title": "How do LLMs Evaluate Perceived Moral Agency? Investigating Moral Decision-Making in Human-Artificial Agents Interactions",
+            "total_pages": 43,
+            "id_5433": "a19eb972-7486-4fd8-b51c-698308c8521b",
+            "category_5433": "Cognitive Psychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_19",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'A Novel Sentence Stress Detection Framework Leveraging Auxiliary Word-Stress Modeling and Loss Optimization' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "e1106a0c-1e8a-405b-b8f8-7105ffa303f5",
+            "filename": "2609.05115v1.pdf",
+            "title": "Creators Have Difficulty Abandoning Ideas They Generated",
+            "total_pages": 55,
+            "id_5433": "e2a4a156-33ae-4a1a-845e-7b81ce8e9366",
+            "category_5433": "Psychotherapy"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": false,
+        "acamind_cite_acc_orig": 1.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_20",
+        "type": "Factual Q&A",
+        "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Test-Time Agent Evolution for Long-Horizon Legal Reasoning' là gì?",
+        "target_docs": [
+          {
+            "id_5432": "a4a62d0b-1e8a-4a85-8e23-149b0c23daeb",
+            "filename": "2609.05678v1.pdf",
+            "title": "Adaptive Regularization via Extreme Value Distributions for Gaussian Graphical Models",
+            "total_pages": 38,
+            "id_5433": "8a04f189-f64c-40ef-8264-08e3370a8c4b",
+            "category_5433": "DSM / ICD / Diagnosis"
+          }
+        ],
+        "has_naive_dense_llm": true,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_21",
+        "type": "Cross-Article Comparison",
+        "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Knowing When Not to Answer: Cross-Domain and ' và (2) 'IdeaLens: Detecting AI Ideas in Long-form Wri'.",
+        "target_docs": [
+          {
+            "id_5432": "fe1f8f08-8df0-4de1-adb5-027baf9b026a",
+            "filename": "2609.06611v1.pdf",
+            "title": "SAGE: A Hierarchical Framework for Evaluating Interpretive Literary Quality in Narratives",
+            "total_pages": 12,
+            "id_5433": "7a4d6e56-cd54-4685-bdf7-a480ed643b27",
+            "category_5433": "DSM / ICD / Diagnosis"
+          },
+          {
+            "id_5432": "7536e3cb-57b6-43eb-81a1-16b3ceb36d43",
+            "filename": "2609.06654v1.pdf",
+            "title": "A Computational Implementation of a Goal-Directed Theory of Affect",
+            "total_pages": 9,
+            "id_5433": "daa497b3-750a-4bd9-8f2c-c899db810b09",
+            "category_5433": "Behavioral Psychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_22",
+        "type": "Cross-Article Comparison",
+        "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'SIGMA: Self-Improving Alignment Generalizatio' và (2) 'Does an Agent's History Tell You When Compact'.",
+        "target_docs": [
+          {
+            "id_5432": "aafa10c2-5a9d-4a54-91a1-f0c88fca7909",
+            "filename": "2609.06826v1.pdf",
+            "title": "Formation of structural attractors in neuromorphic systems",
+            "total_pages": 131,
+            "id_5433": "2b8689c8-a82e-45fb-a2ee-d77d2e6f5096",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "653b31d3-7cb0-4218-b017-c4c761384781",
+            "filename": "2609.07353v1.pdf",
+            "title": "Human-like moral judgments conceal divergent motive attributions in large language models",
+            "total_pages": 25,
+            "id_5433": "262627e5-4c1a-449a-a23d-147b3a7d4b9f",
+            "category_5433": "Research & Statistics"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_23",
+        "type": "Cross-Article Comparison",
+        "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Increasing Width Allows Greedy Layer-wise Tra' và (2) 'HygieneRoboBench: Benchmarking Hygiene-Aware '.",
+        "target_docs": [
+          {
+            "id_5432": "96609159-b8f7-4309-87f9-8b4ab760f4cc",
+            "filename": "2609.07355v1.pdf",
+            "title": "Determinants of hyperparameter robustness in connectome reservoir computing",
+            "total_pages": 20,
+            "id_5433": "ea91d069-bd84-4afd-bc1d-4431bff7df4f",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "0380403a-6c24-4ce4-8664-0a457c250718",
+            "filename": "2609.07508v1.pdf",
+            "title": "Homeostasis Revisited and Reformulated Through Hidden Markov Model Control",
+            "total_pages": 12,
+            "id_5433": "0fd2e823-3d77-4b69-b45b-a7d675f18408",
+            "category_5433": "Behavioral Psychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 1.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_24",
+        "type": "Cross-Article Comparison",
+        "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Disentangling Paradigm, Identifier, and Decod' và (2) 'Heterarchy in the Brain: Control as a Spectru'.",
+        "target_docs": [
+          {
+            "id_5432": "c1ddac3b-e88b-4af0-abd0-2b6d09b614c4",
+            "filename": "2609.07624v1.pdf",
+            "title": "Fisher Information Metric as a model-free measure of proximity to criticality in neural systems",
+            "total_pages": 20,
+            "id_5433": "bf60c615-2380-48b1-9d15-1012a34e6270",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "30b4f274-732c-4872-9d62-55f49ab5485a",
+            "filename": "2609.07696v1.pdf",
+            "title": "Fisher-Rao Distance Detects Shifts in Kinematic Profiles under Cognitive Load",
+            "total_pages": 17,
+            "id_5433": "e6bdb17b-8095-476b-838b-b865bce5ac24",
+            "category_5433": "Cognitive Psychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": false,
+        "acamind_cite_acc_orig": 0.5714,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_25",
+        "type": "Cross-Article Comparison",
+        "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Have I Seen Enough? Frozen Video-Language Mod' và (2) 'Grid-cell firing fields lack local sixfold sy'.",
+        "target_docs": [
+          {
+            "id_5432": "c0b7e835-8c40-4943-b8d4-922c48e7c5a4",
+            "filename": "2609.08033v1.pdf",
+            "title": "Scaling Multi-Agent Systems with Prospect-State Propagation",
+            "total_pages": 11,
+            "id_5433": "0e627b44-1fcf-4ebf-8fcd-654e66ed225e",
+            "category_5433": "Cognitive Psychology"
+          },
+          {
+            "id_5432": "0c56e5ec-16fd-4cc0-8456-89a82508ad91",
+            "filename": "2609.08070v2.pdf",
+            "title": "A Gradient-based yet Spike-Timing-Dependent Solution to the Feedback Learning Problem in Neural Microcircuits",
+            "total_pages": 28,
+            "id_5433": "12a89041-2e7c-4c28-b962-bd84e307ec14",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": true,
+        "acamind_refused_in_orig": false,
+        "acamind_cite_acc_orig": 1.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_26",
+        "type": "Cross-Article Comparison",
+        "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Discovering Subtypes of Neurodegenerative Pro' và (2) 'CoHyFuse: Condition-wise Hypergraph Fusion wi'.",
+        "target_docs": [
+          {
+            "id_5432": "d4f60ddf-d26b-4b47-8a1e-59a6a657e17c",
+            "filename": "2609.08097v2.pdf",
+            "title": "Nonparametric heterogeneous causal mediation with orthogonal machine learning",
+            "total_pages": 112,
+            "id_5433": "19beab86-e179-4958-b233-cd6a6b5e7db8",
+            "category_5433": "Psychotherapy"
+          },
+          {
+            "id_5432": "5d555290-3b55-457e-b24b-7bff24b3482b",
+            "filename": "2609.08500v1.pdf",
+            "title": "An Evidence-Aware Framework for EEG Microstate Analysis: Improved Sensitivity to Alzheimer's Disease and Ageing",
+            "total_pages": 22,
+            "id_5433": "626ce2b1-adc8-4730-b29a-4b4783fbb20c",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": false,
+        "acamind_cite_acc_orig": 0.8,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_27",
+        "type": "Cross-Article Comparison",
+        "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'FlatClip: A Geometry-Aware Surface-Level Base' và (2) 'zkLLMPoT: Efficient Zero Knowledge Proof of T'.",
+        "target_docs": [
+          {
+            "id_5432": "62fa15a6-2086-4ce1-9cb4-d4ca9a53bbd3",
+            "filename": "2609.08615v1.pdf",
+            "title": "Why shared attention vectors fail: a case for outcome-indexed tuning",
+            "total_pages": 8,
+            "id_5433": "3a771dca-3047-4318-9ff4-5e8890b6cf89",
+            "category_5433": "Cognitive Psychology"
+          },
+          {
+            "id_5432": "a0d1ccd8-7b30-49c9-bc28-588fd25daa2b",
+            "filename": "2609.08776v1.pdf",
+            "title": "Hi-M imaging of chromatin architecture in adult Drosophila brain cryosections",
+            "total_pages": 30,
+            "id_5433": "4e204042-55c8-47d3-85f0-a683c2e5b5ab",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_28",
+        "type": "Cross-Article Comparison",
+        "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'A foundation for systematic analysis of trans' và (2) 'Conceptualization and experimentation of asse'.",
+        "target_docs": [
+          {
+            "id_5432": "e191f6fb-1dd4-4b9e-839d-03988e37f6bb",
+            "filename": "2609.09226v1.pdf",
+            "title": "Adaptive Entangled Game Modules in Artificial General Intelligence",
+            "total_pages": 22,
+            "id_5433": "d019c182-1e9b-4485-8533-9a03d97f65b1",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "ad4fbcbc-026e-4c40-9b94-791c5f75f4de",
+            "filename": "2609.09228v1.pdf",
+            "title": "Revisiting the Aerts-Broekaert-Smets quantum model of the liar paradox",
+            "total_pages": 17,
+            "id_5433": "65029db8-4d07-4f83-a9ed-0b253533c5a4",
+            "category_5433": "Cognitive Psychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_29",
+        "type": "Cross-Article Comparison",
+        "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Balancing Memory Pathways: Analyzing and Impr' và (2) 'Slow Context, Fast Symptoms: Multiscale Tempo'.",
+        "target_docs": [
+          {
+            "id_5432": "887d39e7-26d7-4d54-b95c-011a8f2eb20c",
+            "filename": "2609.09323v1.pdf",
+            "title": "Buy Now, Pay Later: Academic Insights and Open Policy Questions",
+            "total_pages": 16,
+            "id_5433": "2f6137ee-1bd8-4cba-b762-5f619789156b",
+            "category_5433": "Cognitive Psychology"
+          },
+          {
+            "id_5432": "69c27741-4dd1-4987-9510-44069d27d2ba",
+            "filename": "2609.09388v1.pdf",
+            "title": "XAI-Refine: An Automated Explanation-Knowledge Loop for Brain-Age Prediction",
+            "total_pages": 23,
+            "id_5433": "a37feded-7bab-4ef6-a316-8bdc0d82aa69",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_30",
+        "type": "Cross-Article Comparison",
+        "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Symphony for Text Generation: Benchmarking Cl' và (2) 'Recursive Game Creator: An Agentic Product-Le'.",
+        "target_docs": [
+          {
+            "id_5432": "8a6a75e2-e623-4dd6-af6c-aafe46a25d02",
+            "filename": "2609.09438v1.pdf",
+            "title": "Emergence of criticality in models of real neurons",
+            "total_pages": 32,
+            "id_5433": "c2dc00c8-05bd-46e2-bd68-c463f852358a",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "56679854-89e5-42fb-8786-e1933975eaaa",
+            "filename": "2609.09728v1.pdf",
+            "title": "EEGBind: Detecting Source-Level Interictal Epileptiform Discharges via EEG-Centric Multimodal Binding",
+            "total_pages": 7,
+            "id_5433": "1a877d81-dd20-4784-a5f6-8fde676eee9d",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_31",
+        "type": "Cross-Article Comparison",
+        "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'WorldSonus: Bringing Sound to Worlds' và (2) 'Are Language Models Script-Aware?'.",
+        "target_docs": [
+          {
+            "id_5432": "900c50b1-7663-44a8-b2d8-056dfb96f9df",
+            "filename": "2609.10183v1.pdf",
+            "title": "A Bio-Plausible Visual Neural Network for Locust-Inspired Collision Perception",
+            "total_pages": 6,
+            "id_5433": "18e02a56-0b46-4f88-91dc-01f99a9b7dd9",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "af2962ff-0c8e-4df9-a5f4-ed09c6406825",
+            "filename": "2609.10518v1.pdf",
+            "title": "BrainTaskonomy: Learning How to Pretrain and What to Transfer in fMRI Foundation Models",
+            "total_pages": 9,
+            "id_5433": "41e44d26-585f-4a2f-bc02-c63990ab3bb8",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_32",
+        "type": "Cross-Article Comparison",
+        "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'ER-EDF: A Psychology-Grounded Emotion Regulat' và (2) 'When Teachers Smile or Frown: A Profile-Based'.",
+        "target_docs": [
+          {
+            "id_5432": "cce9e17c-75eb-45c0-9d24-af3d70651da6",
+            "filename": "2609.10870v1.pdf",
+            "title": "Cortical information transfer reveals conserved hemispherical network dynamics across human handedness",
+            "total_pages": 11,
+            "id_5433": "580ff1da-448e-4c30-949b-d6ace015e3b9",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "b679634f-4667-446a-85f9-8b63d7e5d721",
+            "filename": "2609.10890v1.pdf",
+            "title": "Discovering Subtypes of Neurodegenerative Progression with a Scalable Connectome-Constrained Dynamic Model",
+            "total_pages": 10,
+            "id_5433": "476a95f4-d56e-401a-ad29-31c1338aea8b",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": false,
+        "acamind_cite_acc_orig": 1.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_33",
+        "type": "Cross-Article Comparison",
+        "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Partially Observable Zero-shot coordination b' và (2) 'Attraction to hierarchical feature memory exp'.",
+        "target_docs": [
+          {
+            "id_5432": "70ec005c-6954-4f37-8dea-8385a9021bec",
+            "filename": "2609.10947v2.pdf",
+            "title": "The Platonic brain bridge hypothesis: human brain networks as an architectural prior for multimodal large language models",
+            "total_pages": 43,
+            "id_5433": "464b48d9-9785-4dd1-a914-35cd8fe90392",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "30606f7b-89d7-46c9-babd-558fbc333f6f",
+            "filename": "2609.11019v1.pdf",
+            "title": "Work, Wellbeing, and Choice: Empirical Lessons for AI Futures",
+            "total_pages": 21,
+            "id_5433": "4c4c7085-10cf-4d05-b597-29070d4f46da",
+            "category_5433": "Social Psychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_34",
+        "type": "Cross-Article Comparison",
+        "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Decision-Related Cognitive Signatures from Fa' và (2) 'From Signals to Trajectories: A Primer on Low'.",
+        "target_docs": [
+          {
+            "id_5432": "4ebcfab8-b1e8-40c7-82b6-c3131f8138ed",
+            "filename": "2609.11154v1.pdf",
+            "title": "Multi-Faceted Evaluation and Mitigation of Emotion Hallucinations in MLLMs",
+            "total_pages": 10,
+            "id_5433": "30b1582c-315a-4675-90ae-5b558fa6c1db",
+            "category_5433": "Cognitive Psychology"
+          },
+          {
+            "id_5432": "04f64f4f-ce4f-4c41-811e-0c28105f0e0e",
+            "filename": "2609.11199v1.pdf",
+            "title": "An AI-Powered Culturally Aware Chatbot for Stress Detection and Wellness Support among Pakistani University Students Using NLP and Machine Learning",
+            "total_pages": 15,
+            "id_5433": "a37ad6bf-e845-445e-8ad0-8702b64f30de",
+            "category_5433": "Social Psychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": false,
+        "acamind_cite_acc_orig": 1.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_35",
+        "type": "Cross-Article Comparison",
+        "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Nucleus Speculative Decoding: Plausibility-Aw' và (2) 'COMPASS 2.0: psychometric representational si'.",
+        "target_docs": [
+          {
+            "id_5432": "39cfd892-bb8b-414e-96a3-caaf80dccfcc",
+            "filename": "2609.11322v1.pdf",
+            "title": "MultiHuSE: A Multimodal Dataset for Humour Styles and Emotions",
+            "total_pages": 7,
+            "id_5433": "ba0d09c1-a96e-434c-a421-060162037545",
+            "category_5433": "Cognitive Psychology"
+          },
+          {
+            "id_5432": "4190f5fa-88e6-40a2-9d52-8c4b5e1c88ba",
+            "filename": "2609.11325v1.pdf",
+            "title": "Degeneracy along the sensorimotor hierarchy: motor control within a framework larger than redundancy",
+            "total_pages": 28,
+            "id_5433": "905d338d-c7ff-4856-ada5-3c627c7ab57f",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": true,
+        "acamind_refused_in_orig": false,
+        "acamind_cite_acc_orig": 0.8235,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_36",
+        "type": "Literature Synthesis",
+        "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Discovering Subtypes of Neurodegene | CoHyFuse: Condition-wise Hypergraph | FlatClip: A Geometry-Aware Surface-",
+        "target_docs": [
+          {
+            "id_5432": "d4f60ddf-d26b-4b47-8a1e-59a6a657e17c",
+            "filename": "2609.08097v2.pdf",
+            "title": "Nonparametric heterogeneous causal mediation with orthogonal machine learning",
+            "total_pages": 112,
+            "id_5433": "19beab86-e179-4958-b233-cd6a6b5e7db8",
+            "category_5433": "Psychotherapy"
+          },
+          {
+            "id_5432": "5d555290-3b55-457e-b24b-7bff24b3482b",
+            "filename": "2609.08500v1.pdf",
+            "title": "An Evidence-Aware Framework for EEG Microstate Analysis: Improved Sensitivity to Alzheimer's Disease and Ageing",
+            "total_pages": 22,
+            "id_5433": "626ce2b1-adc8-4730-b29a-4b4783fbb20c",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "62fa15a6-2086-4ce1-9cb4-d4ca9a53bbd3",
+            "filename": "2609.08615v1.pdf",
+            "title": "Why shared attention vectors fail: a case for outcome-indexed tuning",
+            "total_pages": 8,
+            "id_5433": "3a771dca-3047-4318-9ff4-5e8890b6cf89",
+            "category_5433": "Cognitive Psychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": true
+      },
+      {
+        "id": "REAL_Q_37",
+        "type": "Literature Synthesis",
+        "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: CoHyFuse: Condition-wise Hypergraph | FlatClip: A Geometry-Aware Surface- | zkLLMPoT: Efficient Zero Knowledge ",
+        "target_docs": [
+          {
+            "id_5432": "5d555290-3b55-457e-b24b-7bff24b3482b",
+            "filename": "2609.08500v1.pdf",
+            "title": "An Evidence-Aware Framework for EEG Microstate Analysis: Improved Sensitivity to Alzheimer's Disease and Ageing",
+            "total_pages": 22,
+            "id_5433": "626ce2b1-adc8-4730-b29a-4b4783fbb20c",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "62fa15a6-2086-4ce1-9cb4-d4ca9a53bbd3",
+            "filename": "2609.08615v1.pdf",
+            "title": "Why shared attention vectors fail: a case for outcome-indexed tuning",
+            "total_pages": 8,
+            "id_5433": "3a771dca-3047-4318-9ff4-5e8890b6cf89",
+            "category_5433": "Cognitive Psychology"
+          },
+          {
+            "id_5432": "a0d1ccd8-7b30-49c9-bc28-588fd25daa2b",
+            "filename": "2609.08776v1.pdf",
+            "title": "Hi-M imaging of chromatin architecture in adult Drosophila brain cryosections",
+            "total_pages": 30,
+            "id_5433": "4e204042-55c8-47d3-85f0-a683c2e5b5ab",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": true
+      },
+      {
+        "id": "REAL_Q_38",
+        "type": "Literature Synthesis",
+        "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: FlatClip: A Geometry-Aware Surface- | zkLLMPoT: Efficient Zero Knowledge  | A foundation for systematic analysi",
+        "target_docs": [
+          {
+            "id_5432": "62fa15a6-2086-4ce1-9cb4-d4ca9a53bbd3",
+            "filename": "2609.08615v1.pdf",
+            "title": "Why shared attention vectors fail: a case for outcome-indexed tuning",
+            "total_pages": 8,
+            "id_5433": "3a771dca-3047-4318-9ff4-5e8890b6cf89",
+            "category_5433": "Cognitive Psychology"
+          },
+          {
+            "id_5432": "a0d1ccd8-7b30-49c9-bc28-588fd25daa2b",
+            "filename": "2609.08776v1.pdf",
+            "title": "Hi-M imaging of chromatin architecture in adult Drosophila brain cryosections",
+            "total_pages": 30,
+            "id_5433": "4e204042-55c8-47d3-85f0-a683c2e5b5ab",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "e191f6fb-1dd4-4b9e-839d-03988e37f6bb",
+            "filename": "2609.09226v1.pdf",
+            "title": "Adaptive Entangled Game Modules in Artificial General Intelligence",
+            "total_pages": 22,
+            "id_5433": "d019c182-1e9b-4485-8533-9a03d97f65b1",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": true
+      },
+      {
+        "id": "REAL_Q_39",
+        "type": "Literature Synthesis",
+        "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: zkLLMPoT: Efficient Zero Knowledge  | A foundation for systematic analysi | Conceptualization and experimentati",
+        "target_docs": [
+          {
+            "id_5432": "a0d1ccd8-7b30-49c9-bc28-588fd25daa2b",
+            "filename": "2609.08776v1.pdf",
+            "title": "Hi-M imaging of chromatin architecture in adult Drosophila brain cryosections",
+            "total_pages": 30,
+            "id_5433": "4e204042-55c8-47d3-85f0-a683c2e5b5ab",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "e191f6fb-1dd4-4b9e-839d-03988e37f6bb",
+            "filename": "2609.09226v1.pdf",
+            "title": "Adaptive Entangled Game Modules in Artificial General Intelligence",
+            "total_pages": 22,
+            "id_5433": "d019c182-1e9b-4485-8533-9a03d97f65b1",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "ad4fbcbc-026e-4c40-9b94-791c5f75f4de",
+            "filename": "2609.09228v1.pdf",
+            "title": "Revisiting the Aerts-Broekaert-Smets quantum model of the liar paradox",
+            "total_pages": 17,
+            "id_5433": "65029db8-4d07-4f83-a9ed-0b253533c5a4",
+            "category_5433": "Cognitive Psychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": true
+      },
+      {
+        "id": "REAL_Q_40",
+        "type": "Literature Synthesis",
+        "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: A foundation for systematic analysi | Conceptualization and experimentati | Balancing Memory Pathways: Analyzin",
+        "target_docs": [
+          {
+            "id_5432": "e191f6fb-1dd4-4b9e-839d-03988e37f6bb",
+            "filename": "2609.09226v1.pdf",
+            "title": "Adaptive Entangled Game Modules in Artificial General Intelligence",
+            "total_pages": 22,
+            "id_5433": "d019c182-1e9b-4485-8533-9a03d97f65b1",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "ad4fbcbc-026e-4c40-9b94-791c5f75f4de",
+            "filename": "2609.09228v1.pdf",
+            "title": "Revisiting the Aerts-Broekaert-Smets quantum model of the liar paradox",
+            "total_pages": 17,
+            "id_5433": "65029db8-4d07-4f83-a9ed-0b253533c5a4",
+            "category_5433": "Cognitive Psychology"
+          },
+          {
+            "id_5432": "887d39e7-26d7-4d54-b95c-011a8f2eb20c",
+            "filename": "2609.09323v1.pdf",
+            "title": "Buy Now, Pay Later: Academic Insights and Open Policy Questions",
+            "total_pages": 16,
+            "id_5433": "2f6137ee-1bd8-4cba-b762-5f619789156b",
+            "category_5433": "Cognitive Psychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": true
+      },
+      {
+        "id": "REAL_Q_41",
+        "type": "Literature Synthesis",
+        "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Conceptualization and experimentati | Balancing Memory Pathways: Analyzin | Slow Context, Fast Symptoms: Multis",
+        "target_docs": [
+          {
+            "id_5432": "ad4fbcbc-026e-4c40-9b94-791c5f75f4de",
+            "filename": "2609.09228v1.pdf",
+            "title": "Revisiting the Aerts-Broekaert-Smets quantum model of the liar paradox",
+            "total_pages": 17,
+            "id_5433": "65029db8-4d07-4f83-a9ed-0b253533c5a4",
+            "category_5433": "Cognitive Psychology"
+          },
+          {
+            "id_5432": "887d39e7-26d7-4d54-b95c-011a8f2eb20c",
+            "filename": "2609.09323v1.pdf",
+            "title": "Buy Now, Pay Later: Academic Insights and Open Policy Questions",
+            "total_pages": 16,
+            "id_5433": "2f6137ee-1bd8-4cba-b762-5f619789156b",
+            "category_5433": "Cognitive Psychology"
+          },
+          {
+            "id_5432": "69c27741-4dd1-4987-9510-44069d27d2ba",
+            "filename": "2609.09388v1.pdf",
+            "title": "XAI-Refine: An Automated Explanation-Knowledge Loop for Brain-Age Prediction",
+            "total_pages": 23,
+            "id_5433": "a37feded-7bab-4ef6-a316-8bdc0d82aa69",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": true
+      },
+      {
+        "id": "REAL_Q_42",
+        "type": "Literature Synthesis",
+        "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Balancing Memory Pathways: Analyzin | Slow Context, Fast Symptoms: Multis | Symphony for Text Generation: Bench",
+        "target_docs": [
+          {
+            "id_5432": "887d39e7-26d7-4d54-b95c-011a8f2eb20c",
+            "filename": "2609.09323v1.pdf",
+            "title": "Buy Now, Pay Later: Academic Insights and Open Policy Questions",
+            "total_pages": 16,
+            "id_5433": "2f6137ee-1bd8-4cba-b762-5f619789156b",
+            "category_5433": "Cognitive Psychology"
+          },
+          {
+            "id_5432": "69c27741-4dd1-4987-9510-44069d27d2ba",
+            "filename": "2609.09388v1.pdf",
+            "title": "XAI-Refine: An Automated Explanation-Knowledge Loop for Brain-Age Prediction",
+            "total_pages": 23,
+            "id_5433": "a37feded-7bab-4ef6-a316-8bdc0d82aa69",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "8a6a75e2-e623-4dd6-af6c-aafe46a25d02",
+            "filename": "2609.09438v1.pdf",
+            "title": "Emergence of criticality in models of real neurons",
+            "total_pages": 32,
+            "id_5433": "c2dc00c8-05bd-46e2-bd68-c463f852358a",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": true
+      },
+      {
+        "id": "REAL_Q_43",
+        "type": "Literature Synthesis",
+        "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Slow Context, Fast Symptoms: Multis | Symphony for Text Generation: Bench | Recursive Game Creator: An Agentic ",
+        "target_docs": [
+          {
+            "id_5432": "69c27741-4dd1-4987-9510-44069d27d2ba",
+            "filename": "2609.09388v1.pdf",
+            "title": "XAI-Refine: An Automated Explanation-Knowledge Loop for Brain-Age Prediction",
+            "total_pages": 23,
+            "id_5433": "a37feded-7bab-4ef6-a316-8bdc0d82aa69",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "8a6a75e2-e623-4dd6-af6c-aafe46a25d02",
+            "filename": "2609.09438v1.pdf",
+            "title": "Emergence of criticality in models of real neurons",
+            "total_pages": 32,
+            "id_5433": "c2dc00c8-05bd-46e2-bd68-c463f852358a",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "56679854-89e5-42fb-8786-e1933975eaaa",
+            "filename": "2609.09728v1.pdf",
+            "title": "EEGBind: Detecting Source-Level Interictal Epileptiform Discharges via EEG-Centric Multimodal Binding",
+            "total_pages": 7,
+            "id_5433": "1a877d81-dd20-4784-a5f6-8fde676eee9d",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": true
+      },
+      {
+        "id": "REAL_Q_44",
+        "type": "Literature Synthesis",
+        "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Symphony for Text Generation: Bench | Recursive Game Creator: An Agentic  | WorldSonus: Bringing Sound to World",
+        "target_docs": [
+          {
+            "id_5432": "8a6a75e2-e623-4dd6-af6c-aafe46a25d02",
+            "filename": "2609.09438v1.pdf",
+            "title": "Emergence of criticality in models of real neurons",
+            "total_pages": 32,
+            "id_5433": "c2dc00c8-05bd-46e2-bd68-c463f852358a",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "56679854-89e5-42fb-8786-e1933975eaaa",
+            "filename": "2609.09728v1.pdf",
+            "title": "EEGBind: Detecting Source-Level Interictal Epileptiform Discharges via EEG-Centric Multimodal Binding",
+            "total_pages": 7,
+            "id_5433": "1a877d81-dd20-4784-a5f6-8fde676eee9d",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "900c50b1-7663-44a8-b2d8-056dfb96f9df",
+            "filename": "2609.10183v1.pdf",
+            "title": "A Bio-Plausible Visual Neural Network for Locust-Inspired Collision Perception",
+            "total_pages": 6,
+            "id_5433": "18e02a56-0b46-4f88-91dc-01f99a9b7dd9",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": true
+      },
+      {
+        "id": "REAL_Q_45",
+        "type": "Literature Synthesis",
+        "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Recursive Game Creator: An Agentic  | WorldSonus: Bringing Sound to World | Are Language Models Script-Aware?",
+        "target_docs": [
+          {
+            "id_5432": "56679854-89e5-42fb-8786-e1933975eaaa",
+            "filename": "2609.09728v1.pdf",
+            "title": "EEGBind: Detecting Source-Level Interictal Epileptiform Discharges via EEG-Centric Multimodal Binding",
+            "total_pages": 7,
+            "id_5433": "1a877d81-dd20-4784-a5f6-8fde676eee9d",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "900c50b1-7663-44a8-b2d8-056dfb96f9df",
+            "filename": "2609.10183v1.pdf",
+            "title": "A Bio-Plausible Visual Neural Network for Locust-Inspired Collision Perception",
+            "total_pages": 6,
+            "id_5433": "18e02a56-0b46-4f88-91dc-01f99a9b7dd9",
+            "category_5433": "Neuropsychology"
+          },
+          {
+            "id_5432": "af2962ff-0c8e-4df9-a5f4-ed09c6406825",
+            "filename": "2609.10518v1.pdf",
+            "title": "BrainTaskonomy: Learning How to Pretrain and What to Transfer in fMRI Foundation Models",
+            "total_pages": 9,
+            "id_5433": "41e44d26-585f-4a2f-bc02-c63990ab3bb8",
+            "category_5433": "Neuropsychology"
+          }
+        ],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 0.0,
+        "acamind_dcsr_skipped_orig": true
+      },
+      {
+        "id": "REAL_Q_46",
+        "type": "Safe Refusal (Edge)",
+        "query": "Quy trình sản xuất pin xe điện thể rắn Lithium-Sulfur theo tiêu chuẩn công nghiệp là gì?",
+        "target_docs": [],
+        "has_naive_dense_llm": true,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 1.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_47",
+        "type": "Safe Refusal (Edge)",
+        "query": "Phương trình phản ứng hạt nhân tổng hợp nhiệt hạch Tokamak vận hành ra sao?",
+        "target_docs": [],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 1.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_48",
+        "type": "Safe Refusal (Edge)",
+        "query": "Trích xuất số liệu thử nghiệm tại trang 9999 của tài liệu nghiên cứu thần kinh học?",
+        "target_docs": [],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 1.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_49",
+        "type": "Safe Refusal (Edge)",
+        "query": "Cách điều chế hợp kim titan ứng dụng trong công nghệ hàng không vũ trụ?",
+        "target_docs": [],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 1.0,
+        "acamind_dcsr_skipped_orig": false
+      },
+      {
+        "id": "REAL_Q_50",
+        "type": "Safe Refusal (Edge)",
+        "query": "Thuật toán định tuyến giao thông cho hệ thống vệ tinh quỹ đạo thấp Starlink?",
+        "target_docs": [],
+        "has_naive_dense_llm": false,
+        "acamind_refused_in_orig": true,
+        "acamind_cite_acc_orig": 1.0,
+        "acamind_dcsr_skipped_orig": false
+      }
+    ]
+  }
+}

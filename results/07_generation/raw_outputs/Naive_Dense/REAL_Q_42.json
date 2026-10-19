@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_42",
+  "type": "Literature Synthesis",
+  "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Balancing Memory Pathways: Analyzin | Slow Context, Fast Symptoms: Multis | Symphony for Text Generation: Bench",
+  "is_ooc": false,
+  "system": "Naive_Dense",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 82.69,
+  "retrieval_warm_ms": 117.15,
+  "llm_ms": 1199.01,
+  "e2e_cold_ms": 1281.7,
+  "e2e_warm_ms": 1316.16,
+  "provided_chunks": [
+    {
+      "id": "16ffe5e5-6878-45d9-b115-e263a15cc21e",
+      "document_id": "5de42efe-3c4f-44ed-a18b-fe8c58daabbe",
+      "filename": "2610.08093v1.pdf",
+      "page_number": 9,
+      "content": "questions. In Proceedings of the 2025 Conference\nof the Nations of the Americas Chapter of the Asso-\nciation for Computational Linguistics: Human Lan-\nguage Technologies (Volume 1: Long Papers), pages\n3563–3599.\nJunying Chen, Zhenyang Cai, Ke Ji, Xidong Wang,\nWanlong Liu, Rongsheng Wang, and Benyou Wang.\n2025b. Towards medical complex reasoning with\nllms through medical verifiable problems. In Find-\nings of the Association for Computational Linguistics:\nACL 2025, pages 14552–14573.\nZihong Chen, Wanli Jiang, Jinzhe Li, Zhonghang Yuan,\nHuanjun Kong, Wanli Ouyang, and Nanqing Dong.\n2025c. Graphgen: Enhancing supervised fine-tuning\nfor llms with knowledge-driven synthetic data gener-\nation. arXiv preprint arXiv:2505.20416."
+    },
+    {
+      "id": "0093ed75-c7c5-4c34-9050-fb6b3c8e9ba3",
+      "document_id": "595b2e7a-6608-4a65-b9d5-ef020e342ff1",
+      "filename": "2610.08501v1.pdf",
+      "page_number": 32,
+      "content": "50. Tierney, A. A. et al. Ambient artificial intelligence scribes to alleviate the burden of clinical documentation. NEJM\nCatalyst 5 (2024). https://doi.org/10.1056/cat.23.0404.\n51. Silberzahn, R. et al. Many analysts, one data set: Making transparent how variations in analytic choices affect\nresults. Advances in Methods and Practices in Psychological Science 1, 337–356 (2018). https://doi.org/10.1177/\n2515245917747646.\n52. Botvinik-Nezer, R. et al. Variability in the analysis of a single neuroimaging dataset by many teams. Nature 582,\n84–88 (2020). https://doi.org/10.1038/s41586-020-2314-9.\n53. Gallifant, J. et al. The TRIPOD-LLM reporting guideline for studies using large language models. Nature Medicine\n31, 60–69 (2025). https://doi.org/10.1038/s41591-024-03425-5."
+    },
+    {
+      "id": "b9d13148-909e-47a3-be3e-f677b4ff545b",
+      "document_id": "aa20f529-2f4f-429c-9ddb-2c7842ddcde8",
+      "filename": "2610.06673v1.pdf",
+      "page_number": 9,
+      "content": "arXiv preprint arXiv:2509.14260 (2025) Palisade Research Technical Report.\n20. Zhou, J., Lu, T., Mishra, S., et al.:\nInstruction-following evaluation for large language\nmodels. arXiv preprint arXiv:2311.07911 (2023)\n21. Jiang, Y., Wang, Y., Zeng, X., et al.: FollowBench: A multi-level fine-grained constraints\nfollowing benchmark for large language models. In: Proceedings of the 62nd Annual Meeting\nof the Association for Computational Linguistics (ACL). (2024)\n22. Qin, Y., Song, K., Hu, Y., et al.: InFoBench: Evaluating instruction following ability in\nlarge language models. In: Findings of the Association for Computational Linguistics: ACL.\n(2024)\n23. Wallace, E., Xiao, K., Leike, R., et al.: The instruction hierarchy: Training LLMs to prioritize"
+    },
+    {
+      "id": "15899a3e-02c7-42fa-ad4a-d94795b2b747",
+      "document_id": "069e02d8-2c76-4e6d-99d7-2fd900fb5a83",
+      "filename": "2610.08300v1.pdf",
+      "page_number": 4,
+      "content": "Li, K. et al. TiMem: Temporal-hierarchical memory consolidation for long-horizon conversational agents.\nFindings of ACL, 2026. arXiv:2601.02845.\nLiu, N. F. et al. Lost in the middle: How language models use long contexts. TACL, 2024.\nMcNemar, Q. Note on the sampling error of the difference between correlated proportions or percentages.\nPsychometrika, 12:153–157, 1947.\nPaulsen, N. Context is what you need: The maximum effective context window for real world limits of LLMs.\narXiv:2509.21361, 2025.\nWu, Z. et al. GAM: Hierarchical graph-based agentic memory for LLM agents. ACL, 34647–34664, 2026.\nXu, B. et al. StructMem: Structured memory for long-horizon behavior in LLMs. ACL, 122–146, 2026.\nZheng, L. et al. Judging LLM-as-a-judge with MT-Bench and Chatbot Arena. arXiv:2306.05685, 2023.\n4"
+    },
+    {
+      "id": "7dbe05db-6374-48e0-9463-b7fa504d03d5",
+      "document_id": "ff6a59e8-caf8-4227-b5f5-596c3d817056",
+      "filename": "2609.36515v1.pdf",
+      "page_number": 23,
+      "content": "Antoine Peyronnet, Fabian Gloeckle, and Amaury Hayat. Lemmabench: A live, research-level\nbenchmark to evaluate llm capabilities in mathematics. arXiv preprint arXiv:2602.24173, 2026.\nLong Phan, Alice Gatti, Nathaniel Li, Adam Khoja, Ryan Kim, Richard Ren, et al. A benchmark of\nexpert-level academic questions to assess ai capabilities. Nature, 649(8099):1139–1146, 2026.\nKunat Pipatanakul, Phatrasek Jirabovonvisut, Potsawee Manakul, Sittipong Sripaisarnmongkol,\nRuangsak Patomwong, Pathomporn Chokchainant, et al. Typhoon: Thai large language models.\narXiv preprint arXiv:2312.13951, 2023.\nE. Ponti, Goran Glavaš, Olga Majewska, Qianchu Liu, Ivan Vuli´c, and A. Korhonen. Xcopa: A\nmultilingual dataset for causal commonsense reasoning. In Proceedings of the 2020 Conference on"
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

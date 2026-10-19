@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_09",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Learning to Retrieve via Reinforcement Learning in Embedding Space' là gì?",
+  "is_ooc": false,
+  "system": "Naive_Dense",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 157.07,
+  "retrieval_warm_ms": 104.61,
+  "llm_ms": 3344.8,
+  "e2e_cold_ms": 3501.87,
+  "e2e_warm_ms": 3449.41,
+  "provided_chunks": [
+    {
+      "id": "07832ad9-ad75-4dd0-91af-06565bb869af",
+      "document_id": "f4b8ae32-1579-4ca1-956b-a097303e960a",
+      "filename": "2610.07731v1.pdf",
+      "page_number": 1,
+      "content": "Preprint.\nLEARNING TO RETRIEVE VIA REINFORCEMENT\nLEARNING IN EMBEDDING SPACE\nQi Liu, Fengming Liang, Yiqun Chen, Erhan Zhang, Jiaxin Mao\nRenmin University of China\nqiliu6777@gmail.com, maojiaxin@gmail.com\nABSTRACT\nDense retrieval models are typically trained with contrastive objectives that\nlearn effective representations but do not directly optimize retrieval metrics or\ndownstream task performance. To address this problem, we introduce RELER\n(REinforcement LEarning for Retrieval), a reinforcement learning framework\nthat enables existing embedding models to learn to retrieve directly in embedding\nspace and align to task-specific rewards. We train RELER by sampling unit-length\nquery and document embedding actions from von Mises–Fisher (vMF) distribu-"
+    },
+    {
+      "id": "b3bacacc-f5ef-4ba6-8845-15a7a86f7215",
+      "document_id": "f4b8ae32-1579-4ca1-956b-a097303e960a",
+      "filename": "2610.07731v1.pdf",
+      "page_number": 1,
+      "content": "does not directly optimize human preferences or task success. Reinforcement learning (RL) provides\na principled approach by optimizing rewards derived from human preferences or task outcomes\n(Ouyang et al., 2022; DeepSeek-AI, 2025). This motivates using RL to align retrieval models di-\nrectly with retrieval and downstream metrics, as RL can optimize such non-differentiable objectives\nby sampling retrieval decisions, evaluating their outcomes with the target metrics, and estimating\npolicy gradients without differentiating through the retrieval process or the downstream evaluator\n(Williams, 1992). Recent work has explored RL for embedding and retrieval models through poli-\nCode: https://github.com/liuqi6777/RELER\n1\narXiv:2610.07731v1  [cs.IR]  6 Oct 2026"
+    },
+    {
+      "id": "376ad723-a449-4b5a-b69a-375415d9922c",
+      "document_id": "f4b8ae32-1579-4ca1-956b-a097303e960a",
+      "filename": "2610.07731v1.pdf",
+      "page_number": 11,
+      "content": "estimates in reinforcement learning. Journal of Machine Learning Research, 5:1471–1530, 2004.\nPo-Sen Huang, Xiaodong He, Jianfeng Gao, Li Deng, Alex Acero, and Larry Heck. Learning deep\nstructured semantic models for web search using clickthrough data. In Proceedings of the ACM\nInternational Conference on Information and Knowledge Management (CIKM), 2013.\nHaonan Jiang, Yuji Wang, Yongjie Zhu, Xin Lu, Wenyu Qin, Meng Wang, Pengfei Wan, and Yan-\nsong Tang. Embed-RL: Reinforcement learning for reasoning-driven multimodal embeddings.\narXiv preprint arXiv:2602.13823, 2026.\nBowen Jin, Hansi Zeng, Zhenrui Yue, Jinsung Yoon, Sercan Arik, Dong Wang, Hamed Zamani, and\nJiawei Han. Search-R1: Training LLMs to reason and leverage search engines with reinforcement"
+    },
+    {
+      "id": "f636887e-2ca0-4c36-a6a4-32076ec4c199",
+      "document_id": "f4b8ae32-1579-4ca1-956b-a097303e960a",
+      "filename": "2610.07731v1.pdf",
+      "page_number": 2,
+      "content": "Preprint.\ncies over generated text (Sun et al., 2026; Jiang et al., 2026) or discrete document selections (Salemi\net al., 2024; Liu et al., 2025c; Zhang et al., 2026). These policies explore text or document choices;\nthe query and document vectors used for similarity scoring are not themselves sampled as actions.\nIn this work, we revisit reinforcement learning for dense retrieval by treating embeddings as learn-\nable retrieval actions. Because their similarities determine which documents are retrieved, exploring\nalternative embeddings allows task feedback to guide the representations themselves. We introduce\nRELER (REinforcement LEarning for Retrieval), a framework for post-training embedding models"
+    },
+    {
+      "id": "f1224ffd-6fb9-44a5-ad86-ab8d1f1a29dd",
+      "document_id": "f4b8ae32-1579-4ca1-956b-a097303e960a",
+      "filename": "2610.07731v1.pdf",
+      "page_number": 2,
+      "content": "alternative embeddings allows task feedback to guide the representations themselves. We introduce\nRELER (REinforcement LEarning for Retrieval), a framework for post-training embedding models\nto learn to retrieve: sample embedding actions, evaluate the retrieval results or downstream answers\nthey produce, and update the encoder to favor actions with higher rewards. The framework explores\nboth query and document embeddings, and also supports query-only adaptation against a fixed doc-\nument index. Inference retains deterministic single-vector retrieval.\nTo turn this view into a practical learning algorithm, RELER places a von Mises–Fisher (vMF)\npolicy around each normalized encoder output, enabling exploration on the unit sphere used for"
+    }
+  ],
+  "answer": "## I. Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính\n\n### 1. Mục tiêu nghiên cứu\nBài báo giới thiệu **RELER** (**REinforcement LEarning for Retrieval**), một khung học tăng cường (**reinforcement learning framework**) nhằm mục đích hậu đào tạo (**post-training**) các mô hình nhúng (**embedding models**) để học cách truy xuất trực tiếp trong không gian nhúng (**embedding space**) và căn chỉnh theo các phần thưởng đặc thù của tác vụ (**task-specific rewards**) [2610.07731v1.pdf - Trang 1, 2]. \n\n### 2. Giả thuyết khoa học\n* Các mô hình truy xuất dày đặc (**dense retrieval models**) thông thường được huấn luyện bằng các mục tiêu tương phản (**contrastive objectives**), giúp học các biểu diễn hiệu quả nhưng lại không trực tiếp tối ưu hóa các chỉ số truy xuất (**retrieval metrics**) hoặc hiệu suất tác vụ hạ nguồn (**downstream task performance**) [2610.07731v1.pdf - Trang 1].\n* Học tăng cường (**Reinforcement Learning - RL**) cung cấp một cách tiếp cận nguyên lý bằng cách tối ưu hóa phần thưởng bắt nguồn từ sở thích của con người hoặc kết quả tác vụ, từ đó cho phép căn chỉnh các mô hình truy xuất trực tiếp với các chỉ số truy xuất và hạ nguồn [2610.07731v1.pdf - Trang 1].\n* Thay vì chỉ khám phá văn bản hoặc lựa chọn tài liệu rời rạc như các nghiên cứu trước đây, giả thuyết của nghiên cứu này là coi các véc-tơ nhúng (cả truy xuất và tài liệu) như các hành động truy xuất có thể học được (**learnable retrieval actions**), cho phép phản hồi tác vụ hướng dẫn trực tiếp các biểu diễn [2610.07731v1.pdf - Trang 2].\n\n### 3. Phương pháp luận chính\n* **Mô hình hóa hành động (Action Sampling):** Xây dựng chính sách von Mises–Fisher (**von Mises–Fisher - vMF policy**) bao quanh mỗi đầu ra của bộ mã hóa đã được chuẩn hóa (**normalized encoder output**), cho phép khám phá trên mặt cầu đơn vị (**unit sphere**) bằng cách lấy mẫu các hành động nhúng truy xuất và tài liệu có độ dài đơn vị (**unit-length query and document embedding actions**) [2610.07731v1.pdf - Trang 1, 2].\n* **Đánh giá và Cập nhật (Evaluation and Policy Update):** Khung làm việc lấy mẫu các hành động nhúng, đánh giá kết quả truy xuất hoặc câu trả lời hạ nguồn mà chúng tạo ra, và cập nhật bộ mã hóa (**encoder**) để ưu tiên các hành động mang lại phần thưởng cao hơn [2610.07731v1.pdf - Trang 2].\n* **Phạm vi thích ứng và Suy luận (Adaptation and Inference):** Khung này hỗ trợ khám phá cả nhúng truy vấn và tài liệu, đồng thời hỗ trợ thích ứng chỉ riêng truy vấn (**query-only adaptation**) đối với một chỉ mục tài liệu cố định (**fixed document index**); trong khi quá trình suy luận (**inference**) vẫn duy trì việc truy xuất véc-tơ đơn lẻ tất định (**deterministic single-vector retrieval**) [2610.07731v1.pdf - Trang 2].\n\n---\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+}

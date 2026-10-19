@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_29",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Balancing Memory Pathways: Analyzing and Impr' và (2) 'Slow Context, Fast Symptoms: Multiscale Tempo'.",
+  "is_ooc": false,
+  "system": "Naive_Dense",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 84.88,
+  "retrieval_warm_ms": 69.72,
+  "llm_ms": 1279.46,
+  "e2e_cold_ms": 1364.34,
+  "e2e_warm_ms": 1349.18,
+  "provided_chunks": [
+    {
+      "id": "81b5df8c-63a3-4615-9cfd-223dac1bcd0f",
+      "document_id": "55a67f34-2e6f-4e72-9f64-ea39d65610f8",
+      "filename": "2610.06750v1.pdf",
+      "page_number": 1,
+      "content": "tion distributed across long contexts. Extending these findings, we observe that attention plays a\nlarger role when the answer appears directly in the context or can be found from a single piece of\nevidence, whereas the recurrent state plays a larger role when the answer must be inferred rather than\ncopied or requires combining multiple pieces of evidence across the context. These complementary\nstrengths motivate an important question: How well do hybrid LMs use both memory pathways,\nand how can their coordination be improved?\n∗Correspondence to: hyunjil@cs.unc.edu\n1Code in https://github.com/amy-hyunji/Balancing-Memory-Pathways\n1\narXiv:2610.06750v1  [cs.CL]  5 Oct 2026"
+    },
+    {
+      "id": "03724f25-86d0-4b29-914b-ec82bee225b3",
+      "document_id": "55a67f34-2e6f-4e72-9f64-ea39d65610f8",
+      "filename": "2610.06750v1.pdf",
+      "page_number": 5,
+      "content": "recurrent-only conditions to analyze and assess the model’s use of each memory pathway (Sec-\ntion 4.1). We then evaluate how overall performance and pathway utilization change after SFT on\nquestion answering and agentic tasks (Section 4.2).\n4.1\nDISENTANGLING TWO MEMORY PATHWAYS\nTo analyze how past information is carried through attention and recurrence, we divide each input\ninto a past portion and a current portion, and selectively restrict which memory mechanism can\ntransfer information from the past to the current input. For example, in question answering, the past\nportion corresponds to the context and the current portion to the question. We use full to denote the\nunmodified condition, in which both attention and recurrent layers can propagate information from"
+    },
+    {
+      "id": "b29f321d-d586-4693-ae77-cc73fb1e4f67",
+      "document_id": "63570a89-29b2-4c32-917e-625696babf16",
+      "filename": "2610.00083v1.pdf",
+      "page_number": 10,
+      "content": "of free-form large language models. In Proceedings of\nthe 62nd Annual Meeting of the Association for Compu-\ntational Linguistics (Volume 1: Long Papers), pp. 5050–\n5063, 2024a.\nDuan, J., Zhang, R., Diffenderfer, J., Kailkhura, B., Sun,\nL., Stengel-Eskin, E., Bansal, M., Chen, T., and Xu, K.\nGtbench: Uncovering the strategic reasoning capabilities\nof llms via game-theoretic evaluations. Advances in Neu-\nral Information Processing Systems, 37:28219–28253,\n2024b.\nDuan, J., Diffenderfer, J., Madireddy, S., Chen, T.,\nKailkhura, B., and Xu, K. Uprop: Investigating the uncer-\ntainty propagation of llms in multi-step agentic decision-\nmaking. arXiv preprint arXiv:2506.17419, 2025.\nFarquhar, S., Kossen, J., Kuhn, L., and Gal, Y. Detecting\nhallucinations in large language models using semantic"
+    },
+    {
+      "id": "57277c6a-c163-475e-af9c-a444ae154ddd",
+      "document_id": "55a67f34-2e6f-4e72-9f64-ea39d65610f8",
+      "filename": "2610.06750v1.pdf",
+      "page_number": 1,
+      "content": "information: attention supports precise memory recall from earlier tokens, while\nrecurrent layers support consolidation of disparate information over long contexts.\nHowever, we observe that simply having access to both pathways does not mean\nthat hybrid LMs are effectively using them. When we analyze how much the\nmodels rely on each pathway, we find a substantially greater reliance on atten-\ntion than on the recurrent state. Standard supervised fine-tuning improves overall\nperformance but does not improve how the two memory pathways are coordi-\nnated: the model becomes more reliant on information propagated by attention\nlayers, while its use of information propagated by recurrent layers remains lim-\nited. To encourage better coordination between the two memory pathways, we add"
+    },
+    {
+      "id": "eb297d59-dafd-435d-8d17-8997cec3b1b7",
+      "document_id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+      "filename": "2609.22935v2.pdf",
+      "page_number": 32,
+      "content": "SLOW–FAST PSYCHOLOGICAL DYNAMICS\n32\nLunansky, G., Van Borkulo, C., & Borsboom, D. (2020). Personality, resilience, and\npsychopathology: A model for the interaction between slow and fast network processes in\nthe context of mental health. European Journal of Personality, 34(6), 969–987.\nLünsmann, B. J., Kirst, C., & Timme, M. (2017). Transition to reconstructibility in weakly\ncoupled networks. PLOS ONE, 12(10), e0186624.\nhttps://doi.org/10.1371/journal.pone.0186624\nMarsman, M., Borsboom, D., Kruis, J., Epskamp, S., van Bork, R. v., Waldorp, L. J.,\nMaas, H. v. d., & Maris, G. (2018). An introduction to network psychometrics: Relating\nising network models to item response theory models. Multivariate Behavioral Research,\n53(1), 15–35."
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

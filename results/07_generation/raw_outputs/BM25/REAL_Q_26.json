@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_26",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Discovering Subtypes of Neurodegenerative Pro' và (2) 'CoHyFuse: Condition-wise Hypergraph Fusion wi'.",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 958.96,
+  "retrieval_warm_ms": 914.98,
+  "llm_ms": 1345.13,
+  "e2e_cold_ms": 2304.09,
+  "e2e_warm_ms": 2260.11,
+  "provided_chunks": [
+    {
+      "id": "bed43b12-dd3e-48e8-b17c-07e200521885",
+      "document_id": "90988e1f-3a4c-4aee-924b-8b5771f7190b",
+      "filename": "2610.08244v1.pdf",
+      "page_number": 34,
+      "content": "\"{numeric_finding} is {connector_evidence} {waveform_finding}.\",\n\"{waveform_finding} provides waveform support for {numeric_finding}.\",\n\"{numeric_finding} is not clearly matched by waveform evidence because {uncertainty_phrase}.\",\n\"{cross_signal_finding}:\n{numeric_finding} {connector_additive} {waveform_finding}.\",\n\"Together, {numeric_finding} and {waveform_finding} support {clinical_state}.\",\n\"{cross_signal_finding} is present, based only on available numeric and waveform evidence.\",\n\"{waveform_finding} and {numeric_finding} point to {clinical_state}, with proxy-level certainty.\",\n\"{numeric_finding} contrasts with {waveform_finding}; signal interpretation is {uncertainty_phrase}.\",\n\"Cross-signal evidence:\n{cross_signal_finding}; {supporting_findings}.\",\n]"
+    },
+    {
+      "id": "5c4ea38d-2237-4f66-8c4d-65a41cc92acb",
+      "document_id": "270d1d91-963f-4fe6-958c-9dc4fc18cf8f",
+      "filename": "2610.05913v1.pdf",
+      "page_number": 1,
+      "content": "reconfiguration cues and session-level connectivity structure\nfor task-fMRI prediction.\nOur contributions are threefold:\n(i) We propose CoHyFuse, a condition-aware ROI-centered\nhypergraph fusion framework that constructs condition-\nwise top-Kq hypergraphs and integrates attention-fused\nHGNN embeddings with a complementary whole-\nsession FC branch, thereby capturing both condition-\nwise reconfiguration cues and session-level connectivity\nstructure for task-fMRI prediction.\n(ii) We evaluate CoHyFuse on two public fMRI datasets,\nand CoHyFuse achieves the best mean performance\namong evaluated baselines. Ablation results support the\neffectiveness of condition-specific hypergraph construc-\ntion, heterogeneous Kq, and dual-branch fusion.\n(iii) Applying CoHyFuse to FACENAME, we find that the"
+    },
+    {
+      "id": "dae19bde-b88f-4fd0-8363-f1235ff791f6",
+      "document_id": "270d1d91-963f-4fe6-958c-9dc4fc18cf8f",
+      "filename": "2610.05913v1.pdf",
+      "page_number": 8,
+      "content": "vides an auxiliary clinical-task evaluation, suggesting that the\nsame state-wise fusion mechanism can be applied beyond adult\ncognitive regression under matched splits and ROI inputs.\nLimitations include reliance on paradigms with sufficiently\nlong condition windows for stable condition-wise FC estima-\ntion and increased hyperparameter search cost for condition-\nwise Kq. Future work will explore learnable neighborhood\nselection, temporally adaptive condition modeling, and broader\nvalidation across tasks, cohorts, atlases, and connectivity esti-\nmators.\nVI. CONCLUSION\nWe presented CoHyFuse, a condition-aware ROI-centered\nhypergraph fusion framework for task-fMRI prediction. CoHy-\nFuse constructs condition-wise top-Kq hypergraphs and fuses"
+    },
+    {
+      "id": "6cd12677-c8c5-403c-8bd1-2919050c96d8",
+      "document_id": "270d1d91-963f-4fe6-958c-9dc4fc18cf8f",
+      "filename": "2610.05913v1.pdf",
+      "page_number": 1,
+      "content": "work, each hyperedge is operationally defined as an FC-\nprofile neighborhood, enabling incidence-based aggregation\nover condition-specific ROI sets [5]. Prior hypergraph connec-\ntomics studies suggest that such ROI-set topology can carry\nbehaviorally and clinically relevant information [6]. To address\nthis gap, we propose CoHyFuse, a condition-aware ROI-\ncentered hypergraph fusion framework that builds condition-\nwise top-Kq hypergraphs. CoHyFuse integrates attention-\nfused hypergraph neural networks (HGNN) embeddings with\na whole-session FC branch, capturing both condition-wise\nreconfiguration cues and session-level connectivity structure\nfor task-fMRI prediction.\nOur contributions are threefold:\n(i) We propose CoHyFuse, a condition-aware ROI-centered"
+    },
+    {
+      "id": "9966d67c-b9a3-41cd-81e3-8a3102802322",
+      "document_id": "29f37a1a-a219-4181-b173-4e7e8f28407d",
+      "filename": "2609.34801v1.pdf",
+      "page_number": 38,
+      "content": "FiLM population\n4\n37\n2000\n0\nFalse\nFalse\nFalse\nLee2019_MI\nLoRA population\n4\n37\n2750\n750\nFalse\nFalse\nFalse\nLee2019_MI\nFiLM population\n4\n53\n2250\n250\nFalse\nFalse\nFalse\nLee2019_MI\nLoRA population\n4\n53\n2000\n0\nFalse\nFalse\nFalse\nLee2019_MI\nFiLM population\n4\n71\n2000\n0\nFalse\nFalse\nFalse\nLee2019_MI\nLoRA population\n4\n71\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n0\n11\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n0\n11\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n0\n23\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n0\n23\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n0\n37\n2250\n250\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n0\n37\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n0\n53\n2500\n500\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n0\n53\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n0\n71\n2000\n0\nFalse\nFalse\nFalse"
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

@@ -1,0 +1,541 @@
+<USER_REQUEST>
+đây là đoạn overleaf đã có. 
+tôi đã bảo bản 4 thay đổi đó rồi.
+hãy dịch và bổ sung vào đoạn này để tôi copy hết lên overleaf nhé:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Sample document for preparing papers to  "SPIIRAS_Proceedings"
+%%  charset=utf-8
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt]{SPIIRAS_Proceedings}
+\usepackage{float}
+\usepackage{array}
+\usepackage{graphicx}
+\graphicspath{{../figures/}{figures/}{./}}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+
+\begin{document} 
+
+\udk{006.72}
+\titleEng{Acamind: An Intelligent Academic Question Answering System Integrating Retrieval-Augmented Generation and Hybrid Search for the Psychology Domain}
+\authorsTitleEng{ D.T.H Chi, L.D. Tuan, N.C. Binh, N.V. Hung} % \smallcapsfake is needed for a small capitall letters, because the used font doesn't support this feature
+\authorsEng{Dinh Thi Hue Chi, Le Dinh Tuan, Nguyen Cong Binh, Nguyen Viet Hung}
+
+\abstractEng{Evidence-Based Practice (EBP) in clinical psychology requires continuous synthesis and comparative evaluation across empirical intervention studies. However, the exponential expansion of published literature creates severe information overload, while existing Retrieval-Augmented Generation (RAG) frameworks encounter three fundamental limitations: factual hallucinations induced by low-quality scanned documents, high latency in cross-encoder reranking models, and the lack of systematic multi-document comparative synthesis. This paper presents Acamind, a specialized Modular RAG architecture designed for clinical literature synthesis. The system integrates four core mechanisms: (1) a PDF ingestion pipeline governed by a character-density Scan Circuit Breaker that prevents empty-context hallucinations; (2) a hierarchical Dual-Memory Knowledge Graph decoupling document-level summaries (L1) from granular micro-chunks (L2); (3) a parallel hybrid retrieval pipeline optimized by Dynamic Confident-Skip Reranking (DCSR); and (4) an automated Cross-Article Synthesis workflow providing verifiable page-level citations [Document, Page X]. Quantitative empirical evaluation demonstrates that Acamind achieves a database retrieval latency of 247.2~ms (P50), an end-to-end response time of 1.38~s (P50), and a page-level citation accuracy of 47.8\% (substantially outperforming Naive Dense at 35.2\% and BM25 at 21.9\%). Furthermore, DCSR bypasses heavy reranking computation on 20.0\% of queries while maintaining 100\% safe refusal on out-of-domain prompts. These results demonstrate Acamind's effectiveness as a reliable, high-throughput decision support system for clinical researchers and healthcare professionals.}
+
+\keywordsEng{Retrieval-Augmented Generation (RAG), Cross-Article Synthesis, Dynamic Confident-Skip Reranking (DCSR), Parallel Hybrid Search, Evidence-Based Practice, Clinical Psychology, RAGAS Benchmark.}
+
+\makeengtitle
+
+\normalsize
+\raggedbottom
+
+\section{Introduction}
+
+\subsection{Context and Motivation}~\\
+\hspace*{\parindent}Evidence-Based Practice (EBP) \cite{sackett1996evidence} has become the gold standard in clinical psychology and modern psychiatric medicine. Clinical psychologists and healthcare practitioners must continuously synthesize, contrast, and integrate empirical findings across independent clinical trials to formulate safe, evidence-informed diagnostic and psychotherapeutic protocols \cite{moher2009preferred}. However, the exponential growth of peer-reviewed literature indexed in global repositories (such as PubMed, PsycINFO, and ScienceDirect) poses a severe challenge of clinical information overload. Synthesizing disparate intervention studies, patient cohort sizes, standardized psychological assessment scales (such as BDI-II \cite{beck1996manual}, PHQ-9 \cite{kroenke2001phq}, GAD-7 \cite{spitzer2006brief}, and DASS-21 \cite{lovibond1995structure}), and statistical effect sizes \cite{cohen1988statistical} often requires hours of manual cross-referencing by domain experts.
+
+To assist medical experts in evidence synthesis, Retrieval-Augmented Generation (RAG) \cite{lewis2020retrieval} has emerged as a promising paradigm. By coupling external database retrieval with Large Language Models (LLMs), RAG grounds generative responses in authoritative external evidence, significantly mitigating generative hallucinations. Nevertheless, standard RAG frameworks developed for general conversational question-answering encounter acute theoretical and practical hurdles when deployed directly in clinical literature synthesis \cite{gao2024modular}.
+
+\subsection{Three Technical Challenges of Traditional RAG in Clinical Literature}~\\
+\hspace*{\parindent}Our comprehensive preliminary investigations on 500 real-world clinical psychology research papers revealed three fundamental technical bottlenecks:
+
+\textbf{(1) Challenge 1: Severe Ingestion Vulnerability and Scanned Document Noise.} Academic psychology literature spanning decades comprises diverse PDF formats: digital-born publications, scanned legacy reports, and documents with corrupt font tables. Traditional RAG ingestors extract text naively without density auditing. When encountering scanned pages without readable text layers, standard extractors produce empty text chunks. When embedded into vector databases, these empty records become high-similarity vector anomalies (near-zero vectors), causing the generative LLM to hallucinate clinical facts or produce ungrounded therapeutic assertions.
+
+\textbf{(2) Challenge 2: Severe Latency Bottleneck of Full Cross-Encoder Reranking.} Clinical queries frequently demand semantic matching beyond literal keywords. While hybrid retrieval combining dense vectors and sparse lexical search improves recall, subsequent reranking using deep cross-encoder models incurs prohibitive computational latency ($>400$~ms per query on CPU). In clinical scenarios where the top candidate chunk already exhibits overwhelming semantic dominance, executing full cross-encoder inference across all candidate pools represents a massive waste of computational resources.
+
+\textbf{(3) Challenge 3: Lack of Cross-Document Structural Comparison and Verifiable Citations.} General-purpose RAG pipelines treat literature as a flat collection of isolated text snippets. When a researcher inquires: \textit{"Contrast the clinical efficacy of Cognitive Behavioral Therapy (CBT) versus Acceptance and Commitment Therapy (ACT) based on post-treatment BDI-II scores in adult depression"}, existing systems either retrieve arbitrary fragments from a single paper or generate broad summaries that fail to isolate intervention variables, cohort sizes, and exact physical page citations.
+
+\subsection{Key Contributions}~\\
+\hspace*{\parindent}To resolve these foundational challenges, this paper introduces \textbf{Acamind}, a modular RAG architecture specifically engineered for high-integrity clinical literature synthesis. The core contributions of this work are fourfold:
+\begin{enumerate}
+    \item \textbf{Automated Ingestion Pipeline with Scan Circuit Breaker:} We design an automated multi-threaded PDF preprocessing pipeline featuring a mathematical character density heuristic ($C_{\text{density}}$) and a Scan Circuit Breaker that preemptively isolates scanned documents and OCR anomalies, eliminating empty-chunk hallucinations at the source.
+    \item \textbf{Hierarchical Dual-Memory Knowledge Graph:} We introduce a dual-tier index architecture decoupling document-level structured metadata (L1 Fast Memory) from micro-chunk parent-child representations (L2 Deep Memory), enabling sub-millisecond document targeting and high-resolution passage context retrieval.
+    \item \textbf{Parallel Hybrid Retrieval with Dynamic Confident-Skip Reranking (DCSR):} We implement parallel multi-index execution (HNSW Cosine and GIN Full-Text Search on PostgreSQL pgvector) unified by Reciprocal Rank Fusion (RRF), coupled with the novel DCSR algorithm that dynamically bypasses cross-encoder reranking when confidence and score margins exceed rigorous thresholds.
+    \item \textbf{Empirical Rigor and Verifiable Page-Level Citation Framework:} We evaluate Acamind on an empirical benchmark of 500 full-text psychology papers (1,607.72~MB, 12,411 pages, 70,794 chunks) across 50 real-world research queries. Acamind demonstrates statistically significant improvements ($p < 0.05$ via Wilcoxon signed-rank test) in citation accuracy (47.8\% vs. 35.2\% Naive Dense and 21.9\% BM25) and faithfulness (0.6875), while maintaining 100\% safe refusal on out-of-domain queries.
+\end{enumerate}
+
+\subsection{Paper Organization}~\\
+\hspace*{\parindent}The remainder of this paper is organized as follows: Section~2 reviews related work in RAG architectures, hybrid retrieval, and literature synthesis. Section~3 details the proposed Acamind system architecture, mathematical formulations, and algorithmic workflows. Section~4 presents comprehensive empirical experiments, latency profiles, LLM generation evaluations, Wilcoxon hypothesis testing, ablation studies, and comparative discussions. Section~5 concludes the paper and outlines future directions.
+
+\section{Related Work}
+
+\subsection{Evolution of RAG Architectures}~\\
+\hspace*{\parindent}The paradigm of Retrieval-Augmented Generation has evolved through three distinct generational architectures \cite{gao2023retrieval}:
+\begin{enumerate}
+    \item \textbf{Naive RAG:} Follows a sequential \textit{Index-Retrieve-Generate} flow. Documents are segmented into uniform text chunks and converted into dense vector embeddings, drawing inspiration from early open-domain QA frameworks such as Fusion-in-Decoder (FiD) \cite{izacard2021leveraging}. Retrieval relies exclusively on top-$K$ cosine similarity over vector indices. Naive RAG suffers from severe retrieval precision drop when queries contain specialized acronyms or multi-hop dependencies \cite{lewis2020retrieval}.
+    \item \textbf{Advanced RAG:} Introduces pre-retrieval and post-retrieval optimization modules, such as query rewriting, sliding window chunking, and cross-encoder reranking. While retrieval precision is substantially improved, computational overhead increases significantly, and architectural rigidity limits flexibility \cite{yan2024corrective}.
+    \item \textbf{Modular RAG:} Decouples RAG into modular, reconfigurable components that can be dynamically routed and composed \cite{gao2024modular}. Acamind builds upon the Modular RAG paradigm, introducing specialized modules for clinical scan isolation, hierarchical graph memory, and dynamic rerank skipping.
+\end{enumerate}
+
+\begin{table}[H]
+\centering
+\caption{Comparative Architectural Analysis of RAG Paradigms and Acamind}
+\label{tab:rag_comparison}
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{|p{2.8cm}|p{2.2cm}|p{2.4cm}|p{2.4cm}|p{3.4cm}|}
+\hline
+\textbf{Technical Dimension} & \textbf{Naive RAG} & \textbf{Advanced RAG} & \textbf{Modular RAG} & \textbf{Acamind (Proposed)} \\
+\hline
+PDF Ingestion Pipeline & Raw text extraction & Basic OCR support & Disjoint OCR module & Scan Circuit Breaker + Hybrid OCR fallback \\
+\hline
+Retrieval Strategy & Dense vector only & Sequential Dense + Sparse & Dynamic routing & Parallel Hybrid (HNSW + GIN) with RRF \\
+\hline
+Reranking Mechanism & None (top-$K$ Cosine) & Full Cross-Encoder & Learning-to-Rank & Dynamic Confident-Skip Reranking (DCSR) \\
+\hline
+Memory Hierarchy & Flat single index & Secondary index & Disjoint Vector + Graph & Dual-Memory Graph (L1 Fast / L2 Deep) \\
+\hline
+Cross-Paper Comparison & Not supported & Fragment concatenation & Sub-query decomposition & Structured Multi-Document Synthesis Framework \\
+\hline
+Citation Grounding & File name only & File + text snippet & Segment-level index & Verifiable physical page-level citations \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\subsection{Hybrid Retrieval and Semantic Reranking Strategies}~\\
+\hspace*{\parindent}Single-modality retrieval exhibits inherent trade-offs: dense semantic retrieval (e.g., via contrastive text embeddings \cite{wang2022text}) excels at capturing conceptual semantics but fails on exact alphanumeric codes, drug dosages, and patient questionnaire acronyms. Conversely, sparse lexical retrieval (BM25 \cite{robertson2009probabilistic}) guarantees exact keyword matching but cannot capture synonymous clinical expressions. Combining dense and sparse retrieval via Reciprocal Rank Fusion (RRF) \cite{cormack2009reciprocal} achieves robust candidate recall. However, standard architectures pass all merged candidates to heavy cross-encoders \cite{chen2024bge,xiao2023cpack}, incurring prohibitive latency bottlenecks that Acamind overcomes through confidence-gated skipping.
+
+\subsection{Cross-Document Synthesis in Scientific Literature}~\\
+\hspace*{\parindent}Recent automated scientific assistants, such as PaperQA2 \cite{skarlinski2024language}, employ multi-agent sequential reasoning loops over literature collections. While achieving high accuracy on open-domain scientific QA, multi-agent frameworks require tens of LLM API roundtrips per query, incurring latency exceeding 15 seconds and high operational costs. Commercial platforms (e.g., Elicit, SciSpace) operate as closed-source cloud services requiring raw document uploads, raising acute data privacy concerns for unpublished clinical trial data. Acamind addresses this gap by providing an on-premise, privacy-preserving, sub-second hybrid retrieval infrastructure.
+
+\section{Proposed Method: Acamind Architecture}
+
+\subsection{Overall System Architecture}~\\
+\hspace*{\parindent}Acamind is structured into four cooperative tiers: (1) Literature Ingestion and Optical Integrity Tier, (2) Dual-Memory Knowledge Graph Tier, (3) Parallel Hybrid Retrieval and DCSR Tier, and (4) Cross-Article Synthesis and Citation Grounding Tier.
+
+The overall system architecture of Acamind is illustrated in Fig.~\ref{fig:system_architecture}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\columnwidth, height=5.8cm, keepaspectratio]{Figure1_System_Architecture.png}
+\caption{Comprehensive overall system architecture of the Acamind Modular RAG framework, integrating Dual-Memory Graph, Parallel Hybrid Search, DCSR, and Cross-Article Synthesis.}
+\label{fig:system_architecture}
+\end{figure}
+
+\subsection{Literature Ingestion Pipeline and Scan Circuit Breaker}~\\
+\hspace*{\parindent}To protect the knowledge base from corrupt documents, the ingestion pipeline processes PDF documents through a deterministic multi-stage protocol. Given a document $D$ comprising a set of physical pages $P = \{p_1, p_2, \dots, p_{|P|}\}$ and raw extracted text $T_p$ per page, we define the document character density metric $C_{\text{density}}(D)$:
+\begin{equation}
+C_{\text{density}}(D) = \frac{1}{|P|} \sum_{p \in P} \text{len}(\text{clean}(T_p))
+\label{eq:cdensity}
+\end{equation}
+where $\text{clean}(T_p)$ strips non-printable control characters and extraneous whitespace. The Scan Circuit Breaker enforces the Safe Refusal condition:
+\begin{equation}
+F_{\text{SafeRefusal}}(D) = 
+\begin{cases} 
+1, & \text{if } (C_{\text{blank}}(D) = 1) \lor (C_{\text{density}}(D) < \theta_{\text{density}}) \\
+0, & \text{otherwise}
+\end{cases}
+\label{eq:saferefusal}
+\end{equation}
+where $\theta_{\text{density}} = 50$ characters/page. When $F_{\text{SafeRefusal}}(D) = 1$, the document is classified as a scanned image or corrupt file, immediately halting standard text chunking and routing the document to OCR recovery or safe isolation.
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\columnwidth, height=5.8cm, keepaspectratio]{Figure2_PDF_Processing_Pipeline.png}
+\caption{Literature PDF preprocessing pipeline and the deterministic Scan Circuit Breaker mechanism for isolating corrupt or non-OCR scanned documents.}
+\label{fig:pdf_pipeline}
+\end{figure}
+
+To quantify the operational throughput and structural extraction fidelity of this ingestion pipeline, Table~\ref{tab:pipeline_benchmark} presents the empirical benchmark across all 500 clinical documents.
+
+\begin{table}[H]
+\centering
+\caption{Empirical Benchmark of Acamind Preprocessing Pipeline on 500 Clinical PDF Documents}
+\label{tab:pipeline_benchmark}
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{|p{3.2cm}|p{2.6cm}|p{2.4cm}|p{1.8cm}|p{1.8cm}|p{1.6cm}|}
+\hline
+\textbf{Pipeline Stage} & \textbf{Execution Engine} & \textbf{Data Scope} & \textbf{Total Time} & \textbf{Unit Latency} & \textbf{Success} \\
+\hline
+Network Fetch & HTTP Async (10 threads) & 500 PDFs (1,607.72 MB) & 93.97 s & 188.3 ms/doc & 99.8\% \\
+\hline
+Digital Text Extraction & PyMuPDF Fast Path & 12,411 pages & 673.86 s & 54.3 ms/page & 100.0\% \\
+\hline
+Scan Circuit Breaker & Density Audit ($C_{\text{density}} \ge 50$) & 12,411 pages & 0.82 s & $<$0.1 ms/page & 100.0\% \\
+\hline
+Structure Extraction & pdfplumber + Font Inspector & 549 valid sections & 18.45 s & 33.6 ms/doc & 96.2\% \\
+\hline
+Adaptive L1/L2 Chunking & Token Window (512 tokens) & 70,794 micro-chunks & 14.20 s & 0.2 ms/chunk & 100.0\% \\
+\hline
+Dense Vector Embedding & Multilingual-E5-Base (batch=64) & 70,794 chunks (3,000 core) & 337.08 s & 112.4 ms/chunk & 100.0\% \\
+\hline
+Database Indexing & pgvector HNSW + GIN FTS & 70,794 records (768-dim) & 12.51 s & 0.18 ms/record & 100.0\% \\
+\hline
+\textbf{End-to-End Pipeline} & \textbf{Automated Ingestion} & \textbf{499 papers (12,411 pages)} & \textbf{1,117.42 s} & \textbf{90.0 ms/page} & \textbf{99.8\%} \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\subsection{Dual-Memory Knowledge Graph (L1 Fast / L2 Deep)}~\\
+\hspace*{\parindent}Acamind organizes stored representations into two decoupled memory tiers:
+\begin{enumerate}
+    \item \textbf{L1 Fast Memory (Document Tier):} Stores high-level document metadata, executive abstracts, core clinical domains, diagnostic scales, and intervention classes. Given query $q$ and document metadata $f$, candidate documents are scored via:
+    \begin{equation}
+    \text{Score}_{\text{L1}}(f) = |T_q \cap T_f| + 5 \cdot \mathbb{I}(q \subseteq f)
+    \label{eq:l1score}
+    \end{equation}
+    where $T_q$ and $T_f$ denote query and metadata keyword sets, and $\mathbb{I}$ is the exact substring indicator function.
+    \item \textbf{L2 Deep Memory (Micro-Chunk Tier):} Stores 512-token text passages augmented with Parent-Child context references and exact physical PDF page mappings:
+    \begin{equation}
+    \text{Chunk}_{\text{L2}} = \langle \text{ChunkID}, \text{ParentID}, \text{DocTitle}, \text{PageNumber}, \vec{v}_{\text{dense}}, T_{\text{sparse}} \rangle
+    \label{eq:chunk_l2}
+    \end{equation}
+\end{enumerate}
+
+The hierarchical Dual-Memory Knowledge Graph architecture is depicted in Fig.~\ref{fig:dual_memory}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.60\columnwidth, height=5.5cm, keepaspectratio]{Figure3_Dual_Memory_Knowledge_Graph.png}
+\caption{Hierarchical Dual-Memory Architecture (L1 Fast Memory / L2 Deep Micro-Chunk) and GraphRAG clinical knowledge representation.}
+\label{fig:dual_memory}
+\end{figure}
+
+\subsection{Parallel Hybrid Retrieval and Dynamic Confident-Skip Reranking (DCSR)}~\\
+\hspace*{\parindent}When retrieving granular evidence at the L2 tier, Acamind executes the Parallel Hybrid Retrieval workflow (Fig.~\ref{fig:hybrid_retrieval}).
+
+Upon receiving an empirical query $q$, the retrieval tier concurrently executes two search threads over PostgreSQL:
+\begin{enumerate}
+    \item \textbf{Dense Semantic Search:} Computes cosine distance over 768-dimensional embeddings using pgvector HNSW index:
+    \begin{equation}
+    \text{Sim}_{\text{dense}}(q, d) = 1 - \frac{E(q) \cdot E(d)}{\|E(q)\| \|E(d)\|}
+    \label{eq:simdense}
+    \end{equation}
+    \item \textbf{Sparse Lexical Search:} Queries inverted index via GIN Full-Text Search implementing BM25:
+    \begin{equation}
+    \text{Score}_{\text{BM25}}(q, d) = \sum_{t \in q} \text{IDF}(t) \cdot \frac{f(t, d)(k_1 + 1)}{f(t, d) + k_1\left(1 - b + b \frac{|d|}{\text{avgdl}}\right)}
+    \label{eq:scorebm25}
+    \end{equation}
+    with parameters $k_1 = 1.2$ and $b = 0.75$.
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\columnwidth, height=5.8cm, keepaspectratio]{Figure4_Hybrid_Retrieval_Pipeline.png}
+\caption{Block diagram of the Parallel Hybrid Retrieval workflow integrating concurrent HNSW Cosine and GIN FTS search, RRF rank fusion, and confidence evaluation.}
+\label{fig:hybrid_retrieval}
+\end{figure}
+
+The ranked candidate sets from both threads are fused using Reciprocal Rank Fusion (RRF) with constant $k=60$:
+\begin{equation}
+\text{RRF}(d) = \sum_{m \in \{\text{dense}, \text{sparse}\}} \frac{1}{60 + \text{rank}_m(d)}
+\label{eq:rrf}
+\end{equation}
+
+To avoid redundant cross-encoder computation, the DCSR algorithm evaluates retrieval confidence $\text{Conf}(q, \mathcal{C})$ and top candidate score margin $\Delta_{\text{RRF}}$:
+\begin{equation}
+\text{Conf}(q, \mathcal{C}) = \min\left(1.0, 7.5 \cdot \text{RRF}_{\text{top1}} + \frac{0.5}{1 + e^{-20(\text{RRF}_{\text{top1}} - 0.015)}}\right)
+\label{eq:conf}
+\end{equation}
+\begin{equation}
+\Delta_{\text{RRF}} = \frac{\text{RRF}(c_{(1)})}{\max(\text{RRF}(c_{(2)}), 10^{-6})}
+\label{eq:deltarrf}
+\end{equation}
+
+\textbf{DCSR Decision Rule:} If $\text{Conf}(q, \mathcal{C}) \ge \tau_{\text{conf}}$ (0.75) and $\Delta_{\text{RRF}} \ge \tau_{\text{margin}}$ (1.20), the top candidate demonstrates unambiguous semantic dominance. The system bypasses heavy cross-encoder reranking entirely, passing retrieved contexts directly to generation in 0.08~ms. Otherwise, full cross-encoder reranking is executed to resolve candidate ambiguity.
+
+The decision flow of the DCSR algorithm is illustrated in Fig.~\ref{fig:dcsr_flow}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.60\columnwidth, height=5.8cm, keepaspectratio]{Figure5_DCSR_State_Machine.png}
+\caption{Decision flow diagram of the Dynamic Confident-Skip Reranking (DCSR) algorithm and rapid judgment caching mechanism.}
+\label{fig:dcsr_flow}
+\end{figure}
+
+\subsection{Cross-Article Synthesis Workflow}~\\
+\hspace*{\parindent}When comparative inquiries target multiple papers, Acamind orchestrates synthesis in four stages: (1) Query decomposition into parallel sub-inquiries, (2) Independent retrieval for each targeted intervention paper, (3) Parent-child context enrichment, and (4) Structured multi-column contrastive synthesis formatted as:
+\begin{quote}
+\small
+\textit{[Comparison Matrix: Interventions $\mid$ Clinical Scales $\mid$ Effect Sizes $\mid$ Citations: Document, Page X]}
+\end{quote}
+
+The end-to-end workflow of the Cross-Article Synthesis pipeline is illustrated in Fig.~\ref{fig:cross_article}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.60\columnwidth, height=5.8cm, keepaspectratio]{Figure6_Cross_Article_Synthesis_Workflow.png}
+\caption{Acamind Cross-Article Synthesis Pipeline: Grounded passage extraction, clinical scale alignment, methodology discrepancy detection, and matrix comparison.}
+\label{fig:cross_article}
+\end{figure}
+
+\section{Experiments and Results}
+
+\subsection{Experimental Setup and Benchmark Corpus}~\\
+\hspace*{\parindent}All experiments were conducted on an on-premise benchmark workstation equipped with an Intel Core i7-11800H CPU @ 2.30 GHz (8 cores, 16 threads), 16.0 GB DDR4 RAM, running PostgreSQL 16.2 with pgvector extension on Windows 11 / WSL2. Embedding generation was performed using \texttt{intfloat/multilingual-e5-base} (768 dimensions), and generative synthesis was driven by Google Gemini 2.5 Flash-Lite via live API execution.
+
+\textbf{Benchmark Corpus:} The experimental corpus comprises 500 peer-reviewed clinical psychology papers downloaded from open scientific repositories (totaling 1,607.72 MB, 12,411 physical pages, and 70,794 micro-chunks). The benchmark query suite consists of 50 comprehensive research questions categorized into four distinct operational scenarios:
+\begin{itemize}
+    \item \textit{Scenario 1: Factual Clinical Q\&A} (20 queries)---Targeting specific intervention protocols, diagnostic criteria, and clinical trial parameters.
+    \item \textit{Scenario 2: Cross-Article Comparison} (15 queries)---Requiring simultaneous comparative analysis across two or more independent intervention studies.
+    \item \textit{Scenario 3: Literature Synthesis} (10 queries)---Aggregating thematic evidence across multiple publications within a clinical subfield.
+    \item \textit{Scenario 4: Safe Refusal / Edge Testing} (5 queries)---Testing system resilience against out-of-domain queries, deceptive premises, and ungrounded assertions.
+\end{itemize}
+To guarantee rigorous academic objectivity, the reference answers, target clinical assessment scales, and physical PDF page ground-truth coordinates across all 50 queries were independently cross-validated by two domain researchers in clinical psychology, achieving high inter-rater reliability.
+
+\textbf{Baseline Architectures:} Acamind is evaluated against two rigorously controlled on-premise baseline architectures running on the identical PostgreSQL testbed:
+\begin{itemize}
+    \item \textbf{Naive Dense RAG:} Pure dense vector search using pgvector HNSW index with Cosine distance.
+    \item \textbf{BM25 Lexical RAG:} Pure keyword search using PostgreSQL GIN Full-Text Search.
+\end{itemize}
+
+\subsection{Academic Evaluation Metrics}~\\
+\hspace*{\parindent}System performance is evaluated across eight quantitative dimensions:
+(1) Database Retrieval Latency (P50 and Mean, in ms);
+(2) LLM Generation Latency (Mean, in s);
+(3) End-to-End Latency (P50 and P90, in s);
+(4) Factual Faithfulness ($[0, 1]$ via RAGAS \cite{es2024ragas});
+(5) Page-Level Citation Accuracy (\%), verified against physical PDF pages;
+(6) DCSR Confident-Skip Rate (\%);
+(7) Safe Refusal Rate (\%); and
+(8) Statistical Hypothesis Testing via the Wilcoxon signed-rank test ($\alpha = 0.05$).
+
+\subsection{Database Retrieval Latency Evaluation}~\\
+\hspace*{\parindent}Table~\ref{tab:retrieval_latency} presents the empirical latency measured across all 50 research queries at the PostgreSQL database layer.
+
+\begin{table}[H]
+\centering
+\caption{Empirical Retrieval Latency Performance across 50 Research Queries (PostgreSQL pgvector)}
+\label{tab:retrieval_latency}
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{|p{4.2cm}|p{2.6cm}|p{2.6cm}|p{4.8cm}|}
+\hline
+\textbf{Retrieval Architecture} & \textbf{Latency P50 (ms)} & \textbf{Latency Mean (ms)} & \textbf{Technical Execution Characteristics} \\
+\hline
+\textbf{Acamind (Proposed Hybrid + DCSR)} & \textbf{247.2 ms} & \textbf{212.6 ms} & Parallel HNSW Cosine + GIN FTS execution, RRF rank fusion, and DCSR confidence gating \\
+\hline
+Naive Dense RAG (HNSW Cosine) & 65.1 ms & 64.6 ms & 768-dimensional vector nearest neighbor search via pgvector HNSW index \\
+\hline
+BM25 Lexical RAG (GIN Full-Text) & 7.2 ms & 7.3 ms & Inverted index term matching via PostgreSQL GIN index \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+While BM25 achieves the lowest raw retrieval latency (7.2~ms) due to inverted index lookups, it fails entirely on synonymous clinical expressions. Acamind maintains a highly responsive median retrieval latency of 247.2~ms while executing parallel multi-index fusion and dynamic rerank auditing.
+
+\subsection{End-to-End Direct Comparison with Gemini LLM}~\\
+\hspace*{\parindent}To measure real-world generative quality, Table~\ref{tab:e2e_comparison} reports end-to-end performance on representative benchmark queries executed with Gemini 2.5 Flash-Lite.
+
+\begin{table}[H]
+\centering
+\caption{End-to-End Empirical Comparison of 3 Architectures on Representative Clinical Scenarios}
+\label{tab:e2e_comparison}
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{|p{3.2cm}|p{1.8cm}|p{1.8cm}|p{1.8cm}|p{1.8cm}|p{1.8cm}|p{2.4cm}|}
+\hline
+\textbf{System Architecture} & \textbf{Ret Mean} & \textbf{LLM Mean} & \textbf{E2E Mean} & \textbf{Faithfulness} & \textbf{Citation Acc.} & \textbf{Wilcoxon Test} \\
+\hline
+\textbf{Acamind (Proposed)} & \textbf{250.0 ms} & \textbf{2.24 s} & \textbf{2.49 s} & \textbf{0.6875} & \textbf{47.8\%} & $p < 0.05$ (Significant) \\
+\hline
+Naive Dense RAG & 65.0 ms & 1.89 s & 1.95 s & 0.6750 & 35.2\% & Baseline reference \\
+\hline
+BM25 Lexical RAG & 6.1 ms & 1.42 s & 1.43 s & 0.6562 & 21.9\% & Baseline reference \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+Fig.~\ref{fig:empirical_comparison} visually contrasts the direct empirical performance of Acamind against the two baseline architectures across all four core evaluation metrics.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\columnwidth, height=4.5cm, keepaspectratio]{Figure7_Empirical_Comparison.png}
+\caption{Monochrome grouped bar chart directly comparing the empirical performance of Acamind against baseline architectures (Naive Dense and BM25 Lexical) across four core metrics.}
+\label{fig:empirical_comparison}
+\end{figure}
+
+\textbf{Statistical Hypothesis Testing:} To verify that Acamind's improvements are statistically significant and not artifacts of sample variance, we conducted paired Wilcoxon signed-rank tests ($\alpha = 0.05$):
+\begin{itemize}
+    \item \textbf{Citation Accuracy:} Acamind significantly outperforms BM25 ($W = 28.0, p = 0.0156 < 0.05$) and Naive Dense ($W = 21.0, p = 0.0312 < 0.05$). This rejects the null hypothesis $H_0$, proving that hierarchical L1/L2 chunking and parent-child context enrichment provide genuine advantages in precision grounding.
+    \item \textbf{Factual Faithfulness:} Acamind achieves statistically significant improvement over BM25 ($p = 0.0245 < 0.05$) and maintains superior grounding over Naive Dense on complex cross-article queries ($p = 0.0428 < 0.05$).
+\end{itemize}
+
+\subsection{Comprehensive Scenario-Based Evaluation (50 Research Queries)}~\\
+\hspace*{\parindent}Table~\ref{tab:scenario_evaluation} breaks down Acamind's performance across all 50 benchmark queries categorized into the four clinical scenarios.
+
+\begin{table}[H]
+\centering
+\caption{Comprehensive Performance Breakdown of Acamind across 50 Real-World Queries}
+\label{tab:scenario_evaluation}
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{|p{3.2cm}|p{1.0cm}|p{1.8cm}|p{1.8cm}|p{1.8cm}|p{1.8cm}|p{1.8cm}|p{2.0cm}|}
+\hline
+\textbf{Scenario Group} & \textbf{$N$} & \textbf{Ret P50} & \textbf{LLM Mean} & \textbf{E2E P50} & \textbf{Faithfulness} & \textbf{Citation} & \textbf{Operational Note} \\
+\hline
+Factual Clinical Q\&A & 20 & 247.2 ms & 1.58 s & 1.36 s & 0.6650 & 39.4\% & 80--100\% on dense text \\
+\hline
+Cross-Article Comparison & 15 & 255.0 ms & 2.37 s & 1.56 s & 0.6670 & 46.1\% & Parallel synthesis \\
+\hline
+Literature Synthesis & 10 & 65.8 ms & 1.08 s & 1.25 s & 0.6000 & 0.0\% & 100\% DCSR Skip \\
+\hline
+Safe Refusal (Edge) & 5 & 233.7 ms & 0.82 s & 1.04 s & 1.0000 & 100.0\% & 5/5 safe refusals \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+Remarkably, under Scenario~4 (Safe Refusal), Acamind achieved a 100\% safe refusal rate (5/5 queries), correctly returning the \texttt{\_\_NO\_CONTEXT\_\_} token without hallucinating unsupported clinical advice.
+
+\subsection{Component Ablation Study}~\\
+\hspace*{\parindent}To quantify the independent contribution of each architectural module, Table~\ref{tab:ablation_study} reports an ablation analysis isolating individual components.
+
+\begin{table}[H]
+\centering
+\caption{Component Ablation Analysis Demonstrating Individual Module Contributions}
+\label{tab:ablation_study}
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{|p{4.5cm}|p{1.8cm}|p{1.8cm}|p{1.8cm}|p{1.8cm}|p{2.0cm}|}
+\hline
+\textbf{Ablation Configuration} & \textbf{Ret P50} & \textbf{E2E P50} & \textbf{Faithfulness} & \textbf{Citation} & \textbf{Scan Hallucination} \\
+\hline
+(a) Acamind Full Architecture & 247.2 ms & 1.38 s & 0.6875 & 47.8\% & 0.0\% \\
+\hline
+(b) W/o Scan Circuit Breaker & 245.0 ms & 1.38 s & 0.5820 & 28.5\% & 42.5\% \\
+\hline
+(c) W/o DCSR Algorithm (Full Rerank) & 432.2 ms & 1.56 s & 0.6880 & 48.0\% & 0.0\% \\
+\hline
+(d) W/o Dense Path (BM25 only) & 7.2 ms & 1.43 s & 0.6562 & 21.9\% & 0.0\% \\
+\hline
+(e) W/o Sparse Path (Dense only) & 65.1 ms & 1.95 s & 0.6750 & 35.2\% & 0.0\% \\
+\hline
+(f) W/o Hierarchical L1/L2 Chunking & 298.5 ms & 1.82 s & 0.6210 & 31.0\% & 0.0\% \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+Key insights from Table~\ref{tab:ablation_study}:
+\begin{itemize}
+    \item Disabling the Scan Circuit Breaker (Configuration b) induces a catastrophic 42.5\% hallucination rate on scanned PDFs and degrades faithfulness from 0.6875 to 0.5820.
+    \item Disabling the DCSR algorithm (Configuration c) forces full cross-encoder reranking on every query, increasing database retrieval latency by 185.0~ms (+74.8\%) with negligible gain in quality (+0.0005 faithfulness).
+    \item Removing the hierarchical L1/L2 chunking (Configuration f) drops citation accuracy from 47.8\% to 31.0\%, confirming the necessity of parent-child context alignment.
+\end{itemize}
+
+\subsection{Architectural and Operational Comparison with Leading Systems}~\\
+\hspace*{\parindent}Table~\ref{tab:systems_comparison} contextualizes Acamind within the broader landscape of academic AI research assistants.
+
+\begin{table}[H]
+\centering
+\caption{Architectural and Operational Comparison with State-of-the-Art Literature Platforms}
+\label{tab:systems_comparison}
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{|p{2.8cm}|p{2.6cm}|p{2.8cm}|p{2.4cm}|p{2.2cm}|p{2.6cm}|}
+\hline
+\textbf{Platform / System} & \textbf{Architecture Paradigm} & \textbf{Storage Backend} & \textbf{Retrieval Latency} & \textbf{Compute Cost} & \textbf{Privacy \& Data Sovereignty} \\
+\hline
+\textbf{Acamind (Proposed)} & Modular RAG + Parallel Hybrid + DCSR & On-premise PostgreSQL 16 pgvector & $\sim$247 ms (Local database) & Minimal (Gemini Flash-Lite API) & 100\% On-premise Database (Zero raw literature leakage; air-gapped LLM ready) \\
+\hline
+PaperQA2 \cite{skarlinski2024language} & Multi-Agent Sequential Reasoning & Session-based paper scanning & $>$15 s (Multi-round LLM) & High (Dozens of LLM calls) & Dependent on commercial API vendors \\
+\hline
+Elicit AI & Commercial Web Search Engine & Closed-source cloud storage & 5--8 s (Cloud queue) & High (Subscription fee) & Data uploaded to external cloud servers \\
+\hline
+SciSpace Copilot & Commercial PDF Reader + LLM & Closed-source cloud storage & 4--6 s (Cloud queue) & Moderate (Commercial) & Data uploaded to external cloud servers \\
+\hline
+LlamaIndex Sub-Question \cite{liu2023llamaindex} & Sub-Question Decomposition Engine & Custom vector store & 3--7 s (Multiple sub-queries) & Moderate (Model dependent) & Configurable (Local or Cloud) \\
+\hline
+\end{tabular}
+}
+\end{table}
+
+\subsection{Discussion and Limitations}~\\
+\hspace*{\parindent}\textbf{Practical Clinical Value:} Acamind provides an accessible, cost-effective infrastructure for healthcare organizations and research groups operating under strict data governance regulations (e.g., HIPAA, GDPR). By self-hosting the retrieval database on standard hardware, clinical teams can synthesize proprietary or pre-publication trials without exposing sensitive data to external SaaS providers.
+
+\textbf{Limitations:} We identify three primary limitations: (1) Ingestion scope: To optimize embedding throughput on standard CPU hardware, the current benchmark indexed representative sections (Title, Abstract, Methodology, and Findings). Queries demanding granular data buried in interior data tables occasionally triggered cautious safe refusals; (2) Multi-modal extraction: Complex clinical flowcharts and neuroimaging figures currently require multi-modal visual LLMs; and (3) Clinical translation: While extensively evaluated on published trial literature, validation within live electronic health record (EHR) workflows remains an imperative future milestone.
+
+\section{Conclusions and Future Work}
+
+\subsection{Concluding Remarks}~\\
+\hspace*{\parindent}This paper presented Acamind, a specialized Modular RAG architecture addressing the three fundamental limitations of clinical literature synthesis: document ingestion vulnerability, cross-encoder reranking latency, and lack of verifiable multi-document comparative structures. Through an automated Scan Circuit Breaker, a hierarchical Dual-Memory Knowledge Graph, and Parallel Hybrid Retrieval governed by Dynamic Confident-Skip Reranking (DCSR), Acamind establishes a robust and reproducible framework for clinical question answering. Rigorous empirical evaluation on 500 clinical psychology papers confirmed a median retrieval latency of 247.2~ms, an end-to-end response time of 1.38~s, and a page-level citation accuracy of 47.8\% with 100\% safe refusal reliability.
+
+\subsection{Future Research Directions}~\\
+\hspace*{\parindent}Future work will focus on three key advancements: (1) Multilingual cross-lingual adaptation, particularly optimizing biomedical embeddings for low-resource clinical terminology; (2) Integration of dynamic temporal knowledge graphs to continuously integrate updated clinical practice guidelines; and (3) Randomized controlled trials with psychiatric clinicians to measure quantitative diagnostic decision-support efficiency in hospital workflows.
+
+
+\begin{thebibliography}{20}
+
+\bibitem{sackett1996evidence}
+D.~L. Sackett, W.~M.~C. Rosenberg, J.~A.~M. Gray, R.~B. Haynes, and W.~S. Richardson, ``Evidence based medicine: what it is and what it isn't,'' \emph{BMJ}, vol. 312, no. 7023, pp. 71--72, 1996.
+
+\bibitem{moher2009preferred}
+D.~Moher, A.~Liberati, J.~Tetzlaff, D.~G. Altman, and {The PRISMA Group}, ``Preferred reporting items for systematic reviews and meta-analyses: the PRISMA statement,'' \emph{Annals of Internal Medicine}, vol. 151, no. 4, pp. 264--269, 2009.
+
+\bibitem{beck1996manual}
+A.~T. Beck, R.~A. Steer, and G.~K. Brown, \emph{Manual for the Beck Depression Inventory-II}. San Antonio, TX: Psychological Corporation, 1996.
+
+\bibitem{kroenke2001phq}
+K.~Kroenke, R.~L. Spitzer, and J.~B.~W. Williams, ``The PHQ-9: validity of a brief depression severity measure,'' \emph{Journal of General Internal Medicine}, vol. 16, no. 9, pp. 606--613, 2001.
+
+\bibitem{spitzer2006brief}
+R.~L. Spitzer, K.~Kroenke, J.~B.~W. Williams, and B.~Lowe, ``A brief measure for assessing generalized anxiety disorder: the GAD-7,'' \emph{Archives of Internal Medicine}, vol. 166, no. 10, pp. 1092--1097, 2006.
+
+\bibitem{lovibond1995structure}
+P.~F. Lovibond and S.~H. Lovibond, ``The structure of negative emotional states: Comparison of the DASS with the BDI and BAI,'' \emph{Behaviour Research and Therapy}, vol. 33, no. 3, pp. 335--343, 1995.
+
+\bibitem{cohen1988statistical}
+J.~Cohen, \emph{Statistical Power Analysis for the Behavioral Sciences}, 2nd~ed. Lawrence Erlbaum Associates, 1988.
+
+\bibitem{lewis2020retrieval}
+P.~Lewis, E.~Perez, A.~Piktus, F.~Petroni, V.~Karpukhin, N.~Goyal, H.~Kuttler, M.~Lewis, W.-t. Yih, T.~Rocktaschel, S.~Riedel, and D.~Kiela, ``Retrieval-augmented generation for knowledge-intensive NLP tasks,'' in \emph{Advances in Neural Information Processing Systems (NeurIPS)}, vol.~33, 2020, pp. 9459--9474.
+
+\bibitem{gao2024modular}
+Y.~Gao, Y.~Xiong, M.~Wang, and H.~Wang, ``Modular RAG: Transforming RAG systems into LEGO-like reconfigurable frameworks,'' \emph{arXiv preprint arXiv:2407.21059}, 2024.
+
+\bibitem{gao2023retrieval}
+Y.~Gao, Y.~Xiong, X.~Gao, K.~Jia, J.~Pan, Y.~Bi, Y.~Dai, J.~Sun, M.~Wang, and H.~Wang, ``Retrieval-augmented generation for large language models: A survey,'' \emph{arXiv preprint arXiv:2312.10997}, 2023.
+
+\bibitem{izacard2021leveraging}
+G.~Izacard and E.~Grave, ``Leveraging passage retrieval with generative models for open domain question answering,'' in \emph{Proceedings of the 16th Conference of the European Chapter of the Association for Computational Linguistics (EACL)}, 2021, pp. 874--880.
+
+\bibitem{yan2024corrective}
+S.-Q. Yan, J.-C. Gu, Y.~Zhu, and Z.-H. Ling, ``Corrective retrieval augmented generation,'' \emph{arXiv preprint arXiv:2401.15884}, 2024.
+
+\bibitem{wang2022text}
+L.~Wang, N.~Yang, X.~Huang, B.~Hui, L.~Li, F.~Huang, D.~Jiang, and F.~Wei, ``Text embeddings by weakly-supervised contrastive pre-training,'' \emph{arXiv preprint arXiv:2212.03533}, 2022.
+
+\bibitem{robertson2009probabilistic}
+S.~Robertson and H.~Zaragoza, ``The probabilistic relevance framework: BM25 and beyond,'' \emph{Foundations and Trends in Information Retrieval}, vol.~3, no.~4, pp. 333--389, 2009.
+
+\bibitem{cormack2009reciprocal}
+G.~V. Cormack, C.~L.~A. Clarke, and S.~Buettcher, ``Reciprocal rank fusion outperforms indri for web search,'' in \emph{Proceedings of the 32nd International ACM SIGIR Conference on Research and Development in Information Retrieval}, 2009, pp. 758--759.
+
+\bibitem{chen2024bge}
+J.~Chen, S.~Xiao, P.~Zhang, K.~Luo, D.~Lian, and Z.~Liu, ``BGE M3-embedding: Multi-lingual, multi-functionality, multi-granularity text embeddings through self-knowledge distillation,'' \emph{arXiv preprint arXiv:2402.03216}, 2024.
+
+\bibitem{xiao2023cpack}
+S.~Xiao, Z.~Liu, P.~Zhang, and N.~Muennighoff, ``C-Pack: Packaged resources to advance general Chinese embedding,'' \emph{arXiv preprint arXiv:2309.07597}, 2023.
+
+\bibitem{skarlinski2024language}
+M.~D. Skarlinski, S.~Cox, J.~M. Laurent, and A.~D. White, ``Language agents achieve superhuman synthesis of scientific knowledge,'' \emph{arXiv preprint arXiv:2409.13740}, 2024.
+
+\bibitem{es2024ragas}
+S.~Es, J.~James, L.~Espinosa-Anke, and S.~Schockaert, ``RAGAS: Automated evaluation of retrieval augmented generation,'' in \emph{Proceedings of the 18th Conference of the European Chapter of the Association for Computational Linguistics (EACL): System Demonstrations}, 2024, pp. 150--158.
+
+\bibitem{liu2023llamaindex}
+J.~Liu, ``LlamaIndex: A data framework for LLM applications,'' 2023. [Online]. Available: \texttt{https://github.com/run\_llama/llama\_index}
+
+\end{thebibliography}
+
+\begin{aboutAuthors}
+    \textbf{DINH THI HUE CHI}—Research assistant, International Training and Cooperation Institute, East Asia University of Technology. Research interests: Machine \& Deep Learning, NLP. The number of publications—1. dinhhchi2110@gmail.com; Dong Anh - Ha Noi, Viet Nam; office phone: +84(039)395-0301\smallskip
+    
+    \textbf{LE DINH TUAN}—Research assistant, International Training and Cooperation Institute, East Asia University of Technology. Research interests: Machine \& Deep Learning, NLP. The number of publications—1. ledinhtuan27052005@gmail.com; Quynh Thang - Nghe An, Viet Nam; office phone: +84(036)783-3013\smallskip
+
+    \textbf{NGUYEN CONG BINH}—Lecturer, International Training and Cooperation Institute, East Asia University of Technology. Research interests: Machine \& Deep Learning, Network security, Social Network Analysis. The number of publications—3. binhnc@eaut.edu.vn; Phan Tay Nhac - Xuan Phuong - Ha Noi, Viet Nam; office phone: +84(079)613-3703\smallskip
+
+    \textbf{NGUYEN VIET HUNG}—Ph.D, Lecturer, International Training and Cooperation Institute, East Asia University of Technology. Research interests: multimedia communications, network security, artificial intelligence, traffic engineering in next-generation networks, QoE/QoS guarantee for network services, green networking, and applications. The number of publications—48. Corresponding author: hungnv@eaut.edu.vn; Ky Anh, Ha Tinh, Viet Nam; office phone: +84(098)911-2079.\smallskip
+
+    \textbf{Acknowledgements.} This research is supported by East Asia University of Technology.
+\end{aboutAuthors}
+
+\end{document}
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-10-13T13:17:58+07:00.
+</ADDITIONAL_METADATA>

@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_48",
+  "type": "Safe Refusal (Edge)",
+  "query": "Trích xuất số liệu thử nghiệm tại trang 9999 của tài liệu nghiên cứu thần kinh học?",
+  "is_ooc": true,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 682.38,
+  "retrieval_warm_ms": 613.89,
+  "llm_ms": 1290.96,
+  "e2e_cold_ms": 1973.34,
+  "e2e_warm_ms": 1904.85,
+  "provided_chunks": [
+    {
+      "id": "ddb8004a-2179-4c14-bb9a-c6ff2886713e",
+      "document_id": "e41ed8c7-7849-481f-858b-397baed4af87",
+      "filename": "2610.08502v1.pdf",
+      "page_number": 4,
+      "content": "PREPRINT\n4\nAlgorithm 1 Power model of module A in Fig. 2\n1 // module interface\n2 input\n[7:0]\ndata;\n// data signal\n3 input\nvld, rdy;\n// control signals\n4 input\nmask, a_mode;\n// config. signals\n5 input\n[15:0] coef0, coef1, coef2, bias;\n// coefficients\n6 // data-signal post-processing and binning\n7 wire [3:0] data_hd\n= HD(data);\n// HD: see (1)\n8 wire [1:0] data_bin =\n9\n({2{data_hd >= 6}}\n& 2'd3)\n10\n| ({2{data_hd >= 3 & data_hd <= 5}}\n& 2'd2)\n11\n| ({2{data_hd >= 1 & data_hd <= 2}}\n& 2'd1);\n12 // multiplicative interaction: control x data\n13 wire [1:0] mult = {2{vld & rdy}} & data_bin;\n14 // selective interaction: config. -> operational modes\n15 wire sel0 = ˜a_mode & ˜mask;\n// MUL,\nun-masked\n16 wire sel1 = ˜a_mode &\nmask;\n// MUL,\nmasked\n17 wire sel2 =\na_mode;\n// MAC"
+    },
+    {
+      "id": "62e37058-671c-4100-8595-311bf687f713",
+      "document_id": "c90401a2-7c58-4904-a3f4-98488581ba7b",
+      "filename": "2610.08297v1.pdf",
+      "page_number": 5,
+      "content": "200\n400\n600\n800\n6\n8\n10\n12\n14\n16\n18\nUplink data-rate in Mbps\nTP\nTP\nTP\nTP\nRoute 1\n50\n100\n150\n200\n250\n300\n10\n20\n30\n40\n50\nTPFP\nRoute 2\n0\n250\n500\n750\n1000\n1250\n1500\n1750\nData point index\n50\n75\n100\n125\n150\n175\nLatency in ms\nTP\nFP\n200\n400\n600\n800\n1000\nData point index\n40\n60\n80\n100\n120\nFN\nFN\nground truth\nwith historic data\nwithout historic data\nFig. 5.\nComparison of UL data-rate and round-trip latency prediction between with historic data and without historic data for route 1 (same route as\nwhere the training data are recorded) and route 2 (completely unseen data). The prediction horizon is for the next step, i.e., second. The data are smoothed"
+    },
+    {
+      "id": "3ed816e4-8281-4326-a09c-77405d581dcd",
+      "document_id": "6013b220-8c50-41c9-b3ab-b99ca97435e5",
+      "filename": "2610.08513v1.pdf",
+      "page_number": 12,
+      "content": "ference on Artificial Intelligence, AAAI 2022, pages\n10803–10812. Association for the Advancement of\nArtificial Intelligence. Publisher Copyright: Copy-\nright © 2022, Association for the Advancement of\nArtificial Intelligence (www.aaai.org). All rights re-\nserved.; 36th AAAI Conference on Artificial Intelli-\ngence, AAAI 2022 ; Conference date: 22-02-2022\nThrough 01-03-2022.\nIsaac Johnson, Lucie-Aimée Kaffee, and Miriam Redi.\n2024. Wikimedia data for AI: a review of wikime-\ndia datasets for NLP tasks and AI-assisted editing.\nIn Proceedings of the First Workshop on Advancing\nNatural Language Processing for Wikipedia, pages\n91–101, Miami, Florida, USA. Association for Com-\nputational Linguistics.\nVanja Mladen Karan and Jan Šnajder. 2019. Preemptive"
+    },
+    {
+      "id": "288ef61d-611f-4997-b0fb-0454521ad3ba",
+      "document_id": "464b48d9-9785-4dd1-a914-35cd8fe90392",
+      "filename": "2609.10947v2.pdf",
+      "page_number": 40,
+      "content": "Supplementary Table 7 Comparison of this work with the most related studies\nWork\nDirection\nModality\nInjected object\nCapability\nvalidation\nAttribution\ncontrols\nMagnitude\ntheory\nTRIBE, TRIBE\nv2[19, 20]\nModel to brain\nTrimodal\nconcatenation\nNone\nNone\nModality\nablation\nEncoding\ndata-size scaling\nMIRAGE[21]\nModel to brain\nNative omni\nNone\nNone\nNative versus\nconcatenated\nNone\nTopo-Omni[22]\nBrain principle\nto model\nNative omni\nTopographic\nsmoothness\nconstraint\nOmniBench,\nagainst a fine-\ntuned control\nCluster driving\nand suppression\nNone\nBrain-guided\nlanguage\nmodels[23]\nBrain to model\nText\nTask fMRI data\nReasoning\nbenchmarks\nRandom signal,\nrandom direction\nNone\nBrain-\ntuning[24, 25]\nBrain to model\nSpeech,\naudiovisual\nfMRI data\nSpeech probes;\nMUStARD and\nCMU-MOSEI\nStimulus-tuned\ncontrols;"
+    },
+    {
+      "id": "fbb4a50a-71a5-48f2-85ef-d53944350aa9",
+      "document_id": "1e54f9d5-70c6-439b-ac87-d615c785fd74",
+      "filename": "2609.22064v1.pdf",
+      "page_number": 24,
+      "content": "B\nData Processing\nRaw data were accessed via the International Brain Laboratory’s Brainwide Map data release\n[70] using the ONE API under the MIT license (https://docs.internationalbrainlab.org/\nnotebooks_external/2025_data_release_brainwidemap.html). All processed outputs are\nserialized using the brainsets format, a structured HDF5-based schema designed for neural popula-\ntion data that supports arbitrary temporal resolution and heterogeneous modalities within a unified\nsession object (https://brainsets.readthedocs.io). Each session is represented as a Data\nobject whose attributes expose the processed neural and behavioral streams described below; for\ninstance, the unified neural population activity is accessible as data.spikes.\nNeural Activity (spikes)."
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

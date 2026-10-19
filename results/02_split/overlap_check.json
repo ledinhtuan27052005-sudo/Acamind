@@ -1,0 +1,21 @@
+{
+  "dev_queries_total": 42,
+  "dev_stratified_30": 30,
+  "dev_hard_in_domain_12": 12,
+  "test_queries_total": 50,
+  "dev_unique_doc_ids_count": 30,
+  "test_unique_doc_ids_count": 32,
+  "doc_id_intersection_count": 0,
+  "doc_id_disjoint_pass": true,
+  "query_cosine_similarity_check": {
+    "total_pairs_checked": 2100,
+    "threshold": 0.85,
+    "max_cosine_similarity": 0.848324,
+    "mean_cosine_similarity": 0.777974,
+    "p95_cosine_similarity": 0.823514,
+    "max_pair_dev_id": "DEV_Q_16",
+    "max_pair_test_id": "REAL_Q_29",
+    "pairs_ge_085_count": 0,
+    "semantic_disjoint_pass": true
+  }
+}

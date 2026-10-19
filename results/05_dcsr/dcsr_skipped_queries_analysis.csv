@@ -1,0 +1,103 @@
+split,id,type,is_unanswerable,conf_eq7_top3,delta_rrf,dcsr_skipped,overlap_at_8_vs_full,ref_ndcg_at_8_vs_full,top1_changed_vs_full,gt_recall_at_8_full,gt_recall_at_8_dcsr,gt_ndcg_at_8_full,gt_ndcg_at_8_dcsr,gt_ndcg_at_10_full,gt_ndcg_at_10_dcsr
+DEV,DEV_Q_01,Factual Q&A,False,0.518405,1.017613,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+DEV,DEV_Q_02,Factual Q&A,False,0.513116,1.007129,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+DEV,DEV_Q_03,Factual Q&A,False,0.525332,1.001215,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+DEV,DEV_Q_04,Factual Q&A,False,0.515234,1.007012,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+DEV,DEV_Q_05,Factual Q&A,False,0.524646,1.006312,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+DEV,DEV_Q_06,Factual Q&A,False,0.469179,1.070184,1,0.5,0.280419,1,1.0,1.0,1.0,1.0,1.0,1.0
+DEV,DEV_Q_07,Factual Q&A,False,0.527269,1.015761,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+DEV,DEV_Q_08,Factual Q&A,False,0.51586,1.021496,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+DEV,DEV_Q_09,Factual Q&A,False,0.529891,1.044813,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+DEV,DEV_Q_10,Factual Q&A,False,0.532115,1.016001,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+DEV,DEV_Q_11,Factual Q&A,False,0.532115,1.0,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+DEV,DEV_Q_12,Factual Q&A,False,0.532115,1.021808,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+DEV,DEV_Q_13,Cross-Article Comparison,False,0.537277,1.069275,1,0.625,0.703442,1,0.5,0.5,0.613147,0.613147,0.613147,0.613147
+DEV,DEV_Q_14,Cross-Article Comparison,False,0.52711,1.014298,0,1.0,1.0,0,0.5,0.5,0.613147,0.613147,0.613147,0.613147
+DEV,DEV_Q_15,Cross-Article Comparison,False,0.467035,1.553285,1,0.375,0.041787,1,1.0,1.0,0.831555,1.0,0.831555,1.0
+DEV,DEV_Q_16,Cross-Article Comparison,False,0.484569,1.02346,0,1.0,1.0,0,1.0,1.0,0.806574,0.806574,0.806574,0.806574
+DEV,DEV_Q_17,Cross-Article Comparison,False,0.529573,1.061349,1,0.75,0.994413,0,0.5,0.5,0.613147,0.613147,0.613147,0.613147
+DEV,DEV_Q_18,Cross-Article Comparison,False,0.524726,1.104601,1,0.375,0.036555,1,0.5,0.5,0.613147,0.613147,0.613147,0.613147
+DEV,DEV_Q_19,Cross-Article Comparison,False,0.529652,1.047641,0,1.0,1.0,0,0.5,0.5,0.613147,0.613147,0.613147,0.613147
+DEV,DEV_Q_20,Cross-Article Comparison,False,0.510998,1.068066,1,0.75,0.94634,0,0.5,0.5,0.613147,0.613147,0.613147,0.613147
+DEV,DEV_Q_21,Cross-Article Comparison,False,0.502582,1.045898,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+DEV,DEV_Q_22,Literature Synthesis,False,0.539907,1.064582,1,0.875,0.863551,0,0.333333,0.333333,0.469279,0.469279,0.604931,0.610546
+DEV,DEV_Q_23,Literature Synthesis,False,0.518972,1.074834,1,0.875,0.550862,1,0.666667,0.666667,0.703918,0.61732,0.703918,0.61732
+DEV,DEV_Q_24,Literature Synthesis,False,0.524726,1.007997,0,1.0,1.0,0,0.666667,0.666667,0.625705,0.625705,0.625705,0.625705
+DEV,DEV_Q_25,Literature Synthesis,False,0.37643,1.0,0,1.0,1.0,0,0.666667,0.666667,0.61732,0.61732,0.61732,0.61732
+DEV,DEV_Q_26,Literature Synthesis,False,0.525332,1.053554,1,0.625,0.851993,1,0.666667,0.333333,0.61732,0.469279,0.61732,0.469279
+DEV,DEV_Q_27,Literature Synthesis,False,0.469189,1.566461,1,0.625,0.425205,1,0.666667,0.666667,0.703918,0.765361,0.703918,0.765361
+DEV,DEV_Q_28,Safe Refusal (Out-of-Domain),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+DEV,DEV_Q_29,Safe Refusal (Out-of-Domain),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+DEV,DEV_Q_30,Safe Refusal (Out-of-Domain),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+DEV,DEV_HARD_01,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+DEV,DEV_HARD_02,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+DEV,DEV_HARD_03,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+DEV,DEV_HARD_04,In-Domain Unanswerable (Hard Refusal),True,0.420014,1.265967,1,0.5,0.5375,1,0.0,0.0,0.0,0.0,0.0,0.0
+DEV,DEV_HARD_05,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+DEV,DEV_HARD_06,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+DEV,DEV_HARD_07,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+DEV,DEV_HARD_08,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+DEV,DEV_HARD_09,In-Domain Unanswerable (Hard Refusal),True,0.496759,1.735253,1,0.5,0.283158,1,0.0,0.0,0.0,0.0,0.0,0.0
+DEV,DEV_HARD_10,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+DEV,DEV_HARD_11,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+DEV,DEV_HARD_12,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_01,Factual Q&A,False,0.518405,1.017613,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_02,Factual Q&A,False,0.525332,1.017611,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_03,Factual Q&A,False,0.525332,1.289431,1,0.625,0.792329,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_04,Factual Q&A,False,0.524954,1.016376,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_05,Factual Q&A,False,0.527269,1.047777,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_06,Factual Q&A,False,0.532274,1.016509,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_07,Factual Q&A,False,0.514349,1.036892,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_08,Factual Q&A,False,0.532274,1.052704,1,0.625,0.977896,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_09,Factual Q&A,False,0.539907,1.048915,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_10,Factual Q&A,False,0.539907,1.048144,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_11,Factual Q&A,False,0.537277,1.016249,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_12,Factual Q&A,False,0.537277,1.0,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_13,Factual Q&A,False,0.534736,1.0,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_14,Factual Q&A,False,0.537277,1.030972,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_15,Factual Q&A,False,0.539907,1.174656,1,0.5,0.893158,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_16,Factual Q&A,False,0.537277,1.015741,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_17,Factual Q&A,False,0.539907,1.040395,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_18,Factual Q&A,False,0.529891,1.101109,1,0.625,0.907904,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_19,Factual Q&A,False,0.532274,1.032506,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_20,Factual Q&A,False,0.534736,1.007746,0,1.0,1.0,0,1.0,1.0,1.0,1.0,1.0,1.0
+TEST,REAL_Q_21,Cross-Article Comparison,False,0.458576,1.026823,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_22,Cross-Article Comparison,False,0.516348,1.0567,1,0.75,0.899199,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_23,Cross-Article Comparison,False,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_24,Cross-Article Comparison,False,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_25,Cross-Article Comparison,False,0.529652,1.165627,1,0.625,0.575849,1,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_26,Cross-Article Comparison,False,0.524954,1.015683,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_27,Cross-Article Comparison,False,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_28,Cross-Article Comparison,False,0.418675,1.257793,1,0.5,0.611001,1,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_29,Cross-Article Comparison,False,0.496122,1.20044,1,0.375,0.46512,1,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_30,Cross-Article Comparison,False,0.488623,1.685415,1,0.375,0.919551,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_31,Cross-Article Comparison,False,0.50694,1.015087,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_32,Cross-Article Comparison,False,0.511296,1.317257,1,0.625,0.76681,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_33,Cross-Article Comparison,False,0.498182,1.743976,1,0.625,0.893477,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_34,Cross-Article Comparison,False,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_35,Cross-Article Comparison,False,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_36,Literature Synthesis,False,0.534736,1.000248,0,1.0,1.0,0,0.333333,0.333333,0.469279,0.469279,0.469279,0.469279
+TEST,REAL_Q_37,Literature Synthesis,False,0.534736,1.000248,0,1.0,1.0,0,0.333333,0.333333,0.469279,0.469279,0.469279,0.469279
+TEST,REAL_Q_38,Literature Synthesis,False,0.469488,1.098112,1,0.5,0.902558,0,0.666667,0.333333,0.650821,0.469279,0.650821,0.469279
+TEST,REAL_Q_39,Literature Synthesis,False,0.469658,1.569328,1,0.5,0.586741,1,0.333333,0.333333,0.469279,0.469279,0.469279,0.469279
+TEST,REAL_Q_40,Literature Synthesis,False,0.37643,1.0,0,1.0,1.0,0,0.333333,0.333333,0.469279,0.469279,0.469279,0.469279
+TEST,REAL_Q_41,Literature Synthesis,False,0.37643,1.0,0,1.0,1.0,0,0.333333,0.333333,0.469279,0.469279,0.469279,0.469279
+TEST,REAL_Q_42,Literature Synthesis,False,0.37643,1.0,0,1.0,1.0,0,0.333333,0.333333,0.469279,0.469279,0.610546,0.610546
+TEST,REAL_Q_43,Literature Synthesis,False,0.37643,1.0,0,1.0,1.0,0,1.0,1.0,0.932521,0.932521,0.932521,0.932521
+TEST,REAL_Q_44,Literature Synthesis,False,0.534657,1.328255,1,0.625,0.662341,1,1.0,0.666667,1.0,0.671386,1.0,0.671386
+TEST,REAL_Q_45,Literature Synthesis,False,0.37643,1.0,0,1.0,1.0,0,0.666667,0.666667,0.765361,0.765361,0.901013,0.901013
+TEST,REAL_Q_46,Safe Refusal (Edge),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_47,Safe Refusal (Edge),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_48,Safe Refusal (Edge),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_49,Safe Refusal (Edge),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,REAL_Q_50,Safe Refusal (Edge),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,TEST_HARD_01,In-Domain Unanswerable (Hard Refusal),True,0.534736,1.127236,1,0.5,0.200901,1,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,TEST_HARD_02,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,TEST_HARD_03,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,TEST_HARD_04,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,TEST_HARD_05,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,TEST_HARD_06,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,TEST_HARD_07,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,TEST_HARD_08,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,TEST_HARD_09,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0
+TEST,TEST_HARD_10,In-Domain Unanswerable (Hard Refusal),True,0.37643,1.0,0,1.0,1.0,0,0.0,0.0,0.0,0.0,0.0,0.0

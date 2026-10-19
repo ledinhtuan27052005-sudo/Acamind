@@ -1,0 +1,1516 @@
+{
+  "unmatched_in_5433": [],
+  "multi_matched_in_5433": [],
+  "queries": [
+    {
+      "id": "REAL_Q_01",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'AlignQuant: Tile-Aligned Mixed-Precision Quantization for Efficient LLM Generation' là gì?",
+      "extracted_titles": [
+        "AlignQuant: Tile-Aligned Mixed-Precision Quantization for Efficient LLM Generation"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "AlignQuant: Tile-Aligned Mixed-Precision Quantization for Efficient LLM Generation",
+          "matches_5433": [
+            {
+              "id": "e00d5852-6106-41a4-bff0-394f87506de0",
+              "filename": "2610.07457v1.pdf",
+              "title": "AlignQuant: Tile-Aligned Mixed-Precision Quantization for Efficient LLM Generation",
+              "category": "Research & Statistics",
+              "total_pages": 30
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "5b0ebc8d-ee12-49b9-bc0e-33d2b818c7a9",
+              "filename": "2610.07457v1.pdf",
+              "title": "AlignQuant: Tile-Aligned Mixed-Precision Quantization for Efficient LLM Generation",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 30
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_02",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'What Matters for Latent Reasoning with Flow Matching' là gì?",
+      "extracted_titles": [
+        "What Matters for Latent Reasoning with Flow Matching"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "What Matters for Latent Reasoning with Flow Matching",
+          "matches_5433": [
+            {
+              "id": "e28b7029-cd13-427d-a90d-5c97fceabe2e",
+              "filename": "2610.06666v1.pdf",
+              "title": "What Matters for Latent Reasoning with Flow Matching",
+              "category": "Cognitive Psychology",
+              "total_pages": 29
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "8d88f103-91c2-455b-8fdc-ab4b71433977",
+              "filename": "2610.06666v1.pdf",
+              "title": "What Matters for Latent Reasoning with Flow Matching",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 29
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_03",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'TIDE 2.0: an open, model-agnostic engine for keyed de-identification of clinical notes' là gì?",
+      "extracted_titles": [
+        "TIDE 2.0: an open, model-agnostic engine for keyed de-identification of clinical notes"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "TIDE 2.0: an open, model-agnostic engine for keyed de-identification of clinical notes",
+          "matches_5433": [
+            {
+              "id": "5c9623de-2a74-43b0-b13b-61550d59b928",
+              "filename": "2610.07224v1.pdf",
+              "title": "TIDE 2.0: an open, model-agnostic engine for keyed de-identification of clinical notes",
+              "category": "Clinical Psychology",
+              "total_pages": 33
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "681cd489-4d5e-44f7-8763-25aa006ea6f1",
+              "filename": "2610.07224v1.pdf",
+              "title": "TIDE 2.0: an open, model-agnostic engine for keyed de-identification of clinical notes",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 33
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_04",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Aligning Multimodal Patient Evidence with Biomedical Knowledge Graphs for Clinical LLMs' là gì?",
+      "extracted_titles": [
+        "Aligning Multimodal Patient Evidence with Biomedical Knowledge Graphs for Clinical LLMs"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "Aligning Multimodal Patient Evidence with Biomedical Knowledge Graphs for Clinical LLMs",
+          "matches_5433": [
+            {
+              "id": "f4bdfeaa-b909-4a77-a1db-b10ef2190e4b",
+              "filename": "2610.06685v1.pdf",
+              "title": "Aligning Multimodal Patient Evidence with Biomedical Knowledge Graphs for Clinical LLMs",
+              "category": "Clinical Psychology",
+              "total_pages": 33
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "fad14d5e-bb57-400e-9c7f-13f1e7de8e7d",
+              "filename": "2610.06685v1.pdf",
+              "title": "Aligning Multimodal Patient Evidence with Biomedical Knowledge Graphs for Clinical LLMs",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 33
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_05",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Hi-M imaging of chromatin architecture in adult Drosophila brain cryosections' là gì?",
+      "extracted_titles": [
+        "Hi-M imaging of chromatin architecture in adult Drosophila brain cryosections"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "Hi-M imaging of chromatin architecture in adult Drosophila brain cryosections",
+          "matches_5433": [
+            {
+              "id": "4e204042-55c8-47d3-85f0-a683c2e5b5ab",
+              "filename": "2609.08776v1.pdf",
+              "title": "Hi-M imaging of chromatin architecture in adult Drosophila brain cryosections",
+              "category": "Neuropsychology",
+              "total_pages": 30
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "a0d1ccd8-7b30-49c9-bc28-588fd25daa2b",
+              "filename": "2609.08776v1.pdf",
+              "title": "Hi-M imaging of chromatin architecture in adult Drosophila brain cryosections",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 30
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_06",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Selective Transfer of RL Updates for Visual Reasoning' là gì?",
+      "extracted_titles": [
+        "Selective Transfer of RL Updates for Visual Reasoning"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "Selective Transfer of RL Updates for Visual Reasoning",
+          "matches_5433": [
+            {
+              "id": "ba3e8c35-9ab2-4648-bd91-d154a150ef32",
+              "filename": "2610.08659v1.pdf",
+              "title": "Selective Transfer of RL Updates for Visual Reasoning",
+              "category": "Cognitive Psychology",
+              "total_pages": 26
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "e6a2a4d2-90a0-4c48-a841-a02806fced15",
+              "filename": "2610.08659v1.pdf",
+              "title": "Selective Transfer of RL Updates for Visual Reasoning",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 26
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_07",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Flattening the Connectome Spectrum: A Spectral Filter for FC Induces a Pretraining Target for fMRI Encoders' là gì?",
+      "extracted_titles": [
+        "Flattening the Connectome Spectrum: A Spectral Filter for FC Induces a Pretraining Target for fMRI Encoders"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "Flattening the Connectome Spectrum: A Spectral Filter for FC Induces a Pretraining Target for fMRI Encoders",
+          "matches_5433": [
+            {
+              "id": "d41ab0fb-f18f-425b-93f9-a966cf4c64ac",
+              "filename": "2609.37642v1.pdf",
+              "title": "Flattening the Connectome Spectrum: A Spectral Filter for FC Induces a Pretraining Target for fMRI Encoders",
+              "category": "Neuropsychology",
+              "total_pages": 27
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "ad08dbdd-442c-4b2a-a493-d1f470fc2aeb",
+              "filename": "2609.37642v1.pdf",
+              "title": "Flattening the Connectome Spectrum: A Spectral Filter for FC Induces a Pretraining Target for fMRI Encoders",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 27
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_08",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'CLM-as-a-Judge: Evaluating an Open Contrastive Decision Model on Public Judge Benchmarks' là gì?",
+      "extracted_titles": [
+        "CLM-as-a-Judge: Evaluating an Open Contrastive Decision Model on Public Judge Benchmarks"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "CLM-as-a-Judge: Evaluating an Open Contrastive Decision Model on Public Judge Benchmarks",
+          "matches_5433": [
+            {
+              "id": "1de93935-7391-493e-9dee-d2fdd2b7413f",
+              "filename": "2610.07177v1.pdf",
+              "title": "CLM-as-a-Judge: Evaluating an Open Contrastive Decision Model on Public Judge Benchmarks",
+              "category": "Cognitive Psychology",
+              "total_pages": 13
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "50bbd24b-7697-4305-a859-d30fabe3cfa1",
+              "filename": "2610.07177v1.pdf",
+              "title": "CLM-as-a-Judge: Evaluating an Open Contrastive Decision Model on Public Judge Benchmarks",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_09",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Learning to Retrieve via Reinforcement Learning in Embedding Space' là gì?",
+      "extracted_titles": [
+        "Learning to Retrieve via Reinforcement Learning in Embedding Space"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "Learning to Retrieve via Reinforcement Learning in Embedding Space",
+          "matches_5433": [
+            {
+              "id": "f4b8ae32-1579-4ca1-956b-a097303e960a",
+              "filename": "2610.07731v1.pdf",
+              "title": "Learning to Retrieve via Reinforcement Learning in Embedding Space",
+              "category": "Cognitive Psychology",
+              "total_pages": 27
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "f4c5b63a-e640-474f-853a-5c389eb66516",
+              "filename": "2610.07731v1.pdf",
+              "title": "Learning to Retrieve via Reinforcement Learning in Embedding Space",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 27
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_10",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'CliniCIRCA: A Modular LLM Framework for Constructing Longitudinal Mental Health Patient Journeys from Raw EHR Narratives' là gì?",
+      "extracted_titles": [
+        "CliniCIRCA: A Modular LLM Framework for Constructing Longitudinal Mental Health Patient Journeys from Raw EHR Narratives"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "CliniCIRCA: A Modular LLM Framework for Constructing Longitudinal Mental Health Patient Journeys from Raw EHR Narratives",
+          "matches_5433": [
+            {
+              "id": "4054289c-d3d1-4ef1-b8c2-e2b145237da6",
+              "filename": "2609.19585v1.pdf",
+              "title": "CliniCIRCA: A Modular LLM Framework for Constructing Longitudinal Mental Health Patient Journeys from Raw EHR Narratives",
+              "category": "Clinical Psychology",
+              "total_pages": 34
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "4ceedbac-89bb-44bb-9a1d-2081a31d9551",
+              "filename": "2609.19585v1.pdf",
+              "title": "CliniCIRCA: A Modular LLM Framework for Constructing Longitudinal Mental Health Patient Journeys from Raw EHR Narratives",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 34
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_11",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'ChartBmkAgent: Harness-Governed Multi-Agent Construction of Chart QA Benchmarks from Sparse Error-Taxonomy Specifications' là gì?",
+      "extracted_titles": [
+        "ChartBmkAgent: Harness-Governed Multi-Agent Construction of Chart QA Benchmarks from Sparse Error-Taxonomy Specifications"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "ChartBmkAgent: Harness-Governed Multi-Agent Construction of Chart QA Benchmarks from Sparse Error-Taxonomy Specifications",
+          "matches_5433": [
+            {
+              "id": "4e1e265d-d94f-4290-9c1e-d8b71c9587b1",
+              "filename": "2610.08106v1.pdf",
+              "title": "ChartBmkAgent: Harness-Governed Multi-Agent Construction of Chart QA Benchmarks from Sparse Error-Taxonomy Specifications",
+              "category": "Cognitive Psychology",
+              "total_pages": 9
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "788c12d2-0807-4778-ac94-937d21087f9b",
+              "filename": "2610.08106v1.pdf",
+              "title": "ChartBmkAgent: Harness-Governed Multi-Agent Construction of Chart QA Benchmarks from Sparse Error-Taxonomy Specifications",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_12",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'MASC: A Multi-Agent Self-Calibration Framework with Latent Construct Alignment for Consistent Client Role-Playing in Psychological Counseling' là gì?",
+      "extracted_titles": [
+        "MASC: A Multi-Agent Self-Calibration Framework with Latent Construct Alignment for Consistent Client Role-Playing in Psychological Counseling"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "MASC: A Multi-Agent Self-Calibration Framework with Latent Construct Alignment for Consistent Client Role-Playing in Psychological Counseling",
+          "matches_5433": [
+            {
+              "id": "fafe47fa-ce49-4ca0-b877-4cbe55cc117d",
+              "filename": "2610.08250v1.pdf",
+              "title": "MASC: A Multi-Agent Self-Calibration Framework with Latent Construct Alignment for Consistent Client Role-Playing in Psychological Counseling",
+              "category": "Psychotherapy",
+              "total_pages": 29
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "0829570c-9c30-4293-a646-c0c66dec2cd5",
+              "filename": "2610.08250v1.pdf",
+              "title": "MASC: A Multi-Agent Self-Calibration Framework with Latent Construct Alignment for Consistent Client Role-Playing in Psychological Counseling",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 29
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_13",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Efficiency and robustness partition the solution space for memory in recurrent networks' là gì?",
+      "extracted_titles": [
+        "Efficiency and robustness partition the solution space for memory in recurrent networks"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "Efficiency and robustness partition the solution space for memory in recurrent networks",
+          "matches_5433": [
+            {
+              "id": "f4e5bf3a-be87-469e-a9cf-10d31432db0b",
+              "filename": "2610.04697v1.pdf",
+              "title": "Efficiency and robustness partition the solution space for memory in recurrent networks",
+              "category": "Neuropsychology",
+              "total_pages": 30
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "f466b20a-16bd-4717-a74e-c66db5d216b1",
+              "filename": "2610.04697v1.pdf",
+              "title": "Efficiency and robustness partition the solution space for memory in recurrent networks",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 30
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_14",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Theories of Mind as Domain-Specific Languages of Thought' là gì?",
+      "extracted_titles": [
+        "Theories of Mind as Domain-Specific Languages of Thought"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "Theories of Mind as Domain-Specific Languages of Thought",
+          "matches_5433": [
+            {
+              "id": "1c2b38ad-b9a8-4b04-a6e9-75bc688a8cb2",
+              "filename": "2609.19598v1.pdf",
+              "title": "Theories of Mind as Domain-Specific Languages of Thought",
+              "category": "Cognitive Psychology",
+              "total_pages": 73
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "1c140713-9b59-49ae-83b2-c9104cf3e139",
+              "filename": "2609.19598v1.pdf",
+              "title": "Theories of Mind as Domain-Specific Languages of Thought",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 73
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_15",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Making COMET Comparable Across Scripts: Diagnosis and Correction of Tokeniser-Induced Script Bias in Indic MT Evaluation' là gì?",
+      "extracted_titles": [
+        "Making COMET Comparable Across Scripts: Diagnosis and Correction of Tokeniser-Induced Script Bias in Indic MT Evaluation"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "Making COMET Comparable Across Scripts: Diagnosis and Correction of Tokeniser-Induced Script Bias in Indic MT Evaluation",
+          "matches_5433": [
+            {
+              "id": "613089a5-9814-4502-8d68-705024e71de9",
+              "filename": "2610.08159v1.pdf",
+              "title": "Making COMET Comparable Across Scripts: Diagnosis and Correction of Tokeniser-Induced Script Bias in Indic MT Evaluation",
+              "category": "DSM / ICD / Diagnosis",
+              "total_pages": 18
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "02a35dfe-1d6c-4fbb-a42f-5085e9d6337f",
+              "filename": "2610.08159v1.pdf",
+              "title": "Making COMET Comparable Across Scripts: Diagnosis and Correction of Tokeniser-Induced Script Bias in Indic MT Evaluation",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 18
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_16",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Neural noise enables accurate internal simulation of rare events' là gì?",
+      "extracted_titles": [
+        "Neural noise enables accurate internal simulation of rare events"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "Neural noise enables accurate internal simulation of rare events",
+          "matches_5433": [
+            {
+              "id": "3ea7a0f2-1564-43b1-a749-edb272af9339",
+              "filename": "2609.18033v1.pdf",
+              "title": "Neural noise enables accurate internal simulation of rare events",
+              "category": "Neuropsychology",
+              "total_pages": 33
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "8f5dcc81-184d-47f5-9934-079ead32893c",
+              "filename": "2609.18033v1.pdf",
+              "title": "Neural noise enables accurate internal simulation of rare events",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 33
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_17",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Existence of an infinite family of substrates satisfying all the postulates of integrated information theory, exclusion included, with arbitrarily large integrated information' là gì?",
+      "extracted_titles": [
+        "Existence of an infinite family of substrates satisfying all the postulates of integrated information theory, exclusion included, with arbitrarily large integrated information"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "Existence of an infinite family of substrates satisfying all the postulates of integrated information theory, exclusion included, with arbitrarily large integrated information",
+          "matches_5433": [
+            {
+              "id": "7ba36f8d-d391-4aee-b66a-0a1572b9dab8",
+              "filename": "2610.02219v1.pdf",
+              "title": "Existence of an infinite family of substrates satisfying all the postulates of integrated information theory, exclusion included, with arbitrarily large integrated information",
+              "category": "Research & Statistics",
+              "total_pages": 13
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "23c50741-c304-46b0-9be8-9b5ab1af06dd",
+              "filename": "2610.02219v1.pdf",
+              "title": "Existence of an infinite family of substrates satisfying all the postulates of integrated information theory, exclusion included, with arbitrarily large integrated information",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_18",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Compact Robot Policies Need Fine-Grained Visual Representations' là gì?",
+      "extracted_titles": [
+        "Compact Robot Policies Need Fine-Grained Visual Representations"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "Compact Robot Policies Need Fine-Grained Visual Representations",
+          "matches_5433": [
+            {
+              "id": "82c32b8e-a0df-47df-80c8-1857afe7ca1d",
+              "filename": "2610.08183v1.pdf",
+              "title": "Compact Robot Policies Need Fine-Grained Visual Representations",
+              "category": "DSM / ICD / Diagnosis",
+              "total_pages": 35
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "1344dca5-6e3d-4802-9dae-f62877bf56e4",
+              "filename": "2610.08183v1.pdf",
+              "title": "Compact Robot Policies Need Fine-Grained Visual Representations",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 35
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_19",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'A Novel Sentence Stress Detection Framework Leveraging Auxiliary Word-Stress Modeling and Loss Optimization' là gì?",
+      "extracted_titles": [
+        "A Novel Sentence Stress Detection Framework Leveraging Auxiliary Word-Stress Modeling and Loss Optimization"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "A Novel Sentence Stress Detection Framework Leveraging Auxiliary Word-Stress Modeling and Loss Optimization",
+          "matches_5433": [
+            {
+              "id": "f3f6486b-31d0-45d3-8b64-db68742f12c7",
+              "filename": "2610.07626v1.pdf",
+              "title": "A Novel Sentence Stress Detection Framework Leveraging Auxiliary Word-Stress Modeling and Loss Optimization",
+              "category": "DSM / ICD / Diagnosis",
+              "total_pages": 5
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "9de9ad15-5133-46d5-9130-1e585bbc3bb5",
+              "filename": "2610.07626v1.pdf",
+              "title": "A Novel Sentence Stress Detection Framework Leveraging Auxiliary Word-Stress Modeling and Loss Optimization",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_20",
+      "type": "Factual Q&A",
+      "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Test-Time Agent Evolution for Long-Horizon Legal Reasoning' là gì?",
+      "extracted_titles": [
+        "Test-Time Agent Evolution for Long-Horizon Legal Reasoning"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "Test-Time Agent Evolution for Long-Horizon Legal Reasoning",
+          "matches_5433": [
+            {
+              "id": "871e4438-e971-4911-9d04-7bb2b37f1102",
+              "filename": "2610.08138v1.pdf",
+              "title": "Test-Time Agent Evolution for Long-Horizon Legal Reasoning",
+              "category": "Cognitive Psychology",
+              "total_pages": 9
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "fe268839-2bcc-486a-9772-489ddaa947c0",
+              "filename": "2610.08138v1.pdf",
+              "title": "Test-Time Agent Evolution for Long-Horizon Legal Reasoning",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_21",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Knowing When Not to Answer: Cross-Domain and ' và (2) 'IdeaLens: Detecting AI Ideas in Long-form Wri'.",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_22",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'SIGMA: Self-Improving Alignment Generalizatio' và (2) 'Does an Agent's History Tell You When Compact'.",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_23",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Increasing Width Allows Greedy Layer-wise Tra' và (2) 'HygieneRoboBench: Benchmarking Hygiene-Aware '.",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_24",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Disentangling Paradigm, Identifier, and Decod' và (2) 'Heterarchy in the Brain: Control as a Spectru'.",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_25",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Have I Seen Enough? Frozen Video-Language Mod' và (2) 'Grid-cell firing fields lack local sixfold sy'.",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_26",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Discovering Subtypes of Neurodegenerative Pro' và (2) 'CoHyFuse: Condition-wise Hypergraph Fusion wi'.",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_27",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'FlatClip: A Geometry-Aware Surface-Level Base' và (2) 'zkLLMPoT: Efficient Zero Knowledge Proof of T'.",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_28",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'A foundation for systematic analysis of trans' và (2) 'Conceptualization and experimentation of asse'.",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_29",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Balancing Memory Pathways: Analyzing and Impr' và (2) 'Slow Context, Fast Symptoms: Multiscale Tempo'.",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_30",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Symphony for Text Generation: Benchmarking Cl' và (2) 'Recursive Game Creator: An Agentic Product-Le'.",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_31",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'WorldSonus: Bringing Sound to Worlds' và (2) 'Are Language Models Script-Aware?'.",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_32",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'ER-EDF: A Psychology-Grounded Emotion Regulat' và (2) 'When Teachers Smile or Frown: A Profile-Based'.",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_33",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Partially Observable Zero-shot coordination b' và (2) 'Attraction to hierarchical feature memory exp'.",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_34",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Decision-Related Cognitive Signatures from Fa' và (2) 'From Signals to Trajectories: A Primer on Low'.",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_35",
+      "type": "Cross-Article Comparison",
+      "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Nucleus Speculative Decoding: Plausibility-Aw' và (2) 'COMPASS 2.0: psychometric representational si'.",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_36",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Discovering Subtypes of Neurodegene | CoHyFuse: Condition-wise Hypergraph | FlatClip: A Geometry-Aware Surface-",
+      "extracted_titles": [
+        "Discovering Subtypes of Neurodegene",
+        "CoHyFuse: Condition-wise Hypergraph",
+        "FlatClip: A Geometry-Aware Surface-"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "Discovering Subtypes of Neurodegene",
+          "matches_5433": [
+            {
+              "id": "476a95f4-d56e-401a-ad29-31c1338aea8b",
+              "filename": "2609.10890v1.pdf",
+              "title": "Discovering Subtypes of Neurodegenerative Progression with a Scalable Connectome-Constrained Dynamic Model",
+              "category": "Neuropsychology",
+              "total_pages": 10
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "b679634f-4667-446a-85f9-8b63d7e5d721",
+              "filename": "2609.10890v1.pdf",
+              "title": "Discovering Subtypes of Neurodegenerative Progression with a Scalable Connectome-Constrained Dynamic Model",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 10
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "CoHyFuse: Condition-wise Hypergraph",
+          "matches_5433": [
+            {
+              "id": "270d1d91-963f-4fe6-958c-9dc4fc18cf8f",
+              "filename": "2610.05913v1.pdf",
+              "title": "CoHyFuse: Condition-wise Hypergraph Fusion with Global Connectome in Task-fMRI",
+              "category": "Clinical Psychology",
+              "total_pages": 9
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "ff8be04a-026f-447b-994e-8368d9f1b5cb",
+              "filename": "2610.05913v1.pdf",
+              "title": "CoHyFuse: Condition-wise Hypergraph Fusion with Global Connectome in Task-fMRI",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 9
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "FlatClip: A Geometry-Aware Surface-",
+          "matches_5433": [
+            {
+              "id": "e2efa39b-80e9-4421-8e14-303c661db67e",
+              "filename": "2609.31204v1.pdf",
+              "title": "FlatClip: A Geometry-Aware Surface-Level Baseline for fMRI Representation Learning",
+              "category": "Neuropsychology",
+              "total_pages": 25
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "751610d1-1b31-4a7d-8064-b03f8d7edd53",
+              "filename": "2609.31204v1.pdf",
+              "title": "FlatClip: A Geometry-Aware Surface-Level Baseline for fMRI Representation Learning",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 25
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_37",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: CoHyFuse: Condition-wise Hypergraph | FlatClip: A Geometry-Aware Surface- | zkLLMPoT: Efficient Zero Knowledge ",
+      "extracted_titles": [
+        "CoHyFuse: Condition-wise Hypergraph",
+        "FlatClip: A Geometry-Aware Surface-",
+        "zkLLMPoT: Efficient Zero Knowledge"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "CoHyFuse: Condition-wise Hypergraph",
+          "matches_5433": [
+            {
+              "id": "270d1d91-963f-4fe6-958c-9dc4fc18cf8f",
+              "filename": "2610.05913v1.pdf",
+              "title": "CoHyFuse: Condition-wise Hypergraph Fusion with Global Connectome in Task-fMRI",
+              "category": "Clinical Psychology",
+              "total_pages": 9
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "ff8be04a-026f-447b-994e-8368d9f1b5cb",
+              "filename": "2610.05913v1.pdf",
+              "title": "CoHyFuse: Condition-wise Hypergraph Fusion with Global Connectome in Task-fMRI",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 9
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "FlatClip: A Geometry-Aware Surface-",
+          "matches_5433": [
+            {
+              "id": "e2efa39b-80e9-4421-8e14-303c661db67e",
+              "filename": "2609.31204v1.pdf",
+              "title": "FlatClip: A Geometry-Aware Surface-Level Baseline for fMRI Representation Learning",
+              "category": "Neuropsychology",
+              "total_pages": 25
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "751610d1-1b31-4a7d-8064-b03f8d7edd53",
+              "filename": "2609.31204v1.pdf",
+              "title": "FlatClip: A Geometry-Aware Surface-Level Baseline for fMRI Representation Learning",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 25
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "zkLLMPoT: Efficient Zero Knowledge",
+          "matches_5433": [
+            {
+              "id": "15edcab1-9ed6-4380-b92e-653f85cd76f2",
+              "filename": "2610.08258v1.pdf",
+              "title": "zkLLMPoT: Efficient Zero Knowledge Proof of Training for Large Language Models",
+              "category": "DSM / ICD / Diagnosis",
+              "total_pages": 18
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "430db413-5e9e-450b-b023-49b2b4c5f3f7",
+              "filename": "2610.08258v1.pdf",
+              "title": "zkLLMPoT: Efficient Zero Knowledge Proof of Training for Large Language Models",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 18
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_38",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: FlatClip: A Geometry-Aware Surface- | zkLLMPoT: Efficient Zero Knowledge  | A foundation for systematic analysi",
+      "extracted_titles": [
+        "FlatClip: A Geometry-Aware Surface-",
+        "zkLLMPoT: Efficient Zero Knowledge",
+        "A foundation for systematic analysi"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "FlatClip: A Geometry-Aware Surface-",
+          "matches_5433": [
+            {
+              "id": "e2efa39b-80e9-4421-8e14-303c661db67e",
+              "filename": "2609.31204v1.pdf",
+              "title": "FlatClip: A Geometry-Aware Surface-Level Baseline for fMRI Representation Learning",
+              "category": "Neuropsychology",
+              "total_pages": 25
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "751610d1-1b31-4a7d-8064-b03f8d7edd53",
+              "filename": "2609.31204v1.pdf",
+              "title": "FlatClip: A Geometry-Aware Surface-Level Baseline for fMRI Representation Learning",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 25
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "zkLLMPoT: Efficient Zero Knowledge",
+          "matches_5433": [
+            {
+              "id": "15edcab1-9ed6-4380-b92e-653f85cd76f2",
+              "filename": "2610.08258v1.pdf",
+              "title": "zkLLMPoT: Efficient Zero Knowledge Proof of Training for Large Language Models",
+              "category": "DSM / ICD / Diagnosis",
+              "total_pages": 18
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "430db413-5e9e-450b-b023-49b2b4c5f3f7",
+              "filename": "2610.08258v1.pdf",
+              "title": "zkLLMPoT: Efficient Zero Knowledge Proof of Training for Large Language Models",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 18
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "A foundation for systematic analysi",
+          "matches_5433": [
+            {
+              "id": "9a6c7717-92e2-4d8f-8de0-1cec4a55d2fd",
+              "filename": "2610.01894v1.pdf",
+              "title": "A foundation for systematic analysis of transformers and RNNs for tractography",
+              "category": "Cognitive Psychology",
+              "total_pages": 42
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "02a43a2c-be1c-46db-9aeb-dd439eda5a4e",
+              "filename": "2610.01894v1.pdf",
+              "title": "A foundation for systematic analysis of transformers and RNNs for tractography",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 42
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_39",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: zkLLMPoT: Efficient Zero Knowledge  | A foundation for systematic analysi | Conceptualization and experimentati",
+      "extracted_titles": [
+        "zkLLMPoT: Efficient Zero Knowledge",
+        "A foundation for systematic analysi",
+        "Conceptualization and experimentati"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "zkLLMPoT: Efficient Zero Knowledge",
+          "matches_5433": [
+            {
+              "id": "15edcab1-9ed6-4380-b92e-653f85cd76f2",
+              "filename": "2610.08258v1.pdf",
+              "title": "zkLLMPoT: Efficient Zero Knowledge Proof of Training for Large Language Models",
+              "category": "DSM / ICD / Diagnosis",
+              "total_pages": 18
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "430db413-5e9e-450b-b023-49b2b4c5f3f7",
+              "filename": "2610.08258v1.pdf",
+              "title": "zkLLMPoT: Efficient Zero Knowledge Proof of Training for Large Language Models",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 18
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "A foundation for systematic analysi",
+          "matches_5433": [
+            {
+              "id": "9a6c7717-92e2-4d8f-8de0-1cec4a55d2fd",
+              "filename": "2610.01894v1.pdf",
+              "title": "A foundation for systematic analysis of transformers and RNNs for tractography",
+              "category": "Cognitive Psychology",
+              "total_pages": 42
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "02a43a2c-be1c-46db-9aeb-dd439eda5a4e",
+              "filename": "2610.01894v1.pdf",
+              "title": "A foundation for systematic analysis of transformers and RNNs for tractography",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 42
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "Conceptualization and experimentati",
+          "matches_5433": [
+            {
+              "id": "da53c65c-6ef9-4613-a882-d71c0694dad9",
+              "filename": "2609.13304v1.pdf",
+              "title": "Conceptualization and experimentation of asset market with price manipulation",
+              "category": "Cognitive Psychology",
+              "total_pages": 34
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "6870b4fd-d0a2-49ba-b7cf-4013eefcc433",
+              "filename": "2609.13304v1.pdf",
+              "title": "Conceptualization and experimentation of asset market with price manipulation",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 34
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_40",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: A foundation for systematic analysi | Conceptualization and experimentati | Balancing Memory Pathways: Analyzin",
+      "extracted_titles": [
+        "A foundation for systematic analysi",
+        "Conceptualization and experimentati",
+        "Balancing Memory Pathways: Analyzin"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "A foundation for systematic analysi",
+          "matches_5433": [
+            {
+              "id": "9a6c7717-92e2-4d8f-8de0-1cec4a55d2fd",
+              "filename": "2610.01894v1.pdf",
+              "title": "A foundation for systematic analysis of transformers and RNNs for tractography",
+              "category": "Cognitive Psychology",
+              "total_pages": 42
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "02a43a2c-be1c-46db-9aeb-dd439eda5a4e",
+              "filename": "2610.01894v1.pdf",
+              "title": "A foundation for systematic analysis of transformers and RNNs for tractography",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 42
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "Conceptualization and experimentati",
+          "matches_5433": [
+            {
+              "id": "da53c65c-6ef9-4613-a882-d71c0694dad9",
+              "filename": "2609.13304v1.pdf",
+              "title": "Conceptualization and experimentation of asset market with price manipulation",
+              "category": "Cognitive Psychology",
+              "total_pages": 34
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "6870b4fd-d0a2-49ba-b7cf-4013eefcc433",
+              "filename": "2609.13304v1.pdf",
+              "title": "Conceptualization and experimentation of asset market with price manipulation",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 34
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "Balancing Memory Pathways: Analyzin",
+          "matches_5433": [
+            {
+              "id": "55a67f34-2e6f-4e72-9f64-ea39d65610f8",
+              "filename": "2610.06750v1.pdf",
+              "title": "Balancing Memory Pathways: Analyzing and Improving Memory Utilization in Hybrid LMs",
+              "category": "Cognitive Psychology",
+              "total_pages": 18
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "32e1d3f5-eb13-44dd-9b01-232750d8713a",
+              "filename": "2610.06750v1.pdf",
+              "title": "Balancing Memory Pathways: Analyzing and Improving Memory Utilization in Hybrid LMs",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 18
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_41",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Conceptualization and experimentati | Balancing Memory Pathways: Analyzin | Slow Context, Fast Symptoms: Multis",
+      "extracted_titles": [
+        "Conceptualization and experimentati",
+        "Balancing Memory Pathways: Analyzin",
+        "Slow Context, Fast Symptoms: Multis"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "Conceptualization and experimentati",
+          "matches_5433": [
+            {
+              "id": "da53c65c-6ef9-4613-a882-d71c0694dad9",
+              "filename": "2609.13304v1.pdf",
+              "title": "Conceptualization and experimentation of asset market with price manipulation",
+              "category": "Cognitive Psychology",
+              "total_pages": 34
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "6870b4fd-d0a2-49ba-b7cf-4013eefcc433",
+              "filename": "2609.13304v1.pdf",
+              "title": "Conceptualization and experimentation of asset market with price manipulation",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 34
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "Balancing Memory Pathways: Analyzin",
+          "matches_5433": [
+            {
+              "id": "55a67f34-2e6f-4e72-9f64-ea39d65610f8",
+              "filename": "2610.06750v1.pdf",
+              "title": "Balancing Memory Pathways: Analyzing and Improving Memory Utilization in Hybrid LMs",
+              "category": "Cognitive Psychology",
+              "total_pages": 18
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "32e1d3f5-eb13-44dd-9b01-232750d8713a",
+              "filename": "2610.06750v1.pdf",
+              "title": "Balancing Memory Pathways: Analyzing and Improving Memory Utilization in Hybrid LMs",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 18
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "Slow Context, Fast Symptoms: Multis",
+          "matches_5433": [
+            {
+              "id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+              "filename": "2609.22935v2.pdf",
+              "title": "Slow Context, Fast Symptoms: Multiscale Temporal Dynamics and Context-Induced Coupling in Psychological Systems",
+              "category": "DSM / ICD / Diagnosis",
+              "total_pages": 48
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "ad7c162b-2651-472f-8805-ec21401ec5de",
+              "filename": "2609.22935v2.pdf",
+              "title": "Slow Context, Fast Symptoms: Multiscale Temporal Dynamics and Context-Induced Coupling in Psychological Systems",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 48
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_42",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Balancing Memory Pathways: Analyzin | Slow Context, Fast Symptoms: Multis | Symphony for Text Generation: Bench",
+      "extracted_titles": [
+        "Balancing Memory Pathways: Analyzin",
+        "Slow Context, Fast Symptoms: Multis",
+        "Symphony for Text Generation: Bench"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "Balancing Memory Pathways: Analyzin",
+          "matches_5433": [
+            {
+              "id": "55a67f34-2e6f-4e72-9f64-ea39d65610f8",
+              "filename": "2610.06750v1.pdf",
+              "title": "Balancing Memory Pathways: Analyzing and Improving Memory Utilization in Hybrid LMs",
+              "category": "Cognitive Psychology",
+              "total_pages": 18
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "32e1d3f5-eb13-44dd-9b01-232750d8713a",
+              "filename": "2610.06750v1.pdf",
+              "title": "Balancing Memory Pathways: Analyzing and Improving Memory Utilization in Hybrid LMs",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 18
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "Slow Context, Fast Symptoms: Multis",
+          "matches_5433": [
+            {
+              "id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+              "filename": "2609.22935v2.pdf",
+              "title": "Slow Context, Fast Symptoms: Multiscale Temporal Dynamics and Context-Induced Coupling in Psychological Systems",
+              "category": "DSM / ICD / Diagnosis",
+              "total_pages": 48
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "ad7c162b-2651-472f-8805-ec21401ec5de",
+              "filename": "2609.22935v2.pdf",
+              "title": "Slow Context, Fast Symptoms: Multiscale Temporal Dynamics and Context-Induced Coupling in Psychological Systems",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 48
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "Symphony for Text Generation: Bench",
+          "matches_5433": [
+            {
+              "id": "785d9d25-1de9-4f62-a604-a413b7f21b73",
+              "filename": "2610.08161v1.pdf",
+              "title": "Symphony for Text Generation: Benchmarking Clinical Note Generation",
+              "category": "Clinical Psychology",
+              "total_pages": 24
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "000e08c8-27a0-4d43-a15b-a514468389d4",
+              "filename": "2610.08161v1.pdf",
+              "title": "Symphony for Text Generation: Benchmarking Clinical Note Generation",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 24
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_43",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Slow Context, Fast Symptoms: Multis | Symphony for Text Generation: Bench | Recursive Game Creator: An Agentic ",
+      "extracted_titles": [
+        "Slow Context, Fast Symptoms: Multis",
+        "Symphony for Text Generation: Bench",
+        "Recursive Game Creator: An Agentic"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "Slow Context, Fast Symptoms: Multis",
+          "matches_5433": [
+            {
+              "id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+              "filename": "2609.22935v2.pdf",
+              "title": "Slow Context, Fast Symptoms: Multiscale Temporal Dynamics and Context-Induced Coupling in Psychological Systems",
+              "category": "DSM / ICD / Diagnosis",
+              "total_pages": 48
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "ad7c162b-2651-472f-8805-ec21401ec5de",
+              "filename": "2609.22935v2.pdf",
+              "title": "Slow Context, Fast Symptoms: Multiscale Temporal Dynamics and Context-Induced Coupling in Psychological Systems",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 48
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "Symphony for Text Generation: Bench",
+          "matches_5433": [
+            {
+              "id": "785d9d25-1de9-4f62-a604-a413b7f21b73",
+              "filename": "2610.08161v1.pdf",
+              "title": "Symphony for Text Generation: Benchmarking Clinical Note Generation",
+              "category": "Clinical Psychology",
+              "total_pages": 24
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "000e08c8-27a0-4d43-a15b-a514468389d4",
+              "filename": "2610.08161v1.pdf",
+              "title": "Symphony for Text Generation: Benchmarking Clinical Note Generation",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 24
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "Recursive Game Creator: An Agentic",
+          "matches_5433": [
+            {
+              "id": "96d5f9a7-b2a8-4573-b8b5-febd35e9331e",
+              "filename": "2610.08621v1.pdf",
+              "title": "Recursive Game Creator: An Agentic Product-Level Experience-Oriented Game Harness",
+              "category": "Developmental Psychology",
+              "total_pages": 14
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "057663a4-2609-4cbe-adfc-1d37d89cc5cc",
+              "filename": "2610.08621v1.pdf",
+              "title": "Recursive Game Creator: An Agentic Product-Level Experience-Oriented Game Harness",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 14
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_44",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Symphony for Text Generation: Bench | Recursive Game Creator: An Agentic  | WorldSonus: Bringing Sound to World",
+      "extracted_titles": [
+        "Symphony for Text Generation: Bench",
+        "Recursive Game Creator: An Agentic",
+        "WorldSonus: Bringing Sound to World"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "Symphony for Text Generation: Bench",
+          "matches_5433": [
+            {
+              "id": "785d9d25-1de9-4f62-a604-a413b7f21b73",
+              "filename": "2610.08161v1.pdf",
+              "title": "Symphony for Text Generation: Benchmarking Clinical Note Generation",
+              "category": "Clinical Psychology",
+              "total_pages": 24
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "000e08c8-27a0-4d43-a15b-a514468389d4",
+              "filename": "2610.08161v1.pdf",
+              "title": "Symphony for Text Generation: Benchmarking Clinical Note Generation",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 24
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "Recursive Game Creator: An Agentic",
+          "matches_5433": [
+            {
+              "id": "96d5f9a7-b2a8-4573-b8b5-febd35e9331e",
+              "filename": "2610.08621v1.pdf",
+              "title": "Recursive Game Creator: An Agentic Product-Level Experience-Oriented Game Harness",
+              "category": "Developmental Psychology",
+              "total_pages": 14
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "057663a4-2609-4cbe-adfc-1d37d89cc5cc",
+              "filename": "2610.08621v1.pdf",
+              "title": "Recursive Game Creator: An Agentic Product-Level Experience-Oriented Game Harness",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 14
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "WorldSonus: Bringing Sound to World",
+          "matches_5433": [
+            {
+              "id": "fe824ce1-4220-4d48-a2ba-080eed13a5b0",
+              "filename": "2610.08760v1.pdf",
+              "title": "WorldSonus: Bringing Sound to Worlds",
+              "category": "Research & Statistics",
+              "total_pages": 25
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "1f9e23df-ef45-4501-9edc-b06439ebcbaa",
+              "filename": "2610.08760v1.pdf",
+              "title": "WorldSonus: Bringing Sound to Worlds",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 25
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_45",
+      "type": "Literature Synthesis",
+      "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Recursive Game Creator: An Agentic  | WorldSonus: Bringing Sound to World | Are Language Models Script-Aware?",
+      "extracted_titles": [
+        "Recursive Game Creator: An Agentic",
+        "WorldSonus: Bringing Sound to World",
+        "Are Language Models Script-Aware?"
+      ],
+      "matched_docs": [
+        {
+          "query_title_fragment": "Recursive Game Creator: An Agentic",
+          "matches_5433": [
+            {
+              "id": "96d5f9a7-b2a8-4573-b8b5-febd35e9331e",
+              "filename": "2610.08621v1.pdf",
+              "title": "Recursive Game Creator: An Agentic Product-Level Experience-Oriented Game Harness",
+              "category": "Developmental Psychology",
+              "total_pages": 14
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "057663a4-2609-4cbe-adfc-1d37d89cc5cc",
+              "filename": "2610.08621v1.pdf",
+              "title": "Recursive Game Creator: An Agentic Product-Level Experience-Oriented Game Harness",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 14
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "WorldSonus: Bringing Sound to World",
+          "matches_5433": [
+            {
+              "id": "fe824ce1-4220-4d48-a2ba-080eed13a5b0",
+              "filename": "2610.08760v1.pdf",
+              "title": "WorldSonus: Bringing Sound to Worlds",
+              "category": "Research & Statistics",
+              "total_pages": 25
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "1f9e23df-ef45-4501-9edc-b06439ebcbaa",
+              "filename": "2610.08760v1.pdf",
+              "title": "WorldSonus: Bringing Sound to Worlds",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 25
+            }
+          ]
+        },
+        {
+          "query_title_fragment": "Are Language Models Script-Aware?",
+          "matches_5433": [
+            {
+              "id": "170134d8-2b17-48fb-90e4-bc42d8f28734",
+              "filename": "2610.08037v1.pdf",
+              "title": "Are Language Models Script-Aware?",
+              "category": "Research & Statistics",
+              "total_pages": 17
+            }
+          ],
+          "matches_5432": [
+            {
+              "id": "f1ad08b5-d571-4b39-b2c8-d521b94d29f7",
+              "filename": "2610.08037v1.pdf",
+              "title": "Are Language Models Script-Aware?",
+              "category": "arxiv_benchmark_500",
+              "total_pages": 17
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "REAL_Q_46",
+      "type": "Safe Refusal (Edge)",
+      "query": "Quy trình sản xuất pin xe điện thể rắn Lithium-Sulfur theo tiêu chuẩn công nghiệp là gì?",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_47",
+      "type": "Safe Refusal (Edge)",
+      "query": "Phương trình phản ứng hạt nhân tổng hợp nhiệt hạch Tokamak vận hành ra sao?",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_48",
+      "type": "Safe Refusal (Edge)",
+      "query": "Trích xuất số liệu thử nghiệm tại trang 9999 của tài liệu nghiên cứu thần kinh học?",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_49",
+      "type": "Safe Refusal (Edge)",
+      "query": "Cách điều chế hợp kim titan ứng dụng trong công nghệ hàng không vũ trụ?",
+      "extracted_titles": [],
+      "matched_docs": []
+    },
+    {
+      "id": "REAL_Q_50",
+      "type": "Safe Refusal (Edge)",
+      "query": "Thuật toán định tuyến giao thông cho hệ thống vệ tinh quỹ đạo thấp Starlink?",
+      "extracted_titles": [],
+      "matched_docs": []
+    }
+  ]
+}

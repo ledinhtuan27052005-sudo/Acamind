@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { translateText } from '@/lib/api';
 import { NeuralCard } from '@/components/ui/NeuralCard';
 import { NeuralBadge } from '@/components/ui/NeuralBadge';
+import { AcademicDocumentRenderer, cleanMarkdownText } from '@/components/ui/AcademicDocumentRenderer';
 import { Languages, ArrowLeftRight, Copy, Check, RefreshCw, Loader2 } from 'lucide-react';
 
 type Lang = 'en' | 'vi';
@@ -22,7 +23,7 @@ export default function TranslatePage() {
   const swap = () => {
     setSourceLang(targetLang);
     setTargetLang(sourceLang);
-    setInputText(result);
+    setInputText(cleanMarkdownText(result));
     setResult('');
   };
 
@@ -43,7 +44,7 @@ export default function TranslatePage() {
   }
 
   const copyResult = async () => {
-    await navigator.clipboard.writeText(result);
+    await navigator.clipboard.writeText(cleanMarkdownText(result));
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -161,7 +162,7 @@ export default function TranslatePage() {
               ) : error ? (
                 <p className="text-sm text-red-500">{error}</p>
               ) : result ? (
-                <p className="text-sm text-gray-800 dark:text-gray-100 whitespace-pre-wrap">{result}</p>
+                <AcademicDocumentRenderer content={result} />
               ) : (
                 <p className="text-sm text-gray-400">Translation will appear here...</p>
               )}

@@ -5,6 +5,7 @@ import { debateStream, scrapeUrl, ScrapeResult } from '@/lib/api';
 import { NeuralCard } from '@/components/ui/NeuralCard';
 import { NeuralBadge } from '@/components/ui/NeuralBadge';
 import { NeuralButton } from '@/components/ui/NeuralButton';
+import { AcademicDocumentRenderer } from '@/components/ui/AcademicDocumentRenderer';
 import { Scale, Globe, Brain, Sparkles, ChevronRight, Loader2, ArrowLeftRight, Link2 } from 'lucide-react';
 
 type Phase = 'input' | 'loading' | 'result';
@@ -233,10 +234,8 @@ export default function DebatePage() {
  )}
 
  {analysis && (
- <div className="prose prose-sm dark:prose-invert max-w-none">
- <div className="text-sm text-gray-700 dark:text-gray-200 leading-relaxed whitespace-pre-wrap">
- {analysis}
- </div>
+ <div className="max-w-none">
+ <AcademicDocumentRenderer content={analysis} />
  </div>
  )}
  </NeuralCard>

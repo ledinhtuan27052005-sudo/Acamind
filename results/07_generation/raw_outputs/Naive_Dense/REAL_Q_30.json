@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_30",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Symphony for Text Generation: Benchmarking Cl' và (2) 'Recursive Game Creator: An Agentic Product-Le'.",
+  "is_ooc": false,
+  "system": "Naive_Dense",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 93.45,
+  "retrieval_warm_ms": 108.46,
+  "llm_ms": 1535.05,
+  "e2e_cold_ms": 1628.5,
+  "e2e_warm_ms": 1643.51,
+  "provided_chunks": [
+    {
+      "id": "3992cacb-089d-496c-8065-19d7884c4553",
+      "document_id": "cfd01439-e1ee-4442-80ef-69bd1ca5e2f1",
+      "filename": "2610.08452v1.pdf",
+      "page_number": 10,
+      "content": "systems. In Proceedings of the 2024 Conference of\nthe North American Chapter of the Association for\nComputational Linguistics: Human Language Tech-\nnologies (Volume 1: Long Papers), pages 338–354,\nMexico City, Mexico. Association for Computational\nLinguistics.\nSumuk Shashidhar, Clémentine Fourrier, Alina Lo-\nzovskaya, Thomas Wolf, Gokhan Tur, and Dilek\nHakkani-Tür. 2025. Yourbench: Dynamic evalua-\ntion set generation with LLMs. In Conference on\nLanguage Modeling (COLM).\nAditi Singh, Abul Ehtesham, Saket Kumar, Tala Ta-\nlaei Khoei, and Athanasios V. Vasilakos. 2025. Agen-\ntic retrieval-augmented generation: A survey on agen-\ntic RAG. arXiv preprint arXiv:2501.09136.\nYixuan Tang and Yi Yang. 2024.\nMultiHop-RAG:\nBenchmarking retrieval-augmented generation for"
+    },
+    {
+      "id": "2453c47f-8c55-47eb-9ee1-8ea75428ac46",
+      "document_id": "96d5f9a7-b2a8-4573-b8b5-febd35e9331e",
+      "filename": "2610.08621v1.pdf",
+      "page_number": 6,
+      "content": "alone. The Designer receives this record alongside concrete changes and follow-up checks for the\nnext revision.\nVersion comparison and retention. The Reviewer compares a candidate with the retained game\nusing the same shared signals and game-specific criteria. It checks whether the changes address\nthe earlier revision goals and introduce new problems. The output is an A/B preference, a tie,\nor an unavailable judgment, with reasons and evidence paths. Feedback states the problem, its\npossible cause, its effect on play, and a revision goal with a follow-up check. The harness maps the\nReviewer’s judgment back to the game versions and selects which artifact to retain.\n4\nEXPERIMENTS\nWe evaluate Recursive Game Creator on GameCraft-Bench and GameASG-Bench. These bench-"
+    },
+    {
+      "id": "219de97d-8f6a-4cfd-9e3a-9fa7bb40bf0c",
+      "document_id": "aa20f529-2f4f-429c-9ddb-2c7842ddcde8",
+      "filename": "2610.06673v1.pdf",
+      "page_number": 9,
+      "content": "human feedback. In: Advances in Neural Information Processing Systems (NeurIPS). (2022)\n8. Sharma, M., Tong, M., Korbak, T., et al.: Towards understanding sycophancy in language\nmodels. In: International Conference on Learning Representations (ICLR). (2024)\n9. Perez, E., Ringer, S., Lukosiute, K., et al.:\nDiscovering language model behaviors with\nmodel-written evaluations. In: Findings of the Association for Computational Linguistics:\nACL. (2023)\n10. Fanous, A., Goldberg, J., Agarwal, A.A., et al.:\nSycEval: Evaluating LLM sycophancy.\narXiv preprint arXiv:2502.08177 (2025)\n11. Cheng, M., Yu, S., Lee, C., et al.: ELEPHANT: Measuring and understanding social syco-\nphancy in LLMs. arXiv preprint arXiv:2505.13995 (2025)"
+    },
+    {
+      "id": "10ea1c62-42b2-4b8d-9297-15bcda27da1d",
+      "document_id": "f89e31a5-e0f6-4814-a9aa-58b712f1eb77",
+      "filename": "2610.08778v1.pdf",
+      "page_number": 10,
+      "content": "cedure in the main text and appendix. The appendix further provides training and generation settings,\nevaluation protocols, prompts, and details of our asynchronous implementation using AReaL. These\ndescriptions support reproduction of our training and evaluation procedures.\nREFERENCES\nArash Ahmadian, Chris Cremer, Matthias Gall´e, Marzieh Fadaee, Julia Kreutzer, Olivier Pietquin,\nAhmet ¨Ust¨un, and Sara Hooker. Back to basics: Revisiting REINFORCE-style optimization\nfor learning from human feedback in LLMs. In Proceedings of the 62nd Annual Meeting of\nthe Association for Computational Linguistics, pp. 12248–12267. Association for Computational\nLinguistics, 2024. doi: 10.18653/v1/2024.acl-long.662.\nLouis Alfieri, Timothy J. Nokes-Malach, and Christian D. Schunn.\nLearning through case"
+    },
+    {
+      "id": "b29f321d-d586-4693-ae77-cc73fb1e4f67",
+      "document_id": "63570a89-29b2-4c32-917e-625696babf16",
+      "filename": "2610.00083v1.pdf",
+      "page_number": 10,
+      "content": "of free-form large language models. In Proceedings of\nthe 62nd Annual Meeting of the Association for Compu-\ntational Linguistics (Volume 1: Long Papers), pp. 5050–\n5063, 2024a.\nDuan, J., Zhang, R., Diffenderfer, J., Kailkhura, B., Sun,\nL., Stengel-Eskin, E., Bansal, M., Chen, T., and Xu, K.\nGtbench: Uncovering the strategic reasoning capabilities\nof llms via game-theoretic evaluations. Advances in Neu-\nral Information Processing Systems, 37:28219–28253,\n2024b.\nDuan, J., Diffenderfer, J., Madireddy, S., Chen, T.,\nKailkhura, B., and Xu, K. Uprop: Investigating the uncer-\ntainty propagation of llms in multi-step agentic decision-\nmaking. arXiv preprint arXiv:2506.17419, 2025.\nFarquhar, S., Kossen, J., Kuhn, L., and Gal, Y. Detecting\nhallucinations in large language models using semantic"
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

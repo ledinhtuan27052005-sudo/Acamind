@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_25",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Have I Seen Enough? Frozen Video-Language Mod' và (2) 'Grid-cell firing fields lack local sixfold sy'.",
+  "is_ooc": false,
+  "system": "C4_Full_Rerank",
+  "gate_passed": true,
+  "gate_score": 0.963785,
+  "dcsr_skipped": false,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 28124.39,
+  "retrieval_warm_ms": 957.32,
+  "llm_ms": 1170.16,
+  "e2e_cold_ms": 29294.55,
+  "e2e_warm_ms": 2127.48,
+  "provided_chunks": [
+    {
+      "id": "915c6789-96d0-4f99-80a2-15a12f0a740f",
+      "document_id": "bfc326e9-cd50-4a14-ab48-d57757c4fb9b",
+      "filename": "2609.31145v1.pdf",
+      "page_number": 1,
+      "content": "Grid-cell ﬁring ﬁelds lack local sixfold symmetry\nAnian Kerscher\nFaculty of Biology, Ludwig-Maximilians-Universität München, Munich, Germany\nGraduate School of Systemic Neurosciences (GSN), Ludwig-Maximilians-Universität München, Germany\nBernstein Center for Computational Neuroscience Munich, Munich, Germany\nSeptember 25, 2026\nAbstract\nThe ﬁring ﬁelds of a grid cell form a hexagonal lattice, yet each ﬁeld’s intrinsic\ngeometric structure remains unclear: Are individual grid ﬁelds radially symmetric\nor do they exhibit (weak) sixfold modulation inherited from the global lattice? To\naddress this question, we quantiﬁed the within-ﬁeld angular structure using har-\nmonic analysis and per-cell matched simulations that preserved sampling statistics,"
+    },
+    {
+      "id": "0cd9ac17-f503-4a0a-8385-1457afd55093",
+      "document_id": "bfc326e9-cd50-4a14-ab48-d57757c4fb9b",
+      "filename": "2609.31145v1.pdf",
+      "page_number": 23,
+      "content": "below the circular reference (mean AUC(Z) = −0.0336, p = 0.00545) and below the\nimposed-sixfold reference (mean AUC(Z) = −0.0532, p = 5.0 × 10−5). After omitting\nP2, however, the width-matched model was consistent with its circular reference (mean\nAUC(Z) = 0.0062, p = 0.622). Thus, matching ﬁeld width and grid scale more closely\nto the experimental regime did not reveal a robust selective local sixfold enhancement.\nAdditional model-speciﬁc diagnostics are reported in Supplementary Section S10.\n4\nDiscussion\nIn this study, we tested whether individual grid-cell ﬁring ﬁelds exhibit an intrinsic lo-\ncal sixfold angular modulation related to the global hexagonal lattice. After correction\nfor global lattice distortion, experimental ﬁelds showed no reliable elevation of sixfold"
+    },
+    {
+      "id": "e7ac1a7d-d9cd-474b-af2d-a3834670f5bf",
+      "document_id": "bfc326e9-cd50-4a14-ab48-d57757c4fb9b",
+      "filename": "2609.31145v1.pdf",
+      "page_number": 2,
+      "content": "minimized.\nWe therefore asked whether individual grid ﬁelds exhibit a selective local sixfold an-\ngular modulation beyond that expected from matched locally circular ﬁelds. To address\nthis question, we developed a quantitative analysis pipeline that extracts angle-resolved\nﬁring proﬁles from isolated grid ﬁelds and compares their angular structure to matched\nsimulated reference models. Using long recordings from grid cells within a single grid-\ncell module, we analyzed angular ﬁring statistics across spatial scales and assessed the\npresence of sixfold angular modulation using both qualitative and quantitative measures.\nOur results show that, after correction for global elliptic deformation, local sixfold"
+    },
+    {
+      "id": "20e103cb-3eb0-4425-b6bb-0a0558a3f744",
+      "document_id": "bfc326e9-cd50-4a14-ab48-d57757c4fb9b",
+      "filename": "2609.31145v1.pdf",
+      "page_number": 2,
+      "content": "presence of sixfold angular modulation using both qualitative and quantitative measures.\nOur results show that, after correction for global elliptic deformation, local sixfold\nmodulation in experimental ﬁring ﬁelds is consistent with matched circular-ﬁeld expecta-\ntions and substantially weaker than in matched simulations with an imposed local sixfold\ncomponent. These ﬁndings provide a quantitative constraint on the microstructure of\ngrid ﬁelds and support a distinction between global hexagonal lattice organization and\nlocal ﬁring-ﬁeld shape.\n2\nMethods\nThe data analysis consisted of the following steps: (i) Spatial ﬁring rate maps were con-\nstructed from spike and position data (Section 2.2) and used to compute spatial autocorrel-"
+    },
+    {
+      "id": "faf8b155-5215-4f0e-a5af-365660387797",
+      "document_id": "bfc326e9-cd50-4a14-ab48-d57757c4fb9b",
+      "filename": "2609.31145v1.pdf",
+      "page_number": 22,
+      "content": "separated, but experimental f6 was not signiﬁcantly diﬀerent from this weak sixfold ref-\nerence itself. Thus, the analysis showed graded sensitivity to the strength of imposed\nlocal sixfold modulation; these discrete calibration points do not deﬁne a hard detection\nthreshold.\n3.7\nTemporal ﬁring modes do not reveal sixfold organization\nBurst ﬁring may represent a distinct functional mode of grid-cell activity and could, in\nprinciple, express angular structure that is diluted in the complete spike train. Of the\n140 cells with successfully deﬁned all-spike ﬁeld geometry, 108 contained at least 282 in-\ndependent burst-onset events within the local analysis support and entered the primary\nburst analysis. For burst events, f6 did not exceed the matched circular reference (mean"
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

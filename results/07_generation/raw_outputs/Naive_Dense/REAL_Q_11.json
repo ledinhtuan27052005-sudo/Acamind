@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_11",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'ChartBmkAgent: Harness-Governed Multi-Agent Construction of Chart QA Benchmarks from Sparse Error-Taxonomy Specifications' là gì?",
+  "is_ooc": false,
+  "system": "Naive_Dense",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 218.43,
+  "retrieval_warm_ms": 110.08,
+  "llm_ms": 2735.08,
+  "e2e_cold_ms": 2953.51,
+  "e2e_warm_ms": 2845.16,
+  "provided_chunks": [
+    {
+      "id": "fc3a88ef-6de2-4dec-81ba-640fe707e8b3",
+      "document_id": "4e1e265d-d94f-4290-9c1e-d8b71c9587b1",
+      "filename": "2610.08106v1.pdf",
+      "page_number": 1,
+      "content": "ChartBmkAgent: Harness-Governed Multi-Agent Construction of Chart QA\nBenchmarks from Sparse Error-Taxonomy Specifications\nLangxi Huang1, Pingping Zhang1, Lanyun Zhu2, Chunyang Jiang3, Jiawei Shao1, Haocheng Yuan1,\nPeilin Chen1\n1City University of Hong Kong\n2Tongji University\n3Hong Kong University of Science and Technology\nAbstract\nMultimodal large language models (MLLMs) continue to\nachieve substantial capability gains, while the conventional\nbenchmark-development cycle has not kept pace with these\nadvances, thereby delaying the systematic investigation of\nnewly observed capability gaps. Such investigation requires\nan expressive task format and an on-demand construction\nprocess: information-rich charts make chart question answer-\ning (Chart QA) suitable for probing coupled perception and"
+    },
+    {
+      "id": "00349abb-82ac-45a8-b68f-f8a1ef42902f",
+      "document_id": "4e1e265d-d94f-4290-9c1e-d8b71c9587b1",
+      "filename": "2610.08106v1.pdf",
+      "page_number": 1,
+      "content": "whether newly synthesized requirements and content remain\naligned with an externally specified diagnostic target. We in-\ntroduce ChartBmkAgent, which turns an identified capability\ngap into targeted diagnostic evidence by constructing com-\nplete Chart QA samples from sparse error-taxonomy specifi-\ncations. Throughout construction, a central harness governs\nspecialized agents, requires stage-specific evidence of align-\nment with the original error category, and records the basis\nfor each acceptance decision. On 300 taxonomy-wide sam-\nples, MLLM accuracies ranged from 32.7% to 84.3% with\ndistinct category profiles, showing that generated samples re-\nveal capability differences. Across three source-model com-\nparisons, targeted follow-ups scored 50.0% versus 82.2% on"
+    },
+    {
+      "id": "0d7548a6-f9c3-41aa-af87-f6af44c89083",
+      "document_id": "4e1e265d-d94f-4290-9c1e-d8b71c9587b1",
+      "filename": "2610.08106v1.pdf",
+      "page_number": 7,
+      "content": "observed difficulty, not a claim of model-private capability.\nThird, target preservation is supported by an 86.4% exact-\ndescription majority rate on 220 frozen samples, and the\npaired direct baseline shows a 77.5% end-to-end pass rate\nfor the full harness versus 52.5% for three-call construc-\ntion without it. The injected-fault ablation further identifies\nwhy an omitted anchor-to-QA check can leave semantically\nwrong samples admissible.\nThese results do not establish source-independent seman-\ntic validity. We therefore define ChartBmkAgent as an au-\nditable construction mechanism; independent external vali-\ndation remains necessary. Extending the taxonomy, varying\nchart-design conditions, adding independent human review\nand judges, and testing other visual domains are necessary"
+    },
+    {
+      "id": "d88059f2-298e-4f45-b15e-1e6b1e521797",
+      "document_id": "4e1e265d-d94f-4290-9c1e-d8b71c9587b1",
+      "filename": "2610.08106v1.pdf",
+      "page_number": 2,
+      "content": "The main contributions of this work are as follows:\n• We formulate sparse diagnostic specification-to-sample\nconstruction for Chart QA: a complete probe is materi-\nalized from an error-category seed without sample-level\nscaffolds, providing a direct path from suspected failure\nto targeted evidence.\n• We introduce a harness-governed ChartBmkAgent that\nbinds dynamically derived obligations to the root diag-\nnostic construct and admits data, chart, and QA artifacts\nonly when their inheritance evidence satisfies those obli-\ngations.\n• The harness retains the same admission evidence as an\nitem-level construction trace, coupling online drift con-\ntrol with retrospective audit of error-category realization,\ndifficulty realization, and acceptance."
+    },
+    {
+      "id": "be16ea8c-e2a5-49b6-b95f-62bb55665cff",
+      "document_id": "4e1e265d-d94f-4290-9c1e-d8b71c9587b1",
+      "filename": "2610.08106v1.pdf",
+      "page_number": 1,
+      "content": "an expressive task format and an on-demand construction\nprocess: information-rich charts make chart question answer-\ning (Chart QA) suitable for probing coupled perception and\nreasoning. Automated Chart QA construction is intended to\nshorten the benchmark-development cycle by turning iden-\ntified gaps into targeted samples on demand. Current meth-\nods, however, commonly separate target guidance from scratch\ngeneration: target-guided systems often require prepared data,\ncharts, or templates, while scratch-generation systems pri-\nmarily ensure artifact validity, without explicitly controlling\nwhether newly synthesized requirements and content remain\naligned with an externally specified diagnostic target. We in-\ntroduce ChartBmkAgent, which turns an identified capability"
+    }
+  ],
+  "answer": "Dựa trên các tài liệu được cung cấp, dưới đây là tổng hợp về mục tiêu nghiên cứu và phương pháp luận chính được trình bày trong bài báo:\n\n## I. Mục tiêu nghiên cứu\nMục tiêu của nghiên cứu là xây dựng một cơ chế tự động hóa nhằm rút ngắn chu kỳ phát triển bộ chuẩn đánh giá (benchmark-development cycle) bằng cách chuyển đổi các khoảng trống năng lực (capability gaps) đã được xác định thành các mẫu **Hỏi đáp biểu đồ (Chart Question Answering - Chart QA)** có mục tiêu theo yêu cầu [2610.08106v1.pdf - Trang 1]. Nghiên cứu giới thiệu hệ thống **ChartBmkAgent** nhằm biến các đặc tả phân loại lỗi thưa thớt (sparse error-taxonomy specifications) thành bằng chứng chẩn đoán có mục tiêu thông qua việc xây dựng hoàn chỉnh các mẫu Chart QA [2610.08106v1.pdf - Trang 1].\n\n## II. Phương pháp luận chính\nPhương pháp luận của nghiên cứu tập trung vào việc khắc phục điểm yếu của các phương pháp hiện tại (thường tách biệt định hướng mục tiêu khỏi việc tạo từ đầu - scratch generation) bằng cách áp dụng các thành phần kỹ thuật chính sau:\n\n1. **Công thức hóa quy trình xây dựng (Formulation):** \n   > \"We formulate sparse diagnostic specification-to-sample construction for Chart QA: a complete probe is materialized from an error-category seed without sample-level scaffolds, providing a direct path from suspected failure to targeted evidence.\" [2610.08106v1.pdf - Trang 2]\n\n2. **Hệ thống điều khiển trung tâm (Harness-Governed Multi-Agent Architecture):** \n   Giới thiệu **ChartBmkAgent** — một hệ thống trong đó một cơ chế điều khiển trung tâm (central harness) quản lý các tác nhân chuyên biệt (specialized agents), yêu cầu bằng chứng cụ thể theo từng giai đoạn về sự liên kết với danh mục lỗi ban đầu, đồng thời ghi lại cơ sở cho mỗi quyết định chấp nhận [2610.08106v1.pdf - Trang 1]. Hệ thống này ràng buộc các nghĩa vụ được dẫn xuất động với cấu trúc chẩn đoán gốc và chỉ chấp nhận các hiện vật dữ liệu, biểu đồ và QA khi bằng chứng kế thừa thỏa mãn các nghĩa vụ đó [2610.08106v1.pdf - Trang 2].\n\n3. **Kiểm soát độ trôi và kiểm toán hồi cứu (Online Drift Control and Retrospective Audit):** \n   Hệ thống kết hợp việc kiểm soát độ trôi trực tuyến (online drift control) với kiểm toán hồi cứu (retrospective audit) về việc thực hiện danh mục lỗi, thực hiện độ khó và sự chấp nhận [2610.08106v1.pdf - Trang 2].\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+}

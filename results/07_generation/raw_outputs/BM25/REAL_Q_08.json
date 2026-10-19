@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_08",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'CLM-as-a-Judge: Evaluating an Open Contrastive Decision Model on Public Judge Benchmarks' là gì?",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 1308.22,
+  "retrieval_warm_ms": 1344.16,
+  "llm_ms": 4659.93,
+  "e2e_cold_ms": 5968.15,
+  "e2e_warm_ms": 6004.09,
+  "provided_chunks": [
+    {
+      "id": "8afdbb9b-a5a4-4994-809b-36c9c0792394",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 21,
+      "content": "person\nperson / model\nHH / HA\nSem-Detect\nhuman reviews / model rewrite of a human review /\nmodel reviews\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA\nMELD\nhuman / model / six attacks\nperson / model /\nmodel\nperson / model /\nmodel\nHH / AA / AA\nattacked\nLAMP\nmodel draft / the draft after a professional’s edit\nmodel\nmodel\n/\nmodel,\nedited\nAA / not placed\nARB\nhuman / model rewrite of a human article (h2l) /\nmodel (free llm) / llm2l\nperson / person /\nmodel / model\nperson / model /\nmodel / model\nHH / HA / AA /\nAA attacked\nGEDE\nhuman essay / model improves or rewrites it\nperson\nperson / model\nHH / HA\nmodel essay from the assignment / DIPPER, rewrite\nattack\nmodel\nmodel\nAA / AA at-\ntacked\nmodel essay from the student’s summary\nmodel\n(GEDE’s\nown label)\nmodel\nAA, shown but\nnot averaged"
+    },
+    {
+      "id": "b9ed282a-1446-49b3-972a-34b84e3b30e9",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 21,
+      "content": "HH / HA\nmodel essay from the assignment / DIPPER, rewrite\nattack\nmodel\nmodel\nAA / AA at-\ntacked\nmodel essay from the student’s summary\nmodel\n(GEDE’s\nown label)\nmodel\nAA, shown but\nnot averaged\nPerkins et al.\nmodel text under six evasion techniques\nmodel\nmodel\nAA attacked\nHART\nhuman / model rephrase of human text / model / hu-\nmanized\nperson / person /\nmodel / model\nperson / model /\nmodel / model\nHH / HA / AA /\nAA attacked\nmodel text rewritten by a person\nmodel\nmodel, edited\nnot placed\nEpoch author imitation\nthe author’s text / model, plain prompt\nperson / model\nperson / model\nHH / AA\nmodel imitating the author from five passages\nmixed\nmodel\nmixed\nCoCoNUTS\nhuman review / model polishes or translates it /\nmodel review\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA"
+    },
+    {
+      "id": "ab8856aa-a4cc-47f0-8a07-a2bc88770ebe",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 21,
+      "content": "manized)\nperson\nmodel\nHA\nAI-BP, AI-EP: model review from the paper (and hu-\nmanized)\nmodel\nmodel\nAA (attacked)\nAI-HI: model review from the reviewer’s notes\nmixed\nmodel\nmixed\nDetectRL-X\nhuman / model / attacked model text (English rows)\nperson / model /\nmodel\nperson / model /\nmodel\nHH / AA / AA\nattacked\nStoryScope\nhuman stories / stories by five models\nperson / model\nperson / model\nHH / AA\nDetectionAI\nhuman\nessays\n/\nmodel\nessays\n/\nhumanized\n(StealthGPT, 2026)\nperson / model /\nmodel\nperson / model /\nmodel\nHH / AA / AA\nattacked\nOpAI-Bench\nv0: the human draft / v1–v8: successive model edits\nperson\nperson / model\nHH / HA\nSem-Detect\nhuman reviews / model rewrite of a human review /\nmodel reviews\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA\nMELD\nhuman / model / six attacks"
+    },
+    {
+      "id": "c24286db-0980-499e-a5fe-8d2a5991e813",
+      "document_id": "1de93935-7391-493e-9dee-d2fdd2b7413f",
+      "filename": "2610.07177v1.pdf",
+      "page_number": 1,
+      "content": "CLM-as-a-Judge: Evaluating an Open Contrastive Decision Model\non Public Judge Benchmarks\nGowthamkumar Nandakishore\nIndependent researcher\nOctober 2026\nAbstract\nAn open contrastive decision model is near chance as a judge on the hard public benchmarks:\nContrastive-LM/CLM-v0.1-8B scores between 0.351 (best-of-four, chance 0.250) and 0.593\n(pairwise, chance 0.500), is statistically indistinguishable from coin flipping on RM-Bench\nand JudgeBench, and answers every HaluEval item with one constant label, matching the\ntrivial always-first baseline at 0.581. Judges with the same parameter count score far higher\neverywhere: a reward model reaches 0.764 to 0.976 and a generative judge 0.611 to 0.778,\nand every gap to CLM is significant after Benjamini–Hochberg correction. Two properties do"
+    },
+    {
+      "id": "329ebc51-0059-4555-8401-d88fa20541ef",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 21,
+      "content": "model imitating the author from five passages\nmixed\nmodel\nmixed\nCoCoNUTS\nhuman review / model polishes or translates it /\nmodel review\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA\nmodel review from the person’s review\nmixed\nmodel\nmixed\nELLIPSE\nessays by English learners\nperson\nperson\nHH\nAI-Researcher\nexpert reviews / proposals from expert ideas / model\nproposals\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA\npapers people wrote from a model’s idea\nmixed\nperson\nmixed\nAcademic Integrity\noriginal abstract / model abstract from it (and human-\nized)\nperson\nperson / model\nHH / HA\nGEN\nhuman / edited by an AI editor / written by an AI\nwriter\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA\nan AI editor adds details to a person’s text\nmixed\nmodel"
+    }
+  ],
+  "answer": "Dựa trên tài liệu được cung cấp, dưới đây là tổng hợp thông tin về mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo **\"CLM-as-a-Judge: Evaluating an Open Contrastive Decision Model on Public Judge Benchmarks\"**:\n\n## I. Mục tiêu nghiên cứu\n* Mục tiêu của bài báo là đánh giá một mô hình quyết định đối kháng mở (**open contrastive decision model**), cụ thể là mô hình Contrastive-LM/CLM-v0.1-8B, khi đóng vai trò là một giám khảo (judge) trên các benchmark giám khảo công khai khó (**hard public benchmarks**) [2610.07177v1.pdf - Trang 1].\n\n## II. Giả thuyết khoa học\n* Bài báo đánh giá và kiểm định giả thuyết về hiệu năng của mô hình quyết định đối kháng mở so với các tiêu chuẩn ngẫu nhiên và so với các đối thủ cùng số lượng tham số (**parameter count**) [2610.07177v1.pdf - Trang 1]. \n* Kết quả thực nghiệm cho thấy mô hình này đạt kết quả gần mức ngẫu nhiên (near chance) trên các benchmark, cụ thể:\n  > \"Contrastive-LM/CLM-v0.1-8B scores between 0.351 (best-of-four, chance 0.250) and 0.593 (pairwise, chance 0.500), is statistically indistinguishable from coin flipping on RM-Bench and JudgeBench, and answers every HaluEval item with one constant label, matching the trivial always-first baseline at 0.581.\" [2610.07177v1.pdf - Trang 1]\n* Trong khi đó, các giám khảo có cùng số lượng tham số đạt điểm số cao hơn đáng kể ở mọi nơi (reward model đạt từ $0.764$ đến $0.976$ và generative judge đạt từ $0.611$ đến $0.778$), và mọi khoảng cách hiệu suất so với CLM đều có ý nghĩa thống kê sau khi hiệu chỉnh Benjamini–Hochberg [2610.07177v1.pdf - Trang 1].\n\n## III. Phương pháp luận chính\n* Phương pháp luận của nghiên cứu tập trung vào việc thực hiện đánh giá thực nghiệm (**empirical evaluation**) mô hình CLM trên các benchmark giám khảo công khai tiêu chuẩn (bao gồm RM-Bench, JudgeBench và HaluEval) [2610.07177v1.pdf - Trang 1].\n* Nghiên cứu sử dụng các phương pháp kiểm định thống kê, bao gồm việc hiệu chỉnh **Benjamini–Hochberg correction** để kiểm định độ khác biệt có ý nghĩa thống kê giữa CLM và các mô hình so sánh [2610.07177v1.pdf - Trang 1].\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*\n\n**Tài liệu tham khảo:**\n* Nandakishore, G. (2026). CLM-as-a-Judge: Evaluating an Open Contrastive Decision Model on Public Judge Benchmarks. [2610.07177v1.pdf - Trang 1]"
+}

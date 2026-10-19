@@ -83,6 +83,7 @@ class LLMClient:
         system: Optional[str] = None,
         max_tokens: int = 4096,
         temperature: float = 0.1,
+        mime_type: str = "image/jpeg",
     ) -> str:
         """Gọi LLM với ảnh (vision). Gemini hỗ trợ vision natively."""
         import base64
@@ -109,7 +110,7 @@ class LLMClient:
                 {
                     "type": "image_url",
                     "image_url": {
-                        "url": f"data:image/jpeg;base64,{b64}",
+                        "url": f"data:{mime_type};base64,{b64}",
                     },
                 },
                 {"type": "text", "text": prompt},

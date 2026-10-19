@@ -1,0 +1,19 @@
+{
+  "query_id": "REAL_Q_50",
+  "type": "Safe Refusal (Edge)",
+  "query": "Thuật toán định tuyến giao thông cho hệ thống vệ tinh quỹ đạo thấp Starlink?",
+  "is_ooc": true,
+  "system": "C4_Full_Rerank",
+  "gate_passed": false,
+  "gate_score": 0.038563,
+  "dcsr_skipped": false,
+  "gate_refused": true,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 28754.33,
+  "retrieval_warm_ms": 504.18,
+  "llm_ms": 0.0,
+  "e2e_cold_ms": 28754.33,
+  "e2e_warm_ms": 504.18,
+  "provided_chunks": [],
+  "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. (Từ chối bởi CRAG Gate)"
+}

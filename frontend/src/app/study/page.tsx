@@ -6,6 +6,7 @@ import type { DocumentInfo } from '@/lib/api';
 import { NeuralCard } from '@/components/ui/NeuralCard';
 import { NeuralBadge } from '@/components/ui/NeuralBadge';
 import { NeuralButton } from '@/components/ui/NeuralButton';
+import { AcademicDocumentRenderer } from '@/components/ui/AcademicDocumentRenderer';
 import { useAppStore } from '@/store/useAppStore';
 import { GuestBlockScreen } from '@/components/auth/AuthRequiredModal';
 import { GraduationCap, Send, Loader2, FileText, BookOpen, Lightbulb, Zap, ChevronRight, Sparkles } from 'lucide-react';
@@ -226,7 +227,11 @@ export default function LearnPage() {
  ? 'bg-gradient-to-r from-neural-500 to-teal-500 text-white rounded-tr-sm shadow-lg shadow-neural-500/20'
  : 'bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 text-gray-800 dark:text-gray-100 rounded-tl-sm'
  }`}>
+ {msg.role === 'user' ? (
  <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
+ ) : (
+ <AcademicDocumentRenderer content={msg.content} />
+ )}
  </div>
  {msg.role === 'user' && (
  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center flex-shrink-0 mt-1">

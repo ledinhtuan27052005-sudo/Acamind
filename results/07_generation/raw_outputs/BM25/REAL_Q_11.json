@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_11",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'ChartBmkAgent: Harness-Governed Multi-Agent Construction of Chart QA Benchmarks from Sparse Error-Taxonomy Specifications' là gì?",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 929.84,
+  "retrieval_warm_ms": 940.07,
+  "llm_ms": 3926.92,
+  "e2e_cold_ms": 4856.76,
+  "e2e_warm_ms": 4866.99,
+  "provided_chunks": [
+    {
+      "id": "d1a45cc5-fd0c-42ff-b81a-e0c985968815",
+      "document_id": "fc72719e-ab7c-433f-8b9e-9a475544dc8f",
+      "filename": "2610.07657v1.pdf",
+      "page_number": 16,
+      "content": "Memory\nRequest\n&\nResponse\nPrompt Driven\nReasoning & Evaluation\nSystems & Memory\nInteractions\nReflection\nLoop\nAI Agent Workflow\nAgent\nAgent\nAgent\nVertical Multi-agent Architecture\nAgent\nAgent\nAgent\nHorizontal Multi-agent Architecture\nMulti-agent Architectures\nUser\nMCP Host\n(Application)\nJSON RPC Transport Layer\n(One-to-One)\nMCP Client 1\nMCP Server 1\n(Database)\nMCP Client 2\nMCP Server 2\n(File System)\nMCP Client N\nMCP Server N\n(External APIs)\n...\n...\nMCP Architecture (Multi-agent Protocol)\nFig. 6. Background. (Left) An LLM agent reaches everything outside the model through two interfaces, tools and memory, which are the two integration\nsurfaces of Section II-B. (Center) Vertical and horizontal multi-agent topologies. (Right) MCP architecture, which our testbed’s topology adopts.\nTABLE VII"
+    },
+    {
+      "id": "fc3a88ef-6de2-4dec-81ba-640fe707e8b3",
+      "document_id": "4e1e265d-d94f-4290-9c1e-d8b71c9587b1",
+      "filename": "2610.08106v1.pdf",
+      "page_number": 1,
+      "content": "ChartBmkAgent: Harness-Governed Multi-Agent Construction of Chart QA\nBenchmarks from Sparse Error-Taxonomy Specifications\nLangxi Huang1, Pingping Zhang1, Lanyun Zhu2, Chunyang Jiang3, Jiawei Shao1, Haocheng Yuan1,\nPeilin Chen1\n1City University of Hong Kong\n2Tongji University\n3Hong Kong University of Science and Technology\nAbstract\nMultimodal large language models (MLLMs) continue to\nachieve substantial capability gains, while the conventional\nbenchmark-development cycle has not kept pace with these\nadvances, thereby delaying the systematic investigation of\nnewly observed capability gaps. Such investigation requires\nan expressive task format and an on-demand construction\nprocess: information-rich charts make chart question answer-\ning (Chart QA) suitable for probing coupled perception and"
+    },
+    {
+      "id": "00349abb-82ac-45a8-b68f-f8a1ef42902f",
+      "document_id": "4e1e265d-d94f-4290-9c1e-d8b71c9587b1",
+      "filename": "2610.08106v1.pdf",
+      "page_number": 1,
+      "content": "whether newly synthesized requirements and content remain\naligned with an externally specified diagnostic target. We in-\ntroduce ChartBmkAgent, which turns an identified capability\ngap into targeted diagnostic evidence by constructing com-\nplete Chart QA samples from sparse error-taxonomy specifi-\ncations. Throughout construction, a central harness governs\nspecialized agents, requires stage-specific evidence of align-\nment with the original error category, and records the basis\nfor each acceptance decision. On 300 taxonomy-wide sam-\nples, MLLM accuracies ranged from 32.7% to 84.3% with\ndistinct category profiles, showing that generated samples re-\nveal capability differences. Across three source-model com-\nparisons, targeted follow-ups scored 50.0% versus 82.2% on"
+    },
+    {
+      "id": "ef6e88fd-7411-4b9c-ba74-08b36b30ed8c",
+      "document_id": "91d5f553-f676-4abb-860a-d2ba8b9b7809",
+      "filename": "2610.08142v1.pdf",
+      "page_number": 16,
+      "content": "rt\ni = rt\nsparse + ηtrt\ndense,i,\n(C.1)\nwhere rt\nsparse is the cooperative sparse reward shared by both agents, rt\ndense,i is the dense shaping\nreward caused by agent i at timestep t, and ηt is the reward-shaping coefficient.\nSparse reward.\nThe sparse reward is generated only when a dish is delivered. If no delivery occurs,\nthe sparse reward is zero. When a delivery occurs, the delivery reward is divided equally between the\ntwo agents, so both agents receive the same sparse reward regardless of which agent performed the\nfinal delivery action:\nrt\nsparse =\n\u001a 1\n2Rt\ndel,\nif a dish is delivered at timestep t,\n0,\notherwise.\n(C.2)\nThe delivery reward depends on the delivered dish type. If the dish matches the first active order,"
+    },
+    {
+      "id": "1ff54779-cf84-44a3-b54c-7c62a107fc7b",
+      "document_id": "460a4bc5-272b-4882-a970-f5363ef4edf1",
+      "filename": "2610.06650v2.pdf",
+      "page_number": 10,
+      "content": "Accuracy and cost: all 100 questions\nModel\nInterface\nSingle-entity\nMulti-hop\nTotal\nCost/question\nQwen3.8-27B\nRLM harness\n46/50\n28/50\n74/100\n$0.04∗\ngpt-6-luna\nRLM harness\n42/50\n19/50\n61/100\n$0.013\nQwen3.8-27B\ntool-calling agent\n40/50\n20/50\n60/100\n$0.025∗\nGLM-5.3-flash\ntool-calling agent\n37/50\n13/50\n50/100\n$0.067\ngpt-6-luna\ntool-calling agent\n40/50\n9/50\n49/100\n$0.005\nGemini-3.1-flash-lite\ntool-calling agent\n31/50\n10/50\n41/100\n$0.19\nExecution patterns: 50 multi-hop questions\nModel\nInterface\nTarget reached\nGraph calls\nRepeats\nNo answer\nTokens\nQwen3.8-27B\nRLM harness\n39/50\n620\n25%\n1/50\n298,059\ngpt-6-luna\nRLM harness\n35/50\n15,575\n37%\n0/50\n75,255\nQwen3.8-27B\ntool-calling agent\n27/50\n45\n7%\n8/50\n181,047\nGLM-5.3-flash\ntool-calling agent\n23/50\n50\n6%\n16/50\n140,451\ngpt-6-luna\ntool-calling agent"
+    }
+  ],
+  "answer": "Dựa trên các tài liệu được cung cấp trong hệ thống, dưới đây là tổng hợp thông tin về mục tiêu nghiên cứu và phương pháp luận của bài báo **\"ChartBmkAgent: Harness-Governed Multi-Agent Construction of Chart QA Benchmarks from Sparse Error-Taxonomy Specifications\"**:\n\n## 1. Mục tiêu nghiên cứu\nMục tiêu của nghiên cứu là giải quyết thực trạng chu kỳ phát triển bộ chuẩn đánh giá truyền thống hiện nay chưa theo kịp tốc độ phát triển của các mô hình ngôn ngữ lớn đa phương thức (Multimodal Large Language Models - MLLMs), dẫn đến việc chậm trễ trong việc khảo sát một cách có hệ thống các khoảng trống năng lực (capability gaps) mới quan sát được [2610.08106v1.pdf - Trang 1]. Để khắc phục điều này, nghiên cứu đặt mục tiêu xây dựng một quy trình theo yêu cầu (on-demand construction process) với định dạng tác vụ biểu cảm, nhằm chuyển đổi các khoảng trống năng lực được nhận diện thành bằng chứng chẩn đoán có mục tiêu thông qua việc tự động xây dựng các mẫu hỏi đáp biểu đồ (Chart QA) hoàn chỉnh từ các đặc tả phân loại lỗi thưa thớt (sparse error-taxonomy specifications) [2610.08106v1.pdf - Trang 1].\n\n## 2. Phương pháp luận chính\nPhương pháp luận cốt lõi được giới thiệu trong bài báo bao gồm các khía cạnh sau:\n* **Hệ thống ChartBmkAgent:** Nghiên cứu giới thiệu **ChartBmkAgent**, một khung công tác trong đó một hệ thống khai thác trung tâm (central harness) đóng vai trò quản lý các tác nhân chuyên biệt (specialized agents) [2610.08106v1.pdf - Trang 1].\n* **Quy trình kiểm soát và đánh giá:** \n  * Hệ thống yêu cầu bằng chứng cụ thể theo từng giai đoạn nhằm đảm bảo sự liên kết (alignment) với danh mục lỗi ban đầu [2610.08106v1.pdf - Trang 1].\n  * Ghi lại cơ sở (basis) cho mỗi quyết định chấp nhận mẫu [2610.08106v1.pdf - Trang 1].\n* **Đánh giá thực nghiệm:** Phương pháp được thử nghiệm trên 300 mẫu trên toàn bộ danh mục phân loại lỗi (taxonomy-wide samples) để kiểm chứng khả năng làm nổi bật sự khác biệt về năng lực giữa các MLLM và đánh giá hiệu quả của các bước theo dõi có mục tiêu (targeted follow-ups) [2610.08106v1.pdf - Trang 1].\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*\n\n## Tài liệu tham khảo\n- [2610.08106v1.pdf - Trang 1]"
+}

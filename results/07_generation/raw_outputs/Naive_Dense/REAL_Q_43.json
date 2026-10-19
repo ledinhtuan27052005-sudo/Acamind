@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_43",
+  "type": "Literature Synthesis",
+  "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Slow Context, Fast Symptoms: Multis | Symphony for Text Generation: Bench | Recursive Game Creator: An Agentic ",
+  "is_ooc": false,
+  "system": "Naive_Dense",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 130.12,
+  "retrieval_warm_ms": 94.26,
+  "llm_ms": 1225.73,
+  "e2e_cold_ms": 1355.85,
+  "e2e_warm_ms": 1319.99,
+  "provided_chunks": [
+    {
+      "id": "c53d1746-6986-4c48-9171-2076bf51c70d",
+      "document_id": "403ddea6-90b8-42ee-a08e-afcfbb7d0f53",
+      "filename": "2610.07863v1.pdf",
+      "page_number": 11,
+      "content": "complexity trap: Simple observation masking is as efficient as LLM summarization for agent\ncontext management. In NeurIPS Workshop on Deep Learning for Code (DL4C), 2025.\nBanruo Liu, Haoran Qiu, Íñigo Goiri, Rodrigo Fonseca, Ricardo Bianchini, and Esha Choukse.\nAgentic coding in the wild: Characterizing GitHub Copilot traces at production scale. arXiv\npreprint arXiv:2608.00101, 2026a.\nNelson F. Liu, Kevin Lin, John Hewitt, Ashwin Paranjape, Michele Bevilacqua, Fabio Petroni, and\nPercy Liang. Lost in the middle: How language models use long contexts. Transactions of the\nAssociation for Computational Linguistics (TACL), 12:157–173, 2024.\nShukai Liu, Bo Jiang, Jian Yang, Yizhi Li, Jinyang Guo, Xianglong Liu, and Bryan Dai. Context"
+    },
+    {
+      "id": "2c18170d-1d2b-4238-8f31-cd778d3c6706",
+      "document_id": "4f905073-ae04-48a1-a580-efde7cdc473e",
+      "filename": "2610.08722v1.pdf",
+      "page_number": 5,
+      "content": "Recursively summarizing enables long-term dialogue memory in large language models, 2023.\nURL https://arxiv.org/abs/2308.15022. Accepted at Neurocomputing (per arXiv list-\ning).\n[7] Benjamin Rombaut. Inside the scaffold: A source-code taxonomy of coding agent architec-\ntures, April 2026.\nURL https://arxiv.org/abs/2604.03515.\narXiv preprint, v2, 10\nApril 2026.\n[8] Shukai Liu, Bo Jiang, Jian Yang, Yizhi Li, Jinyang Guo, Xianglong Liu, and Bryan Dai.\nContext as a tool: Context management for long-horizon SWE-agents. In Findings of the\nAssociation for Computational Linguistics: ACL 2026, pages 20604–20617, 2026. doi: 10.\n18653/v1/2026.findings-acl.1032. arXiv:2512.22087; author order as in the ACL Anthology\nrecord."
+    },
+    {
+      "id": "4022feed-880c-4071-b6d5-433834ad4284",
+      "document_id": "b6788cf2-00eb-453d-a3cc-b2d2e4ae23a0",
+      "filename": "2610.06843v1.pdf",
+      "page_number": 10,
+      "content": "learning. In Advances in Neural Information Pro-\ncessing Systems Datasets and Benchmarks Track.\nNelson F. Liu, Kevin Lin, John Hewitt, Ashwin Paran-\njape, Michele Bevilacqua, Fabio Petroni, and Percy\nLiang. 2024. Lost in the middle: How language mod-\nels use long contexts. Transactions of the Association\nfor Computational Linguistics, 12.\nYuyao Liu, Jiayuan Mao, David Hsu, Leslie Pack Kael-\nbling, and Tomás Lozano-Pérez. 2026.\nRAPID:\nRobot agentic programming from demonstrations.\narXiv preprint arXiv:2609.30249.\nAman Madaan, Niket Tandon, Prakhar Gupta, Skyler\nHallinan, Luyu Gao, Sarah Wiegreffe, et al. 2023.\nSelf-refine: Iterative refinement with self-feedback.\nIn Advances in Neural Information Processing Sys-\ntems.\nSewon Min, Xinxi Lyu, Ari Holtzman, Mikel Artetxe,"
+    },
+    {
+      "id": "32cb4e94-0cc1-44e7-bc03-9953f9d3195b",
+      "document_id": "87a33d4e-cc6b-4844-8a4c-ccca32cb4aed",
+      "filename": "2610.06689v1.pdf",
+      "page_number": 12,
+      "content": "Danqi Chen, and Yuhao Zhang. Lost in the maze: Overcoming context limitations in long-horizon\nagentic search. arXiv preprint arXiv:2510.18939, 2025.\nAlex L Zhang, Tim Kraska, and Omar Khattab.\nRecursive language models.\narXiv preprint\narXiv:2512.24601, 2025.\nQizheng Zhang, Changran Hu, Shubhangi Upasani, Boyuan Ma, Fenglu Hong, Vamsidhar Kama-\nnuru, Jay Rainton, Chen Wu, Mengmeng Ji, Hanchen Li, et al. Agentic context engineering:\nEvolving contexts for self-improving language models. In International Conference on Learning\nRepresentations, volume 2026, pp. 86069–86100, 2026a.\nZhen Zhang, Liangcai Su, Zhuo Chen, Xiang Lin, Haotian Xu, Simon Shaolei Du, Kaiyu Yang,\nBo An, Lidong Bing, and Xinyu Wang. Argus: Evidence assembly for scalable deep research"
+    },
+    {
+      "id": "0ed01989-42c7-4c68-b8ba-542500af4bb2",
+      "document_id": "cf261ad1-c41e-486a-b117-4700827b065e",
+      "filename": "2610.08327v1.pdf",
+      "page_number": 12,
+      "content": "Agentclinic: a multimodal agent benchmark to evaluate ai in simulated clinical environments.\narXiv preprint arXiv:2405.07960, 2024.\n[25] Zhihong Shao, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Xiao Bi, Haowei Zhang,\nMingchuan Zhang, YK Li, Yang Wu, et al. Deepseekmath: Pushing the limits of mathematical\nreasoning in open language models. arXiv preprint arXiv:2402.03300, 2024.\n[26] Guangming Sheng, Chi Zhang, Zilingfeng Ye, Xibin Wu, Wang Zhang, Ru Zhang, Yanghua\nPeng, Haibin Lin, and Chuan Wu. Hybridflow: A flexible and efficient rlhf framework. In\nProceedings of the Twentieth European Conference on Computer Systems, pages 1279–1297,\n2025.\n[27] Taiwei Shi, Yiyang Wu, Linxin Song, Tianyi Zhou, and Jieyu Zhao. Efficient reinforcement"
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

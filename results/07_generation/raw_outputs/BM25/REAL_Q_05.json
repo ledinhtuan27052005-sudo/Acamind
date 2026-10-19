@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_05",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Hi-M imaging of chromatin architecture in adult Drosophila brain cryosections' là gì?",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 549.41,
+  "retrieval_warm_ms": 490.06,
+  "llm_ms": 1512.92,
+  "e2e_cold_ms": 2062.33,
+  "e2e_warm_ms": 2002.98,
+  "provided_chunks": [
+    {
+      "id": "4fb732b3-e983-4712-8579-8fa8689ced49",
+      "document_id": "2296fcc7-6cb3-4086-ae32-0104390269f3",
+      "filename": "2610.07646v1.pdf",
+      "page_number": 2,
+      "content": "Preprint\nImage B: \nObject match\nImage A: \nRelational match\nSample 1\nSample 2\nSmall,  Large,  Small\nShared \nRelation\nShared\nObject\nI will teach you a new concept called 'XXX' using examples.\n[Sample 1]\nThe image above is a XXX.\n[Sample 2]\nThe image above is also a XXX.\nI will show you two test candidates labeled Image A and B.\n[Image A]\nThis is Image A.\n[Image B]\nThis is Image B.\nWhich one is a XXX?\nUser\nVLM\nImage A\nImage B\nor\nSample 1\nSample 2\nImage A\nImage B\nFigure 1: The Relational Match-to-Sample (RMTS) task as we present it to a VLM. Left: the\nprompt as the model sees it. The VLM is taught a novel nonsense label XXX from two example\nimages (Sample 1 and Sample 2), and is then asked which of two test candidates—Image A or Image"
+    },
+    {
+      "id": "a616b2ab-92d1-466e-86a1-a278648b8ea3",
+      "document_id": "9ef79e7b-6b68-4804-8270-43884d100e41",
+      "filename": "2610.08126v1.pdf",
+      "page_number": 3,
+      "content": "Figure 2: The figure shows the process of rectifying angled images. As input, two pairs of images (Right angled+front view, left angled+front view) are taken\nas input, and appropriate homography is estimated. Hough lines are generated on the test image, which is associated the image’s alignment. Input image with\nappropriate homography generates a rectified image.\nalgorithms. To summarize the methodology, we capture an im-\nage of the grocery shelf from our camera; the captured image\nis taken through an image rectification module, which provides\na warped frontal image in case of an angled image or passes\nthe image as it is when there is no significant angle deviation\nrecorded. The warped images then travel through an object de-\ntection model and predict objects."
+    },
+    {
+      "id": "d4037290-a810-4f94-b3c0-a89003604aa9",
+      "document_id": "60b11762-3533-49b5-bf2c-e9170245f43a",
+      "filename": "2610.06502v1.pdf",
+      "page_number": 9,
+      "content": "similarity matrix:\nsi j = z⊤\nω,izω,j,\ni, j = 1, . . . , B.\n(5)\nEach sample i is associated with a categorical label yi, which\ndefines hard positives as samples sharing the same label (yi =\nyj) and negatives as samples with different labels. For whole-\nbrain images, the label corresponds to subject identity, whereas\nfor brain-region images it corresponds to the combination of\nsubject and brain region. Figure 3 shows examples of whole-\nbrain images and brain-region images from two different sub-\njects.\nI1,1\nI1,2\nI1,3\nI1,4\nI2,1\nI2,2\nFigure 3: Example of input and target images for whole-brain and brain-\nregion data. We denote by IS,R the input image corresponding to sub-\nject S and index R (i.e., time point). I1,1–I1,4 show four images for the"
+    },
+    {
+      "id": "b339f45f-31c4-4713-bcfe-af1a86017372",
+      "document_id": "2296fcc7-6cb3-4086-ae32-0104390269f3",
+      "filename": "2610.07646v1.pdf",
+      "page_number": 16,
+      "content": "Final answer: Image A\nFinal answer: Image B\nCoT prompt.\nThe model is invited to reason step by step before committing to an answer.\nI will teach you a new concept called ’XXX’ using examples.\nThe first image is a XXX.\nThe second image is also a XXX.\nNow look at the third image (Image A) and the fourth image (Image B).\nWhich one is a XXX?\nThe answer is equally likely to be Image A or Image B. Do NOT default to\nA\n- examine both images carefully. Let’s think step by step. After your\nreasoning, conclude with exactly one of these two lines:\nFinal answer: Image A\nFinal answer: Image B\n16"
+    },
+    {
+      "id": "7402ae57-4421-4442-b58d-2a14c53940f3",
+      "document_id": "4e204042-55c8-47d3-85f0-a683c2e5b5ab",
+      "filename": "2609.08776v1.pdf",
+      "page_number": 2,
+      "content": "imaged throughout the experiment to align successive imaging cycles and register the RNA- and \nDNA-FISH datasets. Multiple regions of interest (ROI) are acquired for each experiment to increase \nthroughput. \nThis chapter describes a Hi-M protocol for imaging chromatin organization in cryosections of adult \nDrosophila brains. Compared with previous Hi-M workflows developed for Drosophila embryos 12, the \nprotocol introduces several key adaptations. Adult heads are fixed prior to brain dissection, brains are \ncryoprotected in sucrose and embedded in OCT, and thin cryosections are mounted on activated"
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

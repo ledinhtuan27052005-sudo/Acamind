@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_18",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Compact Robot Policies Need Fine-Grained Visual Representations' là gì?",
+  "is_ooc": false,
+  "system": "C4_Full_Rerank",
+  "gate_passed": true,
+  "gate_score": 0.553879,
+  "dcsr_skipped": false,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 24618.15,
+  "retrieval_warm_ms": 826.22,
+  "llm_ms": 3183.28,
+  "e2e_cold_ms": 27801.43,
+  "e2e_warm_ms": 4009.5,
+  "provided_chunks": [
+    {
+      "id": "9551e268-6f57-4d99-a824-98ba93ad11bf",
+      "document_id": "82c32b8e-a0df-47df-80c8-1857afe7ca1d",
+      "filename": "2610.08183v1.pdf",
+      "page_number": 1,
+      "content": "Preprint\nCOMPACT ROBOT POLICIES NEED FINE-GRAINED\nVISUAL REPRESENTATIONS\nNanhe Chen†\nRunqiu Yang†\nJiawei Tang†\nSichao Liu‡∗\nYuquan Wang†∗\n† X Square Robot\n‡ KTH\nABSTRACT\nMulti-task manipulation policies differ in architecture, scale, and pretrained priors\nall at once, so published comparisons cannot attribute performance to any single\ncomponent. We argue that most of it comes from the visual representation,\nand that parameter scale and generative priors are largely incidental. To test\nthis, we build CoRP (Compressed Representation Policy), a deliberately compact\npolicy (48.9M parameters, no vision-language model and no video-generative\nprior) that factorizes into a representation extractor and a flow-matching action\ngenerator. It reaches 97.0% on LIBERO and 75.78%/73.36% on RoboTwin 2.0"
+    },
+    {
+      "id": "c15047a0-de12-443d-996a-b2841e32eb11",
+      "document_id": "82c32b8e-a0df-47df-80c8-1857afe7ca1d",
+      "filename": "2610.08183v1.pdf",
+      "page_number": 2,
+      "content": "or video-generative prior that is competitive with systems up to 163× larger on LIBERO and\nRoboTwin 2.0, and serves as a controlled testbed for isolating the role of representation.\n• A controlled ablation study shows that effective compact policies require visual representations\nthat are pretrained, task-adapted, and compressed, and that language helps only when the goal is\nvisually ambiguous.\n• Real-robot validation on three bimanual tasks (closed-loop adaptation to object displacement,\ncoordinated two-arm placement, and precision plug insertion), providing qualitative evidence that\nCoRP, pretrained on our large-scale real-world corpus, transfers to physical hardware.\n2\nRELATED WORK\nGenerative and Pretrained Policies. Diffusion Policy (Chi et al., 2023) and ACT (Zhao et al., 2023)"
+    },
+    {
+      "id": "835a6be6-dce2-453d-80f5-403c37a572e2",
+      "document_id": "82c32b8e-a0df-47df-80c8-1857afe7ca1d",
+      "filename": "2610.08183v1.pdf",
+      "page_number": 1,
+      "content": "mation bottleneck over those tokens is worse than a hard token budget, cutting\nLIBERO-Goal from 95.8% to 33.0% by suppressing the instruction-dependent\ntoken selection the policy relies on. Language conditioning contributes only\nwhere the observation leaves the goal ambiguous (LIBERO-Goal: 9.2% to\n95.8%), while on RoboTwin 2.0, where observations are unambiguous, removing\nit slightly improves success. Therefore, we argue that a compact policy works\nwhen its representation is pretrained, task-adapted, and compressed. Project page:\nhttps://corp-policy.github.io/\n1\nINTRODUCTION\nVision-language-action models (VLAs) have become the dominant paradigm for multi-task robotic\nmanipulation, mapping images and language instructions directly to robot actions (Zitkovich et al.,"
+    },
+    {
+      "id": "1fa9837c-c454-4c3e-b9b8-e4d85468e0c3",
+      "document_id": "82c32b8e-a0df-47df-80c8-1857afe7ca1d",
+      "filename": "2610.08183v1.pdf",
+      "page_number": 2,
+      "content": "Our interventions identify the representation extractor as the main source of this performance and\nshow what makes it fine-grained enough for control: the representation must be pretrained, task-\nadapted, and compressed. Our study is restricted to closed-set benchmarks; we do not evaluate the\nopen-world semantic and physical generalization that VLAs and WAMs target (Black et al., 2025a;\nYe et al., 2026).\nWe summarize our contributions as follows:\n•\nCompressed Representation Policy (CoRP), a 48.9M-parameter policy without any VLM\nor video-generative prior that is competitive with systems up to 163× larger on LIBERO and\nRoboTwin 2.0, and serves as a controlled testbed for isolating the role of representation."
+    },
+    {
+      "id": "eb1ee78c-fd26-4dbb-ba2c-771050ac0ec9",
+      "document_id": "bf8f3658-cbab-451f-9c9d-8eac835c49dd",
+      "filename": "2610.07987v1.pdf",
+      "page_number": 19,
+      "content": "Preprint\nOriginal image\nFastV †\nVisionWeave\n(a) Desktop\nVisual tokens: 510 → 255\nVisual tokens: 480 → 183\n(b) Tablet\nVisual tokens: 486 → 243\nVisual tokens: 468 → 261\n(c) Web\nVisual tokens: 480 → 240\nVisual tokens: 480 → 207\nVisionWeave: Fine-grained visual representations\nVisionWeave: Coarse-grained visual representations\nFastV † : Retained visual tokens\nFastV † : Dropped visual tokens\nFigure 10: VisionWeave retains full spatial coverage through mixed-granularity representations,\nwhereas FastV† drops visual tokens.\ngrowing body of token-pruning research has yet to translate into widespread adoption in practical\nLLM serving. In contrast, VisionWeave improves visual efficiency through content-adaptive se-"
+    }
+  ],
+  "answer": "Dựa trên tài liệu được cung cấp từ bài báo **'Compact Robot Policies Need Fine-Grained Visual Representations'**, các nội dung về mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được tổng hợp như sau:\n\n## I. Mục tiêu nghiên cứu\nMục tiêu của nghiên cứu là xây dựng và đánh giá một chính sách điều khiển robot gọn nhẹ (**Compact Representation Policy - CoRP**) nhằm kiểm chứng vai trò cốt lõi của biểu diễn trực giác (**visual representation**) trong các tác vụ thao tác đa nhiệm của robot, đồng thời chứng minh rằng các chính sách gọn nhẹ đạt hiệu suất cạnh tranh không cần phụ thuộc vào mô hình ngôn ngữ thị giác hay tiền định sinh video quy mô lớn [2610.08183v1.pdf - Trang 1, Trang 2].\n\n## II. Giả thuyết khoa học\nCác tác giả đưa ra giả thuyết rằng:\n> \"Hiệu suất của các chính sách thao tác đa nhiệm phần lớn đến từ biểu diễn trực giác (visual representation), trong khi quy mô tham số (parameter scale) và các tiền định sinh (generative priors) đóng vai trò không đáng kể.\" [2610.08183v1.pdf - Trang 1]\n\nBên cạnh đó, nghiên cứu cũng giả định và chứng minh rằng các chính sách gọn nhẹ hiệu quả đòi hỏi các biểu diễn trực giác phải được huấn luyện trước (**pretrained**), thích ứng tác vụ (**task-adapted**), và nén (**compressed**), trong đó ngôn ngữ chỉ hỗ trợ khi mục tiêu có sự mơ hồ về mặt thị giác [2610.08183v1.pdf - Trang 1, Trang 2].\n\n## III. Phương pháp luận chính\nPhương pháp luận của nghiên cứu được triển khai qua các điểm trọng tâm sau:\n1. **Xây dựng mô hình CoRP (Compressed Representation Policy):** Phát triển một chính sách có quy mô nhỏ gọn với 48.9 triệu tham số (**48.9M parameters**), không sử dụng mô hình ngôn ngữ thị giác (**no vision-language model**) và không có tiền định sinh video (**no video-generative prior**) [2610.08183v1.pdf - Trang 1].\n2. **Cấu trúc kiến trúc:** Phân rã (**factorizes**) chính sách thành hai thành phần chính gồm bộ trích xuất biểu diễn (**representation extractor**) và bộ tạo hành động khớp dòng chảy (**flow-matching action generator**) [2610.08183v1.pdf - Trang 1].\n3. **Nghiên cứu cắt bỏ (Ablation Study) và Thử nghiệm thực tế:** \n   * Tiến hành nghiên cứu cắt bỏ có kiểm soát để cô lập vai trò của biểu diễn trực giác [2610.08183v1.pdf - Trang 2].\n   * Đánh giá hiệu suất trên các benchmark chuẩn (đạt 97.0% trên **LIBERO** và 75.78%/73.36% trên **RoboTwin 2.0**) [2610.08183v1.pdf - Trang 1].\n   * Thực hiện kiểm định trên phần cứng robot thực tế (**real-robot validation**) với ba tác vụ hai tay (**bimanual tasks**) được huấn luyện trước trên tập dữ liệu quy mô lớn trong thế giới thực [2610.08183v1.pdf - Trang 2].\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+}

@@ -57,7 +57,8 @@ export interface EvalResult {
  context_quality: number;
  feedback: string;
  answer: string;
- sources: { page: number; preview: string }[];
+ claim_verification?: ClaimVerificationResult;
+ sources: { document_id?: string; filename?: string; page: number; preview: string }[];
 }
 
 // ── Auth APIs ─────────────────────────────────────────────────────────────────
@@ -710,80 +711,134 @@ export const getTopicSummary = async (
  return res.data;
 };
 
-// ── Chat API (streaming) ──────────────────────────────────────────────────────
+// ── Chat API (streaming) & Live RAG Pipeline Telemetry ─────────────────────────
+
+export interface PipelineTelemetry {
+  memory_tier: 'L1_FAST_MEMORY' | 'L2_DEEP_HYBRID' | string;
+  route: 'single_focus' | 'cross_article_comparison' | 'literature_synthesis' | string;
+  num_targets: number;
+  sub_queries: string[];
+  quota_per_target: number;
+  vector_hits: number;
+  fts_hits: number;
+  rrf_k: number;
+  top_rrf_score: number;
+  dominance_ratio: number;
+  dcsr_confidence: number;
+  dcsr_fast_skip: boolean;
+  crag_score: number;
+  crag_threshold: number;
+  crag_passed: boolean;
+  latency_ms: number;
+  chunks_count: number;
+  unique_docs: number;
+}
+
+export interface SourceAuthorityMeta {
+  document_id: string;
+  filename: string;
+  title: string;
+  authors: string;
+  year: number;
+  pages: number[];
+  authority_tier: 'tier_1' | 'tier_2' | 'tier_3' | 'tier_4' | string;
+  authority_label: string;
+  cebm_level: string;
+  cebm_label: string;
+  study_design: string;
+  apa7: string;
+  bibtex: string;
+}
+
+export interface ChatTelemetryPayload {
+  telemetry: PipelineTelemetry;
+  sources: SourceAuthorityMeta[];
+}
+
+export function decodeBase64Utf8Json<T>(b64: string | null): T | null {
+  if (!b64) return null;
+  try {
+    const binString = atob(b64);
+    const bytes = Uint8Array.from(binString, (c) => c.charCodeAt(0));
+    const decodedStr = new TextDecoder('utf-8').decode(bytes);
+    return JSON.parse(decodedStr) as T;
+  } catch {
+    return null;
+  }
+}
 
 export const chatStream = async (
- query: string,
- documentIds: string[],
- onChunk: (text: string) => void,
- signal?: AbortSignal,
- options?: { forceWebSearch?: boolean }
-): Promise<{ noContext: boolean; memoryHit: boolean }> => {
- const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
- const response = await fetch(`${API_URL}/api/v1/chat`, {
- method: 'POST',
- headers: {
- 'Content-Type': 'application/json',
- ...(token ? { Authorization: `Bearer ${token}` } : {}),
- },
- body: JSON.stringify({
- query,
- document_ids: documentIds,
- force_web_search: options?.forceWebSearch ?? false,
- }),
- signal,
- });
+  query: string,
+  documentIds: string[],
+  onChunk: (text: string) => void,
+  signal?: AbortSignal,
+  options?: {
+    forceWebSearch?: boolean;
+    onTelemetry?: (payload: ChatTelemetryPayload) => void;
+  }
+): Promise<{ noContext: boolean; memoryHit: boolean; telemetryPayload: ChatTelemetryPayload | null }> => {
+  const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+  const response = await fetch(`${API_URL}/api/v1/chat`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+    body: JSON.stringify({
+      query,
+      document_ids: documentIds,
+      force_web_search: options?.forceWebSearch ?? false,
+    }),
+    signal,
+  });
 
- if (!response.ok) {
- const errorText = await response.text();
- throw new Error(errorText || `HTTP ${response.status}`);
- }
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(errorText || `HTTP ${response.status}`);
+  }
 
- // Phase A: đọc X-Memory-Hit header để biết câu trả lời đến từ memory
- // (L1 fast path) hay RAG thường (L2). Frontend dùng để hiển thị badge.
- const memoryHit = response.headers.get('X-Memory-Hit') === 'true';
+  // Phase A: đọc X-Memory-Hit và X-Pipeline-Telemetry header
+  const memoryHit = response.headers.get('X-Memory-Hit') === 'true';
+  const telemetryB64 = response.headers.get('X-Pipeline-Telemetry');
+  const telemetryPayload = decodeBase64Utf8Json<ChatTelemetryPayload>(telemetryB64);
+  if (telemetryPayload && options?.onTelemetry) {
+    options.onTelemetry(telemetryPayload);
+  }
 
- // Detect marker __NO_CONTEXT__ ở đầu stream (LLM output khi RAG không tìm được thông tin).
- // Cách xử lý: buffer 100 chars đầu, check marker, nếu có thì yield phần clean (đã strip marker).
- // Sau đó các chunk tiếp theo yield bình thường.
- const reader = response.body!.getReader();
- const decoder = new TextDecoder('utf-8');
- const NO_CONTEXT_MARKER = '__NO_CONTEXT__';
- let header = '';
- let headerChecked = false;
- let noContext = false;
+  // Detect marker __NO_CONTEXT__ ở đầu stream (LLM output khi RAG không tìm được thông tin).
+  const reader = response.body!.getReader();
+  const decoder = new TextDecoder('utf-8');
+  const NO_CONTEXT_MARKER = '__NO_CONTEXT__';
+  let header = '';
+  let headerChecked = false;
+  let noContext = false;
 
- while (true) {
- const { done, value } = await reader.read();
- if (done) break;
- const text = decoder.decode(value, { stream: true });
- if (!text) continue;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    const text = decoder.decode(value, { stream: true });
+    if (!text) continue;
 
- if (!headerChecked) {
- header += text;
- // Check ngay khi có đủ data (>= 50 chars hoặc thấy marker)
- if (header.includes(NO_CONTEXT_MARKER)) {
- noContext = true;
- headerChecked = true;
- // Strip marker và yield phần clean
- const cleaned = header.replace(NO_CONTEXT_MARKER, '').trimStart();
- if (cleaned) onChunk(cleaned);
- continue;
- }
- if (header.length > 50) {
- // No có marker → yield toàn bộ header đã buffer
- headerChecked = true;
- onChunk(header);
- continue;
- }
- // Chưa đủ data, tiếp tục buffer
- continue;
- }
- onChunk(text);
- }
- // Nếu stream kết thúc mà chưa check header (quá ít data)
- if (!headerChecked && header) onChunk(header);
- return { noContext, memoryHit };
+    if (!headerChecked) {
+      header += text;
+      if (header.includes(NO_CONTEXT_MARKER)) {
+        noContext = true;
+        headerChecked = true;
+        const cleaned = header.replace(NO_CONTEXT_MARKER, '').trimStart();
+        if (cleaned) onChunk(cleaned);
+        continue;
+      }
+      if (header.length > 50) {
+        headerChecked = true;
+        onChunk(header);
+        continue;
+      }
+      continue;
+    }
+    onChunk(text);
+  }
+  if (!headerChecked && header) onChunk(header);
+  return { noContext, memoryHit, telemetryPayload };
 };
 
 export const exportChat = async (
@@ -1456,33 +1511,76 @@ export const translateText = async (text: string, targetLang: 'en' | 'vi', sourc
  return res.data as { original: string; translation: string; target_lang: string };
 };
 
+export interface ExplainSourceItem {
+  document_id?: string;
+  doc_title: string;
+  doc_filename?: string;
+  doc_authors?: string;
+  page_number: string | number;
+  text: string;
+  authority_tier?: string;
+  authority_label?: string;
+  cebm_level?: string;
+  cebm_label?: string;
+  apa7?: string;
+  bibtex?: string;
+}
+
 export const explainTerm = async (term: string, context?: string, language = 'vi', documentIds?: string[]) => {
- const res = await api.post('/features/explain', { term, context, language, document_ids: documentIds });
- return res.data as { term: string; explanation: string; language: string; source_type?: string; sources?: { doc_title: string; page_number: string | number; text: string }[] };
+  const res = await api.post('/features/explain', { term, context, language, document_ids: documentIds });
+  return res.data as {
+    term: string;
+    explanation: string;
+    language: string;
+    source_type?: string;
+    sources?: ExplainSourceItem[];
+    telemetry?: PipelineTelemetry;
+  };
 };
 
 export interface TrendsData {
- total_documents: number;
- keywords: { word: string; count: number }[];
- categories: { name: string; count: number }[];
- years: { year: string; count: number }[];
+  total_documents: number;
+  keywords: { word: string; count: number }[];
+  categories: { name: string; count: number }[];
+  years: { year: string; count: number }[];
 }
 export const getTrends = async (): Promise<TrendsData> => {
- const res = await api.get('/features/trends');
- return res.data;
+  const res = await api.get('/features/trends');
+  return res.data;
 };
 
+export interface LiteratureMatrixRow {
+  document_id: string;
+  filename: string;
+  title: string;
+  authors: string;
+  year: number;
+  authority_tier: string;
+  authority_label: string;
+  cebm_level: string;
+  cebm_label: string;
+  study_design: string;
+  methodology: string;
+  scale_or_metric: string;
+  finding: string;
+  page_citation: string;
+  primary_page: number;
+  supporting_pages: number[];
+  apa7: string;
+  bibtex: string;
+}
+
 export const generateLiteratureReview = async (documentIds: string[], focus?: string): Promise<Response> => {
- const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
- const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
- return fetch(`${API_URL}/api/v1/features/literature-review`, {
- method: 'POST',
- headers: {
- 'Content-Type': 'application/json',
- ...(token ? { Authorization: `Bearer ${token}` } : {}),
- },
- body: JSON.stringify({ document_ids: documentIds, focus }),
- });
+  const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+  return fetch(`${API_URL}/api/v1/features/literature-review`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+    body: JSON.stringify({ document_ids: documentIds, focus }),
+  });
 };
 
 export interface SlideData {
@@ -1612,5 +1710,268 @@ export const exportCitationFile = async (
   );
   return res.data;
 };
+
+// ── 5 Scientific Competition Features (CLHV, Contradiction Radar, 3D Neuro Graph, OSCE, Ablation Lab) ──
+
+export interface VerifiedAtomicClaim {
+  index: number;
+  claim_text: string;
+  clean_text: string;
+  status: 'ENTAILED' | 'EXTRAPOLATED' | 'UNVERIFIED';
+  status_label: string;
+  entailment_score: number;
+  entailment_pct: number;
+  matched_doc_id: string;
+  matched_filename: string;
+  matched_title: string;
+  matched_page: number;
+  evidence_snippet: string;
+  key_terms_matched: string[];
+}
+
+export interface ClaimVerificationResult {
+  faithfulness_score: number;
+  formula: string;
+  total_claims: number;
+  entailed_count: number;
+  extrapolated_count: number;
+  unverified_count: number;
+  claims: VerifiedAtomicClaim[];
+}
+
+export const verifyAtomicClaims = async (
+  query: string,
+  answer: string,
+  documentIds?: string[]
+): Promise<ClaimVerificationResult> => {
+  const res = await api.post('/features/verify-claims', {
+    query,
+    answer,
+    document_ids: documentIds || [],
+  });
+  return res.data;
+};
+
+export interface ContradictionStudySide {
+  document_id: string;
+  filename: string;
+  title: string;
+  authors: string;
+  year: number;
+  cebm_level: string;
+  cebm_label: string;
+  cebm_weight: number;
+  position: string;
+  methodology: string;
+  page_citation: string;
+  primary_page: number;
+}
+
+export interface ContradictionPairItem {
+  id: string;
+  dimension: string;
+  study_a: ContradictionStudySide;
+  study_b: ContradictionStudySide;
+  weight_delta: number;
+  root_cause: string;
+  cebm_verdict: string;
+}
+
+export interface CebmContradictionRadar {
+  cebm_weighted_consensus_pct: number;
+  divergence_index_pct: number;
+  formula: string;
+  dominant_study: {
+    title: string;
+    filename: string;
+    cebm_label: string;
+    cebm_weight: number;
+    page_citation: string;
+  } | null;
+  consensus_points: {
+    aspect: string;
+    statement: string;
+    citations: string[];
+    weighted_support: number;
+  }[];
+  contradictions: ContradictionPairItem[];
+  methodological_summary: string;
+}
+
+export const analyzeContradictionRadar = async (
+  documentIds: string[],
+  focus?: string
+): Promise<{ matrix_rows: LiteratureMatrixRow[]; radar: CebmContradictionRadar }> => {
+  const res = await api.post('/features/contradiction-radar', {
+    document_ids: documentIds,
+    focus,
+  });
+  return res.data;
+};
+
+export interface NeuroGraphNode {
+  id: string;
+  label: string;
+  layer: number;
+  category: string;
+  color: string;
+  region_3d_id?: string;
+  name_latin?: string;
+  role_in_pathology?: string;
+  therapy_mechanism?: string;
+  neurotransmitters?: string[];
+  citation?: string;
+}
+
+export interface NeuroBrainRegionCard {
+  region_3d_id: string;
+  name_vi: string;
+  name_latin: string;
+  neurotransmitters: string[];
+  role_in_pathology: string;
+  therapy_mechanism: string;
+  color: string;
+  citation: string;
+}
+
+export interface NeuroClinicalGraphData {
+  nodes: NeuroGraphNode[];
+  edges: { id: string; source: string; target: string; label: string }[];
+  brain_regions: NeuroBrainRegionCard[];
+  summary: string;
+}
+
+export const fetchNeuroClinicalGraph = async (
+  query: string,
+  answer?: string,
+  documentIds?: string[]
+): Promise<NeuroClinicalGraphData> => {
+  const res = await api.post('/features/neuro-graph', {
+    query,
+    answer: answer || '',
+    document_ids: documentIds || [],
+  });
+  return res.data;
+};
+
+export interface OsceCasePublic {
+  case_id: string;
+  title: string;
+  difficulty: string;
+  patient_name: string;
+  patient_age: number;
+  occupation: string;
+  avatar_emoji: string;
+  chief_complaint: string;
+  initial_demeanor: string;
+  available_scales: string[];
+}
+
+export interface OsceEvaluationResult {
+  case_id: string;
+  total_score: number;
+  grade_rank: string;
+  rubric_breakdown: {
+    criterion: string;
+    score: number;
+    max_score: number;
+    comment: string;
+  }[];
+  ground_truth_revealed: {
+    primary_diagnosis: string;
+    differential_diagnosis: string;
+    red_flags_to_ask: string[];
+    target_brain_region_3d: string;
+    target_brain_label: string;
+    evidence_treatment: string;
+    cited_evidence: string;
+  };
+}
+
+export const listOsceCases = async (): Promise<{ cases: OsceCasePublic[] }> => {
+  const res = await api.get('/features/osce/cases');
+  return res.data;
+};
+
+export const chatOscePatient = async (params: {
+  case_id: string;
+  messages: { role: string; content: string }[];
+  administer_scale?: string;
+  document_ids?: string[];
+}): Promise<{
+  type: 'patient_reply' | 'scale_result';
+  patient_reply: string;
+  scale_code?: string;
+  total_score?: string;
+  severity?: string;
+  breakdown?: string;
+}> => {
+  const res = await api.post('/features/osce/chat', params);
+  return res.data;
+};
+
+export const evaluateOsceSession = async (params: {
+  case_id: string;
+  messages: { role: string; content: string }[];
+  administered_scales: string[];
+  user_diagnosis: string;
+  user_differential: string;
+  user_treatment: string;
+  document_ids?: string[];
+}): Promise<OsceEvaluationResult> => {
+  const res = await api.post('/features/osce/evaluate', params);
+  return res.data;
+};
+
+export interface AblationPipelineItem {
+  id: string;
+  name: string;
+  architecture: string;
+  latency_ms: number;
+  keyword_coverage_pct: number;
+  semantic_alignment_pct: number;
+  citation_precision_pct: number;
+  faithfulness_pct: number;
+  overall_score_pct: number;
+  dcsr_active: boolean;
+  dcsr_fast_skip?: boolean;
+  crag_verified: boolean;
+  top_chunks: {
+    rank: number;
+    document_id: string;
+    filename: string;
+    title: string;
+    page: number;
+    score: number;
+    snippet: string;
+  }[];
+}
+
+export interface AblationBenchmarkResult {
+  question: string;
+  expanded_bilingual_terms: string[];
+  pipelines: AblationPipelineItem[];
+  gains: {
+    faithfulness_gain_vs_naive: number;
+    recall_gain_vs_naive: number;
+    citation_gain_vs_naive: number;
+    overall_gain_vs_naive: number;
+  };
+  telemetry: PipelineTelemetry;
+  answer: string;
+  claim_verification: ClaimVerificationResult;
+}
+
+export const runAblationBenchmark = async (
+  question: string,
+  documentIds?: string[]
+): Promise<AblationBenchmarkResult> => {
+  const res = await api.post('/evaluate/ablation', {
+    question,
+    document_ids: documentIds && documentIds.length > 0 ? documentIds : null,
+  });
+  return res.data;
+};
+
 
 

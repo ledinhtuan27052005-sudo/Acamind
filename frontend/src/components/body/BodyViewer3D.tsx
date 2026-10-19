@@ -622,12 +622,16 @@ function GeoOrganMesh({ organ, selected, onSelect, onHover }: OrganMeshProps) {
 
 // ── Full organ layer (model + fallback geo) ───────────────────────────────────
 
-// Các cơ quan dùng hình học (chưa có model 3D) — bao gồm cơ quan thêm mới
-// theo ảnh tham chiếu "Internal organs" (stomach, bladder, reproductive_system).
 const GEO_ORGAN_IDS = [
  'stomach',
  'bladder',
  'reproductive_system',
+ 'prefrontal_cortex',
+ 'amygdala',
+ 'hippocampus',
+ 'anterior_cingulate',
+ 'hypothalamus_hpa',
+ 'striatum_nucleus',
 ];
 
 function OrganLayer({ selected, onSelect, onHover }: {
@@ -642,8 +646,10 @@ function OrganLayer({ selected, onSelect, onHover }: {
  <FbxOrgans selected={selected} onSelect={onSelect} onHover={onHover} />
  </Suspense>
  {GEO_ORGAN_IDS.map((id) => (
+ ORGAN_DATA[id] ? (
  <GeoOrganMesh key={id} organ={ORGAN_DATA[id]}
  selected={selected} onSelect={onSelect} onHover={onHover} />
+ ) : null
  ))}
  </group>
  );

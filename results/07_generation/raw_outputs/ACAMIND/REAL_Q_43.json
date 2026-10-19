@@ -1,0 +1,62 @@
+{
+  "query_id": "REAL_Q_43",
+  "type": "Literature Synthesis",
+  "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Slow Context, Fast Symptoms: Multis | Symphony for Text Generation: Bench | Recursive Game Creator: An Agentic ",
+  "is_ooc": false,
+  "system": "ACAMIND",
+  "gate_passed": true,
+  "gate_score": 0.994595,
+  "dcsr_skipped": false,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 21943.42,
+  "retrieval_warm_ms": 1038.45,
+  "llm_ms": 4789.4,
+  "e2e_cold_ms": 26732.82,
+  "e2e_warm_ms": 5827.85,
+  "provided_chunks": [
+    {
+      "id": "e4f008a1-53d3-4344-988a-b635a460a00e",
+      "document_id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+      "filename": "2609.22935v2.pdf",
+      "page_number": 3,
+      "content": "SLOW–FAST PSYCHOLOGICAL DYNAMICS\n3\nSlow Context, Fast Symptoms: Multiscale Temporal Dynamics and Context-Induced\nCoupling in Psychological Systems\nChanges in psychological states can occur over short timescales, while the context that\nshapes those changes often evolves more slowly. Symptoms, affect, and attention can shift over\nshort timescales, while stress exposure, social isolation, financial strain, biological vulnerability,\nand environmental context often change more slowly. Slow context does not simply sit outside\npsychological dynamics. It can change how easily faster states become active, how long they\npersist, and how easily they recover.\nPsychopathology symptom networks offer a useful case for studying this slow–fast"
+    },
+    {
+      "id": "1166bb88-0dd7-4d74-8f78-1f4b1ae16e18",
+      "document_id": "785d9d25-1de9-4f62-a604-a413b7f21b73",
+      "filename": "2610.08161v1.pdf",
+      "page_number": 1,
+      "content": "Symphony for Text Generation\nBenchmarking Clinical Note Generation\nDaniel Varab\nVictor Petrén Bach Hansen\nMatthew Newton\nAsbjørn W Helge\nKevin Pelgrims\nMathias Baltzersen*\nAdrian Young-San Roessler\nVanessa Klungtvedt\nMaximilian Brand\nLasse Krogsbøll\nHenrik Cullen\nLars Maaløe\nAbstract\nAmbient documentation systems are rapidly gaining adoption, yet their impact\non clinical note quality remains poorly characterized. We introduce MedConv, a\nmultilingual dataset of 300 clinical encounters in English, Danish, and German, and\nuse it alongside the Ambient Clinical Intelligence benchmark (ACI-BENCH) to\ncompare Corti, a clinical AI platform, with two leading, accessible ambient scribe\nsoftware applications built on general-purpose AI. We present a controlled clinical"
+    },
+    {
+      "id": "fdfd631e-34a5-49a3-abde-8cfc3586f8d5",
+      "document_id": "96d5f9a7-b2a8-4573-b8b5-febd35e9331e",
+      "filename": "2610.08621v1.pdf",
+      "page_number": 1,
+      "content": "RECURSIVE GAME CREATOR:\nAN AGENTIC PRODUCT-LEVEL\nEXPERIENCE-ORIENTED GAME HARNESS\nJiajun Chen1,2,3,†, Haoyu Wu1,2,†, Mingda Jia1,2,3,†, Xihui Liu1,2,3,∗\n1HKU MMLab\n2The University of Hong Kong\n3Shenzhen Loop Area Institute\nABSTRACT\nRecent game design agents have made substantial progress in generating playable games. However,\nprogram correctness does not ensure an enjoyable experience for players. We present Recursive\nGame Creator, an experience-oriented harness to advance agentic game development from rough\ngame prototypes into entertaining games. Recursive Game Creator organizes recursive development\naround four components: Designer, Builder, Player, and Reviewer. The Designer translates user"
+    },
+    {
+      "id": "73d3368b-58c9-404f-bc27-0d7be927f6ef",
+      "document_id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+      "filename": "2609.22935v2.pdf",
+      "page_number": 1,
+      "content": "SLOW–FAST PSYCHOLOGICAL DYNAMICS\n1\nSlow Context, Fast Symptoms: Multiscale Temporal Dynamics and Context-Induced\nCoupling in Psychological Systems\nKyuri Park*1, Denny Borsboom3, Mike Lees1,2, Lourens Waldorp3, Johan Bollen1, and Vítor V.\nVasconcelos1,2\n1 University of Amsterdam, Informatics Institute, Computational Science Lab\n2 University of Amsterdam, Institute for Advanced Study\n3 University of Amsterdam, Department of Psychology\nAuthor Note\nAuthor contact information. Kyuri Park (k.park@uva.nl); Vítor V. Vasconcelos\n(v.v.vasconcelos@uva.nl); Mike Lees (m.h.lees@uva.nl); Denny Borsboom\n(d.borsboom@uva.nl); Lourens Waldorp (l.j.waldorp@uva.nl); Johan Bollen\n(j.l.t.m.bollen@uva.nl).\nCorrespondence. *Correspondence concerning this article should be addressed to Kyuri\nPark."
+    },
+    {
+      "id": "c6f4335b-9abe-4fd1-95dd-e02d4310266b",
+      "document_id": "785d9d25-1de9-4f62-a604-a413b7f21b73",
+      "filename": "2610.08161v1.pdf",
+      "page_number": 14,
+      "content": "B\nSymphony for Text Generation\nText Generation API endpoints\nSymphony exposes clinical text and document generation via\nseveral API endpoints spanning general LLM inference, clinical fact extraction (FactsR [Hansen et al.,\n2025]) and guided document synthesis, and working in tandem with Symphony for speech-to-text\n[Nix et al., 2026], Symphony for medical coding [Edin et al., 2026], and agentic orchestration of\nmulti-step clinical workflows. The guided document synthesis API accepts multiple forms of clinical\ncontext and return schema-controlled, structured clinical documents based on fully API-configurable\ntemplates. This modular architecture enables straightforward customization and orchestration of"
+    },
+    {
+      "id": "b77add53-b201-4bbd-8533-d2550a7e0e4a",
+      "document_id": "96d5f9a7-b2a8-4573-b8b5-febd35e9331e",
+      "filename": "2610.08621v1.pdf",
+      "page_number": 2,
+      "content": "1\nINTRODUCTION\nCoding agents can rapidly build runnable games, but successful execution does not establish the\nquality of play. Engaging mechanics, appropriate difficulty, coherent presentation, and respon-\nsive feedback shape player experience. Recent agentic workflows support iterative game develop-\nment (Yan et al., 2026, Hu et al., 2026), yet translating gameplay into experience-oriented revision\nremains challenging. Progress toward product-level games requires a harness that connects devel-\nopment with repeated playtesting and adapts the game to its intended players.\nWe introduce Recursive Game Creator, an experience-oriented recursive harness to iteratively refine\ngames. The harness mirrors a real game studio of four typical roles: Designer, Builder, Player,"
+    }
+  ],
+  "answer": "Dưới đây là bản tổng hợp các đóng góp cốt lõi và khuyến nghị thực hành từ ba nghiên cứu được cung cấp trong ngữ cảnh:\n\n## I. Tổng hợp các đóng góp cốt lõi của 3 nghiên cứu\n\n### 1. Nghiên cứu 1: Slow Context, Fast Symptoms: Multiscale Temporal Dynamics and Context-Induced Coupling in Psychological Systems\n* **Đóng góp cốt lõi:** Nghiên cứu phân tích động lực thời gian đa quy mô (**multiscale temporal dynamics**) trong các hệ thống tâm lý (**psychological systems**), làm rõ mối quan hệ giữa các trạng thái thay đổi nhanh (triệu chứng, cảm xúc, sự chú ý) và bối cảnh thay đổi chậm (áp lực căng thẳng, cô lập xã hội, căng thẳng tài chính, dễ tổn thương sinh học và bối cảnh môi trường) [2609.22935v2.pdf - Trang 3]. \n* Nghiên cứu chỉ ra rằng bối cảnh biến đổi chậm không đứng ngoài các động lực tâm lý mà tác động trực tiếp đến mức độ dễ hoạt hóa của các trạng thái nhanh, thời gian duy trì và tốc độ hồi phục của chúng [2609.22935v2.pdf - Trang 3]. Mạng lưới triệu chứng tâm lý bệnh (**psychopathology symptom networks**) được xem là một trường hợp điển hình để nghiên cứu cơ chế tương tác chậm - nhanh này [2609.22935v2.pdf - Trang 3].\n\n### 2. Nghiên cứu 2: Symphony for Text Generation: Benchmarking Clinical Note Generation\n* **Đóng góp cốt lõi:** Nghiên cứu đánh giá tác động của hệ thống ghi chép môi trường (**ambient documentation systems**) đối với chất lượng ghi chú lâm sàng (**clinical note quality**) [2610.08161v1.pdf - Trang 1]. \n* Tác giả giới thiệu **MedConv** — một tập dữ liệu đa ngôn ngữ (**multilingual dataset**) gồm 300 cuộc hội thoại lâm sàng bằng tiếng Anh, tiếng Đan Mạch và tiếng Đức [2610.08161v1.pdf - Trang 1]. Kết hợp cùng tiêu chuẩn đánh giá trí tuệ lâm sàng môi trường (**Ambient Clinical Intelligence benchmark - ACI-BENCH**), nghiên cứu so sánh nền tảng AI lâm sàng **Corti** với hai phần mềm ghi âm môi trường truy cập rộng rãi dựa trên AI đa dụng [2610.08161v1.pdf - Trang 1].\n* Cung cấp kiến trúc API **Symphony** nhằm hỗ trợ tạo văn bản lâm sàng (**clinical text and document generation**), bao gồm suy luận mô hình ngôn ngữ lớn tổng quát (**general LLM inference**), trích xuất sự kiện lâm sàng (**clinical fact extraction - FactsR**), tổng hợp tài liệu có hướng dẫn (**guided document synthesis**), kết hợp cùng nhận dạng giọng nói (**speech-to-text**), mã hóa y tế (**medical coding**) và điều phối tác nhân cho các quy trình lâm sàng nhiều bước (**agentic orchestration of multi-step clinical workflows**) [2610.08161v1.pdf - Trang 14].\n\n### 3. Nghiên cứu 3: Recursive Game Creator: An Agentic Product-Level Experience-Oriented Game Harness\n* **Đóng góp cốt lõi:** Nghiên cứu giải quyết thách thức trong việc phát triển trò chơi bằng tác nhân (**coding agents**), nơi việc mã hóa chính xác không đảm bảo trải nghiệm người chơi thú vị (**enjoyable experience**) [2610.08621v1.pdf - Trang 1]. \n* Đề xuất **Recursive Game Creator** — một bộ khung đệ quy định hướng trải nghiệm (**experience-oriented recursive harness**) nhằm nâng cấp việc phát triển trò chơi từ các bản mẫu thô sơ thành các sản phẩm giải trí hoàn chỉnh [2610.08621v1.pdf - Trang 1] [2610.08621v1.pdf - Trang 2].\n* Bộ khung mô phỏng cấu trúc của một studio game thực tế gồm bốn vai trò chính: **Designer** (Thiết kế), **Builder** (Xây dựng), **Player** (Người chơi) và **Reviewer** (Đánh giá viên), kết hợp quá trình kiểm thử lặp đi lặp lại (**repeated playtesting**) để điều chỉnh trò chơi phù hợp với người chơi mục tiêu [2610.08621v1.pdf - Trang 1] [2610.08621v1.pdf - Trang 2].\n\n---\n\n## II. Khuyến nghị lâm sàng và thực hành\n\n* **Tích hợp bối cảnh dài hạn trong đánh giá tâm lý:** Khi phân tích các triệu chứng tâm lý biến đổi nhanh, cần kết hợp đánh giá các yếu tố bối cảnh biến đổi chậm (như căng thẳng, cô lập xã hội, áp lực tài chính và dễ tổn thương sinh học) vì các yếu tố này chi phối trực tiếp đến khả năng kích hoạt và phục hồi của trạng thái tâm lý [2609.22935v2.pdf - Trang 3].\n* **Ứng dụng công nghệ ghi chép môi trường và AI trong thực hành lâm sàng:** Tận dụng các hệ thống tài liệu hóa môi trường (**ambient documentation systems**) và các công cụ tổng hợp tài liệu có cấu trúc dựa trên API (như kiến trúc Symphony) để tối ưu hóa quy trình ghi chú lâm sàng, trích xuất dữ liệu thực tế và mã hóa y tế một cách chính xác, minh bạch [2610.08161v1.pdf - Trang 1] [2610.08161v1.pdf - Trang 14].\n* **Phát triển hệ thống đánh giá hướng tới trải nghiệm người dùng/bệnh nhân:** Áp dụng phương pháp tiếp cận đệ quy đa vai trò (tương tự mô hình *Recursive Game Creator*) trong việc thiết kế các công cụ tương tác, phần mềm can thiệp kỹ thuật số hoặc quy trình mô phỏng lâm sàng, trong đó liên tục kết hợp vòng lặp kiểm thử và phản hồi để đảm bảo chất lượng trải nghiệm thực tế thay vì chỉ đạt yêu cầu kỹ thuật đơn thuần [2610.08621v1.pdf - Trang 1] [2610.08621v1.pdf - Trang 2].\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+}

@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_31",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'WorldSonus: Bringing Sound to Worlds' và (2) 'Are Language Models Script-Aware?'.",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 1383.5,
+  "retrieval_warm_ms": 1425.05,
+  "llm_ms": 1969.27,
+  "e2e_cold_ms": 3352.77,
+  "e2e_warm_ms": 3394.32,
+  "provided_chunks": [
+    {
+      "id": "8afdbb9b-a5a4-4994-809b-36c9c0792394",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 21,
+      "content": "person\nperson / model\nHH / HA\nSem-Detect\nhuman reviews / model rewrite of a human review /\nmodel reviews\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA\nMELD\nhuman / model / six attacks\nperson / model /\nmodel\nperson / model /\nmodel\nHH / AA / AA\nattacked\nLAMP\nmodel draft / the draft after a professional’s edit\nmodel\nmodel\n/\nmodel,\nedited\nAA / not placed\nARB\nhuman / model rewrite of a human article (h2l) /\nmodel (free llm) / llm2l\nperson / person /\nmodel / model\nperson / model /\nmodel / model\nHH / HA / AA /\nAA attacked\nGEDE\nhuman essay / model improves or rewrites it\nperson\nperson / model\nHH / HA\nmodel essay from the assignment / DIPPER, rewrite\nattack\nmodel\nmodel\nAA / AA at-\ntacked\nmodel essay from the student’s summary\nmodel\n(GEDE’s\nown label)\nmodel\nAA, shown but\nnot averaged"
+    },
+    {
+      "id": "ab8856aa-a4cc-47f0-8a07-a2bc88770ebe",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 21,
+      "content": "manized)\nperson\nmodel\nHA\nAI-BP, AI-EP: model review from the paper (and hu-\nmanized)\nmodel\nmodel\nAA (attacked)\nAI-HI: model review from the reviewer’s notes\nmixed\nmodel\nmixed\nDetectRL-X\nhuman / model / attacked model text (English rows)\nperson / model /\nmodel\nperson / model /\nmodel\nHH / AA / AA\nattacked\nStoryScope\nhuman stories / stories by five models\nperson / model\nperson / model\nHH / AA\nDetectionAI\nhuman\nessays\n/\nmodel\nessays\n/\nhumanized\n(StealthGPT, 2026)\nperson / model /\nmodel\nperson / model /\nmodel\nHH / AA / AA\nattacked\nOpAI-Bench\nv0: the human draft / v1–v8: successive model edits\nperson\nperson / model\nHH / HA\nSem-Detect\nhuman reviews / model rewrite of a human review /\nmodel reviews\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA\nMELD\nhuman / model / six attacks"
+    },
+    {
+      "id": "b9ed282a-1446-49b3-972a-34b84e3b30e9",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 21,
+      "content": "HH / HA\nmodel essay from the assignment / DIPPER, rewrite\nattack\nmodel\nmodel\nAA / AA at-\ntacked\nmodel essay from the student’s summary\nmodel\n(GEDE’s\nown label)\nmodel\nAA, shown but\nnot averaged\nPerkins et al.\nmodel text under six evasion techniques\nmodel\nmodel\nAA attacked\nHART\nhuman / model rephrase of human text / model / hu-\nmanized\nperson / person /\nmodel / model\nperson / model /\nmodel / model\nHH / HA / AA /\nAA attacked\nmodel text rewritten by a person\nmodel\nmodel, edited\nnot placed\nEpoch author imitation\nthe author’s text / model, plain prompt\nperson / model\nperson / model\nHH / AA\nmodel imitating the author from five passages\nmixed\nmodel\nmixed\nCoCoNUTS\nhuman review / model polishes or translates it /\nmodel review\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA"
+    },
+    {
+      "id": "329ebc51-0059-4555-8401-d88fa20541ef",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 21,
+      "content": "model imitating the author from five passages\nmixed\nmodel\nmixed\nCoCoNUTS\nhuman review / model polishes or translates it /\nmodel review\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA\nmodel review from the person’s review\nmixed\nmodel\nmixed\nELLIPSE\nessays by English learners\nperson\nperson\nHH\nAI-Researcher\nexpert reviews / proposals from expert ideas / model\nproposals\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA\npapers people wrote from a model’s idea\nmixed\nperson\nmixed\nAcademic Integrity\noriginal abstract / model abstract from it (and human-\nized)\nperson\nperson / model\nHH / HA\nGEN\nhuman / edited by an AI editor / written by an AI\nwriter\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA\nan AI editor adds details to a person’s text\nmixed\nmodel"
+    },
+    {
+      "id": "5eea0b17-52b2-491c-8277-1275952416f9",
+      "document_id": "170134d8-2b17-48fb-90e4-bc42d8f28734",
+      "filename": "2610.08037v1.pdf",
+      "page_number": 5,
+      "content": "4\nConclusions\nIn this study, we have examined the extent to which\nlanguage models possess awareness of scripts. Our\nfindings reveal a substantial awareness that extends\nbeyond simple pattern matching: Language Models\ncan both adapt their output scripts to match input\nprompts and follow explicit instructions to generate\ntext in specified scripts.\nModels demonstrate consistently high Latin\nscript fidelity but more variable performance with\nCyrillic script. While all models recognize natural\nscripts for tested languages, natural language-script\ncombinations are handled more reliably than non-\nstandard pairings. We also observed a performance\ngap between LLMs and SLMs, particularly for non-\nstandard script combinations.\nLimitations\nOur analyses in Section 3 rely on GlotLID for"
+    }
+  ],
+  "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. Các ngữ cảnh được cung cấp chỉ chứa thông tin trích đoạn bảng từ tài liệu `2610.06778v1.pdf` và phần kết luận/hạn chế từ tài liệu `2610.08037v1.pdf` (với tiêu đề nghiên cứu \"Are Language Models Script-Aware?\"), hoàn toàn không chứa thông tin hoặc ngữ cảnh về bài báo mang tên `'WorldSonus: Bringing Sound to Worlds'`. \n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+}

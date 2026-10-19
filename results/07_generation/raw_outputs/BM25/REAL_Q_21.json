@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_21",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Knowing When Not to Answer: Cross-Domain and ' và (2) 'IdeaLens: Detecting AI Ideas in Long-form Wri'.",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 1157.14,
+  "retrieval_warm_ms": 1179.21,
+  "llm_ms": 1428.45,
+  "e2e_cold_ms": 2585.59,
+  "e2e_warm_ms": 2607.66,
+  "provided_chunks": [
+    {
+      "id": "9966d67c-b9a3-41cd-81e3-8a3102802322",
+      "document_id": "29f37a1a-a219-4181-b173-4e7e8f28407d",
+      "filename": "2609.34801v1.pdf",
+      "page_number": 38,
+      "content": "FiLM population\n4\n37\n2000\n0\nFalse\nFalse\nFalse\nLee2019_MI\nLoRA population\n4\n37\n2750\n750\nFalse\nFalse\nFalse\nLee2019_MI\nFiLM population\n4\n53\n2250\n250\nFalse\nFalse\nFalse\nLee2019_MI\nLoRA population\n4\n53\n2000\n0\nFalse\nFalse\nFalse\nLee2019_MI\nFiLM population\n4\n71\n2000\n0\nFalse\nFalse\nFalse\nLee2019_MI\nLoRA population\n4\n71\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n0\n11\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n0\n11\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n0\n23\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n0\n23\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n0\n37\n2250\n250\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n0\n37\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n0\n53\n2500\n500\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n0\n53\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n0\n71\n2000\n0\nFalse\nFalse\nFalse"
+    },
+    {
+      "id": "7ad94c95-55b9-4673-badc-6b0304c83f3e",
+      "document_id": "29f37a1a-a219-4181-b173-4e7e8f28407d",
+      "filename": "2609.34801v1.pdf",
+      "page_number": 38,
+      "content": "False\nBNCI\nLoRA population\n1\n53\n5750\n3750\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n1\n71\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n1\n71\n4000\n2000\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n2\n11\n2750\n750\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n2\n11\n3250\n1250\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n2\n23\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n2\n23\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n2\n37\n2250\n250\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n2\n37\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n2\n53\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n2\n53\n3000\n1000\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n2\n71\n2500\n500\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n2\n71\n3500\n1500\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n3\n11\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n3\n11\n2500\n500\nFalse\nFalse\nFalse\nBNCI"
+    },
+    {
+      "id": "9a54528d-487a-49ac-bf7e-d5430693fdd7",
+      "document_id": "29f37a1a-a219-4181-b173-4e7e8f28407d",
+      "filename": "2609.34801v1.pdf",
+      "page_number": 38,
+      "content": "0\n37\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n0\n53\n2500\n500\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n0\n53\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n0\n71\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n0\n71\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n1\n11\n3500\n1500\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n1\n11\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n1\n23\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n1\n23\n2750\n750\nTrue\nFalse\nFalse\nBNCI\nFiLM population\n1\n37\n2250\n250\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n1\n37\n4250\n2250\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n1\n53\n2750\n750\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n1\n53\n5750\n3750\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n1\n71\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n1\n71\n4000\n2000\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n2\n11\n2750\n750"
+    },
+    {
+      "id": "535eda36-1650-42fe-acd1-af4d6ead51fc",
+      "document_id": "29f37a1a-a219-4181-b173-4e7e8f28407d",
+      "filename": "2609.34801v1.pdf",
+      "page_number": 37,
+      "content": "FiLM population\n0\n53\n2750\n750\nFalse\nFalse\nFalse\nLee2019_MI\nLoRA population\n0\n53\n2500\n500\nFalse\nFalse\nFalse\nLee2019_MI\nFiLM population\n0\n71\n2000\n0\nFalse\nFalse\nFalse\nLee2019_MI\nLoRA population\n0\n71\n2750\n750\nFalse\nFalse\nFalse\nLee2019_MI\nFiLM population\n1\n11\n2000\n0\nFalse\nFalse\nFalse\nLee2019_MI\nLoRA population\n1\n11\n2000\n0\nFalse\nFalse\nFalse\nLee2019_MI\nFiLM population\n1\n23\n2000\n0\nFalse\nFalse\nFalse\nLee2019_MI\nLoRA population\n1\n23\n3500\n1500\nFalse\nFalse\nFalse\nLee2019_MI\nFiLM population\n1\n37\n2750\n750\nFalse\nFalse\nFalse\nLee2019_MI\nLoRA population\n1\n37\n2250\n250\nFalse\nFalse\nFalse\nLee2019_MI\nFiLM population\n1\n53\n2750\n750\nFalse\nFalse\nFalse\nLee2019_MI\nLoRA population\n1\n53\n3500\n1500\nFalse\nFalse\nFalse\nLee2019_MI\nFiLM population\n1\n71\n2750\n750\nFalse\nFalse\nFalse\nLee2019_MI\nLoRA population\n1\n71\n2000\n0\nFalse"
+    },
+    {
+      "id": "ec93a475-7c58-4a98-b98b-44cab3e11558",
+      "document_id": "29f37a1a-a219-4181-b173-4e7e8f28407d",
+      "filename": "2609.34801v1.pdf",
+      "page_number": 39,
+      "content": "Cohort\nFamily\nFold\nSeed\nRun steps\nSelected\nTrain flat\nVal. flat\nBoth flat\nBNCI\nLoRA population\n3\n23\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n3\n37\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n3\n37\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n3\n53\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n3\n53\n2250\n250\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n3\n71\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n3\n71\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n4\n11\n2250\n250\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n4\n11\n2000\n0\nTrue\nFalse\nFalse\nBNCI\nFiLM population\n4\n23\n2250\n250\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n4\n23\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n4\n37\n2000\n0\nFalse\nFalse\nFalse\nBNCI\nLoRA population\n4\n37\n2500\n500\nFalse\nFalse\nFalse\nBNCI\nFiLM population\n4\n53\n2250\n250\nFalse\nFalse\nFalse"
+    }
+  ],
+  "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải. Các tài liệu được cung cấp chỉ chứa dữ liệu cấu hình thực nghiệm từ tệp `2609.34801v1.pdf`, không chứa nội dung hoặc thông tin để so sánh và đối chiếu hai bài báo \"(1) 'Knowing When Not to Answer: Cross-Domain and '\" và \"(2) 'IdeaLens: Detecting AI Ideas in Long-form Wri'\".\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+}

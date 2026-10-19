@@ -1,0 +1,7 @@
+Pipeline Stage,Execution Engine,Data Scope (Verified),Total Time (s),Unit Latency,Coverage / Status
+1. Corpus PDF Audit & Scan Check,PyMuPDF 1.28.2 + Page Density Audit,"499 arXiv PDFs (12,411 pages) + 1 Scan PDF (3 pages)",Measured in Stage 0/9,0.04 ms/page (density check),499/499 digital PDFs >= 1004.7 chars/page; 1 scan PDF isolated
+2. Micro-Chunking (L2 Tier),"RecursiveCharacterTextSplitter (800 chars, 200 overlap)","70,825 arXiv chunks (71,059 total DB chunks)",Pre-chunked in DB,~154 words (~210 tokens) / chunk,"100.0% (70,825 / 70,825 chunks)"
+3. Full-Corpus Dense Vector Embedding,"intfloat/multilingual-e5-base (768-dim, L2-normalized, CPU)","70,825 / 70,825 chunks","~14,024.8 s (5.05 chunks/s measured on CPU)",198.0 ms/chunk (batch_size=64),"100.00% (Null/NaN=0, L2 norm=[1.0, 1.0])"
+4a. Vector Index Build (HNSW),"pgvector 0.8.7 HNSW (m=16, ef_construction=64)","71,059 vectors (768-dim)",52.21 s,0.73 ms/record,100.0% (277 MB)
+4b. Lexical Index Build (GIN Chunk FTS),"PostgreSQL 16.15 GIN (to_tsvector('english', content))","71,059 chunks",10.77 s,0.15 ms/record,100.0% (28 MB)
+4c. Lexical Index Build (GIN Page FTS),PostgreSQL 16.15 GIN (page_texts.tsv),"12,450 pages",3.89 s,0.31 ms/page,100.0% (24 MB)

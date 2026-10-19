@@ -1,0 +1,62 @@
+{
+  "query_id": "REAL_Q_29",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Balancing Memory Pathways: Analyzing and Impr' và (2) 'Slow Context, Fast Symptoms: Multiscale Tempo'.",
+  "is_ooc": false,
+  "system": "ACAMIND",
+  "gate_passed": true,
+  "gate_score": 0.988996,
+  "dcsr_skipped": true,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 985.03,
+  "retrieval_warm_ms": 1041.26,
+  "llm_ms": 5021.62,
+  "e2e_cold_ms": 6006.65,
+  "e2e_warm_ms": 6062.88,
+  "provided_chunks": [
+    {
+      "id": "49c2f8c5-f554-47e7-9d79-1034ce46dc23",
+      "document_id": "55a67f34-2e6f-4e72-9f64-ea39d65610f8",
+      "filename": "2610.06750v1.pdf",
+      "page_number": 1,
+      "content": "BALANCING MEMORY PATHWAYS: ANALYZING AND\nIMPROVING MEMORY UTILIZATION IN HYBRID LMS\nHyunji Lee1∗\nJoykirat Singh1\nZaid Khan1\nJustin Chih-Yao Chen1\nElias Stengel-Eskin2\nAlessandro Sordoni3\nArman Cohan4\nMohit Bansal1\n1UNC Chapel Hill\n2The University of Texas at Austin\n3Mila\n4Yale University\nABSTRACT\nRecurrent–attention hybrid language models (LMs), which interleave attention\nand recurrent layers, are increasingly used to combine the efficiency of the re-\ncurrent layers with the strong performance of attention layers. Prior work sug-\ngests that attention and recurrent layers offer complementary pathways to use past\ninformation: attention supports precise memory recall from earlier tokens, while\nrecurrent layers support consolidation of disparate information over long contexts."
+    },
+    {
+      "id": "73d3368b-58c9-404f-bc27-0d7be927f6ef",
+      "document_id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+      "filename": "2609.22935v2.pdf",
+      "page_number": 1,
+      "content": "SLOW–FAST PSYCHOLOGICAL DYNAMICS\n1\nSlow Context, Fast Symptoms: Multiscale Temporal Dynamics and Context-Induced\nCoupling in Psychological Systems\nKyuri Park*1, Denny Borsboom3, Mike Lees1,2, Lourens Waldorp3, Johan Bollen1, and Vítor V.\nVasconcelos1,2\n1 University of Amsterdam, Informatics Institute, Computational Science Lab\n2 University of Amsterdam, Institute for Advanced Study\n3 University of Amsterdam, Department of Psychology\nAuthor Note\nAuthor contact information. Kyuri Park (k.park@uva.nl); Vítor V. Vasconcelos\n(v.v.vasconcelos@uva.nl); Mike Lees (m.h.lees@uva.nl); Denny Borsboom\n(d.borsboom@uva.nl); Lourens Waldorp (l.j.waldorp@uva.nl); Johan Bollen\n(j.l.t.m.bollen@uva.nl).\nCorrespondence. *Correspondence concerning this article should be addressed to Kyuri\nPark."
+    },
+    {
+      "id": "57277c6a-c163-475e-af9c-a444ae154ddd",
+      "document_id": "55a67f34-2e6f-4e72-9f64-ea39d65610f8",
+      "filename": "2610.06750v1.pdf",
+      "page_number": 1,
+      "content": "information: attention supports precise memory recall from earlier tokens, while\nrecurrent layers support consolidation of disparate information over long contexts.\nHowever, we observe that simply having access to both pathways does not mean\nthat hybrid LMs are effectively using them. When we analyze how much the\nmodels rely on each pathway, we find a substantially greater reliance on atten-\ntion than on the recurrent state. Standard supervised fine-tuning improves overall\nperformance but does not improve how the two memory pathways are coordi-\nnated: the model becomes more reliant on information propagated by attention\nlayers, while its use of information propagated by recurrent layers remains lim-\nited. To encourage better coordination between the two memory pathways, we add"
+    },
+    {
+      "id": "e4f008a1-53d3-4344-988a-b635a460a00e",
+      "document_id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+      "filename": "2609.22935v2.pdf",
+      "page_number": 3,
+      "content": "SLOW–FAST PSYCHOLOGICAL DYNAMICS\n3\nSlow Context, Fast Symptoms: Multiscale Temporal Dynamics and Context-Induced\nCoupling in Psychological Systems\nChanges in psychological states can occur over short timescales, while the context that\nshapes those changes often evolves more slowly. Symptoms, affect, and attention can shift over\nshort timescales, while stress exposure, social isolation, financial strain, biological vulnerability,\nand environmental context often change more slowly. Slow context does not simply sit outside\npsychological dynamics. It can change how easily faster states become active, how long they\npersist, and how easily they recover.\nPsychopathology symptom networks offer a useful case for studying this slow–fast"
+    },
+    {
+      "id": "57f19763-2ceb-482a-a934-ed02f1653e0a",
+      "document_id": "55a67f34-2e6f-4e72-9f64-ea39d65610f8",
+      "filename": "2610.06750v1.pdf",
+      "page_number": 3,
+      "content": "over another, and adding auxiliary supervision that encourages the use of the underutilized pathway\nincreases usage of the pathway and improves overall performance in question-answering. Across\narchitectures and tasks, our findings highlight that simply providing multiple memory pathways\ndoes not lead to balanced, complementary use; models must instead be trained to coordinate\nthese memory pathways.\n2\nBACKGROUND & RELATED WORK\nIn this section, we provide an overview of recurrent-attention hybrid LMs in Section 2.1, then review\nand extend prior findings on the roles of the recurrent and attention memory pathways in Section 2.2.\n2.1\nRECURRENT-ATTENTION HYBRID LMS\nRecurrent-attention hybrid LMs (Ren et al., 2025; Dong et al., 2024; NVIDIA et al., 2025; Zhang"
+    },
+    {
+      "id": "81bea474-c41c-466b-b39b-f25d2416a435",
+      "document_id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+      "filename": "2609.22935v2.pdf",
+      "page_number": 13,
+      "content": "Design. The fast layer contained N = 9 binary symptoms, corresponding to the nine\nsymptom items of the PHQ-9 (Kroenke et al., 2001). To isolate the effect of slow context on\nsymptom activation, we held the symptom-specific baseline parameters τi, symptom–symptom\ncouplings ωij, and slow-context loadings γi fixed across conditions and varied only the contextual\nstate:\nP ∈{−0.6,0,0.6}.\nThe symptom-specific parameters and contextual levels were specified for theoretical illustration\nrather than estimated from empirical data. The three values of P represent low, reference, and\nhigh slow-context conditions on the simulation scale. All slow-context loadings were positive and\nsymptom-specific, ranging from 0.60 to 1.00, so increasing P raises the activation tendency of"
+    }
+  ],
+  "answer": "Dưới đây là phần tổng hợp, so sánh và đối chiếu chi tiết giữa hai bài nghiên cứu dựa trên các tài liệu đã cung cấp trong ngữ cảnh:\n\n## I. Tổng quan về hai bài nghiên cứu\n\n1. **Bài báo 1**: *Balancing Memory Pathways: Analyzing and Improving Memory Utilization in Hybrid LMs* [2610.06750v1.pdf - Trang 1] (viết tắt trong ngữ cảnh là `2610.06750v1.pdf`).\n2. **Bài báo 2**: *Slow Context, Fast Symptoms: Multiscale Temporal Dynamics and Context-Induced Coupling in Psychological Systems* [2609.22935v2.pdf - Trang 1] (viết tắt trong ngữ cảnh là `2609.22935v2.pdf`).\n\n---\n\n## II. So sánh và đối chiếu chi tiết\n\n### 1. Phương pháp tiếp cận (Approaches)\n* **Bài báo 1 (Hybrid LMs)**: Nghiên cứu tiếp cận bằng cách phân tích cách các mô hình ngôn ngữ kết hợp (recurrent–attention hybrid language models - hybrid LMs) sử dụng các đường dẫn bộ nhớ (memory pathways) khác nhau. Nhóm tác giả quan sát mức độ mô hình phụ thuộc vào từng đường dẫn, nhận thấy sự chênh lệch (phụ thuộc lớn vào tầng chú ý - attention layers hơn là trạng thái hồi quy - recurrent state), từ đó đề xuất thêm giám sát phụ (auxiliary supervision) để khuyến khích mô hình phối hợp cân bằng các đường dẫn bộ nhớ này [2610.06750v1.pdf - Trang 1] [2610.06750v1.pdf - Trang 3].\n* **Bài báo 2 (Psychological Systems)**: Nghiên cứu tiếp cận thông qua hệ thống động lực thời gian đa tỷ lệ (multiscale temporal dynamics) và sự ghép cặp cảm ứng ngữ cảnh (context-induced coupling) trong hệ thống tâm lý. Nghiên cứu thiết kế lớp nhanh (**fast layer**) với $N = 9$ triệu chứng nhị phân tương ứng với 9 mục triệu chứng của bảng hỏi **PHQ-9 (Patient Health Questionnaire-9)**, giữ cố định các tham số cơ bản đặc hiệu cho triệu chứng ($\\tau_i$), sự ghép cặp triệu chứng - triệu chứng ($\\omega_{ij}$), và tải trọng ngữ cảnh chậm ($\\gamma_i$), đồng thời thay đổi trạng thái ngữ cảnh $P \\in \\{-0.6, 0, 0.6\\}$ để khảo sát ảnh hưởng của ngữ cảnh chậm đến việc kích hoạt triệu chứng [2609.22935v2.pdf - Trang 13].\n\n### 2. Đối tượng nghiên cứu (Subjects & Data)\n* **Bài báo 1 (Hybrid LMs)**: Đối tượng nghiên cứu là các mô hình ngôn ngữ lớn kết hợp giữa cơ chế hồi quy và chú ý (recurrent–attention hybrid language models), đánh giá qua các kiến trúc và nhiệm vụ trả lời câu hỏi (question-answering tasks) [2610.06750v1.pdf - Trang 1] [2610.06750v1.pdf - Trang 3].\n* **Bài báo 2 (Psychological Systems)**: Đối tượng nghiên cứu là các hệ thống tâm lý với các trạng thái thay đổi theo thang thời gian ngắn (triệu chứng, cảm xúc, sự chú ý - symptoms, affect, and attention) chịu tác động bởi ngữ cảnh chậm thay đổi theo thang thời gian dài (phơi nhiễm căng thẳng, cô lập xã hội, áp lực tài chính, dễ bị tổn thương sinh học và ngữ cảnh môi trường - stress exposure, social isolation, financial strain, biological vulnerability, and environmental context), sử dụng mô hình mô phỏng dựa trên 9 mục triệu chứng của **PHQ-9** [2609.22935v2.pdf - Trang 3] [2609.22935v2.pdf - Trang 13].\n\n### 3. Kết luận chính (Main Conclusions)\n* **Bài báo 1 (Hybrid LMs)**: \n  > \"Prior work suggests that attention and recurrent layers offer complementary pathways to use past information: attention supports precise memory recall from earlier tokens, while recurrent layers support consolidation of disparate information over long contexts.\" [2610.06750v1.pdf - Trang 1]\n  Tuy nhiên, các tác giả kết luận rằng việc có sẵn các đường dẫn bộ nhớ không đồng nghĩa với việc mô hình sử dụng chúng hiệu quả [2610.06750v1.pdf - Trang 1]. Tiêu chuẩn tinh chỉnh giám sát (standard supervised fine-tuning) không giải quyết được việc điều phối, khiến mô hình càng phụ thuộc nhiều hơn vào lớp chú ý [2610.06750v1.pdf - Trang 1]. Khi bổ sung giám sát phụ trợ để hỗ trợ đường dẫn ít được tận dụng, hiệu suất trả lời câu hỏi được cải thiện rõ rệt [2610.06750v1.pdf - Trang 3].\n* **Bài báo 2 (Psychological Systems)**: \n  > \"Changes in psychological states can occur over short timescales, while the context that shapes those changes often evolves more slowly.\" [2609.22935v2.pdf - Trang 3]\n  Ngữ cảnh chậm không đứng ngoài các động lực tâm lý mà thay đổi mức độ dễ kích hoạt của các trạng thái nhanh, thời gian duy trì và khả năng hồi phục của chúng [2609.22935v2.pdf - Trang 3]. Việc gia tăng mức độ ngữ cảnh chậm ($P$) làm tăng xu hướng kích hoạt triệu chứng trong hệ thống mô phỏng [2609.22935v2.pdf - Trang 13].\n\n---\n\n## III. Bảng tóm tắt đối chiếu\n\n| Tiêu chí so sánh | Bài báo 1: Balancing Memory Pathways [2610.06750v1.pdf] | Bài báo 2: Slow Context, Fast Symptoms [2609.22935v2.pdf] |\n| :--- | :--- | :--- |\n| **Lĩnh vực / Chủ đề** | Trí tuệ nhân tạo / Mô hình ngôn ngữ lớn (Hybrid LMs) | Tâm lý học tính toán / Động lực học hệ thống tâm lý |\n| **Thành phần động lực học** | Đường dẫn bộ nhớ chú ý (**attention**) và hồi quy (**recurrent layers**) | Trạng thái tâm lý nhanh (**fast symptoms/affect**) và ngữ cảnh chậm (**slow context**) |\n| **Phương pháp chính** | Phân tích phân bố phụ thuộc bộ nhớ và ứng dụng giám sát phụ trợ (**auxiliary supervision**) | Mô hình hóa toán học / mô phỏng động lực học với 9 mục triệu chứng **PHQ-9** |\n| **Phát hiện / Kết luận** | Mô hình thiên lệch nặng về tầng chú ý; cần huấn luyện thêm giám sát phụ để phối hợp cân bằng bộ nhớ. | Ngữ cảnh chậm định hình trực tiếp xu hướng kích hoạt, thời gian duy trì và sự phục hồi của triệu chứng nhanh. |\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+}

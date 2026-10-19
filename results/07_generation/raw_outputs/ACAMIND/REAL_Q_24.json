@@ -1,0 +1,62 @@
+{
+  "query_id": "REAL_Q_24",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Disentangling Paradigm, Identifier, and Decod' và (2) 'Heterarchy in the Brain: Control as a Spectru'.",
+  "is_ooc": false,
+  "system": "ACAMIND",
+  "gate_passed": true,
+  "gate_score": 0.836653,
+  "dcsr_skipped": false,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 20439.22,
+  "retrieval_warm_ms": 1125.39,
+  "llm_ms": 3531.09,
+  "e2e_cold_ms": 23970.31,
+  "e2e_warm_ms": 4656.48,
+  "provided_chunks": [
+    {
+      "id": "79a05ef8-eb22-4edd-a0e2-577d19caea8f",
+      "document_id": "4f5a646f-1908-4612-b6ca-fcbfe5ec6e8d",
+      "filename": "2610.08716v1.pdf",
+      "page_number": 1,
+      "content": "Disentangling Paradigm, Identifier, and Decoding in Generative\nRetrieval\nHicham Randrianarivo\nArtefact Research Center\nFrance\nhicham.randrianarivo@artefact.com\nLogan Renaud\nArtefact Research Center\nFrance\nlogan.renaud@artefact.com\nAlexia Allal\nArtefact Research Center\nFrance\nalexia.allal@artefact.com\nAbstract\nGenerative retrieval trains a language model to generate the iden-\ntifier of a relevant document. Recent work replaces the autore-\ngressive decoder with diffusion, but changes identifiers, training\nrecipe and decoding at once, so differences cannot be credited\nto the paradigm. On NQ320K and MS300K, we train autoregres-\nsive, masked-diffusion and block-diffusion models with residual-\nquantised, product-quantised and random identifiers. With iden-"
+    },
+    {
+      "id": "9b47cb15-4d5c-4446-9a84-8ece1901dacb",
+      "document_id": "a3493a6d-b6b8-4605-8f69-174991b24afe",
+      "filename": "2610.04643v1.pdf",
+      "page_number": 1,
+      "content": "because neural elements constrain one another across concurrent processes, relations \ncan form cycles that resist a stable ranking. Evidence from learned action, cortico-\ncerebellar and thalamocortical loops, and defensive behavior shows that control changes \nwith practice, task phase, urgency, viability demands, and affordances. Hierarchical order \ntherefore characterizes time-bounded configurations, whereas heterarchy characterizes \nthe architecture’s repertoire across occasions. We propose a spectrum of control indexed \nby dynamical decoupling: how far behavior can depend on history, internal state, and \nanticipated consequences. The account yields experimentally testable predictions."
+    },
+    {
+      "id": "f04e8e24-b7c2-4319-acb4-c37194d51e7c",
+      "document_id": "4f5a646f-1908-4612-b6ca-fcbfe5ec6e8d",
+      "filename": "2610.08716v1.pdf",
+      "page_number": 5,
+      "content": "Disentangling Paradigm, Identifier, and Decoding in Generative Retrieval\n0\n1\n2–4\n5–12\n13+\n0\n40\n80\n(a) training queries of the gold\nHit@𝑘(%)\nAR\nMDLM\nBD8\nBD4\nPQ\nrandom\n1\n10\n100\n40\n60\n80\n(b) 𝑘, all queries\n1\n10\n100\n0\n20\n40\n(c) 𝑘, unseen documents\nFigure 2: Documents with more training queries are retrieved more often; at depth, the best diffusion decoding reaches unseen\ndocuments more often than AR (NQ320K). (a) Hit@1 by the gold’s training queries (0: unseen); AR beam, diffusion generate-\nand-match. (b, c) Hit@𝑘, PQ: AR beam; MDLM one-pass; BD8/BD4 chain-rule rescoring.\n30\n35\n40\n45\n50\nMDLM PQ\nMDLM RQ\nBD8 PQ\nBD8 RQ\nBD4 PQ\nBD4 RQ\n(a) NQ320K, Hit@1 (%)\none sample\ngenerate-and-match\nbest-of-𝑁\none-pass\nAR beam\n5\n10\n15\n20\n25\n(b) MS300K, Hit@1 (%)"
+    },
+    {
+      "id": "b0b03116-ac87-480f-8ed5-1ed633ad7527",
+      "document_id": "a3493a6d-b6b8-4605-8f69-174991b24afe",
+      "filename": "2610.04643v1.pdf",
+      "page_number": 1,
+      "content": "Heterarchy in the Brain: Control as a \nSpectrum, Not a Chain of Command \nLuiz Pessoa1 and Andrea Gambarotto2 \n(1) Department of Psychology and Maryland Neuroimaging Center, University of Maryland,        \nCollege Park, USA \n(2) Department of Humanities, Université du Luxembourg, Luxembourg \n \nHighlights \n• Brain-wide cellular recordings and graded analyses increasingly reveal functional \npopulations that cross cytoarchitectural boundaries. \n• Causal perturbation and directed-connectivity studies show that reciprocal circuits \ncan reverse their dominant direction across task phases and states. \n• Research on parallel action systems and affordance-sensitive behavior shows that \ncontrol can migrate while displaced solutions remain available."
+    },
+    {
+      "id": "323a667d-e167-4080-9e0f-8a848b0413a4",
+      "document_id": "4f5a646f-1908-4612-b6ca-fcbfe5ec6e8d",
+      "filename": "2610.08716v1.pdf",
+      "page_number": 11,
+      "content": "Disentangling Paradigm, Identifier, and Decoding in Generative Retrieval\nC\nWhat the Models Learn\nTable 6: Per-token accuracy (%) where AR and diffusion see the same context (NQ320K eval queries): level 1 from the query\nalone, level 16 with the other 15 levels given. Diffusion: range over MDLM, BD8, BD4. On training queries AR is near 100 at\nevery level; diffusion PQ rises from 88–90 (level 1) to 90–97 (level 16), RQ falls from 88–89 to 79–85.\nLevel 1\nLevel 16\nPQ\nRQ\nPQ\nRQ\nAR\n61\n70\n79\n82\nDiffusion\n49–50\n59–60\n67–78\n54–58\nTable 7: NQ320K Hit@𝑘(%) split by whether the gold document is the gold of a training query (seen: 6,075 queries; unseen:\n1,755 of 7,830). Each paradigm at its best decoding (Table 2): AR trie beam, MDLM one-pass scoring, BD8 and BD4 chain-rule"
+    },
+    {
+      "id": "3296f732-a860-4a5b-8c4c-345ac697699e",
+      "document_id": "a3493a6d-b6b8-4605-8f69-174991b24afe",
+      "filename": "2610.04643v1.pdf",
+      "page_number": 5,
+      "content": "interpretation is that vertebrate brains increased this capacity by interposing additional \ncircuitry between sensation and action [2,12,33–35]. \n \n \nFigure 1. Local control asymmetries need not compose into a hierarchy. (A) A control hierarchy: \ninfluence relations form a directed acyclic graph, so every structure can be assigned a consistent \nlevel (a “chain of command”). (B) A heterarchy: the same structures constrain one another’s \nprocesses, producing cycles (A ⊳B, B ⊳A; and the three-cycle A ⊳B ⊳C ⊳A) that admit no \nconsistent level assignment."
+    }
+  ],
+  "answer": "Dưới đây là phần so sánh và đối chiếu giữa hai bài báo dựa trên ngữ cảnh được cung cấp:\n\n## I. Tổng quan về hai bài báo\n\n1. **Bài báo 1**: *Disentangling Paradigm, Identifier, and Decoding in Generative Retrieval* (Hicham Randrianarivo và cộng sự) [2610.08716v1.pdf - Trang 1].\n2. **Bài báo 2**: *Heterarchy in the Brain: Control as a Spectrum, Not a Chain of Command* (Luiz Pessoa và Andrea Gambarotto) [2610.04643v1.pdf - Trang 1].\n\n---\n\n## II. So sánh và đối chiếu chi tiết\n\n### 1. Phương pháp tiếp cận (Approach)\n* **Bài báo 1 (Trí tuệ nhân tạo / Truy xuất tạo sinh - Generative Retrieval)**: Nghiên cứu này thực hiện việc huấn luyện các mô hình ngôn ngữ (**language model**) khác nhau gồm tự hồi quy (**autoregressive**), khuếch tán có mặt nạ (**masked-diffusion**), và khuếch tán khối (**block-diffusion**) kết hợp với các định danh lượng tử hóa dư (**residual-quantised**), lượng tử hóa tích (**product-quantised**), và ngẫu nhiên (**random**) trên các tập dữ liệu NQ320K và MS300K [2610.08716v1.pdf - Trang 1]. \n* **Bài báo 2 (Thần kinh học / Tâm lý học thần kinh - Neuroscience / Neuropsychology)**: Tiếp cận vấn đề thông qua việc phân tích các ghi chép tế bào toàn bộ não (**brain-wide cellular recordings**), các phân tích phân loại (**graded analyses**), các nghiên cứu về nhiễu nhân quả (**causal perturbation**) và kết nối định hướng (**directed-connectivity**), cũng như nghiên cứu về các hệ thống hành động song song (**parallel action systems**) và hành vi nhạy cảm với affordance (**affordance-sensitive behavior**) [2610.04643v1.pdf - Trang 1].\n\n### 2. Đối tượng nghiên cứu (Subjects / Data)\n* **Bài báo 1**: Nghiên cứu tập trung vào các mô hình học máy và truy xuất văn bản (**document retrieval**) sử dụng các tập dữ liệu chuẩn là NQ320K và MS300K, cùng các loại định danh (**identifiers**) và chiến lược giải mã khác nhau [2610.08716v1.pdf - Trang 1].\n* **Bài báo 2**: Nghiên cứu tập trung vào cấu trúc kiểm soát của não bộ động vật có xương sống (**vertebrate brains**), các mạch thần kinh tương hỗ (thị - tiểu não và đồi - vỏ não — **cortico-cerebellar and thalamocortical loops**), hành vi phòng thủ (**defensive behavior**), và các quần thể chức năng vượt qua ranh giới tế bào kiến trúc (**cytoarchitectural boundaries**) [2610.04643v1.pdf - Trang 1].\n\n### 3. Kết luận chính (Main Conclusions)\n* **Bài báo 1**: Đóng góp nhằm tách biệt các yếu tố mô hình, định danh và giải mã trong hệ thống truy xuất tạo sinh, đồng thời đánh giá hiệu suất của các mô hình khuếch tán so với mô hình tự hồi quy truyền thống qua các chỉ số như độ chính xác theo cấp độ (**per-token accuracy**) và `Hit@k` [2610.08716v1.pdf - Trang 1, 5, 11].\n* **Bài báo 2**: Đề xuất rằng việc kiểm soát trong não bộ không phải là một \"chuỗi mệnh lệnh\" cố định (**chain of command**) mà là một phổ (**spectrum**) được chỉ định bởi sự tách rời động (**dynamical decoupling**). Thứ tự phân cấp chỉ đặc trưng cho các cấu hình bị giới hạn thời gian (**time-bounded configurations**), trong khi tính dị bậc (**heterarchy**) đặc trưng cho toàn bộ kho tàng kiến trúc của não bộ qua các dịp khác nhau [2610.04643v1.pdf - Trang 1].\n\n---\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+}

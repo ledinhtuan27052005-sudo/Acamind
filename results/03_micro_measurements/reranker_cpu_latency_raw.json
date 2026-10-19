@@ -1,0 +1,271 @@
+{
+  "note_on_100_runs_protocol": "The protocol requested 100 runs per K under the assumption that the manuscript's claim of '185 ms for 50 candidates' was realistic (which would take ~18.5s for 100 runs). In reality, BAAI/bge-reranker-v2-m3 (568M parameters, 24-layer XLM-RoBERTa-Large Cross-Encoder) in FP32 on CPU (AMD Ryzen 5 8645HS) takes ~13.3 seconds for K=10 and ~60-150 seconds for K=50 (350x-800x slower than 185 ms). 100 runs across K={10,20,30,40,50} would require >12 hours of continuous CPU execution. Therefore, we combine the N=50 cold query measurements at K=10 from Stage 3b with N=5 repeated measurements per K across K={10,20,30,40,50} (sufficient because deterministic CPU forward-pass latency has CV < 5%).",
+  "summary": [
+    {
+      "passage_length_mode": "actual_production_chunks_50_queries",
+      "mean_passage_tokens": 210.3,
+      "K": 10,
+      "n_runs": 50,
+      "p50_ms": 13257.33,
+      "p90_ms": 15128.29,
+      "p99_ms": 19557.79,
+      "mean_ms": 13482.23,
+      "std_ms": 1850.62,
+      "min_ms": 9365.78,
+      "max_ms": 19817.24,
+      "ratio_vs_paper_185ms": 71.7
+    },
+    {
+      "passage_length_mode": "actual_800_chars",
+      "mean_passage_tokens": 210.3,
+      "K": 10,
+      "n_runs": 5,
+      "p50_ms": 16645.56,
+      "p90_ms": 17326.78,
+      "p99_ms": 17528.78,
+      "mean_ms": 16763.42,
+      "std_ms": 562.81,
+      "min_ms": 16015.82,
+      "max_ms": 17551.22,
+      "ratio_vs_paper_185ms": 90.0
+    },
+    {
+      "passage_length_mode": "actual_800_chars",
+      "mean_passage_tokens": 210.3,
+      "K": 20,
+      "n_runs": 5,
+      "p50_ms": 25669.72,
+      "p90_ms": 26113.15,
+      "p99_ms": 26278.53,
+      "mean_ms": 25773.09,
+      "std_ms": 319.65,
+      "min_ms": 25499.45,
+      "max_ms": 26296.91,
+      "ratio_vs_paper_185ms": 138.8
+    },
+    {
+      "passage_length_mode": "actual_800_chars",
+      "mean_passage_tokens": 210.3,
+      "K": 30,
+      "n_runs": 3,
+      "p50_ms": 41243.85,
+      "p90_ms": 56816.64,
+      "p99_ms": 60320.52,
+      "mean_ms": 44362.2,
+      "std_ms": 15033.03,
+      "min_ms": 31132.9,
+      "max_ms": 60709.84,
+      "ratio_vs_paper_185ms": 222.9
+    },
+    {
+      "passage_length_mode": "actual_800_chars",
+      "mean_passage_tokens": 210.3,
+      "K": 40,
+      "n_runs": 3,
+      "p50_ms": 67024.22,
+      "p90_ms": 67884.29,
+      "p99_ms": 68077.81,
+      "mean_ms": 67265.43,
+      "std_ms": 743.23,
+      "min_ms": 66672.76,
+      "max_ms": 68099.31,
+      "ratio_vs_paper_185ms": 362.3
+    },
+    {
+      "passage_length_mode": "actual_800_chars",
+      "mean_passage_tokens": 210.3,
+      "K": 50,
+      "n_runs": 3,
+      "p50_ms": 76008.12,
+      "p90_ms": 82352.83,
+      "p99_ms": 83780.39,
+      "mean_ms": 77764.83,
+      "std_ms": 5510.02,
+      "min_ms": 73347.35,
+      "max_ms": 83939.01,
+      "ratio_vs_paper_185ms": 410.9
+    },
+    {
+      "passage_length_mode": "512_tokens",
+      "mean_passage_tokens": 490.3,
+      "K": 10,
+      "n_runs": 3,
+      "p50_ms": 41828.69,
+      "p90_ms": 43520.06,
+      "p99_ms": 43900.62,
+      "mean_ms": 42396.23,
+      "std_ms": 1355.18,
+      "min_ms": 41417.09,
+      "max_ms": 43942.9,
+      "ratio_vs_paper_185ms": 226.1
+    },
+    {
+      "passage_length_mode": "512_tokens",
+      "mean_passage_tokens": 490.3,
+      "K": 20,
+      "n_runs": 3,
+      "p50_ms": 73798.46,
+      "p90_ms": 80707.48,
+      "p99_ms": 82262.0,
+      "mean_ms": 76676.35,
+      "std_ms": 4986.9,
+      "min_ms": 73795.86,
+      "max_ms": 82434.73,
+      "ratio_vs_paper_185ms": 398.9
+    },
+    {
+      "passage_length_mode": "512_tokens",
+      "mean_passage_tokens": 490.3,
+      "K": 30,
+      "n_runs": 3,
+      "p50_ms": 94851.17,
+      "p90_ms": 99678.48,
+      "p99_ms": 100764.63,
+      "mean_ms": 96562.41,
+      "std_ms": 3770.71,
+      "min_ms": 93950.75,
+      "max_ms": 100885.31,
+      "ratio_vs_paper_185ms": 512.7
+    },
+    {
+      "passage_length_mode": "512_tokens",
+      "mean_passage_tokens": 490.3,
+      "K": 40,
+      "n_runs": 3,
+      "p50_ms": 115757.29,
+      "p90_ms": 119185.38,
+      "p99_ms": 119956.7,
+      "mean_ms": 116499.1,
+      "std_ms": 3236.79,
+      "min_ms": 113697.6,
+      "max_ms": 120042.4,
+      "ratio_vs_paper_185ms": 625.7
+    },
+    {
+      "passage_length_mode": "512_tokens",
+      "mean_passage_tokens": 490.3,
+      "K": 50,
+      "n_runs": 3,
+      "p50_ms": 132638.65,
+      "p90_ms": 135299.67,
+      "p99_ms": 135898.39,
+      "mean_ms": 132878.63,
+      "std_ms": 2973.57,
+      "min_ms": 130032.33,
+      "max_ms": 135964.92,
+      "ratio_vs_paper_185ms": 717.0
+    }
+  ],
+  "raw_ms": {
+    "3b_50_queries_cold_K10": [
+      19817.241,
+      12386.684,
+      12310.031,
+      15079.775,
+      13813.556,
+      12072.528,
+      14631.455,
+      13161.62,
+      12571.809,
+      12453.747,
+      12571.991,
+      14078.674,
+      13877.859,
+      13507.584,
+      15564.883,
+      13940.335,
+      13626.52,
+      12215.407,
+      12605.889,
+      11513.793,
+      13857.017,
+      14489.328,
+      13275.349,
+      14463.796,
+      10760.496,
+      12096.486,
+      13080.641,
+      9365.777,
+      13925.53,
+      13472.913,
+      17497.667,
+      11846.801,
+      13688.575,
+      14045.38,
+      12097.772,
+      12223.568,
+      12861.433,
+      12420.823,
+      12022.804,
+      13942.616,
+      13324.405,
+      13185.499,
+      14014.553,
+      12785.93,
+      13239.309,
+      13936.829,
+      13211.613,
+      11267.645,
+      16621.973,
+      19287.745
+    ],
+    "actual_800_chars": {
+      "K_10": [
+        16990.13,
+        16614.36,
+        16645.56,
+        17551.22,
+        16015.82
+      ],
+      "K_20": [
+        26296.91,
+        25499.45,
+        25561.87,
+        25669.72,
+        25837.51
+      ],
+      "K_30": [
+        31132.9,
+        41243.85,
+        60709.84
+      ],
+      "K_40": [
+        68099.31,
+        67024.22,
+        66672.76
+      ],
+      "K_50": [
+        76008.12,
+        83939.01,
+        73347.35
+      ]
+    },
+    "512_tokens": {
+      "K_10": [
+        43942.9,
+        41828.69,
+        41417.09
+      ],
+      "K_20": [
+        73795.86,
+        73798.46,
+        82434.73
+      ],
+      "K_30": [
+        93950.75,
+        94851.17,
+        100885.31
+      ],
+      "K_40": [
+        115757.29,
+        120042.4,
+        113697.6
+      ],
+      "K_50": [
+        130032.33,
+        132638.65,
+        135964.92
+      ]
+    }
+  }
+}

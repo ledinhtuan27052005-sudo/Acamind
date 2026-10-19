@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_19",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'A Novel Sentence Stress Detection Framework Leveraging Auxiliary Word-Stress Modeling and Loss Optimization' là gì?",
+  "is_ooc": false,
+  "system": "ACAMIND",
+  "gate_passed": true,
+  "gate_score": 0.894508,
+  "dcsr_skipped": false,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 19694.52,
+  "retrieval_warm_ms": 1289.75,
+  "llm_ms": 3563.35,
+  "e2e_cold_ms": 23257.87,
+  "e2e_warm_ms": 4853.1,
+  "provided_chunks": [
+    {
+      "id": "9578a3d5-e492-46f1-a6ec-f697f372c3ca",
+      "document_id": "f3f6486b-31d0-45d3-8b64-db68742f12c7",
+      "filename": "2610.07626v1.pdf",
+      "page_number": 1,
+      "content": "A Novel Sentence Stress Detection Framework Leveraging Auxiliary\nWord-Stress Modeling and Loss Optimization\nTien-Hong Lo ID , Fong-Chun Tsai ID , Ting-An Hung, Yu-Hsuan Hsieh, Yao-Ting Sung ID , Berlin\nChen ID\nNational Taiwan Normal University, Taiwan\n{teinhonglo,berlin}@ntnu.edu.tw\nAbstract\nProsodic stress is a crucial aspect of automatic pronunciation\nassessment (APA), encompassing both sentence stress detection\n(SSD) and word stress detection (WSD). SSD highlights seman-\ntically salient words that shape discourse meaning, while WSD\nidentifies the primary stressed syllable within each word to en-\nsure lexical clarity. However, most prior work treats SSD and\nWSD as independent tasks, overlooking their shared reliance on\nprosodic cues such as pitch, duration, and intensity. To address"
+    },
+    {
+      "id": "8b1c9d6a-963e-4912-9df0-a652c33feb7e",
+      "document_id": "f3f6486b-31d0-45d3-8b64-db68742f12c7",
+      "filename": "2610.07626v1.pdf",
+      "page_number": 1,
+      "content": "Research on APA focuses specifically on evaluating multiple\naspects of L2 learners’ speech, such as fluency and prosody [2].\nProsodic stress constitutes a critical component of APA,\nencompassing both sentence stress detection (SSD) and word\nstress detection (WSD). As displayed in Fig. 1, sentence stress\ndetection (SSD) identifies semantically salient words that shape\ndiscourse meaning, while word stress detection (WSD) locates\nthe primary stressed syllable within each word to ensure lexi-\ncal clarity. As for SSD, theoretical studies have framed stress\nas either a phonological default or a semantic device for em-\nphasis [3, 4, 5], while conceptual accounts have further char-\nacterized its acoustic correlates such as duration, intensity, and"
+    },
+    {
+      "id": "d9dd4aa2-3287-4237-b377-ad61a9b0a448",
+      "document_id": "f3f6486b-31d0-45d3-8b64-db68742f12c7",
+      "filename": "2610.07626v1.pdf",
+      "page_number": 1,
+      "content": "To tackle the aforementioned challenge,\nwe propose\nSTRAW, a Sentence sTress detection (SSD) framework built\non a frozen Whisper backbone that augments token-level SSD\nwith a word-span stress Regularizer (WSR) and an Auxiliary\nphone-level Word stress detection (WSD) branch. Unlike pre-\nvious approaches that treat SSD and WSD in isolation, the\nproposed framework supports both tasks within a common\nfrozen-Whisper framework.\nExperiments on the TinyStress\n[14] benchmark dataset demonstrate improvements over strong\nbaselines. The main contributions of this work are summarized\nas follows:\n1. We present a unified framework for stress detection with sep-\narate task-specific branches for Sentence Stress Detection\n(SSD) and Word Stress Detection (WSD).\narXiv:2610.07626v1  [eess.AS]  6 Oct 2026"
+    },
+    {
+      "id": "820286ce-7c50-4e3a-aff5-96c3598973c5",
+      "document_id": "f3f6486b-31d0-45d3-8b64-db68742f12c7",
+      "filename": "2610.07626v1.pdf",
+      "page_number": 4,
+      "content": "the overall recall gains reported in Table 2.\n5. Conclusion\nThis work introduces STRAW, an SSD framework that aug-\nments token-level SSD with an auxiliary WSD head and a WSR.\nBy supporting sentence- and word-level stress analysis within a\nunified framework and explicitly constraining token-level SSD\npredictions within stressed word spans, the proposed design\nmitigates within-word ambiguity induced by subword tokeniza-\ntion.\nExperiments on TinyStress-15K demonstrate improve-\nments over strong baselines, with the complete configuration\nachieving the highest F1 score among the evaluated configura-\ntions. Three limitations remain. First, the current word-stress\ndetection simplifies lexical stress to a single primary position\nper word and does not explicitly model syllabic structure or sec-"
+    },
+    {
+      "id": "8a2f8f24-28a1-4d4b-bb6c-868ef55e76c6",
+      "document_id": "f3f6486b-31d0-45d3-8b64-db68742f12c7",
+      "filename": "2610.07626v1.pdf",
+      "page_number": 1,
+      "content": "sure lexical clarity. However, most prior work treats SSD and\nWSD as independent tasks, overlooking their shared reliance on\nprosodic cues such as pitch, duration, and intensity. To address\nthis gap, we propose an effective SSD approach combining SSD\nwith auxiliary WSD via a novel modeling paradigm. In addi-\ntion, we introduce a word-span stress regularizer (WSR) that\nconcentrates token-level SSD probabilities within each stressed\nword span.\nExperiments on the TinyStress-15K benchmark\nshow that the proposed method outperforms strong baselines,\nwith the complete configuration achieving the best SSD result.\nIndex Terms: Automatic pronunciation assessment, sentence\nstress detection, word stress detection.\n1. Introduction\nWith the rapid advances in computing technology and the grow-"
+    }
+  ],
+  "answer": "Dựa trên các tài liệu được cung cấp trong hệ thống, dưới đây là tổng hợp chi tiết về mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính của bài báo **'A Novel Sentence Stress Detection Framework Leveraging Auxiliary Word-Stress Modeling and Loss Optimization'**:\n\n## I. Mục tiêu nghiên cứu\n* **Khắc phục hạn chế của các phương pháp trước đây:** Phần lớn các nghiên cứu trước đây thường xử lý bài toán nhận diện trọng âm câu (**Sentence Stress Detection - SSD**) và nhận diện trọng âm từ (**Word Stress Detection - WSD**) như hai tác vụ độc lập, từ đó bỏ qua sự phụ thuộc chung của chúng vào các tín hiệu ngữ điệu (**prosodic cues**) như cao độ (**pitch**), trường độ (**duration**) và cường độ (**intensity**) [2610.07626v1.pdf - Trang 1].\n* **Đề xuất khung công tác thống nhất:** Nghiên cứu đặt mục tiêu đề xuất một khung công tác mới mang tên **STRAW** (*Sentence sTress detection framework*) nhằm tích hợp cả hai tác vụ SSD và WSD trong cùng một kiến trúc thống nhất dựa trên xương sống Whisper đã đóng băng (**frozen Whisper backbone**) [2610.07626v1.pdf - Trang 1].\n\n## II. Giả thuyết khoa học\n* **Sự liên kết giữa SSD và WSD:** Mặc dù SSD xác định các từ nổi bật về mặt ngữ nghĩa nhằm định hình ý nghĩa diễn ngôn [2610.07626v1.pdf - Trang 1], còn WSD định vị âm tiết mang trọng âm chính trong mỗi từ để đảm bảo sự rõ ràng về mặt từ vựng [2610.07626v1.pdf - Trang 1], cả hai tác vụ này đều có chung sự phụ thuộc vào các tín hiệu ngữ điệu (cao độ, trường độ, cường độ) [2610.07626v1.pdf - Trang 1]. \n* **Giả thuyết về hiệu quả của việc kết hợp:** Việc kết hợp tác vụ SSD với nhánh WSD phụ trợ cùng một bộ điều chuẩn khoảng từ (**word-span stress Regularizer - WSR**) sẽ giúp khắc phục tình trạng mơ hồ trong từ do quá trình phân tách mã thông báo phụ (**subword tokenization**) gây ra, từ đó cải thiện độ chính xác và đạt hiệu suất cao hơn so với các mô hình cơ sở mạnh (**strong baselines**) [2610.07626v1.pdf - Trang 1, 4].\n\n## III. Phương pháp luận chính\nKhung công tác **STRAW** được xây dựng và thử nghiệm dựa trên các phương pháp luận chính sau:\n1. **Kiến trúc xương sống (Backbone):** Xây dựng trên nền tảng **Whisper** đã đóng băng (*frozen Whisper backbone*) [2610.07626v1.pdf - Trang 1].\n2. **Các thành phần cốt lõi:**\n   * Tích hợp tác vụ nhận diện trọng âm câu ở cấp độ mã thông báo (*token-level SSD*) [2610.07626v1.pdf - Trang 1].\n   * Bổ sung nhánh nhận diện trọng âm từ ở cấp độ âm vị (*phone-level Word stress detection - WSD branch*) [2610.07626v1.pdf - Trang 1].\n   * Sử dụng bộ điều chuẩn khoảng từ (**word-span stress Regularizer - WSR**) nhằm tập trung các xác suất SSD ở cấp độ mã thông báo trong phạm vi từng khoảng từ mang trọng âm (*stressed word spans*) [2610.07626v1.pdf - Trang 1].\n3. **Đánh giá thực nghiệm:** Thực hiện các thí nghiệm trên bộ dữ liệu chuẩn **TinyStress** (hoặc **TinyStress-15K**) để so sánh và đánh giá hiệu suất so với các mô hình cơ sở mạnh [2610.07626v1.pdf - Trang 1, 4].\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa hoặc chuyên môn tâm lý học lâm sàng.*"
+}

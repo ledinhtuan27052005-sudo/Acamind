@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_30",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'Symphony for Text Generation: Benchmarking Cl' và (2) 'Recursive Game Creator: An Agentic Product-Le'.",
+  "is_ooc": false,
+  "system": "C4_Full_Rerank",
+  "gate_passed": true,
+  "gate_score": 0.898835,
+  "dcsr_skipped": false,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 26257.37,
+  "retrieval_warm_ms": 1284.28,
+  "llm_ms": 1170.31,
+  "e2e_cold_ms": 27427.68,
+  "e2e_warm_ms": 2454.59,
+  "provided_chunks": [
+    {
+      "id": "fdfd631e-34a5-49a3-abde-8cfc3586f8d5",
+      "document_id": "96d5f9a7-b2a8-4573-b8b5-febd35e9331e",
+      "filename": "2610.08621v1.pdf",
+      "page_number": 1,
+      "content": "RECURSIVE GAME CREATOR:\nAN AGENTIC PRODUCT-LEVEL\nEXPERIENCE-ORIENTED GAME HARNESS\nJiajun Chen1,2,3,†, Haoyu Wu1,2,†, Mingda Jia1,2,3,†, Xihui Liu1,2,3,∗\n1HKU MMLab\n2The University of Hong Kong\n3Shenzhen Loop Area Institute\nABSTRACT\nRecent game design agents have made substantial progress in generating playable games. However,\nprogram correctness does not ensure an enjoyable experience for players. We present Recursive\nGame Creator, an experience-oriented harness to advance agentic game development from rough\ngame prototypes into entertaining games. Recursive Game Creator organizes recursive development\naround four components: Designer, Builder, Player, and Reviewer. The Designer translates user"
+    },
+    {
+      "id": "2453c47f-8c55-47eb-9ee1-8ea75428ac46",
+      "document_id": "96d5f9a7-b2a8-4573-b8b5-febd35e9331e",
+      "filename": "2610.08621v1.pdf",
+      "page_number": 6,
+      "content": "alone. The Designer receives this record alongside concrete changes and follow-up checks for the\nnext revision.\nVersion comparison and retention. The Reviewer compares a candidate with the retained game\nusing the same shared signals and game-specific criteria. It checks whether the changes address\nthe earlier revision goals and introduce new problems. The output is an A/B preference, a tie,\nor an unavailable judgment, with reasons and evidence paths. Feedback states the problem, its\npossible cause, its effect on play, and a revision goal with a follow-up check. The harness maps the\nReviewer’s judgment back to the game versions and selects which artifact to retain.\n4\nEXPERIMENTS\nWe evaluate Recursive Game Creator on GameCraft-Bench and GameASG-Bench. These bench-"
+    },
+    {
+      "id": "3992cacb-089d-496c-8065-19d7884c4553",
+      "document_id": "cfd01439-e1ee-4442-80ef-69bd1ca5e2f1",
+      "filename": "2610.08452v1.pdf",
+      "page_number": 10,
+      "content": "systems. In Proceedings of the 2024 Conference of\nthe North American Chapter of the Association for\nComputational Linguistics: Human Language Tech-\nnologies (Volume 1: Long Papers), pages 338–354,\nMexico City, Mexico. Association for Computational\nLinguistics.\nSumuk Shashidhar, Clémentine Fourrier, Alina Lo-\nzovskaya, Thomas Wolf, Gokhan Tur, and Dilek\nHakkani-Tür. 2025. Yourbench: Dynamic evalua-\ntion set generation with LLMs. In Conference on\nLanguage Modeling (COLM).\nAditi Singh, Abul Ehtesham, Saket Kumar, Tala Ta-\nlaei Khoei, and Athanasios V. Vasilakos. 2025. Agen-\ntic retrieval-augmented generation: A survey on agen-\ntic RAG. arXiv preprint arXiv:2501.09136.\nYixuan Tang and Yi Yang. 2024.\nMultiHop-RAG:\nBenchmarking retrieval-augmented generation for"
+    },
+    {
+      "id": "ef8e8a95-9fe3-42d6-b0b6-abc5d1456c71",
+      "document_id": "4e1e265d-d94f-4290-9c1e-d8b71c9587b1",
+      "filename": "2610.08106v1.pdf",
+      "page_number": 9,
+      "content": "Computer Vision, 1527–1536.\nNi, A.; Iyer, S.; Radev, D.; Stoyanov, V.; Yih, W.-t.; Wang,\nS. I.; and Lin, X. V. 2023.\nLEVER: Learning to Ver-\nify Language-to-Code Generation with Execution.\narXiv\npreprint arXiv:2302.08468.\nRanganath, S.; and Raghavendra, A. 2026. PIPE-Cypher:\nAutomatic Enterprise Benchmark Generation for Text-to-\nCypher Systems. arXiv preprint arXiv:2606.08481.\nShinn, N.; Cassano, F.; Gopinath, A.; Narasimhan, K.; and\nYao, S. 2023. Reflexion: Language Agents with Verbal Re-\ninforcement Learning. In Advances in Neural Information\nProcessing Systems, volume 36, 8634–8652.\nSimbola, F.; Reforgiato Recupero, D.; Riboni, D.; and Salis,\nM. 2026. LLM-Driven Compliance Checking for Natural-\nLanguage Policies over Data Product Descriptors. Machine\nLearning, 115(5)."
+    },
+    {
+      "id": "b29f321d-d586-4693-ae77-cc73fb1e4f67",
+      "document_id": "63570a89-29b2-4c32-917e-625696babf16",
+      "filename": "2610.00083v1.pdf",
+      "page_number": 10,
+      "content": "of free-form large language models. In Proceedings of\nthe 62nd Annual Meeting of the Association for Compu-\ntational Linguistics (Volume 1: Long Papers), pp. 5050–\n5063, 2024a.\nDuan, J., Zhang, R., Diffenderfer, J., Kailkhura, B., Sun,\nL., Stengel-Eskin, E., Bansal, M., Chen, T., and Xu, K.\nGtbench: Uncovering the strategic reasoning capabilities\nof llms via game-theoretic evaluations. Advances in Neu-\nral Information Processing Systems, 37:28219–28253,\n2024b.\nDuan, J., Diffenderfer, J., Madireddy, S., Chen, T.,\nKailkhura, B., and Xu, K. Uprop: Investigating the uncer-\ntainty propagation of llms in multi-step agentic decision-\nmaking. arXiv preprint arXiv:2506.17419, 2025.\nFarquhar, S., Kossen, J., Kuhn, L., and Gal, Y. Detecting\nhallucinations in large language models using semantic"
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

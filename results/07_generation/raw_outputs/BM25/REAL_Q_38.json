@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_38",
+  "type": "Literature Synthesis",
+  "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: FlatClip: A Geometry-Aware Surface- | zkLLMPoT: Efficient Zero Knowledge  | A foundation for systematic analysi",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 834.19,
+  "retrieval_warm_ms": 872.73,
+  "llm_ms": 1152.13,
+  "e2e_cold_ms": 1986.32,
+  "e2e_warm_ms": 2024.86,
+  "provided_chunks": [
+    {
+      "id": "e5637b79-8973-4e6e-aa05-8a57f87b57a7",
+      "document_id": "29f37a1a-a219-4181-b173-4e7e8f28407d",
+      "filename": "2609.34801v1.pdf",
+      "page_number": 37,
+      "content": "0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n2\n53\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n2\n53\n3000\n1000\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n2\n71\n2500\n500\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n2\n71\n2500\n500\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n3\n11\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n3\n11\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n3\n23\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n3\n23\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n3\n37\n2000\n250\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n3\n37\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n3\n53\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n3\n53\n2750\n750\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n3\n71\n2000\n0\nFalse\nFalse\nFalse\nCore cohort"
+    },
+    {
+      "id": "91233c62-8da7-46cb-9094-a042b77f36a3",
+      "document_id": "29f37a1a-a219-4181-b173-4e7e8f28407d",
+      "filename": "2609.34801v1.pdf",
+      "page_number": 37,
+      "content": "False\nFalse\nCore cohort\nFiLM population\n3\n53\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n3\n53\n2750\n750\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n3\n71\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n3\n71\n2250\n250\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n4\n11\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n4\n11\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n4\n23\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n4\n23\n2500\n500\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n4\n37\n2250\n250\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n4\n37\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n4\n53\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n4\n53\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n4\n71\n2250\n250\nFalse\nFalse\nFalse\nCore cohort"
+    },
+    {
+      "id": "aa76cbf5-4099-4a14-83d0-928d08838906",
+      "document_id": "29f37a1a-a219-4181-b173-4e7e8f28407d",
+      "filename": "2609.34801v1.pdf",
+      "page_number": 36,
+      "content": "2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n0\n23\n2250\n250\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n0\n23\n2500\n500\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n0\n37\n2500\n500\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n0\n37\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n0\n53\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n0\n53\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n0\n71\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n0\n71\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n1\n11\n2250\n250\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n1\n11\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n1\n23\n2500\n500\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n1\n23\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n1\n37\n2000\n0\nFalse\nFalse\nFalse"
+    },
+    {
+      "id": "fcca27cb-b5d7-4d21-950f-b5a19aec5e1c",
+      "document_id": "29f37a1a-a219-4181-b173-4e7e8f28407d",
+      "filename": "2609.34801v1.pdf",
+      "page_number": 37,
+      "content": "Cohort\nFamily\nFold\nSeed\nRun steps\nSelected\nTrain flat\nVal. flat\nBoth flat\nCore cohort\nLoRA population\n1\n53\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n1\n71\n2500\n500\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n1\n71\n2500\n500\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n2\n11\n4250\n2250\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n2\n11\n4250\n2250\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n2\n23\n6500\n4500\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n2\n23\n2250\n250\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n2\n37\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n2\n37\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n2\n53\n2000\n0\nFalse\nFalse\nFalse\nCore cohort\nLoRA population\n2\n53\n3000\n1000\nFalse\nFalse\nFalse\nCore cohort\nFiLM population\n2\n71\n2500\n500\nFalse\nFalse\nFalse"
+    },
+    {
+      "id": "5da40f38-3fe9-4db5-ba16-ee1c5c759d8f",
+      "document_id": "0267c793-c401-434f-bbab-b6bc7bfc2ad8",
+      "filename": "2609.03302v1.pdf",
+      "page_number": 2,
+      "content": "by two parameters [6, 7]. Surface parameterization of the\ncortical surface has been done previously by [10]. From the\nsurface parameterization, Gaussian and mean curvatures of\nthe brain surface can be computed and used to characterize\nits shape [6, 9, 10]. In particular, [10] used the quadratic\nsurface in estimating the Gaussian and mean curvature of\nthe cortical surfaces. Surface parameterization enables us\nto compute surface metrics such as local area dilatation and\ncurvature differences that characterize the surface shapes.\nDue to errors in image intensities, surface extraction and\nsurface ﬁtting, surface-based signal smoothing is required\nto increase the signal-to-noise ratio.\nWe have used dif-\nfusion smoothing or the Laplace-Beltrami ﬂow to smooth"
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải."
+}

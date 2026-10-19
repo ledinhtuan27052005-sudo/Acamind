@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_22",
+  "type": "Cross-Article Comparison",
+  "query": "So sánh và đối chiếu phương pháp tiếp cận, đối tượng nghiên cứu và kết luận chính giữa hai bài báo: (1) 'SIGMA: Self-Improving Alignment Generalizatio' và (2) 'Does an Agent's History Tell You When Compact'.",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 1040.42,
+  "retrieval_warm_ms": 1044.08,
+  "llm_ms": 1263.87,
+  "e2e_cold_ms": 2304.29,
+  "e2e_warm_ms": 2307.95,
+  "provided_chunks": [
+    {
+      "id": "d1a45cc5-fd0c-42ff-b81a-e0c985968815",
+      "document_id": "fc72719e-ab7c-433f-8b9e-9a475544dc8f",
+      "filename": "2610.07657v1.pdf",
+      "page_number": 16,
+      "content": "Memory\nRequest\n&\nResponse\nPrompt Driven\nReasoning & Evaluation\nSystems & Memory\nInteractions\nReflection\nLoop\nAI Agent Workflow\nAgent\nAgent\nAgent\nVertical Multi-agent Architecture\nAgent\nAgent\nAgent\nHorizontal Multi-agent Architecture\nMulti-agent Architectures\nUser\nMCP Host\n(Application)\nJSON RPC Transport Layer\n(One-to-One)\nMCP Client 1\nMCP Server 1\n(Database)\nMCP Client 2\nMCP Server 2\n(File System)\nMCP Client N\nMCP Server N\n(External APIs)\n...\n...\nMCP Architecture (Multi-agent Protocol)\nFig. 6. Background. (Left) An LLM agent reaches everything outside the model through two interfaces, tools and memory, which are the two integration\nsurfaces of Section II-B. (Center) Vertical and horizontal multi-agent topologies. (Right) MCP architecture, which our testbed’s topology adopts.\nTABLE VII"
+    },
+    {
+      "id": "38889f2c-b350-49f9-a091-aabc3a748dc8",
+      "document_id": "28b0b2a1-fc5f-4ae5-8502-a5cd88ad6f95",
+      "filename": "2610.07935v1.pdf",
+      "page_number": 10,
+      "content": "pressure directly to the CoT, yet still yields substantial alignment gains, offering a route to self-improvement\nthat may better preserve monitorability.\nWhile we conduct a single round of self-improvement training, future work may explore closing the self-\nimprovement loop by further self-training the SIGMA models with improved safety reasoning capabilities,\nas SIGMA may enhance the capability for a stronger task designer agent (Kulikov et al., 2026). Another\npotential limitation is that recent work has shown models may exhibit awareness of alignment evaluation (Li\net al., 2026a), and future work may investigate how evaluation awareness impacts the study of alignment\ngeneralization.\nEthics statement"
+    },
+    {
+      "id": "6b1055ff-b7cd-4054-abf4-c7733756aa30",
+      "document_id": "28b0b2a1-fc5f-4ae5-8502-a5cd88ad6f95",
+      "filename": "2610.07935v1.pdf",
+      "page_number": 7,
+      "content": "in how ethical reasoning helps alignment (Kutasov et al., 2026).\n3.4\nImpact of reasoning\nTo validate our hypothesis that SIGMA leads to broad alignment generalization by improving its own safety\nreasoning capability, we conduct an analysis where we disable thinking during evaluation time, for the SIGMA\ncheckpoints trained with reasoning SFT and RL. Table 2 shows that for SIGMA, disabling thinking degrades\nalignment on 2–3 out of the 4 benchmarks.1 We observe a larger gap on alignment between thinking vs. no\nthinking on SIGMA compared to the base model, providing evidence that SIGMA indeed enhances alignment\nthrough stronger safety reasoning. Comparing models with thinking disabled, SIGMA still outperforms the"
+    },
+    {
+      "id": "728c24b8-0992-47d8-8139-27afce856677",
+      "document_id": "28b0b2a1-fc5f-4ae5-8502-a5cd88ad6f95",
+      "filename": "2610.07935v1.pdf",
+      "page_number": 2,
+      "content": "analyses find that reasoning over a balanced Model Spec and rewards shaped by both task rubrics and the\nspec are crucial for broad alignment self-improvement. Our main contributions are:\n(1) We show that alignment self-improvement can be achieved from a Model Spec by employing our SIGMA\nframework to construct effective supervision.\n(2) We demonstrate that SIGMA’s single-turn training generalizes broadly to improve agentic safety and\nreduce power seeking and sycophancy, while maintaining general capability.\n(3) We characterize how effective alignment self-improvement is shaped by Model Spec content, test-time\nreasoning, reward shaping, and task construction quality.\n2"
+    },
+    {
+      "id": "34315180-e5ae-4a6c-8d7d-0fb632f2f441",
+      "document_id": "0870fe3d-e48c-4af5-9d07-d464a52b9e0d",
+      "filename": "2610.08595v1.pdf",
+      "page_number": 51,
+      "content": "Agent 1\nAgent 2\nReference\nCMDS\nstart\nend\nStart\nGoal\nCollision\nReference\n(I) Medium PointMaze (N = 2).\nAgent 1\nAgent 2\nAgent 3\nAgent 4\nReference\nCMDS\nstart\nend\nStart\nGoal\nCollision\nReference\n(II) Medium PointMaze (N = 4).\nAgent 1\nAgent 2\nReference\nCMDS\nstart\nend\nStart\nGoal\nCollision\nReference\n(III) Large PointMaze (N = 2).\nAgent 1\nAgent 2\nAgent 3\nAgent 4\nReference\nCMDS\nstart\nend\nStart\nGoal\nCollision\nReference\n(IV) Large PointMaze (N = 4).\nFigure 19: Qualitative maze-coordination examples. For each maze and agent count, the top row\nis the reference process trajectory (dashed) and the bottom row is the trajectory produced with the\ntrained CMDS control (solid), for the same 6 held-out instances and the same initial noise.\n51"
+    }
+  ],
+  "answer": "__NO_CONTEXT__\nKhông tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải vì ngữ cảnh không chứa nội dung hoặc dữ liệu về bài báo thứ hai (\"Does an Agent's History Tell You When Compact\"). Do đó, không đủ cơ sở để so sánh và đối chiếu giữa hai bài báo."
+}

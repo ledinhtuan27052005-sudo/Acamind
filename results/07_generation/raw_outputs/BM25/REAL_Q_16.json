@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_16",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Neural noise enables accurate internal simulation of rare events' là gì?",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 717.03,
+  "retrieval_warm_ms": 732.45,
+  "llm_ms": 3791.18,
+  "e2e_cold_ms": 4508.21,
+  "e2e_warm_ms": 4523.63,
+  "provided_chunks": [
+    {
+      "id": "3399cfca-42af-45d3-a10f-6f134a99a003",
+      "document_id": "3ea7a0f2-1564-43b1-a749-edb272af9339",
+      "filename": "2609.18033v1.pdf",
+      "page_number": 25,
+      "content": "Figure 1: Overview of internal model simulation of rare events, and the corrective role of neural\nnoise. (A) A rare event in daily life: a child is almost hit by a rushing car, replays the near-miss offline\nduring sleep, and acts more cautiously at the crossing afterward, a single experience reshaping prediction\nand behaviour. (B) Task and learning: a ground-truth Markov chain of densely connected common event\ngroups (blue) joined by chained rare event groups (red) generates training sequences by random walks, and\nfrom these finite samples the BCPNN learns its internal model, the weight matrix shown and the unit biases,\nthrough local Hebbian and Bayesian plasticity. (C) Internal simulation: cued and left to run, the trained"
+    },
+    {
+      "id": "c85ca00c-77f2-4eec-90d6-c6d094d557bb",
+      "document_id": "2b8689c8-a82e-45fb-a2ee-d77d2e6f5096",
+      "filename": "2609.06826v1.pdf",
+      "page_number": 1,
+      "content": "attractors in dendritic trees, neural coding as a projection of internal attractor dynamics, and the \ndevelopment of neural architectures supporting the proposed learning concept. These hypotheses are \ndiscussed in the context of modern experimental data in the fields of dendritic computations, synaptic \nplasticity, and the structural organization of neural circuits. The proposed neurobiological mechanisms \nare presented as testable hypotheses rather than established biological facts. The results demonstrate the \nmathematical consistency and computational feasibility of the proposed model, while the neurobiological \nhypotheses outline potential directions for its experimental verification. \nKeywords: artificial intelligence, artificial neural networks, neuromorphic systems, machine"
+    },
+    {
+      "id": "20dde958-277c-42bf-a15e-416d6ed33a12",
+      "document_id": "3ea7a0f2-1564-43b1-a749-edb272af9339",
+      "filename": "2609.18033v1.pdf",
+      "page_number": 8,
+      "content": "against σ across three rarities, scoring both occurrence levels (Fig. 6).\nOne of the key findings is that moderate noise broadens the parameter regime that supports\nan accurate internal model, such that accurate representations become less sensitive to parameter\nselection. In other words, adding noise improves the tolerances of the system. Specifically, no\nsetting of these parameters is accurate at both occurrence levels without noise. Once σ is raised to\na moderate range, an accurate regime appears that spans a range of parameter values rather than a\nsingle point, and it persists across all three rarities (Fig. 6). Moderate noise therefore does more\nthan locate an optimum: it opens a band of settings that all support accurate rare-event replay, so"
+    },
+    {
+      "id": "e8d1eed0-b595-4ef9-ba9d-28704b8046c7",
+      "document_id": "3ea7a0f2-1564-43b1-a749-edb272af9339",
+      "filename": "2609.18033v1.pdf",
+      "page_number": 1,
+      "content": "Neural noise enables accurate internal simulation of\nrare events\nHeng Zhang1,∗, Pawel Herman2,†, and Zenas C. Chao1,∗,†\n1International Research Center for Neurointelligence (WPI-IRCN), UTIAS, The University\nof Tokyo, Japan\n2Division of Computational Science and Technology, KTH Royal Institute of Technology,\nStockholm, Sweden\n∗Corresponding authors: rogerzhangheng@gmail.com, zenas.c.chao@gmail.com\n†Co-senior authors\nSeptember 17, 2026\nAbstract\nThe brain needs an accurate internal model of the world to generate predictions and guide\nbehavior. However, it must estimate the statistical structure of the environment from limited\nexperience. This is particularly difficult for rare events, whose observed frequencies in a limited"
+    },
+    {
+      "id": "2796975e-ae5e-4be5-8c6b-568ed0f64bf4",
+      "document_id": "3ea7a0f2-1564-43b1-a749-edb272af9339",
+      "filename": "2609.18033v1.pdf",
+      "page_number": 2,
+      "content": "Their observed occurrence and transition probabilities can therefore under- or overestimate the\nunderlying environmental probabilities. Although the present model considers only their statistical\noccurrence, Fig. 1A illustrates the broader motivation: a rare event, such as a near miss, must\nremain available to internal simulation if it is to inform future predictions and behavior5. An\ninternal model can consequently fail at two distinct stages: learning may encode an inaccurate\nestimate of the environment, and, even when evidence for rare events is retained in the learned\nparameters, internally generated activity may express it inaccurately. Thus, internal-model accuracy\ndepends not only on what is learned but also on how the learned structure is sampled during internal"
+    }
+  ],
+  "answer": "Dựa trên các tài liệu khoa học được cung cấp, dưới đây là tổng hợp chi tiết về mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo **\"Neural noise enables accurate internal simulation of rare events\"**:\n\n## I. Mục tiêu nghiên cứu\n* Bộ não cần xây dựng một **mô hình nội tại (internal model)** chính xác về thế giới để tạo ra các dự đoán và định hướng hành vi [2609.18033v1.pdf - Trang 1]. Tuy nhiên, việc này gặp khó khăn lớn đối với các sự kiện hiếm gặp (rare events) do tần suất quan sát bị hạn chế, dẫn đến việc xác suất xuất hiện và chuyển đổi có thể bị đánh giá thấp hoặc cao hơn thực tế [2609.18033v1.pdf - Trang 1, Trang 2].\n* Mục tiêu của nghiên cứu là xem xét cách thức các sự kiện hiếm được duy trì trong mô phỏng nội tại nhằm thông báo cho các dự đoán và hành vi trong tương lai [2609.18033v1.pdf - Trang 2], đồng thời làm sáng tỏ vai trò của **nhiễu thần kinh (neural noise)** trong việc giúp hệ thống mô phỏng chính xác các sự kiện này [2609.18033v1.pdf - Trang 1].\n\n## II. Giả thuyết khoa học\n* Mô hình nội tại có thể thất bại ở hai giai đoạn riêng biệt: \n  1. Quá trình học tập có thể mã hóa ước tính không chính xác về môi trường [2609.18033v1.pdf - Trang 2].\n  2. Ngay cả khi bằng chứng về các sự kiện hiếm được giữ lại trong các tham số đã học, hoạt động được tạo ra nội bộ vẫn có thể biểu hiện nó một cách không chính xác [2609.18033v1.pdf - Trang 2].\n* Do đó, độ chính xác của mô hình nội tại không chỉ phụ thuộc vào những gì được học mà còn phụ thuộc vào cách cấu trúc đã học được lấy mẫu trong quá trình mô phỏng nội bộ [2609.18033v1.pdf - Trang 2]. \n* Nghiên cứu đưa ra phát hiện then chốt rằng **nhiễu vừa phải (moderate noise)** giúp mở rộng chế độ tham số (parameter regime) hỗ trợ mô hình nội tại chính xác, làm cho các đại diện chính xác ít nhạy cảm hơn với việc lựa chọn tham số và cải thiện độ dung sai của hệ thống [2609.18033v1.pdf - Trang 8].\n\n## III. Phương pháp luận chính\n* **Mô hình tác vụ và học tập:** Sử dụng một chuỗi Markov thực tế (ground-truth Markov chain) gồm các nhóm sự kiện chung có kết nối dày đặc (màu xanh lam) được nối bằng các nhóm sự kiện hiếm có chuỗi (màu đỏ) để tạo ra các trình tự huấn luyện thông qua đi ngẫu nhiên (random walks) [2609.18033v1.pdf - Trang 25].\n* **Cơ chế học tập của mạng:** Từ các mẫu hữu hạn này, mô hình **BCPNN** học mô hình nội tại của nó (bao gồm ma trận trọng số và độ lệch đơn vị - unit biases) thông qua tính dẻo Hebbian và Bayesian cục bộ (local Hebbian and Bayesian plasticity) [2609.18033v1.pdf - Trang 25].\n* **Mô phỏng nội tại:** Kiểm tra khả năng chạy mô phỏng khi được gợi ý để đánh giá vai trò hiệu chỉnh của nhiễu thần kinh đối với các sự kiện hiếm trong đời sống [2609.18033v1.pdf - Trang 25].\n\n```mermaid\nflowchart TD\n  A[\"Chuỗi Markov thực tế\"] --> B[\"Tạo trình tự huấn luyện qua đi ngẫu nhiên\"]\n  B --> C[\"Học mô hình nội tại qua BCPNN và tính dẻo Hebbian - Bayesian\"]\n  C --> D[\"Mô phỏng nội tại dưới tác động hiệu chỉnh của nhiễu thần kinh\"]\n```\n*Hình 1: Sơ đồ tổng quan về mô phỏng mô hình nội tại của các sự kiện hiếm và vai trò hiệu chỉnh của nhiễu thần kinh [2609.18033v1.pdf - Trang 25].*\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*\n\n## Danh mục Tài liệu tham khảo\n* `2609.18033v1.pdf` - Trang 1, 2, 8, 25."
+}

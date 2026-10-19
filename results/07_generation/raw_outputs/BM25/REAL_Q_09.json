@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_09",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Learning to Retrieve via Reinforcement Learning in Embedding Space' là gì?",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 768.9,
+  "retrieval_warm_ms": 735.84,
+  "llm_ms": 3168.49,
+  "e2e_cold_ms": 3937.39,
+  "e2e_warm_ms": 3904.33,
+  "provided_chunks": [
+    {
+      "id": "07832ad9-ad75-4dd0-91af-06565bb869af",
+      "document_id": "f4b8ae32-1579-4ca1-956b-a097303e960a",
+      "filename": "2610.07731v1.pdf",
+      "page_number": 1,
+      "content": "Preprint.\nLEARNING TO RETRIEVE VIA REINFORCEMENT\nLEARNING IN EMBEDDING SPACE\nQi Liu, Fengming Liang, Yiqun Chen, Erhan Zhang, Jiaxin Mao\nRenmin University of China\nqiliu6777@gmail.com, maojiaxin@gmail.com\nABSTRACT\nDense retrieval models are typically trained with contrastive objectives that\nlearn effective representations but do not directly optimize retrieval metrics or\ndownstream task performance. To address this problem, we introduce RELER\n(REinforcement LEarning for Retrieval), a reinforcement learning framework\nthat enables existing embedding models to learn to retrieve directly in embedding\nspace and align to task-specific rewards. We train RELER by sampling unit-length\nquery and document embedding actions from von Mises–Fisher (vMF) distribu-"
+    },
+    {
+      "id": "329742ea-f5f1-41b3-a0fc-4226fa83799c",
+      "document_id": "e66b429a-163c-4e2c-b9a3-4c04ec18f6d4",
+      "filename": "2610.08400v1.pdf",
+      "page_number": 28,
+      "content": "Preprint.\nSpace group 12 (n=7,707)\nSpace group 123 (n=4,766)\nSpace group 166 (n=4,016)\nSpace group 139 (n=2,049)\nSpace group 164 (n=1,691)\nSpace group 65 (n=1,683)\nOther groups (n=28,088)\n(a) Combined space groups.\nSpace group 12 (n=7,707)\nOther groups\nSpace group 123 (n=4,766)\nOther groups\nSpace group 166 (n=4,016)\nOther groups\nSpace group 139 (n=2,049)\nOther groups\nSpace group 164 (n=1,691)\nOther groups\nSpace group 65 (n=1,683)\nOther groups\n(b) Each of the six most frequent space groups highlighted against the others in gray.\nFigure 6: UMAP visualization of crystal representations by space group.\n28"
+    },
+    {
+      "id": "f1224ffd-6fb9-44a5-ad86-ab8d1f1a29dd",
+      "document_id": "f4b8ae32-1579-4ca1-956b-a097303e960a",
+      "filename": "2610.07731v1.pdf",
+      "page_number": 2,
+      "content": "alternative embeddings allows task feedback to guide the representations themselves. We introduce\nRELER (REinforcement LEarning for Retrieval), a framework for post-training embedding models\nto learn to retrieve: sample embedding actions, evaluate the retrieval results or downstream answers\nthey produce, and update the encoder to favor actions with higher rewards. The framework explores\nboth query and document embeddings, and also supports query-only adaptation against a fixed doc-\nument index. Inference retains deterministic single-vector retrieval.\nTo turn this view into a practical learning algorithm, RELER places a von Mises–Fisher (vMF)\npolicy around each normalized encoder output, enabling exploration on the unit sphere used for"
+    },
+    {
+      "id": "f636887e-2ca0-4c36-a6a4-32076ec4c199",
+      "document_id": "f4b8ae32-1579-4ca1-956b-a097303e960a",
+      "filename": "2610.07731v1.pdf",
+      "page_number": 2,
+      "content": "Preprint.\ncies over generated text (Sun et al., 2026; Jiang et al., 2026) or discrete document selections (Salemi\net al., 2024; Liu et al., 2025c; Zhang et al., 2026). These policies explore text or document choices;\nthe query and document vectors used for similarity scoring are not themselves sampled as actions.\nIn this work, we revisit reinforcement learning for dense retrieval by treating embeddings as learn-\nable retrieval actions. Because their similarities determine which documents are retrieved, exploring\nalternative embeddings allows task feedback to guide the representations themselves. We introduce\nRELER (REinforcement LEarning for Retrieval), a framework for post-training embedding models"
+    },
+    {
+      "id": "95aba4ab-098d-4b66-ba7f-fbb50c674805",
+      "document_id": "a6cea387-1ce5-4192-844a-a67d03363ec6",
+      "filename": "2610.07899v1.pdf",
+      "page_number": 11,
+      "content": "[7] Chanin Eom, Dongsu Lee, and Minhae Kwon. Selective imitation for efficient online reinforce-\nment learning with pre-collected data. ICT Express, 10(6):1308–1314, 2024.\n[8] Marc G. Bellemare, Will Dabney, and Rémi Munos. A distributional perspective on reinforce-\nment learning. In International Conference on Machine Learning (ICML), 2017.\n[9] Will Dabney, Mark Rowland, Marc G. Bellemare, and Rémi Munos. Distributional reinforce-\nment learning with quantile regression. In AAAI Conference on Artificial Intelligence (AAAI),\n2018.\n[10] Will Dabney, Georg Ostrovski, David Silver, and Rémi Munos. Implicit quantile networks\nfor distributional reinforcement learning. In International Conference on Machine Learning\n(ICML), 2018."
+    }
+  ],
+  "answer": "## I. Mục tiêu nghiên cứu\n\nMục tiêu chính của nghiên cứu trong bài báo là giải quyết hạn chế của các mô hình truy vấn dày (dense retrieval models) thường được huấn luyện bằng các mục tiêu đối lập (contrastive objectives), vốn chỉ học các biểu diễn hiệu quả nhưng không trực tiếp tối ưu hóa các số liệu truy vấn (retrieval metrics) hoặc hiệu suất tác vụ hạ nguồn (downstream task performance) [2610.07731v1.pdf - Trang 1]. Để khắc phục vấn đề này, các tác giả giới thiệu khung học tăng cường **RELER** (**RE**inforcement **LE**arning for **R**etrieval), cho phép các mô hình nhúng (embedding models) hiện có học cách truy vấn trực tiếp trong không gian nhúng (embedding space) và căn chỉnh theo các phần thưởng đặc thù của tác vụ (task-specific rewards) [2610.07731v1.pdf - Trang 1].\n\n— Khung **RELER** thực hiện việc hậu huấn luyện (post-training) cho các mô hình nhúng để học cách truy vấn thông qua các bước: lấy mẫu các hành động nhúng (sample embedding actions), đánh giá kết quả truy vấn hoặc câu trả lời hạ nguồn mà chúng tạo ra, và cập nhật bộ mã hóa (encoder) để ưu tiên các hành động có phần thưởng cao hơn [2610.07731v1.pdf - Trang 2].\n— Khung này khám phá cả biểu diễn nhúng của truy vấn (query embeddings) và tài liệu (document embeddings), đồng thời hỗ trợ thích ứng chỉ riêng truy vấn (query-only adaptation) đối với một chỉ mục tài liệu cố định, trong khi quá trình suy luận vẫn duy trì phương pháp truy vấn đơn véc-tơ tất định (deterministic single-vector retrieval) [2610.07731v1.pdf - Trang 2].\n\n---\n\n## II. Phương pháp luận chính\n\nĐể chuyển quan điểm xem xét biểu diễn nhúng như các hành động truy vấn khả học thành một thuật toán học tập thực tế, phương pháp luận của **RELER** được xây dựng dựa trên các kỹ thuật sau:\n\n1. **Chính sách phân phối von Mises–Fisher (vMF)**: \n   > \"RELER places a von Mises–Fisher (vMF) policy around each normalized encoder output, enabling exploration on the unit sphere used for\" [2610.07731v1.pdf - Trang 2]\n   \n   Hệ thống đặt một chính sách phân phối **von Mises–Fisher (vMF)** quanh mỗi đầu ra của bộ mã hóa đã được chuẩn hóa (normalized encoder output), cho phép thực hiện việc khám phá (exploration) trên mặt cầu đơn vị (unit sphere) [2610.07731v1.pdf - Trang 1, Trang 2].\n\n2. **Lấy mẫu hành động nhúng**: \n   Quá trình huấn luyện thực hiện việc lấy mẫu các hành động nhúng truy vấn và tài liệu có độ dài đơn vị (unit-length query and document embedding actions) từ phân phối vMF này [2610.07731v1.pdf - Trang 1]. \n\n3. **Khám phá phản hồi tác vụ**: \n   Bằng cách coi các biểu diễn nhúng là hành động truy vấn khả học—nơi độ tương đồng của chúng quyết định tài liệu nào được truy vấn—việc khám phá các biểu diễn nhúng thay thế cho phép phản hồi từ tác vụ trực tiếp hướng dẫn các biểu diễn đó [2610.07731v1.pdf - Trang 2].\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+}

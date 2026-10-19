@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_06",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'Selective Transfer of RL Updates for Visual Reasoning' là gì?",
+  "is_ooc": false,
+  "system": "ACAMIND",
+  "gate_passed": true,
+  "gate_score": 0.684676,
+  "dcsr_skipped": false,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 19014.39,
+  "retrieval_warm_ms": 798.86,
+  "llm_ms": 3469.12,
+  "e2e_cold_ms": 22483.51,
+  "e2e_warm_ms": 4267.98,
+  "provided_chunks": [
+    {
+      "id": "4701ccc7-cee3-4946-a874-1ce209d89590",
+      "document_id": "ba3e8c35-9ab2-4648-bd91-d154a150ef32",
+      "filename": "2610.08659v1.pdf",
+      "page_number": 1,
+      "content": "Under review as a conference paper at ICLR 2027\nSELECTIVE TRANSFER OF RL UPDATES\nFOR VISUAL REASONING\nSuxin Ji1\nHungtao Wan2\nMingjun Liu3\nAn Zhang4\n1University of Pennsylvania\n2Independent Researcher\n3University of Electronic Science and Technology of China\n4Chongqing University\nABSTRACT\nModel merging provides a training-free way to transfer reasoning capabilities\nfrom language models to vision-language models (VLMs), but endpoint-based\ntransfer can conflate pre-existing model differences with changes acquired dur-\ning reasoning post-training. We instead formulate capability transfer around the\ntraining-stage update, isolating the parameter changes induced by reinforcement\nlearning (RL). Yet transferring this update in full remains suboptimal: we find that"
+    },
+    {
+      "id": "a08a77e9-b771-42f2-8a91-4d1088a83485",
+      "document_id": "ba3e8c35-9ab2-4648-bd91-d154a150ef32",
+      "filename": "2610.08659v1.pdf",
+      "page_number": 9,
+      "content": "answers 3115. Attribution to a singular component’s visual skill requires separate analysis.\nThese outcome-selected Qwen-family cases serve qualitative analysis; benchmark performance\nis evaluated separately. Appendix G reports case provenance and further response comparisons,\ncomplementing the quantitative audit.\n5\nCONCLUSION\nIn this paper, we propose SELECTIVE-RL, a selective transfer algorithm that adapts RL-stage updates\nfor visual reasoning. The method isolates the donor’s RL update, selects each eligible matrix’s leading\nspectral direction, and restores its magnitude through Frobenius matching before composing it with a\nrecipient VLM. This construction separates direction selection, update strength, and initialization"
+    },
+    {
+      "id": "d8e1fc49-840f-4b82-a3dc-f2da73825f3e",
+      "document_id": "ba3e8c35-9ab2-4648-bd91-d154a150ef32",
+      "filename": "2610.08659v1.pdf",
+      "page_number": 2,
+      "content": "whether it identifies components compatible across models remains unclear. In the primary Qwen\ncontrols, the dominant matrix-wise direction outperforms the complete update at matched Frobenius\nmagnitude; retaining more directions progressively reduces MathVista accuracy. Thus, components\nof the same post-training update can differ substantially in cross-model transferability, and preserving\nmore of the source update need not be beneficial.\nMotivated by this finding, we introduce Selective-RL, a training-free framework for transferring\nreasoning capabilities from RL-trained language models to multimodal recipients. It first extracts\nthe RL-stage update R −B, excluding parameter differences that predate reasoning post-training."
+    },
+    {
+      "id": "c39616f6-06f0-4006-bfe2-3280348ab46c",
+      "document_id": "ba3e8c35-9ab2-4648-bd91-d154a150ef32",
+      "filename": "2610.08659v1.pdf",
+      "page_number": 1,
+      "content": "training-stage update, isolating the parameter changes induced by reinforcement\nlearning (RL). Yet transferring this update in full remains suboptimal: we find that\nits components differ substantially in cross-model transferability, with dominant\ndirections transferring more effectively than the complete update. Based on this\nfinding, we introduce Selective-RL, which isolates the RL-stage update, retains\nits dominant matrix-wise directions with magnitude preservation, and transfers\nthem to the language modules of a VLM. Across three model families and five\nvisual-reasoning benchmarks, Selective-RL improves full-update interpolation in\n12 of 15 comparisons, including an 8.55 percentage-point MathVision gain on the\nQwen recipient. Matched controls show that update magnitude or arbitrary low"
+    },
+    {
+      "id": "4d5ba058-138b-4735-85e5-abeeacbb5320",
+      "document_id": "ba3e8c35-9ab2-4648-bd91-d154a150ef32",
+      "filename": "2610.08659v1.pdf",
+      "page_number": 1,
+      "content": "R −V\n| {z }\nendpoint displacement\n=\nB −V\n| {z }\npre-RL displacement\n+\nR −B\n| {z }\nRL-stage update\n.\nHere B −V predates RL, whereas R −B isolates RL-acquired changes. Merging depends on\nparameter importance and functional mismatch (Matena & Raffel, 2022; Jin et al., 2023; Daheim\net al., 2024); task information can occupy localized directions or parameter supports (Ortiz-Jimenez\net al., 2023; Wang et al., 2024a). Selective parameter transfer can also preserve existing multimodal\ncapabilities (Zhu et al., 2024). These findings motivate isolating the RL-stage update before testing\nwhich components transfer; stage attribution alone does not establish that every component encodes\ntransferable reasoning.\n1\narXiv:2610.08659v1  [cs.CV]  6 Oct 2026"
+    }
+  ],
+  "answer": "Dựa trên các tài liệu được cung cấp, dưới đây là tổng hợp về mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính của bài báo **\"Selective Transfer of RL Updates for Visual Reasoning\"**:\n\n## I. Mục tiêu nghiên cứu\n* **Chuyển giao năng lực suy luận:** Nghiên cứu đề xuất phương pháp chuyển giao năng lực suy luận từ các mô hình ngôn ngữ lớn (Language Models - LMs) đã được huấn luyện bằng học tăng cường (**reinforcement learning** - **RL**) sang các mô hình ngôn ngữ - thị giác (**Vision-Language Models** - **VLMs**) theo hướng không cần huấn luyện lại (**training-free**) [2610.08659v1.pdf - Trang 1] [2610.08659v1.pdf - Trang 2].\n* **Cách ly sự thay đổi tham số do RL:** Thay vì sử dụng phương pháp chuyển giao dựa trên điểm cuối (endpoint-based transfer) vốn làm lẫn lộn giữa sự khác biệt ban đầu của mô hình và các thay đổi có được trong quá trình hậu huấn luyện suy luận (reasoning post-training), mục tiêu của nghiên cứu là cô lập chính xác các thay đổi tham số do quá trình học tăng cường gây ra [2610.08659v1.pdf - Trang 1].\n\n## II. Giả thuyết khoa học\n* **Sự khác biệt về khả năng chuyển giao:** Nghiên cứu đặt giả thuyết rằng việc chuyển giao toàn bộ cập nhật tham số từ quá trình RL (full update) là dưới tối ưu (*suboptimal*) vì các thành phần bên trong bản cập nhật này có sự khác biệt đáng kể về khả năng chuyển giao chéo giữa các mô hình (cross-model transferability) [2610.08659v1.pdf - Trang 1] [2610.08659v1.pdf - Trang 2].\n* **Hiệu quả của hướng dẫn đầu (dominant directions):** Giả thuyết cho rằng việc giữ lại các hướng ma trận chiếm ưu thế (dominant matrix-wise directions) kết hợp với việc bảo toàn độ lớn sẽ mang lại hiệu quả chuyển giao tốt hơn so với việc sử dụng toàn bộ bản cập nhật hoặc các thành phần ngẫu nhiên khác [2610.08659v1.pdf - Trang 1] [2610.08659v1.pdf - Trang 2].\n\n## III. Phương pháp luận chính\n* **Công thức cô lập cập nhật RL:** Phương pháp tách biệt sự dịch chuyển điểm cuối thành các thành phần dựa trên biểu thức toán học [2610.08659v1.pdf - Trang 1]:\n  \n  $$R - V = (B - V) + (R - B)$$\n  \n  Trong đó:\n  * $R - V$: Sự dịch chuyển điểm cuối (endpoint displacement) [2610.08659v1.pdf - Trang 1].\n  * $B - V$: Sự dịch chuyển trước RL (pre-RL displacement), thể hiện các khác biệt tham số có từ trước quá trình hậu huấn luyện suy luận [2610.08659v1.pdf - Trang 1] [2610.08659v1.pdf - Trang 2].\n  * $R - B$: Bản cập nhật giai đoạn RL (**RL-stage update**), cô lập các thay đổi có được từ học tăng cường [2610.08659v1.pdf - Trang 1].\n* **Thuật toán Selective-RL:** \n  * Cô lập bản cập nhật ở giai đoạn RL ($R - B$) để loại bỏ các khác biệt tham số có trước đó [2610.08659v1.pdf - Trang 2].\n  * Lựa chọn hướng phổ dẫn đầu (leading spectral direction) cho mỗi ma trận đủ điều kiện [2610.08659v1.pdf - Trang 9].\n  * Khôi phục cường độ/độ lớn của nó thông qua phương pháp khớp Frobenius (**Frobenius matching**) trước khi kết hợp (composing) với VLM nhận (recipient VLM) [2610.08659v1.pdf - Trang 9].\n  * Chuyển giao các thành phần này vào các mô-đun ngôn ngữ của VLM [2610.08659v1.pdf - Trang 1].\n\n---\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*"
+}

@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_19",
+  "type": "Factual Q&A",
+  "query": "Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính được trình bày trong bài báo 'A Novel Sentence Stress Detection Framework Leveraging Auxiliary Word-Stress Modeling and Loss Optimization' là gì?",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": false,
+  "retrieval_cold_ms": 1248.73,
+  "retrieval_warm_ms": 1233.77,
+  "llm_ms": 3652.99,
+  "e2e_cold_ms": 4901.72,
+  "e2e_warm_ms": 4886.76,
+  "provided_chunks": [
+    {
+      "id": "8afdbb9b-a5a4-4994-809b-36c9c0792394",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 21,
+      "content": "person\nperson / model\nHH / HA\nSem-Detect\nhuman reviews / model rewrite of a human review /\nmodel reviews\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA\nMELD\nhuman / model / six attacks\nperson / model /\nmodel\nperson / model /\nmodel\nHH / AA / AA\nattacked\nLAMP\nmodel draft / the draft after a professional’s edit\nmodel\nmodel\n/\nmodel,\nedited\nAA / not placed\nARB\nhuman / model rewrite of a human article (h2l) /\nmodel (free llm) / llm2l\nperson / person /\nmodel / model\nperson / model /\nmodel / model\nHH / HA / AA /\nAA attacked\nGEDE\nhuman essay / model improves or rewrites it\nperson\nperson / model\nHH / HA\nmodel essay from the assignment / DIPPER, rewrite\nattack\nmodel\nmodel\nAA / AA at-\ntacked\nmodel essay from the student’s summary\nmodel\n(GEDE’s\nown label)\nmodel\nAA, shown but\nnot averaged"
+    },
+    {
+      "id": "ab8856aa-a4cc-47f0-8a07-a2bc88770ebe",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 21,
+      "content": "manized)\nperson\nmodel\nHA\nAI-BP, AI-EP: model review from the paper (and hu-\nmanized)\nmodel\nmodel\nAA (attacked)\nAI-HI: model review from the reviewer’s notes\nmixed\nmodel\nmixed\nDetectRL-X\nhuman / model / attacked model text (English rows)\nperson / model /\nmodel\nperson / model /\nmodel\nHH / AA / AA\nattacked\nStoryScope\nhuman stories / stories by five models\nperson / model\nperson / model\nHH / AA\nDetectionAI\nhuman\nessays\n/\nmodel\nessays\n/\nhumanized\n(StealthGPT, 2026)\nperson / model /\nmodel\nperson / model /\nmodel\nHH / AA / AA\nattacked\nOpAI-Bench\nv0: the human draft / v1–v8: successive model edits\nperson\nperson / model\nHH / HA\nSem-Detect\nhuman reviews / model rewrite of a human review /\nmodel reviews\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA\nMELD\nhuman / model / six attacks"
+    },
+    {
+      "id": "b9ed282a-1446-49b3-972a-34b84e3b30e9",
+      "document_id": "3e24d639-a7fc-4ac3-9059-7460f82f85a4",
+      "filename": "2610.06778v1.pdf",
+      "page_number": 21,
+      "content": "HH / HA\nmodel essay from the assignment / DIPPER, rewrite\nattack\nmodel\nmodel\nAA / AA at-\ntacked\nmodel essay from the student’s summary\nmodel\n(GEDE’s\nown label)\nmodel\nAA, shown but\nnot averaged\nPerkins et al.\nmodel text under six evasion techniques\nmodel\nmodel\nAA attacked\nHART\nhuman / model rephrase of human text / model / hu-\nmanized\nperson / person /\nmodel / model\nperson / model /\nmodel / model\nHH / HA / AA /\nAA attacked\nmodel text rewritten by a person\nmodel\nmodel, edited\nnot placed\nEpoch author imitation\nthe author’s text / model, plain prompt\nperson / model\nperson / model\nHH / AA\nmodel imitating the author from five passages\nmixed\nmodel\nmixed\nCoCoNUTS\nhuman review / model polishes or translates it /\nmodel review\nperson / person /\nmodel\nperson / model /\nmodel\nHH / HA / AA"
+    },
+    {
+      "id": "9578a3d5-e492-46f1-a6ec-f697f372c3ca",
+      "document_id": "f3f6486b-31d0-45d3-8b64-db68742f12c7",
+      "filename": "2610.07626v1.pdf",
+      "page_number": 1,
+      "content": "A Novel Sentence Stress Detection Framework Leveraging Auxiliary\nWord-Stress Modeling and Loss Optimization\nTien-Hong Lo ID , Fong-Chun Tsai ID , Ting-An Hung, Yu-Hsuan Hsieh, Yao-Ting Sung ID , Berlin\nChen ID\nNational Taiwan Normal University, Taiwan\n{teinhonglo,berlin}@ntnu.edu.tw\nAbstract\nProsodic stress is a crucial aspect of automatic pronunciation\nassessment (APA), encompassing both sentence stress detection\n(SSD) and word stress detection (WSD). SSD highlights seman-\ntically salient words that shape discourse meaning, while WSD\nidentifies the primary stressed syllable within each word to en-\nsure lexical clarity. However, most prior work treats SSD and\nWSD as independent tasks, overlooking their shared reliance on\nprosodic cues such as pitch, duration, and intensity. To address"
+    },
+    {
+      "id": "d9dd4aa2-3287-4237-b377-ad61a9b0a448",
+      "document_id": "f3f6486b-31d0-45d3-8b64-db68742f12c7",
+      "filename": "2610.07626v1.pdf",
+      "page_number": 1,
+      "content": "To tackle the aforementioned challenge,\nwe propose\nSTRAW, a Sentence sTress detection (SSD) framework built\non a frozen Whisper backbone that augments token-level SSD\nwith a word-span stress Regularizer (WSR) and an Auxiliary\nphone-level Word stress detection (WSD) branch. Unlike pre-\nvious approaches that treat SSD and WSD in isolation, the\nproposed framework supports both tasks within a common\nfrozen-Whisper framework.\nExperiments on the TinyStress\n[14] benchmark dataset demonstrate improvements over strong\nbaselines. The main contributions of this work are summarized\nas follows:\n1. We present a unified framework for stress detection with sep-\narate task-specific branches for Sentence Stress Detection\n(SSD) and Word Stress Detection (WSD).\narXiv:2610.07626v1  [eess.AS]  6 Oct 2026"
+    }
+  ],
+  "answer": "## I. Mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận\n\nDựa trên tài liệu nghiên cứu được cung cấp, dưới đây là các nội dung chi tiết về mục tiêu nghiên cứu, giả thuyết khoa học và phương pháp luận chính của bài báo **\"A Novel Sentence Stress Detection Framework Leveraging Auxiliary Word-Stress Modeling and Loss Optimization\"**:\n\n### 1. Mục tiêu nghiên cứu\n* Mục tiêu chính của nghiên cứu là giải quyết hạn chế của các phương pháp trước đây vốn xem xét **Phát hiện trọng âm câu** (**Sentence Stress Detection** - **SSD**) và **Phát hiện trọng âm từ** (**Word Stress Detection** - **WSD**) như hai nhiệm vụ độc lập [2610.07626v1.pdf - Trang 1].\n* Đề xuất một khung công tác thống nhất (**unified framework**) mang tên **STRAW** (khung phát hiện trọng âm câu được xây dựng trên nền tảng **Whisper backbone** đóng băng, kết hợp bộ điều chuẩn trọng âm khoảng từ - **word-span stress Regularizer** - **WSR** và nhánh phụ phát hiện trọng âm từ ở cấp độ âm tố - **Auxiliary phone-level Word stress detection** - **WSD branch**) nhằm hỗ trợ cả hai nhiệm vụ SSD và WSD trong cùng một kiến trúc [2610.07626v1.pdf - Trang 1].\n\n### 2. Giả thuyết khoa học\n* Mặc dù **SSD** (làm nổi bật các từ có ý nghĩa quan trọng định hình ý nghĩa diễn ngôn) và **WSD** (xác định âm tiết được nhấn trọng âm chính trong mỗi từ để đảm bảo sự rõ ràng về mặt từ vựng) thường được xử lý tách biệt, nhưng thực tế chúng có **sự phụ thuộc chung vào các dấu hiệu ngữ điệu** (**prosodic cues**), bao gồm độ cao giọng nói (**pitch**), thời lượng (**duration**) và cường độ (**intensity**) [2610.07626v1.pdf - Trang 1]. \n* Bằng cách khai thác sự phụ thuộc chung này thông qua một mô hình kết hợp bổ trợ, hiệu suất nhận diện trọng âm sẽ được cải thiện so với các đường cơ sở mạnh (**strong baselines**) [2610.07626v1.pdf - Trang 1].\n\n### 3. Phương pháp luận chính\n* **Xây dựng khung công tác thống nhất (Unified Framework - STRAW):** Phát triển một hệ thống tích hợp dựa trên cốt lõi **frozen Whisper backbone** (trục xương sống Whisper đã được đóng băng trọng số) [2610.07626v1.pdf - Trang 1].\n* **Tích hợp các thành phần bổ trợ:** \n  * Bổ sung bộ điều chuẩn trọng âm khoảng từ (**word-span stress Regularizer** - **WSR**) nhằm tăng cường cho nhiệm vụ phát hiện trọng âm câu ở cấp độ token (**token-level SSD**) [2610.07626v1.pdf - Trang 1].\n  * Thiết lập một nhánh phụ phát hiện trọng âm từ ở cấp độ âm tố (**Auxiliary phone-level Word stress detection** - **WSD branch**) [2610.07626v1.pdf - Trang 1].\n* **Thực nghiệm đánh giá:** Tiến hành thực nghiệm kiểm chứng trên tập dữ liệu chuẩn **TinyStress** nhằm so sánh và chứng minh sự cải thiện hiệu suất so với các mô hình đường cơ sở (**strong baselines**) [2610.07626v1.pdf - Trang 1].\n\n---\n\n*Lưu ý: Đây là thông tin học thuật tham khảo từ tài liệu, không thay thế cho chẩn đoán y khoa chuyên môn.*\n\n**Danh mục Tài liệu tham khảo:**\n* [2610.07626v1.pdf - Trang 1]"
+}

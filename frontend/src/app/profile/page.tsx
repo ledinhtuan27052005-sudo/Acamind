@@ -17,6 +17,7 @@ import {
  Camera, Lock, Check, X, Eye, EyeOff, Key,
  GraduationCap, Stethoscope, HeartPulse, Building2, RefreshCw,
 } from 'lucide-react';
+import { AcademicDocumentRenderer, cleanMarkdownText } from '@/components/ui/AcademicDocumentRenderer';
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -860,7 +861,7 @@ export default function ProfilePage() {
  </div>
  <div className="flex items-start gap-2">
  <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-0.5 rounded-full shrink-0 mt-0.5">A</span>
- <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2">{h.answer}</p>
+ <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2">{cleanMarkdownText(h.answer)}</p>
  </div>
  <p className="text-[10px] text-slate-300 dark:text-slate-600 mt-2 text-right">{h.created_at?.slice(0, 16) ?? ''}</p>
  </div>
@@ -889,8 +890,8 @@ export default function ProfilePage() {
  </div>
  ) : (
  <div>
- <div className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed whitespace-pre-wrap bg-slate-50 dark:bg-slate-800/40 rounded-xl p-4 border border-slate-100 dark:border-slate-800 mb-3">
- {insight}
+ <div className="bg-slate-50 dark:bg-slate-800/40 rounded-xl p-4 border border-slate-100 dark:border-slate-800 mb-3">
+ <AcademicDocumentRenderer content={insight} />
  </div>
  <div className="p-3 bg-amber-50 dark:bg-amber-900/20 rounded-xl border border-amber-100 dark:border-amber-800/40">
  <p className="text-xs text-amber-600 dark:text-amber-400">

@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_42",
+  "type": "Literature Synthesis",
+  "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Balancing Memory Pathways: Analyzin | Slow Context, Fast Symptoms: Multis | Symphony for Text Generation: Bench",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 933.31,
+  "retrieval_warm_ms": 904.35,
+  "llm_ms": 1525.61,
+  "e2e_cold_ms": 2458.92,
+  "e2e_warm_ms": 2429.96,
+  "provided_chunks": [
+    {
+      "id": "b7d88b6a-3f51-47c3-bada-449e6c93c847",
+      "document_id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+      "filename": "2609.22935v2.pdf",
+      "page_number": 2,
+      "content": "psychopathology symptom networks. Network models often focus on symptom–symptom\ncoupling, but symptoms also unfold within slow context. Context can be understood as changing\nsymptom activation tendencies, but the feedback between the two is less often made explicit.\nSlow context can shape fast symptom activation, and sustained symptom activation can, in turn,\nfeed back into slow context. We formalize this coupling in a computational slow–fast model.\nSimulations show that contextual input can shift symptom activation without changing\nsymptom–symptom coupling. Perturbations to context can produce temporary symptom increases\nfollowed by recovery. Symptom-to-context feedback can slow recovery and, when stronger,"
+    },
+    {
+      "id": "39d108ad-e37a-4f80-8e9b-f9b41b7cb92d",
+      "document_id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+      "filename": "2609.22935v2.pdf",
+      "page_number": 12,
+      "content": "SLOW–FAST PSYCHOLOGICAL DYNAMICS\n12\nTable 1\nMain components of the slow–fast model.\nFast symptom layer\nComponent\nSymbol\nInterpretation\nSymptom state\nSi,t\nWhether symptom i is inactive or active at time t.\nBaseline activation\nτi\nBaseline log-odds of activation when symptom i receives no input\nfrom the rest of the network.\nSymptom coupling\nωi j\nPairwise coupling between symptoms i and j; an active symptom j\ncontributes ωij to symptom i’s local input.\nLocal input\nηi,t\nTotal input determining symptom i’s activation probability.\nSlow-context loading\nγi\nSensitivity of symptom i’s activation tendency to the slow contextual\nstate Pt.\nMean symptom\nactivation\nmt\nProportion of symptoms active at time t.\nRecent symptom\nactivation\n¯mt"
+    },
+    {
+      "id": "c6f4335b-9abe-4fd1-95dd-e02d4310266b",
+      "document_id": "785d9d25-1de9-4f62-a604-a413b7f21b73",
+      "filename": "2610.08161v1.pdf",
+      "page_number": 14,
+      "content": "B\nSymphony for Text Generation\nText Generation API endpoints\nSymphony exposes clinical text and document generation via\nseveral API endpoints spanning general LLM inference, clinical fact extraction (FactsR [Hansen et al.,\n2025]) and guided document synthesis, and working in tandem with Symphony for speech-to-text\n[Nix et al., 2026], Symphony for medical coding [Edin et al., 2026], and agentic orchestration of\nmulti-step clinical workflows. The guided document synthesis API accepts multiple forms of clinical\ncontext and return schema-controlled, structured clinical documents based on fully API-configurable\ntemplates. This modular architecture enables straightforward customization and orchestration of"
+    },
+    {
+      "id": "4153645c-eb0a-4def-8e5f-ed56861221f1",
+      "document_id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+      "filename": "2609.22935v2.pdf",
+      "page_number": 13,
+      "content": "same slow–fast process appears when the slow field is omitted from an estimated symptom\nnetwork.\nSimulation 1: Slow-context level\nSimulation 1 provides a reference case for the slow-to-fast pathway. It asks how a fixed\ncontextual level changes symptom activation when the fast symptom network itself is unchanged.\nBecause P enters each symptom’s local input through γiP, a shift in activation is expected from\nthe model definition. The purpose of this first simulation is therefore to establish the baseline\nslow-to-fast effect against which the dynamic simulations that follow can be interpreted.\nDesign. The fast layer contained N = 9 binary symptoms, corresponding to the nine\nsymptom items of the PHQ-9 (Kroenke et al., 2001). To isolate the effect of slow context on"
+    },
+    {
+      "id": "d854cdf5-414c-4615-b9be-209ef112691a",
+      "document_id": "9c0f2291-4241-4283-bd22-a41f134c104d",
+      "filename": "2609.22935v2.pdf",
+      "page_number": 35,
+      "content": "SLOW–FAST PSYCHOLOGICAL DYNAMICS\n35\nAppendix A\nTechnical details of the slow–fast model\nThis appendix provides technical details that complement the streamlined model description in\nthe main text. The main text focuses on the conceptual structure of the slow–fast system and the\nkey equations needed to interpret the simulations. Here we collect implementation details for the\nfast-layer update, the smoothed symptom signal, the slow-field update, and the acute perturbation\nused in the recovery simulations.\nFast-layer update dynamics\nAt each slow time step t, the slow contextual field Pt is held fixed while the fast symptom\nlayer is updated. The fast layer consists of N binary symptom states,\nSi,t ∈{0,1},\nwhere Si,t = 0 denotes an inactive symptom and Si,t = 1 denotes an active symptom."
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để tổng hợp đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ cả ba nghiên cứu được liệt kê trong câu hỏi (do các tài liệu ngữ cảnh chỉ chứa thông tin về hai nghiên cứu là *Slow Context, Fast Symptoms: Multis* và *Symphony for Text Generation*, hoàn toàn thiếu vắng tài liệu về *Balancing Memory Pathways*)."
+}

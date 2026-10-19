@@ -1,0 +1,55 @@
+{
+  "query_id": "REAL_Q_44",
+  "type": "Literature Synthesis",
+  "query": "Tổng hợp các đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ nhóm 3 nghiên cứu sau: Symphony for Text Generation: Bench | Recursive Game Creator: An Agentic  | WorldSonus: Bringing Sound to World",
+  "is_ooc": false,
+  "system": "BM25",
+  "gate_passed": true,
+  "gate_score": null,
+  "dcsr_skipped": null,
+  "gate_refused": false,
+  "llm_self_refused": true,
+  "retrieval_cold_ms": 819.66,
+  "retrieval_warm_ms": 852.99,
+  "llm_ms": 1691.8,
+  "e2e_cold_ms": 2511.46,
+  "e2e_warm_ms": 2544.79,
+  "provided_chunks": [
+    {
+      "id": "fdfd631e-34a5-49a3-abde-8cfc3586f8d5",
+      "document_id": "96d5f9a7-b2a8-4573-b8b5-febd35e9331e",
+      "filename": "2610.08621v1.pdf",
+      "page_number": 1,
+      "content": "RECURSIVE GAME CREATOR:\nAN AGENTIC PRODUCT-LEVEL\nEXPERIENCE-ORIENTED GAME HARNESS\nJiajun Chen1,2,3,†, Haoyu Wu1,2,†, Mingda Jia1,2,3,†, Xihui Liu1,2,3,∗\n1HKU MMLab\n2The University of Hong Kong\n3Shenzhen Loop Area Institute\nABSTRACT\nRecent game design agents have made substantial progress in generating playable games. However,\nprogram correctness does not ensure an enjoyable experience for players. We present Recursive\nGame Creator, an experience-oriented harness to advance agentic game development from rough\ngame prototypes into entertaining games. Recursive Game Creator organizes recursive development\naround four components: Designer, Builder, Player, and Reviewer. The Designer translates user"
+    },
+    {
+      "id": "c6f4335b-9abe-4fd1-95dd-e02d4310266b",
+      "document_id": "785d9d25-1de9-4f62-a604-a413b7f21b73",
+      "filename": "2610.08161v1.pdf",
+      "page_number": 14,
+      "content": "B\nSymphony for Text Generation\nText Generation API endpoints\nSymphony exposes clinical text and document generation via\nseveral API endpoints spanning general LLM inference, clinical fact extraction (FactsR [Hansen et al.,\n2025]) and guided document synthesis, and working in tandem with Symphony for speech-to-text\n[Nix et al., 2026], Symphony for medical coding [Edin et al., 2026], and agentic orchestration of\nmulti-step clinical workflows. The guided document synthesis API accepts multiple forms of clinical\ncontext and return schema-controlled, structured clinical documents based on fully API-configurable\ntemplates. This modular architecture enables straightforward customization and orchestration of"
+    },
+    {
+      "id": "46a908a2-faa5-47cd-aed8-aeb4bc81e973",
+      "document_id": "cf261ad1-c41e-486a-b117-4700827b065e",
+      "filename": "2610.08327v1.pdf",
+      "page_number": 2,
+      "content": "(a) Traditional methods\n(c) Our method: challenge, reason, and accumulate\nExpert annotations are \nexpensive!\nDepends heavily on\n1) Internal knowledge of agents\n2) Easy-to-verify reward (math/code)\n(b) Current self-evolving agents \nMedical \nData\nMedical\nExperts\nDatabase in hospital\nQAs\nSFT, RL…\nTraining\nAgent\nMedical Agent\nGenerator\nAgent\nIteration 1\nQuestions\nSolver\nAgent\nIteration 2\nTrain \nwith RL\nEvaluate & train\nMultiple\niterations\nGenerate\nTrain with RL\nExaminer\nAgent\nReasoner\nAgent\nMedical\nKnowledge Graph\nWeb\nSearch\nGenerate\nExternal Knowledge\nQuestions\nInteraction\nReliable \nupdate\nSolver\nAgent\nIteration 1\nGenerator\nAgent\nIteration 2\nQuestions\nTrain \nwith RL\nGenerate\n…\nExaminer\nAgent\nReasoner\nAgent\nKnowledge \naccumulation\nMultiple\niterations\n…\nOpen-ended Medical Reasoning"
+    },
+    {
+      "id": "563628d5-9cd4-47b0-a7e3-28857af83ae6",
+      "document_id": "5a1c0eef-3e0b-420d-b8ae-eaee041efca3",
+      "filename": "2609.38819v1.pdf",
+      "page_number": 6,
+      "content": "future video generation is 0.222, the shared contribution is 0.111, and the unique contribution of\nthe observed video is −0.006 (Figure 2c). The unique contribution of future video generation is\nabove the unique contribution of the observed video in every division (p = 0.002, Appendix A.9).\nOnly in Primary Visual does the shared contribution, 0.151, exceed the unique contribution of future\nvideo generation, 0.089. In every other division the unique contribution of future video generation\nexceeds both the unique contribution of the observed video and the shared contribution. The shared\ncontribution and the unique contribution of future video generation are 0.142 and 0.175 in Early\n6"
+    },
+    {
+      "id": "1ca6ef59-e24d-4158-bd57-9b6a1fe96b27",
+      "document_id": "6a1311c5-0ebe-42c3-b09a-235347b785d6",
+      "filename": "2610.07132v1.pdf",
+      "page_number": 15,
+      "content": "Table 3: Overview of the 30 metadata fields in the Croissant 1.1 schema (10 core + 20 RAI). Coverage\nshows the percentage of datasets where each field has a non-null value in the human gold (N=102)\nand in the silver extraction (N=500).\nField\nType\nMetric\nDefinition\nGold\nSilver\nname\nCore\nConstrained\nDataset name\n100%\n100%\ndescription\nCore\nShort-text\nBrief dataset description\n100%\n100%\nurl\nCore\nConstrained\nAccess URL\n96%\n86%\nlicense\nCore\nConstrained\nDistribution license\n24%\n19%\ncreator\nCore\nShort-text\nDataset creator(s)\n100%\n100%\npublisher\nCore\nConstrained\nPublishing venue/org\n80%\n74%\ndatePublished\nCore\nConstrained\nPublication date\n100%\n89%\ninLanguage\nCore\nConstrained\nContent language(s)\n81%\n93%\nciteAs\nCore\nShort-text\nCitation format\n99%\n61%\nisLiveDataset\nCore\nConstrained\nActively updated?"
+    }
+  ],
+  "answer": "__NO_CONTEXT__ Không tìm thấy thông tin phù hợp trong các tài liệu đã đăng tải để tổng hợp đóng góp cốt lõi và khuyến nghị lâm sàng/thực hành từ đủ ba nghiên cứu được yêu cầu (Symphony for Text Generation, Recursive Game Creator, và WorldSonus)."
+}
