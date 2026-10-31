@@ -192,7 +192,7 @@ export default function RegisterPage() {
       await authRegister(form.email, form.password, form.full_name, otp);
       const res = await authLogin(form.email, form.password);
       setAuth(res.user, res.access_token);
-      if (form.phone && typeof window !== 'undefined') localStorage.setItem('user_phone', form.phone);
+      if (form.phone && typeof window !== 'undefined') sessionStorage.setItem('user_phone', form.phone);
       router.push('/');
     } catch (err: unknown) {
       const errWithResponse = err as { response?: { data?: { detail?: string } } };

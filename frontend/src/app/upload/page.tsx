@@ -11,13 +11,14 @@ import { useAppStore } from '@/store/useAppStore';
 import { uploadDocument, getDocuments, getCategories, getMyPlanUsage, DocumentInfo, DbCategory, PlanUsage } from '@/lib/api';
 import { useI18n } from '@/lib/i18n/context';
 import { GuestBlockScreen } from '@/components/auth/AuthRequiredModal';
+import { ProcessingPanel } from '@/components/ProcessingPanel';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 interface QueueItem {
  id: string;
  file: File;
- status: 'pending' | 'uploading' | 'processing' | 'ready' | 'error';
+ status: 'pending' | 'uploading' | 'processing' | 'ready' | 'error' | 'cancel_requested' | 'cancelled';
  documentId?: string;
  error?: string;
  category?: string;
@@ -60,16 +61,10 @@ export default function UploadPage() {
  const fileInputRef = useRef<HTMLInputElement>(null);
  const pollRef = useRef<ReturnType<typeof setInterval> | null>(null);
  const mountedRef = useRef(true);
+ const queueRef = useRef<QueueItem[]>(queue);
+ queueRef.current = queue;
 
- // ── Auth guard ─────────────────────────────────────────────────────────────
- useEffect(() => {
- // Wait for user to load before checking permissions
- if (user === undefined) return; // Still loading, wait
- if (user === null) return; // Not logged in, may show login prompt
- if (user.role !== 'admin' && user.role !== 'researcher') {
- router.replace('/library');
- }
- }, [user]);
+ // ── Auth guard (unlocked so all users can upload) ──────────────────────────
 
  // ── Load categories & recent docs ──────────────────────────────────────────
  useEffect(() => {
@@ -86,40 +81,47 @@ export default function UploadPage() {
  const loadRecentDocs = async () => {
  try {
  const docs = await getDocuments();
- if (mountedRef.current) setRecentDocs(docs.filter(d => d.is_owner).slice(0, 5));
+ if (mountedRef.current) setRecentDocs(docs.slice(0, 5));
  } catch { /* silent */ }
  };
 
  // ── Poll processing items ──────────────────────────────────────────────────
  const startPolling = useCallback(() => {
  if (pollRef.current) return;
+ let isPolling = false;
  pollRef.current = setInterval(async () => {
- const processing = queue.filter(q => q.status === 'processing');
+ if (isPolling) return;
+ const processing = queueRef.current.filter(q => q.status === 'processing' || q.status === 'cancel_requested');
  if (processing.length === 0) {
- clearInterval(pollRef.current!);
+ if (pollRef.current) clearInterval(pollRef.current);
  pollRef.current = null;
  return;
  }
+ isPolling = true;
  try {
  const docs = await getDocuments();
  if (!mountedRef.current) return;
+ const docMap = new Map(docs.map(d => [d.id, d]));
  setQueue(prev => prev.map(item => {
- if (item.status !== 'processing' || !item.documentId) return item;
- const doc = docs.find(d => d.id === item.documentId);
+ if (!['processing', 'cancel_requested'].includes(item.status) || !item.documentId) return item;
+ const doc = docMap.get(item.documentId);
  if (!doc) return item;
  if (doc.status === 'ready') return { ...item, status: 'ready' };
  if (doc.status === 'error') return { ...item, status: 'error', error: 'Pipeline error' };
+ if (doc.status === 'cancelled' || doc.status === 'cancel_requested') return { ...item, status: doc.status };
  return item;
  }));
- setRecentDocs(docs.filter(d => d.is_owner).slice(0, 5));
- } catch { /* silent */ }
- }, 3000);
- }, [queue]);
+ setRecentDocs(docs.slice(0, 5));
+ } catch { /* silent */ } finally {
+ isPolling = false;
+ }
+ }, 4000);
+ }, []);
 
  useEffect(() => {
- const hasProcessing = queue.some(q => q.status === 'processing');
+ const hasProcessing = queue.some(q => q.status === 'processing' || q.status === 'cancel_requested');
  if (hasProcessing) startPolling();
- }, [queue]);
+ }, [queue, startPolling]);
 
  // ── File handling ──────────────────────────────────────────────────────────
 
@@ -135,7 +137,7 @@ export default function UploadPage() {
  }));
  setQueue(prev => [...prev, ...newItems]);
  // Upload up to 3 files in parallel for speed
- const CONCURRENCY = 3;
+ const CONCURRENCY = 2;
  let idx = 0;
  const next = () => {
  if (idx >= newItems.length) return;
@@ -147,18 +149,22 @@ export default function UploadPage() {
 
  const processItem = async (item: QueueItem) => {
  setQueue(prev => prev.map(q => q.id === item.id ? { ...q, status: 'uploading', progress: 0 } : q));
+ let lastReportedPct = 0;
  try {
  const result = await uploadDocument(
  item.file,
  item.category || null,
  (loaded, total) => {
  const pct = total > 0 ? Math.round((loaded / total) * 100) : 0;
+ if (pct === 100 || pct - lastReportedPct >= 10) {
+ lastReportedPct = pct;
  setQueue(prev => prev.map(q => q.id === item.id ? { ...q, progress: pct } : q));
+ }
  },
  );
  setQueue(prev => prev.map(q =>
  q.id === item.id
- ? { ...q, status: 'processing', documentId: result.document_id, progress: 100 }
+ ? { ...q, status: (result.status === 'ready' ? 'ready' : 'processing'), documentId: result.document_id, progress: 100 }
  : q,
  ));
  } catch (err: unknown) {
@@ -201,16 +207,7 @@ export default function UploadPage() {
  );
  }
 
-  if (!user) {
-    return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 flex items-center justify-center p-4">
-        <GuestBlockScreen
-          title="Yêu cầu đăng nhập để tải lên tài liệu"
-          description="Bạn cần đăng nhập tài khoản Nhà nghiên cứu hoặc Quản trị viên để đóng góp tài liệu vào thư viện Acamind."
-        />
-      </div>
-    );
-  }
+
 
  const stats = {
  total: queue.length,
@@ -355,6 +352,8 @@ export default function UploadPage() {
    processing: { label: t.upload.processing_lbl, icon: Loader2, color: 'text-amber-500', spin: true },
    ready: { label: t.upload.completed_lbl, icon: CheckCircle, color: 'text-emerald-500' },
    error: { label: t.upload.error_lbl, icon: XCircle, color: 'text-red-500' },
+   cancel_requested: { label: 'Đang chờ hủy', icon: Clock, color: 'text-amber-500' },
+   cancelled: { label: 'Đã hủy', icon: XCircle, color: 'text-slate-500' },
  }[item.status];
  const Icon = cfg.icon;
  return (
@@ -391,23 +390,24 @@ export default function UploadPage() {
  />
  </div>
  )}
+ {item.documentId && <ProcessingPanel documentId={item.documentId} onStatus={status => {
+   if (['processing', 'ready', 'error', 'cancel_requested', 'cancelled'].includes(status)) {
+     setQueue(prev => prev.map(q => q.id === item.id ? { ...q, status: status as QueueItem['status'], error: undefined } : q));
+   }
+ }} />}
  </div>
 
   {/* Status */}
   <div className={`flex items-center gap-1.5 text-xs font-medium shrink-0 ${cfg.color}`}>
     <Icon className={`w-4 h-4 ${'spin' in cfg && cfg.spin ? 'animate-spin' : ''}`} />
     <span className="hidden sm:block">
-      {item.status === 'pending' ? t.upload.pending_lbl :
-       item.status === 'uploading' ? t.upload.uploading_lbl :
-       item.status === 'processing' ? t.upload.processing_lbl :
-       item.status === 'ready' ? t.upload.completed_lbl :
-       t.upload.error_lbl}
+      {cfg.label}
     </span>
   </div>
 
  {/* Actions */}
  <div className="flex items-center gap-1 shrink-0">
- {item.status === 'error' && (
+ {item.status === 'error' && !item.documentId && (
  <button
  onClick={() => retryItem(item)}
  className="text-xs text-blue-500 hover:text-blue-700 px-2 py-1 rounded hover:bg-indigo-50 dark:hover:bg-indigo-900/20 dark:hover:bg-indigo-900/20 dark:hover:bg-indigo-900/20 dark:hover:bg-blue-900/20 transition-colors"
@@ -415,7 +415,7 @@ export default function UploadPage() {
  Retry
  </button>
  )}
- {(item.status === 'ready' || item.status === 'error' || item.status === 'pending') && (
+ {(item.status === 'ready' || item.status === 'error' || item.status === 'cancelled') && (
  <button
  onClick={() => removeItem(item.id)}
  className="w-6 h-6 flex items-center justify-center text-slate-400 dark:text-slate-500 dark:hover:text-gray-300 hover:bg-slate-200 dark:hover:bg-slate-700 dark:hover:bg-gray-800 rounded transition-colors"
@@ -471,6 +471,7 @@ export default function UploadPage() {
  <p className="text-xs font-medium text-slate-700 dark:text-slate-200 truncate">
  {doc.title || doc.filename}
  </p>
+ {(doc.user_id === user?.id || user?.role === 'admin') && doc.status !== 'ready' && <ProcessingPanel documentId={doc.id} />}
  <div className="flex items-center gap-1.5 mt-0.5">
             <span className={`text-[10px] font-medium px-1.5 py-0.5 rounded-full ${
               doc.status === 'ready'

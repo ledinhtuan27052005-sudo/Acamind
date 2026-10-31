@@ -81,28 +81,8 @@ def _doc_to_article(doc: Document, user: Optional[User]) -> dict:
 
 def _query_ready_docs(db: Session, user: Optional[User]):
     """Lấy danh sách documents mà user có quyền xem (sẵn sàng + công khai/owner)."""
-    from app.models.document import User as UserModel
-    from sqlalchemy.orm import aliased
-
-    UploaderAlias = aliased(UserModel)
-    base = db.query(Document).outerjoin(UploaderAlias, Document.user_id == UploaderAlias.id)
-
-    if user and user.role == "admin":
-        return base
-    if user:
-        return base.filter(
-            or_(
-                Document.user_id == user.id,
-                Document.user_id == None,
-                UploaderAlias.role.in_(["admin", "researcher"]),
-            )
-        )
-    return base.filter(
-        or_(
-            Document.user_id == None,
-            UploaderAlias.role.in_(["admin", "researcher"]),
-        )
-    )
+    from app.core.document_access import visible_documents
+    return visible_documents(db.query(Document), user)
 
 
 # ── Public endpoints ──────────────────────────────────────────────────────────
@@ -139,6 +119,8 @@ def get_article(
     doc = db.query(Document).filter(Document.id == article_id).first()
     if not doc:
         raise HTTPException(404, "Không tìm thấy tài liệu")
+    from app.core.document_access import enforce_document_read
+    enforce_document_read(doc, user, db)
     return _doc_to_article(doc, user)
 
 
@@ -152,6 +134,8 @@ def get_article_pdf(
     doc = db.query(Document).filter(Document.id == article_id).first()
     if not doc:
         raise HTTPException(404, "Không tìm thấy tài liệu")
+    from app.core.document_access import enforce_document_read
+    enforce_document_read(doc, user, db)
     if not doc.file_path or not os.path.exists(doc.file_path):
         raise HTTPException(404, "File PDF không tồn tại trên server")
     # Check paywall
@@ -255,9 +239,10 @@ def _slug(name: str) -> str:
 def list_authors(
     search: Optional[str] = Query(None),
     db:     Session = Depends(get_db),
+    user: Optional[User] = Depends(get_optional_user),
 ):
     """Danh sách tác giả tổng hợp từ documents."""
-    docs = _query_ready_docs(db, None).filter(Document.status == "ready").all()
+    docs = _query_ready_docs(db, user).filter(Document.status == "ready").all()
 
     author_map: dict = defaultdict(list)
     for doc in docs:
@@ -335,6 +320,9 @@ def analyze_articles(
         raise HTTPException(400, "Maximum 8 documents per analysis")
 
     docs = db.query(Document).filter(Document.id.in_(body.article_ids)).all()
+    from app.core.document_access import enforce_document_read
+    for doc in docs:
+        enforce_document_read(doc, user, db)
     if len(docs) < 2:
         raise HTTPException(404, "Could not find enough requested documents")
 

@@ -7,9 +7,6 @@
    Psychology-Inspired Design for Academic Research Platform
    ═══════════════════════════════════════════════════════════════════════ */
 
-/* ── Google Fonts Import ─────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
-
 /* ── CSS Variables - Light Mode ─────────────────────────────────── */
 :root {
   /* ── Neural Harmony Colors ─────────────────────────────────────── */
@@ -96,9 +93,9 @@
   --glow-cortex: 0 0 20px rgba(124, 58, 237, 0.3), 0 0 40px rgba(124, 58, 237, 0.15);
 
   /* ── Typography ──────────────────────────────────────────────── */
-  --font-display: 'Manrope', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-display: 'Manrope', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', monospace;
 }
 
 /* ── Dark Mode ───────────────────────────────────────────────────── */

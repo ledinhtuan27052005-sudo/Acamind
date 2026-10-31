@@ -1,25 +1,13 @@
 import type { Metadata } from 'next';
-import { Inter, Manrope } from 'next/font/google';
 import './globals.css';
 import 'katex/dist/katex.min.css';
 import ClientLayout from '@/components/ClientLayout';
 import { I18nProvider } from '@/lib/i18n/context';
 
-const inter = Inter({
- subsets: ['latin', 'vietnamese'],
- variable: '--font-inter',
- display: 'swap',
-});
-
-const manrope = Manrope({
- subsets: ['latin'],
- variable: '--font-manrope',
- display: 'swap',
-});
-
 export const metadata: Metadata = {
  title: 'Acamind',
  description: 'Intelligent Academic Q&A System',
+ icons: { icon: '/Logo.jpeg' },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -43,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
  }}
  />
  </head>
- <body className={`${inter.variable} ${manrope.variable} font-[family-name:var(--font-inter)]`}>
+ <body className="font-sans">
  <I18nProvider>
  <ClientLayout>{children}</ClientLayout>
  </I18nProvider>

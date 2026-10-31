@@ -23,6 +23,7 @@ import {
   getDocuments,
   getCategories,
   uploadDocument,
+  uploadMultipleDocuments,
   deleteDocument,
   summarizeDocument,
   updateDocumentCategory,
@@ -276,7 +277,7 @@ function DocumentCard({
 export default function LibraryPage() {
   const { user } = useAppStore();
   const { t } = useI18n();
-  const canUpload = user?.role === 'admin' || user?.role === 'researcher';
+  const canUpload = true;
   const isAdmin = user?.role === 'admin';
 
   const [documents, setDocuments] = useState<DocumentInfo[]>([]);
@@ -311,46 +312,116 @@ export default function LibraryPage() {
     };
   }, [fetchDocs]);
 
-  // ── Upload Handlers ──────────────────────────────────────────────────
+  // ── Upload Handlers (Multi-file Batch Upload) ────────────────────────
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!user) {
-      setShowAuthModal(true);
-      if (e.target) e.target.value = '';
+    const selectedFiles = Array.from(e.target.files || []);
+    if (selectedFiles.length === 0) return;
+
+    const pdfFiles = selectedFiles.filter(
+      (f) => f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf')
+    );
+    if (pdfFiles.length === 0) {
+      setMessage({ text: t.library.pdf_only, type: 'error' });
+      if (fileInputRef.current) fileInputRef.current.value = '';
       return;
     }
-    const file = e.target.files?.[0];
-    if (!file) return;
-    if (file.size > 50 * 1024 * 1024) {
+
+    const validFiles = pdfFiles.filter((f) => f.size <= 50 * 1024 * 1024);
+    if (validFiles.length === 0) {
       setMessage({ text: t.library.file_too_large, type: 'error' });
+      if (fileInputRef.current) fileInputRef.current.value = '';
       return;
     }
-    await performUpload(file);
+
+    await performUpload(validFiles);
   };
 
-  const performUpload = async (file: File) => {
+  const performUpload = async (files: File[]) => {
+    if (files.length === 0) return;
     setUploading(true);
-    setMessage({ text: t.library.uploading, type: 'info' });
+    setMessage({
+      text: files.length === 1
+        ? t.library.uploading
+        : `Đang tải lên ${files.length} tài liệu PDF...`,
+      type: 'info',
+    });
 
     try {
-      const result = await uploadDocument(file);
-      setMessage({ text: `${t.library.processing_id}${result.document_id.slice(0, 8)}...`, type: 'info' });
-      await fetchDocs();
-
-      pollRef.current = setInterval(async () => {
-        const updated = await getDocuments();
-        setDocuments(updated);
-        const doc = updated.find((d) => d.id === result.document_id);
-        if (doc?.status === 'ready') {
-          setMessage({ text: t.library.upload_success, type: 'success' });
-          setUploading(false);
-          clearInterval(pollRef.current!);
-        } else if (doc?.status === 'error') {
-          setMessage({ text: t.library.processing_error, type: 'error' });
-          setUploading(false);
-          clearInterval(pollRef.current!);
+      const batchResult = await uploadMultipleDocuments(files, null, (loaded, total) => {
+        if (files.length > 1 && total > 0) {
+          const pct = Math.min(100, Math.round((loaded / total) * 100));
+          setMessage({
+            text: `Đang tải lên ${files.length} tài liệu PDF (${pct}%)...`,
+            type: 'info',
+          });
         }
-      }, 3000);
+      });
+      const uploadedDocs = batchResult.documents || [];
+      const trackedIds = uploadedDocs.map((d) => d.document_id).filter(Boolean);
+      const trackedSet = new Set(trackedIds);
+
+      await fetchDocs();
+      // Mở khóa nút upload ngay sau khi gửi file xong để người dùng có thể thao tác tiếp
+      setUploading(false);
+
+      if (trackedIds.length === 0) {
+        setMessage({ text: batchResult.message || t.library.upload_error, type: 'error' });
+        return;
+      }
+
+      setMessage({
+        text: trackedIds.length === 1
+          ? `${t.library.processing_id}${trackedIds[0].slice(0, 8)}...`
+          : `Đã tải lên ${trackedIds.length} tài liệu. Hệ thống đang xử lý nền...`,
+        type: 'info',
+      });
+
+      if (pollRef.current) clearInterval(pollRef.current);
+      let isPolling = false;
+      pollRef.current = setInterval(async () => {
+        if (isPolling) return;
+        isPolling = true;
+        try {
+          const updated = await getDocuments();
+          setDocuments(updated);
+          const tracked = updated.filter((d) => trackedSet.has(d.id));
+          const readyCount = tracked.filter((d) => d.status === 'ready').length;
+          const errorCount = tracked.filter((d) => d.status === 'error').length;
+          const doneCount = readyCount + errorCount;
+
+          if (doneCount < trackedIds.length) {
+            setMessage({
+              text: `Đang xử lý hoàn tất ${doneCount}/${trackedIds.length} tài liệu...`,
+              type: 'info',
+            });
+          } else {
+            if (errorCount === 0) {
+              setMessage({
+                text: trackedIds.length === 1
+                  ? t.library.upload_success
+                  : `✓ Đã xử lý thành công toàn bộ ${readyCount}/${trackedIds.length} tài liệu!`,
+                type: 'success',
+              });
+            } else if (readyCount > 0) {
+              setMessage({
+                text: `Hoàn tất ${readyCount}/${trackedIds.length} tài liệu (${errorCount} tài liệu lỗi xử lý).`,
+                type: 'info',
+              });
+            } else {
+              setMessage({ text: t.library.processing_error, type: 'error' });
+            }
+            if (pollRef.current) {
+              clearInterval(pollRef.current);
+              pollRef.current = null;
+            }
+          }
+        } catch {
+          // Bỏ qua lỗi mạng/timeout tạm thời khi đang xử lý lô lớn, tránh Unhandled Runtime Error
+        } finally {
+          isPolling = false;
+        }
+      }, 4000);
     } catch (err: unknown) {
       const errWithResponse = err as { response?: { data?: { detail?: string } } };
       const detail = errWithResponse?.response?.data?.detail;
@@ -360,7 +431,7 @@ export default function LibraryPage() {
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
-  // Drag and drop
+  // Drag and drop (hỗ trợ kéo thả nhiều file PDF cùng lúc)
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragOver(true);
@@ -373,13 +444,13 @@ export default function LibraryPage() {
   const handleDrop = async (e: React.DragEvent) => {
     e.preventDefault();
     setIsDragOver(false);
-    if (!user) {
-      setShowAuthModal(true);
-      return;
-    }
-    const file = e.dataTransfer.files[0];
-    if (file && file.type === 'application/pdf') {
-      await performUpload(file);
+
+    const droppedFiles = Array.from(e.dataTransfer.files || []);
+    const pdfFiles = droppedFiles.filter(
+      (f) => f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf')
+    );
+    if (pdfFiles.length > 0) {
+      await performUpload(pdfFiles);
     } else {
       setMessage({ text: t.library.pdf_only, type: 'error' });
     }
@@ -398,10 +469,7 @@ export default function LibraryPage() {
   };
 
   const handleSummarize = async (id: string) => {
-    if (!user) {
-      setShowAuthModal(true);
-      return;
-    }
+
     setLoadingSummary(id);
     try {
       const summary = await summarizeDocument(id);
@@ -559,6 +627,7 @@ export default function LibraryPage() {
               ref={fileInputRef}
               type="file"
               accept=".pdf"
+              multiple
               className="hidden"
               onChange={handleUpload}
               disabled={uploading}

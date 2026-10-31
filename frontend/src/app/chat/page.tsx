@@ -15,11 +15,11 @@ import { useRouter } from 'next/navigation';
 import {
   Send, Square, Brain, Globe, Trash2, Zap,
   MessageSquare, Clock, Plus, X, User, Sparkles, Paperclip, FileText, Lock,
-  Copy, Check, Download, Printer, Quote, BookOpen, ChevronRight, Table,
+  Copy, Check, Quote, BookOpen, ChevronRight, Table,
   Activity, ShieldCheck, Award, ChevronDown, ChevronUp, Code, Eye, ExternalLink,
 } from 'lucide-react';
 import { SideBySidePdfViewer } from '@/components/ui/SideBySidePdfViewer';
-import { AuthRequiredModal, AuthRequiredBanner } from '@/components/auth/AuthRequiredModal';
+import { AuthRequiredModal } from '@/components/auth/AuthRequiredModal';
 import { KatexMath } from '@/components/ui/KatexMath';
 import { FigureViewer } from '@/components/ui/FigureViewer';
 import { MermaidRenderer } from '@/components/ui/MermaidRenderer';
@@ -47,6 +47,11 @@ interface ChatFile {
   type: string;
   url: string;
   size?: number;
+}
+
+function chatSessionStorageKey(): string {
+  const userId = useAppStore.getState().user?.id;
+  return userId ? `chat.sessions.user.${userId}` : 'chat.sessions.guest';
 }
 
 /* ── Chat Session Sidebar ─────────────────────────────────────────────── */
@@ -932,7 +937,10 @@ function renderRichText({
 
         // 5. Trích xuất câu hoặc mệnh đề hoàn chỉnh trong đoạn văn
         if (!contextSnippet) {
-          const cleanBefore = textBefore.replace(/\[[^\]]+\]/g, '').replace(/[\*\_]/g, '').trim();
+          const cleanBefore = textBefore
+            .replace(/\[[^\[\]]*?(?:Trang|Page|Sheet|tr\.?|p\.?|pp\.?)\s*\d+[^\[\]]*?\]/gi, '')
+            .replace(/[\*\_]/g, '')
+            .trim();
           const sentences = cleanBefore.split(/(?<=[.!?\n])\s+/);
           let candidate = sentences[sentences.length - 1] || cleanBefore;
           if (sentences.length >= 2 && candidate.length < 25) {
@@ -945,16 +953,20 @@ function renderRichText({
           contextSnippet = candidate;
         }
 
-        // Dọn dẹp sạch sẽ các ký tự markdown bao bọc
+        // Dọn dẹp sạch sẽ các ký tự markdown bao bọc (giữ lại khoảng tin cậy thống kê như [0.22, 0.45])
         contextSnippet = contextSnippet
-          .replace(/\[[^\]]+\]/g, '')
+          .replace(/\[[^\[\]]*?(?:Trang|Page|Sheet|tr\.?|p\.?|pp\.?)\s*\d+[^\[\]]*?\]/gi, '')
           .replace(/[\*\_`]/g, '')
           .replace(/^[“"'«\s]+|[”"'»\s]+$/g, '')
           .trim();
       }
 
-      if (!contextSnippet) {
-        contextSnippet = text.replace(/\[[^\]]+\]/g, '').replace(/[\*\_`]/g, '').trim().slice(0, 180);
+      if (!contextSnippet && textBefore.trim().length > 0) {
+        contextSnippet = text
+          .replace(/\[[^\[\]]*?(?:Trang|Page|Sheet|tr\.?|p\.?|pp\.?)\s*\d+[^\[\]]*?\]/gi, '')
+          .replace(/[\*\_`]/g, '')
+          .trim()
+          .slice(0, 180);
       }
 
       subItems.forEach((sub, subIdx) => {
@@ -981,7 +993,7 @@ function renderRichText({
         } else if (pageMatch) {
           const rawFilename = pageMatch[1].trim();
           const pageNum = parseInt(pageMatch[2], 10);
-          const shortName = rawFilename.length > 22 ? rawFilename.slice(0, 19) + '…' : rawFilename;
+          const shortName = rawFilename.length > 40 ? rawFilename.slice(0, 37) + '…' : rawFilename;
 
           citationButtons.push(
             <button
@@ -989,10 +1001,10 @@ function renderRichText({
               type="button"
               onClick={() => onCitationClick?.(rawFilename, pageNum, contextSnippet)}
               className="inline-flex items-center gap-1.5 px-2 py-0.5 mx-1 my-0.5 rounded-md text-[11.5px] font-medium bg-slate-100 hover:bg-teal-50 dark:bg-slate-800/90 dark:hover:bg-teal-950/70 text-slate-700 hover:text-teal-700 dark:text-slate-200 dark:hover:text-teal-300 border border-slate-300/80 hover:border-teal-400 dark:border-slate-700 dark:hover:border-teal-600 transition-all hover:scale-105 active:scale-95 group shadow-2xs cursor-pointer select-none"
-              title={`Nhấn để mở đối chiếu "${rawFilename}" tại trang ${pageNum} bên cạnh (Tự động bôi vàng đoạn trích)`}
+              title={`Nhấn để mở "${rawFilename}" tại trang ${pageNum}`}
             >
               <FileText size={11} className="text-teal-600 dark:text-teal-400 shrink-0 group-hover:rotate-6 transition-transform" />
-              <span className="font-semibold truncate max-w-[140px]">{shortName}</span>
+              <span className="font-semibold break-all text-left">{shortName}</span>
               <span className="bg-slate-200/90 dark:bg-slate-700/90 group-hover:bg-teal-200/70 dark:group-hover:bg-teal-800/70 px-1.5 py-0.2 rounded text-[10px] font-mono font-bold text-slate-800 dark:text-slate-200 group-hover:text-teal-900 dark:group-hover:text-teal-200 transition-colors">
                 Trang {pageNum}
               </span>
@@ -1208,8 +1220,8 @@ function AiMessage({
   onCitationClick?: (filename: string, page: number, snippet?: string) => void;
   onInjectPrompt?: (promptText: string) => void;
 }) {
+  const legacyFeaturesEnabled = () => process.env.NEXT_PUBLIC_SHOW_TELEMETRY === '1';
   const router = useRouter();
-  const [copied, setCopied] = useState(false);
   const [showTelemetryDetail, setShowTelemetryDetail] = useState(false);
   const [copiedApaId, setCopiedApaId] = useState<string | null>(null);
   const [copiedBibId, setCopiedBibId] = useState<string | null>(null);
@@ -1226,6 +1238,98 @@ function AiMessage({
 
   const tel = telemetryPayload?.telemetry;
   const sourcesMeta = telemetryPayload?.sources || [];
+  const evidenceTargets = telemetryPayload?.evidence_targets || [];
+
+  // Resolve the best verbatim PDF excerpt for a given (filename, page) from telemetry
+  const resolvePageExcerpt = (filename: string, page: number): string | undefined => {
+    const cleanTarget = filename.trim().toLowerCase();
+    for (const src of sourcesMeta) {
+      if (src.filename.trim().toLowerCase() === cleanTarget || src.filename.toLowerCase().includes(cleanTarget) || cleanTarget.includes(src.filename.toLowerCase())) {
+        const exc = src.page_excerpts?.[String(page)];
+        if (exc && exc.trim().length > 15) return exc.trim();
+      }
+    }
+    for (const target of evidenceTargets) {
+      for (const item of target.evidence || []) {
+        if (item.page === page && (item.filename.trim().toLowerCase() === cleanTarget || item.filename.toLowerCase().includes(cleanTarget))) {
+          if (item.excerpt && item.excerpt.trim().length > 15) return item.excerpt.trim();
+        }
+      }
+    }
+    return undefined;
+  };
+
+  const handleSmartCitationClick = (filename: string, page: number, contextSnippet?: string) => {
+    let effectiveSnippet = contextSnippet?.trim() || '';
+    const isPaperTitle = effectiveSnippet && sourcesMeta.some(
+      (s) => s.title && effectiveSnippet.toLowerCase().includes(s.title.trim().toLowerCase().slice(0, 28))
+    );
+    if ((!effectiveSnippet || isPaperTitle) && content) {
+      const bodyOnly = content.split(/#{1,3}\s*(?:Tài liệu tham khảo|References|Nguồn trích dẫn)/i)[0] || content;
+      const cleanName = filename.trim().toLowerCase();
+      const bodyLines = bodyOnly.split('\n');
+      for (let idx = 0; idx < bodyLines.length; idx++) {
+        const line = bodyLines[idx];
+        if (
+          line.toLowerCase().includes(cleanName) &&
+          new RegExp(`(?:Trang|Page|tr\\.?|p\\.?|pp\\.?)\\s*${page}\\b`, 'i').test(line)
+        ) {
+          let cleanedLine = line
+            .replace(/\[[^\[\]]*?(?:Trang|Page|Sheet|tr\.?|p\.?|pp\.?)\s*\d+[^\[\]]*?\]/gi, '')
+            .replace(/^[\s\-*•\d.)#]+/, '')
+            .replace(/[\*\_`]/g, '')
+            .trim();
+          if (cleanedLine.length < 15) {
+            for (let prev = idx - 1; prev >= 0; prev--) {
+              const candPrev = bodyLines[prev]
+                .replace(/\[[^\[\]]*?(?:Trang|Page|Sheet|tr\.?|p\.?|pp\.?)\s*\d+[^\[\]]*?\]/gi, '')
+                .replace(/^[\s\-*•\d.)#>]+/, '')
+                .replace(/[\*\_`]/g, '')
+                .trim();
+              if (candPrev.length >= 15 && !candPrev.startsWith('---')) {
+                cleanedLine = candPrev;
+                break;
+              }
+            }
+          }
+          if (cleanedLine.length < 15) {
+            for (let next = idx + 1; next < bodyLines.length; next++) {
+              const candNext = bodyLines[next]
+                .replace(/\[[^\[\]]*?(?:Trang|Page|Sheet|tr\.?|p\.?|pp\.?)\s*\d+[^\[\]]*?\]/gi, '')
+                .replace(/^[\s\-*•\d.)#>]+/, '')
+                .replace(/[\*\_`]/g, '')
+                .trim();
+              if (candNext.length >= 15 && !candNext.startsWith('---')) {
+                cleanedLine = candNext.split(/(?<=[.!?])\s+/)[0] || candNext;
+                break;
+              }
+            }
+          }
+          if (cleanedLine.length >= 15) {
+            effectiveSnippet = cleanedLine.slice(0, 260);
+            break;
+          }
+        }
+      }
+    }
+
+    const verbatimExcerpt = resolvePageExcerpt(filename, page);
+    const combinedSnippet = verbatimExcerpt
+      ? effectiveSnippet && effectiveSnippet !== verbatimExcerpt
+        ? `${verbatimExcerpt} || ${effectiveSnippet}`
+        : verbatimExcerpt
+      : effectiveSnippet || undefined;
+    onCitationClick?.(filename, page, combinedSnippet);
+  };
+
+  const handleOpenEvidenceMatrix = () => {
+    const documentIdsForMatrix = Array.from(new Set(sourcesMeta.map((source) => source.document_id).filter(Boolean))).slice(0, 10);
+    if (documentIdsForMatrix.length === 0) return;
+    const params = new URLSearchParams();
+    if (query?.trim()) params.set('focus', query.trim());
+    documentIdsForMatrix.forEach((id) => params.append('document_id', id));
+    router.push(`/Literature?${params.toString()}`);
+  };
 
   const handleVerifyClaims = async () => {
     if (showClaimPanel && claimResult) {
@@ -1281,25 +1385,6 @@ function AiMessage({
     router.push(`/3d?region=${encodeURIComponent(regionId)}&xray=1`);
   };
 
-  const handleCopy = () => {
-    const cleanText = content
-      .replace(/^#{1,6}\s+/gm, '')
-      .replace(/\*\*([^\*]+?)\*\*/g, '$1')
-      .replace(/(?:\*([^\*\n]+?)\*|_([^\_\n]+?)_)/g, '$1')
-      .replace(/\[([^\]]+?)\s*-\s*(?:Page|Trang)\s*(\d+)\]/gi, '[$1, tr. $2]');
-    navigator.clipboard.writeText(cleanText);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handleExportWord = () => {
-    exportToWord(content, 'Bao_Cao_Trich_Xuat_Acamind');
-  };
-
-  const handlePrint = () => {
-    printDocument(content, 'Bao_Cao_Trich_Xuat_Acamind');
-  };
-
   const copySourceCitation = (id: string, textToCopy: string, type: 'apa' | 'bib') => {
     navigator.clipboard.writeText(textToCopy);
     if (type === 'apa') {
@@ -1321,81 +1406,34 @@ function AiMessage({
   return (
     <div className="group relative bg-white dark:bg-[#151a23] border border-slate-200/90 dark:border-slate-800 rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.05)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.35)] overflow-hidden transition-all hover:border-slate-300 dark:hover:border-slate-700">
       {/* ── Document Page Header Bar (Word / PDF Document Style) ── */}
-      <div className="flex items-center justify-between flex-wrap gap-2 px-4 sm:px-6 py-2.5 bg-gradient-to-r from-slate-50 via-slate-100/70 to-slate-50 dark:from-[#1a202c] dark:via-[#1e2634] dark:to-[#1a202c] border-b border-slate-200 dark:border-slate-800 text-xs select-none">
-        <div className="flex items-center gap-2 min-w-0">
-          <div className="w-6 h-6 rounded bg-teal-600/10 dark:bg-teal-400/20 text-teal-700 dark:text-teal-400 flex items-center justify-center shrink-0">
-            <FileText size={14} />
+      {telemetryPayload?.evidence_matrix && (
+        <details className="border-b border-slate-200 dark:border-slate-800 px-4 py-3 text-xs">
+          <summary className="cursor-pointer font-semibold text-teal-700 dark:text-teal-300">
+            {telemetryPayload.evidence_matrix.action === 'partial' ? 'Chỉ đủ bằng chứng cho một phần câu hỏi' : 'Bằng chứng theo tiêu chí'}
+            {' · '}{telemetryPayload.evidence_matrix.supported_cells}/{telemetryPayload.evidence_matrix.total_cells} tiêu chí có đoạn hỗ trợ
+          </summary>
+          <p className="my-2 text-slate-500">Các đoạn dưới đây đã được đối chiếu nguyên văn; đánh giá nội dung do mô hình thực hiện.</p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead><tr><th className="p-2">Nghiên cứu / Câu hỏi</th><th className="p-2">Tiêu chí</th><th className="p-2">Bằng chứng</th></tr></thead>
+              <tbody>{telemetryPayload.evidence_matrix.cells.map((cell, index) => (
+                <tr key={index} className="border-t border-slate-200 dark:border-slate-800 align-top">
+                  <td className="p-2">{cell.target}</td>
+                  <td className="p-2">{({ sample: 'Mẫu', method: 'Phương pháp', measure: 'Thang đo', finding: 'Kết quả', limitation: 'Hạn chế', answer: 'Nội dung trả lời' } as Record<string, string>)[cell.facet] || cell.facet}</td>
+                  <td className="p-2">{cell.evidence.length ? cell.evidence.map((e, i) => (
+                    <div key={i} className="mb-2"><p>“{e.quote}”</p>
+                      <button type="button" className="text-teal-700 dark:text-teal-300 underline mt-1"
+                        onClick={() => onCitationClick?.(e.filename, e.page, e.quote)}>{e.filename} · Trang {e.page}</button>
+                    </div>
+                  )) : 'Chưa tìm thấy trong các đoạn đã truy xuất'}</td>
+                </tr>
+              ))}</tbody>
+            </table>
           </div>
-          <div className="flex items-center gap-2 min-w-0">
-            <span className="font-bold text-[11px] sm:text-xs tracking-wider uppercase text-slate-800 dark:text-slate-200 truncate">
-              VĂN BẢN TRÍCH XUẤT & PHÂN TÍCH
-            </span>
-          </div>
-        </div>
-
-        {/* Toolbar actions */}
-        <div className="flex items-center flex-wrap gap-1 sm:gap-1.5 shrink-0">
-          {/* Feature 1: Claim-Level X-Ray Hallucination Shield */}
-          <button
-            type="button"
-            onClick={handleVerifyClaims}
-            className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-semibold transition-colors shadow-2xs cursor-pointer border ${
-              showClaimPanel
-                ? 'bg-emerald-600 text-white border-emerald-600'
-                : 'bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/60 dark:hover:bg-emerald-900/70 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800'
-            }`}
-            title="Kiểm chứng Chống Ảo giác Cấp độ Mệnh đề (X-Ray Claim Entailment Shield)"
-          >
-            <ShieldCheck size={12} />
-            <span>{claimLoading ? 'Đang kiểm chứng...' : 'Kiểm chứng X-Ray'}</span>
-          </button>
-
-          {/* Feature 3: Neuro-Clinical 3D Brain Graph Bridge */}
-          <button
-            type="button"
-            onClick={handleOpenNeuroGraph}
-            className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-semibold transition-colors shadow-2xs cursor-pointer border ${
-              showNeuroPanel
-                ? 'bg-indigo-600 text-white border-indigo-600'
-                : 'bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-950/60 dark:hover:bg-indigo-900/70 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800'
-            }`}
-            title="Đồ thị Tri thức Thần kinh – Tâm lý Liên kết Não bộ 3D"
-          >
-            <Brain size={12} />
-            <span>{neuroLoading ? 'Đang lập đồ thị...' : 'Đồ thị Não 3D'}</span>
-          </button>
-
-          <button
-            onClick={handleCopy}
-            className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[11px] font-medium bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-colors shadow-2xs cursor-pointer"
-            title="Sao chép toàn bộ nội dung văn bản"
-          >
-            {copied ? <Check size={12} className="text-emerald-500" /> : <Copy size={12} />}
-            <span className="hidden md:inline">{copied ? 'Đã sao chép' : 'Sao chép'}</span>
-          </button>
-
-          <button
-            onClick={handleExportWord}
-            className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[11px] font-medium bg-teal-50 hover:bg-teal-100 dark:bg-teal-950/50 dark:hover:bg-teal-900/60 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800 transition-colors shadow-2xs cursor-pointer"
-            title="Tải văn bản về dưới dạng tệp Microsoft Word (.doc)"
-          >
-            <Download size={12} />
-            <span className="hidden md:inline">Xuất Word</span>
-          </button>
-
-          <button
-            onClick={handlePrint}
-            className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[11px] font-medium bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-colors shadow-2xs cursor-pointer"
-            title="In hoặc lưu thành tệp PDF"
-          >
-            <Printer size={12} />
-            <span className="hidden md:inline">In / PDF</span>
-          </button>
-        </div>
-      </div>
-
+        </details>
+      )}
       {/* ── Live RAG Pipeline Telemetry Bar (Proposal 1: DCSR + Multi-Target Router + CRAG Gate) ── */}
-      {tel && (
+      {legacyFeaturesEnabled() && tel && (
         <div className="border-b border-slate-200/80 dark:border-slate-800/90 bg-slate-50/70 dark:bg-[#111722] px-4 sm:px-6 py-2 text-[11px]">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex flex-wrap items-center gap-1.5">
@@ -1430,6 +1468,20 @@ function AiMessage({
                 CRAG: {tel.crag_passed ? 'Verified' : 'Abstain'} (S₂={tel.crag_score} ≥ τ={tel.crag_threshold})
               </span>
 
+              {/* Epistemic Uncertainty & Shannon Entropy Badge */}
+              <span
+                className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-medium border ${
+                  (tel.epistemic_level || 'LOW') === 'LOW'
+                    ? 'bg-cyan-500/10 text-cyan-800 dark:text-cyan-300 border-cyan-500/25'
+                    : (tel.epistemic_level || 'LOW') === 'MODERATE'
+                    ? 'bg-amber-500/10 text-amber-800 dark:text-amber-300 border-amber-500/25'
+                    : 'bg-rose-500/10 text-rose-800 dark:text-rose-300 border-rose-500/25'
+                }`}
+                title={tel.epistemic_label || 'Định lượng Độ Bất định Nhận thức & Entropy Bằng chứng Shannon'}
+              >
+                H(q)={tel.shannon_entropy_bits ?? 0}b • U_epist={tel.epistemic_uncertainty ?? 0} ({tel.epistemic_level || 'LOW'})
+              </span>
+
               {/* Latency */}
               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-mono text-[10.5px] bg-slate-200/70 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
                 ⏱ {tel.latency_ms} ms
@@ -1447,57 +1499,90 @@ function AiMessage({
           </div>
 
           {showTelemetryDetail && (
-            <div className="mt-2.5 pt-2.5 border-t border-slate-200/70 dark:border-slate-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-[11px]">
-              <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
-                <div className="font-bold text-slate-800 dark:text-slate-200 mb-1">1. Phân rã Đa mục tiêu (Eq. 9)</div>
-                <div className="text-slate-600 dark:text-slate-400 space-y-0.5">
-                  <div>Chế độ: <span className="font-mono font-semibold text-indigo-600 dark:text-indigo-400">{tel.route}</span></div>
-                  <div>Số mục tiêu (M): <span className="font-mono font-semibold">{tel.num_targets}</span> (Quota: {tel.quota_per_target}/mục tiêu)</div>
-                  <div className="truncate" title={tel.sub_queries?.join(' | ')}>
-                    Truy vấn con: <span className="italic">{tel.sub_queries?.join(' • ')}</span>
+            <div className="mt-2.5 pt-2.5 border-t border-slate-200/70 dark:border-slate-800 space-y-2.5 text-[11px]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
+                <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
+                  <div className="font-bold text-slate-800 dark:text-slate-200 mb-1">1. Phân rã Đa mục tiêu (Eq. 9)</div>
+                  <div className="text-slate-600 dark:text-slate-400 space-y-0.5">
+                    <div>Chế độ: <span className="font-mono font-semibold text-indigo-600 dark:text-indigo-400">{tel.route}</span></div>
+                    <div>Số mục tiêu (M): <span className="font-mono font-semibold">{tel.num_targets}</span> (Quota: {tel.quota_per_target}/mục tiêu)</div>
+                    <div className="truncate" title={tel.sub_queries?.join(' | ')}>
+                      Truy vấn con: <span className="italic">{tel.sub_queries?.join(' • ')}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
+                  <div className="font-bold text-slate-800 dark:text-slate-200 mb-1">2. Truy hồi Lai RRF (k = {tel.rrf_k})</div>
+                  <div className="text-slate-600 dark:text-slate-400 space-y-0.5">
+                    <div>Dense HNSW (384-d): <span className="font-mono font-semibold">{tel.vector_hits} ứng viên</span></div>
+                    <div>Title-Boosted GIN FTS: <span className="font-mono font-semibold">{tel.fts_hits} ứng viên</span></div>
+                    <div>Top-1 RRF Score: <span className="font-mono font-semibold text-teal-600 dark:text-teal-400">{tel.top_rrf_score}</span></div>
+                  </div>
+                </div>
+
+                <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
+                  <div className="font-bold text-slate-800 dark:text-slate-200 mb-1">3. Chọn lọc DCSR (Eq. 5–8)</div>
+                  <div className="text-slate-600 dark:text-slate-400 space-y-0.5">
+                    <div>Độ tin cậy C(q): <span className="font-mono font-semibold">{tel.dcsr_confidence}</span> (τ_conf = 0.35)</div>
+                    <div>Tỷ số áp đảo Δ_RRF: <span className="font-mono font-semibold">{tel.dominance_ratio}</span> (τ_Δ = 1.05)</div>
+                    <div>Quyết định: <span className="font-semibold text-amber-600 dark:text-amber-400">{tel.dcsr_fast_skip ? 'Fast-Skip Cross-Encoder' : 'Chạy Cross-Encoder (K=16)'}</span></div>
+                  </div>
+                </div>
+
+                <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
+                  <div className="font-bold text-slate-800 dark:text-slate-200 mb-1">4. Cổng Kiểm định CRAG</div>
+                  <div className="text-slate-600 dark:text-slate-400 space-y-0.5">
+                    <div>Điểm cổng S₂(q): <span className="font-mono font-semibold text-emerald-600 dark:text-emerald-400">{tel.crag_score}</span> (τ_min = {tel.crag_threshold})</div>
+                    <div>Số đoạn trích (Chunks): <span className="font-mono font-semibold">{tel.chunks_count} chunks / {tel.unique_docs} bài báo</span></div>
+                    <div>Thời gian truy hồi: <span className="font-mono font-semibold">{tel.latency_ms} ms</span></div>
+                  </div>
+                </div>
+
+                <div className="p-2.5 rounded-xl bg-cyan-50/50 dark:bg-cyan-950/25 border border-cyan-200/80 dark:border-cyan-800/70">
+                  <div className="font-bold text-cyan-900 dark:text-cyan-200 mb-1">5. Entropy &amp; Độ Bất định Nhận thức</div>
+                  <div className="text-slate-600 dark:text-slate-400 space-y-0.5">
+                    <div>Shannon H(q): <span className="font-mono font-semibold text-cyan-700 dark:text-cyan-300">{tel.shannon_entropy_bits ?? 0} bits</span> (H_max={tel.max_entropy_bits ?? 0})</div>
+                    <div>Bất định U_epist(q): <span className="font-mono font-semibold text-indigo-600 dark:text-indigo-400">{tel.epistemic_uncertainty ?? 0}</span> ({tel.epistemic_level || 'LOW'})</div>
+                    <div>Đa dạng nguồn Gini D: <span className="font-mono font-semibold text-emerald-600 dark:text-emerald-400">{tel.source_diversity_index ?? 0}</span></div>
                   </div>
                 </div>
               </div>
 
-              <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
-                <div className="font-bold text-slate-800 dark:text-slate-200 mb-1">2. Truy hồi Lai RRF (k = {tel.rrf_k})</div>
-                <div className="text-slate-600 dark:text-slate-400 space-y-0.5">
-                  <div>Dense HNSW (384-d): <span className="font-mono font-semibold">{tel.vector_hits} ứng viên</span></div>
-                  <div>Title-Boosted GIN FTS: <span className="font-mono font-semibold">{tel.fts_hits} ứng viên</span></div>
-                  <div>Top-1 RRF Score: <span className="font-mono font-semibold text-teal-600 dark:text-teal-400">{tel.top_rrf_score}</span></div>
+              {tel.chunk_probabilities && tel.chunk_probabilities.length > 0 && (
+                <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="font-semibold text-slate-700 dark:text-slate-300">
+                      Phân phối Xác suất Hậu nghiệm P(c_k | q) = softmax(S_k / τ):
+                    </span>
+                    {tel.chunk_probabilities.map((prob, pIdx) => (
+                      <span
+                        key={pIdx}
+                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 font-mono text-[10.5px] text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700"
+                      >
+                        <span>c_{pIdx + 1}:</span>
+                        <span className="font-bold text-teal-600 dark:text-teal-400">{(prob * 100).toFixed(1)}%</span>
+                      </span>
+                    ))}
+                  </div>
+                  <span className="text-[10.5px] font-medium text-cyan-700 dark:text-cyan-300">
+                    {tel.epistemic_label || 'Bất định nhận thức thấp (Bằng chứng hội tụ vững chắc)'}
+                  </span>
                 </div>
-              </div>
-
-              <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
-                <div className="font-bold text-slate-800 dark:text-slate-200 mb-1">3. Chọn lọc DCSR (Eq. 5–8)</div>
-                <div className="text-slate-600 dark:text-slate-400 space-y-0.5">
-                  <div>Độ tin cậy C(q): <span className="font-mono font-semibold">{tel.dcsr_confidence}</span> (τ_conf = 0.35)</div>
-                  <div>Tỷ số áp đảo Δ_RRF: <span className="font-mono font-semibold">{tel.dominance_ratio}</span> (τ_Δ = 1.05)</div>
-                  <div>Quyết định: <span className="font-semibold text-amber-600 dark:text-amber-400">{tel.dcsr_fast_skip ? 'Fast-Skip Cross-Encoder' : 'Chạy Cross-Encoder (K=16)'}</span></div>
-                </div>
-              </div>
-
-              <div className="p-2.5 rounded-xl bg-white dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
-                <div className="font-bold text-slate-800 dark:text-slate-200 mb-1">4. Cổng Kiểm định CRAG</div>
-                <div className="text-slate-600 dark:text-slate-400 space-y-0.5">
-                  <div>Điểm cổng S₂(q): <span className="font-mono font-semibold text-emerald-600 dark:text-emerald-400">{tel.crag_score}</span> (τ_min = {tel.crag_threshold})</div>
-                  <div>Số đoạn trích (Chunks): <span className="font-mono font-semibold">{tel.chunks_count} chunks / {tel.unique_docs} bài báo</span></div>
-                  <div>Thời gian truy hồi: <span className="font-mono font-semibold">{tel.latency_ms} ms</span></div>
-                </div>
-              </div>
+              )}
             </div>
           )}
         </div>
       )}
 
       {/* ── Feature 1: Claim-Level Entailment & Hallucination Shield (CLHV) Panel ── */}
-      {showClaimPanel && (
+      {legacyFeaturesEnabled() && showClaimPanel && claimResult && (
         <div className="border-b border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/40 dark:bg-emerald-950/20 px-4 sm:px-6 py-4">
           <div className="flex items-center justify-between flex-wrap gap-2 mb-3">
             <div className="flex items-center gap-2">
               <ShieldCheck size={16} className="text-emerald-600 dark:text-emerald-400" />
               <span className="font-bold text-xs uppercase tracking-wider text-emerald-900 dark:text-emerald-200">
-                Khiên Kiểm chứng Chống Ảo giác Cấp độ Mệnh đề (Atomic Claim Entailment Shield)
+                Đối chiếu mệnh đề với đoạn nguồn ứng viên
               </span>
             </div>
             <button
@@ -1522,7 +1607,7 @@ function AiMessage({
                   <span className="font-bold text-slate-800 dark:text-slate-100">
                     Độ Trung thực Học thuật (Faithfulness):{' '}
                     <span className="text-emerald-600 dark:text-emerald-400 font-mono text-sm">
-                      {claimResult.faithfulness_score}%
+                      {claimResult.faithfulness_score === null ? 'Chưa xác minh' : `${claimResult.faithfulness_score}%`}
                     </span>
                   </span>
                   <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 font-semibold">
@@ -1561,7 +1646,7 @@ function AiMessage({
                       <div className="flex items-center justify-between flex-wrap gap-1.5">
                         <div className="flex items-center gap-1.5 flex-wrap">
                           <span className={`px-2 py-0.5 rounded-md font-bold text-[10.5px] border ${badgeCls}`}>
-                            Mệnh đề #{c.index}: {c.status_label} (S = {c.entailment_score} • {c.entailment_pct}%)
+                            Mệnh đề #{c.index}: {c.status_label}
                           </span>
                           {c.key_terms_matched && c.key_terms_matched.length > 0 && (
                             <span className="font-mono text-[10.5px] text-slate-500 dark:text-slate-400">
@@ -1598,7 +1683,7 @@ function AiMessage({
       )}
 
       {/* ── Feature 3: Interactive Neuro-Clinical Knowledge Graph <-> 3D Brain Bridge Panel ── */}
-      {showNeuroPanel && (
+      {legacyFeaturesEnabled() && showNeuroPanel && neuroGraph && (
         <div className="border-b border-indigo-200 dark:border-indigo-900/60 bg-indigo-50/40 dark:bg-indigo-950/20 px-4 sm:px-6 py-4">
           <div className="flex items-center justify-between flex-wrap gap-2 mb-3">
             <div className="flex items-center gap-2">
@@ -1686,10 +1771,56 @@ function AiMessage({
 
       {/* ── Document Page Body (A4 / Document Page Content) ── */}
       <div className="px-5 py-5 sm:px-7 sm:py-6 md:px-8 md:py-7">
-        <StructuredMessage content={content} onCitationClick={onCitationClick} />
+        <StructuredMessage content={content} onCitationClick={handleSmartCitationClick} />
+
+        {legacyFeaturesEnabled() && evidenceTargets.length > 0 && (
+          <details className="mt-4 rounded-xl border border-teal-200 dark:border-teal-900/70 bg-teal-50/50 dark:bg-teal-950/20">
+            <summary className="cursor-pointer list-none px-4 py-3 flex items-center justify-between gap-3">
+              <span className="inline-flex items-center gap-2 text-xs font-bold text-teal-900 dark:text-teal-200">
+                <BookOpen size={15} /> Bằng chứng theo từng ý hỏi ({evidenceTargets.filter((target) => target.has_retrieved_evidence).length}/{evidenceTargets.length} ý có đoạn được truy hồi)
+              </span>
+              <ChevronDown size={15} className="text-teal-700 dark:text-teal-300 shrink-0" />
+            </summary>
+            <div className="px-4 pb-4 space-y-3">
+              {evidenceTargets.map((target, targetIndex) => (
+                <section key={`${targetIndex}-${target.sub_query}`} className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/70 p-3">
+                  <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
+                    <p className="text-xs font-semibold text-slate-800 dark:text-slate-100">{targetIndex + 1}. {target.sub_query}</p>
+                    <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${target.has_retrieved_evidence ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300' : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'}`}>
+                      {target.has_retrieved_evidence ? `Đã truy hồi ${target.retrieved_count} đoạn` : 'Chưa tìm thấy đoạn'}
+                    </span>
+                  </div>
+                  {target.evidence.length > 0 ? (
+                    <div className="space-y-2">
+                      {target.evidence.map((item, evidenceIndex) => (
+                        <div key={`${item.document_id}-${item.page}-${evidenceIndex}`} className="rounded-md bg-slate-50 dark:bg-slate-950/70 p-2.5">
+                          <button type="button" onClick={() => handleSmartCitationClick(item.filename, item.page, item.excerpt)} className="text-left text-[11px] font-bold text-teal-700 hover:underline dark:text-teal-300">
+                            {item.title} · {item.filename} · Trang {item.page} <ExternalLink size={10} className="inline" />
+                          </button>
+                          <p className="mt-1 whitespace-pre-wrap text-[11px] leading-relaxed text-slate-600 dark:text-slate-300">{item.excerpt}</p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-[11px] text-amber-800 dark:text-amber-300">Chưa có đoạn tài liệu được truy hồi cho ý này. Hãy bổ sung nguồn hoặc thử diễn đạt lại câu hỏi.</p>
+                  )}
+                </section>
+              ))}
+              <p className="text-[10px] text-slate-500 dark:text-slate-400">Có đoạn được truy hồi không đồng nghĩa đoạn đó đã chứng minh câu trả lời; hãy mở trang PDF để kiểm tra nội dung.</p>
+            </div>
+          </details>
+        )}
+
+        {legacyFeaturesEnabled() && sourcesMeta.length >= 2 && (
+          <div className="mt-3 flex justify-end">
+            <button type="button" onClick={handleOpenEvidenceMatrix} className="inline-flex items-center gap-2 rounded-lg border border-violet-200 bg-violet-50 px-3 py-2 text-xs font-semibold text-violet-800 transition-colors hover:bg-violet-100 dark:border-violet-900 dark:bg-violet-950/40 dark:text-violet-200 dark:hover:bg-violet-950/70">
+              <Table size={14} /> Lập bảng tổng hợp {Math.min(new Set(sourcesMeta.map((source) => source.document_id)).size, 10)} nghiên cứu
+            </button>
+          </div>
+        )}
 
         {/* ── Clinical Evidence Hierarchy Badges & One-Click APA 7th / BibTeX Citations (Proposal 5) ── */}
-        {sourcesMeta.length > 0 && (
+        {legacyFeaturesEnabled() && sourcesMeta.length > 0 && (
           <div className="mt-6 pt-5 border-t-2 border-slate-200/90 dark:border-slate-800">
             <div className="flex items-center justify-between flex-wrap gap-2 mb-3">
               <div className="flex items-center gap-2">
@@ -1719,18 +1850,18 @@ function AiMessage({
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-1.5 flex-wrap mb-1">
                           <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10.5px] font-bold border ${badgeClass}`}>
-                            {isTier1 ? '🥇' : isTier2 ? '🥈' : '🥉'} {src.cebm_label} • {src.study_design || src.authority_label}
+                            {src.cebm_level === 'unverified' ? '📄' : isTier1 ? '🥇' : isTier2 ? '🥈' : '🥉'} {src.cebm_label} • {src.study_design || src.authority_label}
                           </span>
                           {src.pages?.map((pNum) => (
                             <button
                               key={pNum}
                               type="button"
-                              onClick={() => onCitationClick?.(src.filename, pNum, src.title)}
+                              onClick={() => handleSmartCitationClick(src.filename, pNum, src.page_excerpts?.[String(pNum)] || src.title)}
                               className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10.5px] font-semibold bg-teal-50 hover:bg-teal-100 dark:bg-teal-950/60 dark:hover:bg-teal-900 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800 transition-colors cursor-pointer"
                               title={`Mở PDF "${src.filename}" tại trang ${pNum} và tô sáng bằng chứng`}
                             >
                               <FileText size={10} />
-                              <span>Mở PDF Trang {pNum}</span>
+                              <span>Mở PDF & Highlight Trang {pNum}</span>
                             </button>
                           ))}
                         </div>
@@ -1787,6 +1918,7 @@ export default function ChatPage() {
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isAnalyzingFiles, setIsAnalyzingFiles] = useState(false);
   const [currentDomain, setCurrentDomain] = useState<'psychology' | 'general' | null>(null);
   const [mode, setMode] = useState<'basic' | 'advanced'>('advanced');
   const [showModeMenu, setShowModeMenu] = useState(false);
@@ -1800,14 +1932,31 @@ export default function ChatPage() {
   // Phase 4: Side-by-Side PDF Viewer State & Citation Handler
   const [activePdfViewer, setActivePdfViewer] = useState<{
     documentId: string;
+    directUrl?: string;
     filename: string;
     title?: string;
     page: number;
     totalPages?: number | null;
     snippet?: string;
   } | null>(null);
+  const [citationNotice, setCitationNotice] = useState<string | null>(null);
 
   const handleCitationClick = async (filename: string, page: number, snippet?: string) => {
+    setCitationNotice(null);
+    const inlinePdf = chatMessages
+      .flatMap(message => message.attachments || [])
+      .find(file => file.name.toLowerCase() === filename.toLowerCase() && file.type === 'application/pdf');
+    if (inlinePdf) {
+      setActivePdfViewer({
+        documentId: `inline:${inlinePdf.url}`,
+        directUrl: inlinePdf.url,
+        filename: inlinePdf.name,
+        title: inlinePdf.name,
+        page,
+        snippet,
+      });
+      return;
+    }
     const cleanTarget = filename.replace(/\.pdf$/i, '').trim().toLowerCase();
     const matched = documents.find(d => 
       d.filename.toLowerCase() === filename.toLowerCase() ||
@@ -1830,6 +1979,10 @@ export default function ChatPage() {
     try {
       const lookedUp = await lookupDocument(filename);
       if (lookedUp) {
+        if (lookedUp.has_file === false) {
+          setCitationNotice(`Đã tìm thấy hồ sơ “${lookedUp.filename}” nhưng tệp PDF hiện không khả dụng.`);
+          return;
+        }
         setActivePdfViewer({
           documentId: lookedUp.id,
           filename: lookedUp.filename,
@@ -1838,9 +1991,12 @@ export default function ChatPage() {
           totalPages: lookedUp.total_pages,
           snippet: snippet,
         });
+      } else {
+        setCitationNotice(`Không tìm thấy PDF “${filename}” trong thư viện tài liệu. Nếu đây là tệp đính kèm trong chat, hãy đính kèm lại sau khi tải lại trang.`);
       }
     } catch (e) {
       console.error('Error looking up document:', e);
+      setCitationNotice('Không thể mở tài liệu nguồn. Hãy kiểm tra kết nối rồi thử lại.');
     }
   };
 
@@ -1854,10 +2010,13 @@ export default function ChatPage() {
   }, []);
 
   useEffect(() => {
-    loadSessions();
     initAuth();
     getDocuments().then(setDocuments).catch(() => {});
   }, []);
+
+  useEffect(() => {
+    loadSessions();
+  }, [user?.id]);
 
   useEffect(() => {
     if (token) {
@@ -1868,7 +2027,7 @@ export default function ChatPage() {
 
   const loadSessions = () => {
     try {
-      const saved = localStorage.getItem('chat.sessions');
+      const saved = sessionStorage.getItem(chatSessionStorageKey());
       if (saved) {
         const parsed = JSON.parse(saved);
         setSessions(parsed.map((s: any) => ({
@@ -1882,16 +2041,12 @@ export default function ChatPage() {
   const saveSessions = (updater: ChatSession[] | ((prev: ChatSession[]) => ChatSession[])) => {
     setSessions(prev => {
       const next = typeof updater === 'function' ? updater(prev) : updater;
-      localStorage.setItem('chat.sessions', JSON.stringify(next));
+      sessionStorage.setItem(chatSessionStorageKey(), JSON.stringify(next));
       return next;
     });
   };
 
   const createNewSession = () => {
-    if (!user) {
-      setShowAuthModal(true);
-      return;
-    }
     const newSession: ChatSession = {
       id: Date.now().toString(),
       title: 'New chat',
@@ -1917,18 +2072,48 @@ export default function ChatPage() {
     'application/vnd.ms-excel': '.xls',
   };
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!user) {
-      setShowAuthModal(true);
-      if (e.target) e.target.value = '';
-      return;
-    }
-    const files = Array.from(e.target.files || []);
+  const MAX_CHAT_FILES = 20;
+  const [isChatDragging, setIsChatDragging] = useState(false);
+
+  const appendChatFiles = (fileList: FileList | File[]) => {
+    const files = Array.from(fileList || []);
     if (!files.length) return;
     const valid = files.filter(f => f.type.startsWith('image/') || f.type === 'application/pdf' || f.name.match(/\.(pdf|docx?|xlsx?|jpg|jpeg|png|gif|webp|bmp)$/i));
     if (!valid.length) return;
-    setUploadedFiles(prev => [...prev, ...valid]);
+    if (uploadedFiles.length + valid.length > MAX_CHAT_FILES) {
+      setCitationNotice(`Mỗi lượt phân tích tối đa ${MAX_CHAT_FILES} tài liệu. Các tệp vượt giới hạn chưa được đính kèm.`);
+    }
+    setUploadedFiles(prev => {
+      const remaining = Math.max(0, MAX_CHAT_FILES - prev.length);
+      return [...prev, ...valid.slice(0, remaining)];
+    });
+  };
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      appendChatFiles(e.target.files);
+    }
     e.target.value = '';
+  };
+
+  const handleChatDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    if (!isLoading) setIsChatDragging(true);
+  };
+
+  const handleChatDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    if (e.currentTarget.contains(e.relatedTarget as Node)) return;
+    setIsChatDragging(false);
+  };
+
+  const handleChatDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsChatDragging(false);
+    if (isLoading) return;
+    if (e.dataTransfer?.files?.length) {
+      appendChatFiles(e.dataTransfer.files);
+    }
   };
 
   const removeFile = (idx: number) => {
@@ -1986,13 +2171,11 @@ export default function ChatPage() {
   }, [chatMessages]);
 
   const handleSend = async () => {
-    if (!user) {
-      setShowAuthModal(true);
-      return;
-    }
-    if (!input.trim() || isLoading) return;
+    if ((!input.trim() && uploadedFiles.length === 0) || isLoading) return;
 
-    const rawQuery = input.trim();
+    const filesToSend = [...uploadedFiles];
+    const hasFilesToAnalyze = filesToSend.length > 0;
+    const rawQuery = input.trim() || 'Hãy phân tích và tóm tắt nội dung chính của tài liệu đính kèm.';
 
     // Create session lazily on first message (when no session exists yet)
     let activeSessionId = currentSessionId;
@@ -2030,6 +2213,7 @@ export default function ChatPage() {
     // Reset uploaded files immediately when sending (don't wait for API)
     setUploadedFiles([]);
     setIsLoading(true);
+    setIsAnalyzingFiles(hasFilesToAnalyze);
 
     // Inject mode instruction vào query gửi lên LLM (chỉ phía request, user vẫn thấy raw text).
     // 'basic' → trả lời ngắn gọn (2-4 câu), 'advanced' → trả lời đầy đủ, sâu, chi tiết.
@@ -2038,11 +2222,11 @@ export default function ChatPage() {
 
     const modeInstruction = isEnglish
       ? (mode === 'basic'
-          ? '[System: Please reply concisely in about 2-4 sentences strictly answering the question. Avoid unasked topics.] '
-          : '[System: Please provide a thorough, accurate response focused strictly on what is asked. Cite page numbers from documents. Strictly do not expand into unasked topics.] ')
+          ? '[System: MODE=BRIEF. Reply in about 2-4 sentences. Answer only the question and avoid unasked topics.] '
+          : '[System: MODE=DEEP. Give a detailed answer. For a straightforward question, aim for 5-8 useful sentences; for a complex or comparative question, use 4-8 focused paragraphs with clear structure. Explain relevant reasoning, evidence, nuance, and limitations, and cite document page numbers. Stay strictly within the question and do not add filler.] ')
       : (mode === 'basic'
-          ? '[He thong: Hay tra loi ngan gon, suc tich trong khoang 2-4 cau, dung trong tam cau hoi. Tranh liet ke dai va khong mo rong sang chu de khac.] '
-          : '[He thong: Hay tra loi day du, sau sac, dung trong tam cau hoi. Trinh bay ro rang kem trich dan so trang tu tai lieu. Tuyet doi khong mo rong lan man sang cac chu de ngoai pham vi cau hoi.] ');
+          ? '[He thong: MODE=BRIEF. Hay tra loi trong khoang 2-4 cau, dung trong tam cau hoi va khong mo rong sang chu de khac.] '
+          : '[He thong: MODE=DEEP. Hay tra loi chuyen sau. Voi cau hoi don gian, huong den 5-8 cau co gia tri; voi cau hoi phuc tap hoac so sanh, trinh bay 4-8 doan co cau truc. Giai thich lap luan, bang chung, diem tinh te va gioi han lien quan; trich dan so trang tai lieu. Chi tap trung vao cau hoi, khong them noi dung lap day.] ');
     const sentQuery = modeInstruction + rawQuery;
 
     // Fast domain detection via keywords (no API call — instant, ~0ms).
@@ -2091,11 +2275,11 @@ export default function ChatPage() {
     };
 
     try {
-      if (uploadedFiles.length > 0) {
+      if (filesToSend.length > 0) {
         // Use file-chat endpoint when files are attached
         await chatFileStream({
           query: sentQuery,
-          files: uploadedFiles,
+          files: filesToSend,
           documentIds: docIds,
           onChunk,
           signal: abortRef.current.signal,
@@ -2127,6 +2311,7 @@ export default function ChatPage() {
       }
     } finally {
       setIsLoading(false);
+      setIsAnalyzingFiles(false);
       setUploadedFiles([]);
     }
   };
@@ -2169,7 +2354,24 @@ export default function ChatPage() {
       {/* ── Main Chat + Side-by-Side PDF Container (Nhóm 4) ── */}
       <div className="flex-1 flex min-w-0 min-h-0 relative overflow-hidden">
         {/* Main Chat Area */}
-        <main className={`flex-1 flex flex-col min-w-0 min-h-0 bg-white dark:bg-[#0A0F1A] overflow-hidden transition-all duration-300 ${activePdfViewer ? 'hidden sm:flex' : 'flex'}`}>
+        <main
+          onDragOver={handleChatDragOver}
+          onDragLeave={handleChatDragLeave}
+          onDrop={handleChatDrop}
+          className={`relative flex-1 flex flex-col min-w-0 min-h-0 bg-white dark:bg-[#0A0F1A] overflow-hidden transition-all duration-300 ${activePdfViewer ? 'hidden sm:flex' : 'flex'}`}
+        >
+          {isChatDragging && (
+            <div className="absolute inset-3 z-50 rounded-2xl border-2 border-dashed border-teal-500 bg-teal-500/10 backdrop-blur-[2px] flex flex-col items-center justify-center pointer-events-none">
+              <div className="px-5 py-3 rounded-xl bg-white/95 dark:bg-slate-900/95 shadow-lg border border-teal-500/30 text-center">
+                <p className="text-sm font-semibold text-teal-600 dark:text-teal-400">
+                  Thả nhiều tài liệu vào đây để đính kèm cùng lúc
+                </p>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                  Hỗ trợ PDF, Word, Excel, Hình ảnh (tối đa 20 tệp/lượt)
+                </p>
+              </div>
+            </div>
+          )}
           {/* Messages - scrollable */}
           <div
             className="flex-1 min-h-0 overflow-y-auto overscroll-contain"
@@ -2193,17 +2395,11 @@ export default function ChatPage() {
                     >
                       <div className="flex items-center justify-center gap-1.5 text-amber-700 dark:text-amber-400 font-semibold text-xs sm:text-sm mb-1.5">
                         <Lock size={15} />
-                        <span>Chế độ Khách (Chưa đăng nhập)</span>
+                        <span>Chế độ Khách</span>
                       </div>
                       <p className="text-xs text-gray-600 dark:text-gray-300 mb-3 leading-relaxed">
-                        Bạn cần đăng nhập tài khoản để gửi tin nhắn, đính kèm tài liệu và sử dụng đầy đủ chức năng của Trợ lý học tập AI Acamind.
+                        Bạn có thể đặt câu hỏi ngay. Đăng nhập để tải tài liệu riêng lên và phân tích cùng AI.
                       </p>
-                      <button
-                        onClick={() => setShowAuthModal(true)}
-                        className="px-4 py-2 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-teal-500 via-cortex-500 to-purple-600 hover:opacity-90 shadow-md shadow-teal-500/20 transition-all cursor-pointer"
-                      >
-                        Đăng nhập ngay
-                      </button>
                     </motion.div>
                   )}
                 </div>
@@ -2284,7 +2480,7 @@ export default function ChatPage() {
                 <div className="w-5 h-5 rounded-full bg-gradient-to-br from-teal-500 to-purple-600 flex items-center justify-center shrink-0 mt-0.5">
                   <Brain size={8} className="text-white" />
                 </div>
-                <div className="bg-gray-100 dark:bg-white/10 rounded-xl px-3 py-2 flex gap-1">
+                <div className="bg-gray-100 dark:bg-white/10 rounded-xl px-3 py-2 flex items-center gap-2">
                   {[0, 1, 2].map(i => (
                     <div
                       key={i}
@@ -2292,6 +2488,7 @@ export default function ChatPage() {
                       style={{ animationDelay: `${i * 0.15}s` }}
                     />
                   ))}
+                  {isAnalyzingFiles && <span className="text-[11px] text-gray-500 dark:text-gray-400">Đang đọc tài liệu và đối chiếu bằng chứng…</span>}
                 </div>
               </motion.div>
             )}
@@ -2303,15 +2500,12 @@ export default function ChatPage() {
         {/* Input Area */}
         <div className="shrink-0 px-4 py-4 border-t border-gray-200 dark:border-white/10 bg-white dark:bg-[#0A0F1A] transition-colors">
           <div className="max-w-3xl mx-auto space-y-2">
-            {!user ? (
-              <AuthRequiredBanner
-                message="Vui lòng đăng nhập để gửi tin nhắn, tải file đối chiếu và khai thác tài liệu cùng AI"
-              />
-            ) : (
-              <>
                 {/* File preview chips */}
                 {uploadedFiles.length > 0 && (
-                  <div className="flex flex-wrap gap-2 px-1">
+                  <div className="flex flex-wrap items-center gap-2 px-1">
+                    <span className="text-[11px] font-medium text-teal-600 dark:text-teal-400">
+                      Đã chọn {uploadedFiles.length} tệp:
+                    </span>
                     {uploadedFiles.map((file, idx) => (
                       <div
                         key={idx}
@@ -2327,6 +2521,15 @@ export default function ChatPage() {
                         </button>
                       </div>
                     ))}
+                    {uploadedFiles.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => setUploadedFiles([])}
+                        className="text-[11px] text-red-500 hover:text-red-600 dark:text-red-400 underline ml-1"
+                      >
+                        Xóa tất cả
+                      </button>
+                    )}
                   </div>
                 )}
 
@@ -2334,6 +2537,8 @@ export default function ChatPage() {
                   {/* Hidden file input */}
                   <input
                     ref={fileInputRef}
+                    id="chat-file-input"
+                    name="chat-files"
                     type="file"
                     multiple
                     accept="image/jpeg,image/png,image/gif,image/webp,image/bmp,application/pdf,.pdf,.jpg,.jpeg,.png,.gif,.webp,.bmp,.doc,.docx,.xls,.xlsx"
@@ -2341,18 +2546,21 @@ export default function ChatPage() {
                     className="hidden"
                   />
 
-                  {/* Upload button */}
+                  {/* Upload remains account-only; guests can still use chat. */}
                   <button
+                    type="button"
                     onClick={() => fileInputRef.current?.click()}
+                    disabled={isLoading}
                     className="shrink-0 p-1.5 rounded-full text-gray-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-teal-50 dark:hover:bg-teal-900/20 transition-colors"
                     title={t.chat.attach_file}
-                    disabled={isLoading}
                   >
                     <Paperclip size={16} />
                   </button>
 
                   <textarea
                     ref={textareaRef}
+                    id="chat-message-input"
+                    name="message"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={(e) => {
@@ -2361,7 +2569,7 @@ export default function ChatPage() {
                         handleSend();
                       }
                     }}
-                    placeholder={t.chat.type_message}
+                    placeholder={`${t.chat.type_message} (kéo thả hoặc chọn nhiều tệp; tối đa 20 tệp)`}
                     rows={1}
                     disabled={isLoading}
                     className="flex-1 bg-transparent text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 resize-none focus:outline-none text-sm"
@@ -2407,8 +2615,9 @@ export default function ChatPage() {
                     {isLoading ? <Square size={14} /> : <Send size={14} />}
                   </button>
                 </div>
-              </>
-            )}
+                <p className="mt-1 px-3 text-[10px] text-slate-400 dark:text-slate-500">
+                  Hỗ trợ đính kèm hoặc kéo thả nhiều tài liệu cùng lúc (tối đa 20 tệp/lượt). Có thể dán URL công khai vào câu hỏi.
+                </p>
           </div>
         </div>
       </main>
@@ -2418,6 +2627,7 @@ export default function ChatPage() {
           <aside className="w-full sm:w-[48%] md:w-[50%] lg:w-[52%] h-full shrink-0 flex flex-col min-h-0 z-10 transition-all duration-300">
             <SideBySidePdfViewer
               documentId={activePdfViewer.documentId}
+              directUrl={activePdfViewer.directUrl}
               filename={activePdfViewer.filename}
               title={activePdfViewer.title}
               initialPage={activePdfViewer.page}
@@ -2434,9 +2644,17 @@ export default function ChatPage() {
       <AuthRequiredModal
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}
-        title="Đăng nhập để sử dụng tính năng Chat AI"
-        description="Bạn cần đăng nhập tài khoản Acamind để gửi tin nhắn, tải lên tài liệu học tập và khai thác trích dẫn đối chiếu PDF."
+        title="Đăng nhập để tải tài liệu lên"
+        description="Khách vẫn có thể đặt câu hỏi. Đăng nhập để tải tài liệu riêng lên và phân tích trực tiếp trong cuộc trò chuyện."
       />
+      {citationNotice && (
+        <div role="status" className="fixed bottom-5 right-5 z-[100] max-w-sm rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900 shadow-xl dark:border-amber-800 dark:bg-amber-950 dark:text-amber-100">
+          <div className="flex items-start gap-3">
+            <span className="flex-1">{citationNotice}</span>
+            <button type="button" onClick={() => setCitationNotice(null)} aria-label="Đóng thông báo" className="font-bold">×</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

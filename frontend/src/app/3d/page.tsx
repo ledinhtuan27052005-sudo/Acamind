@@ -153,7 +153,7 @@ export default function BodyPage() {
 
   const getUserType = (): 'patient' | 'student' | 'expert' => {
     if (typeof window === 'undefined') return 'patient';
-    return (localStorage.getItem('user_type') ?? 'patient') as 'patient' | 'student' | 'expert';
+    return (sessionStorage.getItem('user_type') ?? 'patient') as 'patient' | 'student' | 'expert';
   };
 
   useEffect(() => {
@@ -282,7 +282,7 @@ export default function BodyPage() {
 
   const getUserId = () => {
     if (typeof window === 'undefined') return undefined;
-    return localStorage.getItem('user_id') ?? undefined;
+    return sessionStorage.getItem('user_id') ?? undefined;
   };
 
   const selectedInfo = selected ? (BODY_DATA[selected] ?? ORGAN_DATA[selected] ?? null) : null;

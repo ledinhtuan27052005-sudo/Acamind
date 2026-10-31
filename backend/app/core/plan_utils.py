@@ -121,3 +121,16 @@ def count_today_chats(user_id, db: Session) -> int:
         {"uid": str(user_id), "today": date.today()},
     ).scalar()
     return int(result or 0)
+
+
+def count_monthly_chats(user_id, db: Session) -> int:
+    from sqlalchemy import text
+    result = db.execute(
+        text("""
+            SELECT COUNT(*) FROM chat_history
+            WHERE user_id = :uid
+              AND DATE_TRUNC('month', created_at) = DATE_TRUNC('month', CURRENT_DATE)
+        """),
+        {"uid": str(user_id)},
+    ).scalar()
+    return int(result or 0)

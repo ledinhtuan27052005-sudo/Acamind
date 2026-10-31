@@ -1,0 +1,3 @@
+OpenAlex License & Terms Notification
+Timestamp: 2026-10-26T01:08:00+07:00
+Notice: Please check the terms at https://help.openalex.org/ and always verify the individual license of papers retrieved via OpenAlex for any restrictions.

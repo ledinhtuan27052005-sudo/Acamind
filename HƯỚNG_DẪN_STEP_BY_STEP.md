@@ -9556,3 +9556,105 @@ Thêm link vào `layout.tsx`:
 
 **🎉 Hệ thống hoàn chỉnh! Tổng cộng 33 bước, đầy đủ tính năng từ demo cơ bản đến hệ thống production.**
 
+
+
+---
+
+# ═══════════════════════════════════════════════════════════════════════════
+# PHẦN 5 — BỘ 9 KỸ THUẬT ĐỘT PHÁ NGHIÊN CỨU KHOA HỌC (NCKH) & HƯỚNG DẪN TEST
+# ═══════════════════════════════════════════════════════════════════════════
+
+> **Tài liệu chuyên biệt**: Xem thêm bản đặc tả toán học đầy đủ tại file `HUONG_DAN_HE_THONG_VA_KIEM_THU_NCKH.md`.
+> **Chuẩn hiển thị văn bản sạch**: Toàn bộ câu trả lời AI và phân tích trên hệ thống đã được chuẩn hóa qua `AcademicDocumentRenderer` & `cleanMarkdownText` (hiển thị chuẩn định dạng văn bản PDF/Word khoa học, loại bỏ hoàn toàn các ký tự Markdown thô `**`, `###`, `` ` ``).
+
+---
+
+## DANH MỤC 9 TÍNH NĂNG & KỸ THUẬT KHOA HỌC NÂNG CAO ĐÃ TÍCH HỢP
+
+### 1. Khiên Kiểm chứng Chống Ảo giác Cấp độ Mệnh đề Nguyên tử (`Atomic Claim Entailment Shield — CLHV`)
+- **Vị trí**: Trang `/chat`, `/Literature`, `/RAG` (Nút **"🛡️ Kiểm chứng X-Ray"**)
+- **Chức năng**: Tách câu trả lời AI thành từng mệnh đề nguyên tử độc lập $C = \{c_1, \dots, c_m\}$, đối chiếu từng câu với toàn bộ các đoạn trích nguồn và gắn nhãn 3 màu:
+  - 🟢 **Bảo chứng trực tiếp (`ENTAILED`, $S \ge 0.42$)**
+  - 🟡 **Suy luận mở rộng (`EXTRAPOLATED`, $0.24 \le S < 0.42$)**
+  - 🔴 **Chưa đủ bằng chứng (`UNVERIFIED`, $S < 0.24$)**
+- **Đối chiếu PDF 1-Click**: Mỗi mệnh đề có nút **"Đối chiếu PDF (Tên bài - Tr. X)"** mở thẳng trang PDF gốc và tự động **tô sáng màu vàng (Yellow Highlight)** đoạn bằng chứng.
+
+### 2. Định lượng Độ Bất định Nhận thức & Entropy Bằng chứng (`Epistemic Uncertainty & Shannon Entropy H(q)`)
+- **Vị trí**: Trang `/chat` (Thanh Telemetry phía trên câu trả lời & Thẻ số 5 trong **"Chi tiết thuật toán"**)
+- **Chức năng**:
+  - Tính phân phối xác suất hậu nghiệm trên tập đoạn trích $P(c_k \mid q) = \text{softmax}(S_k / \tau)$ với $\tau = 0.15$.
+  - Tính **Entropy Thông tin Shannon** $H(q) = -\sum P(c_k \mid q) \log_2 P(c_k \mid q)$ (bits), **Độ Bất định Nhận thức** $\mathcal{U}_{\text{epistemic}}(q) = 0.55(1 - S_{(1)}) + 0.45\hat{H}(q)$ và **Chỉ số Đa dạng Nguồn Gini-Simpson**.
+  - Hiển thị huy hiệu trực tiếp `H(q)=...b • U_epist=...%` và thanh phân phối xác suất $P(c_k \mid q)$ của từng đoạn trích.
+
+### 3. Radar Phát hiện Mâu thuẫn & Đồng thuận Học thuật Trọng số Oxford CEBM
+- **Vị trí**: Trang `/Literature` (Nút **"⚖️ Chạy Radar Phát hiện Mâu thuẫn & Đồng thuận CEBM"**)
+- **Chức năng**:
+  - Tự động phân loại cấp độ bằng chứng Y học Thực chứng **Oxford CEBM (`Level 1a` đến `Level 5`)** và gán trọng số uy tín $w_{\text{CEBM}} \in [0.30, 1.00]$.
+  - Tính **Chỉ số Đồng thuận Trọng số (`Consensus Index %`)**, **Chỉ số Phân kỳ (`Divergence Index %`)**, lập **Ma trận Đối kháng Cặp Nghiên cứu** (Nghiên cứu A vs. Nghiên cứu B, độ lệch $\Delta w_{\text{CEBM}}$) và đưa ra phán quyết CEBM.
+
+### 4. Phân tích Gộp Tự động (`Random-Effects Meta-Analysis`), Chỉ số Dị biệt $I^2$ & Biểu đồ Rừng (`Forest Plot`)
+- **Vị trí**: Trang `/Literature` (Khối **"📊 Phân tích Gộp Tự động (Random-Effects Meta-Analysis) & Biểu đồ Rừng (Forest Plot)"**)
+- **Chức năng**:
+  - Chuẩn hóa cỡ hiệu ứng từng bài báo sang **Hedges' $g$**, sai số chuẩn $SE_i$ và khoảng tin cậy $95\%\text{ CI}$.
+  - Chạy mô hình tác động ngẫu nhiên **DerSimonian–Laird**: tính thống kê **Cochran's $Q$**, phương sai giữa các nghiên cứu $\tau^2$, chỉ số dị biệt **Higgins $I^2$ (%)**, cỡ hiệu ứng gộp **$\text{Pooled } g_{\text{RE}}$**, kiểm định $Z$-score và $p$-value.
+  - Vẽ **Biểu đồ Rừng Tương tác (`Interactive Forest Plot`)** với thanh sai số 95% CI, ô vuông tỷ lệ trọng số $w_i^*$ và **Hình thoi Tổng hợp (`◆` Summary Diamond)**.
+
+### 5. Bản đồ Nhiệt Khoảng trống Bằng chứng PICO & Sinh Giả thuyết Đề tài NCKH Mới
+- **Vị trí**: Trang `/Literature` (Khối **"🧭 Bản đồ Nhiệt Khoảng trống Bằng chứng PICO & Đề xuất Đề tài NCKH Mới"**)
+- **Chức năng**:
+  - Xây dựng **Bản đồ Nhiệt Ma trận Phủ Bằng chứng $4 \times 3$ (Quần thể P $\times$ Can thiệp I)**, tô màu 🟢 `Well-Studied`, 🟡 `Under-Explored` và 🔴 `GAP (0 bài báo)`.
+  - Tự động sinh **3 Đề xuất Đề tài & Giả thuyết Nghiên cứu Khoa học Mới ($H_1$)** kèm phân tích đầy đủ `P - I - C - O` và thiết kế nghiên cứu khuyến nghị để lấp các ô `GAP`.
+
+### 6. Đồ thị Tri thức Thần kinh – Tâm lý 4 Tầng & Cầu nối Giải phẫu Não 3D X-Ray
+- **Vị trí**: Trang `/chat` (Nút **"🧠 Đồ thị Não 3D"**) $\leftrightarrow$ Trang `/3d`
+- **Chức năng**:
+  - Bóc tách mạng lưới nhân quả 4 tầng: *Triệu chứng lâm sàng DSM-5/ICD-11* $\rightarrow$ *6 Vùng não giải phẫu chuyên biệt (`Prefrontal Cortex`, `Amygdala`, `Hippocampus`, `Anterior Cingulate`, `Hypothalamus HPA`, `Striatum`)* $\rightarrow$ *Chất dẫn truyền thần kinh (`Serotonin`, `Dopamine`, `GABA`, `Cortisol`, `BDNF`)* $\rightarrow$ *Cơ chế trị liệu (`CBT`, `SSRI`, `EMDR`)*.
+  - Bấm **"Mở Não 3D X-Ray"** chuyển thẳng sang mô hình 3D, tự động bật X-Ray xuyên thấu hộp sọ và làm phát sáng vùng não bị tổn thương.
+
+### 7. Phòng Mô phỏng Bệnh nhân Ảo Lâm sàng DSM-5 / ICD-11 & Chấm điểm OSCE (Thang 100)
+- **Vị trí**: Trang `/Health` (Tab **"Phòng Mô phỏng Bệnh nhân Ảo (OSCE)"**)
+- **Chức năng**:
+  - 3 Ca bệnh nhân ảo chuẩn hóa có Hồ sơ Bệnh sử Ẩn (`Nguyễn Minh An - MDD nặng kèm nguy cơ tự sát`, `Trần Thu Hà - GAD & Panic`, `Lê Hoàng Nam - PTSD`).
+  - Cho phép vấn chẩn, chỉ định thang đo tâm lý (`+ Đo PHQ-9`, `+ Đo GAD-7`, `+ Đo BDI-II`, `+ Đo DASS-21`) và nộp bệnh án để nhận **Bảng chấm điểm tự động theo Rubric OSCE 100 điểm** + Đáp án Chuẩn Vàng.
+
+### 8. Phòng Thí nghiệm Đối chứng Thuật toán Trực tiếp (`Live A/B/C RAG Ablation Lab`)
+- **Vị trí**: Trang `/RAG` (Nút **"⚡ 1. Chạy Đối chứng Đơn truy vấn"**)
+- **Chức năng**: Chạy đối chứng trực tiếp 3 kiến trúc (`Naive Dense RAG` vs. `Standard Hybrid RRF` vs. `Acamind Proposed Pipeline`) trên cùng truy vấn, hiển thị mức cải thiện (`Gain %`) và đối sánh trực quan Top Chunks.
+
+### 9. Kiểm định Ý nghĩa Thống kê Đa truy vấn ($p$-value, Cohen's $d$, 95% CI) & Đường biên Tối ưu Pareto
+- **Vị trí**: Trang `/RAG` (Nút **"📊 2. Chạy Kiểm định Thống kê Đa truy vấn (p-value, Cohen's d & Pareto)"**)
+- **Chức năng**:
+  - Thực thi tự động bộ $N=5$ kịch bản truy vấn chuẩn hóa qua 3 kiến trúc RAG (15 lượt chạy thực nghiệm).
+  - Tính **Trung bình $\pm$ Độ lệch chuẩn ($\text{Mean} \pm \text{SD}$)**, **Khoảng tin cậy Bootstrap 95% CI**, **Kiểm định $t$ bắt cặp (`Paired Student's t-test` $t$-stat & $p$-value)** và **Cỡ hiệu ứng `Cohen's d`**.
+  - Vẽ **Biểu đồ Tương tác Đường biên Tối ưu Pareto (`Accuracy–Latency Pareto Frontier SVG`)** và xuất bảng LaTeX chuẩn IEEE/Springer.
+
+---
+
+## CHECKLIST KIỂM THỬ STEP-BY-STEP CÁC TÍNH NĂNG NCKH MỚI
+
+### A. Kiểm thử tại Trang `/chat` (`http://localhost:3001/chat`)
+- [ ] Tích chọn 2–4 bài báo PDF $\rightarrow$ Gửi câu hỏi: `"Phân tích cơ chế sinh học thần kinh của trầm cảm và lo âu, đồng thời so sánh hiệu quả của liệu pháp nhận thức hành vi (CBT) trên các thang đo lâm sàng."`
+- [ ] Kiểm tra hàng huy hiệu Telemetry: thấy `Hybrid RRF (k=60)`, `Router`, `DCSR`, `CRAG` và huy hiệu **`H(q)=...b • U_epist=...%`**.
+- [ ] Bấm **"Chi tiết thuật toán"** $\rightarrow$ kiểm tra 5 thẻ toán học và thanh phân phối xác suất hậu nghiệm $P(c_k \mid q)$.
+- [ ] Bấm nút xanh lá **"🛡️ Kiểm chứng X-Ray"** $\rightarrow$ kiểm tra tỷ lệ `Faithfulness (%)` và các mệnh đề 🟢/🟡/🔴.
+- [ ] Bấm **"Đối chiếu PDF (... - Tr. X)"** $\rightarrow$ kiểm tra khung PDF mở bên phải và tự động tô vàng câu bằng chứng.
+- [ ] Bấm nút tím **"🧠 Đồ thị Não 3D"** $\rightarrow$ bấm **"Mở Não 3D X-Ray"** $\rightarrow$ kiểm tra mô hình 3D bật X-Ray và phát sáng vùng não.
+
+### B. Kiểm thử tại Trang `/Literature` (`http://localhost:3001/Literature`)
+- [ ] Tích chọn 2–5 bài báo PDF $\rightarrow$ Bấm **"✨ Tạo Ma trận Bằng chứng & Literature Review"** (hoặc nút cam **"⚖️ Chạy Radar Phát hiện Mâu thuẫn & Đồng thuận CEBM"**).
+- [ ] Kiểm tra khối **Radar Đồng thuận & Mâu thuẫn Trọng số Oxford CEBM** (`Consensus %`, `Divergence %`, cặp nghiên cứu đối kháng).
+- [ ] Kiểm tra khối **Phân tích Gộp Meta-Analysis & Biểu đồ Rừng (`Forest Plot`)** (`Pooled Hedges' g`, `Higgins I²`, `Cochran's Q`, `Z-test p-value` và hình thoi tổng hợp `◆`).
+- [ ] Kiểm tra khối **Bản đồ Nhiệt Khoảng trống Bằng chứng PICO ($4 \times 3$)** và **3 Thẻ Đề xuất Đề tài NCKH Mới ($H_1$)**.
+- [ ] Kiểm tra bảng **Ma trận Bằng chứng 4 Thuộc tính**, bấm thử nút `Trang X`, `Copy LaTeX (Overleaf)` và `Xuất Excel (.csv)`.
+
+### C. Kiểm thử tại Trang `/Health` (`http://localhost:3001/Health`)
+- [ ] Chọn **Ca 1: Nguyễn Minh An (24t)** trong Phòng Mô phỏng Bệnh nhân Ảo (OSCE).
+- [ ] Gửi câu hỏi sàng lọc triệu chứng & nguy cơ tự sát $\rightarrow$ Bấm **`+ Đo PHQ-9`** và **`+ Đo BDI-II`**.
+- [ ] Điền Phiếu Chẩn đoán (`MDD mức độ nặng`, phân biệt `GAD, Lưỡng cực`, phác đồ `CBT + SSRI + giám sát an toàn`) $\rightarrow$ Bấm **"🏆 Nộp Bệnh Án & Chấm Điểm OSCE (Thang 100)"**.
+- [ ] Kiểm tra bảng điểm Rubric 100 điểm và Đáp án Chuẩn Vàng.
+
+### D. Kiểm thử tại Trang `/RAG` (`http://localhost:3001/RAG`)
+- [ ] Chọn câu hỏi mẫu $\rightarrow$ Bấm **"⚡ 1. Chạy Đối chứng Đơn truy vấn"** để xem bảng so sánh 3 kiến trúc và đối sánh Top Chunks.
+- [ ] Bấm nút màu xanh ngọc **"📊 2. Chạy Kiểm định Thống kê Đa truy vấn (p-value, Cohen's d & Pareto)"**.
+- [ ] Kiểm tra 2 thẻ **Paired Student's $t$-test & Cohen's $d$**, bảng **$\text{Mean} \pm \text{SD}$ & 95% CI**, và biểu đồ **Đường biên Tối ưu Pareto (`Pareto Frontier SVG`)**.
+- [ ] Bấm **"Copy Bảng LaTeX (Mean ± SD, p-value)"** để lấy mã LaTeX dán vào bài báo khoa học.

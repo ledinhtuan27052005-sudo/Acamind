@@ -10,7 +10,7 @@ const api = axios.create({
 // Inject JWT token into every request
 api.interceptors.request.use((config) => {
  if (typeof window !== 'undefined') {
- const token = localStorage.getItem('token');
+ const token = sessionStorage.getItem('token');
  if (token) config.headers.Authorization = `Bearer ${token}`;
  }
  return config;
@@ -26,7 +26,7 @@ export interface DocumentInfo {
  title: string | null;
  authors: string | null;
  year: number | null;
- status: 'processing' | 'ready' | 'error';
+ status: 'processing' | 'ready' | 'error' | 'cancel_requested' | 'cancelled';
  total_pages: number | null;
  category: string | null;
  created_at: string | null;
@@ -35,6 +35,7 @@ export interface DocumentInfo {
  // Phase A: memory status (built từ document_summaries ở backend)
  has_memory?: boolean;
  memory_status?: 'pending' | 'building' | 'ready' | 'failed' | string;
+ has_file?: boolean;
 }
 
 export interface AuthUser {
@@ -97,6 +98,34 @@ export const authGoogleLogin = async (
 
 // ── Document APIs ─────────────────────────────────────────────────────────────
 
+export interface UploadedDocumentItem {
+ document_id: string;
+ filename: string;
+ status: string;
+ duplicate?: boolean;
+ message: string;
+}
+
+export interface MultiUploadResponse {
+ total_uploaded: number;
+ total_errors: number;
+ documents: UploadedDocumentItem[];
+ errors: Array<{ filename: string; error: string; status: string }>;
+ message: string;
+}
+
+export interface ProcessingStatus {
+  status: string; stage: string; label: string; updated_at: string | null;
+}
+export const getProcessingStatus = async (id: string): Promise<ProcessingStatus> => {
+  const res = await api.get(`/document/${encodeURIComponent(id)}/processing`);
+  return res.data;
+};
+export const controlProcessing = async (id: string, action: 'cancel' | 'retry') => {
+  const res = await api.post(`/document/${encodeURIComponent(id)}/${action}-processing`);
+  return res.data as { status: string };
+};
+
 export const uploadDocument = async (
  file: File,
  category?: string | null,
@@ -120,6 +149,65 @@ export const uploadDocument = async (
  return res.data;
 };
 
+export const uploadMultipleDocuments = async (
+ files: File[],
+ category?: string | null,
+ onProgress?: (loaded: number, total: number) => void,
+ timeoutMs: number = 600_000,
+): Promise<MultiUploadResponse> => {
+ const BATCH_SIZE = 5;
+ const totalBytes = files.reduce((acc, f) => acc + (f.size || 0), 0);
+ let uploadedBytesCompleted = 0;
+
+ const allDocuments: UploadedDocumentItem[] = [];
+ const allErrors: Array<{ filename: string; error: string; status: string }> = [];
+
+ for (let i = 0; i < files.length; i += BATCH_SIZE) {
+ const batch = files.slice(i, i + BATCH_SIZE);
+ const batchBytes = batch.reduce((acc, f) => acc + (f.size || 0), 0);
+ const formData = new FormData();
+ batch.forEach((f) => formData.append('files', f));
+ if (category) formData.append('category', category);
+
+ try {
+ const res = await api.post<MultiUploadResponse>('/document/upload-multiple', formData, {
+ headers: { 'Content-Type': 'multipart/form-data' },
+ onUploadProgress: (e) => {
+ if (onProgress && totalBytes > 0) {
+ const currentBatchLoaded = e.total ? Math.min(batchBytes, Math.round((e.loaded / e.total) * batchBytes)) : 0;
+ onProgress(uploadedBytesCompleted + currentBatchLoaded, totalBytes);
+ }
+ },
+ timeout: timeoutMs,
+ maxContentLength: Infinity,
+ maxBodyLength: Infinity,
+ });
+ if (res.data?.documents) allDocuments.push(...res.data.documents);
+ if (res.data?.errors) allErrors.push(...res.data.errors);
+ } catch (err: unknown) {
+ const errWithResponse = err as { response?: { data?: { detail?: string } }; message?: string };
+ const detail = errWithResponse?.response?.data?.detail || errWithResponse?.message || 'Upload batch failed';
+ batch.forEach((f) => allErrors.push({ filename: f.name, error: detail, status: 'error' }));
+ }
+ uploadedBytesCompleted += batchBytes;
+ if (onProgress && totalBytes > 0) {
+ onProgress(uploadedBytesCompleted, totalBytes);
+ }
+ }
+
+ if (allDocuments.length === 0 && allErrors.length > 0) {
+ throw { response: { data: { detail: allErrors[0].error } } };
+ }
+
+ return {
+ total_uploaded: allDocuments.length,
+ total_errors: allErrors.length,
+ documents: allDocuments,
+ errors: allErrors,
+ message: `✓ Đã tải lên ${allDocuments.length}/${files.length} tài liệu. Đang xử lý nền...`,
+ };
+};
+
 export interface DbCategory {
  id: string;
  name: string;
@@ -131,9 +219,27 @@ export const getCategories = async (): Promise<DbCategory[]> => {
  return res.data;
 };
 
+let _inFlightGetDocs: Promise<DocumentInfo[]> | null = null;
+let _lastDocsCache: DocumentInfo[] = [];
+
 export const getDocuments = async (): Promise<DocumentInfo[]> => {
- const res = await api.get('/document/list');
- return res.data.documents;
+ if (_inFlightGetDocs) {
+  return _inFlightGetDocs;
+ }
+ _inFlightGetDocs = (async () => {
+  try {
+   const res = await api.get('/document/list', { timeout: 30_000 });
+   const docs = res.data?.documents || [];
+   _lastDocsCache = docs;
+   return docs;
+  } catch (err) {
+   console.warn('getDocuments fallback to cache due to timeout/network:', err);
+   return _lastDocsCache;
+  } finally {
+   _inFlightGetDocs = null;
+  }
+ })();
+ return _inFlightGetDocs;
 };
 
 
@@ -164,7 +270,7 @@ export const summarizeDocument = async (id: string): Promise<string> => {
 };
 
 export const fetchDocumentBlob = async (id: string): Promise<Blob> => {
- const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+ const token = typeof window !== 'undefined' ? sessionStorage.getItem('token') : null;
  const res = await fetch(`${API_URL}/api/v1/document/${id}/file`, {
  headers: token ? { Authorization: `Bearer ${token}` } : {},
  });
@@ -635,7 +741,7 @@ export const chatGeneralStream = async (
  onChunk: (text: string) => void,
  signal?: AbortSignal
 ): Promise<void> => {
- const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+ const token = typeof window !== 'undefined' ? sessionStorage.getItem('token') : null;
  const response = await fetch(`${API_URL}/api/v1/chat/general`, {
  method: 'POST',
  headers: {
@@ -732,6 +838,14 @@ export interface PipelineTelemetry {
   latency_ms: number;
   chunks_count: number;
   unique_docs: number;
+  shannon_entropy_bits?: number;
+  max_entropy_bits?: number;
+  normalized_entropy?: number;
+  epistemic_uncertainty?: number;
+  epistemic_level?: 'LOW' | 'MODERATE' | 'HIGH' | string;
+  epistemic_label?: string;
+  source_diversity_index?: number;
+  chunk_probabilities?: number[];
 }
 
 export interface SourceAuthorityMeta {
@@ -739,8 +853,9 @@ export interface SourceAuthorityMeta {
   filename: string;
   title: string;
   authors: string;
-  year: number;
+  year: number | null;
   pages: number[];
+  page_excerpts?: Record<string, string>;
   authority_tier: 'tier_1' | 'tier_2' | 'tier_3' | 'tier_4' | string;
   authority_label: string;
   cebm_level: string;
@@ -753,6 +868,28 @@ export interface SourceAuthorityMeta {
 export interface ChatTelemetryPayload {
   telemetry: PipelineTelemetry;
   sources: SourceAuthorityMeta[];
+  evidence_targets?: EvidenceTargetMeta[];
+  evidence_matrix?: {
+    action: 'answer' | 'partial' | 'refuse' | 'unavailable';
+    supported_cells?: number;
+    total_cells?: number;
+    calibrated: boolean;
+    cells: { target: string; facet: string; status: string;
+      evidence: { document_id: string; filename: string; page: number; quote: string }[] }[];
+  };
+}
+
+export interface EvidenceTargetMeta {
+  sub_query: string;
+  retrieved_count: number;
+  has_retrieved_evidence: boolean;
+  evidence: {
+    document_id: string;
+    filename: string;
+    title: string;
+    page: number;
+    excerpt: string;
+  }[];
 }
 
 export function decodeBase64Utf8Json<T>(b64: string | null): T | null {
@@ -777,7 +914,7 @@ export const chatStream = async (
     onTelemetry?: (payload: ChatTelemetryPayload) => void;
   }
 ): Promise<{ noContext: boolean; memoryHit: boolean; telemetryPayload: ChatTelemetryPayload | null }> => {
-  const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+  const token = typeof window !== 'undefined' ? sessionStorage.getItem('token') : null;
   const response = await fetch(`${API_URL}/api/v1/chat`, {
     method: 'POST',
     headers: {
@@ -794,7 +931,9 @@ export const chatStream = async (
 
   if (!response.ok) {
     const errorText = await response.text();
-    throw new Error(errorText || `HTTP ${response.status}`);
+    let message = errorText || `HTTP ${response.status}`;
+    try { message = JSON.parse(errorText)?.detail || message; } catch {}
+    throw new Error(message);
   }
 
   // Phase A: đọc X-Memory-Hit và X-Pipeline-Telemetry header
@@ -811,7 +950,7 @@ export const chatStream = async (
   const NO_CONTEXT_MARKER = '__NO_CONTEXT__';
   let header = '';
   let headerChecked = false;
-  let noContext = false;
+  let noContext = response.headers.get('X-No-Context') === 'true';
 
   while (true) {
     const { done, value } = await reader.read();
@@ -870,7 +1009,7 @@ export const chatFileStream = async ({
  onChunk,
  signal,
 }: ChatFileStreamOptions): Promise<void> => {
- const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+ const token = typeof window !== 'undefined' ? sessionStorage.getItem('token') : null;
  const formData = new FormData();
  formData.append('query', query);
  formData.append('document_ids', JSON.stringify(documentIds));
@@ -888,7 +1027,9 @@ export const chatFileStream = async ({
 
  if (!response.ok) {
   const errorText = await response.text();
-  throw new Error(errorText || `HTTP ${response.status}`);
+  let message = errorText || `HTTP ${response.status}`;
+  try { message = JSON.parse(errorText)?.detail || message; } catch {}
+  throw new Error(message);
  }
 
  const reader = response.body!.getReader();
@@ -1312,7 +1453,7 @@ export const debateStream = async (
  topic: string,
  onChunk: (text: string) => void
 ): Promise<void> => {
- const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+ const token = typeof window !== 'undefined' ? sessionStorage.getItem('token') : null;
  const response = await fetch(`${API_URL}/api/v1/debate/analyze`, {
  method: 'POST',
  headers: {
@@ -1323,7 +1464,9 @@ export const debateStream = async (
  });
  if (!response.ok) {
  const errorText = await response.text();
- throw new Error(errorText || `HTTP ${response.status}`);
+    let message = errorText || `HTTP ${response.status}`;
+    try { message = JSON.parse(errorText)?.detail || message; } catch {}
+    throw new Error(message);
  }
  const reader = response.body!.getReader();
  const decoder = new TextDecoder('utf-8');
@@ -1554,7 +1697,7 @@ export interface LiteratureMatrixRow {
   filename: string;
   title: string;
   authors: string;
-  year: number;
+  year: number | null;
   authority_tier: string;
   authority_label: string;
   cebm_level: string;
@@ -1563,6 +1706,7 @@ export interface LiteratureMatrixRow {
   methodology: string;
   scale_or_metric: string;
   finding: string;
+  sample_size_candidates?: { value: number; page: number | null; quote: string }[];
   page_citation: string;
   primary_page: number;
   supporting_pages: number[];
@@ -1570,8 +1714,101 @@ export interface LiteratureMatrixRow {
   bibtex: string;
 }
 
+export interface StudyProfile {
+  document_id: string;
+  title: string;
+  filename: string;
+  message: string;
+  coverage: { chunks_scanned: number; truncated: boolean; scope: string };
+  fields: Record<string, {
+    label: string;
+    status: 'unverified' | 'not_found';
+    candidate_count: number;
+    candidates: { quote: string; page: number; chunk_id: string; start: number; end: number;
+      origin: 'current_study_candidate' | 'cited_study_candidate' | 'unclear' }[];
+  }>;
+}
+
+export const getStudyProfile = async (documentId: string, signal?: AbortSignal): Promise<StudyProfile> => {
+  const res = await api.get(`/features/study-profile/${encodeURIComponent(documentId)}`, { signal });
+  return res.data;
+};
+
+export interface StudyComparability {
+  status: 'comparable' | 'conditions_differ' | 'insufficient_data';
+  message: string;
+  criteria: { key: string; label: string; status: 'matched' | 'different' | 'unknown'; reason: string;
+    evidence_a: { document_id: string; page: number; quote: string } | null;
+    evidence_b: { document_id: string; page: number; quote: string } | null }[];
+}
+
+export interface RankingExplanation {
+  retrieval_position: number; score_source: string; summary: string; note: string;
+  model_score: number | null; ranking_score: number | null; heuristic_score: number | null;
+  rrf_score: number | null; composite_score: number | null;
+  facets: { key: string; label: string; score: number | null; selected: boolean }[];
+}
+
+export interface StudyReview {
+  revision: number; status: 'draft' | 'confirmed'; value: string; note: string;
+  chunk_id: string; quote: string; page: number; created_at: string; reviewer_name: string;
+}
+
+export interface StudyDuplicateCheck {
+  message: string;
+  pairs: { document_a: string; document_b: string; kind: 'identical_file' | 'possible_version'; reason: string;
+    title_similarity: number | null;
+    metadata_a: { title: string; authors: string | null; year: number | null };
+    metadata_b: { title: string; authors: string | null; year: number | null };
+  }[];
+}
+export const checkStudyDuplicates = async (document_ids: string[]): Promise<StudyDuplicateCheck> => {
+  const res = await api.post('/features/study-duplicates', { document_ids });
+  return res.data;
+};
+export const getStudyReviews = async (id: string, criterion: string, before?: number) => {
+  const res = await api.get(`/features/study-profile/${encodeURIComponent(id)}/reviews/${encodeURIComponent(criterion)}`, { params: { before } });
+  return res.data as { items: StudyReview[]; next_before: number | null };
+};
+export const saveStudyReview = async (id: string, criterion: string, body: {
+  expected_revision: number; status: 'draft' | 'confirmed'; value: string; note: string; chunk_id: string; quote: string;
+}): Promise<StudyReview> => {
+  const res = await api.post(`/features/study-profile/${encodeURIComponent(id)}/reviews/${encodeURIComponent(criterion)}`, body);
+  return res.data;
+};
+
+export interface StudyGapSearch {
+  document_id: string; criterion: string; query: string; status: 'unverified' | 'not_found';
+  candidates: { chunk_id: string; page: number; quote: string; ranking?: RankingExplanation | null }[];
+}
+
+export const searchStudyGap = async (id: string, criterion: string, focus: string, signal?: AbortSignal): Promise<StudyGapSearch> => {
+  const res = await api.post(`/features/study-profile/${encodeURIComponent(id)}/search-gap`,
+    { criterion, focus }, { signal, timeout: 180000 });
+  return res.data;
+};
+
+export const compareStudyConditions = async (document_a: string, document_b: string, focus: string): Promise<StudyComparability> => {
+  const res = await api.post('/features/study-comparability', { document_a, document_b, focus }, { timeout: 150000 });
+  return res.data;
+};
+
+export interface StudyRelations {
+  status: 'assessed' | 'conditions_differ' | 'insufficient_data';
+  comparability: StudyComparability;
+  message: string;
+  relations: { aspect: string; relation: 'agreement' | 'contradiction'; reason: string;
+    evidence_a: { document_id: string; page: number; quote: string };
+    evidence_b: { document_id: string; page: number; quote: string } }[];
+}
+
+export const compareStudyFindings = async (document_a: string, document_b: string, focus: string): Promise<StudyRelations> => {
+  const res = await api.post('/features/study-relations', { document_a, document_b, focus }, { timeout: 270000 });
+  return res.data;
+};
+
 export const generateLiteratureReview = async (documentIds: string[], focus?: string): Promise<Response> => {
-  const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+  const token = typeof window !== 'undefined' ? sessionStorage.getItem('token') : null;
   const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
   return fetch(`${API_URL}/api/v1/features/literature-review`, {
     method: 'POST',
@@ -1618,8 +1855,8 @@ export interface PicoFramework {
 }
 
 export interface ConsensusMatrix {
-  consensus_percentage: number;
-  caveats_percentage: number;
+  consensus_percentage: number | null;
+  caveats_percentage: number | null;
   summary: string;
   debate_points: string[];
   consensus_label: string;
@@ -1675,7 +1912,7 @@ export interface ScientificAppraisal {
     bibtex: string;
     ris: string;
     apa7: string[];
-    docs: { id: string; title: string; authors: string; year: number; filename: string }[];
+    docs: { id: string; title: string; authors: string; year: number | null; filename: string }[];
   };
   knowledge_graph: KnowledgeGraphData;
   total_sources_appraised: number;
@@ -1719,8 +1956,8 @@ export interface VerifiedAtomicClaim {
   clean_text: string;
   status: 'ENTAILED' | 'EXTRAPOLATED' | 'UNVERIFIED';
   status_label: string;
-  entailment_score: number;
-  entailment_pct: number;
+  entailment_score: number | null;
+  entailment_pct: number | null;
   matched_doc_id: string;
   matched_filename: string;
   matched_title: string;
@@ -1730,7 +1967,7 @@ export interface VerifiedAtomicClaim {
 }
 
 export interface ClaimVerificationResult {
-  faithfulness_score: number;
+  faithfulness_score: number | null;
   formula: string;
   total_claims: number;
   entailed_count: number;
@@ -1757,7 +1994,7 @@ export interface ContradictionStudySide {
   filename: string;
   title: string;
   authors: string;
-  year: number;
+  year: number | null;
   cebm_level: string;
   cebm_label: string;
   cebm_weight: number;
@@ -1777,9 +2014,103 @@ export interface ContradictionPairItem {
   cebm_verdict: string;
 }
 
+export interface MetaAnalysisStudyItem {
+  document_id: string;
+  filename: string;
+  title: string;
+  authors: string;
+  year: number | null;
+  cebm_level: string;
+  cebm_label: string;
+  page_citation: string;
+  primary_page: number;
+  sample_n: number;
+  hedges_g: number;
+  se: number;
+  variance: number;
+  ci_lower: number;
+  ci_upper: number;
+  weight_pct: number;
+  effect_source_note: string;
+}
+
+export type MetaAnalysisForestPlot = MetaAnalysisAvailable | {
+  status: 'insufficient_data';
+  studies: [];
+  k_studies: 0;
+  message: string;
+  missing_sample_studies: { document_id: string; filename: string; sample_n: null; reason?: string; has_unverified_candidate?: boolean }[];
+  missing_effect_studies?: { document_id: string; filename: string; effect_size: null; reason: string }[];
+};
+
+export interface MetaAnalysisAvailable {
+  status?: 'available';
+  studies: MetaAnalysisStudyItem[];
+  k_studies: number;
+  total_sample_n: number;
+  pooled_effect: number;
+  pooled_se: number;
+  pooled_ci_lower: number;
+  pooled_ci_upper: number;
+  cochran_q: number;
+  df: number;
+  i_squared_pct: number;
+  tau_squared: number;
+  z_score: number;
+  p_value_str: string;
+  heterogeneity_level: string;
+  heterogeneity_interpretation: string;
+  model_used: string;
+}
+
+export interface PicoGapCell {
+  cell_id: string;
+  population_id: string;
+  population_label: string;
+  method_id: string;
+  method_label: string;
+  study_count: number;
+  best_cebm_level: string;
+  status: 'SATURATED' | 'PARTIAL' | 'GAP';
+  status_label: string;
+  citations: string[];
+}
+
+export interface NovelHypothesisItem {
+  id: string;
+  badge: string;
+  gap_target: string;
+  proposed_title: string;
+  research_question: string;
+  pico: {
+    population: string;
+    intervention: string;
+    comparison: string;
+    outcome: string;
+  };
+  suggested_design: string;
+  novelty_rationale: string;
+}
+
+export interface PicoResearchGapMap {
+  status?: string;
+  message?: string;
+  population_axes: { id: string; label: string }[];
+  method_axes: { id: string; label: string }[];
+  grid_cells: PicoGapCell[];
+  summary_stats: {
+    total_cells: number;
+    saturated_cells: number;
+    partial_cells: number;
+    gap_cells: number;
+    evidence_coverage_pct: number | null;
+  };
+  novel_hypotheses: NovelHypothesisItem[];
+}
+
 export interface CebmContradictionRadar {
-  cebm_weighted_consensus_pct: number;
-  divergence_index_pct: number;
+  cebm_weighted_consensus_pct: number | null;
+  divergence_index_pct: number | null;
   formula: string;
   dominant_study: {
     title: string;
@@ -1796,6 +2127,8 @@ export interface CebmContradictionRadar {
   }[];
   contradictions: ContradictionPairItem[];
   methodological_summary: string;
+  meta_analysis?: MetaAnalysisForestPlot | null;
+  research_gaps?: PicoResearchGapMap | null;
 }
 
 export const analyzeContradictionRadar = async (
@@ -1929,10 +2262,10 @@ export interface AblationPipelineItem {
   architecture: string;
   latency_ms: number;
   keyword_coverage_pct: number;
-  semantic_alignment_pct: number;
-  citation_precision_pct: number;
-  faithfulness_pct: number;
-  overall_score_pct: number;
+  semantic_alignment_pct: number | null;
+  citation_precision_pct: number | null;
+  faithfulness_pct: number | null;
+  overall_score_pct: number | null;
   dcsr_active: boolean;
   dcsr_fast_skip?: boolean;
   crag_verified: boolean;
@@ -1952,10 +2285,10 @@ export interface AblationBenchmarkResult {
   expanded_bilingual_terms: string[];
   pipelines: AblationPipelineItem[];
   gains: {
-    faithfulness_gain_vs_naive: number;
-    recall_gain_vs_naive: number;
-    citation_gain_vs_naive: number;
-    overall_gain_vs_naive: number;
+    faithfulness_gain_vs_naive: number | null;
+    recall_gain_vs_naive: number | null;
+    citation_gain_vs_naive: number | null;
+    overall_gain_vs_naive: number | null;
   };
   telemetry: PipelineTelemetry;
   answer: string;
@@ -1973,5 +2306,78 @@ export const runAblationBenchmark = async (
   return res.data;
 };
 
+export interface StatisticalMetricSummary {
+  mean: number;
+  sd: number;
+  se: number;
+  ci_lower: number;
+  ci_upper: number;
+}
 
+export interface PairedTTestResult {
+  mean_diff: number;
+  sd_diff: number;
+  t_stat: number;
+  df: number;
+  p_value: number;
+  p_value_str: string;
+  cohens_d: number;
+  effect_magnitude: string;
+  significant: boolean;
+}
 
+export interface ParetoFrontierPoint {
+  id: string;
+  label: string;
+  latency_ms: number;
+  accuracy_pct: number;
+  faithfulness_pct: number | null;
+  is_pareto_optimal: boolean;
+  color: string;
+  note: string;
+}
+
+export interface AblationSuiteQueryRun {
+  id: string;
+  category: string;
+  question: string;
+  naive_overall: number;
+  hybrid_overall: number;
+  acamind_overall: number;
+  naive_faithfulness: number;
+  hybrid_faithfulness: number;
+  acamind_faithfulness: number;
+  naive_latency_ms: number;
+  hybrid_latency_ms: number;
+  acamind_latency_ms: number;
+  dcsr_fast_skip: boolean;
+  shannon_entropy_bits: number;
+  epistemic_uncertainty: number;
+}
+
+export interface AblationSuiteResult {
+  n_queries: number;
+  per_query_runs: AblationSuiteQueryRun[];
+  summary_stats: {
+    naive_dense: Record<string, StatisticalMetricSummary>;
+    hybrid_rrf: Record<string, StatisticalMetricSummary>;
+    acamind_full: Record<string, StatisticalMetricSummary>;
+  };
+  significance_tests: {
+    vs_naive_dense: Record<string, PairedTTestResult>;
+    vs_hybrid_rrf: Record<string, PairedTTestResult>;
+  };
+  pareto_frontier: ParetoFrontierPoint[];
+  latex_statistical_table: string;
+}
+
+export const runStatisticalAblationSuite = async (
+  customQuestion?: string,
+  documentIds?: string[]
+): Promise<AblationSuiteResult> => {
+  const res = await api.post('/evaluate/ablation-suite', {
+    custom_question: customQuestion || null,
+    document_ids: documentIds && documentIds.length > 0 ? documentIds : null,
+  });
+  return res.data;
+};

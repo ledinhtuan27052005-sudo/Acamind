@@ -8,6 +8,21 @@ const nextConfig = {
   // Fix: transpile three.js + r3f so Next.js 14 App Router can bundle them correctly
   // Without this, @react-three/fiber throws "Cannot read properties of undefined"
   transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
+  async redirects() {
+    const removedFeaturePaths = [
+      '/timeline', '/translate', '/Terminology', '/graph', '/Trend', '/trend',
+      '/Quiz', '/quiz', '/Slide', '/slide', '/study', '/Health', '/health', '/3d', '/Critique', '/critique', '/RAG', '/rag',
+      '/debate', '/trends', '/authors', '/analysis',
+    ];
+    return [
+      { source: '/', destination: '/chat', permanent: false },
+      ...removedFeaturePaths.map((source) => ({
+      source: `${source}/:path*`,
+      destination: '/chat',
+      permanent: false,
+      })),
+    ];
+  },
 };
 
 module.exports = nextConfig;

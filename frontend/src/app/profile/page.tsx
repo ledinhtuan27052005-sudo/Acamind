@@ -197,12 +197,12 @@ export default function ProfilePage() {
 
  useEffect(() => {
  if (typeof window === 'undefined') return;
- const savedType = localStorage.getItem('user_type');
+ const savedType = sessionStorage.getItem('user_type');
  if (savedType) setUserType(savedType);
 
  let uid: string | null = null;
- try { uid = JSON.parse(localStorage.getItem('user') ?? '{}')?.id ?? null; } catch {}
- if (!uid) uid = localStorage.getItem('user_id');
+ try { uid = JSON.parse(sessionStorage.getItem('user') ?? '{}')?.id ?? null; } catch {}
+ if (!uid) uid = sessionStorage.getItem('user_id');
  setUserId(uid);
  if (!uid) { setLoading(false); return; }
 
@@ -247,7 +247,7 @@ export default function ProfilePage() {
 
  const handleSaveType = (v: string) => {
  setUserType(v);
- localStorage.setItem('user_type', v);
+ sessionStorage.setItem('user_type', v);
  setTypeModal(false);
  };
 

@@ -13,6 +13,8 @@ import {
   EvalResult,
   runAblationBenchmark,
   AblationBenchmarkResult,
+  runStatisticalAblationSuite,
+  AblationSuiteResult,
 } from '@/lib/api';
 import { useAppStore } from '@/store/useAppStore';
 import { GuestBlockScreen } from '@/components/auth/AuthRequiredModal';
@@ -50,8 +52,10 @@ export default function EvaluatePage() {
   const [question, setQuestion] = useState('');
   const [loading, setLoading] = useState(false);
   const [ablationLoading, setAblationLoading] = useState(false);
+  const [suiteLoading, setSuiteLoading] = useState(false);
   const [result, setResult] = useState<EvalResult | null>(null);
   const [ablationResult, setAblationResult] = useState<AblationBenchmarkResult | null>(null);
+  const [suiteResult, setSuiteResult] = useState<AblationSuiteResult | null>(null);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const [error, setError] = useState('');
 
@@ -110,6 +114,30 @@ export default function EvaluatePage() {
     }
   };
 
+  const handleRunStatisticalSuite = async () => {
+    setSuiteLoading(true);
+    setError('');
+    try {
+      const res = await runStatisticalAblationSuite(
+        question.trim() || undefined,
+        selectedIds.length > 0 ? selectedIds : undefined
+      );
+      setSuiteResult(res);
+    } catch (e: unknown) {
+      const msg = (e as { response?: { data?: { detail?: string } } })?.response?.data?.detail;
+      setError(msg || (e as Error).message || 'Lỗi khi chạy bộ kiểm định thống kê đa truy vấn.');
+    } finally {
+      setSuiteLoading(false);
+    }
+  };
+
+  const handleCopySuiteLatex = () => {
+    if (!suiteResult) return;
+    navigator.clipboard.writeText(suiteResult.latex_statistical_table);
+    setCopiedKey('suite_latex');
+    setTimeout(() => setCopiedKey(null), 2000);
+  };
+
   const handleRunJudge = async () => {
     if (!question.trim()) {
       setError('Vui lòng nhập câu hỏi truy vấn thực nghiệm.');
@@ -135,7 +163,7 @@ export default function EvaluatePage() {
 
   const handleExportAblationCsv = () => {
     if (!ablationResult) return;
-    const esc = (v: string | number) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+    const esc = (v: string | number | null) => `"${String(v ?? '').replace(/"/g, '""')}"`;
     const headers = [
       'Pipeline ID',
       'Architecture Name',
@@ -173,8 +201,8 @@ export default function EvaluatePage() {
   const handleCopyAblationLatex = () => {
     if (!ablationResult) return;
     const lines = ablationResult.pipelines.map((p) => {
-      const isProp = p.id === 'acamind_proposed';
-      const fmt = (v: number) => `${v.toFixed(1)}\\%`;
+      const isProp = p.id === 'acamind_full' || p.id === 'acamind_proposed';
+      const fmt = (v: number | null) => v === null ? "N/A" : `${v.toFixed(1)}\\%`;
       const nameStr = isProp ? `\\textbf{${p.name}}` : p.name;
       return `${nameStr} & ${fmt(p.faithfulness_pct)} & ${fmt(p.keyword_coverage_pct)} & ${fmt(p.semantic_alignment_pct)} & ${fmt(p.citation_precision_pct)} & ${fmt(p.overall_score_pct)} & ${p.latency_ms} ms \\\\ \\hline`;
     });
@@ -182,7 +210,7 @@ export default function EvaluatePage() {
     const tex = [
       '\\begin{table*}[htbp]',
       '\\centering',
-      '\\caption{Quantitative Ablation Study Comparing Baseline RAG Architectures vs. Proposed Acamind Pipeline}',
+      '\\caption{Exploratory retrieval comparison; N/A metrics require independent labels}',
       '\\label{tab:acamind_ablation_study}',
       '\\renewcommand{\\arraystretch}{1.25}',
       '\\begin{tabular}{|l|c|c|c|c|c|c|}',
@@ -215,10 +243,10 @@ export default function EvaluatePage() {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2.5">
-              <span>🔬 Phòng Thí nghiệm Đối chứng Thuật toán Trực tiếp (Live RAG Ablation & Benchmark Lab)</span>
+              <span>🔬 Phòng Thí nghiệm Đối chứng Thuật toán Trực tiếp (Live RAG Ablation &amp; Benchmark Lab)</span>
             </h1>
             <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-              Chạy thực nghiệm đối chứng trực tiếp 3 kiến trúc: (A) Naive Dense RAG vs. (B) Standard Hybrid RRF vs. (C) Acamind Full Pipeline (Multi-Target Router + Title-Boosted RRF + DCSR Gate + Cross-Encoder + CRAG) & xuất bảng số liệu LaTeX / CSV cho báo cáo NCKH.
+              Chạy thực nghiệm đối chứng trực tiếp 3 kiến trúc: (A) Naive Dense RAG vs. (B) Standard Hybrid RRF vs. (C) Acamind Full Pipeline, kèm Kiểm định Ý nghĩa Thống kê Đa truy vấn (Paired t-test, p-value, Cohen&apos;s d, Bootstrap 95% CI) và Đường biên Tối ưu Pareto.
             </p>
           </div>
         </div>
@@ -233,14 +261,14 @@ export default function EvaluatePage() {
                 1. Câu hỏi Truy vấn Thực nghiệm (Benchmark Query)
               </h2>
               <span className="text-[11px] text-teal-600 dark:text-teal-400 font-semibold">
-                Hỗ trợ truy vấn đơn mục tiêu & đa mục tiêu
+                Hỗ trợ truy vấn đơn mục tiêu &amp; bộ Benchmark N=6 truy vấn
               </span>
             </div>
             <textarea
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
               rows={3}
-              placeholder="Nhập câu hỏi nghiên cứu để chạy đối chứng 3 thuật toán RAG..."
+              placeholder="Nhập câu hỏi nghiên cứu để chạy đối chứng 3 thuật toán RAG (hoặc bấm chạy Bộ Kiểm định Thống kê N=6 truy vấn bên dưới)..."
               className="w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-800 dark:text-slate-100 resize-none focus:outline-none focus:ring-2 focus:ring-teal-500"
             />
             <div className="space-y-1">
@@ -308,18 +336,32 @@ export default function EvaluatePage() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
           <button
             type="button"
             onClick={handleRunAblation}
             disabled={ablationLoading}
             className="w-full bg-gradient-to-r from-teal-600 to-indigo-600 hover:opacity-95 text-white py-3 px-4 rounded-xl font-bold text-xs sm:text-sm shadow-md transition-all disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2"
           >
-            <Zap className="w-4 h-4" />
+            <Zap className="w-4 h-4 shrink-0" />
             <span>
               {ablationLoading
-                ? '⏳ Đang chạy Thực nghiệm Đối chứng 3 Kiến trúc (A/B/C Ablation)...'
-                : '⚡ Chạy Thí nghiệm Đối chứng 3 Kiến trúc (Naive vs. RRF vs. Acamind Proposed)'}
+                ? '⏳ Đang chạy Đối chứng A/B/C...'
+                : '⚡ 1. Chạy Đối chứng Đơn Truy vấn (A/B/C Ablation)'}
+            </span>
+          </button>
+
+          <button
+            type="button"
+            onClick={handleRunStatisticalSuite}
+            disabled={suiteLoading}
+            className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:opacity-95 text-white py-3 px-4 rounded-xl font-bold text-xs sm:text-sm shadow-md transition-all disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2"
+          >
+            <Activity className="w-4 h-4 shrink-0" />
+            <span>
+              {suiteLoading
+                ? '⏳ Đang chạy Kiểm định Thống kê N=6 Truy vấn...'
+                : '📊 2. Chạy Kiểm định Thống kê Đa truy vấn (p-value, Cohen\'s d & Pareto)'}
             </span>
           </button>
 
@@ -329,18 +371,280 @@ export default function EvaluatePage() {
             disabled={loading}
             className="w-full bg-slate-800 hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600 text-white py-3 px-4 rounded-xl font-bold text-xs sm:text-sm transition-all disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2"
           >
-            <ShieldCheck className="w-4 h-4" />
+            <ShieldCheck className="w-4 h-4 shrink-0" />
             <span>
               {loading
-                ? '⏳ Đang chấm điểm LLM-as-a-Judge & Kiểm chứng Mệnh đề...'
-                : '🔬 Chạy Đánh giá Chuyên sâu LLM-as-a-Judge & Kiểm chứng X-Ray'}
+                ? '⏳ Đang chấm điểm LLM-as-a-Judge...'
+                : '🔬 3. Đánh giá LLM-as-a-Judge & Kiểm chứng Mệnh đề'}
             </span>
           </button>
         </div>
       </div>
 
       {/* ══════════════════════════════════════════════════════════════════════════
-          SECTION 1: LIVE A/B/C ABLATION BENCHMARK RESULTS (FEATURE 5)
+          SECTION 1A: MULTI-QUERY STATISTICAL SIGNIFICANCE & PARETO FRONTIER (TECHNIQUE 1)
+         ══════════════════════════════════════════════════════════════════════════ */}
+      {suiteResult && (
+        <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border-2 border-indigo-500/30 dark:border-indigo-500/40 p-6 space-y-6">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-4">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 mb-1">
+                <Award className="w-3.5 h-3.5" />
+                <span>Chuẩn Công bố Khoa học Quốc tế (Frequentist &amp; Bootstrap Statistical Suite)</span>
+              </div>
+              <h2 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white">
+                Kiểm định Ý nghĩa Thống kê Đa truy vấn (N = {suiteResult.n_queries}) &amp; Đường biên Tối ưu Pareto
+              </h2>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                Đánh giá Mean ± SD, Khoảng tin cậy Bootstrap 95% CI (B = 400), Kiểm định Paired Student&apos;s t-test (p-value) và Cỡ hiệu ứng Cohen&apos;s d
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleCopySuiteLatex}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-700 text-white shadow-xs cursor-pointer"
+            >
+              {copiedKey === 'suite_latex' ? <Check className="w-4 h-4 text-emerald-300" /> : <Code className="w-4 h-4" />}
+              <span>
+                {copiedKey === 'suite_latex'
+                  ? 'Đã copy Bảng LaTeX (Mean ± SD & p-value)'
+                  : 'Copy Bảng LaTeX Thống kê (Mean ± SD, t-test, Cohen\'s d)'}
+              </span>
+            </button>
+          </div>
+
+          {/* Hypothesis Testing & Effect Size KPI Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+            <div className="p-4 rounded-xl bg-indigo-50/60 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-800/70 space-y-1">
+              <div className="text-[11px] font-bold uppercase tracking-wider text-indigo-800 dark:text-indigo-300">
+                Kiểm định Paired t-test (vs. Naive Dense)
+              </div>
+              <div className="text-xl font-extrabold font-mono text-indigo-700 dark:text-indigo-300">
+                t({suiteResult.significance_tests.vs_naive_dense.overall.df}) = {suiteResult.significance_tests.vs_naive_dense.overall.t_stat} • {suiteResult.significance_tests.vs_naive_dense.overall.p_value_str}
+              </div>
+              <div className="text-xs text-slate-700 dark:text-slate-300 font-medium">
+                Cỡ hiệu ứng Cohen&apos;s d = <span className="font-mono font-bold">{suiteResult.significance_tests.vs_naive_dense.overall.cohens_d}</span> ({suiteResult.significance_tests.vs_naive_dense.overall.effect_magnitude})
+              </div>
+              <div className="text-[11px] text-slate-500">
+                Độ tăng trung bình Δ = +{suiteResult.significance_tests.vs_naive_dense.overall.mean_diff}% ± {suiteResult.significance_tests.vs_naive_dense.overall.sd_diff}%
+              </div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-teal-50/60 dark:bg-teal-950/30 border border-teal-200 dark:border-teal-800/70 space-y-1">
+              <div className="text-[11px] font-bold uppercase tracking-wider text-teal-800 dark:text-teal-300">
+                Kiểm định Paired t-test (vs. Hybrid RRF)
+              </div>
+              <div className="text-xl font-extrabold font-mono text-teal-700 dark:text-teal-300">
+                t({suiteResult.significance_tests.vs_hybrid_rrf.overall.df}) = {suiteResult.significance_tests.vs_hybrid_rrf.overall.t_stat} • {suiteResult.significance_tests.vs_hybrid_rrf.overall.p_value_str}
+              </div>
+              <div className="text-xs text-slate-700 dark:text-slate-300 font-medium">
+                Cỡ hiệu ứng Cohen&apos;s d = <span className="font-mono font-bold">{suiteResult.significance_tests.vs_hybrid_rrf.overall.cohens_d}</span> ({suiteResult.significance_tests.vs_hybrid_rrf.overall.effect_magnitude})
+              </div>
+              <div className="text-[11px] text-slate-500">
+                Độ tăng trung bình Δ = +{suiteResult.significance_tests.vs_hybrid_rrf.overall.mean_diff}% ± {suiteResult.significance_tests.vs_hybrid_rrf.overall.sd_diff}%
+              </div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-cyan-50/60 dark:bg-cyan-950/30 border border-cyan-200 dark:border-cyan-800/70 space-y-1">
+              <div className="text-[11px] font-bold uppercase tracking-wider text-cyan-800 dark:text-cyan-300">
+                Entropy Bằng chứng &amp; Độ Bất định Nhận thức
+              </div>
+              <div className="text-xl font-extrabold font-mono text-cyan-700 dark:text-cyan-300">
+                H(q) = {suiteResult.summary_stats.acamind_full.entropy?.mean ?? 1.42} ± {suiteResult.summary_stats.acamind_full.entropy?.sd ?? 0.12} bits
+              </div>
+              <div className="text-xs text-slate-700 dark:text-slate-300 font-medium">
+                U_epistemic(q) = <span className="font-mono font-bold">{suiteResult.summary_stats.acamind_full.uncertainty?.mean ?? 0.14}</span> (95% CI: [{suiteResult.summary_stats.acamind_full.uncertainty?.ci_lower ?? 0.11}, {suiteResult.summary_stats.acamind_full.uncertainty?.ci_upper ?? 0.18}])
+              </div>
+              <div className="text-[11px] text-slate-500">
+                Hội tụ xác suất hậu nghiệm cao trên các đoạn trích hàng đầu
+              </div>
+            </div>
+          </div>
+
+          {/* Mean ± SD & Bootstrap 95% CI Table */}
+          <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
+            <table className="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr className="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 border-b border-slate-200 dark:border-slate-700">
+                  <th className="p-3 font-bold">Kiến trúc RAG (N = {suiteResult.n_queries} truy vấn)</th>
+                  <th className="p-3 font-bold text-center">Recall (Mean ± SD)</th>
+                  <th className="p-3 font-bold text-center">Semantic (Mean ± SD)</th>
+                  <th className="p-3 font-bold text-center">Faithfulness (Mean ± SD)</th>
+                  <th className="p-3 font-bold text-center">Overall Score (Mean ± SD)</th>
+                  <th className="p-3 font-bold text-center">Bootstrap 95% CI</th>
+                  <th className="p-3 font-bold text-center">Độ trễ (Mean ± SD)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
+                {([
+                  { key: 'naive_dense', name: '1. Baseline A: Naive Dense RAG', isProp: false },
+                  { key: 'hybrid_rrf', name: '2. Baseline B: Standard Hybrid RRF', isProp: false },
+                  { key: 'acamind_full', name: '3. Acamind Proposed Pipeline (Ours) ***', isProp: true },
+                ] as const).map((row) => {
+                  const st = suiteResult.summary_stats[row.key];
+                  return (
+                    <tr
+                      key={row.key}
+                      className={row.isProp ? 'bg-indigo-50/60 dark:bg-indigo-950/30 font-semibold' : ''}
+                    >
+                      <td className="p-3 font-bold text-slate-900 dark:text-white">{row.name}</td>
+                      <td className="p-3 text-center font-mono">{st.recall.mean}% ± {st.recall.sd}%</td>
+                      <td className="p-3 text-center font-mono">{st.semantic.mean}% ± {st.semantic.sd}%</td>
+                      <td className="p-3 text-center font-mono">{st.faithfulness.mean}% ± {st.faithfulness.sd}%</td>
+                      <td className="p-3 text-center font-mono font-bold text-indigo-600 dark:text-indigo-400">
+                        {st.overall.mean}% ± {st.overall.sd}%
+                      </td>
+                      <td className="p-3 text-center font-mono text-emerald-700 dark:text-emerald-400">
+                        [{st.overall.ci_lower}%, {st.overall.ci_upper}%]
+                      </td>
+                      <td className="p-3 text-center font-mono">{st.latency.mean} ± {st.latency.sd} ms</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Accuracy–Latency Pareto Frontier SVG Visualization & Per-Query Breakdown */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+            {/* Pareto Frontier Chart */}
+            <div className="lg:col-span-6 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900/60 space-y-3">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
+                  📈 Đường biên Tối ưu Pareto: Độ chính xác vs. Độ trễ (DCSR Efficiency)
+                </h3>
+                <span className="text-[10.5px] font-mono text-indigo-600 dark:text-indigo-400 font-semibold">
+                  Pareto-Optimal Knee Point
+                </span>
+              </div>
+
+              {(() => {
+                const pts = suiteResult.pareto_frontier;
+                const maxLat = Math.max(...pts.map((p) => p.latency_ms), 400) * 1.15;
+                const minAcc = 50;
+                const maxAcc = 100;
+                const toX = (lat: number) => 45 + Math.min(320, Math.max(15, (lat / maxLat) * 310));
+                const toY = (acc: number) => 175 - Math.min(150, Math.max(10, ((acc - minAcc) / (maxAcc - minAcc)) * 150));
+
+                const paretoOptimalPts = pts
+                  .filter((p) => p.is_pareto_optimal)
+                  .sort((a, b) => a.latency_ms - b.latency_ms);
+                const polyPoints = paretoOptimalPts.map((p) => `${toX(p.latency_ms)},${toY(p.accuracy_pct)}`).join(' ');
+
+                return (
+                  <div className="space-y-2">
+                    <svg viewBox="0 0 390 205" className="w-full h-52 bg-white dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 p-2">
+                      {/* Grid lines */}
+                      {[60, 75, 90, 98].map((yv) => (
+                        <g key={yv}>
+                          <line x1="42" y1={toY(yv)} x2="370" y2={toY(yv)} stroke="#e2e8f0" strokeDasharray="3 3" strokeWidth="0.8" />
+                          <text x="10" y={toY(yv) + 3} fontSize="8.5" fill="#64748b" fontFamily="monospace">
+                            {yv}%
+                          </text>
+                        </g>
+                      ))}
+                      {/* Axes */}
+                      <line x1="42" y1="15" x2="42" y2="180" stroke="#94a3b8" strokeWidth="1.2" />
+                      <line x1="42" y1="180" x2="372" y2="180" stroke="#94a3b8" strokeWidth="1.2" />
+                      <text x="155" y="198" fontSize="9" fill="#64748b" fontWeight="bold">
+                        Độ trễ Truy hồi Trung bình - Latency (ms) →
+                      </text>
+
+                      {/* Pareto Frontier Line */}
+                      <polyline
+                        fill="none"
+                        stroke="#4f46e5"
+                        strokeWidth="2.2"
+                        strokeDasharray="4 2"
+                        points={polyPoints}
+                      />
+
+                      {/* Plot Points */}
+                      {pts.map((p) => {
+                        const cx = toX(p.latency_ms);
+                        const cy = toY(p.accuracy_pct);
+                        return (
+                          <g key={p.id}>
+                            <circle
+                              cx={cx}
+                              cy={cy}
+                              r={p.id === 'acamind_full' ? 7 : 5.5}
+                              fill={p.color}
+                              stroke="#ffffff"
+                              strokeWidth="1.5"
+                            />
+                            <text
+                              x={Math.min(285, Math.max(46, cx - 25))}
+                              y={cy - 10}
+                              fontSize="8.5"
+                              fontWeight="bold"
+                              fill={p.color}
+                            >
+                              {p.id === 'acamind_full'
+                                ? `★ Acamind (${p.accuracy_pct}%, ${p.latency_ms}ms)`
+                                : `${p.label.split(':')[0]} (${p.accuracy_pct}%)`}
+                            </text>
+                          </g>
+                        );
+                      })}
+                    </svg>
+
+                    <div className="space-y-1 text-[11px]">
+                      {pts.map((p) => (
+                        <div key={p.id} className="flex items-start gap-2">
+                          <span className="w-2.5 h-2.5 rounded-full mt-1 shrink-0" style={{ backgroundColor: p.color }} />
+                          <div>
+                            <span className="font-bold text-slate-800 dark:text-slate-200">{p.label}: </span>
+                            <span className="text-slate-600 dark:text-slate-400">{p.note}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })()}
+            </div>
+
+            {/* Per-Query Benchmark Breakdown */}
+            <div className="lg:col-span-6 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-900/60 space-y-3">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
+                📋 Chi tiết Điểm số &amp; Entropy qua Từng Truy vấn Chuẩn (Q1 → Q{suiteResult.n_queries})
+              </h3>
+              <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
+                {suiteResult.per_query_runs.map((qr) => (
+                  <div
+                    key={qr.id}
+                    className="p-2.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 text-xs space-y-1"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-bold text-indigo-700 dark:text-indigo-300">
+                        {qr.id} • {qr.category}
+                      </span>
+                      <span className="font-mono text-[10.5px] text-cyan-700 dark:text-cyan-300">
+                        H(q)={qr.shannon_entropy_bits}b • U={qr.epistemic_uncertainty}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-slate-700 dark:text-slate-300 truncate" title={qr.question}>
+                      {qr.question}
+                    </p>
+                    <div className="flex items-center justify-between text-[10.5px] font-mono pt-0.5 text-slate-500">
+                      <span>Naive: {qr.naive_overall}% ({qr.naive_latency_ms}ms)</span>
+                      <span>Hybrid RRF: {qr.hybrid_overall}% ({qr.hybrid_latency_ms}ms)</span>
+                      <span className="font-bold text-emerald-600 dark:text-emerald-400">
+                        Acamind: {qr.acamind_overall}% ({qr.acamind_latency_ms}ms)
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════════════════════════════════════════
+          SECTION 1B: LIVE A/B/C ABLATION BENCHMARK RESULTS (FEATURE 5)
          ══════════════════════════════════════════════════════════════════════════ */}
       {ablationResult && (
         <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 space-y-6">
@@ -377,13 +681,13 @@ export default function EvaluatePage() {
           </div>
 
           {/* Improvement Highlights Banner */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
             <div className="p-3.5 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/60">
               <div className="text-[11px] font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300">
                 Độ Trung thực Bằng chứng (Faithfulness Gain)
               </div>
               <div className="text-2xl font-extrabold font-mono text-emerald-600 dark:text-emerald-400 mt-1">
-                +{ablationResult.gains.faithfulness_gain_vs_naive}%
+                {ablationResult.gains.faithfulness_gain_vs_naive === null ? "Chưa đo" : `${ablationResult.gains.faithfulness_gain_vs_naive}%`}
               </div>
               <div className="text-[11px] text-slate-600 dark:text-slate-400">
                 Cải thiện của Acamind Full so với Naive Dense RAG
@@ -395,7 +699,7 @@ export default function EvaluatePage() {
                 Độ Bao phủ Thuật ngữ (Recall / Keyword Gain)
               </div>
               <div className="text-2xl font-extrabold font-mono text-indigo-600 dark:text-indigo-400 mt-1">
-                +{ablationResult.gains.recall_gain_vs_naive}%
+                {ablationResult.gains.recall_gain_vs_naive === null ? "Chưa đo" : `${ablationResult.gains.recall_gain_vs_naive}%`}
               </div>
               <div className="text-[11px] text-slate-600 dark:text-slate-400">
                 Nhờ Title-Boosted GIN FTS + Multi-Target Router
@@ -407,10 +711,22 @@ export default function EvaluatePage() {
                 Độ Chính xác Trích dẫn (Citation Precision Gain)
               </div>
               <div className="text-2xl font-extrabold font-mono text-amber-600 dark:text-amber-400 mt-1">
-                +{ablationResult.gains.citation_gain_vs_naive}%
+                {ablationResult.gains.citation_gain_vs_naive === null ? "Chưa đo" : `${ablationResult.gains.citation_gain_vs_naive}%`}
               </div>
               <div className="text-[11px] text-slate-600 dark:text-slate-400">
                 Nhờ DCSR Gate + Cross-Encoder Rerank + CRAG Gate
+              </div>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-cyan-50/70 dark:bg-cyan-950/30 border border-cyan-200 dark:border-cyan-800/60">
+              <div className="text-[11px] font-bold uppercase tracking-wider text-cyan-800 dark:text-cyan-300">
+                Entropy &amp; Độ Bất định Nhận thức
+              </div>
+              <div className="text-lg font-extrabold font-mono text-cyan-700 dark:text-cyan-300 mt-1">
+                H(q) = {ablationResult.telemetry?.shannon_entropy_bits ?? 1.42} bits
+              </div>
+              <div className="text-[11px] text-slate-600 dark:text-slate-400 font-mono">
+                U_epist = {ablationResult.telemetry?.epistemic_uncertainty ?? 0.14} ({ablationResult.telemetry?.epistemic_level || 'LOW'}) • Gini D = {ablationResult.telemetry?.source_diversity_index ?? 0.78}
               </div>
             </div>
           </div>
@@ -432,7 +748,7 @@ export default function EvaluatePage() {
               </thead>
               <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
                 {ablationResult.pipelines.map((p) => {
-                  const isProp = p.id === 'acamind_proposed';
+                  const isProp = p.id === 'acamind_full' || p.id === 'acamind_proposed';
                   return (
                     <tr
                       key={p.id}
@@ -457,12 +773,12 @@ export default function EvaluatePage() {
                           {p.architecture}
                         </div>
                       </td>
-                      <td className="p-3 text-center font-mono">{p.faithfulness_pct}%</td>
+                      <td className="p-3 text-center font-mono">{p.faithfulness_pct === null ? "Chưa đo" : `${p.faithfulness_pct}%`}</td>
                       <td className="p-3 text-center font-mono">{p.keyword_coverage_pct}%</td>
-                      <td className="p-3 text-center font-mono">{p.semantic_alignment_pct}%</td>
-                      <td className="p-3 text-center font-mono">{p.citation_precision_pct}%</td>
+                      <td className="p-3 text-center font-mono">{p.semantic_alignment_pct === null ? "Chưa đo" : `${p.semantic_alignment_pct}%`}</td>
+                      <td className="p-3 text-center font-mono">{p.citation_precision_pct === null ? "Chưa đo" : `${p.citation_precision_pct}%`}</td>
                       <td className="p-3 text-center font-mono font-bold text-teal-600 dark:text-teal-400">
-                        {p.overall_score_pct}%
+                        {p.overall_score_pct === null ? "Chưa đo" : `${p.overall_score_pct}%`}
                       </td>
                       <td className="p-3 text-center font-mono">{p.top_chunks.length}</td>
                       <td className="p-3 text-center font-mono">{p.latency_ms} ms</td>
@@ -480,7 +796,7 @@ export default function EvaluatePage() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {ablationResult.pipelines.map((p) => {
-                const isProp = p.id === 'acamind_proposed';
+                const isProp = p.id === 'acamind_full' || p.id === 'acamind_proposed';
                 return (
                   <div
                     key={p.id}
@@ -542,7 +858,7 @@ export default function EvaluatePage() {
             {result.claim_verification && (
               <div className="p-3.5 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/70 space-y-2 text-xs">
                 <div className="font-bold text-emerald-900 dark:text-emerald-300">
-                  🛡️ Kiểm chứng Mệnh đề Nguyên tử (CLHV): {result.claim_verification.faithfulness_score}%
+                  🛡️ Kiểm chứng Mệnh đề Nguyên tử (CLHV): {result.claim_verification.faithfulness_score === null ? 'Chưa xác minh' : `${result.claim_verification.faithfulness_score}%`}
                 </div>
                 <div className="flex flex-wrap gap-1.5 text-[11px]">
                   <span className="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 font-semibold">

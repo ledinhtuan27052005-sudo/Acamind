@@ -191,44 +191,16 @@ const features = [
   {
     icon: <BookOpen className="w-6 h-6" />,
     title: 'Document Library',
-    description: 'Upload bulk clinical PDFs and literature. AI auto-categorizes, extracts, and lists precise page citations.',
-    href: '/library',
+    description: 'Upload and manage research documents for grounded answers with page-level citations.',
+    href: '/upload',
     color: '#0D9488',
   },
   {
     icon: <MessageSquare className="w-6 h-6" />,
-    title: 'AI Psychology Q&A',
-    description: 'Ask questions in natural language. AI answers with interactive annotations that take you straight to the source page.',
+    title: 'Research Chatbot',
+    description: 'Ask questions across documents, compare studies, and follow interactive citations back to evidence.',
     href: '/chat',
     color: '#7C3AED',
-  },
-  {
-    icon: <GraduationCap className="w-6 h-6" />,
-    title: 'Revision Quiz',
-    description: 'Automatically convert raw documents into multiple-choice questions and quick quizzes for clinical study.',
-    href: '/quiz',
-    color: '#F59E0B',
-  },
-  {
-    icon: <Activity className="w-6 h-6" />,
-    title: '3D Anatomy Atlas',
-    description: 'Interactive 3D simulation of body and brain anatomy. Explore functional zones related to stress response.',
-    href: '/3d',
-    color: '#EC4899',
-  },
-  {
-    icon: <Scale className="w-6 h-6" />,
-    title: 'AI Critique',
-    description: 'Analyze the validity of scientific arguments and contrast conflicting viewpoints across articles.',
-    href: '/debate',
-    color: '#06B6D4',
-  },
-  {
-    icon: <Share2 className="w-6 h-6" />,
-    title: 'Knowledge Graph',
-    description: 'Visualize connection networks between authors and research topics in an interactive 3D graph.',
-    href: '/graph',
-    color: '#10B981',
   },
 ];
 
@@ -479,18 +451,9 @@ export default function LandingPage() {
             <div>
               <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Application</h4>
               <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                <li><Link href="/library" className="hover:text-neural-600 transition-colors">PDF Library</Link></li>
+                <li><Link href="/upload" className="hover:text-neural-600 transition-colors">Upload Documents</Link></li>
+                <li><Link href="/library" className="hover:text-neural-600 transition-colors">Document Library</Link></li>
                 <li><Link href="/chat" className="hover:text-neural-600 transition-colors">AI Q&A</Link></li>
-                <li><Link href="/3d" className="hover:text-neural-600 transition-colors">3D Atlas</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Research</h4>
-              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                <li><Link href="/graph" className="hover:text-neural-600 transition-colors">Knowledge Graph</Link></li>
-                <li><Link href="/trends" className="hover:text-neural-600 transition-colors">Trending</Link></li>
-                <li><Link href="/debate" className="hover:text-neural-600 transition-colors">AI Critique</Link></li>
               </ul>
             </div>
 

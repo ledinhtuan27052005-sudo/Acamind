@@ -1,0 +1,300 @@
+Q001: Tâm lý học nghiên cứu những gì?
+Q002: Trình bày khái niệm nhân cách trong tâm lý học, phân tích các yếu tố hình thành nhân cách và giải thích vì sao việc đánh giá nhân cách đóng vai trò quan trọng trong chẩn đoán lâm sàng.
+Q003: Trầm cảm được định nghĩa như thế nào trong tâm lý học lâm sàng?
+Q004: Mô tả lộ trình đánh giá và chẩn đoán trầm cảm gồm phỏng vấn lâm sàng, sử dụng thang đo chuẩn, chẩn đoán phân biệt với các rối loạn khác và các bước lập kế hoạch điều trị ban đầu.
+Q005: Rối loạn lo âu lan tỏa là gì?
+Q006: Trình bày khái niệm trí nhớ, phân loại các dạng trí nhớ theo thời gian lưu trữ và giải thích vai trò của trí nhớ trong học tập cùng cách đánh giá suy giảm trí nhớ trên lâm sàng.
+Q007: Học thuyết phân tâm của Freud gồm những khái niệm cốt lõi nào?
+Q008: Mô tả lộ trình đánh giá tâm lý ban đầu cho thân chủ mới, từ tiếp nhận và phỏng vấn lâm sàng đến quan sát hành vi, sử dụng test tâm lý và tổng hợp kết quả phản hồi.
+Q009: Động lực nội tại là gì?
+Q010: Trình bày khái niệm cảm xúc, các thành phần sinh lý và nhận thức của cảm xúc, chức năng thích nghi của cảm xúc và cách đánh giá rối loạn điều hòa cảm xúc trong thực hành lâm sàng.
+Q011: Thuyết hành vi của Skinner nhấn mạnh điều gì?
+Q012: Trình bày khái niệm sang chấn tâm lý, cơ chế hình thành rối loạn stress sau sang chấn và các bước sàng lọc, chẩn đoán cùng lập kế hoạch điều trị tổng thể cho bệnh nhân.
+Q013: Rối loạn lưỡng cực có đặc điểm chính gì?
+Q014: Trình bày khái niệm tư duy, các loại hình tư duy cơ bản, mối liên hệ giữa tư duy và trí tuệ cùng cách nhận diện rối loạn tư duy trong đánh giá tâm lý lâm sàng.
+Q015: Tâm lý học nhân văn do những ai sáng lập?
+Q016: Mô tả lộ trình lập kế hoạch điều trị tâm lý gồm xác định mục tiêu cụ thể, lựa chọn liệu pháp phù hợp, phân công nhiệm vụ cho thân chủ và tiêu chí đánh giá tiến triển định kỳ.
+Q017: OCD là viết tắt của rối loạn tâm lý nào?
+Q018: Trình bày khái niệm stress, các giai đoạn của phản ứng stress theo Selye, ảnh hưởng của stress kéo dài đến sức khỏe tâm thần và phương pháp đánh giá mức độ stress.
+Q019: Trí tuệ cảm xúc (EQ) được hiểu như thế nào?
+Q020: Trình bày khái niệm rối loạn nhân cách ranh giới, các tiêu chí chẩn đoán chính và các bước đánh giá nguy cơ tự hại cùng lập kế hoạch đảm bảo an toàn cho bệnh nhân.
+Q021: Thuyết phát triển nhận thức của Piaget có mấy giai đoạn?
+Q022: Trình bày khái niệm giấc ngủ và vai trò của giấc ngủ đối với sức khỏe tâm thần, cùng các bước đánh giá rối loạn mất ngủ trong thực hành tâm lý lâm sàng.
+Q023: Rối loạn phổ tự kỷ được chẩn đoán dựa trên những dấu hiệu nào?
+Q024: Trình bày khái niệm sự chú ý, các loại chú ý cơ bản, biểu hiện rối loạn chú ý ở người ADHD và quy trình đánh giá cùng lập kế hoạch can thiệp phù hợp.
+Q025: Liệu pháp tâm lý là gì?
+Q026: Trình bày khái niệm trải nghiệm bất lợi thời thơ ấu, ảnh hưởng lâu dài của sang chấn tuổi thơ đến sức khỏe tâm thần và các bước đánh giá tiền sử sang chấn trong trị liệu.
+Q027: Rối loạn ăn uống thường gặp gồm những dạng nào?
+Q028: Trình bày khái niệm tâm thần phân liệt, phân biệt triệu chứng dương tính và triệu chứng âm tính cùng lộ trình chẩn đoán phân biệt với các rối loạn loạn thần khác.
+Q029: Thang đo trầm cảm Beck dùng để đánh giá điều gì?
+Q030: Trình bày khái niệm khả năng phục hồi tâm lý, các yếu tố bảo vệ giúp con người vượt qua nghịch cảnh và cách đánh giá cùng xây dựng khả năng này trong quá trình trị liệu.
+Q031: Vô thức trong học thuyết phân tâm là gì?
+Q032: Trình bày khái niệm động lực thành tích, các lý thuyết giải thích động lực của con người và ứng dụng của chúng trong đánh giá cùng can thiệp tâm lý học đường.
+Q033: Giai đoạn vị thành niên có đặc điểm tâm lý nổi bật gì?
+Q034: Mô tả lộ trình theo dõi tiến triển trong điều trị tâm lý gồm tái đánh giá định kỳ, điều chỉnh mục tiêu trị liệu, ghi nhận thay đổi triệu chứng và cải thiện chức năng sống hằng ngày.
+Q035: Rối loạn hoảng sợ là gì?
+Q036: Trình bày khái niệm nhận thức xã hội, các sai lệch nhận thức thường gặp khi đánh giá người khác và vai trò của chúng trong hình thành định kiến cùng xung đột xã hội.
+Q037: Hiệu ứng placebo trong điều trị tâm lý là gì?
+Q038: Trình bày khái niệm rối loạn stress sau sang chấn (PTSD), các tiêu chí chẩn đoán theo thời gian khởi phát triệu chứng và các bước lập kế hoạch điều trị tổng thể đa phương thức.
+Q039: Trí nhớ ngắn hạn có thể lưu trữ trong bao lâu?
+Q040: Trình bày khái niệm nhân cách theo mô hình Big Five, mô tả năm yếu tố chính và ứng dụng của mô hình này trong đánh giá tâm lý cùng tư vấn hướng nghiệp.
+Q041: Lộ trình chẩn đoán trầm cảm gồm những bước nào?
+Q042: Trình bày khái niệm sự đồng cảm, phân biệt đồng cảm nhận thức và đồng cảm cảm xúc cùng vai trò của đồng cảm trong việc xây dựng mối quan hệ trị liệu hiệu quả.
+Q043: Tâm lý học phát triển nghiên cứu những vấn đề gì?
+Q044: Trình bày khái niệm rối loạn ám ảnh cưỡng chế (OCD), vòng lặp giữa ý nghĩ ám ảnh và hành vi cưỡng chế cùng các bước đánh giá mức độ nghiêm trọng của triệu chứng.
+Q045: Cơ chế phòng vệ tâm lý là gì?
+Q046: Trình bày khái niệm rối loạn lo âu xã hội, các tình huống kích hoạt điển hình gây sợ hãi và lộ trình đánh giá cùng lập kế hoạch can thiệp từng bước cho bệnh nhân.
+Q047: Thuyết tiến hóa giải thích hành vi con người ra sao?
+Q048: Trình bày khái niệm sự gắn bó trong tâm lý học phát triển, mô tả các kiểu gắn bó ở trẻ em và ảnh hưởng của chúng đến quan hệ tình cảm cùng sức khỏe tâm thần khi trưởng thành.
+Q049: Buổi đánh giá tâm lý ban đầu gồm những nội dung gì?
+Q050: Trình bày khái niệm rối loạn tăng động giảm chú ý (ADHD), mô tả ba nhóm triệu chứng chính và quy trình chẩn đoán ở trẻ em cũng như người trưởng thành.
+Q051: Khủng hoảng tuổi trung niên là gì?
+Q052: Trình bày khái niệm tâm lý học sinh học, vai trò của hệ thần kinh và các chất dẫn truyền thần kinh trong hành vi cùng ứng dụng của chúng trong chẩn đoán rối loạn tâm thần.
+Q053: Rối loạn giấc ngủ thường gặp gồm những loại nào?
+Q054: Trình bày khái niệm lòng tự trọng, phân tích mối liên hệ giữa tự trọng thấp với trầm cảm và lo âu cùng các bước đánh giá và can thiệp nâng cao tự trọng cho thân chủ.
+Q055: Thuyết học tập xã hội của Bandura nói về điều gì?
+Q056: Trình bày khái niệm cơn hoảng loạn, mô tả các triệu chứng thể chất và tâm lý điển hình cùng lộ trình chẩn đoán phân biệt với các bệnh lý tim mạch và nội khoa khác.
+Q057: Chẩn đoán phân biệt trong tâm lý lâm sàng là gì?
+Q058: Trình bày khái niệm trí tuệ đa dạng của Gardner, mô tả các loại hình trí tuệ khác nhau và ứng dụng của lý thuyết này trong giáo dục cùng đánh giá năng lực cá nhân.
+Q059: Rối loạn nhân cách chống đối xã hội là gì?
+Q060: Trình bày khái niệm sự trì hoãn dưới góc độ tâm lý học, phân tích nguyên nhân nhận thức và cảm xúc dẫn đến trì hoãn cùng các bước đánh giá và can thiệp hiệu quả.
+Q061: Giai đoạn tiền thao tác của Piaget có đặc trưng gì?
+Q062: Mô tả lộ trình đánh giá nguy cơ tự tử gồm sàng lọc ban đầu, phỏng vấn sâu về ý định, xác định yếu tố nguy cơ và yếu tố bảo vệ cùng việc lập kế hoạch đảm bảo an toàn.
+Q063: Tâm lý học đường hỗ trợ học sinh như thế nào?
+Q064: Trình bày khái niệm cảm giác tội lỗi và xấu hổ, phân biệt chức năng tâm lý của hai cảm xúc này và vai trò của chúng trong cơ chế duy trì trầm cảm cùng rối loạn lo âu.
+Q065: Rối loạn dạng cơ thể là gì?
+Q066: Trình bày khái niệm hành vi gây hấn, phân tích các yếu tố sinh học và môi trường góp phần hình thành cùng quy trình đánh giá và lập kế hoạch quản lý hành vi gây hấn.
+Q067: Tháp nhu cầu của Maslow gồm mấy tầng?
+Q068: Trình bày những biến đổi tâm lý thường gặp ở phụ nữ tuổi trung niên, các yếu tố ảnh hưởng và các bước đánh giá cùng hỗ trợ tâm lý phù hợp cho nhóm đối tượng này.
+Q069: Sang chấn tâm lý ảnh hưởng đến não bộ như thế nào?
+Q070: Trình bày khái niệm rối loạn điều hòa cảm xúc ở trẻ em, mô tả các biểu hiện lâm sàng điển hình và lộ trình đánh giá toàn diện cùng can thiệp sớm cho trẻ và gia đình.
+Q071: Phỏng vấn lâm sàng có cấu trúc là gì?
+Q072: Trình bày khái niệm tư duy phản biện, mô tả các thành phần cốt lõi của nó, vai trò trong quá trình ra quyết định và ứng dụng trong trị liệu nhận thức hành vi.
+Q073: Rối loạn lo âu chia ly thường gặp ở lứa tuổi nào?
+Q074: Trình bày khái niệm sự cô đơn dưới góc độ tâm lý học, phân tích ảnh hưởng của cô đơn kéo dài đến sức khỏe tâm thần và các bước đánh giá cùng can thiệp trong trị liệu.
+Q075: Ngưỡng tuyệt đối trong tâm lý học cảm giác là gì?
+Q076: Trình bày khái niệm khủng hoảng hiện sinh, mô tả các biểu hiện thường gặp ở người trưởng thành và lộ trình đánh giá cùng định hướng can thiệp trị liệu phù hợp.
+Q077: Test Rorschach dùng để đánh giá điều gì?
+Q078: Trình bày khái niệm ám ảnh sợ đặc hiệu, liệt kê các loại ám ảnh phổ biến và mô tả các bước lập kế hoạch điều trị theo từng nấc tiếp xúc cho bệnh nhân.
+Q079: Giai đoạn lão niên có những thách thức tâm lý gì?
+Q080: Trình bày khái niệm sự tự hiệu quả, phân tích vai trò của niềm tin vào năng lực bản thân trong thay đổi hành vi và cách đánh giá cùng củng cố nó trong quá trình trị liệu.
+Q081: Rối loạn tic là gì?
+Q082: Trình bày khái niệm quá trình quên, các lý thuyết giải thích hiện tượng quên và cách phân biệt quên bình thường với suy giảm trí nhớ bệnh lý trong chẩn đoán lâm sàng.
+Q083: Kế hoạch an toàn cho người có hành vi tự hại gồm những gì?
+Q084: Trình bày quan điểm của tâm lý học tiến hóa về hành vi lựa chọn bạn đời, các cơ chế thích nghi được đề xuất cùng những tranh luận và bằng chứng nghiên cứu hiện nay.
+Q085: Chứng mất ngủ mãn tính được định nghĩa như thế nào?
+Q086: Trình bày khái niệm sự giận dữ dưới góc độ tâm lý học, mô tả các giai đoạn leo thang của cơn giận, ảnh hưởng đến các mối quan hệ và lộ trình đánh giá cùng quản lý cơn giận.
+Q087: Thuyết ba thành phần của Sternberg về tình yêu gồm những yếu tố nào?
+Q088: Trình bày khái niệm rối loạn nhân cách ái kỷ, các tiêu chí chẩn đoán chính, các bước đánh giá và những thách thức trong việc thiết lập quan hệ trị liệu với nhóm bệnh nhân này.
+Q089: Đánh giá chức năng sống trong trị liệu là gì?
+Q090: Trình bày khái niệm sự phát triển ngôn ngữ ở trẻ em, mô tả các mốc phát triển quan trọng và những dấu hiệu chậm phát triển ngôn ngữ cần được đánh giá chuyên sâu.
+Q091: Hội chứng burnout được định nghĩa như thế nào?
+Q092: Trình bày khái niệm trí nhớ làm việc, phân tích vai trò của nó trong học tập và ra quyết định cùng các phương pháp đánh giá trí nhớ làm việc trong thực hành lâm sàng.
+Q093: Thang đo trầm cảm PHQ-9 có bao nhiêu câu hỏi?
+Q094: Trình bày khái niệm rối loạn nhân cách phân liệt, mô tả các đặc điểm lâm sàng nổi bật và các bước đánh giá cùng lập kế hoạch can thiệp phù hợp cho bệnh nhân.
+Q095: Tâm lý học nhận thức tập trung nghiên cứu điều gì?
+Q096: Mô tả lộ trình kết thúc trị liệu tâm lý gồm tiêu chí đánh giá sự sẵn sàng của thân chủ, kế hoạch duy trì kết quả đạt được, phòng ngừa tái phát và lịch tái khám định kỳ.
+Q097: Ám ảnh sợ xã hội ảnh hưởng đến cuộc sống ra sao?
+Q098: Trình bày khái niệm sự hài lòng với cuộc sống, phân tích các yếu tố dự báo quan trọng, mối liên hệ với sức khỏe tâm thần và cách đo lường khái niệm này trong nghiên cứu.
+Q099: Chu kỳ giấc ngủ của con người gồm những giai đoạn nào?
+Q100: Tổng hợp lộ trình chăm sóc sức khỏe tâm thần toàn diện từ sàng lọc trong cộng đồng đến chẩn đoán chính xác, triển khai điều trị đa phương thức và theo dõi lâu dài sau can thiệp.
+Q101: Trầm cảm khác nỗi buồn bình thường ở điểm nào?
+Q102: So sánh liệu pháp nhận thức hành vi và liệu pháp phân tâm về quan điểm nguyên nhân gây rối loạn, vai trò của nhà trị liệu, thời lượng điều trị và bằng chứng hiệu quả đã được nghiên cứu.
+Q103: Lo âu lan tỏa khác rối loạn hoảng sợ thế nào?
+Q104: Đối chiếu trường phái hành vi và trường phái nhân văn trong cách nhìn bản chất con người, mục tiêu của trị liệu và vai trò của mối quan hệ giữa nhà trị liệu với thân chủ.
+Q105: Trí nhớ ngắn hạn khác trí nhớ dài hạn ra sao?
+Q106: So sánh rối loạn lưỡng cực type I và type II về mức độ hưng cảm, nguy cơ hành vi, ảnh hưởng đến chức năng sống và những khác biệt quan trọng trong phác đồ điều trị.
+Q107: Người ngoại hướng và nội hướng khác nhau thế nào?
+Q108: Đối chiếu rối loạn ám ảnh cưỡng chế và rối loạn lo âu lan tỏa về bản chất của lo âu, vai trò của hành vi cưỡng chế, vòng lặp duy trì triệu chứng và chiến lược can thiệp phù hợp.
+Q109: Động lực nội tại khác động lực ngoại tại ở đâu?
+Q110: So sánh liệu pháp gia đình hệ thống và liệu pháp cá nhân về đối tượng can thiệp chính, cách nhìn nhận nguyên nhân của vấn đề và tiêu chí đánh giá sự thành công của trị liệu.
+Q111: Tâm thần phân liệt khác rối loạn phân liệt cảm xúc thế nào?
+Q112: Đối chiếu học thuyết phân tâm của Freud và tâm lý học cá nhân của Adler về vai trò của vô thức, mặc cảm tự ti và định hướng phát triển nhân cách của con người.
+Q113: Chánh niệm khác thư giãn đơn thuần ở điểm nào?
+Q114: So sánh rối loạn tăng động giảm chú ý và rối loạn phổ tự kỷ ở trẻ em về khó khăn chú ý, tương tác xã hội, hành vi lặp lại và khác biệt trong kế hoạch can thiệp.
+Q115: Tư duy hội tụ khác tư duy phân kỳ ra sao?
+Q116: Đối chiếu trầm cảm đơn cực và giai đoạn trầm cảm trong rối loạn lưỡng cực về biểu hiện lâm sàng, nguy cơ chuyển pha hưng cảm và những lưu ý quan trọng khi lựa chọn thuốc điều trị.
+Q117: Cảm xúc khác tâm trạng ở chỗ nào?
+Q118: So sánh liệu pháp chấp nhận và cam kết với CBT truyền thống về cách tiếp cận suy nghĩ tiêu cực, mục tiêu thay đổi của trị liệu và vai trò của sự chấp nhận trong quá trình chữa lành.
+Q119: Chán ăn tâm thần khác ăn vô độ tâm thần thế nào?
+Q120: Đối chiếu tâm lý học nhận thức và tâm lý học hành vi trong việc giải thích nguyên nhân của rối loạn lo âu và lựa chọn kỹ thuật can thiệp tương ứng cho từng trường phái.
+Q121: Gắn bó an toàn khác gắn bó né tránh ra sao?
+Q122: So sánh liệu pháp EMDR và liệu pháp tiếp xúc kéo dài trong điều trị PTSD về cơ chế tác động lên ký ức sang chấn, quy trình thực hiện, thời gian điều trị và bằng chứng hiệu quả.
+Q123: Stress cấp tính khác stress mãn tính ở điểm nào?
+Q124: Đối chiếu rối loạn nhân cách ranh giới và rối loạn lưỡng cực về tính ổn định của cảm xúc, kiểu mẫu quan hệ, hành vi bốc đồng và các điểm mấu chốt trong chẩn đoán phân biệt.
+Q125: Học tập cổ điển khác học tập thao tác thế nào?
+Q126: So sánh liệu pháp hành vi biện chứng và liệu pháp tâm động học trong điều trị rối loạn nhân cách ranh giới về cấu trúc buổi trị liệu, kỹ năng được dạy và mục tiêu dài hạn.
+Q127: Trí tuệ linh hoạt khác trí tuệ kết tinh ở đâu?
+Q128: Đối chiếu tâm lý học phát triển và tâm lý học lâm sàng về đối tượng nghiên cứu chính, phương pháp tiếp cận đặc thù và ứng dụng thực tiễn trong chăm sóc sức khỏe con người.
+Q129: Người tự trọng cao khác người tự ái ở điểm nào?
+Q130: So sánh mất ngủ nguyên phát và mất ngủ thứ phát do trầm cảm về nguyên nhân gốc rễ, biểu hiện lâm sàng đặc trưng và khác biệt trong hướng điều trị được ưu tiên.
+Q131: Ám ảnh sợ đặc hiệu khác ám ảnh sợ xã hội thế nào?
+Q132: Đối chiếu mô hình Big Five và thuyết nhân cách của Eysenck về cấu trúc các yếu tố, phương pháp đo lường và giá trị dự báo hành vi trong thực tiễn.
+Q133: Liệu pháp nhóm khác liệu pháp cá nhân ở chỗ nào?
+Q134: So sánh rối loạn hoảng sợ và bệnh lý tim mạch trong chẩn đoán phân biệt về triệu chứng thực thể, các xét nghiệm cần thiết và vai trò của đánh giá tâm lý trong quy trình.
+Q135: Quên bình thường khác sa sút trí tuệ ra sao?
+Q136: Đối chiếu trường phái sinh học và trường phái tiến hóa trong việc giải thích nguyên nhân của trầm cảm, từ gen và chất dẫn truyền thần kinh đến các cơ chế thích nghi của loài người.
+Q137: Đồng cảm nhận thức khác đồng cảm cảm xúc thế nào?
+Q138: So sánh chán ăn tâm thần và ăn vô độ tâm thần về hành vi kiểm soát cân nặng, hình ảnh cơ thể méo mó, biến chứng y khoa và chiến lược điều trị cho từng dạng.
+Q139: Trị liệu ngắn hạn khác trị liệu dài hạn ở điểm nào?
+Q140: Đối chiếu thang đo tự báo cáo và phỏng vấn lâm sàng có cấu trúc về độ tin cậy, tính giá trị, ưu điểm nổi bật và hạn chế khi dùng trong chẩn đoán rối loạn tâm thần.
+Q141: Rối loạn tic khác hành vi lặp lại ở trẻ tự kỷ thế nào?
+Q142: So sánh liệu pháp nghệ thuật và liệu pháp âm nhạc trong hỗ trợ sức khỏe tâm thần về cách thức biểu đạt cảm xúc, đối tượng phù hợp và bằng chứng nghiên cứu hiện có.
+Q143: Thôi miên trị liệu khác thiền định ở chỗ nào?
+Q144: Đối chiếu cơn giận bình thường và rối loạn bùng nổ cơn giận từng cơn về tần suất xuất hiện, mức độ nghiêm trọng, hậu quả gây ra và tiêu chí cần can thiệp lâm sàng.
+Q145: Ký ức sự kiện khác ký ức quy trình ra sao?
+Q146: So sánh mô hình y sinh và mô hình sinh tâm xã hội trong điều trị rối loạn tâm thần về vai trò của thuốc, liệu pháp tâm lý và các yếu tố xã hội trong quá trình hồi phục.
+Q147: Người ái kỷ khác người tự tin lành mạnh thế nào?
+Q148: Đối chiếu liệu pháp tiếp xúc và liệu pháp nhận thức trong điều trị ám ảnh sợ đặc hiệu về nguyên tắc hoạt động, tiến trình thực hiện và hiệu quả duy trì sau điều trị.
+Q149: Trầm cảm sau sinh khác trầm cảm thông thường ở điểm nào?
+Q150: So sánh tâm lý học đường và tâm lý học tổ chức về bối cảnh ứng dụng, đối tượng phục vụ chính, mục tiêu can thiệp và phương pháp đánh giá đặc thù của từng lĩnh vực.
+Q151: Suy nghĩ tự động tiêu cực khác niềm tin cốt lõi thế nào?
+Q152: Đối chiếu biểu hiện rối loạn lo âu ở trẻ em và người lớn về triệu chứng lâm sàng, yếu tố gia đình liên quan, ảnh hưởng đến học tập và điều chỉnh cần thiết trong kế hoạch điều trị.
+Q153: Thuốc chống trầm cảm khác thuốc an thần ở chỗ nào?
+Q154: So sánh phương pháp nghiên cứu thực nghiệm và nghiên cứu tương quan trong tâm lý học về khả năng kết luận nhân quả, kiểm soát biến số và giá trị ứng dụng thực tiễn.
+Q155: Hành vi cưỡng chế khác nghi thức văn hóa ra sao?
+Q156: Đối chiếu liệu pháp cặp đôi tập trung vào cảm xúc và liệu pháp cặp đôi Gottman về cách nhìn sự gắn bó, kỹ thuật can thiệp xung đột và mục tiêu cuối cùng cho mối quan hệ.
+Q157: Mộng du khác ác mộng ở điểm nào?
+Q158: So sánh rối loạn stress cấp tính và rối loạn stress sau sang chấn về khung thời gian khởi phát triệu chứng, tiêu chí chẩn đoán, tiên lượng và chiến lược can thiệp sớm phù hợp.
+Q159: Tính cách khác khí chất ở đâu?
+Q160: Đối chiếu tâm lý học nhân văn của Rogers và Maslow về quan niệm tự hiện thực hóa, điều kiện giúp con người phát triển lành mạnh và ứng dụng trong thực hành trị liệu.
+Q161: Can thiệp khủng hoảng khác trị liệu dài hạn thế nào?
+Q162: So sánh quy trình đánh giá tâm lý ở trẻ em và người lớn về công cụ sử dụng, vai trò của người chăm sóc, cách diễn giải kết quả và những lưu ý đặc biệt về đạo đức.
+Q163: Rối loạn phân ly khác giả vờ bệnh ra sao?
+Q164: Đối chiếu liệu pháp ánh sáng và liệu pháp hành vi trong điều trị trầm cảm theo mùa về cơ chế tác động, chỉ định phù hợp, thời gian phát huy tác dụng và tác dụng phụ có thể gặp.
+Q165: Lắng nghe chủ động khác nghe thụ động ở điểm nào?
+Q166: So sánh nghiện chất và nghiện hành vi như nghiện game về cơ chế tưởng thưởng của não bộ, tiêu chí chẩn đoán, ảnh hưởng đến chức năng sống và hướng điều trị cho từng dạng.
+Q167: Trí nhớ làm việc khác trí nhớ dài hạn ở chỗ nào?
+Q168: Đối chiếu cách biểu hiện trầm cảm trong văn hóa phương Đông và phương Tây về triệu chứng cơ thể, định kiến xã hội, xu hướng tìm kiếm giúp đỡ và điều chỉnh liệu pháp phù hợp.
+Q169: Tự hại không nhằm tự tử khác hành vi tự tử thế nào?
+Q170: So sánh liệu pháp thôi miên và liệu pháp thư giãn cơ lũy tiến trong điều trị lo âu về trạng thái ý thức của thân chủ, kỹ thuật thực hiện và đối tượng chống chỉ định cần lưu ý.
+Q171: Nhận thức xã hội khác trí tuệ cảm xúc ra sao?
+Q172: Đối chiếu rối loạn phát triển ngôn ngữ và rối loạn phổ tự kỷ về khó khăn giao tiếp, hành vi xã hội, nhu cầu can thiệp và tiên lượng phát triển dài hạn của trẻ.
+Q173: Điều trị nội trú khác điều trị ngoại trú ở điểm nào?
+Q174: So sánh hiệu ứng giả dược trong thử nghiệm thuốc tâm thần và trong liệu pháp tâm lý về cơ chế kỳ vọng của bệnh nhân, ý nghĩa đạo đức và cách kiểm soát trong thiết kế nghiên cứu.
+Q175: Nỗi sợ bình thường khác ám ảnh sợ bệnh lý thế nào?
+Q176: Đối chiếu mô hình phục hồi và mô hình y khoa trong chăm sóc sức khỏe tâm thần về định nghĩa khỏi bệnh, vai trò chủ động của người bệnh và tiêu chí đánh giá sự thành công.
+Q177: Giai đoạn tiền thao tác khác giai đoạn thao tác cụ thể ra sao?
+Q178: So sánh trầm cảm kháng trị và trầm cảm đáp ứng với điều trị về định nghĩa, các bước đánh giá nguyên nhân gây kháng trị và lựa chọn can thiệp tiếp theo cho bệnh nhân.
+Q179: Liệu pháp hành vi khác liệu pháp nhận thức ở chỗ nào?
+Q180: Đối chiếu phương pháp đánh giá định tính và định lượng trong nghiên cứu tâm lý học về cách thu thập dữ liệu, kỹ thuật phân tích, độ sâu của kết quả và khả năng khái quát hóa.
+Q181: Mất ngủ do lo âu khác mất ngủ nguyên phát thế nào?
+Q182: So sánh vai trò của nhà tâm lý học lâm sàng và bác sĩ tâm thần trong hệ thống chăm sóc sức khỏe tâm thần về quá trình đào tạo, thẩm quyền kê đơn thuốc và phạm vi can thiệp chuyên môn.
+Q183: Ký ức sai lệch khác nói dối ở điểm nào?
+Q184: Đối chiếu liệu pháp tiếp xúc qua thực tế ảo và tiếp xúc trực tiếp trong điều trị ám ảnh sợ về mức độ kiểm soát tình huống, chi phí thực hiện, khả năng tiếp cận và hiệu quả điều trị.
+Q185: Trầm cảm ở người cao tuổi khác người trẻ ra sao?
+Q186: So sánh cơ chế phòng vệ phủ nhận và hợp lý hóa về cách thức bảo vệ bản ngã khỏi lo âu, biểu hiện trên lâm sàng và ý nghĩa của chúng trong tiến trình trị liệu tâm động học.
+Q187: Hành vi bốc đồng khác hành vi cưỡng chế ở đâu?
+Q188: Đối chiếu việc dùng thuốc trong điều trị rối loạn lo âu lan tỏa và rối loạn ám ảnh cưỡng chế về nhóm thuốc ưu tiên, liều lượng khởi đầu, thời gian đáp ứng và kế hoạch theo dõi.
+Q189: Thiền chánh niệm khác cầu nguyện ở điểm nào?
+Q190: So sánh chương trình phòng ngừa tự tử trong trường học và trong cộng đồng về đối tượng mục tiêu, nội dung can thiệp chính, cách đánh giá hiệu quả và thách thức khi triển khai thực tế.
+Q191: Tự kỷ chức năng cao từng được phân biệt với hội chứng Asperger thế nào?
+Q192: Đối chiếu liệu pháp tâm động học ngắn hạn và dài hạn về độ sâu khám phá vô thức, tần suất buổi trị liệu mỗi tuần, tiêu chí lựa chọn bệnh nhân và bằng chứng hiệu quả đã công bố.
+Q193: Căng thẳng tích cực khác căng thẳng tiêu cực ở chỗ nào?
+Q194: So sánh rối loạn nhân cách phân liệt và rối loạn phổ tự kỷ về khó khăn trong tương tác xã hội, hứng thú hạn hẹp, nguyên nhân được cho là và khác biệt trong hướng can thiệp.
+Q195: Trị liệu trực tuyến khác trị liệu trực tiếp ra sao?
+Q196: Đối chiếu thuyết học tập xã hội và thuyết hành vi cổ điển trong việc giải thích sự hình thành nỗi sợ hãi và cách thiết kế chương trình điều trị ám ảnh sợ cho bệnh nhân.
+Q197: Rối loạn điều hòa cảm xúc khác rối loạn lưỡng cực thế nào?
+Q198: So sánh việc sử dụng thang đo PHQ-9 và GAD-7 trong sàng lọc sức khỏe tâm thần cộng đồng về mục đích sử dụng, cách chấm điểm, ngưỡng cắt và bước tiếp theo sau khi sàng lọc.
+Q199: Tình yêu lãng mạn khác sự gắn bó an toàn ở điểm nào?
+Q200: Đối chiếu quan điểm của Freud và Jung về vô thức cá nhân và vô thức tập thể, cách diễn giải biểu tượng giấc mơ, quá trình cá nhân hóa và ảnh hưởng của chúng đến trị liệu hiện đại.
+Q201: Liệu pháp CBT điều trị trầm cảm như thế nào?
+Q202: Trình bày các bước cốt lõi của liệu pháp nhận thức hành vi trong điều trị trầm cảm, từ xác định suy nghĩ tự động tiêu cực đến thử nghiệm hành vi và tái cấu trúc nhận thức, kèm cách đánh giá tiến triển của thân chủ.
+Q203: Liệu pháp DBT phù hợp với những đối tượng nào?
+Q204: Giải thích bốn nhóm kỹ năng chính trong liệu pháp hành vi biện chứng gồm chánh niệm, chịu đựng căng thẳng, điều hòa cảm xúc và hiệu quả giao tiếp, cùng cách áp dụng cho bệnh nhân rối loạn nhân cách ranh giới.
+Q205: Liệu pháp ACT giúp bệnh nhân lo âu bằng cách nào?
+Q206: Trình bày sáu quá trình cốt lõi của liệu pháp chấp nhận và cam kết như chấp nhận trải nghiệm, tách rời nhận thức và làm rõ giá trị sống, kèm ví dụ áp dụng cho người bị rối loạn lo âu lan tỏa.
+Q207: Liệu pháp EMDR được dùng để điều trị rối loạn nào?
+Q208: Mô tả chi tiết quy trình tám giai đoạn của liệu pháp EMDR trong điều trị sang chấn, từ lấy tiền sử đến tái xử lý ký ức bằng chuyển động mắt song phương và đánh giá kết quả sau cùng.
+Q209: Liệu pháp tâm động học tập trung vào điều gì?
+Q210: Trình bày nguyên tắc của liệu pháp tâm động học trong điều trị trầm cảm, cách khám phá xung đột vô thức và trải nghiệm thời thơ ấu, cùng tiêu chí lựa chọn bệnh nhân phù hợp với liệu pháp này.
+Q211: Liệu pháp gia đình hệ thống can thiệp vào đâu?
+Q212: Giải thích cách liệu pháp gia đình hệ thống nhìn nhận triệu chứng của cá nhân như biểu hiện của mẫu hình tương tác trong gia đình, kèm các kỹ thuật tái cấu trúc ranh giới và cải thiện giao tiếp.
+Q213: Liệu pháp nhóm có những ưu điểm gì nổi bật?
+Q214: Trình bày các yếu tố trị liệu đặc thù của liệu pháp nhóm như tính phổ quát của vấn đề, học hỏi qua quan sát xã hội và niềm hy vọng, cùng cách nhà trị liệu quản lý động lực và xung đột trong nhóm.
+Q215: Thuốc SSRI điều trị trầm cảm theo cơ chế nào?
+Q216: Giải thích cơ chế tác động của thuốc ức chế tái hấp thu serotonin có chọn lọc, thời gian cần thiết để phát huy tác dụng, tác dụng phụ thường gặp và nguyên tắc theo dõi khi kê đơn cho bệnh nhân.
+Q217: Chánh niệm giúp giảm stress bằng cách nào?
+Q218: Trình bày chương trình giảm stress dựa trên chánh niệm gồm các bài tập quan sát hơi thở và quét cơ thể, kèm bằng chứng hiệu quả với lo âu và hướng dẫn duy trì thực hành tại nhà mỗi ngày.
+Q219: Thôi miên trị liệu được chỉ định trong trường hợp nào?
+Q220: Mô tả quy trình thôi miên trị liệu trong điều trị ám ảnh sợ, từ giai đoạn dẫn dắt thư giãn sâu đến đưa ra gợi ý trị liệu và củng cố kết quả, cùng những chống chỉ định quan trọng cần lưu ý.
+Q221: Kỹ thuật tiếp xúc trong CBT hoạt động ra sao?
+Q222: Trình bày nguyên tắc xây dựng thang phân cấp nỗi sợ và thực hiện tiếp xúc từng bước trong điều trị ám ảnh sợ đặc hiệu, kèm cách ngăn ngừa hành vi né tránh tái diễn sau khi kết thúc trị liệu.
+Q223: Liệu pháp EFT trong trị liệu cặp đôi là gì?
+Q224: Giải thích ba giai đoạn của liệu pháp cặp đôi tập trung vào cảm xúc gồm giảm leo thang xung đột, tái cấu trúc sự gắn bó và củng cố mối quan hệ, kèm ví dụ can thiệp khi cặp đôi mất kết nối cảm xúc.
+Q225: DBT dạy kỹ năng chịu đựng căng thẳng thế nào?
+Q226: Trình bày các kỹ thuật chịu đựng căng thẳng trong DBT như đánh lạc hướng lành mạnh và tự xoa dịu bằng giác quan, kèm cách huấn luyện bệnh nhân áp dụng khi xuất hiện xung động tự hại cấp tính.
+Q227: Thuốc ổn định khí sắc dùng cho rối loạn nào?
+Q228: Giải thích vai trò của lithium và các thuốc ổn định khí sắc trong điều trị rối loạn lưỡng cực, nguyên tắc theo dõi nồng độ thuốc trong máu và các xét nghiệm định kỳ để đảm bảo an toàn.
+Q229: Liệu pháp ánh sáng điều trị trầm cảm theo mùa ra sao?
+Q230: Mô tả phác đồ liệu pháp ánh sáng cho trầm cảm theo mùa gồm cường độ ánh sáng, thời gian chiếu mỗi ngày và thời điểm thực hiện, kèm tiêu chí đánh giá đáp ứng sau vài tuần điều trị.
+Q231: Kỹ thuật tái cấu trúc nhận thức gồm những bước nào?
+Q232: Trình bày chi tiết kỹ thuật tái cấu trúc nhận thức trong CBT, từ ghi nhật ký suy nghĩ đến kiểm tra bằng chứng khách quan và xây dựng suy nghĩ cân bằng, kèm ví dụ với niềm tin tiêu cực về bản thân.
+Q233: Liệu pháp nghệ thuật phù hợp với những ai?
+Q234: Giải thích cách liệu pháp nghệ thuật giúp bệnh nhân từng trải qua sang chấn biểu đạt cảm xúc khó nói thành lời qua vẽ và nặn, kèm cách nhà trị liệu diễn giải sản phẩm sáng tạo một cách an toàn và tôn trọng.
+Q235: Bài tập tách rời nhận thức trong ACT là gì?
+Q236: Trình bày các bài tập tách rời nhận thức trong ACT như gọi tên suy nghĩ đang xuất hiện và quan sát suy nghĩ như đám mây trôi, kèm cách giúp bệnh nhân giảm bám víu vào nội dung tiêu cực.
+Q237: Liệu pháp tiếp xúc kéo dài điều trị PTSD ra sao?
+Q238: Mô tả quy trình liệu pháp tiếp xúc kéo dài cho PTSD gồm tiếp xúc tưởng tượng với ký ức sang chấn và tiếp xúc thực tế với tình huống né tránh, kèm cách xử lý khi bệnh nhân quá tải cảm xúc.
+Q239: Thuốc chống loạn thần thế hệ mới có ưu điểm gì?
+Q240: Giải thích cơ chế của thuốc chống loạn thần thế hệ hai trong điều trị tâm thần phân liệt, các tác dụng phụ chuyển hóa cần theo dõi và nguyên tắc phối hợp chặt chẽ với can thiệp tâm lý xã hội.
+Q241: Kỹ thuật thư giãn cơ Jacobson thực hiện thế nào?
+Q242: Trình bày từng bước của kỹ thuật thư giãn cơ lũy tiến, từ căng rồi thả lỏng từng nhóm cơ theo trình tự, kèm lịch tập luyện hằng ngày và ứng dụng trong kiểm soát cơn hoảng sợ cấp tính.
+Q243: Liệu pháp trò chơi dùng cho trẻ em ra sao?
+Q244: Giải thích nguyên tắc của liệu pháp trò chơi trong can thiệp cho trẻ từng trải qua sang chấn, cách nhà trị liệu quan sát biểu tượng trong trò chơi của trẻ và xây dựng cảm giác an toàn trong phòng trị liệu.
+Q245: Chương trình MBSR thường kéo dài bao lâu?
+Q246: Mô tả cấu trúc tám tuần của chương trình giảm stress dựa trên chánh niệm gồm buổi học nhóm hàng tuần và bài tập thực hành tại nhà, kèm tiêu chí đánh giá mức độ cải thiện lo âu sau khóa học.
+Q247: Liệu pháp Gottman giúp các cặp đôi bằng cách nào?
+Q248: Trình bày các nguyên tắc của liệu pháp cặp đôi Gottman như xây dựng bản đồ tình yêu và quản lý xung đột có thể giải quyết, kèm bài tập cải thiện tỷ lệ tương tác tích cực so với tiêu cực mỗi ngày.
+Q249: Kỹ thuật dừng suy nghĩ trong CBT là gì?
+Q250: Giải thích kỹ thuật dừng suy nghĩ và thay thế trong kiểm soát suy nghĩ ám ảnh không mong muốn, các bước thực hành cụ thể, giới hạn của kỹ thuật và cách kết hợp với tiếp xúc ngăn ngừa phản ứng.
+Q251: Thuốc benzodiazepine điều trị lo âu có rủi ro gì?
+Q252: Trình bày nguy cơ lệ thuộc và hội chứng cai khi sử dụng benzodiazepine kéo dài cho rối loạn lo âu, nguyên tắc kê đơn ngắn hạn và kế hoạch giảm liều từ từ đảm bảo an toàn cho bệnh nhân.
+Q253: Liệu pháp âm nhạc hỗ trợ trầm cảm thế nào?
+Q254: Giải thích cách liệu pháp âm nhạc sử dụng việc nghe và chơi nhạc để điều hòa cảm xúc ở bệnh nhân trầm cảm, kèm bằng chứng nghiên cứu hiện có và cách tích hợp vào kế hoạch điều trị tổng thể.
+Q255: Kỹ thuật hít thở 4-7-8 giúp giảm lo âu ra sao?
+Q256: Mô tả chi tiết kỹ thuật hít thở 4-7-8 trong kiểm soát cơn lo âu cấp tính, cách hướng dẫn bệnh nhân thực hành từng nhịp hít vào giữ hơi thở ra và thời điểm áp dụng phù hợp trong ngày.
+Q257: Liệu pháp hành vi cho trẻ ADHD gồm những gì?
+Q258: Trình bày các thành phần của can thiệp hành vi cho trẻ ADHD như huấn luyện kỹ năng cho cha mẹ, quản lý hành vi tại lớp học và hệ thống khen thưởng, kèm cách đo lường tiến triển theo từng giai đoạn can thiệp.
+Q259: EMDR khác liệu pháp trò chuyện thông thường ở đâu?
+Q260: Giải thích điểm khác biệt cốt lõi của EMDR so với trị liệu trò chuyện thông thường, từ việc sử dụng kích thích song phương đến tái xử lý ký ức mà không yêu cầu mô tả chi tiết sang chấn.
+Q261: Liệu pháp thực tế ảo điều trị ám ảnh sợ thế nào?
+Q262: Trình bày cách liệu pháp tiếp xúc qua thực tế ảo mô phỏng tình huống gây sợ trong môi trường kiểm soát được, kèm ưu điểm về an toàn cho bệnh nhân và khả năng cá nhân hóa mức độ tiếp xúc từng buổi.
+Q263: Kỹ thuật nhật ký cảm xúc trong DBT là gì?
+Q264: Giải thích cách sử dụng thẻ nhật ký hằng ngày trong DBT để theo dõi cảm xúc, xung động và mức độ áp dụng kỹ năng, kèm cách nhà trị liệu phản hồi nội dung nhật ký trong buổi trị liệu cá nhân.
+Q265: Thuốc kích thích điều trị ADHD theo cơ chế nào?
+Q266: Trình bày cơ chế tăng cường dopamine và norepinephrine của thuốc kích thích trong điều trị ADHD, hiệu quả đối với khả năng chú ý và kiểm soát xung động, cùng các tác dụng phụ cần theo dõi ở trẻ em.
+Q267: Liệu pháp CBT-I điều trị mất ngủ gồm những gì?
+Q268: Giải thích các thành phần của liệu pháp nhận thức hành vi cho mất ngủ gồm kiểm soát kích thích, hạn chế thời gian trên giường và vệ sinh giấc ngủ, kèm cách xây dựng lịch ngủ mới và đánh giá cải thiện sau vài tuần.
+Q269: Bài tập giá trị sống trong ACT thực hiện ra sao?
+Q270: Mô tả cách nhà trị liệu ACT giúp bệnh nhân làm rõ giá trị sống cốt lõi qua bài tập tưởng tượng và đặt mục tiêu cam kết hành động, kèm ví dụ chuyển giá trị trừu tượng thành việc làm cụ thể mỗi tuần.
+Q271: Liệu pháp tâm động học ngắn hạn kéo dài bao lâu?
+Q272: Trình bày cấu trúc của liệu pháp tâm động học ngắn hạn thường từ mười hai đến hai mươi buổi, cách xác định trọng tâm trị liệu ngay từ đầu và kỹ thuật diễn giải chuyển di trong khung thời gian giới hạn.
+Q273: Kỹ thuật đảo vai trong trị liệu cặp đôi là gì?
+Q274: Giải thích kỹ thuật đảo vai trong trị liệu cặp đôi giúp mỗi người trải nghiệm góc nhìn của đối phương, các bước thực hiện an toàn trong buổi trị liệu và cách xử lý khi cảm xúc của hai bên dâng cao.
+Q275: Thuốc chống trầm cảm ba vòng còn được dùng khi nào?
+Q276: Trình bày những chỉ định còn lại của thuốc chống trầm cảm ba vòng trong các trường hợp kháng trị, các tác dụng phụ kháng cholinergic và tim mạch cần theo dõi chặt chẽ trong quá trình kê đơn.
+Q277: Liệu pháp kể chuyện giúp bệnh nhân ra sao?
+Q278: Giải thích nguyên tắc ngoại hóa vấn đề trong liệu pháp kể chuyện, cách giúp bệnh nhân tách bản thân khỏi câu chuyện tiêu cực chi phối và cùng viết lại câu chuyện mới giàu hy vọng hơn.
+Q279: Kỹ thuật giải mẫn cảm có hệ thống gồm mấy bước?
+Q280: Trình bày ba bước của kỹ thuật giải mẫn cảm có hệ thống gồm huấn luyện thư giãn sâu, xây dựng thang phân cấp nỗi sợ và tiếp xúc tưởng tượng từng nấc, kèm tiêu chí chuyển sang nấc tiếp theo.
+Q281: Can thiệp sớm cho trẻ tự kỷ gồm những gì?
+Q282: Giải thích các thành phần của can thiệp sớm cho trẻ tự kỷ như phân tích hành vi ứng dụng, huấn luyện giao tiếp và chơi tương tác, kèm nguyên tắc cá nhân hóa theo mức độ và theo dõi tiến triển định kỳ.
+Q283: Liệu pháp sốc điện ECT được chỉ định khi nào?
+Q284: Trình bày chỉ định của liệu pháp sốc điện cho trầm cảm nặng kháng trị có nguy cơ tự tử cao, quy trình gây mê trong mỗi buổi, số buổi điều trị khuyến nghị và cách theo dõi tác dụng phụ về trí nhớ.
+Q285: Kỹ thuật hình dung nơi an toàn trong trị liệu sang chấn là gì?
+Q286: Giải thích kỹ thuật xây dựng nơi an toàn trong tưởng tượng cho bệnh nhân sang chấn, các bước dẫn dắt chi tiết qua từng giác quan và cách sử dụng như công cụ ổn định cảm xúc trước khi tái xử lý ký ức.
+Q287: Thuốc điều trị OCD thường dùng nhóm nào?
+Q288: Trình bày phác đồ thuốc cho rối loạn ám ảnh cưỡng chế với SSRI liều cao, thời gian chờ đáp ứng kéo dài hơn so với trầm cảm và nguyên tắc phối hợp với liệu pháp tiếp xúc ngăn ngừa phản ứng để tăng hiệu quả.
+Q289: Liệu pháp chấp nhận giúp người đau mãn tính thế nào?
+Q290: Giải thích cách liệu pháp chấp nhận và cam kết áp dụng cho bệnh nhân đau mãn tính qua việc chấp nhận cảm giác khó chịu và cam kết hành động theo giá trị, kèm bằng chứng cải thiện chất lượng cuộc sống.
+Q291: Kỹ thuật phản hồi sinh học biofeedback là gì?
+Q292: Mô tả cách phản hồi sinh học giúp bệnh nhân học kiểm soát phản ứng cơ thể như nhịp tim và mức căng cơ qua tín hiệu trực quan, kèm ứng dụng trong điều trị lo âu và chứng đau đầu do căng thẳng.
+Q293: Kế hoạch duy trì sau điều trị trầm cảm gồm những gì?
+Q294: Trình bày kế hoạch duy trì sau khi kết thúc điều trị trầm cảm gồm lịch tái khám định kỳ, dấu hiệu cảnh báo tái phát sớm, chiến lược ứng phó đã luyện tập và vai trò hỗ trợ của gia đình trong giám sát.
+Q295: Kỹ năng giao tiếp quyết đoán được dạy thế nào?
+Q296: Giải thích các bước huấn luyện giao tiếp quyết đoán trong trị liệu như dùng câu nói bắt đầu bằng tôi, kỹ thuật từ chối lành mạnh và đàm phán nhu cầu, kèm bài tập đóng vai và phản hồi của nhà trị liệu.
+Q297: Liệu pháp nhóm cho người nghiện chất hoạt động ra sao?
+Q298: Trình bày mô hình mười hai bước và liệu pháp nhóm nhận thức hành vi trong cai nghiện chất, cách chia sẻ kinh nghiệm tạo động lực thay đổi và phương pháp xử lý nguy cơ tái nghiện ngay trong nhóm.
+Q299: Kỹ thuật viết nhật ký trị liệu giúp bệnh nhân thế nào?
+Q300: Tổng hợp cách tích hợp viết nhật ký trị liệu vào các liệu pháp khác nhau từ CBT đến ACT, hướng dẫn cấu trúc bài viết và tần suất thực hành, cùng cách nhà trị liệu sử dụng nội dung nhật ký để theo dõi tiến triển.

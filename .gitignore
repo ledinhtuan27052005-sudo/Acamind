@@ -47,5 +47,6 @@ pnpm-debug.log*
 temp_pgvector/
 *.tsbuildinfo
 backend/data/raw_pdfs_500/
+backend/data/PDF/
 backend/storage/
-
+data/raw_pdfs/

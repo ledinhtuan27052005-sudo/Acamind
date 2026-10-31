@@ -3,21 +3,26 @@ Features: translate, explain, trends, literature review, slides
 """
 import os
 import re
+import httpx
 from typing import List, Optional
 from collections import Counter
+from uuid import UUID
 
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from app.db.postgres import get_db
 from app.models.document import Document, Chunk
 from app.core.security import get_optional_user, get_current_user
+from app.core.document_access import enforce_document_read, readable_document_ids, visible_documents
 from app.services.llm_client import get_default_client
 from app.services.llm_client import llm_configuration_error
 
 router = APIRouter()
+from app.api.v1.study_reviews import router as study_reviews_router
+router.include_router(study_reviews_router)
 llm_client = get_default_client()
 
 
@@ -90,7 +95,7 @@ class ExplainRequest(BaseModel):
 
 
 @router.post("/explain")
-def explain_term(body: ExplainRequest, db: Session = Depends(get_db)):
+def explain_term(body: ExplainRequest, db: Session = Depends(get_db), user=Depends(get_optional_user)):
     if not body.term.strip():
         raise HTTPException(400, "Thuật ngữ không được để trống")
 
@@ -111,7 +116,7 @@ def explain_term(body: ExplainRequest, db: Session = Depends(get_db)):
             strip_academic_header_and_boilerplate,
         )
 
-        search_ids = body.document_ids if (body.document_ids and len(body.document_ids) <= 15) else None
+        search_ids = readable_document_ids(db, user, body.document_ids if (body.document_ids and len(body.document_ids) <= 15) else None)
         chunks = None
         if search_ids and len(search_ids) <= 5:
             try:
@@ -149,7 +154,7 @@ def explain_term(body: ExplainRequest, db: Session = Depends(get_db)):
                     "filename": fname,
                     "title": title,
                     "authors": authors,
-                    "year": 2024,
+                    "year": ch.get("doc_year"),
                 }
                 _, tier_name, tier_label = score_document_authority(doc_dict, clean_txt)
                 cebm_info = evaluate_cebm_evidence_level([doc_dict], [ch])
@@ -252,9 +257,9 @@ def _extract_keywords(text: str, top_n: int = 50) -> list:
 
 
 @router.get("/trends")
-def get_trends(db: Session = Depends(get_db)):
+def get_trends(db: Session = Depends(get_db), user=Depends(get_optional_user)):
     """Trending keywords + topic distribution từ toàn bộ tài liệu."""
-    docs = db.query(Document).filter(Document.status == "ready").all()
+    docs = visible_documents(db.query(Document), user).filter(Document.status == "ready").all()
 
     all_text = " ".join(
         f"{d.title or ''} {d.authors or ''} {d.category or ''}"
@@ -289,6 +294,116 @@ class LiteratureRequest(BaseModel):
     focus: Optional[str] = None  # câu hỏi nghiên cứu tập trung
 
 
+@router.get("/study-profile/{document_id}")
+def study_profile(document_id: UUID, db: Session = Depends(get_db), user=Depends(get_current_user)):
+    from app.api.v1.document import _enforce_doc_read_access
+    from app.services.study_profile import build_study_profile
+    doc = db.query(Document).filter(Document.id == document_id).first()
+    if not doc:
+        raise HTTPException(404, "Không tìm thấy tài liệu")
+    _enforce_doc_read_access(doc, user, db)
+    chunks = (db.query(Chunk).filter(Chunk.document_id == document_id)
+              .order_by(Chunk.page_number.asc(), Chunk.chunk_index.asc(), Chunk.id.asc()).limit(2001).all())
+    return build_study_profile({
+        'document_id': str(doc.id), 'filename': doc.filename, 'title': doc.title or doc.filename,
+        'authors': doc.authors, 'year': doc.year,
+    }, [{'id': str(c.id), 'document_id': str(c.document_id), 'page_number': c.page_number,
+         'content': c.content} for c in chunks[:2000]], truncated=len(chunks) > 2000)
+
+
+class GapSearchRequest(BaseModel):
+    criterion: str = Field(max_length=30)
+    focus: str = Field(default='', max_length=1000)
+
+
+class DuplicateCheckRequest(BaseModel):
+    document_ids: List[UUID] = Field(min_length=2, max_length=10)
+
+
+@router.post('/study-duplicates')
+def study_duplicates(body: DuplicateCheckRequest, db: Session = Depends(get_db), user=Depends(get_current_user)):
+    from app.api.v1.document import _enforce_doc_read_access
+    from app.services.study_duplicates import detect_duplicate_pairs
+    ids = list(dict.fromkeys(body.document_ids))
+    if len(ids) < 2:
+        raise HTTPException(422, 'Cần ít nhất hai tài liệu khác nhau')
+    docs = db.query(Document).filter(Document.id.in_(ids)).all()
+    if len(docs) != len(ids):
+        raise HTTPException(404, 'Không tìm thấy một trong các tài liệu')
+    for doc in docs:
+        _enforce_doc_read_access(doc, user, db)
+    return {'pairs': detect_duplicate_pairs(docs),
+            'message': 'Chỉ kiểm tra các bài đã chọn. Không phát hiện cặp nghi trùng không chứng minh các nghiên cứu độc lập. Bản có năm mới hơn không mặc nhiên là bản chính thức.'}
+
+
+@router.post('/study-profile/{document_id}/search-gap')
+def study_gap_search(document_id: UUID, body: GapSearchRequest, db: Session = Depends(get_db), user=Depends(get_current_user)):
+    from app.api.v1.document import _enforce_doc_read_access
+    from app.services.study_profile import FIELDS
+    from app.services.study_gap_search import search_gap
+    if body.criterion not in FIELDS:
+        raise HTTPException(422, 'Tiêu chí không hợp lệ')
+    doc = db.query(Document).filter(Document.id == document_id).first()
+    if not doc:
+        raise HTTPException(404, 'Không tìm thấy tài liệu')
+    _enforce_doc_read_access(doc, user, db)
+    try:
+        query, ids, explanations = search_gap(document_id, body.criterion, body.focus, db)
+    except Exception:
+        raise HTTPException(503, 'Tìm bổ sung thất bại; hãy thử lại. Chưa thể kết luận thiếu bằng chứng.')
+    valid_ids = []
+    for value in ids:
+        try:
+            valid_ids.append(UUID(value))
+        except ValueError:
+            continue
+    rows = db.query(Chunk).filter(Chunk.document_id == document_id, Chunk.id.in_(valid_ids)).all() if valid_ids else []
+    by_id = {str(c.id): c for c in rows}
+    candidates = []
+    for value in ids:
+        c = by_id.get(value)
+        if c is not None and type(c.page_number) is int and c.page_number > 0 and c.content:
+            candidates.append({'chunk_id': str(c.id), 'page': c.page_number, 'quote': c.content,
+                               'ranking': explanations.get(value)})
+    return {'document_id': str(document_id), 'criterion': body.criterion, 'query': query,
+            'status': 'unverified' if candidates else 'not_found', 'candidates': candidates}
+
+
+class ComparabilityRequest(BaseModel):
+    document_a: UUID
+    document_b: UUID
+    focus: str = Field(default='', max_length=1000)
+
+
+@router.post('/study-relations')
+def study_relations(body: ComparabilityRequest, db: Session = Depends(get_db), user=Depends(get_current_user)):
+    from app.services.study_relations import assess_study_relations
+    if body.document_a == body.document_b:
+        raise HTTPException(400, 'Cần chọn hai tài liệu khác nhau')
+    if not body.focus.strip():
+        raise HTTPException(400, 'Cần nhập vấn đề hoặc kết cục muốn đối chiếu')
+    a = study_profile(body.document_a, db, user)
+    b = study_profile(body.document_b, db, user)
+    try:
+        return assess_study_relations(a, b, body.focus.strip())
+    except (ValueError, KeyError, TypeError, ConnectionError, httpx.HTTPError):
+        raise HTTPException(503, 'Không thể xác minh quan hệ lúc này. Kiểm tra Ollama cục bộ rồi thử lại; chưa có kết luận đồng thuận hay mâu thuẫn.')
+
+
+@router.post('/study-comparability')
+def study_comparability(body: ComparabilityRequest, db: Session = Depends(get_db), user=Depends(get_current_user)):
+    from app.services.study_comparability import assess_profiles
+    if body.document_a == body.document_b:
+        raise HTTPException(400, 'Cần chọn hai tài liệu khác nhau')
+    # Both access checks finish before any passages reach the local model.
+    a = study_profile(body.document_a, db, user)
+    b = study_profile(body.document_b, db, user)
+    try:
+        return assess_profiles(a, b, body.focus)
+    except (ValueError, KeyError, TypeError, ConnectionError, httpx.HTTPError):
+        raise HTTPException(503, 'Không thể đánh giá lúc này. Kiểm tra mô hình Ollama cục bộ và thử lại; chưa có kết luận về khả năng so sánh.')
+
+
 def _build_literature_matrix_and_summaries(
     docs: list[Document],
     focus: Optional[str],
@@ -303,6 +418,7 @@ def _build_literature_matrix_and_summaries(
     from app.services.scientific_appraiser import (
         evaluate_cebm_evidence_level,
         extract_structured_study_cells,
+        _extract_sample_size_candidates,
         generate_apa7_citation,
         generate_bibtex_entry,
         strip_academic_header_and_boilerplate,
@@ -316,7 +432,7 @@ def _build_literature_matrix_and_summaries(
         fname = doc.filename or "Document.pdf"
         title = doc.title or fname
         authors = doc.authors or "N/A"
-        year = doc.year or 2024
+        year = doc.year
 
         # 1. Lấy các chunk liên quan theo focus query (nếu có) + các chunk đầu bài báo (trang 1-3)
         matching_chunks: list[dict] = []
@@ -378,6 +494,15 @@ def _build_literature_matrix_and_summaries(
             matching_chunks=matching_chunks,
             page_texts_map=page_texts_map,
         )
+        sample_sources = [
+            {"content": content, "document_id": did, "doc_filename": fname, "page_number": page}
+            for (source_name, page), content in page_texts_map.items()
+            if source_name == fname
+        ] or matching_chunks
+        sample_candidates = [
+            {"value": candidate["value"], "page": candidate["page"], "quote": candidate["quote"]}
+            for candidate in _extract_sample_size_candidates(sample_sources)["sample_size_candidates"]
+        ]
 
         raw_cite = cells.get("page_citation", f"[{fname} - Page 1]")
         p_match = re.search(r"(?:Page|Trang)\s*(\d+)", raw_cite, re.IGNORECASE)
@@ -407,9 +532,12 @@ def _build_literature_matrix_and_summaries(
             "cebm_level": cebm_info.get("level", "2b"),
             "cebm_label": cebm_info.get("level_label", "Cấp 2B"),
             "study_design": cebm_info.get("study_design", ""),
+            "extraction_status": cells.get("extraction_status", "unverified"),
+            "field_pages": cells.get("field_pages", {}),
             "methodology": cells.get("methodology", ""),
             "scale_or_metric": cells.get("scale_or_metric", ""),
             "finding": cells.get("finding", ""),
+            "sample_size_candidates": sample_candidates,
             "page_citation": raw_cite,
             "primary_page": primary_page,
             "supporting_pages": cells.get("all_supporting_pages", [primary_page]),
@@ -457,6 +585,8 @@ def literature_review(
     docs = db.query(Document).filter(Document.id.in_(body.document_ids)).all()
     if not docs:
         raise HTTPException(404, "Không tìm thấy tài liệu")
+    for doc in docs:
+        enforce_document_read(doc, user, db)
 
     matrix_rows, doc_summaries = _build_literature_matrix_and_summaries(docs, body.focus, db)
 
@@ -522,6 +652,8 @@ def generate_slides(
     if not doc:
         raise HTTPException(404, "Không tìm thấy tài liệu")
 
+    enforce_document_read(doc, user, db)
+
     chunks = db.query(Chunk).filter(Chunk.document_id == doc.id).limit(10).all()
     content = "\n".join(c.content[:400] for c in chunks)
 
@@ -581,6 +713,7 @@ class VerifyClaimsRequest(BaseModel):
 def verify_claims_endpoint(
     body: VerifyClaimsRequest,
     db: Session = Depends(get_db),
+    user=Depends(get_optional_user),
 ):
     from app.services.retriever import retrieve, retrieve_via_memory
     from app.services.scientific_appraiser import verify_atomic_claims_entailment
@@ -588,7 +721,7 @@ def verify_claims_endpoint(
     if not body.answer or not body.answer.strip():
         raise HTTPException(400, "Nội dung câu trả lời cần kiểm chứng không được để trống")
 
-    search_ids = body.document_ids if (body.document_ids and len(body.document_ids) > 0) else None
+    search_ids = readable_document_ids(db, user, body.document_ids if (body.document_ids and len(body.document_ids) > 0) else None)
     search_q = (body.query or body.answer[:240]).strip()
     chunks: list[dict] = []
 
@@ -627,6 +760,7 @@ def verify_claims_endpoint(
 def contradiction_radar_endpoint(
     body: LiteratureRequest,
     db: Session = Depends(get_db),
+    user=Depends(get_optional_user),
 ):
     from app.services.scientific_appraiser import analyze_cebm_contradiction_radar
 
@@ -635,6 +769,8 @@ def contradiction_radar_endpoint(
     docs = db.query(Document).filter(Document.id.in_(body.document_ids[:10])).all()
     if not docs:
         raise HTTPException(404, "Không tìm thấy tài liệu")
+    for doc in docs:
+        enforce_document_read(doc, user, db)
 
     matrix_rows, _ = _build_literature_matrix_and_summaries(docs, body.focus, db)
     radar = analyze_cebm_contradiction_radar(matrix_rows, body.focus, llm_callable=_call_llm)
@@ -656,11 +792,12 @@ class NeuroGraphRequest(BaseModel):
 def neuro_graph_endpoint(
     body: NeuroGraphRequest,
     db: Session = Depends(get_db),
+    user=Depends(get_optional_user),
 ):
     from app.services.retriever import retrieve
     from app.services.scientific_appraiser import extract_neuro_clinical_3d_graph
 
-    search_ids = body.document_ids if (body.document_ids and len(body.document_ids) > 0) else None
+    search_ids = readable_document_ids(db, user, body.document_ids if (body.document_ids and len(body.document_ids) > 0) else None)
     search_q = (body.query or body.answer or "Tâm lý thần kinh não bộ").strip()[:300]
     chunks: list[dict] = []
     try:
@@ -780,6 +917,7 @@ Bệnh nhân ({case_obj['patient_name']}) trả lời:"""
 def osce_evaluate_session(
     body: OsceEvaluateRequest,
     db: Session = Depends(get_db),
+    user=Depends(get_optional_user),
 ):
     from app.services.retriever import retrieve
     from app.services.scientific_appraiser import OSCE_CLINICAL_CASES, grade_osce_clinical_submission
@@ -787,7 +925,7 @@ def osce_evaluate_session(
     case_obj = next((c for c in OSCE_CLINICAL_CASES if c["case_id"] == body.case_id), OSCE_CLINICAL_CASES[0])
     cited_ev = ""
     try:
-        search_ids = body.document_ids if (body.document_ids and len(body.document_ids) > 0) else None
+        search_ids = readable_document_ids(db, user, body.document_ids if (body.document_ids and len(body.document_ids) > 0) else None)
         q_ev = f"{case_obj['ground_truth']['primary_diagnosis']} {case_obj['ground_truth']['evidence_treatment']}"
         chunks = retrieve(q_ev[:200], search_ids, db, top_k=3)
         if chunks:

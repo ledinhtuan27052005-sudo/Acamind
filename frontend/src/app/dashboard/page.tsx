@@ -132,11 +132,8 @@ function StatCard({ icon: Icon, label, value, sub, href, index, badge }: StatCar
 
 const quickActions = [
   { href: '/chat', icon: MessageCircle, label: 'AI Q&A', desc: 'RAG Chat', color: '#3B82F6' },
-  { href: '/Quiz', icon: Brain, label: 'Quiz', desc: 'Knowledge Test', color: '#A855F7' },
-  { href: '/graph', icon: Network, label: 'Knowledge Graph', desc: 'Knowledge Graph', color: '#06B6D4' },
   { href: '/upload', icon: Upload, label: 'Upload PDF', desc: 'Add Documents', color: '#10B981' },
-  { href: '/Trend', icon: TrendingUp, label: 'Trending', desc: 'Trending Topics', color: '#F59E0B' },
-  { href: '/RAG', icon: BarChart3, label: 'RAG Evaluation', desc: 'Benchmark', color: '#EF4444' },
+  { href: '/library', icon: FileText, label: 'Document Library', desc: 'Manage Documents', color: '#06B6D4' },
 ];
 
 function QuickAction({ href, icon: Icon, label, desc, color, index }: typeof quickActions[0] & { index: number }) {
@@ -197,8 +194,7 @@ const systemInfo = [
   { label: 'Embedding Model', value: 'nomic-embed-text (Ollama)', icon: Zap, color: '#3B82F6' },
   { label: 'LLM Model', value: 'Checking configuration…', icon: Brain, color: '#A855F7' },
   { label: 'Vector DB', value: 'PostgreSQL + pgvector (HNSW)', icon: Layers, color: '#06B6D4' },
-  { label: 'Search', value: 'Hybrid: Vector + BM25 → RRF', icon: Network, color: '#10B981' },
-  { label: 'Graph DB', value: 'Neo4j Community Edition', icon: Share2 as typeof Network, color: '#F59E0B' },
+  { label: 'Search', value: 'Hybrid: Vector + Lexical → RRF', icon: Network, color: '#10B981' },
   { label: 'Chunk size', value: '500 chars / overlap 50', icon: BookOpen as typeof Network, color: '#EF4444' },
 ];
 
@@ -396,7 +392,7 @@ export default function DashboardPage() {
                 <h3 className="text-lg font-bold gradient-text">Acamind AI Platform</h3>
                 <p className="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
                   {readiness?.ready_for_rag
-                    ? 'RAG · Psychology Knowledge Base · Medical 3D'
+                    ? 'Document upload · Psychology chatbot'
                     : readiness?.issues?.[0] || 'Checking RAG prerequisites...'}
                 </p>
               </div>
@@ -407,13 +403,6 @@ export default function DashboardPage() {
                   style={{ background: 'linear-gradient(135deg, #3B82F6, #A855F7)' }}
                 >
                   {readiness?.ready_for_rag ? 'Start Chat' : 'Set up RAG'}
-                </Link>
-                <Link
-                  href="/3d"
-                  className="px-4 py-2 rounded-xl text-sm font-semibold border transition-all hover:scale-105 text-slate-700 dark:text-slate-200"
-                  style={{ borderColor: 'rgba(59,130,246,0.3)', background: 'rgba(59,130,246,0.06)' }}
-                >
-                  3D Body
                 </Link>
               </div>
             </div>

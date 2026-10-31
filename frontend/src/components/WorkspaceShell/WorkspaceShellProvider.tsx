@@ -7,6 +7,7 @@ import { useTabShortcuts } from './useTabShortcuts';
 import { NavProgressBar } from './NavProgressBar';
 import { WorkspaceMenu } from './WorkspaceMenu';
 import { CommandPalette } from './CommandPalette';
+import { useAppStore } from '@/store/useAppStore';
 
 interface WorkspaceShellProviderProps {
   children: React.ReactNode;
@@ -19,6 +20,8 @@ interface WorkspaceShellProviderProps {
  */
 function ShellRoot({ children, topBar }: WorkspaceShellProviderProps) {
   const { menuOpen, closeMenu, paletteOpen } = useWorkspaceTabs();
+  const user = useAppStore(state => state.user);
+  const canManageDocuments = user?.role === 'admin' || user?.role === 'researcher' || user?.role === 'expert';
   const [mounted, setMounted] = useState(false);
 
   useTabShortcuts();
@@ -57,8 +60,8 @@ function ShellRoot({ children, topBar }: WorkspaceShellProviderProps) {
 
       <NavProgressBar />
 
-      <AnimatePresence>{menuOpen && <WorkspaceMenu key="menu" onClose={closeMenu} />}</AnimatePresence>
-      <CommandPalette />
+      {canManageDocuments && <AnimatePresence>{menuOpen && <WorkspaceMenu key="menu" onClose={closeMenu} />}</AnimatePresence>}
+      {canManageDocuments && <CommandPalette />}
     </div>
   );
 }

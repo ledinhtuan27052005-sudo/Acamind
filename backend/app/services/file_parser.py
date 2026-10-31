@@ -355,12 +355,12 @@ def _excel_to_text(data: bytes, ext: str, filename: str = "Tập tin") -> str:
 
 
 def _image_to_text(data: bytes, ext: str) -> str:
-    """Trích xuất chi tiết toàn diện nội dung hình ảnh bằng Gemini Multimodal Vision API.
+    """Trích xuất chi tiết hình ảnh bằng nhà cung cấp OCR/vision đã cấu hình.
     Hỗ trợ OCR văn bản, phân tích bảng biểu Markdown, giải thích sơ đồ, đồ thị nghiên cứu.
     """
     try:
-        from app.services.llm_client import get_default_client
-        client = get_default_client()
+        from app.services.llm_client import get_ocr_client
+        client = get_ocr_client()
         clean_ext = ext.lower().lstrip(".")
         mime_map = {
             "png": "image/png",
@@ -376,11 +376,11 @@ def _image_to_text(data: bytes, ext: str) -> str:
             image_data=data,
             prompt=(
                 "Bạn là chuyên gia phân tích tài liệu học thuật, số liệu nghiên cứu và hình ảnh y tế / tâm lý học. "
-                "Hãy quan sát thật kỹ và trích xuất TOÀN DIỆN, CỰC KỲ CHI TIẾT từng phần của hình ảnh này bằng tiếng Việt:\n"
-                "1. VĂN BẢN & ĐỀ MỤC (OCR): Đọc và trích xuất nguyên văn 100% tất cả các đoạn văn, tiêu đề, nhãn, số liệu, chú thích trong ảnh.\n"
-                "2. BẢNG BIỂU & MA TRẬN DỮ LIỆU: Nếu có bảng biểu, hãy tái hiện đầy đủ dưới dạng Bảng Markdown (| Cột 1 | Cột 2 |) với các số liệu chính xác.\n"
-                "3. BIỂU ĐỒ & SƠ ĐỒ ĐỒ THỊ: Nếu là biểu đồ, mô tả chi tiết trục tung (Y), trục hoành (X), các mốc số liệu, tỷ lệ %, xu hướng diễn biến và kết luận khoa học.\n"
-                "4. TỔNG KẾT NỘI DUNG: Tóm tắt thông điệp cốt lõi hoặc phát hiện lâm sàng / khoa học quan trọng nhất trong ảnh."
+                "Hãy phân tích hình ảnh tài liệu học thuật bằng tiếng Việt và chỉ nêu nội dung nhìn thấy được:\n"
+                "1. Trích nguyên văn tiêu đề, nhãn, chú thích và các số liệu đọc rõ ràng; đánh dấu phần mờ/không đọc được thay vì tự đoán.\n"
+                "2. Với bảng, tái hiện cấu trúc và số liệu đọc được dưới dạng Markdown; không tự điền ô thiếu.\n"
+                "3. Với biểu đồ, nêu loại biểu đồ, trục, đơn vị, nhãn, xu hướng. Nếu ước lượng giá trị từ vị trí/độ cao của điểm trên hình, ghi rõ là ƯỚC LƯỢNG và không trình bày như số liệu trích xuất chính xác.\n"
+                "4. Phân biệt quan sát trực tiếp với diễn giải; nếu hình không đủ rõ để kết luận, nói rõ giới hạn đó."
             ),
             max_tokens=4096,
             temperature=0.1,
@@ -419,7 +419,7 @@ def parse_file(file_data: bytes, filename: str) -> str:
         return f"[Lỗi khi đọc file: {filename}]"
 
 
-def parse_file_chunks(file_data: bytes, filename: str) -> list[dict]:
+def parse_file_chunks(file_data: bytes, filename: str, analyze_visuals: bool = False, max_visual_pages: int = 1) -> list[dict]:
     """Phân tách file tải lên thành các chunk có cấu trúc (đặc biệt tách từng Sheet cho Excel),
     giúp LLM trích dẫn chính xác theo từng Sheet/trang và bao quát toàn bộ dữ liệu.
     """
@@ -466,7 +466,86 @@ def parse_file_chunks(file_data: bytes, filename: str) -> list[dict]:
             })
         return chunks
 
-    # Các file PDF, DOCX, ảnh: trả về 1 chunk hoàn chỉnh
+    if ext == 'pdf':
+        # Keep page provenance for inline PDFs so citations can identify the
+        # page that actually supplied each fact.
+        chunks = []
+        visual_pages_used = 0
+        try:
+            with fitz.open(stream=file_data, filetype="pdf") as pdf:
+                for page_index, page in enumerate(pdf):
+                    text = _clean(page.get_text() or "")
+                    if len(text) < 50:
+                        try:
+                            pix = page.get_pixmap(dpi=150)
+                            ocr = _image_to_text(pix.tobytes("jpeg"), "jpeg")
+                            if ocr and not ocr.startswith(("[Hình ảnh — không thể", "[Hình ảnh — API lỗi")):
+                                text = _clean(ocr)
+                        except Exception as exc:
+                            logger.warning("Inline PDF OCR failed on page %s: %s", page_index + 1, exc)
+                    if text:
+                        has_visual_content = bool(page.get_images(full=True)) or bool(re.search(
+                            r"\b(?:figure|fig\.?|chart|graph|plot|hình|biểu đồ|bảng)\s*\d*\b",
+                            text,
+                            re.IGNORECASE,
+                        ))
+                        if analyze_visuals and has_visual_content and visual_pages_used < max_visual_pages:
+                            try:
+                                pix = page.get_pixmap(dpi=130, alpha=False)
+                                visual_text = _image_to_text(pix.tobytes("jpeg"), "jpeg")
+                                if visual_text and not visual_text.startswith(("[Hình ảnh — không thể", "[Hình ảnh — API lỗi")):
+                                    text += "\n\n[Vision analysis of figure/table/graphic on this PDF page; verify any visually estimated values]\n" + _clean(visual_text)
+                                visual_pages_used += 1
+                            except Exception as exc:
+                                logger.warning("Inline PDF visual analysis failed on page %s: %s", page_index + 1, exc)
+                        chunks.append({
+                            "content": text[:MAX_TEXT_CHARS],
+                            "document_id": "inline_file",
+                            "doc_filename": filename,
+                            "doc_title": filename,
+                            "page_number": page_index + 1,
+                        })
+            # Add machine-readable table cells to their original page context;
+            # this improves comparison and chart-ready numeric extraction.
+            try:
+                with pdfplumber.open(io.BytesIO(file_data)) as pdf_text:
+                    page_chunks = {int(c["page_number"]): c for c in chunks}
+                    for page_index, page in enumerate(pdf_text.pages, start=1):
+                        target = page_chunks.get(page_index)
+                        if not target:
+                            continue
+                        rendered_tables = []
+                        for table_index, table in enumerate(page.extract_tables() or [], start=1):
+                            if not table or len(table) < 2:
+                                continue
+                            rows = [[re.sub(r"\s+", " ", str(cell or "")).strip() for cell in row] for row in table]
+                            width = max((len(row) for row in rows), default=0)
+                            if width < 2:
+                                continue
+                            rows = [row + [""] * (width - len(row)) for row in rows]
+                            rendered_tables.append(
+                                f"[Extracted table {table_index}, PDF page {page_index}]\n"
+                                + "| " + " | ".join(rows[0]) + " |\n"
+                                + "| " + " | ".join(["---"] * width) + " |\n"
+                                + "\n".join("| " + " | ".join(row) + " |" for row in rows[1:])
+                            )
+                        if rendered_tables:
+                            target["content"] += "\n\n" + "\n\n".join(rendered_tables)
+            except Exception as exc:
+                logger.info("Inline PDF table extraction skipped for %s: %s", filename, exc)
+        except Exception as exc:
+            logger.warning("Inline PDF page parsing failed for %s: %s", filename, exc)
+        if chunks:
+            try:
+                from app.services.reference_filter import filter_reference_chunks
+                filtered_inline = filter_reference_chunks(chunks)
+                if filtered_inline:
+                    chunks = filtered_inline
+            except Exception:
+                pass
+            return chunks
+
+    # Other DOCX and image files are returned as one chunk.
     text = parse_file(file_data, filename)
     return [{
         "content": f"[File: {filename}]\n{text}",

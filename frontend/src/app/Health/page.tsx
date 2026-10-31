@@ -93,7 +93,7 @@ export default function PsychologyPage() {
   const getUserId = (): string | undefined => {
     if (user?.id) return user.id;
     if (typeof window === 'undefined') return undefined;
-    return localStorage.getItem('user_id') ?? undefined;
+    return sessionStorage.getItem('user_id') ?? undefined;
   };
 
   const fetchSymptoms = async () => {

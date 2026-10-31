@@ -179,27 +179,16 @@ def _parse_json_array(raw: str) -> Optional[list]:
 # ── LLM call wrapper ─────────────────────────────────────────────────────────
 
 def _llm_complete(messages: list[dict], system: str, max_tokens: int = 3000) -> str:
-    """Wrapper gọi Gemini (qua llm_client) cho memory extraction task.
+    """Use the configured LLM for memory extraction without provider fallback.
 
-    Chỉ hỗ trợ backend Gemini. Nếu env flag
-    `MEMORY_LLM_BACKEND` khác 'gemini', log warning và fallback về Gemini.
-
-    Tự động bump max_tokens lên _MAX_TOKENS_GEMINI (14000) vì 
-    hay bị truncate giữa JSON.
-    Caller có thể pass max_tokens cao hơn nếu cần.
+    Gemini keeps its historical larger output budget; local models use the
+    requested budget to avoid excessive memory use and generation time.
 
     Trả về '' nếu fail (không raise) — caller sẽ fallback.
     """
     from app.core.config import settings
-    backend = (settings.MEMORY_LLM_BACKEND or "gemini").lower()
-    if backend != "gemini":
-        logger.warning(
-            "MEMORY_LLM_BACKEND=%r không còn hỗ trợ — chỉ Gemini. Fallback về Gemini.",
-            backend,
-        )
-
-    # Đảm bảo Gemini có đủ tokens
-    effective_max = max(max_tokens, _MAX_TOKENS_GEMINI)
+    backend = (settings.LLM_PROVIDER or "ollama").lower()
+    effective_max = max(max_tokens, _MAX_TOKENS_GEMINI) if backend == "gemini" else max_tokens
     try:
         from app.services.llm_client import get_default_client
         client = get_default_client()
@@ -210,7 +199,7 @@ def _llm_complete(messages: list[dict], system: str, max_tokens: int = 3000) -> 
             temperature=0.1,
         ) or ""
     except Exception as e:
-        logger.warning("Gemini LLM call failed: %s", e)
+        logger.warning("Configured LLM call failed (%s): %s", backend, e)
         return ""
 
 
@@ -246,6 +235,8 @@ def build_memory_for_doc(document_id: str, db_url: str) -> bool:
         True nếu memory_status='ready', False nếu fail.
         Document vẫn ở status='ready' cho dù memory build fail.
     """
+    from app.db.postgres import _resolve_postgres_url
+    db_url = _resolve_postgres_url(db_url)
     engine = create_engine(db_url)
     SessionLocal = sessionmaker(bind=engine)
     db = SessionLocal()
@@ -452,7 +443,7 @@ def _format_structure_for_prompt(structure: dict, max_items: int = 30) -> str:
 def _build_memory_standard(doc, pages: list[dict], structure: dict, db) -> bool:
     """Build memory cho PDF ≤ 100 trang: 1 LLM call."""
     from app.core.config import settings
-    is_gemini = settings.MEMORY_LLM_BACKEND.lower() == "gemini"
+    is_gemini = (settings.LLM_PROVIDER or "ollama").lower() == "gemini"
     n_facts = _MAX_FACTS_PER_CHUNK_GEMINI if is_gemini else _MAX_FACTS_PER_CHUNK
 
     sample = _sample_pages(pages, _TOTAL_PAGES_SAMPLE_FOR_ABSTRACT)

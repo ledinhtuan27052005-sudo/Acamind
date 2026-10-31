@@ -35,25 +35,49 @@ def _char_overlap(a: str, b: str) -> int:
 
 
 def _find_page(chunk_content: str, pages_data: list) -> int:
-    """Gán trang cho chunk bằng cách tìm trang có nhiều ký tự chung nhất
-    với phần đầu của chunk (cải thiện đáng kể so với `in` đơn thuần).
+    """Gán trang cho chunk bằng cách ưu tiên nhãn [Trang X] và phần thân chính của chunk.
 
-    Trước đây: so sánh 80 ký tự đầu chunk với `in page_text` — chunk cắt
-    ngang trang sẽ gán sai. Giờ: chuẩn hoá whitespace + dùng sliding overlap.
+    Khắc phục lỗi cũ:
+    - Khi chunk cắt qua ranh giới trang (overlap 200 ký tự đầu thuộc cuối trang trước,
+      sau đó là [Trang X] và 600 ký tự thuộc trang X), hoặc khi 120 ký tự đầu trùng với
+      running header/footer lặp lại ở Trang 1, thuật toán cũ gán nhầm về Trang 1.
     """
     if not pages_data:
         return 1
-    head = chunk_content[:120]
+
+    # 1. Nếu trong chunk có nhãn [Trang X], tính chính xác số ký tự thuộc về từng trang
+    markers = list(re.finditer(r"\[Trang\s+(\d+)\]", chunk_content))
+    if markers:
+        page_char_counts: dict[int, int] = {}
+        first_pos = markers[0].start()
+        first_page = int(markers[0].group(1))
+        if first_pos > 0:
+            prev_page = max(1, first_page - 1)
+            page_char_counts[prev_page] = page_char_counts.get(prev_page, 0) + first_pos
+        for idx_m, m in enumerate(markers):
+            p_num = int(m.group(1))
+            seg_start = m.end()
+            seg_end = markers[idx_m + 1].start() if idx_m + 1 < len(markers) else len(chunk_content)
+            seg_len = max(0, seg_end - seg_start)
+            page_char_counts[p_num] = page_char_counts.get(p_num, 0) + seg_len
+        if page_char_counts:
+            return max(page_char_counts.items(), key=lambda kv: (kv[1], kv[0]))[0]
+
+    # 3. Nếu không có nhãn [Trang X] trong chunk, lấy đoạn giữa của chunk (bỏ qua 80 ký tự đầu/cuối dễ dính running header/footer)
+    cleaned_content = re.sub(r"\[Trang\s+\d+\]\s*", "", chunk_content).strip()
+    mid_start = 80 if len(cleaned_content) > 260 else 0
+    probe = cleaned_content[mid_start:mid_start + 160]
     best_page = 1
     best_score = 0
     for page in pages_data:
         text = page.get("text", "")
         if not text:
             continue
-        score = _char_overlap(head, text)
+        score = _char_overlap(probe, text)
         if score > best_score:
             best_score = score
             best_page = page["page"]
+
     return best_page
 
 
@@ -82,4 +106,9 @@ def chunk_text(text: str, document_id: str, pages_data: list) -> list[dict]:
             "document_id": document_id,
             "page_number": _find_page(content, pages_data),
         })
+    try:
+        from app.services.reference_filter import filter_reference_chunks
+        chunks = filter_reference_chunks(chunks)
+    except Exception:
+        pass
     return chunks

@@ -67,7 +67,7 @@ def extract_and_save_figures(file_path: str, document_id: str, db: Session, max_
                             })
 
                 # 2. Thu thập vector drawings và raster images
-                drawings = page.get_drawings() or []
+                drawings = (page.get_drawings() or [])[:400]
                 img_blocks = [
                     fitz.Rect(b["bbox"])
                     for b in blocks
@@ -136,7 +136,7 @@ def extract_and_save_figures(file_path: str, document_id: str, db: Session, max_
                                 pix.save(img_path)
 
                                 # Lưu record vào DB
-                                clean_caption = cap["text"][:300].strip()
+                                clean_caption = cap["text"].replace("\x00", "")[:300].strip()
                                 fig_record = DocumentFigure(
                                     document_id=uuid.UUID(str(document_id)),
                                     page_number=page_num,

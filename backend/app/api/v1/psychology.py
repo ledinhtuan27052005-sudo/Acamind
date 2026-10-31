@@ -4,6 +4,8 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from typing import Optional
 from app.db.postgres import get_db
+from app.core.security import get_optional_user
+from app.core.document_access import readable_document_ids
 from app.services.retriever import retrieve
 from app.services.generator import (
     analyze_symptoms_dsm,
@@ -49,7 +51,7 @@ MIN_SUFFICIENT_CHUNKS = 3
 # ── 1. DSM/ICD Symptom Analysis ──────────────────────────────────────────
 
 @router.post("/symptom-analysis")
-def symptom_analysis(req: SymptomRequest, db: Session = Depends(get_db)):
+def symptom_analysis(req: SymptomRequest, db: Session = Depends(get_db), user=Depends(get_optional_user)):
     """Analyze symptoms against DSM/ICD from documents, with internet fallback."""
     if not req.symptom_description.strip():
         raise HTTPException(400, "Symptom description cannot be empty")
@@ -57,7 +59,7 @@ def symptom_analysis(req: SymptomRequest, db: Session = Depends(get_db)):
     # Try to retrieve from uploaded documents
     chunks = []
     if req.document_ids:
-        chunks = retrieve(req.symptom_description, req.document_ids, db, top_k=req.top_k)
+        chunks = retrieve(req.symptom_description, readable_document_ids(db, user, req.document_ids), db, top_k=req.top_k)
 
     # If document chunks are sufficient, use document-only analysis
     if len(chunks) >= MIN_SUFFICIENT_CHUNKS:
@@ -133,14 +135,14 @@ def symptom_analysis(req: SymptomRequest, db: Session = Depends(get_db)):
 # ── 2. Treatment Protocol ────────────────────────────────────────────────────────
 
 @router.post("/treatment-protocol")
-def treatment_protocol(req: TreatmentRequest, db: Session = Depends(get_db)):
+def treatment_protocol(req: TreatmentRequest, db: Session = Depends(get_db), user=Depends(get_optional_user)):
     """Synthesize treatment protocols from multiple scientific documents."""
     if not req.condition.strip():
         raise HTTPException(400, "Condition name cannot be empty")
     if not req.document_ids:
         raise HTTPException(400, "At least 1 document must be selected")
 
-    chunks = retrieve(req.condition, req.document_ids, db, top_k=req.top_k)
+    chunks = retrieve(req.condition, readable_document_ids(db, user, req.document_ids), db, top_k=req.top_k)
     if not chunks:
         raise HTTPException(
             404,
@@ -171,14 +173,14 @@ def treatment_protocol(req: TreatmentRequest, db: Session = Depends(get_db)):
 # ── 3. Compare Psychology Schools ──────────────────────────────────────────
 
 @router.post("/compare-schools")
-def compare_schools(req: CompareSchoolsRequest, db: Session = Depends(get_db)):
+def compare_schools(req: CompareSchoolsRequest, db: Session = Depends(get_db), user=Depends(get_optional_user)):
     """Compare perspectives of multiple psychology schools on a topic."""
     if not req.topic.strip():
         raise HTTPException(400, "Topic cannot be empty")
     if not req.document_ids:
         raise HTTPException(400, "At least 2 documents must be selected for school comparison")
 
-    chunks = retrieve(req.topic, req.document_ids, db, top_k=req.top_k)
+    chunks = retrieve(req.topic, readable_document_ids(db, user, req.document_ids), db, top_k=req.top_k)
     if not chunks:
         raise HTTPException(
             404,
@@ -209,14 +211,14 @@ def compare_schools(req: CompareSchoolsRequest, db: Session = Depends(get_db)):
 # ── 4. Topic Research Summary ────────────────────────────────────────
 
 @router.post("/topic-summary")
-def topic_summary(req: TopicSummaryRequest, db: Session = Depends(get_db)):
+def topic_summary(req: TopicSummaryRequest, db: Session = Depends(get_db), user=Depends(get_optional_user)):
     """Synthesize all research on a psychology topic from the document repository."""
     if not req.topic.strip():
         raise HTTPException(400, "Topic cannot be empty")
     if not req.document_ids:
         raise HTTPException(400, "At least 1 document must be selected")
 
-    chunks = retrieve(req.topic, req.document_ids, db, top_k=req.top_k)
+    chunks = retrieve(req.topic, readable_document_ids(db, user, req.document_ids), db, top_k=req.top_k)
     if not chunks:
         raise HTTPException(
             404,

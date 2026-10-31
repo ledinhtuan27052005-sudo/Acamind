@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 # ── Force-load .env TRƯỚC khi Settings() được khởi tạo ────────────────────
 # Vấn đề: trên Windows, một số tool set sẵn API key ở mức OS environment.
-# GEMINI_API_KEY / GEMINI_BASE_URL ở mức OS environment. pydantic-settings
+# API keys ở mức OS environment. pydantic-settings
 # v2 mặc định ưu tiên OS env hơn .env file → backend đọc nhầm key cũ
 # thay vì key trong backend/.env.
 #
@@ -24,10 +24,15 @@ class Settings(BaseSettings):
     NEO4J_URL: str
     NEO4J_USER: str
     NEO4J_PASSWORD: str
+    LLM_PROVIDER: str = "ollama"
     GEMINI_API_KEY: str = ""
     GEMINI_BASE_URL: str = "https://generativelanguage.googleapis.com/v1beta/openai"
-    LLM_MODEL: str = "gemini-3.1-flash-lite"
+    LLM_MODEL: str = "qwen3:4b-instruct"
     OLLAMA_BASE_URL: str = "http://localhost:11434"
+    EVIDENCE_LOCAL_MODEL: str = "qwen3:4b-instruct"
+    EVIDENCE_COMPARISON_MODEL: str = "qwen3:4b-instruct"
+    OCR_PROVIDER: str = "gemini"
+    OCR_MODEL: str = "gemini-3.1-flash-lite"
     SECRET_KEY: str
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440
@@ -39,9 +44,9 @@ class Settings(BaseSettings):
     SMTP_PASS: str = ""
 
     # ── Phase A: Memory builder config ─────────────────────────────────────────
-    # MEMORY_LLM_BACKEND: gemini (default) — dùng Gemini qua llm_client.
-    MEMORY_LLM_BACKEND: str = "gemini"
-    MEMORY_LLM_MODEL: str = "gemini-3.1-flash-lite"
+    # Memory extraction uses the same configured LLM provider/model as chat.
+    MEMORY_LLM_BACKEND: str = "ollama"
+    MEMORY_LLM_MODEL: str = "qwen3:4b-instruct"
 
     # ── App config ────────────────────────────────────────────────────────
     DEBUG: bool = False

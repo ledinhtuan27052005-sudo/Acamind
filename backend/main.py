@@ -359,16 +359,28 @@ def _warm_models_at_startup():
             if _os.getenv("RERANK_BACKEND", "flag").lower() != "llm":
                 from app.services.reranker import get_reranker
                 reranker = get_reranker()
+                _ = reranker.score_pairs([("query warmup", "passage warmup")])
                 _logger.info("Reranker warmed OK: %s", type(reranker._model).__name__ if hasattr(reranker, "_model") and reranker._model else "lazy")
         except Exception as e:
             _logger.warning("Reranker warmup failed (non-fatal, will load lazily): %s", e)
+
+        try:
+            from app.api.v1.document import resume_pending_documents
+            resume_pending_documents()
+        except Exception as e:
+            _logger.warning("Resume pending documents failed: %s", e)
 
     threading.Thread(target=_warm_worker, daemon=True, name="model-warmup").start()
 
 # Middleware phải được add theo thứ tự ngược: add cuối cùng = chạy đầu tiên
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:3001"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:3001",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -417,10 +429,13 @@ def readiness_health():
     try:
         ready_documents = db.query(func.count(Document.id)).filter(Document.status == "ready").scalar() or 0
         total_chunks = db.query(func.count(Chunk.id)).scalar() or 0
-        llm_configured = bool(settings.GEMINI_API_KEY.strip())
+        from app.services.llm_client import llm_configuration_error, ocr_configuration_error
+        config_error = llm_configuration_error()
+        ocr_error = ocr_configuration_error()
+        llm_configured = config_error is None
         issues = []
         if not llm_configured:
-            issues.append("Chưa cấu hình GEMINI_API_KEY cho dịch vụ tạo câu trả lời.")
+            issues.append(config_error)
         if ready_documents == 0:
             issues.append("Chưa có tài liệu ở trạng thái ready.")
         if total_chunks == 0:
@@ -428,7 +443,12 @@ def readiness_health():
         return {
             "ready_for_rag": not issues,
             "llm_configured": llm_configured,
+            "llm_provider": settings.LLM_PROVIDER,
             "llm_model": settings.LLM_MODEL,
+            "ocr_configured": ocr_error is None,
+            "ocr_provider": settings.OCR_PROVIDER,
+            "ocr_model": settings.OCR_MODEL,
+            "ocr_issue": ocr_error,
             "ready_documents": ready_documents,
             "total_chunks": total_chunks,
             "issues": issues,

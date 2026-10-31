@@ -1,8 +1,0 @@
-mode,ef_search,exact_nn_recall_at_10,gt_doc_recall_at_5,latency_p50_ms,latency_p90_ms,latency_mean_ms
-Exact_BruteForce_SeqScan,,1.0,0.8667,109.42,117.62,116.16
-HNSW_m16_efConst64_efSearch10,10,0.4422,0.5556,3.19,5.23,3.72
-HNSW_m16_efConst64_efSearch20,20,0.6222,0.6667,2.22,3.24,2.32
-HNSW_m16_efConst64_efSearch40,40,0.68,0.7111,2.35,3.03,2.48
-HNSW_m16_efConst64_efSearch80,80,0.82,0.8444,3.52,4.23,3.57
-HNSW_m16_efConst64_efSearch160,160,0.8933,0.8222,5.44,7.22,5.5
-HNSW_m16_efConst64_efSearch320,320,0.9489,0.8444,8.12,10.82,8.57

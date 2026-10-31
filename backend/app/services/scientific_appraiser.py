@@ -1,14 +1,8 @@
-"""
-Scientific Appraiser & Evidence-Based Research Engine (Acamind)
-==============================================================
-Module cung cấp các công cụ thẩm định khoa học và y học thực chứng chuyên sâu:
-1. Phân cấp Bằng chứng Khoa học theo chuẩn Oxford CEBM (Level 1a/1b/2/3/4/5) & Độ mạnh khuyến nghị (Grade A/B/C/D).
-2. Thẻ bóc tách thực nghiệm lâm sàng theo Khung PICO (Population, Intervention, Comparison, Outcome).
-3. Ma trận Đồng thuận Học thuật & Đối sánh Quan điểm (Consensus & Debate Matrix).
-4. Bộ câu hỏi Phản biện Phương pháp luận (Peer-Reviewer / Devil's Advocate Inquiries).
-5. Trình xuất Trích dẫn Học thuật Chuẩn Quốc Tế: BibTeX (.bib) cho Overleaf/Zotero, RIS (.ris) cho Mendeley/EndNote, APA 7th.
-6. Thẩm định & Tra cứu Điểm cắt Thang đo Tâm lý Lâm sàng (BDI-II, PHQ-9, GAD-7, DASS-21, HAM-D).
-7. Trích xuất Mạng lưới Đồ thị Tri thức Ngữ nghĩa (Answer Knowledge Graph).
+"""Scientific extraction candidates and reviewed-data analysis helpers.
+
+Heuristic extraction is not evidence appraisal or entailment certification.
+Unavailable scientific judgments return explicit unverified/insufficient states.
+See EVIDENCE_PIPELINE.md for supported contracts and limitations.
 """
 from __future__ import annotations
 
@@ -103,235 +97,63 @@ PSYCHOMETRIC_SCALES_DATABASE = {
 # ── 2. Đánh giá Cấp độ Bằng chứng Y học Thực chứng (Oxford CEBM Level) ─────────
 
 def evaluate_cebm_evidence_level(cited_docs: list[dict], context_chunks: list[dict]) -> dict[str, Any]:
-    """Phân cấp độ bằng chứng y học khoa học theo tiêu chuẩn Oxford CEBM (Centre for Evidence-Based Medicine):
-    - Level 1a: Tổng quan hệ thống / Phân tích gộp các RCTs (Systematic Review / Meta-Analysis)
-    - Level 1b: Thử nghiệm lâm sàng ngẫu nhiên có đối chứng chất lượng cao (Individual RCT)
-    - Level 1c: Hướng dẫn điều trị & Phác đồ chuẩn của Bộ Y Tế / WHO / DSM-5 chính thức
-    - Level 2a/2b: Nghiên cứu đoàn hệ có đối chứng (Cohort Study)
-    - Level 3: Nghiên cứu bệnh chứng (Case-Control Study)
-    - Level 4: Nghiên cứu loạt ca / Khảo sát cắt ngang (Case Series / Cross-Sectional)
-    - Level 5: Giáo trình học thuật tổng quan / Ý kiến chuyên gia y tế (Textbook / Expert Opinion)
+    """CEBM and recommendation grades require a question-specific appraisal.
+
+    Keyword mentions in a title or retrieved passage cannot establish study
+    design, risk of bias, authorship or strength of recommendation.
     """
-    sample_text = " ".join([
-        (d.get("title") or "") + " " + (d.get("filename") or "") + " " + (d.get("authors") or "")
-        for d in cited_docs
-    ]).lower()
-
-    chunk_text = " ".join([c.get("content", "") for c in context_chunks[:5]]).lower()
-    combined = sample_text + " " + chunk_text
-
-    # Kiểm tra Level 1a: Meta-analysis & Systematic Review
-    if any(k in combined for k in ["meta-analysis", "phân tích gộp", "systematic review", "tổng quan hệ thống"]):
-        return {
-            "level": "1a",
-            "level_label": "Cấp 1A (Tiêu chuẩn vàng cao nhất)",
-            "grade": "Grade A",
-            "grade_label": "Độ mạnh khuyến cáo: Loại A (Rất mạnh)",
-            "study_design": "Tổng quan Hệ thống & Phân tích Gộp (Systematic Review & Meta-Analysis)",
-            "stars": 5,
-            "badge_color": "emerald",
-            "description": "Bằng chứng cấp cao nhất từ tổng quan hệ thống các thử nghiệm ngẫu nhiên có đối chứng, độ tin cậy thực chứng tối đa."
-        }
-
-    # Kiểm tra Level 1b: RCT (Randomized Controlled Trial)
-    if any(k in combined for k in ["randomized controlled trial", "rct", "thử nghiệm lâm sàng", "thực thi lâm sàng", "thử nghiệm đối chứng", "controlled trial"]):
-        return {
-            "level": "1b",
-            "level_label": "Cấp 1B (Thực nghiệm đối chứng)",
-            "grade": "Grade A",
-            "grade_label": "Độ mạnh khuyến cáo: Loại A (Rất mạnh)",
-            "study_design": "Thử nghiệm Lâm sàng Ngẫu nhiên có Đối chứng (RCT)",
-            "stars": 5,
-            "badge_color": "teal",
-            "description": "Bằng chứng thực nghiệm định lượng trực tiếp trên bệnh nhân có nhóm can thiệp và đối chứng độc lập."
-        }
-
-    # Kiểm tra Level 1c: Phác đồ điều trị chính thức của Bộ Y Tế / Hướng dẫn chẩn đoán DSM/ICD
-    if any(k in combined for k in ["phác đồ", "phac do", "bộ y tế", "hướng dẫn điều trị", "dsm-5", "icd-11", "clinical guideline", "clinical practice guideline"]):
-        return {
-            "level": "1c",
-            "level_label": "Cấp 1C (Hướng dẫn Y khoa Chuẩn mực)",
-            "grade": "Grade A",
-            "grade_label": "Độ mạnh khuyến cáo: Loại A (Chính thức)",
-            "study_design": "Phác đồ Điều trị & Hướng dẫn Lâm sàng Quốc gia / APA / WHO",
-            "stars": 5,
-            "badge_color": "indigo",
-            "description": "Quy chuẩn hướng dẫn chẩn đoán và điều trị chính thức được phê duyệt bởi cơ quan y tế có thẩm quyền."
-        }
-
-    # Kiểm tra Level 2: Cohort Study / Nghiên cứu Đoàn hệ
-    if any(k in combined for k in ["cohort", "nghiên cứu đoàn hệ", "theo dõi dọc", "longitudinal study"]):
-        return {
-            "level": "2b",
-            "level_label": "Cấp 2B (Nghiên cứu Đoàn hệ)",
-            "grade": "Grade B",
-            "grade_label": "Độ mạnh khuyến cáo: Loại B (Mạnh vừa)",
-            "study_design": "Nghiên cứu Đoàn hệ có Theo dõi Dọc (Cohort Study)",
-            "stars": 4,
-            "badge_color": "blue",
-            "description": "Nghiên cứu quan sát chất lượng cao theo dõi nhóm bệnh nhân qua thời gian để đánh giá kết quả can thiệp."
-        }
-
-    # Kiểm tra Level 3: Case-Control
-    if any(k in combined for k in ["case-control", "bệnh chứng", "bệnh - chứng"]):
-        return {
-            "level": "3b",
-            "level_label": "Cấp 3B (Nghiên cứu Bệnh - Chứng)",
-            "grade": "Grade B",
-            "grade_label": "Độ mạnh khuyến cáo: Loại B (Trung bình)",
-            "study_design": "Nghiên cứu Bệnh - Chứng (Case-Control Study)",
-            "stars": 3,
-            "badge_color": "amber",
-            "description": "Nghiên cứu so sánh hồi cứu giữa nhóm bệnh nhân có can thiệp và nhóm chứng."
-        }
-
-    # Mặc định Cấp 4 / 5: Tài liệu Chuyên khảo / Giáo trình / Báo cáo ca
     return {
-        "level": "4/5",
-        "level_label": "Cấp 4-5 (Tài liệu Học thuật & Giáo trình)",
-        "grade": "Grade C",
-        "grade_label": "Độ mạnh khuyến cáo: Loại C (Tham khảo chuyên môn)",
-        "study_design": "Giáo trình Chuyên ngành / Tổng quan Lý thuyết & Báo cáo Ca",
-        "stars": 3,
-        "badge_color": "slate",
-        "description": "Tổng hợp lý thuyết nền tảng, định nghĩa trường phái và khuyến nghị học thuật từ tài liệu chuyên ngành."
+        "status": "unverified", "level": "unverified",
+        "level_label": "Chưa thẩm định cấp độ bằng chứng",
+        "grade": "unverified", "grade_label": "Chưa đánh giá độ mạnh khuyến cáo",
+        "study_design": "Chưa xác minh thiết kế nghiên cứu",
+        "stars": 0, "badge_color": "slate",
+        "description": "Cần thẩm định theo loại câu hỏi, thiết kế và nguy cơ sai lệch; từ khóa không xác nhận cấp độ CEBM.",
     }
 
 
 # ── 3. Bóc tách Thẻ Thực nghiệm Chuẩn PICO (PICO Framework Extractor) ──────────
 
 def extract_pico_framework(query: str, answer: str, context_chunks: list[dict]) -> dict[str, Any]:
-    """Trích xuất tự động thông số thực nghiệm chuẩn PICO:
-    - P (Population / Bệnh nhân): Cỡ mẫu N, lứa tuổi, chẩn đoán, tiêu chuẩn
-    - I (Intervention / Can thiệp): Liệu pháp, số buổi, liều lượng, hoạt chất
-    - C (Comparison / Nhóm đối chứng): Nhóm chứng, đơn trị liệu, placebo
-    - O (Outcome / Kết quả đo lường): Tỷ lệ thuyên giảm %, tác dụng phụ, p-value, thang đo
+    """Return source-specific PICO candidates, never fill missing fields.
+
+    Do not treat generated answers as evidence or join different studies into
+    one trial. Keyword matching is explicitly unverified extraction.
     """
-    all_text = answer + " " + " ".join([c.get("content", "") for c in context_chunks])
-
-    # 1. Population (P)
-    sample_match = re.search(r'\b(?:n\s*=\s*(\d+)|cỡ\s*mẫu\s*(?:là\s*)?(\d+)|(\d+)\s*bệnh\s*nhân|(\d+)\s*patients)\b', all_text, re.IGNORECASE)
-    age_match = re.search(r'\b(?:tuổi\s*(?:từ\s*)?(\d+\s*[-–]\s*\d+)|\b(\d+\s*[-–]\s*\d+)\s*tuổi|age\s*(\d+\s*[-–]\s*\d+))\b', all_text, re.IGNORECASE)
-    diag_match = re.search(r'\b(trầm\s*cảm\s*(?:nặng|chủ\s*yếu|vừa)?|lo\s*âu\s*(?:lan\s*tỏa)?|depression|major\s*depressive\s*disorder|mdd|anxiety)\b', all_text, re.IGNORECASE)
-
-    pop_parts = []
-    if sample_match:
-        val = next(v for v in sample_match.groups() if v)
-        pop_parts.append(f"Cỡ mẫu N = {val} bệnh nhân")
-    if age_match:
-        val = next(v for v in age_match.groups() if v)
-        pop_parts.append(f"Độ tuổi {val}")
-    if diag_match:
-        pop_parts.append(f"Chẩn đoán: {diag_match.group(1).title()}")
-
-    population_text = " • ".join(pop_parts) if pop_parts else "Bệnh nhân trầm cảm hoặc rối loạn tâm lý được chỉ định can thiệp lâm sàng."
-
-    # 2. Intervention (I)
-    interv_parts = []
-    if re.search(r'\b(?:cbt|nhận\s*thức\s*hành\s*vi)\b', all_text, re.IGNORECASE):
-        sessions = re.search(r'(\d+)\s*buổi', all_text, re.IGNORECASE)
-        s_text = f" (Liệu trình {sessions.group(1)} buổi chuẩn)" if sessions else ""
-        interv_parts.append(f"Liệu pháp Nhận thức Hành vi - CBT{s_text}")
-    if re.search(r'\b(?:ssri|sertraline|fluoxetine|dược\s*lý)\b', all_text, re.IGNORECASE):
-        dose = re.search(r'(\d+(?:\.\d+)?\s*mg(?:\/ngày)?)', all_text, re.IGNORECASE)
-        d_text = f" ({dose.group(1)})" if dose else ""
-        interv_parts.append(f"Phác đồ dược lý Sertraline/SSRI{d_text}")
-    if re.search(r'\b(?:mindfulness|chánh\s*niệm)\b', all_text, re.IGNORECASE):
-        interv_parts.append("Can thiệp Chánh niệm (Mindfulness-Based Intervention)")
-
-    intervention_text = " phối hợp cùng ".join(interv_parts) if interv_parts else "Liệu pháp nhận thức hành vi (CBT) hoặc can thiệp phối hợp dược lý."
-
-    # 3. Comparison (C)
-    comp_parts = []
-    if re.search(r'\b(?:nhóm\s*b|nhóm\s*đơn\s*trị|đơn\s*trị\s*liệu|ssri\s*độc\s*lập)\b', all_text, re.IGNORECASE):
-        comp_parts.append("Nhóm dùng thuốc SSRI đơn thuần")
-    if re.search(r'\b(?:nhóm\s*a|cbt\s*độc\s*lập|chỉ\s*cbt)\b', all_text, re.IGNORECASE):
-        comp_parts.append("Nhóm chỉ áp dụng CBT đơn trị")
-    if re.search(r'\b(?:placebo|giả\s*dược|waitlist|chờ\s*đợi)\b', all_text, re.IGNORECASE):
-        comp_parts.append("Nhóm chứng đối chứng (Placebo/Waitlist)")
-
-    comparison_text = " đối chiếu với ".join(comp_parts) if comp_parts else "Các nhánh đơn trị liệu (chỉ dùng thuốc hoặc chỉ can thiệp tâm lý) làm đối chứng."
-
-    # 4. Outcome (O)
-    out_parts = []
-    remiss = re.search(r'(\d+(?:\.\d+)?%)\s*(?:thuyên\s*giảm|suy\s*giảm|remission)', all_text, re.IGNORECASE)
-    if remiss:
-        out_parts.append(f"Tỷ lệ thuyên giảm đạt {remiss.group(1)}")
-    else:
-        any_pct = re.findall(r'(\d+(?:\.\d+)?%)', answer)
-        if any_pct:
-            out_parts.append(f"Hiệu quả định lượng vượt trội ({any_pct[0]})")
-
-    adv = re.search(r'(\d+(?:\.\d+)?%)\s*(?:tác\s*dụng\s*phụ|adverse)', all_text, re.IGNORECASE)
-    if adv:
-        out_parts.append(f"Tác dụng phụ kiểm soát ở mức {adv.group(1)}")
-
-    scale_found = [s["code"] for s in PSYCHOMETRIC_SCALES_DATABASE.values() if s["code"].lower() in all_text.lower()]
-    if scale_found:
-        out_parts.append(f"Đánh giá trên thang đo {', '.join(scale_found)}")
-
-    p_val = re.search(r'(p\s*<\s*0\.\d+|p\s*=\s*0\.\d+)', all_text, re.IGNORECASE)
-    if p_val:
-        out_parts.append(f"Ý nghĩa thống kê: {p_val.group(1)}")
-
-    outcome_text = " • ".join(out_parts) if out_parts else "Cải thiện rõ rệt điểm số lâm sàng, giảm triệu chứng bệnh lý và hạn chế nguy cơ tái phát."
-
-    return {
-        "has_pico": bool(pop_parts or interv_parts or out_parts),
-        "population": population_text,
-        "intervention": intervention_text,
-        "comparison": comparison_text,
-        "outcome": outcome_text,
-        "source_type": "Thực nghiệm đối chứng can thiệp (Intervention Trial)"
+    patterns = {
+        "population": r"\b(?:participants?|patients?|subjects?|sample|population|bệnh nhân|người tham gia|cỡ mẫu)\b",
+        "intervention": r"\b(?:intervention|treatment|therapy|can thiệp|liệu pháp|điều trị)\b",
+        "comparison": r"\b(?:control group|placebo|comparator|comparison|nhóm chứng|đối chứng|so sánh)\b",
+        "outcome": r"\b(?:outcome|results?|finding|kết quả|kết cục)\b",
     }
+    candidates = {key: [] for key in patterns}
+    for chunk in context_chunks:
+        source_text = chunk.get("content") or ""
+        for match in re.finditer(r"[^.!?\n]+(?:[.!?]|$)", source_text):
+            quote = match.group().strip()
+            if not quote:
+                continue
+            for key, pattern in patterns.items():
+                if re.search(pattern, quote, re.I):
+                    candidates[key].append({"quote": quote, "document_id": chunk.get("document_id"),
+                        "filename": chunk.get("doc_filename"), "page": chunk.get("page_number"),
+                        "claim_origin": "unverified"})
+    return {"has_pico": any(candidates.values()), "status": "unverified",
+            **{key: "Chưa xác minh; xem các đoạn nguồn ứng viên" if values else "Chưa tìm thấy trong các đoạn truy xuất"
+               for key, values in candidates.items()},
+            "source_type": "Ứng viên PICO theo từng nguồn; chưa xác minh thiết kế nghiên cứu",
+            "candidates": candidates}
 
 
 # ── 4. Ma trận Đồng thuận vs. Bất đồng Học thuật (Consensus Meter) ─────────────
 
 def calculate_consensus_matrix(query: str, answer: str, context_chunks: list[dict]) -> dict[str, Any]:
-    """Phân tích mức độ đồng thuận giữa các tài liệu khoa học:
-    - consensus_percentage: % tài liệu ủng hộ luận điểm chính
-    - caveats_percentage: % tài liệu nhấn mạnh lưu ý, hạn chế hoặc tác dụng phụ
-    - consensus_statement: Phát biểu đồng thuận cốt lõi
-    - debate_points: Các khía cạnh cần cân nhắc chuyên sâu
-    """
-    has_side_effects = bool(re.search(r'(tác dụng phụ|adverse|rối loạn tiêu hóa|mất ngủ|khô miệng)', answer, re.IGNORECASE))
-    has_relapse_risk = bool(re.search(r'(tái phát|relapse|ngừng thuốc|bỏ dở|dropout)', answer, re.IGNORECASE))
-    has_high_efficacy = bool(re.search(r'(vượt trội|68\.9%|hiệu quả|thuyên giảm|cải thiện)', answer, re.IGNORECASE))
-
-    # Tính toán tỷ lệ đồng thuận dựa trên bằng chứng
-    if has_high_efficacy and (has_side_effects or has_relapse_risk):
-        consensus_pct = 85
-        caveats_pct = 15
-        summary = "Đồng thuận cao về hiệu quả vượt trội của phác đồ phối hợp; Cần lưu ý theo dõi tác dụng phụ và duy trì kỹ năng sau can thiệp."
-    elif has_high_efficacy:
-        consensus_pct = 95
-        caveats_pct = 5
-        summary = "Đồng thuận rất cao giữa các tài liệu nghiên cứu về vai trò và hiệu lực của phương pháp can thiệp."
-    else:
-        consensus_pct = 75
-        caveats_pct = 25
-        summary = "Đồng thuận về nguyên lý cơ bản; các nghiên cứu ghi nhận sự khác biệt tùy thuộc vào đặc điểm bệnh nhân và môi trường điều trị."
-
-    debate_points = [
-        {
-            "aspect": "Hiệu quả tức thời so với Tính bền vững dài hạn",
-            "support_view": "Can thiệp dược lý tạo hiệu ứng giảm nhanh triệu chứng sinh hóa não bộ.",
-            "contrast_view": "Can thiệp tâm lý (CBT) trang bị kỹ năng tái cấu trúc nhận thức, giúp phòng ngừa tái phát bền vững sau khi ngừng thuốc."
-        },
-        {
-            "aspect": "Mức độ tuân thủ điều trị (Treatment Adherence)",
-            "support_view": "Liệu trình có cấu trúc rõ ràng (12 buổi) giúp bệnh nhân dễ theo dõi tiến độ.",
-            "contrast_view": "Yêu cầu sự nỗ lực làm bài tập về nhà của bệnh nhân; cần giám sát tỷ lệ bỏ dở trị liệu (dropout rate)."
-        }
-    ]
-
+    """No agreement percentage without claim-level comparable evidence."""
     return {
-        "consensus_percentage": consensus_pct,
-        "caveats_percentage": caveats_pct,
-        "summary": summary,
-        "debate_points": debate_points,
-        "consensus_label": "Đồng thuận Học thuật Rất cao (Consensus Level A)" if consensus_pct >= 85 else "Đồng thuận Có điều kiện (Qualified Consensus)"
+        "status": "insufficient_evidence",
+        "consensus_percentage": None, "caveats_percentage": None,
+        "summary": "Chưa có đối chiếu nhận định tương đương để tính mức đồng thuận.",
+        "debate_points": [], "consensus_label": "Chưa đủ bằng chứng",
     }
 
 
@@ -363,58 +185,41 @@ def generate_peer_review_questions(query: str, answer: str) -> list[dict[str, st
 
 # ── 6. Trình xuất Trích dẫn Học thuật Chuẩn Quốc Tế (BibTeX / RIS / APA 7th) ────
 
-def generate_bibtex_entry(doc: dict[str, Any]) -> str:
-    """Tạo bản ghi BibTeX chuẩn (.bib) tương thích Zotero, Mendeley, Overleaf, LaTeX."""
-    title = doc.get("title") or doc.get("filename") or "Psychology Scientific Paper"
-    authors = doc.get("authors") or "Acamind Research Team"
-    year = doc.get("year") or "2023"
-    filename = doc.get("filename") or "document.pdf"
-    
-    # Tạo citation key sạch: Smith2023 hoặc Tran2023
-    first_author = authors.split(",")[0].split()[ -1] if authors else "Author"
-    clean_author = re.sub(r'[^a-zA-Z]', '', first_author) or "Ref"
-    cite_key = f"{clean_author}{year}_{doc.get('id', '')[:6]}"
+def _citation_text(value: Any) -> str:
+    return " ".join(str(value or "").split())
 
-    bibtex = f"""@article{{{cite_key},
-  author    = {{{authors}}},
-  title     = {{{title}}},
-  journal   = {{Journal of Clinical Psychology and Mental Health}},
-  year      = {{{year}}},
-  note      = {{Archive: {filename}}},
-  publisher = {{Acamind Academic Database}}
-}}"""
-    return bibtex
+
+def generate_bibtex_entry(doc: dict[str, Any]) -> str:
+    """Export supplied metadata only; unknown bibliographic fields are omitted."""
+    def escape(value):
+        return _citation_text(value).replace("\\", "\\textbackslash{} ").replace("{", "\\{").replace("}", "\\}").replace("%", "\\%").replace("&", "\\&").replace("_", "\\_")
+    key = re.sub(r"[^A-Za-z0-9]", "", str(doc.get("id") or doc.get("filename") or "ref"))[:40] or "ref"
+    fields = {"title": doc.get("title") or doc.get("filename"), "author": doc.get("authors"),
+              "year": doc.get("year"), "journal": doc.get("journal"), "publisher": doc.get("publisher"),
+              "doi": doc.get("doi")}
+    lines = [f"@misc{{{key},"]
+    lines.extend(f"  {name} = {{{escape(value)}}}," for name, value in fields.items() if value)
+    lines.append("}")
+    return "\n".join(lines)
 
 
 def generate_ris_entry(doc: dict[str, Any]) -> str:
-    """Tạo bản ghi RIS chuẩn (.ris) tương thích EndNote, Reference Manager, Zotero."""
-    title = doc.get("title") or doc.get("filename") or "Psychology Scientific Paper"
-    authors = doc.get("authors") or "Acamind Research Team"
-    year = doc.get("year") or "2023"
-    filename = doc.get("filename") or "document.pdf"
-
-    ris_lines = [
-        "TY  - JOUR",
-        f"TI  - {title}",
-    ]
-    for author in [a.strip() for a in authors.split(",") if a.strip()]:
-        ris_lines.append(f"AU  - {author}")
-    ris_lines.extend([
-        f"PY  - {year}",
-        "JO  - Journal of Clinical Psychology and Mental Health",
-        f"N1  - File: {filename}",
-        "ER  - "
-    ])
-    return "\n".join(ris_lines)
+    """Export supplied metadata without inventing journal, author or year."""
+    lines = ["TY  - GEN"]
+    for tag, value in (("TI", doc.get("title") or doc.get("filename")), ("AU", doc.get("authors")),
+                       ("PY", doc.get("year")), ("JO", doc.get("journal")), ("DO", doc.get("doi"))):
+        if value:
+            lines.append(f"{tag}  - {_citation_text(value)}")
+    return "\n".join(lines + ["ER  - "])
 
 
 def generate_apa7_citation(doc: dict[str, Any], page_number: int | str = None) -> str:
-    """Tạo trích dẫn chuẩn APA 7th chính xác với tác giả, năm, tựa đề in nghiêng."""
-    title = doc.get("title") or doc.get("filename") or "Tài liệu Nghiên cứu"
-    authors = doc.get("authors") or "Ban Biên tập Khoa học"
-    year = doc.get("year") or "2023"
-    page_part = f", tr. {page_number}" if page_number else ""
-    return f"{authors} ({year}). *{title}*{page_part}. Acamind Digital Psychology Library."
+    """Metadata-based citation draft; author formatting still needs review."""
+    title = _citation_text(doc.get("title") or doc.get("filename") or "Tài liệu chưa rõ tên")
+    authors = _citation_text(doc.get("authors"))
+    year = _citation_text(doc.get("year")) or "n.d."
+    page = f", tr. {_citation_text(page_number)}" if page_number else ""
+    return f"{authors + '. ' if authors else ''}({year}). *{title}*{page}."
 
 
 # ── 7. Trích xuất Mạng lưới Đồ thị Tri thức Ngữ nghĩa (Answer Knowledge Graph) ─
@@ -517,61 +322,38 @@ def appraise_scientific_context(
     7. Semantic Knowledge Graph
     """
     # 1. Trích xuất metadata các tài liệu được trích dẫn
-    doc_ids = list(set([c.get("document_id") for c in context_chunks if c.get("document_id")]))
-    cited_docs = []
-    if doc_ids:
-        cand_ids_str = ", ".join([f"'{d}'" for d in doc_ids])
-        rows = db.execute(text(f"""
-            SELECT id, title, authors, year, filename 
-            FROM documents 
-            WHERE id IN ({cand_ids_str})
-        """)).fetchall()
-        for r in rows:
-            cited_docs.append({
-                "id": str(r.id),
-                "title": r.title or r.filename,
-                "authors": r.authors or "",
-                "year": r.year or 2023,
-                "filename": r.filename or "Tài liệu.pdf"
-            })
+    raw_doc_ids = list({str(c.get("document_id")) for c in context_chunks if c.get("document_id")})
+    valid_doc_ids = []
+    for d in raw_doc_ids:
+        try:
+            valid_doc_ids.append(str(uuid.UUID(d)))
+        except (ValueError, TypeError, AttributeError):
+            pass
 
-    # 1b. Trích xuất trực tiếp từ các citation pills trong answer [file.pdf - Page X]
-    citation_matches = re.findall(r'\[([^\]\n]+?)\s*-\s*(?:Page|Trang)\s*\d+\]', answer)
-    for raw_fn in citation_matches:
-        fn = raw_fn.strip()
-        if fn and not any(d.get("filename") == fn or d.get("title") == fn for d in cited_docs):
-            try:
-                row = db.execute(text("""
+    cited_docs = []
+    if valid_doc_ids:
+        try:
+            rows = db.execute(
+                text("""
                     SELECT id, title, authors, year, filename 
                     FROM documents 
-                    WHERE filename ILIKE :fn OR title ILIKE :fn 
-                    LIMIT 1
-                """), {"fn": f"%{fn}%"}).fetchone()
-                if row:
-                    cited_docs.append({
-                        "id": str(row.id),
-                        "title": row.title or row.filename,
-                        "authors": row.authors or "",
-                        "year": row.year or 2023,
-                        "filename": row.filename or fn
-                    })
-                else:
-                    cited_docs.append({
-                        "id": str(uuid.uuid4()),
-                        "title": fn,
-                        "authors": "",
-                        "year": 2023,
-                        "filename": fn
-                    })
-            except Exception:
+                    WHERE id = ANY(CAST(:ids AS uuid[]))
+                """),
+                {"ids": valid_doc_ids},
+            ).fetchall()
+            for r in rows:
                 cited_docs.append({
-                    "id": str(uuid.uuid4()),
-                    "title": fn,
-                    "authors": "",
-                    "year": 2023,
-                    "filename": fn
+                    "id": str(r.id),
+                    "title": r.title or r.filename,
+                    "authors": r.authors or "",
+                    "year": r.year,
+                    "filename": r.filename or "Tài liệu.pdf"
                 })
-
+        except Exception:
+            try:
+                db.rollback()
+            except Exception:
+                pass
 
     # Nếu không tìm thấy trong DB, fallback từ context_chunks
     if not cited_docs:
@@ -581,10 +363,10 @@ def appraise_scientific_context(
             if fname not in seen:
                 seen.add(fname)
                 cited_docs.append({
-                    "id": c.get("document_id", str(uuid.uuid4())),
+                    "id": c.get("document_id") or "",
                     "title": c.get("doc_title") or fname,
                     "authors": c.get("doc_authors") or "",
-                    "year": 2023,
+                    "year": c.get("doc_year"),
                     "filename": fname
                 })
 
@@ -771,7 +553,7 @@ def _extract_clean_candidate_sentences(text_block: str, paper_title: str = "") -
         if title_prefix and s_norm.startswith(title_prefix) and len(s) < len(paper_title) + 85:
             continue
         # Kiểm tra mật độ chữ cái hợp lệ
-        alpha_words = re.findall(r"[A-Za-z]{3,}", s)
+        alpha_words = re.findall(r"[^\W\d_]{2,}", s, re.UNICODE)
         if len(alpha_words) < 7:
             continue
         if s not in valid_sents:
@@ -805,6 +587,8 @@ def _prior_work_penalty(s: str) -> float:
 
 def _score_methodology_sentence(s: str) -> float:
     score = _prior_work_penalty(s)
+    if re.search(r"\b(?:randomi[sz]ed (?:controlled )?trial|observational study|cohort study|case.control study|cross.sectional study|qualitative study|pilot study)\b", s, re.I):
+        score += 7.0
     if re.search(r"\b(?:we propose|we introduce|we present|we develop|we formulate|we design|this paper proposes|this paper introduces|in this primer, we present|in this work, we|we construct|we build|we employ|our framework|our method|our model|our approach)\b", s, re.I):
         score += 7.5
     if re.search(r"\b(?:framework|architecture|algorithm|model|method|approach|pipeline|protocol|harness|mechanism|network|encoder|decoder|hypergraph|quantization|speculative decoding|verification|calibration|filter|objective|loss|training|agent|probe|probes|trajectory|cluster|profile|observation operator)\b", s, re.I):
@@ -816,9 +600,9 @@ def _score_methodology_sentence(s: str) -> float:
 
 def _score_scale_metric_sentence(s: str) -> float:
     score = _prior_work_penalty(s)
-    if re.search(r"\b(?:we evaluate|we test|we use|we analyze|we collect|we construct|across evaluations|across resting-state|across four model|applied to \d+|on a comprehensive suite|in pre-registered|were recruited|held-out auroc|participants|subjects|patients|students|cohort|sample|benchmarks?|datasets?|corpus|trials|sessions|instances|task families|open-weight instruction models)\b", s, re.I):
+    if re.search(r"\b(?:we evaluate|we test|we use|we analyze|across evaluations|held-out auroc|benchmarks?|datasets?|corpus|task families|open-weight instruction models)\b", s, re.I):
         score += 6.0
-    if re.search(r"\b(?:six|seven|five|four|three|two|eighty|\d+(?:,\d+)?(?:\.\d+)?)\s*(?:%|participants|subjects|students|patients|open-weight|models|model families|benchmarks|datasets|instances|task families|tasks|words|layers|sessions|rois|regions|genes|trials|fold|resample|cells|biomarkers|stories|configurations|dimensions)\b", s, re.I):
+    if re.search(r"\b(?:six|seven|five|four|three|two|eighty|\d+(?:,\d+)?(?:\.\d+)?)\s*(?:%|open-weight|models|model families|benchmarks|datasets|instances|task families|tasks|words|layers|sessions|rois|regions|genes|fold|resample|cells|biomarkers|stories|configurations|dimensions)\b", s, re.I):
         score += 6.5
     if re.search(r"\b(?:BDI-II|PHQ-9|PHQ-8|PCL-C|GAD-7|DASS-21|HAM-D|MADRS|PANSS|CAPS-5|Y-BOCS|PDSQI-9|COMET|RSA|AUROC|FPR|TPR|NLL|EEG|MEG|fMRI|PPMI|HCP|ADNI|SQuAD|MuSiQue|OmniGibson|GameASG-Bench|GameCraft-Bench|Burrito-PO|Overcooked-PO|Melting Pot|FACENAME|CIFAR-10|CIFAR-100|AgentHarm|OSWorld)\b", s):
         score += 4.5
@@ -863,19 +647,23 @@ def extract_structured_study_cells(
 
     sorted_chunks = sorted(
         matching_chunks,
-        key=lambda c: (0 if int(c.get("page_number", 99)) == 1 else (1 if int(c.get("page_number", 99)) <= 3 else 2), -float(c.get("rrf_score", 0.0))),
+        key=lambda c: -float(
+            c.get("composite_priority_score")
+            or c.get("rerank_score")
+            or c.get("rrf_score")
+            or 0.0
+        ),
     )
 
     pages_to_scan: list[tuple[int, str, float]] = []
     seen_pages: set[int] = set()
     for idx_c, c in enumerate(sorted_chunks):
         pno = int(c.get("page_number") or 1)
-        page_priority = 2.5 if pno == 1 else (1.5 if pno == 2 else 0.8)
-        rrf_bonus = page_priority + max(0.0, 1.0 - 0.2 * idx_c)
+        rrf_bonus = max(0.4, 2.2 - 0.25 * idx_c)
         if page_texts_map and (filename, pno) in page_texts_map:
             ptxt = page_texts_map[(filename, pno)]
         else:
-            ptxt = c.get("parent_context") or c.get("content") or ""
+            ptxt = c.get("content") or ""
         if pno not in seen_pages and ptxt:
             seen_pages.add(pno)
             pages_to_scan.append((pno, ptxt, rrf_bonus))
@@ -884,7 +672,7 @@ def extract_structured_study_cells(
         for p_early in (1, 2):
             if p_early not in seen_pages and (filename, p_early) in page_texts_map:
                 seen_pages.add(p_early)
-                pages_to_scan.append((p_early, page_texts_map[(filename, p_early)], 2.2 if p_early == 1 else 1.4))
+                pages_to_scan.append((p_early, page_texts_map[(filename, p_early)], 0.9 if p_early == 1 else 0.7))
 
     for pno, txt_block, rrf_bonus in pages_to_scan:
         sents = _extract_clean_candidate_sentences(txt_block, paper_title=paper_title)
@@ -900,9 +688,10 @@ def extract_structured_study_cells(
         fallback_txt = strip_academic_header_and_boilerplate(best_c.get("content", ""), paper_title=paper_title)
         return {
             "retrieved": 1,
-            "methodology": fallback_txt,
-            "scale_or_metric": fallback_txt,
-            "finding": fallback_txt,
+            "methodology": "Chưa tìm thấy câu mô tả phương pháp",
+            "scale_or_metric": "Chưa tìm thấy câu mô tả chỉ số",
+            "finding": "Chưa tìm thấy câu mô tả kết quả",
+            "extraction_status": "unverified",
             "page_citation": f"[{filename} - Page {pno}]",
         }
 
@@ -937,12 +726,12 @@ def extract_structured_study_cells(
     )
     finding_s, finding_p, _ = scored_finding[0]
 
-    # Đảm bảo số trang trích dẫn khớp với trang đã được truy hồi trong top-6
+    # Đảm bảo số trang trích dẫn khớp với trang chứa phát hiện hoặc phương pháp đã được truy hồi
     cite_pages = sorted({method_p, metric_p, finding_p})
-    if method_p in retrieved_pages:
-        primary_page = method_p
-    elif finding_p in retrieved_pages:
+    if finding_p in retrieved_pages:
         primary_page = finding_p
+    elif method_p in retrieved_pages:
+        primary_page = method_p
     elif metric_p in retrieved_pages:
         primary_page = metric_p
     else:
@@ -951,9 +740,11 @@ def extract_structured_study_cells(
 
     return {
         "retrieved": 1,
-        "methodology": method_s,
-        "scale_or_metric": metric_s,
-        "finding": finding_s,
+        "methodology": method_s if _score_methodology_sentence(method_s) > 0 else "Chưa tìm thấy câu mô tả phương pháp",
+        "scale_or_metric": metric_s if _score_scale_metric_sentence(metric_s) > 0 else "Chưa tìm thấy câu mô tả chỉ số",
+        "finding": finding_s if _score_finding_sentence(finding_s) > 0 else "Chưa tìm thấy câu mô tả kết quả",
+        "extraction_status": "unverified",
+        "field_pages": {"methodology": method_p, "scale_or_metric": metric_p, "finding": finding_p},
         "page_citation": page_citation,
         "all_supporting_pages": cite_pages,
     }
@@ -988,8 +779,8 @@ def verify_atomic_claims_entailment(
     """
     if not answer or not answer.strip():
         return {
-            "faithfulness_score": 0.0,
-            "formula": "S_faithfulness = (1/N) * Σ [0.45·Sim_sem(c_i, e*) + 0.35·Overlap_lex(c_i, e*) + 0.20·I_cite(c_i)]",
+            "faithfulness_score": None,
+            "formula": "Điểm tương đồng chỉ dùng tìm đoạn ứng viên, không phải xác suất hỗ trợ nhận định",
             "total_claims": 0,
             "entailed_count": 0,
             "extrapolated_count": 0,
@@ -1034,15 +825,20 @@ def verify_atomic_claims_entailment(
     # Chuẩn bị danh sách đoạn bằng chứng từ context_chunks
     evidence_pool: list[dict[str, Any]] = []
     for ch in context_chunks or []:
-        content = (ch.get("parent_context") or ch.get("content") or "").strip()
+        content = (ch.get("content") or "").strip()
         if not content:
             continue
         fname = ch.get("doc_filename") or ch.get("doc_title") or "Tài liệu.pdf"
         title = ch.get("doc_title") or fname
-        pno = int(ch.get("page_number") or 1)
+        try:
+            pno = int(ch.get("page_number"))
+        except (TypeError, ValueError):
+            continue
+        if pno <= 0:
+            continue
         did = str(ch.get("document_id") or "")
         # Tách đoạn chunk thành các câu bằng chứng con để highlight chính xác
-        clean_c = strip_academic_header_and_boilerplate(content, paper_title=title) or content
+        clean_c = content
         c_sents = [x.strip() for x in re.split(r"(?<=[.!?])\s+", clean_c) if len(x.strip()) >= 25]
         evidence_pool.append({
             "document_id": did,
@@ -1073,8 +869,10 @@ def verify_atomic_claims_entailment(
     def _cosine(v1: list[float] | None, v2: list[float] | None) -> float:
         if not v1 or not v2 or len(v1) != len(v2):
             return 0.0
+        import math
         dot = sum(a * b for a, b in zip(v1, v2))
-        return max(0.0, min(1.0, float(dot)))
+        norm = math.sqrt(sum(a*a for a in v1) * sum(b*b for b in v2))
+        return max(0.0, min(1.0, float(dot / norm))) if norm else 0.0
 
     verified_claims: list[dict[str, Any]] = []
     entailed_cnt = 0
@@ -1088,13 +886,28 @@ def verify_atomic_claims_entailment(
             raw_claim,
             flags=re.IGNORECASE,
         )
-        clean_claim = re.sub(r"\[[^\]]+\]", "", raw_claim)
+        clean_claim = re.sub(
+            r"\[[^\[\]]*?(?:Page|Trang|Sheet|tr\.?|p\.?|pp\.?)\s*\d+[^\[\]]*?\]",
+            "",
+            raw_claim,
+            flags=re.IGNORECASE,
+        )
         clean_claim = re.sub(r"\*{1,3}|_{1,3}|`+", "", clean_claim).strip()
         claim_tokens = _tokenize_content_words(clean_claim)
+        try:
+            from app.services.pdf_highlighter import (
+                extract_evidence_anchors,
+                extract_english_phrases_from_claim,
+            )
+            bilingual_anchors = extract_evidence_anchors(clean_claim) + extract_english_phrases_from_claim(clean_claim)
+            for phrase in bilingual_anchors:
+                claim_tokens.update(_tokenize_content_words(phrase))
+        except Exception:
+            pass
         claim_numbers = set(re.findall(r"\b\d+(?:\.\d+)?%?\b", clean_claim))
 
         claim_vec = None
-        if embed_fn and clean_claim:
+        if embed_fn and clean_claim and evidence_pool:
             try:
                 claim_vec = embed_fn(clean_claim[:400])
             except Exception:
@@ -1111,7 +924,8 @@ def verify_atomic_claims_entailment(
             lex_recall = len(shared_tokens) / max(len(claim_tokens), 1)
             # Bonus nếu khớp chính xác con số thống kê (cỡ mẫu, %, p-value)
             ev_numbers = set(re.findall(r"\b\d+(?:\.\d+)?%?\b", ev["full_text"]))
-            num_bonus = 0.18 if (claim_numbers and (claim_numbers & ev_numbers)) else 0.0
+            shared_numbers = claim_numbers & ev_numbers
+            num_bonus = min(0.32, 0.16 * len(shared_numbers)) if shared_numbers else 0.0
             s_lex = min(1.0, lex_recall * 1.65 + num_bonus)
 
             # 2. Điểm tương đồng ngữ nghĩa đa ngữ (Cross-Lingual Semantic Cosine)
@@ -1140,49 +954,30 @@ def verify_atomic_claims_entailment(
 
             combined = 0.45 * s_sem + 0.35 * s_lex + 0.20 * s_cite
             # Nếu có trích dẫn đúng file + đúng trang và có khớp nội dung, nâng mức bảo chứng
-            if s_cite >= 0.95 and (s_sem >= 0.45 or s_lex >= 0.25):
+            if s_cite >= 0.95 and (s_sem >= 0.45 or s_lex >= 0.20):
                 combined = max(combined, 0.78 + min(0.18, 0.2 * s_lex))
 
             if combined > best_score:
                 best_score = combined
                 best_ev = ev
-                best_matched_terms = sorted(shared_tokens, key=len, reverse=True)[:6]
-                # Tìm câu bằng chứng con trong trang khớp nhất với mệnh đề
+                best_matched_terms = sorted(shared_tokens | shared_numbers, key=len, reverse=True)[:6]
+                # Tìm câu bằng chứng con trong trang khớp nhất với mệnh đề (xét cả từ khóa song ngữ & con số thống kê)
                 best_sent = ev["sentences"][0]
-                best_sent_ov = -1
+                best_sent_ov = -1.0
                 for cand_s in ev["sentences"]:
                     cand_toks = _tokenize_content_words(cand_s)
-                    ov = len(claim_tokens & cand_toks)
+                    cand_nums = set(re.findall(r"\b\d+(?:\.\d+)?%?\b", cand_s))
+                    ov = len(claim_tokens & cand_toks) + len(claim_numbers & cand_nums) * 3.5
                     if ov > best_sent_ov:
                         best_sent_ov = ov
                         best_sent = cand_s
                 best_snippet = best_sent[:280]
 
-        # Nếu không có evidence_pool nhưng mệnh đề có trích dẫn rõ ràng từ DB
-        if best_ev is None and cite_matches:
-            c_fn, c_pg = cite_matches[0]
-            best_score = 0.76
-            best_ev = {
-                "document_id": "",
-                "filename": c_fn.strip(),
-                "title": c_fn.strip(),
-                "page_number": int(c_pg),
-            }
-            best_snippet = clean_claim[:220]
-
-        score_clamped = round(max(0.12, min(0.98, best_score)), 3)
-        if score_clamped >= 0.72:
-            status = "ENTAILED"
-            status_label = "Đã xác thực trực tiếp (Entailed)"
-            entailed_cnt += 1
-        elif score_clamped >= 0.45:
-            status = "EXTRAPOLATED"
-            status_label = "Tổng hợp / Suy luận hợp lý (Extrapolated)"
-            extrapolated_cnt += 1
-        else:
-            status = "UNVERIFIED"
-            status_label = "Cảnh báo thiếu nguồn trực tiếp (Unverified)"
-            unverified_cnt += 1
+        # Similarity retrieves candidate evidence; it does not prove entailment.
+        score_clamped = round(max(0.0, min(1.0, best_score)), 3)
+        status = "UNVERIFIED"
+        status_label = "Chưa xác minh quan hệ hỗ trợ; đoạn dưới chỉ là ứng viên"
+        unverified_cnt += 1
 
         verified_claims.append({
             "index": idx,
@@ -1190,8 +985,9 @@ def verify_atomic_claims_entailment(
             "clean_text": clean_claim,
             "status": status,
             "status_label": status_label,
-            "entailment_score": score_clamped,
-            "entailment_pct": round(score_clamped * 100, 1),
+            "entailment_score": None,
+            "similarity_score": score_clamped,
+            "entailment_pct": None,
             "matched_doc_id": best_ev["document_id"] if best_ev else "",
             "matched_filename": best_ev["filename"] if best_ev else "",
             "matched_title": best_ev["title"] if best_ev else "",
@@ -1200,15 +996,11 @@ def verify_atomic_claims_entailment(
             "key_terms_matched": best_matched_terms,
         })
 
-    avg_faithfulness = (
-        round((sum(c["entailment_score"] for c in verified_claims) / len(verified_claims)) * 100, 1)
-        if verified_claims
-        else 0.0
-    )
-
     return {
-        "faithfulness_score": avg_faithfulness,
-        "formula": "S_faithfulness = (1/N) * Σ [0.45·Sim_sem(c_i, e*) + 0.35·Overlap_lex(c_i, e*) + 0.20·I_cite(c_i)]",
+        "faithfulness_score": None,
+        "assessment_status": "unverified",
+        "truncated": len(raw_segments) > len(atomic_claims),
+        "formula": "Điểm tương đồng chỉ dùng tìm đoạn ứng viên, không phải xác suất hỗ trợ nhận định",
         "total_claims": len(verified_claims),
         "entailed_count": entailed_cnt,
         "extrapolated_count": extrapolated_cnt,
@@ -1246,189 +1038,121 @@ def analyze_cebm_contradiction_radar(
     focus: str | None = None,
     llm_callable=None,
 ) -> dict[str, Any]:
-    """Phân tích Đa Tài liệu nhằm phát hiện Đồng thuận (Consensus), Mâu thuẫn/Bất đồng (Contradictions),
-    Nguyên nhân phương pháp luận (Root-Cause Methodological Diagnosis) và Phán quyết Trọng số Oxford CEBM.
-    """
-    if not matrix_rows:
-        return {
-            "cebm_weighted_consensus_pct": 0,
-            "divergence_index_pct": 0,
-            "formula": "W_consensus = (Σ w_CEBM(i) · I_agree(i)) / Σ w_CEBM(i)",
-            "dominant_study": None,
-            "consensus_points": [],
-            "contradictions": [],
-            "methodological_summary": "Chưa có dữ liệu ma trận nghiên cứu.",
-        }
-
-    # Gán trọng số toán học w_CEBM cho từng nghiên cứu
-    enriched_rows = []
-    for r in matrix_rows:
-        lvl = r.get("cebm_level", "2b")
-        w = get_cebm_numerical_weight(lvl)
-        enriched_rows.append({**r, "cebm_weight": w})
-
-    sorted_by_weight = sorted(enriched_rows, key=lambda x: (x["cebm_weight"], x.get("year", 2024)), reverse=True)
-    dominant = sorted_by_weight[0]
-
-    # Tạo danh sách cặp đối sánh bất đồng/khác biệt phương pháp & kết quả giữa các nghiên cứu
-    contradictions: list[dict[str, Any]] = []
-    if len(enriched_rows) >= 2:
-        for i in range(min(len(enriched_rows) - 1, 3)):
-            st_a = sorted_by_weight[0] if i == 0 else enriched_rows[i]
-            st_b = sorted_by_weight[i + 1] if i + 1 < len(sorted_by_weight) else enriched_rows[-1]
-            if st_a.get("document_id") == st_b.get("document_id") and len(enriched_rows) > 1:
-                st_b = enriched_rows[(i + 1) % len(enriched_rows)]
-
-            w_a = st_a["cebm_weight"]
-            w_b = st_b["cebm_weight"]
-            diff_w = round(abs(w_a - w_b), 2)
-
-            if i == 0:
-                dim_label = "Phạm vi Hiệu lực & Cỡ Hiệu ứng Thực nghiệm (Effect Size & Generalizability)"
-                root_cause = (
-                    f"Sự khác biệt xuất phát từ thiết kế nghiên cứu ({st_a.get('study_design', 'Cấp cao')} vs. "
-                    f"{st_b.get('study_design', 'Thực nghiệm')}) và hệ quy chiếu công cụ đo lường "
-                    f"({st_a.get('scale_or_metric', 'Metric A')[:90]} so với {st_b.get('scale_or_metric', 'Metric B')[:90]})."
-                )
-            elif i == 1:
-                dim_label = "Độ nhạy Thang đo Lượng giá & Đặc trưng Mẫu (Psychometric & Cohort Sensitivity)"
-                root_cause = (
-                    f"Hai công trình áp dụng phương pháp tiếp cận khác nhau ({st_a.get('methodology', '')[:85]}... "
-                    f"đối chiếu với {st_b.get('methodology', '')[:85]}...), dẫn đến biên độ đáp ứng khác nhau giữa các phân nhóm."
-                )
-            else:
-                dim_label = "Độ bền vững Dài hạn vs. Tác động Ngắn hạn (Longitudinal Stability)"
-                root_cause = (
-                    "Khác biệt về thời gian theo dõi, tiêu chuẩn chọn mẫu và biến số kiểm soát nhiễu trong thực nghiệm."
-                )
-
-            if w_a >= w_b:
-                verdict = (
-                    f"Ưu tiên kết luận của {st_a.get('title')} ({st_a.get('cebm_label')}, trọng số w = {w_a:.2f} "
-                    f"so với w = {w_b:.2f} của {st_b.get('title')}). Tuy nhiên cần tích hợp cảnh báo điều kiện biên từ nghiên cứu thứ hai."
-                )
-            else:
-                verdict = (
-                    f"Ưu tiên kết luận của {st_b.get('title')} ({st_b.get('cebm_label')}, trọng số w = {w_b:.2f})."
-                )
-
-            contradictions.append({
-                "id": f"conflict-{i+1}",
-                "dimension": dim_label,
-                "study_a": {
-                    "document_id": st_a.get("document_id", ""),
-                    "filename": st_a.get("filename", ""),
-                    "title": st_a.get("title", ""),
-                    "authors": st_a.get("authors", ""),
-                    "year": st_a.get("year", 2024),
-                    "cebm_level": st_a.get("cebm_level", "1b"),
-                    "cebm_label": st_a.get("cebm_label", ""),
-                    "cebm_weight": w_a,
-                    "position": st_a.get("finding", ""),
-                    "methodology": st_a.get("methodology", ""),
-                    "page_citation": st_a.get("page_citation", ""),
-                    "primary_page": st_a.get("primary_page", 1),
-                },
-                "study_b": {
-                    "document_id": st_b.get("document_id", ""),
-                    "filename": st_b.get("filename", ""),
-                    "title": st_b.get("title", ""),
-                    "authors": st_b.get("authors", ""),
-                    "year": st_b.get("year", 2024),
-                    "cebm_level": st_b.get("cebm_level", "2b"),
-                    "cebm_label": st_b.get("cebm_label", ""),
-                    "cebm_weight": w_b,
-                    "position": st_b.get("finding", ""),
-                    "methodology": st_b.get("methodology", ""),
-                    "page_citation": st_b.get("page_citation", ""),
-                    "primary_page": st_b.get("primary_page", 1),
-                },
-                "weight_delta": diff_w,
-                "root_cause": root_cause,
-                "cebm_verdict": verdict,
-            })
-
-    # Điểm đồng thuận chung
-    all_citations = [r.get("page_citation", "") for r in enriched_rows if r.get("page_citation")]
-    consensus_points = [
-        {
-            "aspect": "Tính hiệu lực của Mô hình & Can thiệp Dựa trên Bằng chứng",
-            "statement": (
-                f"Cả {len(enriched_rows)} công trình đều cung cấp bằng chứng định lượng khẳng định mối liên hệ có ý nghĩa thống kê "
-                f"giữa phương pháp tiếp cận/can thiệp với biến số đầu ra mục tiêu ({', '.join(all_citations[:3])})."
-            ),
-            "citations": all_citations[:4],
-            "weighted_support": round(sum(r["cebm_weight"] for r in enriched_rows) / len(enriched_rows), 2),
-        },
-        {
-            "aspect": "Chuẩn hóa Đo lường Thực nghiệm & Kiểm soát Sai số",
-            "statement": (
-                "Các nghiên cứu đồng thuận việc sử dụng các thang đo định lượng chuẩn hóa và bộ chỉ số đánh giá khách quan "
-                "để loại trừ thiên lệch chủ quan."
-            ),
-            "citations": all_citations[:3],
-            "weighted_support": round(max(0.75, sum(r["cebm_weight"] for r in enriched_rows) / len(enriched_rows) - 0.05), 2),
-        },
-    ]
-
-    # Tính toán chỉ số đồng thuận trọng số CEBM
-    unique_designs = len({r.get("cebm_level", "2b") for r in enriched_rows})
-    divergence_pct = min(42, max(14, 12 * len(contradictions) + 4 * max(0, unique_designs - 1))) if len(enriched_rows) >= 2 else 8
-    consensus_pct = 100 - divergence_pct
-
-    # Nếu có LLM callable và >= 2 bài báo, tinh chỉnh nguyên nhân mâu thuẫn & phán quyết sát chủ đề focus
-    if llm_callable and len(enriched_rows) >= 2 and contradictions:
-        try:
-            import json as _json
-            study_briefs = "\n".join(
-                f"- [{r['filename']} - Page {r['primary_page']}] ({r['title']}, {r['year']}, {r['cebm_label']}, w={r['cebm_weight']}): "
-                f"Method={r['methodology']} | Scale={r['scale_or_metric']} | Finding={r['finding']}"
-                for r in enriched_rows[:6]
-            )
-            focus_str = f"Chủ đề trọng tâm: {focus}\n" if focus else ""
-            radar_prompt = f"""Phân tích đồng thuận và mâu thuẫn/khác biệt phương pháp luận giữa các nghiên cứu sau (tiếng Việt chuẩn học thuật, KHÔNG dùng ký tự markdown ** hay ###):
-{focus_str}{study_briefs}
-
-Trả về đúng định dạng JSON:
-{{
-  "methodological_summary": "1-2 câu tổng kết sự đồng thuận và phân cực giữa các bài báo",
-  "root_cause_override": "Giải thích sâu sắc tại sao kết quả/phương pháp giữa các bài báo có sự khác biệt (do cỡ mẫu, thang đo, hay thiết kế)",
-  "verdict_override": "Phán quyết khoa học dựa trên trọng số cấp độ bằng chứng Oxford CEBM (w_CEBM)"
-}}"""
-            raw_llm = llm_callable(radar_prompt, 0.2, 900)
-            jm = re.search(r"\{[\s\S]+\}", raw_llm)
-            if jm:
-                parsed = _json.loads(jm.group())
-                if parsed.get("root_cause_override") and contradictions:
-                    contradictions[0]["root_cause"] = parsed["root_cause_override"]
-                if parsed.get("verdict_override") and contradictions:
-                    contradictions[0]["cebm_verdict"] = parsed["verdict_override"]
-                if parsed.get("methodological_summary"):
-                    method_sum = parsed["methodological_summary"]
-                else:
-                    method_sum = f"Phân tích trọng số Oxford CEBM trên {len(enriched_rows)} nghiên cứu cho thấy mức đồng thuận đạt {consensus_pct}% và độ phân cực phương pháp luận ở mức {divergence_pct}%."
-            else:
-                method_sum = f"Phân tích trọng số Oxford CEBM trên {len(enriched_rows)} nghiên cứu cho thấy mức đồng thuận đạt {consensus_pct}% và độ phân cực phương pháp luận ở mức {divergence_pct}%."
-        except Exception:
-            method_sum = f"Phân tích trọng số Oxford CEBM trên {len(enriched_rows)} nghiên cứu cho thấy mức đồng thuận đạt {consensus_pct}% và độ phân cực phương pháp luận ở mức {divergence_pct}%."
-    else:
-        method_sum = f"Phân tích trọng số Oxford CEBM trên {len(enriched_rows)} nghiên cứu cho thấy mức đồng thuận đạt {consensus_pct}% và độ phân cực phương pháp luận ở mức {divergence_pct}%."
-
+    """Do not fabricate pairwise findings from evidence-level labels."""
     return {
-        "cebm_weighted_consensus_pct": consensus_pct,
-        "divergence_index_pct": divergence_pct,
-        "formula": "W_consensus = (Σ w_CEBM(i) · I_agree(i)) / Σ w_CEBM(i)",
-        "dominant_study": {
-            "title": dominant.get("title", ""),
-            "filename": dominant.get("filename", ""),
-            "cebm_label": dominant.get("cebm_label", ""),
-            "cebm_weight": dominant.get("cebm_weight", 0.9),
-            "page_citation": dominant.get("page_citation", ""),
-        },
-        "consensus_points": consensus_points,
-        "contradictions": contradictions,
-        "methodological_summary": method_sum,
+        "status": "insufficient_evidence",
+        "cebm_weighted_consensus_pct": None, "divergence_index_pct": None,
+        "formula": "Chưa có phép đo đồng thuận được xác minh",
+        "dominant_study": None, "consensus_points": [], "contradictions": [],
+        "methodological_summary": "Cần xác minh nguồn, quần thể, kết cục, thời điểm và chiều hiệu ứng trước khi kết luận đồng thuận hoặc mâu thuẫn.",
+        "meta_analysis": compute_meta_analysis_forest_plot(matrix_rows),
+        "research_gaps": build_pico_research_gap_map(matrix_rows, focus),
     }
+
+
+def compute_meta_analysis_forest_plot(matrix_rows: list[dict[str, Any]]) -> dict[str, Any]:
+    """Pool reviewed Hedges g estimates with reported sampling variance.
+
+    Free-text rows alone are extraction candidates, not analysis-ready data.
+    A reviewed meta_analysis_input must identify its independent study, shared
+    analysis group (population/outcome/timepoint/contrast/direction), reviewer
+    and source quote. This function validates the contract, not review truth.
+    """
+    import math
+    studies = []
+    issues = []
+    missing_sample = []
+    missing_effect = []
+    groups = set()
+    study_ids = set()
+    for i, row in enumerate(matrix_rows):
+        identity = {"document_id": row.get("document_id", ""),
+                    "filename": row.get("filename") or f"Study {i + 1}"}
+        text_value = " ".join(str(row.get(k) or "") for k in ("methodology", "scale_or_metric", "finding"))
+        if not re.search(r"\b(?:n\s*=\s*\d+|\d+\s*(?:participants|patients|subjects|người tham gia))\b", text_value, re.I):
+            missing_sample.append({**identity, "sample_n": None,
+                                   "has_unverified_candidate": bool(row.get("sample_size_candidates"))})
+        if not re.search(r"(?<!\w)(?:d|g)\s*[=:≈]\s*[-+−]?(?:\d|\.)", text_value, re.I):
+            missing_effect.append({**identity, "effect_size": None})
+        data = row.get("meta_analysis_input")
+        reason = "missing_reviewed_estimate"
+        if isinstance(data, dict):
+            try:
+                g, variance = data["hedges_g"], data["variance"]
+                n = data["sample_n"]
+                valid = (type(g) in (int, float) and type(variance) in (int, float)
+                         and math.isfinite(g) and math.isfinite(variance) and variance > 0
+                         and type(n) is int and n > 1)
+                source = data.get("source", {})
+                valid = valid and (data.get("reviewed") is True and bool(str(data.get("reviewer") or "").strip())
+                    and bool(str(data.get("analysis_group") or "").strip())
+                    and bool(str(data.get("independent_study_id") or "").strip())
+                    and isinstance(source, dict) and bool(source.get("document_id"))
+                    and source.get("document_id") == row.get("document_id")
+                    and type(source.get("page")) is int and source["page"] > 0
+                    and bool(str(source.get("quote") or "").strip()))
+                if valid:
+                    key = str(data["independent_study_id"])
+                    if key in study_ids:
+                        reason = "dependent_or_duplicate_study"
+                    else:
+                        study_ids.add(key)
+                        groups.add(str(data["analysis_group"]))
+                        studies.append({**identity, "title": row.get("title") or identity["filename"],
+                            "authors": row.get("authors") or "", "year": row.get("year"),
+                            "cebm_level": row.get("cebm_level") or "unverified",
+                            "cebm_label": row.get("cebm_label") or "Chưa thẩm định",
+                            "page_citation": row.get("page_citation") or "", "primary_page": source["page"],
+                            "sample_n": n, "hedges_g": float(g), "variance": float(variance),
+                            "source": source, "effect_source_note": "Ước lượng và phương sai do người thẩm định cung cấp"})
+                        continue
+                else:
+                    reason = "invalid_or_unreviewed_estimate"
+            except (KeyError, TypeError, ValueError, OverflowError):
+                reason = "invalid_or_unreviewed_estimate"
+        issues.append({**identity, "reason": reason})
+    if issues or len(studies) < 2 or len(groups) != 1:
+        return {"status": "insufficient_data", "studies": [], "k_studies": 0,
+                "missing_sample_studies": missing_sample, "missing_effect_studies": missing_effect,
+                "validation_issues": issues,
+                "message": "Cần ít nhất hai nghiên cứu độc lập đã thẩm định, cỡ hiệu ứng g và phương sai hợp lệ, cùng quần thể/kết cục/thời điểm/đối chiếu/chiều hiệu ứng. Không suy ra phương sai từ tổng N hoặc gộp trực tiếp số liệu trong văn bản."}
+    weights = [1 / s["variance"] for s in studies]
+    sw = math.fsum(weights)
+    fixed = math.fsum(w * s["hedges_g"] for w, s in zip(weights, studies)) / sw
+    q = math.fsum(w * (s["hedges_g"] - fixed) ** 2 for w, s in zip(weights, studies))
+    df = len(studies) - 1
+    denominator = sw - math.fsum(w * w for w in weights) / sw
+    tau = max(0.0, (q - df) / denominator) if denominator > 0 else 0.0
+    rw = [1 / (s["variance"] + tau) for s in studies]
+    srw = math.fsum(rw)
+    pooled = math.fsum(w * s["hedges_g"] for w, s in zip(rw, studies)) / srw
+    se = math.sqrt(1 / srw)
+    z = pooled / se
+    p = math.erfc(abs(z) / math.sqrt(2))
+    i2 = max(0.0, (q - df) / q * 100) if q > 0 else 0.0
+    for s, w in zip(studies, rw):
+        s.update(se=math.sqrt(s["variance"]), ci_lower=s["hedges_g"] - 1.96 * math.sqrt(s["variance"]),
+                 ci_upper=s["hedges_g"] + 1.96 * math.sqrt(s["variance"]), weight_pct=w / srw * 100)
+    return {"status": "available", "studies": studies, "k_studies": len(studies),
+            "total_sample_n": sum(s["sample_n"] for s in studies),
+            "pooled_effect": pooled, "pooled_se": se, "pooled_ci_lower": pooled - 1.96 * se,
+            "pooled_ci_upper": pooled + 1.96 * se, "cochran_q": q, "df": df,
+            "i_squared_pct": i2, "tau_squared": tau, "z_score": z, "p_value": p,
+            "p_value_str": f"p = {p:.6g}", "heterogeneity_level": f"I² = {i2:.1f}%",
+            "heterogeneity_interpretation": "I² không xác nhận tính tương đương hoặc chất lượng nghiên cứu; cần diễn giải cùng thẩm định nguồn và độ bất định.",
+            "model_used": "DerSimonian–Laird random effects; normal-approximation CI; reviewed Hedges g"}
+
+
+# ── 11C. Bản đồ Khoảng trống Bằng chứng PICO & Sinh Giả thuyết Đề tài Mới (Research Gap Engine) ──
+
+def build_pico_research_gap_map(matrix_rows: list[dict[str, Any]], focus: str | None = None) -> dict[str, Any]:
+    """Missing mentions in retrieved rows do not establish literature gaps."""
+    return {"status": "insufficient_evidence",
+            "message": "Chưa có tìm kiếm hệ thống và PICO đã xác minh để kết luận khoảng trống nghiên cứu.",
+            "population_axes": [], "method_axes": [], "grid_cells": [],
+            "summary_stats": {"total_cells": 0, "saturated_cells": 0, "partial_cells": 0,
+                              "gap_cells": 0, "evidence_coverage_pct": None},
+            "novel_hypotheses": []}
 
 
 # ── 12. Đồ thị Tri thức Thần kinh – Tâm lý Liên kết Giải phẫu Não 3D (Neuro-Clinical 3D Bridge) ──
@@ -1925,4 +1649,354 @@ def grade_osce_clinical_submission(
     }
 
 
+# ── 12. Hạng mục C, D, E: Phân loại IMRaD, Chuẩn hóa Cỡ Hiệu ứng Liên bài & Chỉ số Đồng thuận ──
 
+import math as _math
+
+_SECONDARY_CITATION_RE = re.compile(
+    r"(?:\b[A-Z][a-zA-Z'-]+\s+et\s+al\.?\s*\(\s*(?:19|20)\d{2}\s*\)"
+    r"|\(\s*[A-Z][a-zA-Z'-]+(?:\s*(?:&|and)\s*[A-Z][a-zA-Z'-]+)?,\s*(?:19|20)\d{2}[a-z]?(?:\s*;\s*[A-Z][a-zA-Z'-]+.*?\d{4})?\s*\)"
+    r"|\[\s*\d{1,3}(?:\s*[,–-]\s*\d{1,3})+\s*\])"
+)
+
+_INSTRUMENT_PATTERNS = [
+    ("DSM-5", r"\bDSM-5(?:-TR)?\b"),
+    ("DSM-IV", r"\bDSM-IV(?:-TR)?\b"),
+    ("ICD-11", r"\bICD-11\b"),
+    ("ICD-10", r"\bICD-10\b"),
+    ("BDI-II", r"\bBDI(?:-II)?\b"),
+    ("PHQ-9", r"\bPHQ-9\b"),
+    ("GAD-7", r"\bGAD-7\b"),
+    ("DASS-21", r"\bDASS-21\b"),
+    ("HAM-D", r"\b(?:HAM-D|HDRS)\b"),
+    ("SCAS", r"\bSCAS\b"),
+    ("SPAI-C", r"\bSPAI-C\b"),
+    ("MMPI", r"\bMMPI(?:-2)?\b"),
+    ("WAIS", r"\bWAIS(?:-[IV]+)?\b"),
+    ("WISC", r"\bWISC(?:-[IV]+)?\b"),
+    ("CBCL", r"\bCBCL\b"),
+    ("Y-BOCS", r"\bY-BOCS\b"),
+    ("PCL-5", r"\bPCL-5\b"),
+    ("PANSS", r"\bPANSS\b"),
+]
+
+
+def classify_imrad_section(content: str, page_number: int | str = 1) -> dict[str, Any]:
+    """Identify structural cues, never certify that a claim belongs to this study.
+
+    Section headings describe location; keyword matches are tentative topic cues.
+    Page number is deliberately not evidence of an IMRaD section or authorship.
+    """
+    txt = (content or "").strip()
+    citation_pattern = re.compile(
+        r"\b[A-Z][a-zA-Z'’-]+(?:\s+(?:et\s+al\.?|(?:and|&)\s+[A-Z][a-zA-Z'’-]+))?"
+        r"\s*\(\s*(?:19|20)\d{2}[a-z]?\s*\)"
+        r"|\([^()]*[A-Z][a-zA-Z'’-]+[^()]*,\s*(?:19|20)\d{2}[a-z]?[^()]*\)"
+        r"|\[\s*\d{1,3}(?:\s*[,–-]\s*\d{1,3})*\s*\]"
+    )
+    sec_citations = len(citation_pattern.findall(txt))
+    heading_patterns = {
+        "ABSTRACT": r"abstract|tóm tắt",
+        "INTRODUCTION": r"introduction|background|giới thiệu|đặt vấn đề",
+        "METHODS": r"methods?|methodology|materials and methods|phương pháp|đối tượng và phương pháp",
+        "RESULTS": r"results?|findings|kết quả|kết quả nghiên cứu",
+        "DISCUSSION": r"discussion|limitations?|conclusions?|bàn luận|hạn chế|kết luận",
+    }
+    headings = set()
+    for code, pattern in heading_patterns.items():
+        if re.search(rf"^\s*(?:#{{1,6}}\s*)?(?:\d+(?:\.\d+)*[.)]?\s+)?(?:{pattern})\s*[:.]?\s*$", txt, re.I | re.M):
+            headings.add(code)
+    if len(headings) == 1:
+        code = next(iter(headings))
+        basis = "explicit_heading"
+    elif headings:
+        code = "MIXED"
+        basis = "multiple_headings"
+    else:
+        cues = set()
+        if re.search(r"\b(?:sample size|recruited|questionnaire|methods?|cỡ mẫu|phương pháp)\b", txt, re.I):
+            cues.add("METHODS")
+        if re.search(r"\b(?:results?|findings?|regression|anova|significant(?:ly)?|kết quả)\b", txt, re.I):
+            cues.add("RESULTS")
+        if re.search(r"\b(?:limitations?|future research|discussion|hạn chế|bàn luận)\b", txt, re.I):
+            cues.add("DISCUSSION")
+        if re.search(r"\b(?:previous work|prior studies|literature review|nghiên cứu trước|tổng quan tài liệu)\b", txt, re.I):
+            cues.add("INTRODUCTION")
+        code = next(iter(cues)) if len(cues) == 1 else "MIXED" if cues else "UNKNOWN"
+        basis = "keyword_heuristic" if cues else "unknown"
+    labels = {
+        "ABSTRACT": "Tóm tắt", "INTRODUCTION": "Giới thiệu / tổng quan",
+        "METHODS": "Phương pháp / mẫu / công cụ", "RESULTS": "Kết quả",
+        "DISCUSSION": "Bàn luận / hạn chế", "MIXED": "Nhiều mục hoặc nội dung hỗn hợp",
+        "UNKNOWN": "Chưa xác định mục",
+    }
+    label = labels[code]
+    if basis == "keyword_heuristic":
+        label += " (gợi ý từ khóa, chưa xác minh cấu trúc)"
+    elif basis == "explicit_heading":
+        label += " (tiêu đề mục xuất hiện trong đoạn)"
+    guard_note = (
+        "Lưu ý nguồn gốc: Nhãn mục không xác nhận đây là phát hiện của bài hiện tại. "
+        "Cần xác minh chủ thể từng nhận định và nguồn trước khi gán kết quả cho nghiên cứu."
+    )
+    if sec_citations:
+        guard_note += (
+            " Có dấu hiệu trích dẫn nghiên cứu khác; có thể có cả kết quả gốc lẫn kết quả được dẫn lại. "
+            "Không tự coi mọi số liệu trong đoạn là kết quả gốc, kể cả trong Methods hoặc Results."
+        )
+    return {
+        "section_code": code,
+        "section_label": label,
+        "section_basis": basis,
+        "claim_origin": "unverified",
+        "secondary_citation_count": sec_citations,
+        "has_secondary_citations": sec_citations > 0,
+        "guard_note": guard_note,
+    }
+
+
+def _classify_cohen_d(d_abs: float) -> str:
+    if d_abs >= 0.80:
+        return "Lớn (Large effect, |d| >= 0.80)"
+    if d_abs >= 0.50:
+        return "Trung bình (Medium effect, 0.50 <= |d| < 0.80)"
+    if d_abs >= 0.20:
+        return "Nhỏ (Small effect, 0.20 <= |d| < 0.50)"
+    return "Rất nhỏ / Không đáng kể (Negligible, |d| < 0.20)"
+
+
+def _extract_sample_size_candidates(chunks: list[dict[str, Any]]) -> dict[str, Any]:
+    """Collect literal sample-size mentions without assigning study/group ownership.
+
+    A retrieved number (even a unique one) may describe a subgroup, follow-up,
+    planned sample or cited study. Never promote it to a study-level N here.
+    Parent context is excluded because its text can span different source pages.
+    """
+    number = r"(?:\d{1,3}(?:,\d{3})+|\d+)"
+    pattern = re.compile(
+        rf"\b(?:n\s*=\s*(?P<n>{number})(?![\w,]|\.\d)|"
+        rf"(?P<count>{number})\s+(?:(?:adult|undergraduate|university|college|young|older)\s+)?(?:participants|patients|students|children|"
+        r"adolescents|adults|subjects|bệnh nhân|người tham gia|sinh viên)\b)",
+        re.I,
+    )
+    candidates = []
+    seen = set()
+    for chunk in chunks:
+        content = str(chunk.get("content") or "")
+        document_id = str(chunk.get("document_id") or "")
+        filename = str(chunk.get("doc_filename") or chunk.get("filename") or "")
+        page = chunk.get("page_number")
+        for match in pattern.finditer(content):
+            value = int((match.group("n") or match.group("count")).replace(",", ""))
+            if value <= 0:
+                continue
+            key = (document_id, filename, str(page), content, match.start(), match.end())
+            if key in seen:
+                continue
+            seen.add(key)
+            candidates.append({
+                "value": value,
+                "document_id": document_id,
+                "filename": filename,
+                "page": page,
+                "quote": match.group(0),
+                "source_text": content,
+                "start": match.start(),
+                "end": match.end(),
+                "role": "unverified",
+            })
+    distinct_values = {c["value"] for c in candidates}
+    return {
+        "sample_n": None,
+        "sample_size_status": "missing" if not candidates else
+                              "ambiguous" if len(distinct_values) > 1 else "unverified",
+        "sample_size_candidates": candidates,
+    }
+
+
+def _extract_effect_candidates(chunks: list[dict[str, Any]]) -> dict[str, Any]:
+    """Keep all original-page effect mentions; ownership is not established by regex."""
+    pattern = re.compile(
+        r"(?<![\w.])(?P<kind>hedges['’]?\s*g|cohen['’]?\s*d|OR|d|g|r)"
+        r"\s*=\s*(?P<value>[-+−]?(?:\d+(?:\.\d+)?|\.\d+))(?!\w|[.,]\d)",
+        re.IGNORECASE,
+    )
+    candidates = []
+    seen = set()
+    for chunk in chunks:
+        content = str(chunk.get("content") or "")
+        document_id = str(chunk.get("document_id") or "")
+        filename = str(chunk.get("doc_filename") or chunk.get("filename") or "")
+        page = chunk.get("page_number")
+        for match in pattern.finditer(content):
+            key = (document_id, filename, str(page), content, match.start(), match.end())
+            if key in seen:
+                continue
+            seen.add(key)
+            token = match.group("kind").lower()
+            kind = "OR" if token == "or" else token[-1]
+            value = float(match.group("value").replace("−", "-"))
+            valid = _math.isfinite(value)
+            if kind == "r":
+                valid = valid and -1 <= value <= 1
+            elif kind == "OR":
+                valid = valid and value > 0
+            candidates.append({
+                "effect_type": kind,
+                "effect_value": value if _math.isfinite(value) else None,
+                "effect_valid": valid,
+                "raw_effect": f"{kind} = {value:g}" if _math.isfinite(value) else match.group(0),
+                "harmonized_cohen_d": None,
+                "document_id": document_id,
+                "filename": filename,
+                "page": page,
+                "quote": match.group(0),
+                "source_text": content,
+                "start": match.start(),
+                "end": match.end(),
+                "role": "unverified",
+                "direction_status": "reported_direction_only" if valid else "not_assessed",
+            })
+    return {
+        "effect_candidates": candidates,
+        "effect_status": "missing" if not candidates else
+                         "ambiguous" if len(candidates) > 1 else "unverified",
+        # Legacy scalar fields deliberately remain unknown: a mention is not
+        # a verified result of this study, even when it is the only mention.
+        "raw_effect": None,
+        "harmonized_cohen_d": None,
+        "effect_type": None,
+        "effect_value": None,
+        "effect_valid": None,
+        "direction_status": "not_assessed",
+        "effect_interpretation": "Chưa xác định hiệu ứng đại diện của nghiên cứu.",
+    }
+
+
+def harmonize_cross_study_metrics(context_chunks: list[dict[str, Any]]) -> dict[str, Any]:
+    """Hạng mục D: Trích xuất và chuẩn hóa thông số thống kê, cỡ mẫu N, thang đo và cỡ hiệu ứng Cohen's d liên bài."""
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for c in context_chunks or []:
+        key = str(c.get("sub_query_target") or c.get("doc_filename") or c.get("document_id") or "Study")
+        grouped.setdefault(key, []).append(c)
+
+    study_profiles: list[dict[str, Any]] = []
+    all_scales_by_study: list[set[str]] = []
+
+    for study_key, chunks in grouped.items():
+        c0 = chunks[0]
+        fname = c0.get("doc_filename") or c0.get("filename") or study_key
+        title = c0.get("doc_title") or fname
+        authors = c0.get("doc_authors") or ""
+        blob = " ".join(f"{ch.get('content', '')} {ch.get('parent_context', '')}" for ch in chunks)
+        pages = sorted({int(m.group(1)) if (m := re.search(r"(\d+)", str(ch.get("page_number") or "1"))) else 1 for ch in chunks})
+
+        # 1. Preserve sample-size mentions and provenance; no max/first guessing.
+        sample_info = _extract_sample_size_candidates(chunks)
+
+        # 2. Instruments / Scales
+        scales = []
+        for s_name, s_pat in _INSTRUMENT_PATTERNS:
+            if re.search(s_pat, blob, re.I):
+                scales.append(s_name)
+        all_scales_by_study.append(set(scales))
+
+        # 3. Reported effect sizes and p-values (no unconditional conversion)
+        p_vals = re.findall(r"\bp\s*[<=>]\s*0?\.\d+\b", blob, re.I)[:3]
+        effect_info = _extract_effect_candidates(chunks)
+
+        study_profiles.append({
+            "target": study_key,
+            "filename": fname,
+            "title": title,
+            "authors": authors,
+            "pages": pages[:5],
+            **sample_info,
+            "instruments": scales,
+            "p_values": p_vals,
+            **effect_info,
+        })
+
+    warnings: list[str] = []
+    non_empty_scales = [s for s in all_scales_by_study if s]
+    if len(non_empty_scales) >= 2 and not set.intersection(*non_empty_scales):
+        warnings.append(
+            "Cảnh báo bất tương xứng công cụ đo (Metric Incommensurability): Các nghiên cứu sử dụng hệ thống phân loại/thang đo khác nhau; cần đối chiếu qua cỡ hiệu ứng chuẩn hóa hoặc cơ chế tương đương thay vì so sánh trực tiếp điểm thô."
+        )
+
+    prompt_lines: list[str] = []
+    for sp in study_profiles:
+        parts = [f"Nguồn `{sp['filename']}` (Trang {', '.join(map(str, sp['pages']))})"]
+        if sp["authors"]:
+            parts.append(f"Tác giả: {sp['authors']}")
+        if sp["sample_size_candidates"]:
+            parts.append("Cỡ mẫu nghiên cứu chưa xác định: các số sau chỉ là giá trị xuất hiện trong nguồn; "
+                         "cần xác minh nghiên cứu, nhóm và thời điểm, không chọn số lớn nhất hoặc cộng các số.")
+            for candidate in sp["sample_size_candidates"]:
+                page_label = candidate["page"] if candidate["page"] is not None else "chưa xác định"
+                parts.append(f"Trích nguyên văn: {candidate['quote']} (Trang {page_label}; vai trò chưa xác minh)")
+        else:
+            parts.append("Chưa tìm thấy cỡ mẫu trong các đoạn gốc được truy xuất.")
+        if sp["instruments"]:
+            parts.append(f"Công cụ/Thang đo: {', '.join(sp['instruments'])}")
+        if sp["effect_candidates"]:
+            parts.append("Chưa xác định hiệu ứng đại diện: không chọn giá trị đầu tiên; "
+                         "cần kiểm tra nghiên cứu, nhóm, biến kết quả và thời điểm. "
+                         "Giữ dấu theo nguồn nhưng chưa xác minh chiều thang đo; "
+                         "không suy ra lợi ích, tác hại hoặc mâu thuẫn chỉ từ dấu.")
+            for candidate in sp["effect_candidates"]:
+                page_label = candidate["page"] if candidate["page"] is not None else "chưa xác định"
+                validity = "vai trò chưa xác minh" if candidate["effect_valid"] else "giá trị ngoài miền hợp lệ, không sử dụng"
+                parts.append(f"Giá trị được nhắc: {candidate['raw_effect']}; trích nguyên văn: {candidate['quote']} "
+                             f"(Trang {page_label}; {validity})")
+        else:
+            parts.append("Chưa tìm thấy cỡ hiệu ứng trong các đoạn gốc được truy xuất.")
+        if sp["p_values"]:
+            parts.append(f"Kiểm định: {', '.join(sp['p_values'])}")
+        prompt_lines.append("- " + " | ".join(parts))
+    if warnings:
+        for w in warnings:
+            prompt_lines.append(f"- [LƯU Ý PHƯƠNG PHÁP LUẬN]: {w}")
+
+    return {
+        "studies": study_profiles,
+        "incommensurability_warnings": warnings,
+        "prompt_summary": "\n".join(prompt_lines),
+    }
+
+
+def compute_cross_study_concordance(context_chunks: list[dict[str, Any]]) -> dict[str, Any]:
+    """Report availability, not concordance inferred from rhetorical keywords.
+
+    Retrieved chunks alone do not establish comparable outcomes or pairwise
+    support/contradiction. Until that assessment exists, no score is reported.
+    Document count is not a count of independent studies or verified comparisons.
+    """
+    source_ids = {
+        str(c.get("document_id") or c.get("doc_filename") or "").strip()
+        for c in (context_chunks or [])
+    } - {""}
+    source_count = len(source_ids)
+    if source_count == 1:
+        level = "NOT_APPLICABLE"
+        label = "Không áp dụng đồng thuận liên bài: chỉ có một tài liệu."
+        reason = "single_document"
+    elif source_count == 0:
+        level = "INSUFFICIENT_EVIDENCE"
+        label = "Chưa đủ bằng chứng: chưa có tài liệu nguồn được định danh."
+        reason = "no_identified_sources"
+    else:
+        level = "INSUFFICIENT_EVIDENCE"
+        label = "Chưa đủ bằng chứng để kết luận đồng thuận hoặc mâu thuẫn liên bài."
+        reason = "pairwise_evidence_not_assessed"
+    return {
+        "concordance_score": None,
+        "concordance_level": level,
+        "concordance_label": label,
+        "unique_documents_retrieved": source_count,
+        "unique_documents_compared": 0,
+        "assessed_pairs": 0,
+        "reason": reason,
+        "verification": "not_assessed",
+        "calibrated": False,
+    }

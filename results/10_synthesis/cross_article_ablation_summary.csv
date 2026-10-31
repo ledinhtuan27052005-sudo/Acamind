@@ -1,7 +1,0 @@
-config,n_queries,use_decomposition,tau_dedup,use_matrix_schema,mean_doc_recall_at_6,both_papers_retrieved_rate_at_6,both_papers_retrieved_count,mean_page_recall_at_6,mean_distinct_docs_in_top6,mean_dedup_removed_chunks,populated_matrix_cell_rate,latency_p50_ms,latency_mean_ms
-Full_Synthesis_Decomp_Dedup085,15,True,0.85,True,1.0,1.0,15/15,1.0,2.53,0.0,1.0,570.2,663.55
-Ablation_i_No_Query_Decomposition,15,False,0.85,True,0.8,0.6,9/15,0.7667,2.2,0.0,0.8,289.27,326.23
-Ablation_ii_No_Dedup_tau100,15,True,1.0,True,1.0,1.0,15/15,1.0,2.53,0.0,1.0,438.92,479.73
-Ablation_ii_Strict_Dedup_tau075,15,True,0.75,True,1.0,1.0,15/15,1.0,2.53,0.0,1.0,442.37,492.12
-Ablation_ii_Relaxed_Dedup_tau095,15,True,0.95,True,1.0,1.0,15/15,1.0,2.53,0.0,1.0,447.73,498.42
-Ablation_iii_No_Matrix_Schema,15,True,0.85,False,1.0,1.0,15/15,1.0,2.53,0.0,0.0,437.43,490.39

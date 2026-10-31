@@ -45,13 +45,15 @@ def extract_structure(file_path: str) -> dict:
     # TOC từ PDF metadata (nếu có)
     raw_toc = []
     headings: list[dict] = []
+    tables: list[dict] = []
+    _table_caption_re = re.compile(r"^\s*(?:Table|Bảng|TABLE|BẢNG)\s*\d+(?:[.:\s]|$)", re.IGNORECASE)
     with fitz.open(file_path) as doc:
         try:
             raw_toc = doc.get_toc(simple=True) or []
         except Exception:
             raw_toc = []
 
-        # Headings: scan tất cả spans, lấy text có font size >= threshold
+        # Headings & Tables: scan tất cả spans/lines qua PyMuPDF (nhanh <10ms, không treo GIL như pdfplumber)
         for page_num in range(len(doc)):
             try:
                 page_dict = doc[page_num].get_text("dict")
@@ -61,7 +63,16 @@ def extract_structure(file_path: str) -> dict:
                 if block.get("type") != 0:  # chỉ text blocks
                     continue
                 for line in block.get("lines", []):
-                    for span in line.get("spans", []):
+                    spans = line.get("spans", [])
+                    line_text = "".join(sp.get("text", "") for sp in spans).strip()
+                    if line_text and _table_caption_re.match(line_text):
+                        tables.append({
+                            "page": page_num + 1,
+                            "rows": 0,
+                            "cols": 0,
+                            "caption": line_text[:160],
+                        })
+                    for span in spans:
                         size = span.get("size", 0)
                         if size >= _HEADING_MIN_SIZE:
                             text = span.get("text", "").strip()
@@ -79,24 +90,6 @@ def extract_structure(file_path: str) -> dict:
         if len(item) >= 3
     ]
 
-    # Tables: pdfplumber (giữ cùng code cũ, chỉ lấy metadata để tiết kiệm memory, tối đa 30 trang đầu)
-    tables: list[dict] = []
-    try:
-        with pdfplumber.open(file_path) as pdf:
-            for page_num, page in enumerate(pdf.pages[:30]):
-                try:
-                    for t in page.extract_tables() or []:
-                        if t and len(t) > 1 and t[0]:
-                            tables.append({
-                                "page": page_num + 1,
-                                "rows": len(t),
-                                "cols": len(t[0]),
-                            })
-                except Exception:
-                    continue
-    except Exception:
-        pass
-
     return {"toc": toc, "headings": headings, "tables": tables}
 
 
@@ -112,10 +105,12 @@ Nhiệm vụ của bạn là chuyển đổi hình ảnh trang tài liệu này 
 
 
 import json
+import threading
 from pathlib import Path
 
 # Bộ nhớ đệm SHA-256 cấp trang: băm ảnh -> văn bản Markdown OCR (0.01ms truy xuất, chống lặp API)
 _PAGE_IMAGE_OCR_CACHE: dict[str, str] = {}
+_OCR_CACHE_LOCK = threading.Lock()
 _OCR_CACHE_FILE = Path(__file__).resolve().parent.parent.parent.parent / "data" / "ocr_cache.json"
 
 
@@ -124,7 +119,8 @@ def _load_ocr_cache():
     try:
         if _OCR_CACHE_FILE.exists():
             with open(_OCR_CACHE_FILE, "r", encoding="utf-8") as f:
-                _PAGE_IMAGE_OCR_CACHE.update(json.load(f))
+                with _OCR_CACHE_LOCK:
+                    _PAGE_IMAGE_OCR_CACHE.update(json.load(f))
     except Exception:
         pass
 
@@ -132,8 +128,10 @@ def _load_ocr_cache():
 def _save_ocr_cache():
     try:
         _OCR_CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        with _OCR_CACHE_LOCK:
+            snapshot = dict(_PAGE_IMAGE_OCR_CACHE)
         with open(_OCR_CACHE_FILE, "w", encoding="utf-8") as f:
-            json.dump(_PAGE_IMAGE_OCR_CACHE, f, ensure_ascii=False, indent=2)
+            json.dump(snapshot, f, ensure_ascii=False, indent=2)
     except Exception:
         pass
 
@@ -141,26 +139,34 @@ def _save_ocr_cache():
 _load_ocr_cache()
 
 
+_OCR_CIRCUIT_OPEN_UNTIL: float = 0.0
+
+
 def ocr_page_image(page, dpi: int = 150) -> tuple[str, float, bool]:
-    """Render trang PDF thành ảnh và thực hiện nhận dạng quang học qua Gemini Vision API.
+    """Render trang PDF thành ảnh và OCR bằng nhà cung cấp OCR đã cấu hình.
     
     Returns:
         tuple (ocr_text, latency_ms, is_cache_hit)
     """
+    global _OCR_CIRCUIT_OPEN_UNTIL
     t0 = time.perf_counter()
     try:
-        from app.services.llm_client import get_default_client
-        client = get_default_client()
-        if not client.api_key:
+        if time.time() < _OCR_CIRCUIT_OPEN_UNTIL:
+            return "", round((time.perf_counter() - t0) * 1000, 2), False
+        from app.services.llm_client import get_ocr_client
+        client = get_ocr_client()
+        if not client.is_configured:
             return "", round((time.perf_counter() - t0) * 1000, 2), False
 
         pix = page.get_pixmap(dpi=dpi)
         img_bytes = pix.tobytes("jpeg")
-        img_hash = hashlib.sha256(img_bytes).hexdigest()
+        cache_key = img_bytes + f"\0{client.provider}\0{client.model}".encode("utf-8")
+        img_hash = hashlib.sha256(cache_key).hexdigest()
 
         # Kiểm tra Cache băm ảnh
-        if img_hash in _PAGE_IMAGE_OCR_CACHE:
-            cached_text = _PAGE_IMAGE_OCR_CACHE[img_hash]
+        with _OCR_CACHE_LOCK:
+            cached_text = _PAGE_IMAGE_OCR_CACHE.get(img_hash)
+        if cached_text is not None:
             latency_ms = round((time.perf_counter() - t0) * 1000, 2)
             return cached_text, latency_ms, True
 
@@ -172,11 +178,14 @@ def ocr_page_image(page, dpi: int = 150) -> tuple[str, float, bool]:
         )
         res_text = ocr_result.strip() if ocr_result else ""
         if res_text and not res_text.startswith("[Hình ảnh — API lỗi") and not res_text.startswith("[Hình ảnh — không thể"):
-            _PAGE_IMAGE_OCR_CACHE[img_hash] = res_text
+            with _OCR_CACHE_LOCK:
+                _PAGE_IMAGE_OCR_CACHE[img_hash] = res_text
             _save_ocr_cache()
             latency_ms = round((time.perf_counter() - t0) * 1000, 2)
             return res_text, latency_ms, False
         else:
+            if ocr_result and ("503" in ocr_result or "429" in ocr_result or "timed out" in ocr_result.lower() or "API lỗi" in ocr_result):
+                _OCR_CIRCUIT_OPEN_UNTIL = time.time() + 120.0
             latency_ms = round((time.perf_counter() - t0) * 1000, 2)
             return "", latency_ms, False
     except Exception as e:
@@ -227,9 +236,17 @@ def parse_pdf(file_path: str, enable_ocr: bool = True, max_ocr_workers: int = 5)
         for page_num in range(total):
             page = doc[page_num]
             text = clean_text(page.get_text("text"))
-            # Phát hiện trang scan: text quá ngắn (< 50 chars) HOẶC lớp text layer bị lỗi font nặng (chứa nhiều ký tự hỏng như ·, \ufffd)
-            corrupt_dots = text.count('·') + text.count('\ufffd')
-            is_scanned = (len(text.strip()) < _SCAN_PAGE_MIN_CHARS) or (corrupt_dots >= 15 or (len(text) > 0 and corrupt_dots / len(text) > 0.03))
+            # Phát hiện trang scan: text quá ngắn (< 50 chars) HOẶC lớp text layer bị lỗi font nặng (chứa nhiều ký tự \ufffd)
+            fffd_count = text.count('\ufffd')
+            dot_ratio = text.count('·') / len(text) if len(text) > 0 else 0.0
+            is_scanned = (
+                len(text.strip()) < _SCAN_PAGE_MIN_CHARS
+                or fffd_count >= 15
+                or (len(text) > 0 and fffd_count / len(text) > 0.03)
+                or dot_ratio > 0.20
+            )
+            if page_num % 5 == 0:
+                time.sleep(0.002)
             if is_scanned:
                 scanned_indices.append(page_num)
 
@@ -247,6 +264,15 @@ def parse_pdf(file_path: str, enable_ocr: bool = True, max_ocr_workers: int = 5)
         cache_hits = 0
         ocr_headings = []
         t_ocr_start = time.perf_counter()
+
+        # Nếu tài liệu đã có lớp văn bản số trên đa số trang (>60% trang có chữ), các trang ít chữ còn lại chỉ là trang bìa/hình vẽ minh họa
+        # Chỉ kích hoạt Vision OCR cho trang có lỗi font (\ufffd) hoặc khi >= 40% tài liệu là trang scan thực sự.
+        if scanned_indices and total > 2 and (len(scanned_indices) / total) < 0.40:
+            scanned_indices = [
+                idx for idx in scanned_indices
+                if pages_text[idx]["text"].count('\ufffd') >= 15
+            ]
+            scanned_page_count = len(scanned_indices)
 
         # Giai đoạn 2: Phục hồi song song các trang scan qua Multimodal Vision OCR (Parallel Auto-Recovery)
         if scanned_indices and enable_ocr:
@@ -314,9 +340,9 @@ def parse_pdf(file_path: str, enable_ocr: bool = True, max_ocr_workers: int = 5)
             "parallel_workers": min(max_ocr_workers, len(scanned_indices)) if scanned_indices else 0,
         },
         "metadata": {
-            "title": metadata.get("title", ""),
-            "author": metadata.get("author", ""),
-            "creation_date": metadata.get("creationDate", ""),
+            "title": clean_text(metadata.get("title", "") or ""),
+            "author": clean_text(metadata.get("author", "") or ""),
+            "creation_date": clean_text(metadata.get("creationDate", "") or ""),
         }
     }
 

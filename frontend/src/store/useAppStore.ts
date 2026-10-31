@@ -48,9 +48,14 @@ export const useAppStore = create<AppStore>((set) => ({
  token: null,
  setAuth: (user, token) => {
  if (typeof window !== 'undefined') {
- localStorage.setItem('token', token);
- localStorage.setItem('user', JSON.stringify(user));
- localStorage.setItem('user_id', user.id);
+ // Authentication belongs to this browser tab session and ends with it.
+ sessionStorage.setItem('token', token);
+ sessionStorage.setItem('user', JSON.stringify(user));
+ sessionStorage.setItem('user_id', user.id);
+ // Remove credentials persisted by older versions across browser restarts.
+ localStorage.removeItem('token');
+ localStorage.removeItem('user');
+ localStorage.removeItem('user_id');
  }
  set({ user, token });
  },
@@ -59,13 +64,16 @@ export const useAppStore = create<AppStore>((set) => ({
  if (!state.user) return {};
  const updated = { ...state.user, ...updates };
  if (typeof window !== 'undefined') {
- localStorage.setItem('user', JSON.stringify(updated));
+ sessionStorage.setItem('user', JSON.stringify(updated));
  }
  return { user: updated };
  });
  },
  logout: () => {
  if (typeof window !== 'undefined') {
+ sessionStorage.removeItem('token');
+ sessionStorage.removeItem('user');
+ sessionStorage.removeItem('user_id');
  localStorage.removeItem('token');
  localStorage.removeItem('user');
  localStorage.removeItem('user_id');
@@ -74,8 +82,12 @@ export const useAppStore = create<AppStore>((set) => ({
  },
  initAuth: () => {
  if (typeof window === 'undefined') return;
- const token = localStorage.getItem('token');
- const userStr = localStorage.getItem('user');
+ // Never restore credentials left in persistent storage by older versions.
+ localStorage.removeItem('token');
+ localStorage.removeItem('user');
+ localStorage.removeItem('user_id');
+ const token = sessionStorage.getItem('token');
+ const userStr = sessionStorage.getItem('user');
  const darkMode = localStorage.getItem('darkMode') === 'true';
  if (token && userStr) {
  try {

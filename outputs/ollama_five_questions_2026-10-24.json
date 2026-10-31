@@ -1,0 +1,67 @@
+[
+  {
+    "label": "short_cbt",
+    "mode": "brief",
+    "question": "CBT là gì?",
+    "status": 200,
+    "outcome": "answered",
+    "decision": null,
+    "no_context": null,
+    "first_text_ms": 72,
+    "total_ms": 72,
+    "citation_count": 0,
+    "answer": "CBT (Cognitive Behavioral Therapy - Liệu pháp nhận thức hành vi) là phương pháp trị liệu giúp nhận diện và thay đổi các suy nghĩ, hành vi tiêu cực nhằm cải thiện sức khỏe tâm thần."
+  },
+  {
+    "label": "short_latency",
+    "mode": "brief",
+    "question": "Trong báo cáo thực nghiệm Acamind, độ trễ trung bình được ghi là bao nhiêu?",
+    "status": 200,
+    "outcome": "answered",
+    "decision": "generation_check",
+    "no_context": "false",
+    "first_text_ms": 58761,
+    "total_ms": 58763,
+    "citation_count": 2,
+    "answer": "Độ trễ trung bình (Avg Latency) của Acamind được ghi là 4194.8 ms. [Du_lieu_test.pdf - Trang 2]\n\n---\n## Tài liệu tham khảo\n\n1. [Du_lieu_test.pdf - Page 2] **Báo cáo thực nghiệm đối sánh & dữ liệu test hệ thống Acamind** — *Hội đồng Khoa học Thẩm định Acamind*"
+  },
+  {
+    "label": "long_comparison",
+    "mode": "deep",
+    "question": "Hãy đối chiếu hai tài liệu “IdeaAnchor: Teaching LLMs to Turn Literature into Research Ideas” và “Báo cáo thực nghiệm đối sánh & dữ liệu test hệ thống Acamind”. Với từng tài liệu, trình bày mục tiêu nghiên cứu, phương pháp, dữ liệu hoặc bộ đánh giá, kết quả chính và hạn chế. Sau đó chỉ ra điểm giống và khác trong cách đánh giá chất lượng ý tưởng hoặc câu trả lời. Mỗi nhận định cần có tên tài liệu và trang cụ thể. Nếu một tiêu chí không có bằng chứng trong tài liệu được truy xuất, hãy ghi rõ là chưa tìm thấy và không suy đoán.",
+    "status": 200,
+    "outcome": "partial_answer",
+    "decision": "partial",
+    "no_context": "false",
+    "first_text_ms": 218353,
+    "total_ms": 218356,
+    "citation_count": 4,
+    "answer": "### Đối chiếu theo bằng chứng đã xác nhận\n\n| Tài liệu/ý được hỏi | Tiêu chí | Bằng chứng |\n| --- | --- | --- |\n| IdeaAnchor: Teaching LLMs to Turn Literature into Research Ideas | Phương pháp | “We introduce IdeaAnchor, a paradigm for training LLMs to perform research ideation, using structured specifications as privileged signals. Each IdeaAnchor instance encodes how each input paper should be synthesized into a successful idea, including their functional roles, relationships, and target synthesis criteria.” [2610.08781v1.pdf - Trang 1] |\n| IdeaAnchor: Teaching LLMs to Turn Literature into Research Ideas | Kết quả | “In-domain training improves steadily with scale: SFT and RL exhibit large gains over the base model, while self-distillation yields a smaller but consistent increase, suggesting that additional anchor supervision strengthens literature-grounded synthesis rather than merely fitting the evaluation set.” [2610.08781v1.pdf - Trang 8] |\n| IdeaAnchor: Teaching LLMs to Turn Literature into Research Ideas | Hạn chế | Chưa tìm thấy trong các đoạn được truy xuất |\n| Báo cáo thực nghiệm đối sánh & dữ liệu test hệ thống Acamind | Phương pháp | “Dữ liệu thực nghiệm được đo đạc qua API trực tiếp và dựa trên các công bố học thuật chuẩn mực (PaperQA2 Nature/bioRxiv 2024, LitQA2 benchmark, Elicit Technical Reports).” [Du_lieu_test.pdf - Trang 1] |\n| Báo cáo thực nghiệm đối sánh & dữ liệu test hệ thống Acamind | Kết quả | “Acamind đạt điểm Faithfulness (0.9458) tương đương với hệ thống PaperQA2 (0.9523) của FutureHouse, nhưng phản hồi nhanh gấp 10,3 lần (1.838 ms so với 19.013 ms).” [Du_lieu_test.pdf - Trang 2] |\n| Báo cáo thực nghiệm đối sánh & dữ liệu test hệ thống Acamind | Hạn chế | Chưa tìm thấy trong các đoạn được truy xuất |\n\nChỉ các trích đoạn có dẫn trang ở trên đã được xác nhận; không suy ra kết luận cho các ô còn thiếu."
+  },
+  {
+    "label": "therapy_exposure",
+    "mode": "deep",
+    "question": "Theo tài liệu được truy xuất, người lo âu và né tránh khi thuyết trình có thể áp dụng những bước CBT nào để tập đối mặt dần một cách an toàn? Chỉ nêu bước có nguồn và trích dẫn trang.",
+    "status": 200,
+    "outcome": "refused",
+    "decision": "answer",
+    "no_context": "false",
+    "first_text_ms": 70034,
+    "total_ms": 70035,
+    "citation_count": 0,
+    "answer": "Chưa tìm thấy trong các đoạn được truy xuất."
+  },
+  {
+    "label": "therapy_insomnia",
+    "mode": "deep",
+    "question": "Theo tài liệu được truy xuất, có giải pháp trị liệu nào cho người mất ngủ liên quan đến căng thẳng? Nêu cách áp dụng, giới hạn bằng chứng và trích dẫn trang; nếu không đủ nguồn, hãy từ chối phần chưa được hỗ trợ.",
+    "status": 200,
+    "outcome": "refused",
+    "decision": "answer",
+    "no_context": "false",
+    "first_text_ms": 34304,
+    "total_ms": 34304,
+    "citation_count": 0,
+    "answer": "Chưa tìm thấy trong các đoạn được truy xuất. Các đoạn được truy xuất chưa cho thấy các giải pháp trị liệu cụ thể cho người mất ngủ liên quan đến căng thẳng."
+  }
+]

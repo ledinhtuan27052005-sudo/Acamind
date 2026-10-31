@@ -207,6 +207,7 @@ function UserFooter({
   const ROLE_CONFIG: Record<UserRole, { label: string; variant: 'neural' | 'cortex' | 'dopamine' }> = {
     admin: { label: 'Admin', variant: 'dopamine' },
     researcher: { label: 'Researcher', variant: 'cortex' },
+    expert: { label: 'Expert', variant: 'cortex' },
     student: { label: 'Student', variant: 'neural' },
   };
 

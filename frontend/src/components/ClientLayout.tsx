@@ -44,7 +44,7 @@ function getInitials(user: AuthUser) {
 
 // ── Avatar with dropdown ───────────────────────────────────────────────────────
 
-export function UserAvatar({ user, onLogout }: { user: AuthUser; onLogout: () => void }) {
+export function UserAvatar({ user, onLogout, allowProfile = true }: { user: AuthUser; onLogout: () => void; allowProfile?: boolean }) {
   const [open, setOpen] = useState(false);
   const { t } = useI18n();
   const inis = getInitials(user);
@@ -123,13 +123,13 @@ export function UserAvatar({ user, onLogout }: { user: AuthUser; onLogout: () =>
                 <LayoutDashboard className="w-4 h-4" /> Dashboard
               </Link>
             )}
-            <Link
+            {allowProfile && <Link
               href="/profile"
               onClick={() => setOpen(false)}
               className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors"
             >
               <UserIcon className="w-4 h-4" /> Personal Profile
-            </Link>
+            </Link>}
           </div>
           <div className="border-t border-slate-100 dark:border-slate-800 py-1">
             <button
@@ -155,6 +155,8 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const pathname = usePathname();
 
   const isAuthPage = pathname === '/login' || pathname === '/register';
+  const canManageDocuments = user?.role === 'admin' || user?.role === 'researcher' || user?.role === 'expert';
+  const isChatOnlyRoute = pathname === '/chat' || pathname === '/';
   // Top bar CHUNG cho mọi route (kể cả landing), trừ auth pages.
   // KHÔNG gate bằng `mounted` để top bar render ngay trong SSR HTML (good for first paint).
   const showWorkspaceHeader = !isAuthPage;
@@ -163,6 +165,12 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     initAuth();
     setMounted(true);
   }, [initAuth]);
+
+  useEffect(() => {
+    if (mounted && !isAuthPage && !canManageDocuments && !isChatOnlyRoute) {
+      router.replace('/chat');
+    }
+  }, [mounted, isAuthPage, canManageDocuments, isChatOnlyRoute, router]);
 
   const handleLogout = () => {
     logout();
@@ -173,6 +181,8 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   if (isAuthPage) {
     return <>{children}</>;
   }
+
+  if (mounted && !canManageDocuments && !isChatOnlyRoute) return null;
 
   return (
     <WorkspaceShellProvider

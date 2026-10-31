@@ -19,6 +19,9 @@ import logging
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
+import ipaddress
+import socket
+import os
 from html.parser import HTMLParser
 from typing import Optional
 
@@ -632,4 +635,82 @@ def _fallback_search(query: str, max_results: int) -> list[dict]:
         return results
     except Exception:
         return []
+
+
+def fetch_public_source(url: str, max_bytes: int = 20 * 1024 * 1024) -> dict:
+    """Fetch a public HTML or PDF source without forwarding user cookies.
+
+    Redirects are followed manually and each destination is revalidated to
+    reduce SSRF exposure. Non-public hosts and non-document response types are
+    rejected. The caller is responsible for parsing PDFs.
+    """
+    def validate_public_url(candidate: str) -> str:
+        parsed = urllib.parse.urlsplit(candidate)
+        if parsed.scheme not in {"http", "https"} or not parsed.hostname:
+            raise ValueError("Chỉ hỗ trợ URL http/https hợp lệ.")
+        if parsed.username or parsed.password:
+            raise ValueError("Không hỗ trợ URL chứa thông tin đăng nhập.")
+        host = parsed.hostname.rstrip(".").lower()
+        if host in {"localhost", "localhost.localdomain"} or host.endswith((".local", ".internal")):
+            raise ValueError("Không thể truy cập máy chủ nội bộ.")
+        try:
+            addresses = {item[4][0] for item in socket.getaddrinfo(host, parsed.port or (443 if parsed.scheme == "https" else 80), type=socket.SOCK_STREAM)}
+        except OSError as exc:
+            raise ValueError("Không phân giải được tên miền nguồn.") from exc
+        if not addresses:
+            raise ValueError("Tên miền nguồn không có địa chỉ IP công khai.")
+        for address in addresses:
+            ip = ipaddress.ip_address(address)
+            if not ip.is_global:
+                raise ValueError("Không thể truy cập địa chỉ IP riêng hoặc nội bộ.")
+        return urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, parsed.path or "/", parsed.query, ""))
+
+    current_url = validate_public_url(url.strip())
+    response = None
+    try:
+        for _ in range(6):
+            response = requests.get(
+                current_url,
+                headers={"User-Agent": _BROWSER_HEADERS["User-Agent"], "Accept": "text/html,application/pdf;q=0.9,*/*;q=0.5"},
+                timeout=(8, 20),
+                allow_redirects=False,
+                stream=True,
+            )
+            if response.is_redirect or response.is_permanent_redirect:
+                location = response.headers.get("Location")
+                response.close()
+                if not location:
+                    raise ValueError("Nguồn trả về chuyển hướng không hợp lệ.")
+                current_url = validate_public_url(urllib.parse.urljoin(current_url, location))
+                continue
+            response.raise_for_status()
+            content_type = (response.headers.get("Content-Type") or "").split(";", 1)[0].strip().lower()
+            body = bytearray()
+            for part in response.iter_content(64 * 1024):
+                if part:
+                    body.extend(part)
+                    if len(body) > max_bytes:
+                        raise ValueError("Tệp từ URL vượt quá giới hạn 20 MB.")
+            payload = bytes(body)
+            if content_type == "application/pdf" or current_url.lower().split("?", 1)[0].endswith(".pdf") or payload.startswith(b"%PDF-"):
+                return {"url": current_url, "content_type": "application/pdf", "data": payload}
+            if content_type and content_type not in {"text/html", "application/xhtml+xml", "text/plain"}:
+                raise ValueError(f"Định dạng nguồn chưa hỗ trợ ({content_type}).")
+            encoding = response.encoding or "utf-8"
+            html = payload.decode(encoding, errors="replace")
+            content = _best_content_from_html(html)
+            if not content:
+                content = re.sub(r"\s+", " ", html).strip()
+            if len(content) < _MIN_CONTENT_LENGTH:
+                raise ValueError("Không trích xuất được nội dung đọc được từ trang này.")
+            return {
+                "url": current_url,
+                "content_type": "text/html",
+                "title": _extract_title(html, fallback=current_url),
+                "content": content[:12000],
+            }
+        raise ValueError("Nguồn chuyển hướng quá nhiều lần.")
+    finally:
+        if response is not None:
+            response.close()
 

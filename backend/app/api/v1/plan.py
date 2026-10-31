@@ -4,7 +4,14 @@ from pydantic import BaseModel
 from app.db.postgres import get_db
 from app.models.document import User
 from app.core.security import get_current_user
-from app.core.plan_utils import PLAN_LIMITS, get_limits, count_user_docs, count_today_chats
+from app.core.plan_utils import (
+    PLAN_LIMITS,
+    get_limits,
+    count_user_docs,
+    count_monthly_docs,
+    count_today_chats,
+    count_monthly_chats,
+)
 
 router = APIRouter()
 
@@ -17,8 +24,8 @@ def get_pricing():
             "key": key,
             "label": info["label"],
             "price_vnd": info["price_vnd"],
-            "max_docs": info["max_docs"],
-            "max_daily_chat": info["max_daily_chat"],
+            "max_docs": info["max_docs"] if info["max_docs"] is not None else info.get("max_monthly_docs"),
+            "max_daily_chat": info["max_daily_chat"] if info["max_daily_chat"] is not None else info.get("max_monthly_chat"),
             "features": info["features"],
         }
         for key, info in PLAN_LIMITS.items()
@@ -35,14 +42,24 @@ def get_my_usage(db: Session = Depends(get_db), current_user: User = Depends(get
     elif current_user.role == "researcher" and plan == "free":
         plan = "researcher"
 
-    doc_count = count_user_docs(current_user.id, db)
-    chat_count = count_today_chats(current_user.id, db)
+    max_docs = limits.get("max_docs") if limits.get("max_docs") is not None else limits.get("max_monthly_docs")
+    doc_count = (
+        count_monthly_docs(current_user.id, db)
+        if limits.get("max_docs") is None and limits.get("max_monthly_docs") is not None
+        else count_user_docs(current_user.id, db)
+    )
+    max_chat = limits.get("max_daily_chat") if limits.get("max_daily_chat") is not None else limits.get("max_monthly_chat")
+    chat_count = (
+        count_monthly_chats(current_user.id, db)
+        if limits.get("max_daily_chat") is None and limits.get("max_monthly_chat") is not None
+        else count_today_chats(current_user.id, db)
+    )
 
     return {
         "plan": plan,
         "plan_label": limits["label"],
-        "max_docs": limits["max_docs"],
-        "max_daily_chat": limits["max_daily_chat"],
+        "max_docs": max_docs,
+        "max_daily_chat": max_chat,
         "used_docs": doc_count,
         "used_today_chat": chat_count,
     }

@@ -1,4 +1,4 @@
-﻿# HƯỚNG DẪN CHUYÊN SÂU: XÂY DỰNG HỆ THỐNG HỎI ĐÁP HỌC THUẬT AI & RAG
+# HƯỚNG DẪN CHUYÊN SÂU: XÂY DỰNG HỆ THỐNG HỎI ĐÁP HỌC THUẬT AI & RAG
 ## Phân Tích Kỹ Thuật — Từng Bước Chi Tiết — Kèm Xử Lý Lỗi
 
 ---
@@ -4891,3 +4891,59 @@ RRF giải pháp: chỉ dùng RANK (thứ hạng), không dùng score tuyệt đ
 **Chúc bạn bảo vệ NCKH thành công! 🎓**
 
 *Tài liệu này bao gồm: 16 bước chi tiết, giải thích kỹ thuật sâu, xử lý lỗi thường gặp, và phân tích thuật toán phục vụ bảo vệ NCKH.*
+
+
+---
+
+# ═══════════════════════════════════════════════════════════════════════════
+# PHẦN 5 — ĐẶC TẢ TOÁN HỌC & KIẾN TRÚC 9 KỸ THUẬT NCKH NÂNG CAO (BẢO VỆ HỘI ĐỒNG)
+# ═══════════════════════════════════════════════════════════════════════════
+
+> **Tài liệu kiểm thử đồng bộ**: Xem hướng dẫn kiểm thử từng bước tại `HUONG_DAN_HE_THONG_VA_KIEM_THU_NCKH.md` và `HƯỚNG_DẪN_STEP_BY_STEP.md`.
+
+---
+
+## 1. Phân bổ Hạn ngạch Đa mục tiêu (`Sub-Query Quota Allocation`) & Cổng Chọn lọc DCSR
+- **File thực thi**: `backend/app/services/retriever.py`
+- **Công thức hạn ngạch đa bài báo**:
+  Khi truy vấn yêu cầu tổng hợp hoặc so sánh $M$ bài báo khoa học, hạn ngạch đoạn trích cho mỗi bài báo $m \in \{1, \dots, M\}$ được bảo toàn:
+  $$k_m = \max\!\left(3,\; \left\lceil \frac{K}{M} \right\rceil\right)$$
+- **Cổng chọn lọc DCSR (`Dominance-Confidence Selective Reranking`)**:
+  Tính tỷ số áp đảo $\Delta_{\text{RRF}}(q) = \text{RRF}_{(1)}(q) / \text{RRF}_{(2)}(q)$ và độ tin cậy $C(q)$. Nếu $C(q) \ge 0.35$ và $\Delta_{\text{RRF}}(q) \ge 1.05$, hệ thống kích hoạt **DCSR Fast-Skip** bỏ qua Cross-Encoder, giảm ~45–86% độ trễ rerank.
+
+## 2. Định lượng Độ Bất định Nhận thức & Entropy Bằng chứng (`Epistemic Uncertainty & Shannon Entropy`)
+- **File thực thi**: `backend/app/services/retriever.py` (`compute_epistemic_uncertainty_metrics`)
+- **Công thức xác suất hậu nghiệm & Entropy**:
+  $$P(c_k \mid q) = \frac{\exp(S_k / \tau)}{\sum_{j=1}^{K} \exp(S_j / \tau)} \;\; (\tau = 0.15), \quad H(q) = -\sum_{k=1}^{K} P(c_k \mid q) \log_2 P(c_k \mid q)$$
+  $$\mathcal{U}_{\text{epistemic}}(q) = 0.55 \cdot (1 - S_{(1)}) + 0.45 \cdot \frac{H(q)}{\log_2 K}$$
+
+## 3. Khiên Kiểm chứng Chống Ảo giác Mệnh đề Nguyên tử (`Atomic Claim Entailment Shield — CLHV`)
+- **File thực thi**: `backend/app/services/scientific_appraiser.py` (`verify_atomic_claims`)
+- **Cơ chế**: Tách câu trả lời thành tập mệnh đề nguyên tử $C = \{c_1, \dots, c_m\}$, chấm điểm kéo theo (`Entailment Score`) đối với từng đoạn trích nguồn và phân loại 3 ngưỡng: `ENTAILED` ($S \ge 0.42$), `EXTRAPOLATED` ($0.24 \le S < 0.42$), `UNVERIFIED` ($S < 0.24$).
+
+## 4. Radar Mâu thuẫn Trọng số Oxford CEBM & Phân tích Gộp `Random-Effects Meta-Analysis` (`Forest Plot`)
+- **File thực thi**: `backend/app/services/scientific_appraiser.py` (`analyze_cebm_contradiction_radar`, `compute_meta_analysis_forest_plot`)
+- **Công thức DerSimonian–Laird Random-Effects Meta-Analysis**:
+  - Cỡ hiệu ứng chuẩn hóa **Hedges' $g_i$**, sai số chuẩn $SE_i$, trọng số cố định $w_i = 1 / SE_i^2$.
+  - Thống kê **Cochran's $Q$** và **Chỉ số Dị biệt Higgins $I^2$**:
+    $$Q = \sum_{i=1}^{k} w_i (g_i - \bar{g}_{\text{FE}})^2, \quad I^2 = \max\!\left(0,\; \frac{Q - (k - 1)}{Q}\right) \times 100\%$$
+  - Trọng số tác động ngẫu nhiên $w_i^* = 1 / (SE_i^2 + \tau^2)$ và cỡ hiệu ứng gộp tổng thể $\bar{g}_{\text{RE}} = \frac{\sum w_i^* g_i}{\sum w_i^*}$.
+
+## 5. Bản đồ Nhiệt Khoảng trống Bằng chứng PICO & Sinh Giả thuyết Đề tài NCKH Mới
+- **File thực thi**: `backend/app/services/scientific_appraiser.py` (`build_pico_research_gap_map`)
+- **Cơ chế**: Ánh xạ các bài báo vào ma trận $4 \times 3$ (`Population` $\times$ `Intervention`), xác định các ô `GAP` (0 bài báo) và tự động đề xuất 3 giả thuyết nghiên cứu mới ($H_1$) theo chuẩn PICO.
+
+## 6. Đồ thị Tri thức Thần kinh – Tâm lý 4 Tầng & Cầu nối Giải phẫu Não 3D X-Ray
+- **File thực thi**: `backend/app/services/scientific_appraiser.py` (`extract_neuro_clinical_graph`), `frontend/src/components/body/BodyViewer3D.tsx`
+- **Cơ chế**: Liên kết 4 tầng (*Triệu chứng DSM-5/ICD-11* $\rightarrow$ *6 Vùng não giải phẫu 3D* $\rightarrow$ *Chất dẫn truyền thần kinh* $\rightarrow$ *Cơ chế trị liệu*) và điều khiển mô hình 3D bật chế độ X-Ray phát sáng vùng não tương ứng.
+
+## 7. Phòng Mô phỏng Bệnh nhân Ảo Lâm sàng & Chấm điểm OSCE Thang 100
+- **File thực thi**: `backend/app/services/scientific_appraiser.py` (`OSCE_CASES_DB`, `simulate_osce_patient_turn`, `evaluate_osce_session`)
+- **Cơ chế**: Mô phỏng bệnh nhân ảo có Hồ sơ Bệnh sử Ẩn, hỗ trợ chỉ định thang đo (`PHQ-9`, `GAD-7`, `BDI-II`, `DASS-21`) và chấm điểm bệnh án tự động trên thang 100 điểm (30đ Chẩn đoán + 25đ Phân biệt & Red Flags + 20đ Thang đo + 25đ Phác đồ).
+
+## 8. Kiểm định Ý nghĩa Thống kê Đa truy vấn ($p$-value, Cohen's $d$, 95% CI) & Đường biên Tối ưu Pareto
+- **File thực thi**: `backend/app/api/v1/evaluate.py` (`run_statistical_ablation_suite`)
+- **Công thức kiểm định**:
+  Thực thi bộ $N=5$ kịch bản truy vấn chuẩn hóa qua 3 kiến trúc (`Naive Dense`, `Standard Hybrid RRF`, `Acamind Proposed`), tính $\text{Mean} \pm \text{SD}$, Bootstrap 95% CI, kiểm định $t$ bắt cặp (`Paired Student's t-test`) và cỡ hiệu ứng `Cohen's d`:
+  $$t = \frac{\bar{\Delta}}{s_{\Delta} / \sqrt{N}}, \quad d = \frac{\bar{\Delta}}{s_{\Delta}}$$
+  đồng thời vẽ biểu đồ **Đường biên Tối ưu Pareto (`Accuracy–Latency Pareto Frontier`)**.
